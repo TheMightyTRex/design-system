@@ -231,6 +231,7 @@
     <li><a href="#changes-preview">What will change</a></li>
     <li><a href="#month-nav">Earlier and later</a></li>
     <li><a href="#check-history">Recent checks</a></li>
+    <li><a href="#ux-notes">UX notes</a></li>
   </ol>
 </nav>
 
@@ -859,6 +860,14 @@
   </div>
 </section>
 
+<section class="g-section" id="ux-notes" aria-labelledby="ux-notes-h">
+  <header><h2 id="ux-notes-h">UX notes</h2><p class="muted">For testing only: <code>ux-notes.js</code> puts Note an issue in the corner of every page. Choose the part of the page (click it, or Tab to it and press Enter), say what is wrong, the kind and how bad it is. Notes lists them, with Copy as text, Download and Mark as fixed. Each app turns it on with a setting and can keep the notes on its server; here they stay in this browser.</p></header>
+  <div class="g-demo">
+    <div class="actions"><button class="btn" type="button" id="g-ux-start">Turn on UX notes</button><button class="btn" type="button" id="g-ux-stop">Turn off</button></div>
+    <p class="small muted">Starts with <code>UxNotes.start({ app: "Gallery" })</code>; a store with list, add, update and remove keeps them elsewhere.</p>
+  </div>
+</section>
+
 </main>
 </div>
 </div>
@@ -952,7 +961,10 @@ Pending sectors: 0</code></div></details>
 </div>
 
 <script src="components.js"></script>
+<script src="ux-notes.js"></script>
 <script>
+  document.getElementById("g-ux-start").addEventListener("click", () => UxNotes.start({ app: "Gallery" }));
+  document.getElementById("g-ux-stop").addEventListener("click", () => UxNotes.stop());
   // Colour swatches, read from the live tokens so they follow the theme.
   const names = ["bg","header","surface","surface-raised","surface-sunken","text","text-muted","border","divider","accent","accent-text","accent-soft","focus","count"];
   const tones = ["success","info","warning","danger","muted"];
