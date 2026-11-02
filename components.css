@@ -3097,6 +3097,12 @@
     padding: var(--space-2);
     background: var(--color-surface-sunken);
   }
+  /* A found file's own picture (another site's image cannot be a mask). */
+  .logo-candidate__art > img {
+    max-width: 112px;
+    max-height: 48px;
+    object-fit: contain;
+  }
   .logo-candidate__art > .logo-mask {
     width: 112px;
     height: 48px;
@@ -3220,6 +3226,12 @@
     display: block;
     max-width: 100%;
     height: auto;
+  }
+  /* The logo editor's eraser and paintbrush draw on the cut-out (UX-48). */
+  .checker[data-tool="erase"] canvas,
+  .checker[data-tool="paint"] canvas {
+    cursor: crosshair;
+    touch-action: none;
   }
   /* Upload your own. */
   .logo-drop {
