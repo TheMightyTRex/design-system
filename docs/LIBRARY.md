@@ -138,16 +138,16 @@ work in the gallery.
 | Selection bar | `.selection-bar`, `.selection-bar__text`, `.row--select`, `.cover--thumb` | Bulk actions (Wanted, series reading order) |
 | Wizard | `.wizard`, `.wizard__foot`, `.steps--collapse`, `.steps__short` | Onboarding and upgrade; steps become "Step 3 of 7" on phones |
 | Settings rows | `.settings-section`, `.settings-section__head`, `.settings-rows`, `.setting`, `.setting--opens`, `.setting__text`, `.setting__label`, `.setting__hint`, `.setting__control`, `.settings-section__head--action` | Things with several fields open a slide-out |
-| Panel header | `.panel-header`, `.panel-header__title`, `.panel-header__brand`, `.panel-header__actions` (Previous, Next) | The same bar on slide-outs, dialogs and the phone menu |
-| Slide-out | `.side-panel-layer`, `.side-panel-backdrop`, `.side-panel`, `.side-panel--wide`, `.side-panel__body`, `.side-panel__foot`, `.side-panel__lead` | From the right; 420px, 640px wide, full width on phones |
+| Panel header | `.panel-header`, `.panel-header__title`, `.panel-header__brand`, `.panel-header__actions` (Previous, Next) | The same bar on slide-outs, dialogs and the phone menu; on slide-outs and the phone menu it wears the page background (`--color-slide-header`) |
+| Slide-out | `.side-panel-layer`, `.side-panel-backdrop`, `.side-panel`, `.side-panel--wide`, `.side-panel__body`, `.side-panel__foot`, `.side-panel__lead` | From the right; 420px, 640px wide, full width on phones; header in the page background, body and foot on the raised surface |
 | Dialog | `.dialog` (`<dialog>`), `.dialog__body`, `.dialog__foot` | Decisions and short tasks only |
 
 ## Slide-out, dialog or page
 
 | Use | When | Examples |
 |---|---|---|
-| Slide-out | Details of one item in a list, or editing it, where seeing the list still helps; longer reading beside the page | Book summary; a request; a download client, indexer, reading account or user; a log entry; an app, disk, download or backup run on Starboard; release notes |
-| Dialog | A decision or short task that must finish before going on; one or two fields | Confirm remove or reset; Add list; Display and accessibility |
+| Slide-out | Details of one item in a list, or editing it, where seeing the list still helps; longer reading beside the page | Book summary; a request; a download client, indexer, reading account or user; a log entry; an app, disk, download or backup run on Starboard; release notes; Display and accessibility |
+| Dialog | A decision or short task that must finish before going on; one or two fields | Confirm remove or reset; Add list; a password check before a download or restore |
 | Page | Something people return to, link to or spend time in | Book, author, series and narrator pages; Disk health; each Settings section; Upgrade wizard |
 | In place | A small change to a value already in view | Switches and selects in settings rows; filter chips; cover size |
 
@@ -206,7 +206,7 @@ close function, cleans up its listeners and can be reopened safely. Loading the 
 5. Commit in each repo, rebuild and test each app.
 6. Add the change to the decisions list in this file, commit it here and push, so every checkout picks it up.
 
-**Decisions:** accent teal (UX-02 option B); status chip style B, outline with icon (UX-04); cover actions (UX-42: `.cover-card` with `.cover-actions` on the cover by default, beside it as a per-account setting); shelves without scroll bars (UX-30 option A: `.shelf-scroller`, arrows over an edge fade); covers always line up (`.media-card` titles take two lines); small covers (UX-44: `.book-row` with `.cover-actions--row` in rows, `.cover-card__more` with the actions in words on small tiles); square radio art in the book shape (FEAT-R decision 2, fill 4: `.show-art`, label in the image's colour) and `.logo-tile`.
+**Decisions:** accent teal (UX-02 option B); status chip style B, outline with icon (UX-04); cover actions (UX-42: `.cover-card` with `.cover-actions` on the cover by default, beside it as a per-account setting); shelves without scroll bars (UX-30 option A: `.shelf-scroller`, arrows over an edge fade); covers always line up (`.media-card` titles take two lines); small covers (UX-44: `.book-row` with `.cover-actions--row` in rows, `.cover-card__more` with the actions in words on small tiles); square radio art in the book shape (FEAT-R decision 2, fill 4: `.show-art`, label in the image's colour) and `.logo-tile`; slide-outs look like slide-outs (David, 2 November 2026: `--color-slide-header`, the page background, on slide-out and phone menu headers over a raised-surface body; dialogs keep the plain header; Display and accessibility and Release notes are slide-outs).
 
 ## App-only patterns (2 November 2026)
 
