@@ -129,9 +129,16 @@
   <div class="g-demo g-demo--row" aria-label="Series colours 1 to 7, then empty">
     <span class="tag" style="border-left:14px solid var(--series-1)">1</span><span class="tag" style="border-left:14px solid var(--series-2)">2</span><span class="tag" style="border-left:14px solid var(--series-3)">3</span><span class="tag" style="border-left:14px solid var(--series-4)">4</span><span class="tag" style="border-left:14px solid var(--series-5)">5</span><span class="tag" style="border-left:14px solid var(--series-6)">6</span><span class="tag" style="border-left:14px solid var(--series-7)">7</span><span class="tag" style="border-left:14px solid var(--series-empty-line)">Empty</span>
   </div>
+  <h3>Scroll bars</h3>
+  <div class="g-demo g-demo--row">
+    <ul aria-label="A long list that scrolls" tabindex="0" style="height:160px;width:280px;overflow:auto;margin:0;padding:var(--space-2) var(--space-3);border:1px solid var(--color-divider);background:var(--color-surface);list-style:none">
+      <li>Ben Aaronovitch</li><li>Douglas Adams</li><li>Joe Abercrombie</li><li>Naomi Alderman</li><li>Isaac Asimov</li><li>Margaret Atwood</li><li>Iain M. Banks</li><li>Leigh Bardugo</li><li>Becky Chambers</li><li>Susanna Clarke</li><li>Arthur C. Clarke</li><li>Philip K. Dick</li><li>Steven Erikson</li><li>Neil Gaiman</li><li>Barry J. Hutchison</li><li>Ann Leckie</li><li>Ursula K. Le Guin</li><li>Terry Pratchett</li>
+    </ul>
+  </div>
   <div class="g-notes">
     <div><h4>Use</h4><ul><li><code>--color-accent</code> for the one main action, the current page bar and links.</li><li><code>--color-text-muted</code> for meta lines and hints, never for the only copy of something important.</li><li><code>--status-*</code> pairs only inside chips, notices, stats and edges, always with words.</li></ul></div>
     <div><h4>Accent</h4><ul><li>Teal (UX-02, option B); changing it is one token in each theme.</li></ul></div>
+    <div><h4>Scroll bars</h4><ul><li>Thin and square in every scrolling area, in <code>--color-scrollbar</code> (the border colour; the text colour in High contrast) on a clear track. They stay visible; only shelves hide theirs, behind arrows.</li></ul></div>
     <div><h4>Chart series</h4><ul><li><code>--series-1</code> to <code>--series-7</code> in a fixed order that follows the thing, never its rank. Checked for colour blindness, and 3:1 against the surface, in all four themes.</li><li><code>--series-empty</code> with a hatch for free space.</li></ul></div>
   </div>
 </section>

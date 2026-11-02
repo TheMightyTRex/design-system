@@ -75,6 +75,31 @@
   svg {
     flex: none;
   }
+  /* Scroll bars: thin and square, in the border colour on a clear track, in every scrolling area (the
+     page, long lists, slide-outs). They stay visible; only shelves hide theirs, behind arrows. */
+  :root {
+    scrollbar-color: var(--color-scrollbar) transparent;
+  }
+  :where(*) {
+    scrollbar-width: thin;
+  }
+  @supports not (scrollbar-color: auto) {
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      border: 2px solid transparent;
+      border-radius: 0;
+      background: var(--color-scrollbar) padding-box;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--color-scrollbar-hover) padding-box;
+    }
+  }
   :focus-visible {
     outline: var(--focus-w) solid var(--color-focus);
     outline-offset: 2px;
