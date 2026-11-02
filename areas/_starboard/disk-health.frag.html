@@ -1,0 +1,89 @@
+<!--meta {"title": "Disk health", "main": "system", "sub": "disks", "phone_note": "The table becomes one row per disk, still sorted by what needs checking first; each row opens the SMART report."}-->
+<!--note-->
+<ul style="margin:0;padding-left:var(--space-5)">
+  <li>Large disk cards become <strong>one compact row per disk, sorted by tone</strong> (failing, then to check, then healthy), so nine or more disks fit on one page.</li>
+  <li>Each disk opens a wide <strong>SMART report slide-out</strong>: facts, problem counters, the full attribute table, self-tests and that disk's events. The full table was not available before.</li>
+  <li>Summary tiles (disks, to check, hottest, oldest) lead; the temperature and age charts move under the list as meters.</li>
+</ul>
+<!--page-->
+<div class="page-head">
+  <div class="page-head__text"><h1>Disk health</h1><p class="page-head__summary">6 disks · 1 to check · last SMART reports today at 03:00</p></div>
+  <div class="actions"><button class="btn" type="button">{{i:refresh-cw}}Check again</button></div>
+</div>
+<div class="stats">
+  <div class="stat"><span class="stat__value">6</span><span class="stat__label">Disks</span></div>
+  <div class="stat" data-tone="warning"><span class="stat__value">1</span><span class="stat__label">To check</span><span class="chip" data-tone="warning" style="justify-self:start">Needs attention</span></div>
+  <div class="stat"><span class="stat__value">41°C</span><span class="stat__label">Hottest, Disk 4</span></div>
+  <div class="stat"><span class="stat__value">5.2 years</span><span class="stat__label">Oldest, Disk 1</span></div>
+</div>
+<div class="table-wrap" data-stack>
+  <table class="table">
+    <caption class="visually-hidden">Disks, most urgent first</caption>
+    <thead><tr><th scope="col">Disk</th><th scope="col">Status</th><th scope="col">Model</th><th scope="col">Size</th><th scope="col" class="numeric">Temperature</th><th scope="col" class="numeric">Powered on</th><th scope="col">Last self-test</th><th scope="col"><span class="visually-hidden">Details</span></th></tr></thead>
+    <tbody>
+      <tr><td data-label="Disk"><strong>Disk 3 <span class="small muted">sdc</span></strong></td><td data-label="Status"><span class="chip" data-tone="warning">Needs attention</span><br><span class="small">12 reallocated sectors</span></td><td data-label="Model">4 TB, 5400 rpm</td><td data-label="Size">4 TB</td><td data-label="Temperature" class="numeric">38°C</td><td data-label="Powered on" class="numeric">3.1 years</td><td data-label="Last self-test">Passed, 1 Nov</td><td><button class="btn btn--compact" type="button" data-opens="disk-smart">SMART report<span class="visually-hidden"> for Disk 3</span></button></td></tr>
+      <tr><td data-label="Disk"><strong>Disk 4 <span class="small muted">sdd</span></strong></td><td data-label="Status"><span class="chip" data-tone="success">Healthy</span></td><td data-label="Model">8 TB, 7200 rpm</td><td data-label="Size">8 TB</td><td data-label="Temperature" class="numeric">41°C</td><td data-label="Powered on" class="numeric">1.4 years</td><td data-label="Last self-test">Passed, 1 Nov</td><td><button class="btn btn--compact" type="button" data-opens="disk-smart">SMART report<span class="visually-hidden"> for Disk 4</span></button></td></tr>
+      <tr><td data-label="Disk"><strong>Disk 1 <span class="small muted">sda</span></strong></td><td data-label="Status"><span class="chip" data-tone="success">Healthy</span></td><td data-label="Model">4 TB, 5400 rpm</td><td data-label="Size">4 TB</td><td data-label="Temperature" class="numeric">36°C</td><td data-label="Powered on" class="numeric">5.2 years</td><td data-label="Last self-test">Passed, 1 Nov</td><td><button class="btn btn--compact" type="button" data-opens="disk-smart">SMART report<span class="visually-hidden"> for Disk 1</span></button></td></tr>
+      <tr><td data-label="Disk"><strong>Disk 2 <span class="small muted">sdb</span></strong></td><td data-label="Status"><span class="chip" data-tone="success">Healthy</span></td><td data-label="Model">8 TB, 7200 rpm</td><td data-label="Size">8 TB</td><td data-label="Temperature" class="numeric">39°C</td><td data-label="Powered on" class="numeric">2.0 years</td><td data-label="Last self-test">Passed, 1 Nov</td><td><button class="btn btn--compact" type="button" data-opens="disk-smart">SMART report<span class="visually-hidden"> for Disk 2</span></button></td></tr>
+      <tr><td data-label="Disk"><strong>Disk 5 <span class="small muted">sde</span></strong></td><td data-label="Status"><span class="chip" data-tone="success">Healthy</span></td><td data-label="Model">3.6 TB, 5400 rpm</td><td data-label="Size">3.6 TB</td><td data-label="Temperature" class="numeric">35°C</td><td data-label="Powered on" class="numeric">0.8 years</td><td data-label="Last self-test">Passed, 1 Nov</td><td><button class="btn btn--compact" type="button" data-opens="disk-smart">SMART report<span class="visually-hidden"> for Disk 5</span></button></td></tr>
+      <tr><td data-label="Disk"><strong>System <span class="small muted">nvme0</span></strong></td><td data-label="Status"><span class="chip" data-tone="success">Healthy</span></td><td data-label="Model">240 GB solid state</td><td data-label="Size">240 GB</td><td data-label="Temperature" class="numeric">33°C</td><td data-label="Powered on" class="numeric">2.6 years</td><td data-label="Last self-test">Passed, 1 Nov</td><td><button class="btn btn--compact" type="button" data-opens="disk-smart">SMART report<span class="visually-hidden"> for the system disk</span></button></td></tr>
+    </tbody>
+  </table>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:var(--space-4)">
+  <section class="panel" aria-labelledby="dh-temp-h"><div class="panel__head"><h2 id="dh-temp-h">Temperature</h2><span class="small muted">Under 45°C is fine</span></div>
+    <div class="meter"><div class="meter__label"><span>Disk 4</span><span class="numeric">41°C</span></div><div class="progress" role="img" aria-label="41 degrees"><span style="width:68%"></span></div></div>
+    <div class="meter"><div class="meter__label"><span>Disk 2</span><span class="numeric">39°C</span></div><div class="progress" role="img" aria-label="39 degrees"><span style="width:65%"></span></div></div>
+    <div class="meter"><div class="meter__label"><span>Disk 3</span><span class="numeric">38°C</span></div><div class="progress" role="img" aria-label="38 degrees"><span style="width:63%"></span></div></div>
+    <div class="meter"><div class="meter__label"><span>Disk 1</span><span class="numeric">36°C</span></div><div class="progress" role="img" aria-label="36 degrees"><span style="width:60%"></span></div></div>
+  </section>
+  <section class="panel" aria-labelledby="dh-age-h"><div class="panel__head"><h2 id="dh-age-h">Powered on</h2><span class="small muted">Plan to replace after about 5 years</span></div>
+    <div class="meter"><div class="meter__label"><span>Disk 1</span><span class="numeric">5.2 years</span></div><div class="progress" data-tone="warning" role="img" aria-label="5.2 years"><span style="width:87%"></span></div></div>
+    <div class="meter"><div class="meter__label"><span>Disk 3</span><span class="numeric">3.1 years</span></div><div class="progress" role="img" aria-label="3.1 years"><span style="width:52%"></span></div></div>
+    <div class="meter"><div class="meter__label"><span>System</span><span class="numeric">2.6 years</span></div><div class="progress" role="img" aria-label="2.6 years"><span style="width:43%"></span></div></div>
+    <div class="meter"><div class="meter__label"><span>Disk 2</span><span class="numeric">2.0 years</span></div><div class="progress" role="img" aria-label="2.0 years"><span style="width:33%"></span></div></div>
+  </section>
+</div>
+<section class="panel" aria-labelledby="dh-ev-h"><div class="panel__head"><h2 id="dh-ev-h">Recent events</h2><span class="small muted">Self-tests and changes, newest first</span></div>
+  <ul class="rows">
+    <li class="row row--no-lead"><div><div class="row__title">Disk 3: reallocated sectors rose from 4 to 12</div><div class="row__meta">Today at 03:00</div></div><div class="row__side"><span class="chip" data-tone="warning">Needs attention</span></div></li>
+    <li class="row row--no-lead"><div><div class="row__title">Short self-test passed on all 6 disks</div><div class="row__meta">Sunday 1 November at 04:00</div></div><div class="row__side"><span class="chip" data-tone="success">Passed</span></div></li>
+  </ul>
+</section>
+<!--phone-->
+<ul class="rows">
+  <li class="row row--opens row--no-lead"><div><div class="row__title"><button type="button" data-opens="disk-smart">Disk 3 · 4 TB</button></div><div class="row__meta">12 reallocated sectors · 38°C · 3.1 years</div></div><div class="row__side"><span class="chip" data-tone="warning">Needs attention</span></div></li>
+  <li class="row row--opens row--no-lead"><div><div class="row__title"><button type="button" data-opens="disk-smart">Disk 4 · 8 TB</button></div><div class="row__meta">41°C · 1.4 years</div></div><div class="row__side"><span class="chip" data-tone="success">Healthy</span></div></li>
+</ul>
+<!--panels-->
+<div class="side-panel-layer" id="disk-smart" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel side-panel--wide" role="dialog" aria-modal="true" aria-labelledby="ds-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="ds-h">Disk 3, SMART report</h2><button class="icon-btn" type="button" data-closes aria-label="Close Disk 3 SMART report">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <div class="notice" data-tone="warning">{{i:triangle-alert}}<div class="notice__body"><span class="notice__title">Needs attention</span><p>12 sectors were reallocated, 8 of them this week. Back up what is on it and plan to replace it.</p></div></div>
+      <dl class="facts"><dt>Model</dt><dd>4 TB, 5400 rpm</dd><dt>Device</dt><dd><code>/dev/sdc</code></dd><dt>Temperature</dt><dd>38°C</dd><dt>Powered on</dt><dd>3 years, 41 days (27,150 hours)</dd><dt>Report from</dt><dd>Today at 03:00</dd></dl>
+      <section style="display:grid;gap:var(--space-3)" aria-labelledby="ds-c-h"><h3 id="ds-c-h">Counters that should stay at zero</h3>
+        <div class="stats" style="grid-template-columns:repeat(3,1fr)"><div class="stat" data-tone="warning"><span class="stat__value">12</span><span class="stat__label">Reallocated sectors</span></div><div class="stat"><span class="stat__value">0</span><span class="stat__label">Pending sectors</span></div><div class="stat"><span class="stat__value">0</span><span class="stat__label">Uncorrectable</span></div></div>
+      </section>
+      <section style="display:grid;gap:var(--space-3)" aria-labelledby="ds-a-h"><h3 id="ds-a-h">All attributes</h3>
+        <div class="table-wrap"><table class="table"><thead><tr><th scope="col" class="numeric">ID</th><th scope="col">Attribute</th><th scope="col" class="numeric">Value</th><th scope="col" class="numeric">Worst</th><th scope="col" class="numeric">Threshold</th><th scope="col" class="numeric">Raw</th></tr></thead><tbody>
+          <tr><td class="numeric">1</td><td>Read error rate</td><td class="numeric">200</td><td class="numeric">200</td><td class="numeric">51</td><td class="numeric">0</td></tr>
+          <tr><td class="numeric">5</td><td>Reallocated sectors <span class="chip" data-tone="warning">Needs attention</span></td><td class="numeric">198</td><td class="numeric">198</td><td class="numeric">140</td><td class="numeric">12</td></tr>
+          <tr><td class="numeric">9</td><td>Power-on hours</td><td class="numeric">63</td><td class="numeric">63</td><td class="numeric">0</td><td class="numeric">27150</td></tr>
+          <tr><td class="numeric">194</td><td>Temperature</td><td class="numeric">112</td><td class="numeric">98</td><td class="numeric">0</td><td class="numeric">38</td></tr>
+          <tr><td class="numeric">197</td><td>Pending sectors</td><td class="numeric">200</td><td class="numeric">200</td><td class="numeric">0</td><td class="numeric">0</td></tr>
+          <tr><td class="numeric">198</td><td>Uncorrectable</td><td class="numeric">100</td><td class="numeric">253</td><td class="numeric">0</td><td class="numeric">0</td></tr>
+          <tr><td class="numeric">199</td><td>Cable errors</td><td class="numeric">200</td><td class="numeric">200</td><td class="numeric">0</td><td class="numeric">0</td></tr>
+        </tbody></table></div>
+      </section>
+      <section style="display:grid;gap:var(--space-3)" aria-labelledby="ds-t-h"><h3 id="ds-t-h">Self-tests</h3>
+        <ul class="rows"><li class="row row--no-lead"><div><div class="row__title">Short test</div><div class="row__meta">Sunday 1 November at 04:00</div></div><div class="row__side"><span class="chip" data-tone="success">Passed</span></div></li><li class="row row--no-lead"><div><div class="row__title">Long test</div><div class="row__meta">Sunday 4 October at 04:00 · 9 hours</div></div><div class="row__side"><span class="chip" data-tone="success">Passed</span></div></li></ul>
+      </section>
+      <section style="display:grid;gap:var(--space-3)" aria-labelledby="ds-e-h"><h3 id="ds-e-h">Events for this disk</h3>
+        <ul class="rows"><li class="row row--no-lead"><div><div class="row__title">Reallocated sectors rose from 4 to 12</div><div class="row__meta">Today at 03:00</div></div></li><li class="row row--no-lead"><div><div class="row__title">Reallocated sectors rose from 0 to 4</div><div class="row__meta">Tuesday 27 October at 03:00</div></div></li></ul>
+      </section>
+    </div>
+    <div class="side-panel__foot"><button class="btn" type="button">{{i:refresh-cw}}Check again</button><button class="btn btn--quiet" type="button">{{i:download}}Download the full report</button></div>
+  </aside>
+</div>

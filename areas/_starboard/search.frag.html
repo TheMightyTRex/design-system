@@ -1,0 +1,59 @@
+<!--meta {"title": "Search", "main": "search", "sub": "", "phone_note": "Results lose the overview line; the Add slide-out fills the screen and Close returns to the same result."}-->
+<!--note-->
+<ul style="margin:0;padding-left:var(--space-5)">
+  <li>The Add modal becomes an <strong>Add slide-out</strong>: the result stays in view, the panel shows the cover, overview and the three options, and after adding it says where it went.</li>
+  <li>Follows the Collection template: search and kind filter chips in one toolbar, an h2 "Results" with h3 items. Filter chips are toggled in place, so focus stays on the chip.</li>
+  <li>The header search is labelled "Search films, series, music and books", matching its placeholder.</li>
+</ul>
+<!--page-->
+<div class="page-head">
+  <div class="page-head__text"><h1>Search</h1><p class="page-head__summary">Find a series, film, artist or author and add it to the right app.</p></div>
+</div>
+<div class="toolbar">
+  <div class="toolbar__row">
+    <form class="toolbar__search search-field" role="search" onsubmit="return false" style="max-width:480px;display:flex;gap:var(--space-2)"><input class="input" type="search" aria-label="Search for" value="harbour"><button class="btn btn--primary" type="submit">{{i:search}}Search</button></form>
+    <div class="filter-chips" role="group" aria-label="Show">
+      <button class="filter-chip" type="button" aria-pressed="false">{{i:tv}}Series, 3</button>
+      <button class="filter-chip" type="button" aria-pressed="false">{{i:film}}Films, 2</button>
+      <button class="filter-chip" type="button" aria-pressed="false">{{i:music}}Music, 1</button>
+      <button class="filter-chip" type="button" aria-pressed="false">{{i:book}}Books, 1</button>
+    </div>
+    <div class="toolbar__end"><span class="toolbar__count">7 results from 4 apps</span></div>
+  </div>
+</div>
+<section aria-labelledby="results-h" style="display:grid;gap:var(--space-3)">
+  <h2 id="results-h">Results</h2>
+  <ul class="rows">
+    <li class="row row--opens"><div class="cover" style="width:64px;background:linear-gradient(160deg,#154a96,#135c2e);color:#fff">Harbour Lights</div><div><h3 class="row__title"><button type="button" data-opens="search-add">Harbour Lights (2024)</button></h3><div class="row__meta">Series · 3 seasons · Sonarr</div><p class="small" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-width:70ch">A coastguard returns to her home town when a trawler goes missing, and finds the town keeping more than one secret.</p></div><div class="row__side"><button class="btn" type="button" data-opens="search-add">{{i:plus}}Add<span class="visually-hidden"> Harbour Lights</span></button></div></li>
+    <li class="row row--opens"><div class="cover" style="width:64px;background:linear-gradient(160deg,#323a77,#af4e24);color:#fff">The Harbour</div><div><h3 class="row__title"><button type="button" data-opens="search-add">The Harbour (2019)</button></h3><div class="row__meta">Film · 1 hr 52 min · Radarr</div><p class="small" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-width:70ch">Two brothers inherit a failing boatyard and one last summer to save it.</p></div><div class="row__side"><span class="chip" data-tone="success">In library</span></div></li>
+    <li class="row row--opens"><div class="cover" style="width:64px">No cover</div><div><h3 class="row__title"><button type="button" data-opens="search-add">Harbour Songs</button></h3><div class="row__meta">Artist · 4 albums · Lidarr</div></div><div class="row__side"><button class="btn" type="button" data-opens="search-add">{{i:plus}}Add<span class="visually-hidden"> Harbour Songs</span></button></div></li>
+    <li class="row row--opens"><div class="cover" style="width:64px;background:linear-gradient(160deg,#6b4500,#9b1c14);color:#fff">Glass Harbour</div><div><h3 class="row__title"><button type="button" data-opens="search-add">The Glass Harbour</button></h3><div class="row__meta">Book · Mara Ellison · Storyarr</div></div><div class="row__side"><span class="chip" data-tone="success">In library</span></div></li>
+  </ul>
+</section>
+<div class="notice" data-tone="warning" role="status">{{i:triangle-alert}}<div class="notice__body"><span class="notice__title">Lidarr did not answer</span><p>Music results may be missing. Search again when Lidarr is running.</p></div><a class="btn btn--compact" href="starboard-apps.html">View apps</a></div>
+<p class="small muted">Not finding it? <a href="starboard-settings-apps.html">Add another app to search</a>.</p>
+<!--phone-->
+<form role="search" onsubmit="return false" style="display:flex;gap:var(--space-2)"><input class="input" type="search" aria-label="Search for (phone)" value="harbour" style="flex:1"><button class="btn btn--primary" type="submit" aria-label="Search">{{i:search}}</button></form>
+<div class="filter-chips" role="group" aria-label="Show (phone)" style="flex-wrap:nowrap;overflow-x:auto"><button class="filter-chip" type="button" aria-pressed="true" style="flex:none">Series, 3</button><button class="filter-chip" type="button" aria-pressed="false" style="flex:none">Films, 2</button><button class="filter-chip" type="button" aria-pressed="false" style="flex:none">Music, 1</button></div>
+<ul class="rows">
+  <li class="row row--opens" style="grid-template-columns:auto minmax(0,1fr)"><div class="cover" style="width:48px;background:linear-gradient(160deg,#154a96,#135c2e);color:#fff"></div><div><h3 class="row__title"><button type="button" data-opens="search-add">Harbour Lights (2024)</button></h3><div class="row__meta">Series · Sonarr</div></div><div class="row__side" style="grid-column:1/-1;justify-content:start"><button class="btn" type="button" data-opens="search-add" style="flex:1">{{i:plus}}Add<span class="visually-hidden"> Harbour Lights</span></button></div></li>
+</ul>
+<!--panels-->
+<div class="side-panel-layer" id="search-add" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="sa-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="sa-h">Add Harbour Lights</h2><button class="icon-btn" type="button" data-closes aria-label="Close Add Harbour Lights">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <div class="side-panel__lead"><div class="cover" style="background:linear-gradient(160deg,#154a96,#135c2e);color:#fff">Harbour Lights</div><div style="display:grid;gap:var(--space-2)"><h3 style="font-size:var(--text-lg)">Harbour Lights (2024)</h3><span class="chip" style="justify-self:start">Not in library</span><span class="small muted">Series · 3 seasons · 24 episodes</span></div></div>
+      <p>A coastguard returns to her home town when a trawler goes missing, and finds the town keeping more than one secret.</p>
+      <section style="display:grid;gap:var(--space-4)" aria-labelledby="sa-opt-h">
+        <h3 id="sa-opt-h">Add to Sonarr</h3>
+        <div class="field"><label for="sa-q">Quality profile</label><select class="select" id="sa-q"><option>HD 1080p</option><option>Any</option></select></div>
+        <div class="field"><label for="sa-f">Folder</label><select class="select" id="sa-f"><option>/data/media/series</option><option>/data/media/kids-series</option></select></div>
+        <label class="check"><input type="checkbox" checked><span class="check__text">Start searching for it now</span></label>
+      </section>
+      <div class="notice" data-tone="success" role="status">{{i:circle-check}}<div class="notice__body"><span class="notice__title">After adding</span><p>"Added to Sonarr" appears here with a link to open it, and focus returns to the result's In library chip.</p></div></div>
+    </div>
+    <div class="side-panel__foot"><button class="btn btn--primary" type="button">{{i:plus}}Add to Sonarr</button><button class="btn btn--quiet" type="button" data-closes>Cancel</button></div>
+  </aside>
+</div>

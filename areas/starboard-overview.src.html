@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overview · Starboard board</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  /* Board only, as in the gallery: icon sizes (no icon size class in the library yet). */
+  svg.i { width: var(--icon-md); height: var(--icon-md); }
+  svg.i-lg { width: var(--icon-lg); height: var(--icon-lg); }
+  svg.i-xl { width: 32px; height: 32px; }
+</style>
+</head>
+<body>
+<!--ICONS-->
+<a class="skip-link" href="#main">Skip to main content</a>
+<aside aria-label="About this board" style="padding:var(--space-4) var(--space-8);background:var(--color-surface-sunken);border-bottom:1px solid var(--color-divider)">
+  <div class="notice" style="max-width:1100px">{{i:info}}<div class="notice__body"><span class="notice__title">What changed and why</span>
+<ul style="margin:0;padding-left:var(--space-5)">
+  <li><strong>Needs attention comes first</strong>, because it is the part you act on; each warning opens a slide-out with the full message. Charts follow.</li>
+  <li>Stat tiles say a warning in words (for example "Hot"), not only with an amber edge.</li>
+  <li>The time range is a labelled segmented control. Download and Upload are written as words, not arrows.</li>
+</ul>
+  </div><a class="btn btn--compact" href="index-starboard.html">All boards</a></div>
+</aside>
+<header class="site-header">
+  <div class="site-header__bar">
+    <a class="site-header__brand" href="starboard-apps.html" style="display:inline-flex;padding-left:var(--space-5)"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg>Starboard</a>
+    <nav class="menu-tabs" aria-label="Main menu"><a href="starboard-apps.html">{{i:layout-grid}}<span class="menu-tabs__label">Apps</span></a><a href="starboard-search.html">{{i:search}}<span class="menu-tabs__label">Search</span></a><a href="starboard-downloads.html">{{i:download}}<span class="menu-tabs__label">Downloads</span></a><a href="starboard-coming-up.html">{{i:calendar-days}}<span class="menu-tabs__label">Coming up</span></a><a href="starboard-overview.html" aria-current="page">{{i:activity}}<span class="menu-tabs__label">System</span></a><a href="starboard-settings-apps.html">{{i:settings}}<span class="menu-tabs__label">Settings</span></a></nav>
+    <form class="site-header__search search-field" role="search" action="starboard-search.html"><input class="input" type="search" name="q" aria-label="Search films, series, music and books" placeholder="Search films, series, music, books"><button class="visually-hidden" type="submit">Search</button></form>
+    <div class="site-header__actions"><button class="icon-btn" type="button" data-dialog="display-dialog">{{i-lg:sun}}<span class="label">Display</span></button></div>
+  </div>
+  <div class="site-header__tabs"><nav class="menu-tabs" aria-label="System"><a href="starboard-overview.html" aria-current="page">{{i:gauge}}<span class="menu-tabs__label">Overview</span></a><a href="starboard-storage.html">{{i:hard-drive}}<span class="menu-tabs__label">Storage</span></a><a href="starboard-disk-health.html">{{i:heart-pulse}}<span class="menu-tabs__label">Disk health</span> <span class="count">1<span class="visually-hidden"> to check</span></span></a><a href="starboard-monitor.html">{{i:chart-line}}<span class="menu-tabs__label">Monitor</span></a><a href="starboard-network.html">{{i:network}}<span class="menu-tabs__label">Network</span></a><a href="starboard-backup.html">{{i:archive}}<span class="menu-tabs__label">Backup and restore</span></a></nav></div>
+</header>
+<main id="main" tabindex="-1">
+<div class="page">
+<div class="page-head">
+  <div class="page-head__text"><h1>Overview</h1><p class="page-head__summary">Up 23 days · 2 warnings · updated 10 seconds ago</p></div>
+  <div class="actions"><button class="btn" type="button">{{i:refresh-cw}}Check again</button></div>
+</div>
+<div class="stats">
+  <div class="stat"><span class="stat__value">23%</span><span class="stat__label">Processor</span></div>
+  <div class="stat"><span class="stat__value">11.2 GB</span><span class="stat__label">Memory used of 16 GB (70%)</span></div>
+  <div class="stat" data-tone="warning"><span class="stat__value">78°C</span><span class="stat__label">Processor temperature</span><span class="chip" data-tone="warning" style="justify-self:start">Hot</span></div>
+  <div class="stat"><span class="stat__value">1.4</span><span class="stat__label">Load, 4 cores</span></div>
+</div>
+<section class="panel" data-tone="warning" aria-labelledby="na-h">
+  <div class="panel__head"><h2 id="na-h">Needs attention</h2><span class="small muted">Warnings your apps and disks report about themselves</span></div>
+  <ul class="rows">
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">S</span><div><div class="row__title"><button type="button" data-opens="ov-warning">Indexers unavailable for more than 6 hours</button></div><div class="row__meta">Sonarr · first seen today at 08:12</div></div><div class="row__side"><span class="chip" data-tone="warning">Needs attention</span></div></li>
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:hard-drive}}</span><div><div class="row__title"><a href="starboard-disk-health.html">Disk 3 has 12 reallocated sectors</a></div><div class="row__meta">Disk health · found at the 03:00 check</div></div><div class="row__side"><span class="chip" data-tone="warning">Needs attention</span></div></li>
+  </ul>
+</section>
+<div style="display:flex;flex-wrap:wrap;gap:var(--space-3);align-items:center;justify-content:space-between">
+  <h2>Last 6 hours</h2>
+  <fieldset style="display:flex;gap:var(--space-3);align-items:center;grid-auto-flow:column"><legend class="visually-hidden">Time range</legend><span class="small muted" aria-hidden="true">Time range</span><div class="segmented"><label><input type="radio" name="ov-r"><span>Last hour</span></label><label><input type="radio" name="ov-r" checked><span>6 hours</span></label><label><input type="radio" name="ov-r"><span>24 hours</span></label></div><a class="btn btn--quiet" href="starboard-monitor.html">{{i:chart-line}}Live</a></fieldset>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(560px,1fr));gap:var(--space-4)">
+<section class="panel" aria-labelledby="c-cpu-h">
+  <div class="panel__head"><h3 id="c-cpu-h">Processor</h3><span class="numeric">23% now</span></div>
+  <svg viewBox="0 0 600 170" role="img" aria-labelledby="c-cpu-h c-cpu-d" style="display:block;width:100%;height:auto"><line x1="44" x2="592" y1="148.0" y2="148.0" stroke="var(--color-divider)" stroke-width="1"/><text x="38" y="152.0" text-anchor="end" font-size="15" fill="var(--color-text-muted)">0%</text><line x1="44" x2="592" y1="113.0" y2="113.0" stroke="var(--color-divider)" stroke-width="1"/><text x="38" y="117.0" text-anchor="end" font-size="15" fill="var(--color-text-muted)">25%</text><line x1="44" x2="592" y1="78.0" y2="78.0" stroke="var(--color-divider)" stroke-width="1"/><text x="38" y="82.0" text-anchor="end" font-size="15" fill="var(--color-text-muted)">50%</text><line x1="44" x2="592" y1="43.0" y2="43.0" stroke="var(--color-divider)" stroke-width="1"/><text x="38" y="47.0" text-anchor="end" font-size="15" fill="var(--color-text-muted)">75%</text><line x1="44" x2="592" y1="8.0" y2="8.0" stroke="var(--color-divider)" stroke-width="1"/><text x="38" y="12.0" text-anchor="end" font-size="15" fill="var(--color-text-muted)">100%</text><text x="44.0" y="166" text-anchor="start" font-size="15" fill="var(--color-text-muted)">10:00</text><text x="181.0" y="166" text-anchor="middle" font-size="15" fill="var(--color-text-muted)">11:30</text><text x="318.0" y="166" text-anchor="middle" font-size="15" fill="var(--color-text-muted)">13:00</text><text x="455.0" y="166" text-anchor="middle" font-size="15" fill="var(--color-text-muted)">14:30</text><text x="592.0" y="166" text-anchor="end" font-size="15" fill="var(--color-text-muted)">16:00</text><polyline fill="none" stroke="var(--chart-1)" stroke-width="2.5" points="44.0,131.2 89.7,122.8 135.3,127.0 181.0,90.6 226.7,106.0 272.3,117.2 318.0,121.4 363.7,113.0 409.3,108.8 455.0,124.2 500.7,120.0 546.3,111.6 592.0,115.8"/><circle cx="592.0" cy="115.8" r="4" fill="var(--chart-1)"/></svg>
+  <p class="visually-hidden" id="c-cpu-d">Processor use over the last 6 hours, between 12% and 41%, now 23%.</p>
+  
+  <details class="disclosure"><summary>Show as a table</summary><div class="disclosure__body"><div class="table-wrap"><table class="table"><caption class="visually-hidden">Processor</caption><thead><tr><th scope="col">Time</th><th scope="col">Processor</th></tr></thead><tbody><tr><th scope="row" class="numeric">10:00</th><td class="numeric">12%</td></tr><tr><th scope="row" class="numeric">11:30</th><td class="numeric">41%</td></tr><tr><th scope="row" class="numeric">13:00</th><td class="numeric">19%</td></tr><tr><th scope="row" class="numeric">14:30</th><td class="numeric">17%</td></tr><tr><th scope="row" class="numeric">16:00</th><td class="numeric">23%</td></tr></tbody></table></div></div></details>
+</section>
+<section class="panel" aria-labelledby="c-mem-h">
+  <div class="panel__head"><h3 id="c-mem-h">Memory</h3><span class="numeric">70% now</span></div>
+  <svg viewBox="0 0 600 170" role="img" aria-labelledby="c-mem-h c-mem-d" style="display:block;width:100%;height:auto"><line x1="44" x2="592" y1="148.0" y2="148.0" stroke="var(--color-divider)" stroke-width="1"/><text x="38" y="152.0" text-anchor="end" font-size="15" fill="var(--color-text-muted)">0%</text><line x1="44" x2="592" y1="113.0" y2="113.0" stroke="var(--color-divider)" stroke-width="1"/><text x="38" y="117.0" text-anchor="end" font-size="15" fill="var(--color-text-muted)">25%</text><line x1="44" x2="592" y1="78.0" y2="78.0" stroke="var(--color-divider)" stroke-width="1"/><text x="38" y="82.0" text-anchor="end" font-size="15" fill="var(--color-text-muted)">50%</text><line x1="44" x2="592" y1="43.0" y2="43.0" stroke="var(--color-divider)" stroke-width="1"/><text x="38" y="47.0" text-anchor="end" font-size="15" fill="var(--color-text-muted)">75%</text><line x1="44" x2="592" y1="8.0" y2="8.0" stroke="var(--color-divider)" stroke-width="1"/><text x="38" y="12.0" text-anchor="end" font-size="15" fill="var(--color-text-muted)">100%</text><text x="44.0" y="166" text-anchor="start" font-size="15" fill="var(--color-text-muted)">10:00</text><text x="181.0" y="166" text-anchor="middle" font-size="15" fill="var(--color-text-muted)">11:30</text><text x="318.0" y="166" text-anchor="middle" font-size="15" fill="var(--color-text-muted)">13:00</text><text x="455.0" y="166" text-anchor="middle" font-size="15" fill="var(--color-text-muted)">14:30</text><text x="592.0" y="166" text-anchor="end" font-size="15" fill="var(--color-text-muted)">16:00</text><polyline fill="none" stroke="var(--chart-1)" stroke-width="2.5" points="44.0,58.4 89.7,57.0 135.3,55.6 181.0,52.8 226.7,51.4 272.3,51.4 318.0,50.0 363.7,50.0 409.3,48.6 455.0,50.0 500.7,50.0 546.3,51.4 592.0,50.0"/><circle cx="592.0" cy="50.0" r="4" fill="var(--chart-1)"/></svg>
+  <p class="visually-hidden" id="c-mem-d">Memory use over the last 6 hours, steady between 64% and 71%, now 70%.</p>
+  
+  <details class="disclosure"><summary>Show as a table</summary><div class="disclosure__body"><div class="table-wrap"><table class="table"><caption class="visually-hidden">Memory</caption><thead><tr><th scope="col">Time</th><th scope="col">Memory</th></tr></thead><tbody><tr><th scope="row" class="numeric">10:00</th><td class="numeric">64%</td></tr><tr><th scope="row" class="numeric">11:30</th><td class="numeric">68%</td></tr><tr><th scope="row" class="numeric">13:00</th><td class="numeric">70%</td></tr><tr><th scope="row" class="numeric">14:30</th><td class="numeric">70%</td></tr><tr><th scope="row" class="numeric">16:00</th><td class="numeric">70%</td></tr></tbody></table></div></div></details>
+</section>
+<section class="panel" aria-labelledby="c-temp-h">
+  <div class="panel__head"><h3 id="c-temp-h">Processor temperature</h3><span class="numeric">78°C now <span class="chip" data-tone="warning">Hot</span></span></div>
+  <svg viewBox="0 0 600 170" role="img" aria-labelledby="c-temp-h c-temp-d" style="display:block;width:100%;height:auto"><line x1="44" x2="592" y1="148.0" y2="148.0" stroke="var(--color-divider)" stroke-width="1"/><text x="38" y="152.0" text-anchor="end" font-size="15" fill="var(--color-text-muted)">0°</text><line x1="44" x2="592" y1="113.0" y2="113.0" stroke="var(--color-divider)" stroke-width="1"/><text x="38" y="117.0" text-anchor="end" font-size="15" fill="var(--color-text-muted)">25°</text><line x1="44" x2="592" y1="78.0" y2="78.0" stroke="var(--color-divider)" stroke-width="1"/><text x="38" y="82.0" text-anchor="end" font-size="15" fill="var(--color-text-muted)">50°</text><line x1="44" x2="592" y1="43.0" y2="43.0" stroke="var(--color-divider)" stroke-width="1"/><text x="38" y="47.0" text-anchor="end" font-size="15" fill="var(--color-text-muted)">75°</text><line x1="44" x2="592" y1="8.0" y2="8.0" stroke="var(--color-divider)" stroke-width="1"/><text x="38" y="12.0" text-anchor="end" font-size="15" fill="var(--color-text-muted)">100°</text><text x="44.0" y="166" text-anchor="start" font-size="15" fill="var(--color-text-muted)">10:00</text><text x="181.0" y="166" text-anchor="middle" font-size="15" fill="var(--color-text-muted)">11:30</text><text x="318.0" y="166" text-anchor="middle" font-size="15" fill="var(--color-text-muted)">13:00</text><text x="455.0" y="166" text-anchor="middle" font-size="15" fill="var(--color-text-muted)">14:30</text><text x="592.0" y="166" text-anchor="end" font-size="15" fill="var(--color-text-muted)">16:00</text><polyline fill="none" stroke="var(--chart-1)" stroke-width="2.5" points="44.0,62.6 89.7,59.8 135.3,58.4 181.0,47.2 226.7,43.0 272.3,50.0 318.0,52.8 363.7,48.6 409.3,44.4 455.0,41.6 500.7,40.2 546.3,37.4 592.0,38.8"/><circle cx="592.0" cy="38.8" r="4" fill="var(--chart-1)"/></svg>
+  <p class="visually-hidden" id="c-temp-d">Processor temperature over the last 6 hours, rising from 61 to 78 degrees, which is hot.</p>
+  
+  <details class="disclosure"><summary>Show as a table</summary><div class="disclosure__body"><div class="table-wrap"><table class="table"><caption class="visually-hidden">Processor temperature</caption><thead><tr><th scope="col">Time</th><th scope="col">Temperature</th></tr></thead><tbody><tr><th scope="row" class="numeric">10:00</th><td class="numeric">61°</td></tr><tr><th scope="row" class="numeric">11:30</th><td class="numeric">72°</td></tr><tr><th scope="row" class="numeric">13:00</th><td class="numeric">68°</td></tr><tr><th scope="row" class="numeric">14:30</th><td class="numeric">76°</td></tr><tr><th scope="row" class="numeric">16:00</th><td class="numeric">78°</td></tr></tbody></table></div></div></details>
+</section>
+<section class="panel" aria-labelledby="c-net-h">
+  <div class="panel__head"><h3 id="c-net-h">Network</h3><span class="numeric">Download 18.4 MB/s · Upload 1.2 MB/s</span></div>
+  <svg viewBox="0 0 600 170" role="img" aria-labelledby="c-net-h c-net-d" style="display:block;width:100%;height:auto"><line x1="44" x2="592" y1="148.0" y2="148.0" stroke="var(--color-divider)" stroke-width="1"/><text x="38" y="152.0" text-anchor="end" font-size="15" fill="var(--color-text-muted)">0</text><line x1="44" x2="592" y1="113.0" y2="113.0" stroke="var(--color-divider)" stroke-width="1"/><text x="38" y="117.0" text-anchor="end" font-size="15" fill="var(--color-text-muted)">6.25</text><line x1="44" x2="592" y1="78.0" y2="78.0" stroke="var(--color-divider)" stroke-width="1"/><text x="38" y="82.0" text-anchor="end" font-size="15" fill="var(--color-text-muted)">12.5</text><line x1="44" x2="592" y1="43.0" y2="43.0" stroke="var(--color-divider)" stroke-width="1"/><text x="38" y="47.0" text-anchor="end" font-size="15" fill="var(--color-text-muted)">18.75</text><line x1="44" x2="592" y1="8.0" y2="8.0" stroke="var(--color-divider)" stroke-width="1"/><text x="38" y="12.0" text-anchor="end" font-size="15" fill="var(--color-text-muted)">25</text><text x="44.0" y="166" text-anchor="start" font-size="15" fill="var(--color-text-muted)">10:00</text><text x="181.0" y="166" text-anchor="middle" font-size="15" fill="var(--color-text-muted)">11:30</text><text x="318.0" y="166" text-anchor="middle" font-size="15" fill="var(--color-text-muted)">13:00</text><text x="455.0" y="166" text-anchor="middle" font-size="15" fill="var(--color-text-muted)">14:30</text><text x="592.0" y="166" text-anchor="end" font-size="15" fill="var(--color-text-muted)">16:00</text><polyline fill="none" stroke="var(--chart-1)" stroke-width="2.5" points="44.0,136.8 89.7,125.6 135.3,131.2 181.0,80.8 226.7,24.8 272.3,58.4 318.0,103.2 363.7,120.0 409.3,97.6 455.0,69.6 500.7,36.0 546.3,41.6 592.0,47.2"/><circle cx="592.0" cy="47.2" r="4" fill="var(--chart-1)"/><polyline fill="none" stroke="var(--chart-2)" stroke-width="2.5" stroke-dasharray="6 4" points="44.0,145.2 89.7,143.5 135.3,144.6 181.0,141.8 226.7,139.0 272.3,141.3 318.0,143.0 363.7,144.1 409.3,143.5 455.0,142.4 500.7,140.2 546.3,140.7 592.0,141.3"/><circle cx="592.0" cy="141.3" r="4" fill="var(--chart-2)"/></svg>
+  <p class="visually-hidden" id="c-net-d">Download and upload speed over the last 6 hours. Download peaked at 22 MB/s and is now 18.4; upload stayed under 2 MB/s.</p>
+  <p class="small" style="display:flex;gap:var(--space-4);flex-wrap:wrap"><span style="display:inline-flex;align-items:center;gap:var(--space-2)"><span aria-hidden="true" style="display:inline-block;width:20px;height:0;border-top:3px solid var(--chart-1)"></span>Download, MB/s</span><span style="display:inline-flex;align-items:center;gap:var(--space-2)"><span aria-hidden="true" style="display:inline-block;width:20px;height:0;border-top:3px dashed var(--chart-2)"></span>Upload, MB/s</span></p>
+  <details class="disclosure"><summary>Show as a table</summary><div class="disclosure__body"><div class="table-wrap"><table class="table"><caption class="visually-hidden">Network</caption><thead><tr><th scope="col">Time</th><th scope="col">Download, MB/s</th><th scope="col">Upload, MB/s</th></tr></thead><tbody><tr><th scope="row" class="numeric">10:00</th><td class="numeric">2</td><td class="numeric">0.5</td></tr><tr><th scope="row" class="numeric">11:30</th><td class="numeric">12</td><td class="numeric">1.1</td></tr><tr><th scope="row" class="numeric">13:00</th><td class="numeric">8</td><td class="numeric">0.9</td></tr><tr><th scope="row" class="numeric">14:30</th><td class="numeric">14</td><td class="numeric">1</td></tr><tr><th scope="row" class="numeric">16:00</th><td class="numeric">18</td><td class="numeric">1.2</td></tr></tbody></table></div></div></details>
+</section>
+</div>
+</div>
+</main>
+<footer class="site-footer"><span>Starboard v0.2.0</span><a href="starboard-settings-about.html">About and updates</a></footer>
+<section aria-labelledby="board-phone-h" style="display:grid;gap:var(--space-4);padding:var(--space-8);border-top:2px solid var(--color-text);background:var(--color-surface-sunken)">
+  <div style="display:grid;gap:var(--space-1)"><h2 id="board-phone-h">On a phone (390px)</h2><p class="small muted">Stat tiles go two to a row; Needs attention stays first; charts stack one per row.</p></div>
+  <div style="width:390px;border:1px solid var(--color-border);background:var(--color-bg);overflow:hidden">
+      <header class="site-header" style="position:relative">
+        <div class="site-header__bar" style="height:60px;padding-inline:var(--space-4);gap:var(--space-3)">
+          <button class="icon-btn" type="button" data-opens="phone-menu" aria-controls="phone-menu" aria-expanded="false">{{i-lg:menu}}<span class="visually-hidden">Menu</span></button>
+          <span class="panel-header__brand"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg>Starboard</span>
+          <button class="icon-btn" type="button" style="margin-left:auto" data-dialog="display-dialog" aria-label="Display">{{i-lg:sun}}</button>
+        </div>
+        <div class="site-header__tabs"><nav class="menu-tabs" aria-label="System (phone)"><a href="starboard-overview.html" aria-current="page">{{i:gauge}}<span class="menu-tabs__label">Overview</span></a><a href="starboard-storage.html">{{i:hard-drive}}<span class="menu-tabs__label">Storage</span></a><a href="starboard-disk-health.html">{{i:heart-pulse}}<span class="menu-tabs__label">Disk health</span> <span class="count">1<span class="visually-hidden"> to check</span></span></a><a href="starboard-monitor.html">{{i:chart-line}}<span class="menu-tabs__label">Monitor</span></a><a href="starboard-network.html">{{i:network}}<span class="menu-tabs__label">Network</span></a><a href="starboard-backup.html">{{i:archive}}<span class="menu-tabs__label">Backup and restore</span></a></nav></div>
+      </header>
+      <div style="display:grid;gap:var(--space-4);padding:var(--space-4)">
+<div class="stats" style="grid-template-columns:1fr 1fr">
+  <div class="stat"><span class="stat__value">23%</span><span class="stat__label">Processor</span></div>
+  <div class="stat" data-tone="warning"><span class="stat__value">78°C</span><span class="stat__label">Temperature</span><span class="chip" data-tone="warning" style="justify-self:start">Hot</span></div>
+</div>
+<section class="panel" data-tone="warning" style="padding:var(--space-4)" aria-labelledby="p-na-h"><h2 id="p-na-h">Needs attention</h2>
+  <ul class="rows"><li class="row row--opens row--no-lead"><div><div class="row__title"><button type="button" data-opens="ov-warning">Indexers unavailable for more than 6 hours</button></div><div class="row__meta">Sonarr · today at 08:12</div></div></li></ul>
+</section>
+      </div>
+  </div>
+</section>
+<div class="side-panel-layer" id="phone-menu" hidden>
+  <div class="side-panel-backdrop"></div>
+  <nav class="phone-menu" aria-label="Main menu">
+    <div class="panel-header"><span class="panel-header__brand"><svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg>Starboard</span><button class="icon-btn" type="button" data-closes aria-label="Close menu">{{i:x}}</button></div>
+    <form class="phone-menu__search" role="search" action="starboard-search.html"><input class="input" type="search" name="q" aria-label="Search films, series, music and books" placeholder="Search films, series, music, books"></form>
+    <div class="phone-menu__sections"><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="pm-apps">{{i-lg:layout-grid}}Apps{{i:chevron-right phone-menu__chevron}}</button><ul id="pm-apps" hidden><li><a href="starboard-apps.html">{{i:layout-grid}}Apps</a></li><li><a href="starboard-other-services.html">{{i:server-cog}}Other services</a></li></ul></div><div class="phone-menu__section"><a href="starboard-search.html" style="display:flex;align-items:center;gap:var(--space-3);min-height:52px;padding:0 var(--space-4);font-weight:var(--weight-strong);text-decoration:none;color:var(--color-text)">{{i-lg:search}}Search</a></div><div class="phone-menu__section"><a href="starboard-downloads.html" style="display:flex;align-items:center;gap:var(--space-3);min-height:52px;padding:0 var(--space-4);font-weight:var(--weight-strong);text-decoration:none;color:var(--color-text)">{{i-lg:download}}Downloads</a></div><div class="phone-menu__section"><a href="starboard-coming-up.html" style="display:flex;align-items:center;gap:var(--space-3);min-height:52px;padding:0 var(--space-4);font-weight:var(--weight-strong);text-decoration:none;color:var(--color-text)">{{i-lg:calendar-days}}Coming up</a></div><div class="phone-menu__section" data-current><button type="button" aria-expanded="true" aria-controls="pm-system">{{i-lg:activity}}System{{i:chevron-right phone-menu__chevron}}</button><ul id="pm-system"><li><a href="starboard-overview.html" aria-current="page">{{i:gauge}}Overview</a></li><li><a href="starboard-storage.html">{{i:hard-drive}}Storage</a></li><li><a href="starboard-disk-health.html">{{i:heart-pulse}}Disk health</a></li><li><a href="starboard-monitor.html">{{i:chart-line}}Monitor</a></li><li><a href="starboard-network.html">{{i:network}}Network</a></li><li><a href="starboard-backup.html">{{i:archive}}Backup and restore</a></li></ul></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="pm-settings">{{i-lg:settings}}Settings{{i:chevron-right phone-menu__chevron}}</button><ul id="pm-settings" hidden><li><a href="starboard-settings-apps.html">{{i:app-window}}Manage apps</a></li><li><a href="starboard-settings-general.html">{{i:sliders-horizontal}}General</a></li><li><a href="starboard-settings-security.html">{{i:shield-check}}Security</a></li><li><a href="starboard-settings-about.html">{{i:info}}About and updates</a></li></ul></div></div>
+    <div class="phone-menu__foot"><span class="small muted">Starboard v0.2.0</span><button class="btn" type="button">{{i:log-out}}Sign out</button></div>
+  </nav>
+</div>
+<div class="side-panel-layer" id="ov-warning" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="ow-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="ow-h">Warning from Sonarr</h2><button class="icon-btn" type="button" data-closes aria-label="Close warning from Sonarr">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <span class="chip" data-tone="warning" style="justify-self:start">Needs attention</span>
+      <h3 style="font-size:var(--text-lg)">Indexers unavailable due to failures for more than 6 hours</h3>
+      <p>Sonarr could not reach 2 of its 5 sources: Source A and Source C. Searches still run on the other 3, so fewer releases are found.</p>
+      <dl class="facts"><dt>First seen</dt><dd>Today at 08:12</dd><dt>Last seen</dt><dd>1 minute ago</dd><dt>From</dt><dd>Sonarr's own health check</dd></dl>
+      <details class="disclosure"><summary>Technical details</summary><div class="disclosure__body"><code class="code-block">IndexerStatusCheck · Warning
+https://wiki.servarr.com/sonarr/system#indexers-are-unavailable-due-to-failures</code></div></details>
+    </div>
+    <div class="side-panel__foot"><a class="btn btn--primary" href="#" target="_blank" rel="noopener">{{i:external-link}}Open Sonarr's sources<span class="visually-hidden"> (opens in a new tab)</span></a><a class="btn" href="starboard-apps.html">View in Apps</a></div>
+  </aside>
+</div>
+<dialog class="dialog" id="display-dialog" aria-labelledby="display-h">
+  <div class="panel-header"><h2 class="panel-header__title" id="display-h">Display and accessibility</h2><button class="icon-btn" type="button" data-closes aria-label="Close display and accessibility">{{i:x}}</button></div>
+  <div class="dialog__body">
+    <fieldset><legend class="field__label">Theme</legend><div class="segmented"><label><input type="radio" name="d-theme" value="light" data-display="theme" checked><span>Light</span></label><label><input type="radio" name="d-theme" value="dark" data-display="theme"><span>Dark</span></label></div></fieldset>
+    <fieldset><legend class="field__label">Text size</legend><div class="segmented"><label><input type="radio" name="d-text" value="100" data-display="text" checked><span>100%</span></label><label><input type="radio" name="d-text" value="125" data-display="text"><span>125%</span></label><label><input type="radio" name="d-text" value="150" data-display="text"><span>150%</span></label><label><input type="radio" name="d-text" value="175" data-display="text"><span>175%</span></label></div></fieldset>
+    <div>
+      <label class="switch"><span class="check__text"><strong>High contrast</strong></span><input type="checkbox" role="switch" data-display="contrast"></label>
+      <label class="switch"><span class="check__text"><strong>Reduce motion</strong></span><input type="checkbox" role="switch" data-display="motion"></label>
+      <label class="switch"><span class="check__text"><strong>Underline links</strong></span><input type="checkbox" role="switch" data-display="underline"></label>
+      <label class="switch"><span class="check__text"><strong>Wider text spacing</strong></span><input type="checkbox" role="switch" data-display="spacing"></label>
+    </div>
+  </div>
+  <div class="dialog__foot"><button class="btn btn--primary" type="button" data-closes>Done</button><button class="btn btn--quiet" type="button">Reset</button></div>
+</dialog>
+<script src="../components.js"></script>
+</body>
+</html>

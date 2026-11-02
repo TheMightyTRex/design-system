@@ -1,0 +1,83 @@
+<!--meta {"title": "Backup and restore", "main": "system", "sub": "backup", "phone_note": "Each run is one row; the run's slide-out fills the screen with Restore and Download in its footer."}-->
+<!--note-->
+<ul style="margin:0;padding-left:var(--space-5)">
+  <li>Three jobs with three standing password fields become <strong>two sections</strong>: The whole server, then Starboard's settings. The password is asked once, in the dialog that confirms the action.</li>
+  <li>Each server backup run and each saved copy opens a <strong>backup run slide-out</strong>: times, size, what was included, unreadable files, whether a rebuild prompt was added, and Restore or Download next to those facts.</li>
+  <li>Restoring has its own confirm dialog that names what is replaced and what is kept, so a file restore and a saved copy no longer share one notice.</li>
+</ul>
+<!--page-->
+<div class="page-head">
+  <div class="page-head__text"><h1>Backup and restore</h1><p class="page-head__summary">Last server backup today at 03:00 · 2 files could not be read · next tonight at 03:00</p></div>
+</div>
+<section class="panel" aria-labelledby="bk-server-h">
+  <div class="panel__head"><h2 id="bk-server-h">The whole server</h2><span class="small muted">Every app's settings and databases, system settings and the package list. Not your media.</span></div>
+  <div style="display:flex;flex-wrap:wrap;gap:var(--space-4);align-items:center;justify-content:space-between">
+    <label class="switch" style="max-width:560px"><span class="check__text"><strong>Include a rebuild prompt</strong><span class="check__hint">Adds REBUILD-PROMPT.md: steps an AI assistant with a shell can follow to rebuild the server from this backup.</span></span><input type="checkbox" role="switch" checked></label>
+    <button class="btn btn--primary" type="button">{{i:play}}Back up the server now</button>
+  </div>
+  <ul class="rows" aria-label="Server backups, newest first">
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:archive}}</span><div><div class="row__title"><button type="button" data-opens="bk-run">Today at 03:00</button></div><div class="row__meta">14 minutes · 3.8 GB · with rebuild prompt</div></div><div class="row__side"><span class="chip" data-tone="warning">2 files not read</span></div></li>
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:archive}}</span><div><div class="row__title"><button type="button" data-opens="bk-run">Sunday 1 November at 03:00</button></div><div class="row__meta">13 minutes · 3.8 GB · with rebuild prompt</div></div><div class="row__side"><span class="chip" data-tone="success">Complete</span></div></li>
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:archive}}</span><div><div class="row__title"><button type="button" data-opens="bk-run">Saturday 31 October at 03:00</button></div><div class="row__meta">13 minutes · 3.7 GB</div></div><div class="row__side"><span class="chip" data-tone="success">Complete</span></div></li>
+  </ul>
+  <div class="notice" data-tone="warning">{{i:triangle-alert}}<div class="notice__body"><span class="notice__title">Keep a copy somewhere else</span><p>All 3 backups are on the system disk. If that disk fails, they go with it. Copy the newest one to another disk or computer.</p></div></div>
+</section>
+<section class="panel" aria-labelledby="bk-sb-h">
+  <div class="panel__head"><h2 id="bk-sb-h">Starboard's settings</h2><span class="small muted">Your apps, their API keys, categories and other settings. Not your password.</span></div>
+  <div class="actions"><button class="btn btn--primary" type="button" data-dialog="bk-download">{{i:download}}Download a backup</button><button class="btn" type="button" data-dialog="bk-restore">{{i:upload}}Restore from a file</button></div>
+  <h3>Copies Starboard saved</h3>
+  <p class="small muted">Made before every restore and before an update changes the settings.</p>
+  <ul class="rows">
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:history}}</span><div><div class="row__title"><button type="button" data-opens="bk-copy">Before updating to v0.2.0</button></div><div class="row__meta">Friday 30 October at 21:14 · 12 apps</div></div><div class="row__side"><button class="btn btn--compact" type="button" data-dialog="bk-restore">Restore<span class="visually-hidden"> the copy from 30 October</span></button></div></li>
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:history}}</span><div><div class="row__title"><button type="button" data-opens="bk-copy">Before restoring a file</button></div><div class="row__meta">Monday 12 October at 18:40 · 11 apps</div></div><div class="row__side"><button class="btn btn--compact" type="button" data-dialog="bk-restore">Restore<span class="visually-hidden"> the copy from 12 October</span></button></div></li>
+  </ul>
+</section>
+<!--phone-->
+<ul class="rows">
+  <li class="row row--opens" style="grid-template-columns:auto minmax(0,1fr)"><span class="app-icon" aria-hidden="true">{{i:archive}}</span><div><div class="row__title"><button type="button" data-opens="bk-run">Today at 03:00</button></div><div class="row__meta">3.8 GB · 14 minutes</div></div><div class="row__side" style="grid-column:1/-1;justify-content:start"><span class="chip" data-tone="warning">2 files not read</span></div></li>
+</ul>
+<button class="btn btn--primary" type="button" style="width:100%">{{i:play}}Back up the server now</button>
+<!--panels-->
+<div class="side-panel-layer" id="bk-run" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="br-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="br-h">Server backup, today at 03:00</h2><button class="icon-btn" type="button" data-closes aria-label="Close server backup details">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <div class="notice" data-tone="warning">{{i:triangle-alert}}<div class="notice__body"><span class="notice__title">2 files could not be read</span><p>The backup finished without them. Both belong to Jellyfin, which was writing to them at the time.</p></div></div>
+      <dl class="facts"><dt>Started</dt><dd>Today at 03:00</dd><dt>Finished</dt><dd>Today at 03:14</dd><dt>Size</dt><dd class="numeric">3.8 GB</dd><dt>Saved to</dt><dd><code>/backups/server-2026-11-02.tar.zst</code></dd><dt>Rebuild prompt</dt><dd>Included, and saved next to the backup</dd></dl>
+      <section style="display:grid;gap:var(--space-3)" aria-labelledby="br-inc-h"><h3 id="br-inc-h">Included</h3>
+        <ul class="rows"><li class="row row--no-lead"><div><div class="row__title">App settings and databases</div><div class="row__meta">12 apps · 3.1 GB</div></div></li><li class="row row--no-lead"><div><div class="row__title">System settings</div><div class="row__meta">Network, users, scheduled jobs · 4 MB</div></div></li><li class="row row--no-lead"><div><div class="row__title">Package list</div><div class="row__meta">1,284 packages</div></div></li></ul>
+      </section>
+      <details class="disclosure"><summary>Files that could not be read <span class="disclosure__meta">2</span></summary><div class="disclosure__body"><code class="code-block">/config/jellyfin/data/library.db-wal
+/config/jellyfin/data/jellyfin.db-shm</code></div></details>
+    </div>
+    <div class="side-panel__foot"><button class="btn btn--primary" type="button">{{i:download}}Download</button><button class="btn" type="button" data-dialog="bk-restore">{{i:archive-restore}}Restore</button></div>
+  </aside>
+</div>
+<div class="side-panel-layer" id="bk-copy" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="bc-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="bc-h">Saved copy, 30 October</h2><button class="icon-btn" type="button" data-closes aria-label="Close saved copy details">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <dl class="facts"><dt>Made</dt><dd>Friday 30 October at 21:14</dd><dt>Why</dt><dd>Before updating to v0.2.0</dd><dt>Apps</dt><dd>12</dd><dt>Categories</dt><dd>Media, Library managers, Downloads, Tools</dd></dl>
+      <p class="small muted">Differences from now: Prowlarr was added on 1 November.</p>
+    </div>
+    <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-dialog="bk-restore">{{i:archive-restore}}Restore this copy</button><button class="btn" type="button">{{i:download}}Download</button></div>
+  </aside>
+</div>
+<dialog class="dialog" id="bk-restore" aria-labelledby="bk-restore-h">
+  <div class="panel-header"><h2 class="panel-header__title" id="bk-restore-h">Restore Starboard's settings?</h2><button class="icon-btn" type="button" data-closes aria-label="Close">{{i:x}}</button></div>
+  <div class="dialog__body">
+    <p>Your apps, categories and settings are replaced with the ones in the copy from 30 October. Starboard saves a copy of the current ones first, so you can go back. Your password and sign-ins stay as they are.</p>
+    <div class="field"><label for="bk-r-pw">Your password</label><input class="input" id="bk-r-pw" type="password" autocomplete="current-password"></div>
+  </div>
+  <div class="dialog__foot"><button class="btn btn--danger btn--primary" type="button" data-closes>Restore settings</button><button class="btn btn--quiet" type="button" data-closes>Cancel</button></div>
+</dialog>
+<dialog class="dialog" id="bk-download" aria-labelledby="bk-download-h">
+  <div class="panel-header"><h2 class="panel-header__title" id="bk-download-h">Download a backup of Starboard's settings</h2><button class="icon-btn" type="button" data-closes aria-label="Close">{{i:x}}</button></div>
+  <div class="dialog__body">
+    <p>The file holds your apps' API keys. Keep it somewhere private.</p>
+    <div class="field"><label for="bk-d-pw">Your password</label><input class="input" id="bk-d-pw" type="password" autocomplete="current-password"></div>
+  </div>
+  <div class="dialog__foot"><button class="btn btn--primary" type="button" data-closes>{{i:download}}Download</button><button class="btn btn--quiet" type="button" data-closes>Cancel</button></div>
+</dialog>

@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manage apps · Starboard board</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  /* Board only, as in the gallery: icon sizes (no icon size class in the library yet). */
+  svg.i { width: var(--icon-md); height: var(--icon-md); }
+  svg.i-lg { width: var(--icon-lg); height: var(--icon-lg); }
+  svg.i-xl { width: 32px; height: 32px; }
+</style>
+</head>
+<body>
+<!--ICONS-->
+<a class="skip-link" href="#main">Skip to main content</a>
+<aside aria-label="About this board" style="padding:var(--space-4) var(--space-8);background:var(--color-surface-sunken);border-bottom:1px solid var(--color-divider)">
+  <div class="notice" style="max-width:1100px">{{i:info}}<div class="notice__body"><span class="notice__title">What changed and why</span>
+<ul style="margin:0;padding-left:var(--space-5)">
+  <li>Renamed <strong>Manage apps</strong>, so Apps means only the launcher. The 17-field modal is replaced by an <strong>add and edit slide-out</strong> in two clear steps: Connection, then Adding options.</li>
+  <li>Four buttons per row (two arrows, Edit and Remove) become Edit plus one <strong>More actions menu</strong> (Move up, Move down, Hide, Remove). Moving keeps focus on the moved row.</li>
+  <li>Remove asks in a <strong>dialog</strong>, not in a toast that vanishes after 6 seconds.</li>
+</ul>
+  </div><a class="btn btn--compact" href="index-starboard.html">All boards</a></div>
+</aside>
+<header class="site-header">
+  <div class="site-header__bar">
+    <a class="site-header__brand" href="starboard-apps.html" style="display:inline-flex;padding-left:var(--space-5)"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg>Starboard</a>
+    <nav class="menu-tabs" aria-label="Main menu"><a href="starboard-apps.html">{{i:layout-grid}}<span class="menu-tabs__label">Apps</span></a><a href="starboard-search.html">{{i:search}}<span class="menu-tabs__label">Search</span></a><a href="starboard-downloads.html">{{i:download}}<span class="menu-tabs__label">Downloads</span></a><a href="starboard-coming-up.html">{{i:calendar-days}}<span class="menu-tabs__label">Coming up</span></a><a href="starboard-overview.html">{{i:activity}}<span class="menu-tabs__label">System</span></a><a href="starboard-settings-apps.html" aria-current="page">{{i:settings}}<span class="menu-tabs__label">Settings</span></a></nav>
+    <form class="site-header__search search-field" role="search" action="starboard-search.html"><input class="input" type="search" name="q" aria-label="Search films, series, music and books" placeholder="Search films, series, music, books"><button class="visually-hidden" type="submit">Search</button></form>
+    <div class="site-header__actions"><button class="icon-btn" type="button" data-dialog="display-dialog">{{i-lg:sun}}<span class="label">Display</span></button></div>
+  </div>
+  <div class="site-header__tabs"><nav class="menu-tabs" aria-label="Settings"><a href="starboard-settings-apps.html" aria-current="page">{{i:app-window}}<span class="menu-tabs__label">Manage apps</span></a><a href="starboard-settings-general.html">{{i:sliders-horizontal}}<span class="menu-tabs__label">General</span></a><a href="starboard-settings-security.html">{{i:shield-check}}<span class="menu-tabs__label">Security</span></a><a href="starboard-settings-about.html">{{i:info}}<span class="menu-tabs__label">About and updates</span></a></nav></div>
+</header>
+<main id="main" tabindex="-1">
+<div class="page">
+<div class="page-head">
+  <div class="page-head__text"><h1>Manage apps</h1><p class="page-head__summary">12 apps and 4 services, in the order they appear on the dashboard.</p></div>
+  <div class="actions"><button class="btn btn--primary" type="button" data-opens="app-edit">{{i:plus}}Add an app</button></div>
+</div>
+<section class="settings-section" style="max-width:none" aria-labelledby="ma-lib-h">
+  <div class="settings-section__head"><h2 id="ma-lib-h">Library managers</h2><p class="small muted">Sonarr, Radarr, Lidarr and Storyarr are also searched from Search.</p></div>
+  <ul class="rows" style="border-top:0">
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">S</span><div><div class="row__title"><button type="button" data-opens="app-edit">Sonarr</button></div><div class="row__meta">http://sonarr:8989 · searched · outside address set</div></div><div class="row__side"><span class="chip" data-tone="success">Connected</span><button class="btn btn--compact" type="button" data-opens="app-edit">{{i:pencil}}Edit<span class="visually-hidden"> Sonarr</span></button>
+      <div class="menu-wrap"><button class="icon-btn icon-btn--bare" type="button" aria-haspopup="menu" aria-controls="ma-m1" aria-label="More actions for Sonarr">{{i:ellipsis}}</button><div class="menu" id="ma-m1" role="menu" aria-label="Sonarr"><button type="button" role="menuitem">{{i:arrow-up}}Move up</button><button type="button" role="menuitem">{{i:arrow-down}}Move down</button><button type="button" role="menuitem">{{i:eye}}Hide from the dashboard</button><hr><button type="button" role="menuitem" data-dialog="remove-app">{{i:trash-2}}Remove</button></div></div></div></li>
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">R</span><div><div class="row__title"><button type="button" data-opens="app-edit">Radarr</button></div><div class="row__meta">http://radarr:7878 · searched</div></div><div class="row__side"><span class="chip" data-tone="success">Connected</span><button class="btn btn--compact" type="button" data-opens="app-edit">{{i:pencil}}Edit<span class="visually-hidden"> Radarr</span></button><div class="menu-wrap"><button class="icon-btn icon-btn--bare" type="button" aria-haspopup="menu" aria-controls="ma-m2" aria-label="More actions for Radarr">{{i:ellipsis}}</button><div class="menu" id="ma-m2" role="menu" aria-label="Radarr"><button type="button" role="menuitem">Move up</button><button type="button" role="menuitem">Move down</button><button type="button" role="menuitem">Hide from the dashboard</button><hr><button type="button" role="menuitem">Remove</button></div></div></div></li>
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">L</span><div><div class="row__title"><button type="button" data-opens="app-edit">Lidarr</button></div><div class="row__meta">http://lidarr:8686 · searched</div></div><div class="row__side"><span class="chip" data-tone="danger">Cannot connect</span><button class="btn btn--compact" type="button" data-opens="app-edit">{{i:pencil}}Edit<span class="visually-hidden"> Lidarr</span></button><div class="menu-wrap"><button class="icon-btn icon-btn--bare" type="button" aria-haspopup="menu" aria-controls="ma-m3" aria-label="More actions for Lidarr">{{i:ellipsis}}</button><div class="menu" id="ma-m3" role="menu" aria-label="Lidarr"><button type="button" role="menuitem">Move up</button><button type="button" role="menuitem">Move down</button><button type="button" role="menuitem">Hide from the dashboard</button><hr><button type="button" role="menuitem">Remove</button></div></div></div></li>
+  </ul>
+</section>
+<section class="settings-section" style="max-width:none" aria-labelledby="ma-media-h">
+  <div class="settings-section__head"><h2 id="ma-media-h">Media</h2></div>
+  <ul class="rows" style="border-top:0">
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">J</span><div><div class="row__title"><button type="button" data-opens="app-edit">Jellyfin</button></div><div class="row__meta">http://jellyfin:8096 · outside address set</div></div><div class="row__side"><span class="chip" data-tone="success">Connected</span><button class="btn btn--compact" type="button" data-opens="app-edit">{{i:pencil}}Edit<span class="visually-hidden"> Jellyfin</span></button><div class="menu-wrap"><button class="icon-btn icon-btn--bare" type="button" aria-haspopup="menu" aria-controls="ma-m4" aria-label="More actions for Jellyfin">{{i:ellipsis}}</button><div class="menu" id="ma-m4" role="menu" aria-label="Jellyfin"><button type="button" role="menuitem">Move up</button><button type="button" role="menuitem">Move down</button><button type="button" role="menuitem">Hide from the dashboard</button><hr><button type="button" role="menuitem">Remove</button></div></div></div></li>
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">A</span><div><div class="row__title"><button type="button" data-opens="app-edit">Audiobookshelf</button></div><div class="row__meta">http://audiobookshelf:80 · hidden from the dashboard</div></div><div class="row__side"><span class="chip" data-tone="muted">Hidden</span><button class="btn btn--compact" type="button" data-opens="app-edit">{{i:pencil}}Edit<span class="visually-hidden"> Audiobookshelf</span></button><div class="menu-wrap"><button class="icon-btn icon-btn--bare" type="button" aria-haspopup="menu" aria-controls="ma-m5" aria-label="More actions for Audiobookshelf">{{i:ellipsis}}</button><div class="menu" id="ma-m5" role="menu" aria-label="Audiobookshelf"><button type="button" role="menuitem">Move up</button><button type="button" role="menuitem">Move down</button><button type="button" role="menuitem">Show on the dashboard</button><hr><button type="button" role="menuitem">Remove</button></div></div></div></li>
+  </ul>
+</section>
+<section class="settings-section" style="max-width:none" aria-labelledby="ma-bg-h">
+  <div class="settings-section__head"><h2 id="ma-bg-h">Other services</h2><p class="small muted">Services with no web page. They appear under Apps, Other services.</p></div>
+  <ul class="rows" style="border-top:0">
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:shield-check}}</span><div><div class="row__title"><button type="button" data-opens="app-edit">VPN</button></div><div class="row__meta">No address · follows qBittorrent</div></div><div class="row__side"><span class="chip" data-tone="success">Running</span><button class="btn btn--compact" type="button" data-opens="app-edit">{{i:pencil}}Edit<span class="visually-hidden"> VPN</span></button></div></li>
+  </ul>
+</section>
+</div>
+</main>
+<footer class="site-footer"><span>Starboard v0.2.0</span><a href="starboard-settings-about.html">About and updates</a></footer>
+<section aria-labelledby="board-phone-h" style="display:grid;gap:var(--space-4);padding:var(--space-8);border-top:2px solid var(--color-text);background:var(--color-surface-sunken)">
+  <div style="display:grid;gap:var(--space-1)"><h2 id="board-phone-h">On a phone (390px)</h2><p class="small muted">One button per row (More actions); Edit opens the slide-out full screen.</p></div>
+  <div style="width:390px;border:1px solid var(--color-border);background:var(--color-bg);overflow:hidden">
+      <header class="site-header" style="position:relative">
+        <div class="site-header__bar" style="height:60px;padding-inline:var(--space-4);gap:var(--space-3)">
+          <button class="icon-btn" type="button" data-opens="phone-menu" aria-controls="phone-menu" aria-expanded="false">{{i-lg:menu}}<span class="visually-hidden">Menu</span></button>
+          <span class="panel-header__brand"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg>Starboard</span>
+          <button class="icon-btn" type="button" style="margin-left:auto" data-dialog="display-dialog" aria-label="Display">{{i-lg:sun}}</button>
+        </div>
+        <div class="site-header__tabs"><nav class="menu-tabs" aria-label="Settings (phone)"><a href="starboard-settings-apps.html" aria-current="page">{{i:app-window}}<span class="menu-tabs__label">Manage apps</span></a><a href="starboard-settings-general.html">{{i:sliders-horizontal}}<span class="menu-tabs__label">General</span></a><a href="starboard-settings-security.html">{{i:shield-check}}<span class="menu-tabs__label">Security</span></a><a href="starboard-settings-about.html">{{i:info}}<span class="menu-tabs__label">About and updates</span></a></nav></div>
+      </header>
+      <div style="display:grid;gap:var(--space-4);padding:var(--space-4)">
+<ul class="rows">
+  <li class="row row--opens"><span class="app-icon" aria-hidden="true">S</span><div><div class="row__title"><button type="button" data-opens="app-edit">Sonarr</button></div><div class="row__meta"><span class="chip" data-tone="success">Connected</span></div></div><div class="row__side"><button class="icon-btn icon-btn--bare" type="button" aria-label="More actions for Sonarr">{{i:ellipsis}}</button></div></li>
+  <li class="row row--opens"><span class="app-icon" aria-hidden="true">L</span><div><div class="row__title"><button type="button" data-opens="app-edit">Lidarr</button></div><div class="row__meta"><span class="chip" data-tone="danger">Cannot connect</span></div></div><div class="row__side"><button class="icon-btn icon-btn--bare" type="button" aria-label="More actions for Lidarr">{{i:ellipsis}}</button></div></li>
+</ul>
+<button class="btn btn--primary" type="button" data-opens="app-edit" style="width:100%">{{i:plus}}Add an app</button>
+      </div>
+  </div>
+</section>
+<div class="side-panel-layer" id="phone-menu" hidden>
+  <div class="side-panel-backdrop"></div>
+  <nav class="phone-menu" aria-label="Main menu">
+    <div class="panel-header"><span class="panel-header__brand"><svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg>Starboard</span><button class="icon-btn" type="button" data-closes aria-label="Close menu">{{i:x}}</button></div>
+    <form class="phone-menu__search" role="search" action="starboard-search.html"><input class="input" type="search" name="q" aria-label="Search films, series, music and books" placeholder="Search films, series, music, books"></form>
+    <div class="phone-menu__sections"><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="pm-apps">{{i-lg:layout-grid}}Apps{{i:chevron-right phone-menu__chevron}}</button><ul id="pm-apps" hidden><li><a href="starboard-apps.html">{{i:layout-grid}}Apps</a></li><li><a href="starboard-other-services.html">{{i:server-cog}}Other services</a></li></ul></div><div class="phone-menu__section"><a href="starboard-search.html" style="display:flex;align-items:center;gap:var(--space-3);min-height:52px;padding:0 var(--space-4);font-weight:var(--weight-strong);text-decoration:none;color:var(--color-text)">{{i-lg:search}}Search</a></div><div class="phone-menu__section"><a href="starboard-downloads.html" style="display:flex;align-items:center;gap:var(--space-3);min-height:52px;padding:0 var(--space-4);font-weight:var(--weight-strong);text-decoration:none;color:var(--color-text)">{{i-lg:download}}Downloads</a></div><div class="phone-menu__section"><a href="starboard-coming-up.html" style="display:flex;align-items:center;gap:var(--space-3);min-height:52px;padding:0 var(--space-4);font-weight:var(--weight-strong);text-decoration:none;color:var(--color-text)">{{i-lg:calendar-days}}Coming up</a></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="pm-system">{{i-lg:activity}}System{{i:chevron-right phone-menu__chevron}}</button><ul id="pm-system" hidden><li><a href="starboard-overview.html">{{i:gauge}}Overview</a></li><li><a href="starboard-storage.html">{{i:hard-drive}}Storage</a></li><li><a href="starboard-disk-health.html">{{i:heart-pulse}}Disk health</a></li><li><a href="starboard-monitor.html">{{i:chart-line}}Monitor</a></li><li><a href="starboard-network.html">{{i:network}}Network</a></li><li><a href="starboard-backup.html">{{i:archive}}Backup and restore</a></li></ul></div><div class="phone-menu__section" data-current><button type="button" aria-expanded="true" aria-controls="pm-settings">{{i-lg:settings}}Settings{{i:chevron-right phone-menu__chevron}}</button><ul id="pm-settings"><li><a href="starboard-settings-apps.html" aria-current="page">{{i:app-window}}Manage apps</a></li><li><a href="starboard-settings-general.html">{{i:sliders-horizontal}}General</a></li><li><a href="starboard-settings-security.html">{{i:shield-check}}Security</a></li><li><a href="starboard-settings-about.html">{{i:info}}About and updates</a></li></ul></div></div>
+    <div class="phone-menu__foot"><span class="small muted">Starboard v0.2.0</span><button class="btn" type="button">{{i:log-out}}Sign out</button></div>
+  </nav>
+</div>
+<div class="side-panel-layer" id="app-edit" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel side-panel--wide" role="dialog" aria-modal="true" aria-labelledby="app-edit-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="app-edit-h">Edit Sonarr</h2><button class="icon-btn" type="button" data-closes aria-label="Close Edit Sonarr">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <ol class="steps" aria-label="Steps"><li aria-current="step">Connection</li><li>Adding options</li></ol>
+      <section style="display:grid;gap:var(--space-4)" aria-labelledby="ae-conn-h">
+        <h3 id="ae-conn-h">Connection</h3>
+        <div class="form-grid">
+          <div class="field"><label for="ae-kind">Kind of app</label><select class="select" id="ae-kind"><option>Sonarr</option><option>Radarr</option><option>Lidarr</option><option>Jellyfin</option><option>qBittorrent</option><option>Other web app</option></select></div>
+          <div class="field"><label for="ae-name">Name</label><input class="input" id="ae-name" value="Sonarr" maxlength="60"></div>
+          <div class="field" data-span="all"><label for="ae-url">Address Starboard uses</label><span class="hint" id="ae-url-h">On Docker, the container name and port, such as http://sonarr:8989.</span><input class="input" id="ae-url" inputmode="url" aria-describedby="ae-url-h" value="http://sonarr:8989"></div>
+          <div class="field" data-span="all"><label for="ae-key">API key</label><span class="hint" id="ae-key-h">In Sonarr: Settings, General. Leave blank to keep the saved key; it is never shown again.</span><input class="input" id="ae-key" type="password" autocomplete="off" aria-describedby="ae-key-h"></div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:var(--space-3);align-items:center"><button class="btn" type="button">{{i:zap}}Test connection</button></div>
+        <div class="notice" data-tone="success" role="status">{{i:circle-check}}<div class="notice__body"><span class="notice__title">Connected</span><p>Sonarr 4.0.11 answered in 84 ms.</p></div></div>
+      </section>
+      <section style="display:grid;gap:var(--space-4)" aria-labelledby="ae-show-h">
+        <h3 id="ae-show-h">On the dashboard</h3>
+        <div class="form-grid">
+          <div class="field"><label for="ae-cat">Category</label><span class="hint" id="ae-cat-h">Change the list in Settings, General.</span><select class="select" id="ae-cat" aria-describedby="ae-cat-h"><option>Library managers</option><option>Media</option><option>Downloads</option><option>Tools</option></select></div>
+          <div class="field"><label for="ae-icon">Icon</label><span class="hint" id="ae-icon-h">A name from the dashboard icons collection.</span><input class="input" id="ae-icon" aria-describedby="ae-icon-h" value="sonarr"></div>
+          <div class="field" data-span="all"><label for="ae-desc">Description</label><input class="input" id="ae-desc" maxlength="200" value="Finds and organises series."></div>
+          <div class="field" data-span="all"><label for="ae-link">Address to open in your browser</label><span class="hint" id="ae-link-h">Leave blank to use the address Starboard uses.</span><input class="input" id="ae-link" inputmode="url" aria-describedby="ae-link-h" value="http://homeserver.local:8989"></div>
+          <div class="field" data-span="all"><label for="ae-out">Outside address</label><span class="hint" id="ae-out-h">The address that works away from home. Starboard checks it can be reached.</span><input class="input" id="ae-out" inputmode="url" aria-describedby="ae-out-h" value="https://sonarr.example.com"></div>
+        </div>
+        <div>
+          <label class="switch"><span class="check__text"><strong>Show on the dashboard</strong></span><input type="checkbox" role="switch" checked></label>
+          <label class="switch"><span class="check__text"><strong>Background service</strong><span class="check__hint">It has no web page, so it is listed under Apps, Other services.</span></span><input type="checkbox" role="switch"></label>
+        </div>
+      </section>
+    </div>
+    <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-opens="app-edit-2">Save and continue</button><button class="btn btn--quiet" type="button" data-closes>Cancel</button><button class="btn btn--danger" type="button" data-dialog="remove-app">{{i:trash-2}}Remove</button></div>
+  </aside>
+</div>
+
+<div class="side-panel-layer" id="app-edit-2" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel side-panel--wide" role="dialog" aria-modal="true" aria-labelledby="app-edit-2-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="app-edit-2-h">Edit Sonarr</h2><button class="icon-btn" type="button" data-closes aria-label="Close Edit Sonarr">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <ol class="steps" aria-label="Steps"><li data-done>Connection</li><li aria-current="step">Adding options</li></ol>
+      <div class="notice" data-tone="success" role="status">{{i:circle-check}}<div class="notice__body"><span class="notice__title">Sonarr saved</span><p>Now choose what Starboard uses when you add a series from Search.</p></div></div>
+      <section style="display:grid;gap:var(--space-4)" aria-labelledby="ae2-h">
+        <h3 id="ae2-h">Adding options</h3>
+        <div class="form-grid">
+          <div class="field"><label for="ae2-q">Quality profile</label><select class="select" id="ae2-q"><option>HD 1080p</option><option>Any</option><option>Ultra HD</option></select></div>
+          <div class="field"><label for="ae2-f">Folder</label><select class="select" id="ae2-f"><option>/data/media/series</option><option>/data/media/kids-series</option></select></div>
+        </div>
+        <label class="switch"><span class="check__text"><strong>Search as soon as something is added</strong><span class="check__hint">On: Sonarr looks for every episode straight away.</span></span><input type="checkbox" role="switch" checked></label>
+      </section>
+    </div>
+    <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Save adding options</button><button class="btn btn--quiet" type="button" data-closes>Skip for now</button></div>
+  </aside>
+</div>
+
+<dialog class="dialog" id="remove-app" aria-labelledby="remove-app-h">
+  <div class="panel-header"><h2 class="panel-header__title" id="remove-app-h">Remove Sonarr?</h2><button class="icon-btn" type="button" data-closes aria-label="Close">{{i:x}}</button></div>
+  <div class="dialog__body"><p>Sonarr leaves the dashboard and Search. Sonarr itself, its files and its settings stay as they are. You can add it again at any time.</p></div>
+  <div class="dialog__foot"><button class="btn btn--danger btn--primary" type="button" data-closes>Remove Sonarr</button><button class="btn btn--quiet" type="button" data-closes>Keep it</button></div>
+</dialog>
+
+<dialog class="dialog" id="display-dialog" aria-labelledby="display-h">
+  <div class="panel-header"><h2 class="panel-header__title" id="display-h">Display and accessibility</h2><button class="icon-btn" type="button" data-closes aria-label="Close display and accessibility">{{i:x}}</button></div>
+  <div class="dialog__body">
+    <fieldset><legend class="field__label">Theme</legend><div class="segmented"><label><input type="radio" name="d-theme" value="light" data-display="theme" checked><span>Light</span></label><label><input type="radio" name="d-theme" value="dark" data-display="theme"><span>Dark</span></label></div></fieldset>
+    <fieldset><legend class="field__label">Text size</legend><div class="segmented"><label><input type="radio" name="d-text" value="100" data-display="text" checked><span>100%</span></label><label><input type="radio" name="d-text" value="125" data-display="text"><span>125%</span></label><label><input type="radio" name="d-text" value="150" data-display="text"><span>150%</span></label><label><input type="radio" name="d-text" value="175" data-display="text"><span>175%</span></label></div></fieldset>
+    <div>
+      <label class="switch"><span class="check__text"><strong>High contrast</strong></span><input type="checkbox" role="switch" data-display="contrast"></label>
+      <label class="switch"><span class="check__text"><strong>Reduce motion</strong></span><input type="checkbox" role="switch" data-display="motion"></label>
+      <label class="switch"><span class="check__text"><strong>Underline links</strong></span><input type="checkbox" role="switch" data-display="underline"></label>
+      <label class="switch"><span class="check__text"><strong>Wider text spacing</strong></span><input type="checkbox" role="switch" data-display="spacing"></label>
+    </div>
+  </div>
+  <div class="dialog__foot"><button class="btn btn--primary" type="button" data-closes>Done</button><button class="btn btn--quiet" type="button">Reset</button></div>
+</dialog>
+<script src="../components.js"></script>
+</body>
+</html>

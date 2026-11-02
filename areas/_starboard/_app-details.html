@@ -1,0 +1,36 @@
+<div class="side-panel-layer" id="app-details" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="app-details-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="app-details-h">Sonarr</h2><button class="icon-btn" type="button" data-closes aria-label="Close Sonarr details">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <div style="display:flex;gap:var(--space-3);align-items:center">
+        <span class="app-icon" aria-hidden="true">S</span>
+        <div style="display:grid;gap:var(--space-1)"><span class="chip" data-tone="success" style="justify-self:start">Running</span><span class="small muted">Replied in 84 ms · checked 1 minute ago</span></div>
+      </div>
+      <div class="notice" role="status">{{i:circle-arrow-up}}<div class="notice__body"><span class="notice__title">Update available</span><p>Version 4.0.12 is out. You have 4.0.11. Sonarr updates when its container image is updated.</p></div></div>
+      <section style="display:grid;gap:var(--space-3)" aria-labelledby="ad-addr-h">
+        <h3 id="ad-addr-h">Addresses</h3>
+        <dl class="facts">
+          <dt>Home</dt><dd><code>http://homeserver.local:8989</code> <button class="copy-btn" type="button" data-copy="http://homeserver.local:8989" aria-label="Copy home address for Sonarr">{{i:copy}}</button></dd>
+          <dt>Outside</dt><dd><code>https://sonarr.example.com</code> <button class="copy-btn" type="button" data-copy="https://sonarr.example.com" aria-label="Copy outside address for Sonarr">{{i:copy}}</button><br><span class="chip" data-tone="success">Reachable from outside</span></dd>
+        </dl>
+      </section>
+      <section style="display:grid;gap:var(--space-3)" aria-labelledby="ad-warn-h">
+        <h3 id="ad-warn-h">Warnings from Sonarr</h3>
+        <ul class="rows">
+          <li class="row row--no-lead"><div><div class="row__title">Indexers unavailable due to failures for more than 6 hours</div><div class="row__meta">First seen today at 08:12</div></div><div class="row__side"><span class="chip" data-tone="warning">Needs attention</span></div></li>
+        </ul>
+      </section>
+      <section style="display:grid;gap:var(--space-3)" aria-labelledby="ad-more-h">
+        <h3 id="ad-more-h">About this app</h3>
+        <dl class="facts">
+          <dt>Category</dt><dd>Library managers</dd>
+          <dt>Version</dt><dd class="numeric">4.0.11</dd>
+          <dt>Search</dt><dd>Searched from Starboard's Search page</dd>
+          <dt>Followed by</dt><dd>No other services</dd>
+        </dl>
+      </section>
+    </div>
+    <div class="side-panel__foot"><a class="btn btn--primary" href="#" target="_blank" rel="noopener">{{i:external-link}}Open Sonarr<span class="visually-hidden"> (opens in a new tab)</span></a><button class="btn" type="button" data-opens="app-edit">{{i:pencil}}Edit app</button><button class="btn btn--quiet" type="button">{{i:refresh-cw}}Check now</button></div>
+  </aside>
+</div>

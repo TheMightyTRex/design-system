@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Set up · Starboard board</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  /* Board only, as in the gallery: icon sizes (no icon size class in the library yet). */
+  svg.i { width: var(--icon-md); height: var(--icon-md); }
+  svg.i-lg { width: var(--icon-lg); height: var(--icon-lg); }
+  svg.i-xl { width: 32px; height: 32px; }
+</style>
+</head>
+<body>
+<!--ICONS-->
+<a class="skip-link" href="#main">Skip to main content</a>
+<aside aria-label="About this board" style="padding:var(--space-4) var(--space-8);background:var(--color-surface-sunken);border-bottom:1px solid var(--color-divider)">
+  <div class="notice" style="max-width:1100px">{{i:info}}<div class="notice__body"><span class="notice__title">What changed and why</span>
+<ul style="margin:0;padding-left:var(--space-5)">
+  <li>The <strong>setup code comes first</strong>, because it is the thing the person has to find; where to find it is the field's hint.</li>
+  <li>A slim header with the <strong>Display button</strong>, as on Sign in.</li>
+  <li>The form is grouped (setup code, then the dashboard, then the password) with library field spacing.</li>
+</ul>
+  </div><a class="btn btn--compact" href="index-starboard.html">All boards</a></div>
+</aside>
+<header class="site-header">
+  <div class="site-header__bar" style="padding-left:var(--space-5)">
+    <span class="panel-header__brand"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg>Starboard</span>
+    <div class="site-header__actions" style="margin-left:auto"><button class="icon-btn" type="button" data-dialog="display-dialog">{{i-lg:sun}}<span class="label">Display</span></button></div>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<div class="page" style="max-width:520px">
+<section class="panel" aria-labelledby="su-h" style="margin-top:var(--space-8)">
+  <div style="display:grid;gap:var(--space-1)"><h1 id="su-h">Set up Starboard</h1><p class="muted">Three things, then you are in.</p></div>
+  <div class="field"><label for="su-code">Setup code</label><span class="hint" id="su-code-h">In the installer's output, or run <code>docker compose logs starboard</code> on the server.</span><input class="input" id="su-code" autocomplete="off" aria-describedby="su-code-h"></div>
+  <div class="field"><label for="su-name">Name your dashboard</label><span class="hint" id="su-name-h">Shown in the header and the browser tab. You can change it later.</span><input class="input" id="su-name" maxlength="60" value="Starboard" aria-describedby="su-name-h"></div>
+  <fieldset><legend class="field__label">Password</legend>
+    <div class="field"><label for="su-pw">Choose a password</label><span class="hint" id="su-pw-h">At least 10 characters.</span><input class="input" id="su-pw" type="password" autocomplete="new-password" aria-describedby="su-pw-h"></div>
+    <div class="field"><label for="su-pw2">Type it again</label><input class="input" id="su-pw2" type="password" autocomplete="new-password"></div>
+  </fieldset>
+  <label class="check"><input type="checkbox"><span class="check__text">Remember me on this device</span></label>
+  <button class="btn btn--primary" type="button" style="width:100%">Save password and continue</button>
+</section>
+</div>
+</main>
+
+
+
+
+<dialog class="dialog" id="display-dialog" aria-labelledby="display-h">
+  <div class="panel-header"><h2 class="panel-header__title" id="display-h">Display and accessibility</h2><button class="icon-btn" type="button" data-closes aria-label="Close display and accessibility">{{i:x}}</button></div>
+  <div class="dialog__body">
+    <fieldset><legend class="field__label">Theme</legend><div class="segmented"><label><input type="radio" name="d-theme" value="light" data-display="theme" checked><span>Light</span></label><label><input type="radio" name="d-theme" value="dark" data-display="theme"><span>Dark</span></label></div></fieldset>
+    <fieldset><legend class="field__label">Text size</legend><div class="segmented"><label><input type="radio" name="d-text" value="100" data-display="text" checked><span>100%</span></label><label><input type="radio" name="d-text" value="125" data-display="text"><span>125%</span></label><label><input type="radio" name="d-text" value="150" data-display="text"><span>150%</span></label><label><input type="radio" name="d-text" value="175" data-display="text"><span>175%</span></label></div></fieldset>
+    <div>
+      <label class="switch"><span class="check__text"><strong>High contrast</strong></span><input type="checkbox" role="switch" data-display="contrast"></label>
+      <label class="switch"><span class="check__text"><strong>Reduce motion</strong></span><input type="checkbox" role="switch" data-display="motion"></label>
+      <label class="switch"><span class="check__text"><strong>Underline links</strong></span><input type="checkbox" role="switch" data-display="underline"></label>
+      <label class="switch"><span class="check__text"><strong>Wider text spacing</strong></span><input type="checkbox" role="switch" data-display="spacing"></label>
+    </div>
+  </div>
+  <div class="dialog__foot"><button class="btn btn--primary" type="button" data-closes>Done</button><button class="btn btn--quiet" type="button">Reset</button></div>
+</dialog>
+<script src="../components.js"></script>
+</body>
+</html>

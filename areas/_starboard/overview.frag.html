@@ -1,0 +1,59 @@
+<!--meta {"title": "Overview", "main": "system", "sub": "overview", "phone_note": "Stat tiles go two to a row; Needs attention stays first; charts stack one per row."}-->
+<!--note-->
+<ul style="margin:0;padding-left:var(--space-5)">
+  <li><strong>Needs attention comes first</strong>, because it is the part you act on; each warning opens a slide-out with the full message. Charts follow.</li>
+  <li>Stat tiles say a warning in words (for example "Hot"), not only with an amber edge.</li>
+  <li>The time range is a labelled segmented control. Download and Upload are written as words, not arrows.</li>
+</ul>
+<!--page-->
+<div class="page-head">
+  <div class="page-head__text"><h1>Overview</h1><p class="page-head__summary">Up 23 days · 2 warnings · updated 10 seconds ago</p></div>
+  <div class="actions"><button class="btn" type="button">{{i:refresh-cw}}Check again</button></div>
+</div>
+<div class="stats">
+  <div class="stat"><span class="stat__value">23%</span><span class="stat__label">Processor</span></div>
+  <div class="stat"><span class="stat__value">11.2 GB</span><span class="stat__label">Memory used of 16 GB (70%)</span></div>
+  <div class="stat" data-tone="warning"><span class="stat__value">78°C</span><span class="stat__label">Processor temperature</span><span class="chip" data-tone="warning" style="justify-self:start">Hot</span></div>
+  <div class="stat"><span class="stat__value">1.4</span><span class="stat__label">Load, 4 cores</span></div>
+</div>
+<section class="panel" data-tone="warning" aria-labelledby="na-h">
+  <div class="panel__head"><h2 id="na-h">Needs attention</h2><span class="small muted">Warnings your apps and disks report about themselves</span></div>
+  <ul class="rows">
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">S</span><div><div class="row__title"><button type="button" data-opens="ov-warning">Indexers unavailable for more than 6 hours</button></div><div class="row__meta">Sonarr · first seen today at 08:12</div></div><div class="row__side"><span class="chip" data-tone="warning">Needs attention</span></div></li>
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:hard-drive}}</span><div><div class="row__title"><a href="starboard-disk-health.html">Disk 3 has 12 reallocated sectors</a></div><div class="row__meta">Disk health · found at the 03:00 check</div></div><div class="row__side"><span class="chip" data-tone="warning">Needs attention</span></div></li>
+  </ul>
+</section>
+<div style="display:flex;flex-wrap:wrap;gap:var(--space-3);align-items:center;justify-content:space-between">
+  <h2>Last 6 hours</h2>
+  <fieldset style="display:flex;gap:var(--space-3);align-items:center;grid-auto-flow:column"><legend class="visually-hidden">Time range</legend><span class="small muted" aria-hidden="true">Time range</span><div class="segmented"><label><input type="radio" name="ov-r"><span>Last hour</span></label><label><input type="radio" name="ov-r" checked><span>6 hours</span></label><label><input type="radio" name="ov-r"><span>24 hours</span></label></div><a class="btn btn--quiet" href="starboard-monitor.html">{{i:chart-line}}Live</a></fieldset>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(560px,1fr));gap:var(--space-4)">
+<!--chart {"id":"c-cpu","title":"Processor","now":"23% now","unit":"%","max":100,"labels":["10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00"],"series":[["Processor",[12,18,15,41,30,22,19,25,28,17,20,26,23]]],"desc":"Processor use over the last 6 hours, between 12% and 41%, now 23%."}-->
+<!--chart {"id":"c-mem","title":"Memory","now":"70% now","unit":"%","max":100,"labels":["10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00"],"series":[["Memory",[64,65,66,68,69,69,70,70,71,70,70,69,70]]],"desc":"Memory use over the last 6 hours, steady between 64% and 71%, now 70%."}-->
+<!--chart {"id":"c-temp","title":"Processor temperature","now":"78°C now","tone":["warning","Hot"],"unit":"°","max":100,"labels":["10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00"],"series":[["Temperature",[61,63,64,72,75,70,68,71,74,76,77,79,78]]],"desc":"Processor temperature over the last 6 hours, rising from 61 to 78 degrees, which is hot."}-->
+<!--chart {"id":"c-net","max":25,"title":"Network","now":"Download 18.4 MB/s · Upload 1.2 MB/s","unit":"","labels":["10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00"],"series":[["Download, MB/s",[2,4,3,12,22,16,8,5,9,14,20,19,18]],["Upload, MB/s",[0.5,0.8,0.6,1.1,1.6,1.2,0.9,0.7,0.8,1.0,1.4,1.3,1.2]]],"desc":"Download and upload speed over the last 6 hours. Download peaked at 22 MB/s and is now 18.4; upload stayed under 2 MB/s."}-->
+</div>
+<!--phone-->
+<div class="stats" style="grid-template-columns:1fr 1fr">
+  <div class="stat"><span class="stat__value">23%</span><span class="stat__label">Processor</span></div>
+  <div class="stat" data-tone="warning"><span class="stat__value">78°C</span><span class="stat__label">Temperature</span><span class="chip" data-tone="warning" style="justify-self:start">Hot</span></div>
+</div>
+<section class="panel" data-tone="warning" style="padding:var(--space-4)" aria-labelledby="p-na-h"><h2 id="p-na-h">Needs attention</h2>
+  <ul class="rows"><li class="row row--opens row--no-lead"><div><div class="row__title"><button type="button" data-opens="ov-warning">Indexers unavailable for more than 6 hours</button></div><div class="row__meta">Sonarr · today at 08:12</div></div></li></ul>
+</section>
+<!--panels-->
+<div class="side-panel-layer" id="ov-warning" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="ow-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="ow-h">Warning from Sonarr</h2><button class="icon-btn" type="button" data-closes aria-label="Close warning from Sonarr">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <span class="chip" data-tone="warning" style="justify-self:start">Needs attention</span>
+      <h3 style="font-size:var(--text-lg)">Indexers unavailable due to failures for more than 6 hours</h3>
+      <p>Sonarr could not reach 2 of its 5 sources: Source A and Source C. Searches still run on the other 3, so fewer releases are found.</p>
+      <dl class="facts"><dt>First seen</dt><dd>Today at 08:12</dd><dt>Last seen</dt><dd>1 minute ago</dd><dt>From</dt><dd>Sonarr's own health check</dd></dl>
+      <details class="disclosure"><summary>Technical details</summary><div class="disclosure__body"><code class="code-block">IndexerStatusCheck · Warning
+https://wiki.servarr.com/sonarr/system#indexers-are-unavailable-due-to-failures</code></div></details>
+    </div>
+    <div class="side-panel__foot"><a class="btn btn--primary" href="#" target="_blank" rel="noopener">{{i:external-link}}Open Sonarr's sources<span class="visually-hidden"> (opens in a new tab)</span></a><a class="btn" href="starboard-apps.html">View in Apps</a></div>
+  </aside>
+</div>

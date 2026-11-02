@@ -1,0 +1,19 @@
+book-open bookmark list-checks compass activity settings sparkles library layout-grid calendar-days layers award list menu x search sun chevron-down chevron-right check plus refresh-cw download copy circle-help circle-alert circle-check triangle-alert info trash-2 pencil external-link log-out user users key-round bell hard-drive-download radar sliders-horizontal zap scroll-text timer archive-restore archive book-copy server hard-drive cpu network database play pause rotate-ccw filter arrow-up-down ellipsis star clock history list-ordered file-search heart-pulse gauge shield-check folder link inbox wifi circle-arrow-up server-cog chart-line app-window thermometer globe lock upload file-text eye grip-vertical arrow-up arrow-down panel-right-open circle-x house film tv music book terminal monitor wrench arrow-left ban book-marked bookmark-plus book-open-text calendar-clock chevron-left eye-off file-pen file-question file-x folder-input folder-open link-2 list-plus mic plug puzzle send square-check tags undo-2 user-plus user-round
+minus
+circle
+hourglass
+octagon-x
+undo-2
+ban
+bookmark
+import
+calendar
+download
+check
+circle-check
+circle-x
+clock
+search
+triangle-alert
+info
+headphones

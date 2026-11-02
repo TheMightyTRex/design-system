@@ -1,0 +1,47 @@
+<!--meta {"title": "Security", "main": "settings", "sub": "security", "phone_note": "Each section keeps its own Save; the session buttons stack full width."}-->
+<!--note-->
+<ul style="margin:0;padding-left:var(--space-5)">
+  <li>Three forms in one panel with one h3 become <strong>three sections with h2s</strong>: Who can open the dashboard, Password, Sessions. No more jump from h1 to h3.</li>
+  <li>Turning off network access and <strong>Sign out everywhere</strong> now ask in a dialog that says what happens. Sign out everywhere had no confirmation at all.</li>
+  <li>Network access is a switch with the result in words; the addresses that can reach Starboard are listed under it.</li>
+</ul>
+<!--page-->
+<div class="page-head">
+  <div class="page-head__text"><h1>Security</h1><p class="page-head__summary">Who can open the dashboard, your password and how long people stay signed in.</p></div>
+</div>
+<section class="settings-section" aria-labelledby="sc-who-h">
+  <div class="settings-section__head"><h2 id="sc-who-h">Who can open the dashboard</h2><p class="small muted">When this is off, only the computer Starboard runs on can open it.</p></div>
+  <ul class="settings-rows">
+    <li class="setting"><div class="setting__text"><span class="setting__label">Phones and other computers on your home network</span><span class="setting__hint">On: anyone on your home network can reach the sign-in page at <code>http://homeserver.local:8090</code>.</span></div><div class="setting__control"><label class="switch"><span class="visually-hidden">Phones and other computers on your home network</span><input type="checkbox" role="switch" checked data-dialog="sc-network-off"></label></div></li>
+  </ul>
+</section>
+<section class="settings-section" aria-labelledby="sc-pw-h">
+  <div class="settings-section__head"><h2 id="sc-pw-h">Password</h2><p class="small muted">At least 10 characters. Everyone signed in stays signed in.</p></div>
+  <div class="form-grid" style="max-width:720px">
+    <div class="field" data-span="all" style="max-width:340px"><label for="sc-cur">Current password</label><input class="input" id="sc-cur" type="password" autocomplete="current-password"></div>
+    <div class="field"><label for="sc-new">New password</label><input class="input" id="sc-new" type="password" autocomplete="new-password" aria-invalid="true" aria-describedby="sc-new-e"><span class="field-error" id="sc-new-e">{{i:circle-alert}}Use at least 10 characters. This one has 7.</span></div>
+    <div class="field"><label for="sc-new2">Type the new password again</label><input class="input" id="sc-new2" type="password" autocomplete="new-password"></div>
+  </div>
+  <div class="actions"><button class="btn btn--primary" type="button">Change password</button></div>
+</section>
+<section class="settings-section" aria-labelledby="sc-ses-h">
+  <div class="settings-section__head"><h2 id="sc-ses-h">Sessions</h2><p class="small muted">How long Remember me lasts, and signing out.</p></div>
+  <ul class="settings-rows">
+    <li class="setting"><div class="setting__text"><span class="setting__label" id="sc-days-l">Remember me keeps people signed in for</span><span class="setting__hint">1 to 90 days.</span></div><div class="setting__control"><div class="input-group" style="max-width:180px"><input class="input" inputmode="numeric" value="30" aria-labelledby="sc-days-l"><span class="input-group__unit">days</span></div></div></li>
+    <li class="setting"><div class="setting__text"><span class="setting__label">Only send the sign-in cookie over HTTPS</span><span class="setting__hint">Turn on when every address you use starts with https.</span></div><div class="setting__control"><label class="switch"><span class="visually-hidden">Only send the sign-in cookie over HTTPS</span><input type="checkbox" role="switch"></label></div></li>
+  </ul>
+  <div class="actions"><button class="btn btn--primary" type="button">Save session settings</button><button class="btn" type="button">{{i:log-out}}Sign out</button><button class="btn btn--danger" type="button" data-dialog="sc-everywhere">Sign out everywhere</button></div>
+</section>
+<!--phone-->
+<div class="actions" style="display:grid;gap:var(--space-2)"><button class="btn btn--primary" type="button">Save session settings</button><button class="btn" type="button">{{i:log-out}}Sign out</button><button class="btn btn--danger" type="button" data-dialog="sc-everywhere">Sign out everywhere</button></div>
+<!--panels-->
+<dialog class="dialog" id="sc-everywhere" aria-labelledby="sc-ev-h">
+  <div class="panel-header"><h2 class="panel-header__title" id="sc-ev-h">Sign out everywhere?</h2><button class="icon-btn" type="button" data-closes aria-label="Close">{{i:x}}</button></div>
+  <div class="dialog__body"><p>Every browser and phone signed in to Starboard is signed out, including this one. Everyone needs the password to sign in again.</p></div>
+  <div class="dialog__foot"><button class="btn btn--danger btn--primary" type="button" data-closes>Sign out everywhere</button><button class="btn btn--quiet" type="button" data-closes>Stay signed in</button></div>
+</dialog>
+<dialog class="dialog" id="sc-network-off" aria-labelledby="sc-no-h">
+  <div class="panel-header"><h2 class="panel-header__title" id="sc-no-h">Turn off access from your home network?</h2><button class="icon-btn" type="button" data-closes aria-label="Close">{{i:x}}</button></div>
+  <div class="dialog__body"><div class="notice" data-tone="warning">{{i:triangle-alert}}<div class="notice__body"><span class="notice__title">You are using another device</span><p>This phone or computer loses access straight away. Only the server itself can open Starboard after this.</p></div></div></div>
+  <div class="dialog__foot"><button class="btn btn--danger btn--primary" type="button" data-closes>Turn off network access</button><button class="btn btn--quiet" type="button" data-closes>Keep it on</button></div>
+</dialog>

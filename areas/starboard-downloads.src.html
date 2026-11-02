@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Downloads · Starboard board</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  /* Board only, as in the gallery: icon sizes (no icon size class in the library yet). */
+  svg.i { width: var(--icon-md); height: var(--icon-md); }
+  svg.i-lg { width: var(--icon-lg); height: var(--icon-lg); }
+  svg.i-xl { width: 32px; height: 32px; }
+</style>
+</head>
+<body>
+<!--ICONS-->
+<a class="skip-link" href="#main">Skip to main content</a>
+<aside aria-label="About this board" style="padding:var(--space-4) var(--space-8);background:var(--color-surface-sunken);border-bottom:1px solid var(--color-divider)">
+  <div class="notice" style="max-width:1100px">{{i:info}}<div class="notice__body"><span class="notice__title">What changed and why</span>
+<ul style="margin:0;padding-left:var(--space-5)">
+  <li>Each row opens a <strong>download details slide-out</strong> with every message, the history of states and the actions the app supports (search again, remove, open in the app).</li>
+  <li>Rows are updated in place by id every 15 seconds, so focus and the open slide-out stay put. Downloads needing attention sort first; Sort and Group by app are in the toolbar.</li>
+  <li>"Pause updates" keeps one label and uses <code>aria-pressed</code>; Refresh becomes "Check again", the same word as on Apps.</li>
+</ul>
+  </div><a class="btn btn--compact" href="index-starboard.html">All boards</a></div>
+</aside>
+<header class="site-header">
+  <div class="site-header__bar">
+    <a class="site-header__brand" href="starboard-apps.html" style="display:inline-flex;padding-left:var(--space-5)"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg>Starboard</a>
+    <nav class="menu-tabs" aria-label="Main menu"><a href="starboard-apps.html">{{i:layout-grid}}<span class="menu-tabs__label">Apps</span></a><a href="starboard-search.html">{{i:search}}<span class="menu-tabs__label">Search</span></a><a href="starboard-downloads.html" aria-current="page">{{i:download}}<span class="menu-tabs__label">Downloads</span></a><a href="starboard-coming-up.html">{{i:calendar-days}}<span class="menu-tabs__label">Coming up</span></a><a href="starboard-overview.html">{{i:activity}}<span class="menu-tabs__label">System</span></a><a href="starboard-settings-apps.html">{{i:settings}}<span class="menu-tabs__label">Settings</span></a></nav>
+    <form class="site-header__search search-field" role="search" action="starboard-search.html"><input class="input" type="search" name="q" aria-label="Search films, series, music and books" placeholder="Search films, series, music, books"><button class="visually-hidden" type="submit">Search</button></form>
+    <div class="site-header__actions"><button class="icon-btn" type="button" data-dialog="display-dialog">{{i-lg:sun}}<span class="label">Display</span></button></div>
+  </div>
+  
+</header>
+<main id="main" tabindex="-1">
+<div class="page">
+<div class="page-head">
+  <div class="page-head__text"><h1>Downloads</h1><p class="page-head__summary">5 in the queue · 3 downloading at 18.4 MB/s · 1 needs attention · updated 4 seconds ago</p></div>
+  <div class="actions"><button class="btn" type="button" aria-pressed="false">{{i:pause}}Pause updates</button><button class="btn" type="button">{{i:refresh-cw}}Check again</button></div>
+</div>
+<div class="toolbar">
+  <div class="toolbar__row">
+    <div class="filter-chips" role="group" aria-label="Show">
+      <button class="filter-chip" type="button" aria-pressed="false">Needs attention, 1</button>
+      <button class="filter-chip" type="button" aria-pressed="false">Downloading, 3</button>
+      <button class="filter-chip" type="button" aria-pressed="false">Waiting, 1</button>
+      <button class="filter-chip" type="button" aria-pressed="false">Importing, 0</button>
+    </div>
+    <div class="toolbar__end">
+      <span class="toolbar__count">5 downloads</span>
+      <div class="menu-wrap"><button class="btn" type="button" aria-haspopup="menu" aria-controls="dl-sort">{{i:arrow-up-down}}Sort: Needs you first{{i:chevron-down}}</button><div class="menu" id="dl-sort" role="menu" aria-label="Sort"><button type="button" role="menuitemradio" aria-checked="true">Needs you first</button><button type="button" role="menuitemradio" aria-checked="false">Time left</button><button type="button" role="menuitemradio" aria-checked="false">App</button><button type="button" role="menuitemradio" aria-checked="false">Recently added</button></div></div>
+    </div>
+  </div>
+</div>
+<ul class="rows" aria-label="Queue">
+  <li class="row row--opens row--no-lead"><div><div class="row__title"><button type="button" data-opens="dl-details">Harbour Lights S02E05</button></div><div class="row__meta">Sonarr · qBittorrent · 1.4 GB · stalled for 2 hours</div></div><div class="row__side"><span class="numeric">61%</span><span class="chip" data-tone="warning">Needs attention</span></div><div class="progress" data-tone="warning" role="progressbar" aria-valuenow="61" aria-valuemin="0" aria-valuemax="100" aria-label="Harbour Lights S02E05, 61%"><span style="width:61%"></span></div></li>
+  <li class="row row--opens row--no-lead"><div><div class="row__title"><button type="button" data-opens="dl-details">The Long Field (2023)</button></div><div class="row__meta">Radarr · SABnzbd · 8.2 GB · 4 minutes left</div></div><div class="row__side"><span class="numeric">88%</span><span class="chip" data-tone="info">Downloading</span></div><div class="progress" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" aria-label="The Long Field, 88%"><span style="width:88%"></span></div></li>
+  <li class="row row--opens row--no-lead"><div><div class="row__title"><button type="button" data-opens="dl-details">Coastal Recordings, Vol. 2</button></div><div class="row__meta">Lidarr · qBittorrent · 412 MB · 9 minutes left</div></div><div class="row__side"><span class="numeric">34%</span><span class="chip" data-tone="info">Downloading</span></div><div class="progress" role="progressbar" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100" aria-label="Coastal Recordings, 34%"><span style="width:34%"></span></div></li>
+  <li class="row row--opens row--no-lead"><div><div class="row__title"><button type="button" data-opens="dl-details">The Glass Harbour (audiobook)</button></div><div class="row__meta">Storyarr · qBittorrent · 610 MB · 3 minutes left</div></div><div class="row__side"><span class="numeric">68%</span><span class="chip" data-tone="info">Downloading</span></div><div class="progress" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100" aria-label="The Glass Harbour, 68%"><span style="width:68%"></span></div></li>
+  <li class="row row--opens row--no-lead"><div><div class="row__title"><button type="button" data-opens="dl-details">Night Ferry S01E01</button></div><div class="row__meta">Sonarr · SABnzbd · 2.1 GB · fourth in line</div></div><div class="row__side"><span class="numeric">0%</span><span class="chip">Waiting</span></div><div class="progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Night Ferry S01E01, 0%"><span style="width:0%"></span></div></li>
+</ul>
+</div>
+</main>
+<footer class="site-footer"><span>Starboard v0.2.0</span><a href="starboard-settings-about.html">About and updates</a></footer>
+<section aria-labelledby="board-phone-h" style="display:grid;gap:var(--space-4);padding:var(--space-8);border-top:2px solid var(--color-text);background:var(--color-surface-sunken)">
+  <div style="display:grid;gap:var(--space-1)"><h2 id="board-phone-h">On a phone (390px)</h2><p class="small muted">Rows keep the bar and percentage; the reason a download needs attention moves into its slide-out.</p></div>
+  <div style="width:390px;border:1px solid var(--color-border);background:var(--color-bg);overflow:hidden">
+      <header class="site-header" style="position:relative">
+        <div class="site-header__bar" style="height:60px;padding-inline:var(--space-4);gap:var(--space-3)">
+          <button class="icon-btn" type="button" data-opens="phone-menu" aria-controls="phone-menu" aria-expanded="false">{{i-lg:menu}}<span class="visually-hidden">Menu</span></button>
+          <span class="panel-header__brand"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg>Starboard</span>
+          <button class="icon-btn" type="button" style="margin-left:auto" data-dialog="display-dialog" aria-label="Display">{{i-lg:sun}}</button>
+        </div>
+        
+      </header>
+      <div style="display:grid;gap:var(--space-4);padding:var(--space-4)">
+<div class="filter-chips" role="group" aria-label="Show (phone)" style="flex-wrap:nowrap;overflow-x:auto"><button class="filter-chip" type="button" aria-pressed="false" style="flex:none">Needs attention, 1</button><button class="filter-chip" type="button" aria-pressed="false" style="flex:none">Downloading, 3</button><button class="filter-chip" type="button" aria-pressed="false" style="flex:none">Waiting, 1</button></div>
+<ul class="rows">
+  <li class="row row--opens row--no-lead"><div><div class="row__title"><button type="button" data-opens="dl-details">Harbour Lights S02E05</button></div><div class="row__meta">Sonarr · stalled</div></div><div class="row__side"><span class="chip" data-tone="warning">Needs attention</span></div><div class="progress" data-tone="warning" role="progressbar" aria-valuenow="61" aria-valuemin="0" aria-valuemax="100" aria-label="61%"><span style="width:61%"></span></div></li>
+  <li class="row row--opens row--no-lead"><div><div class="row__title"><button type="button" data-opens="dl-details">The Long Field (2023)</button></div><div class="row__meta">Radarr · 88% · 4 min left</div></div><div class="row__side"><span class="chip" data-tone="info">Downloading</span></div><div class="progress" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" aria-label="88%"><span style="width:88%"></span></div></li>
+</ul>
+      </div>
+  </div>
+</section>
+<div class="side-panel-layer" id="phone-menu" hidden>
+  <div class="side-panel-backdrop"></div>
+  <nav class="phone-menu" aria-label="Main menu">
+    <div class="panel-header"><span class="panel-header__brand"><svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg>Starboard</span><button class="icon-btn" type="button" data-closes aria-label="Close menu">{{i:x}}</button></div>
+    <form class="phone-menu__search" role="search" action="starboard-search.html"><input class="input" type="search" name="q" aria-label="Search films, series, music and books" placeholder="Search films, series, music, books"></form>
+    <div class="phone-menu__sections"><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="pm-apps">{{i-lg:layout-grid}}Apps{{i:chevron-right phone-menu__chevron}}</button><ul id="pm-apps" hidden><li><a href="starboard-apps.html">{{i:layout-grid}}Apps</a></li><li><a href="starboard-other-services.html">{{i:server-cog}}Other services</a></li></ul></div><div class="phone-menu__section"><a href="starboard-search.html" style="display:flex;align-items:center;gap:var(--space-3);min-height:52px;padding:0 var(--space-4);font-weight:var(--weight-strong);text-decoration:none;color:var(--color-text)">{{i-lg:search}}Search</a></div><div class="phone-menu__section"><a href="starboard-downloads.html" style="display:flex;align-items:center;gap:var(--space-3);min-height:52px;padding:0 var(--space-4);font-weight:var(--weight-strong);text-decoration:none;color:var(--color-accent)" aria-current="page">{{i-lg:download}}Downloads</a></div><div class="phone-menu__section"><a href="starboard-coming-up.html" style="display:flex;align-items:center;gap:var(--space-3);min-height:52px;padding:0 var(--space-4);font-weight:var(--weight-strong);text-decoration:none;color:var(--color-text)">{{i-lg:calendar-days}}Coming up</a></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="pm-system">{{i-lg:activity}}System{{i:chevron-right phone-menu__chevron}}</button><ul id="pm-system" hidden><li><a href="starboard-overview.html">{{i:gauge}}Overview</a></li><li><a href="starboard-storage.html">{{i:hard-drive}}Storage</a></li><li><a href="starboard-disk-health.html">{{i:heart-pulse}}Disk health</a></li><li><a href="starboard-monitor.html">{{i:chart-line}}Monitor</a></li><li><a href="starboard-network.html">{{i:network}}Network</a></li><li><a href="starboard-backup.html">{{i:archive}}Backup and restore</a></li></ul></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="pm-settings">{{i-lg:settings}}Settings{{i:chevron-right phone-menu__chevron}}</button><ul id="pm-settings" hidden><li><a href="starboard-settings-apps.html">{{i:app-window}}Manage apps</a></li><li><a href="starboard-settings-general.html">{{i:sliders-horizontal}}General</a></li><li><a href="starboard-settings-security.html">{{i:shield-check}}Security</a></li><li><a href="starboard-settings-about.html">{{i:info}}About and updates</a></li></ul></div></div>
+    <div class="phone-menu__foot"><span class="small muted">Starboard v0.2.0</span><button class="btn" type="button">{{i:log-out}}Sign out</button></div>
+  </nav>
+</div>
+<div class="side-panel-layer" id="dl-details" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="dd-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="dd-h">Harbour Lights S02E05</h2><button class="icon-btn" type="button" data-closes aria-label="Close download details">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <div class="meter"><div class="meter__label"><span><span class="chip" data-tone="warning">Needs attention</span></span><span class="numeric">0.85 of 1.4 GB (61%)</span></div><div class="progress" data-tone="warning" role="progressbar" aria-valuenow="61" aria-valuemin="0" aria-valuemax="100" aria-label="61% downloaded"><span style="width:61%"></span></div></div>
+      <div class="notice" data-tone="warning">{{i:triangle-alert}}<div class="notice__body"><span class="notice__title">Stalled for 2 hours</span><p>No one is sharing the rest of this download. Search again to find another release.</p></div></div>
+      <section style="display:grid;gap:var(--space-3)" aria-labelledby="dd-msg-h"><h3 id="dd-msg-h">Messages from Sonarr</h3>
+        <ul class="rows"><li class="row row--no-lead"><div><div class="row__title">The download is stalled with no connections</div><div class="row__meta">Today at 09:14</div></div></li><li class="row row--no-lead"><div><div class="row__title">Release is 3 days old, fewer than 5 sources</div><div class="row__meta">Today at 07:02</div></div></li></ul>
+      </section>
+      <dl class="facts"><dt>App</dt><dd>Sonarr</dd><dt>Download client</dt><dd>qBittorrent</dd><dt>Size</dt><dd class="numeric">1.4 GB</dd><dt>Added</dt><dd>Today at 06:58</dd><dt>Release</dt><dd>Harbour.Lights.S02E05.1080p.WEB</dd></dl>
+      <section style="display:grid;gap:var(--space-3)" aria-labelledby="dd-hist-h"><h3 id="dd-hist-h">History</h3>
+        <div class="table-wrap"><table class="table"><thead><tr><th scope="col">Time</th><th scope="col">State</th></tr></thead><tbody><tr><td class="numeric">09:14</td><td><span class="chip" data-tone="warning">Needs attention</span></td></tr><tr><td class="numeric">07:01</td><td><span class="chip" data-tone="info">Downloading</span></td></tr><tr><td class="numeric">06:58</td><td><span class="chip">Waiting</span></td></tr></tbody></table></div>
+      </section>
+    </div>
+    <div class="side-panel__foot"><button class="btn btn--primary" type="button">{{i:search}}Search again</button><a class="btn" href="#" target="_blank" rel="noopener">{{i:external-link}}Open in Sonarr<span class="visually-hidden"> (opens in a new tab)</span></a><button class="btn btn--danger" type="button" data-dialog="dl-remove">{{i:trash-2}}Remove</button></div>
+  </aside>
+</div>
+<dialog class="dialog" id="dl-remove" aria-labelledby="dl-remove-h">
+  <div class="panel-header"><h2 class="panel-header__title" id="dl-remove-h">Remove Harbour Lights S02E05?</h2><button class="icon-btn" type="button" data-closes aria-label="Close">{{i:x}}</button></div>
+  <div class="dialog__body"><p>qBittorrent stops the download and deletes the part already downloaded. Sonarr keeps the episode as wanted, so it can search again.</p><label class="check"><input type="checkbox"><span class="check__text">Also block this release, so it is not chosen again</span></label></div>
+  <div class="dialog__foot"><button class="btn btn--danger btn--primary" type="button" data-closes>Remove download</button><button class="btn btn--quiet" type="button" data-closes>Keep it</button></div>
+</dialog>
+<dialog class="dialog" id="display-dialog" aria-labelledby="display-h">
+  <div class="panel-header"><h2 class="panel-header__title" id="display-h">Display and accessibility</h2><button class="icon-btn" type="button" data-closes aria-label="Close display and accessibility">{{i:x}}</button></div>
+  <div class="dialog__body">
+    <fieldset><legend class="field__label">Theme</legend><div class="segmented"><label><input type="radio" name="d-theme" value="light" data-display="theme" checked><span>Light</span></label><label><input type="radio" name="d-theme" value="dark" data-display="theme"><span>Dark</span></label></div></fieldset>
+    <fieldset><legend class="field__label">Text size</legend><div class="segmented"><label><input type="radio" name="d-text" value="100" data-display="text" checked><span>100%</span></label><label><input type="radio" name="d-text" value="125" data-display="text"><span>125%</span></label><label><input type="radio" name="d-text" value="150" data-display="text"><span>150%</span></label><label><input type="radio" name="d-text" value="175" data-display="text"><span>175%</span></label></div></fieldset>
+    <div>
+      <label class="switch"><span class="check__text"><strong>High contrast</strong></span><input type="checkbox" role="switch" data-display="contrast"></label>
+      <label class="switch"><span class="check__text"><strong>Reduce motion</strong></span><input type="checkbox" role="switch" data-display="motion"></label>
+      <label class="switch"><span class="check__text"><strong>Underline links</strong></span><input type="checkbox" role="switch" data-display="underline"></label>
+      <label class="switch"><span class="check__text"><strong>Wider text spacing</strong></span><input type="checkbox" role="switch" data-display="spacing"></label>
+    </div>
+  </div>
+  <div class="dialog__foot"><button class="btn btn--primary" type="button" data-closes>Done</button><button class="btn btn--quiet" type="button">Reset</button></div>
+</dialog>
+<script src="../components.js"></script>
+</body>
+</html>

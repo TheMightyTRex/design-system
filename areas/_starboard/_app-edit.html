@@ -1,0 +1,61 @@
+<div class="side-panel-layer" id="app-edit" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel side-panel--wide" role="dialog" aria-modal="true" aria-labelledby="app-edit-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="app-edit-h">Edit Sonarr</h2><button class="icon-btn" type="button" data-closes aria-label="Close Edit Sonarr">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <ol class="steps" aria-label="Steps"><li aria-current="step">Connection</li><li>Adding options</li></ol>
+      <section style="display:grid;gap:var(--space-4)" aria-labelledby="ae-conn-h">
+        <h3 id="ae-conn-h">Connection</h3>
+        <div class="form-grid">
+          <div class="field"><label for="ae-kind">Kind of app</label><select class="select" id="ae-kind"><option>Sonarr</option><option>Radarr</option><option>Lidarr</option><option>Jellyfin</option><option>qBittorrent</option><option>Other web app</option></select></div>
+          <div class="field"><label for="ae-name">Name</label><input class="input" id="ae-name" value="Sonarr" maxlength="60"></div>
+          <div class="field" data-span="all"><label for="ae-url">Address Starboard uses</label><span class="hint" id="ae-url-h">On Docker, the container name and port, such as http://sonarr:8989.</span><input class="input" id="ae-url" inputmode="url" aria-describedby="ae-url-h" value="http://sonarr:8989"></div>
+          <div class="field" data-span="all"><label for="ae-key">API key</label><span class="hint" id="ae-key-h">In Sonarr: Settings, General. Leave blank to keep the saved key; it is never shown again.</span><input class="input" id="ae-key" type="password" autocomplete="off" aria-describedby="ae-key-h"></div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:var(--space-3);align-items:center"><button class="btn" type="button">{{i:zap}}Test connection</button></div>
+        <div class="notice" data-tone="success" role="status">{{i:circle-check}}<div class="notice__body"><span class="notice__title">Connected</span><p>Sonarr 4.0.11 answered in 84 ms.</p></div></div>
+      </section>
+      <section style="display:grid;gap:var(--space-4)" aria-labelledby="ae-show-h">
+        <h3 id="ae-show-h">On the dashboard</h3>
+        <div class="form-grid">
+          <div class="field"><label for="ae-cat">Category</label><span class="hint" id="ae-cat-h">Change the list in Settings, General.</span><select class="select" id="ae-cat" aria-describedby="ae-cat-h"><option>Library managers</option><option>Media</option><option>Downloads</option><option>Tools</option></select></div>
+          <div class="field"><label for="ae-icon">Icon</label><span class="hint" id="ae-icon-h">A name from the dashboard icons collection.</span><input class="input" id="ae-icon" aria-describedby="ae-icon-h" value="sonarr"></div>
+          <div class="field" data-span="all"><label for="ae-desc">Description</label><input class="input" id="ae-desc" maxlength="200" value="Finds and organises series."></div>
+          <div class="field" data-span="all"><label for="ae-link">Address to open in your browser</label><span class="hint" id="ae-link-h">Leave blank to use the address Starboard uses.</span><input class="input" id="ae-link" inputmode="url" aria-describedby="ae-link-h" value="http://homeserver.local:8989"></div>
+          <div class="field" data-span="all"><label for="ae-out">Outside address</label><span class="hint" id="ae-out-h">The address that works away from home. Starboard checks it can be reached.</span><input class="input" id="ae-out" inputmode="url" aria-describedby="ae-out-h" value="https://sonarr.example.com"></div>
+        </div>
+        <div>
+          <label class="switch"><span class="check__text"><strong>Show on the dashboard</strong></span><input type="checkbox" role="switch" checked></label>
+          <label class="switch"><span class="check__text"><strong>Background service</strong><span class="check__hint">It has no web page, so it is listed under Apps, Other services.</span></span><input type="checkbox" role="switch"></label>
+        </div>
+      </section>
+    </div>
+    <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-opens="app-edit-2">Save and continue</button><button class="btn btn--quiet" type="button" data-closes>Cancel</button><button class="btn btn--danger" type="button" data-dialog="remove-app">{{i:trash-2}}Remove</button></div>
+  </aside>
+</div>
+
+<div class="side-panel-layer" id="app-edit-2" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel side-panel--wide" role="dialog" aria-modal="true" aria-labelledby="app-edit-2-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="app-edit-2-h">Edit Sonarr</h2><button class="icon-btn" type="button" data-closes aria-label="Close Edit Sonarr">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <ol class="steps" aria-label="Steps"><li data-done>Connection</li><li aria-current="step">Adding options</li></ol>
+      <div class="notice" data-tone="success" role="status">{{i:circle-check}}<div class="notice__body"><span class="notice__title">Sonarr saved</span><p>Now choose what Starboard uses when you add a series from Search.</p></div></div>
+      <section style="display:grid;gap:var(--space-4)" aria-labelledby="ae2-h">
+        <h3 id="ae2-h">Adding options</h3>
+        <div class="form-grid">
+          <div class="field"><label for="ae2-q">Quality profile</label><select class="select" id="ae2-q"><option>HD 1080p</option><option>Any</option><option>Ultra HD</option></select></div>
+          <div class="field"><label for="ae2-f">Folder</label><select class="select" id="ae2-f"><option>/data/media/series</option><option>/data/media/kids-series</option></select></div>
+        </div>
+        <label class="switch"><span class="check__text"><strong>Search as soon as something is added</strong><span class="check__hint">On: Sonarr looks for every episode straight away.</span></span><input type="checkbox" role="switch" checked></label>
+      </section>
+    </div>
+    <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Save adding options</button><button class="btn btn--quiet" type="button" data-closes>Skip for now</button></div>
+  </aside>
+</div>
+
+<dialog class="dialog" id="remove-app" aria-labelledby="remove-app-h">
+  <div class="panel-header"><h2 class="panel-header__title" id="remove-app-h">Remove Sonarr?</h2><button class="icon-btn" type="button" data-closes aria-label="Close">{{i:x}}</button></div>
+  <div class="dialog__body"><p>Sonarr leaves the dashboard and Search. Sonarr itself, its files and its settings stay as they are. You can add it again at any time.</p></div>
+  <div class="dialog__foot"><button class="btn btn--danger btn--primary" type="button" data-closes>Remove Sonarr</button><button class="btn btn--quiet" type="button" data-closes>Keep it</button></div>
+</dialog>

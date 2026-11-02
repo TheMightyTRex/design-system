@@ -1,0 +1,28 @@
+<!--meta {"title": "Other services", "main": "apps", "sub": "services", "phone_note": "Rows keep the title and chip on one line; the follow note wraps under them."}-->
+<!--note-->
+<ul style="margin:0;padding-left:var(--space-5)">
+  <li>Same row and the same <strong>details slide-out</strong> as Apps, so a VPN or a backup job reads like any other app.</li>
+  <li>"Follows" is shown in words on each row, not only in the edit form. The hint paragraph about services is now the empty state.</li>
+  <li>"Add a service" goes to Manage apps with Background service already on.</li>
+</ul>
+<!--page-->
+<div class="page-head">
+  <div class="page-head__text"><h1>Other services</h1><p class="page-head__summary">4 services · 3 running · 1 not checked · checked 1 minute ago</p></div>
+  <div class="actions"><button class="btn" type="button">{{i:refresh-cw}}Check again</button><a class="btn btn--quiet" href="starboard-settings-apps.html">{{i:plus}}Add a service</a></div>
+</div>
+<ul class="rows">
+  <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:shield-check}}</span><div><div class="row__title"><button type="button" data-opens="app-details">VPN</button></div><div class="row__meta">Follows qBittorrent · no web page</div></div><div class="row__side"><span class="chip" data-tone="success">Running</span></div></li>
+  <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:archive}}</span><div><div class="row__title"><button type="button" data-opens="app-details">Nightly backup</button></div><div class="row__meta">Last ran today at 03:00 · took 14 minutes</div></div><div class="row__side"><span class="chip" data-tone="success">Running</span></div></li>
+  <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:database}}</span><div><div class="row__title"><button type="button" data-opens="app-details">Database server</button></div><div class="row__meta">http://postgres:5432 · replied in 4 ms</div></div><div class="row__side"><span class="chip" data-tone="success">Running</span></div></li>
+  <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:hard-drive}}</span><div><div class="row__title"><button type="button" data-opens="app-details">Disk report job</button></div><div class="row__meta">No address, and it follows no other app, so Starboard cannot check it</div></div><div class="row__side"><span class="chip" data-tone="muted">Not checked</span></div></li>
+</ul>
+<div class="empty">{{i-xl:server-cog empty__icon}}<h3>Add services that have no web page</h3><p>A VPN, a database or a backup job. A service with no address can follow another app's status, such as a VPN that qBittorrent runs through.</p><a class="btn btn--primary" href="starboard-settings-apps.html">{{i:plus}}Add a service</a></div>
+<p class="small muted">The empty state is shown here for review; on the live page it only appears when there are no services.</p>
+<!--phone-->
+<ul class="rows">
+  <li class="row row--opens" style="grid-template-columns:auto minmax(0,1fr)"><span class="app-icon" aria-hidden="true">{{i:shield-check}}</span><div><div class="row__title"><button type="button" data-opens="app-details">VPN</button></div><div class="row__meta">Follows qBittorrent</div></div><div class="row__side" style="grid-column:1/-1;justify-content:start"><span class="chip" data-tone="success">Running</span></div></li>
+  <li class="row row--opens" style="grid-template-columns:auto minmax(0,1fr)"><span class="app-icon" aria-hidden="true">{{i:hard-drive}}</span><div><div class="row__title"><button type="button" data-opens="app-details">Disk report job</button></div><div class="row__meta">No address, follows no app</div></div><div class="row__side" style="grid-column:1/-1;justify-content:start"><span class="chip" data-tone="muted">Not checked</span></div></li>
+</ul>
+<!--panels-->
+<!--include:app-details-->
+<!--include:app-edit-->

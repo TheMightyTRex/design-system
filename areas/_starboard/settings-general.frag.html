@@ -1,0 +1,53 @@
+<!--meta {"title": "General", "main": "settings", "sub": "general", "phone_note": "Settings rows stack: label and hint, then the control under them."}-->
+<!--note-->
+<ul style="margin:0;padding-left:var(--space-5)">
+  <li>Follows the Settings group template: <strong>sections with an h2, a one-line description and their own Save</strong>, instead of one panel holding everything.</li>
+  <li>Categories were a comma-separated text box where renaming one silently moved apps. They are now an <strong>editable list</strong> with rename, reorder and remove; removing asks where the apps go.</li>
+  <li>The card options are switches that apply at once; the default design uses option cards.</li>
+</ul>
+<!--page-->
+<div class="page-head">
+  <div class="page-head__text"><h1>General</h1><p class="page-head__summary">The dashboard's name, its categories and what each app card shows.</p></div>
+</div>
+<section class="settings-section" aria-labelledby="gn-name-h">
+  <div class="settings-section__head"><h2 id="gn-name-h">Dashboard</h2><p class="small muted">Shown in the header and the browser tab.</p></div>
+  <div class="field" style="max-width:420px"><label for="gn-name">Dashboard name</label><input class="input" id="gn-name" maxlength="60" value="Starboard"></div>
+  <div class="actions"><button class="btn btn--primary" type="button">Save name</button></div>
+</section>
+<section class="settings-section" aria-labelledby="gn-cat-h">
+  <div class="settings-section__head"><h2 id="gn-cat-h">Categories</h2><p class="small muted">The headings apps sit under on the Apps page, in this order.</p></div>
+  <ul class="rows" style="border-top:0">
+    <li class="row"><span class="app-icon" aria-hidden="true">1</span><div><div class="row__title">Media</div><div class="row__meta">3 apps</div></div><div class="row__side"><button class="btn btn--compact" type="button">{{i:pencil}}Rename<span class="visually-hidden"> Media</span></button><div class="menu-wrap"><button class="icon-btn icon-btn--bare" type="button" aria-haspopup="menu" aria-controls="gn-m1" aria-label="More actions for Media">{{i:ellipsis}}</button><div class="menu" id="gn-m1" role="menu" aria-label="Media"><button type="button" role="menuitem">Move up</button><button type="button" role="menuitem">Move down</button><hr><button type="button" role="menuitem">Remove</button></div></div></div></li>
+    <li class="row"><span class="app-icon" aria-hidden="true">2</span><div><div class="row__title">Library managers</div><div class="row__meta">5 apps</div></div><div class="row__side"><button class="btn btn--compact" type="button">{{i:pencil}}Rename<span class="visually-hidden"> Library managers</span></button><div class="menu-wrap"><button class="icon-btn icon-btn--bare" type="button" aria-haspopup="menu" aria-controls="gn-m2" aria-label="More actions for Library managers">{{i:ellipsis}}</button><div class="menu" id="gn-m2" role="menu" aria-label="Library managers"><button type="button" role="menuitem">Move up</button><button type="button" role="menuitem">Move down</button><hr><button type="button" role="menuitem">Remove</button></div></div></div></li>
+    <li class="row"><span class="app-icon" aria-hidden="true">3</span><div><div class="row__title">Downloads</div><div class="row__meta">2 apps</div></div><div class="row__side"><button class="btn btn--compact" type="button">{{i:pencil}}Rename<span class="visually-hidden"> Downloads</span></button><div class="menu-wrap"><button class="icon-btn icon-btn--bare" type="button" aria-haspopup="menu" aria-controls="gn-m3" aria-label="More actions for Downloads">{{i:ellipsis}}</button><div class="menu" id="gn-m3" role="menu" aria-label="Downloads"><button type="button" role="menuitem">Move up</button><button type="button" role="menuitem">Move down</button><hr><button type="button" role="menuitem">Remove</button></div></div></div></li>
+    <li class="row"><span class="app-icon" aria-hidden="true">4</span><div><div class="row__title">Tools</div><div class="row__meta">2 apps</div></div><div class="row__side"><button class="btn btn--compact" type="button">{{i:pencil}}Rename<span class="visually-hidden"> Tools</span></button><button class="btn btn--compact btn--danger" type="button" data-dialog="gn-remove-cat">{{i:trash-2}}Remove<span class="visually-hidden"> Tools</span></button></div></li>
+  </ul>
+  <div style="display:flex;gap:var(--space-2);max-width:520px"><input class="input" aria-label="New category name" placeholder="For example: Home" style="flex:1"><button class="btn" type="button">{{i:plus}}Add category</button></div>
+</section>
+<section class="settings-section" aria-labelledby="gn-card-h">
+  <div class="settings-section__head"><h2 id="gn-card-h">App cards</h2><p class="small muted">What everyone sees on each card. These apply at once.</p></div>
+  <ul class="settings-rows">
+    <li class="setting"><div class="setting__text"><span class="setting__label">Home address</span><span class="setting__hint">With a copy button.</span></div><div class="setting__control"><label class="switch"><span class="visually-hidden">Home address</span><input type="checkbox" role="switch" checked></label></div></li>
+    <li class="setting"><div class="setting__text"><span class="setting__label">Outside address</span><span class="setting__hint">With a copy button, when the app has one.</span></div><div class="setting__control"><label class="switch"><span class="visually-hidden">Outside address</span><input type="checkbox" role="switch"></label></div></li>
+  </ul>
+</section>
+<section class="settings-section" aria-labelledby="gn-design-h">
+  <div class="settings-section__head"><h2 id="gn-design-h">Default design</h2><p class="small muted">Everyone sees this unless they choose their own in Display.</p></div>
+  <fieldset><legend class="visually-hidden">Default design</legend><div class="option-cards">
+    <label class="option-card"><input type="radio" name="gn-d" checked><strong>Health first</strong><small>Apps that need you come first.</small></label>
+    <label class="option-card"><input type="radio" name="gn-d"><strong>Tiles</strong><small>Even grid by category.</small></label>
+    <label class="option-card"><input type="radio" name="gn-d"><strong>Status board</strong><small>A table, one app per line.</small></label>
+  </div></fieldset>
+  <div class="actions"><button class="btn btn--primary" type="button">Save default design</button></div>
+</section>
+<!--phone-->
+<ul class="settings-rows">
+  <li class="setting" style="grid-template-columns:minmax(0,1fr)"><div class="setting__text"><span class="setting__label">Home address</span><span class="setting__hint">With a copy button.</span></div><div class="setting__control" style="justify-content:start"><label class="switch"><span class="visually-hidden">Home address (phone)</span><input type="checkbox" role="switch" checked></label></div></li>
+  <li class="setting" style="grid-template-columns:minmax(0,1fr)"><div class="setting__text"><span class="setting__label">Outside address</span><span class="setting__hint">With a copy button, when the app has one.</span></div><div class="setting__control" style="justify-content:start"><label class="switch"><span class="visually-hidden">Outside address (phone)</span><input type="checkbox" role="switch"></label></div></li>
+</ul>
+<!--panels-->
+<dialog class="dialog" id="gn-remove-cat" aria-labelledby="gn-rc-h">
+  <div class="panel-header"><h2 class="panel-header__title" id="gn-rc-h">Remove the Tools category?</h2><button class="icon-btn" type="button" data-closes aria-label="Close">{{i:x}}</button></div>
+  <div class="dialog__body"><p>2 apps are in Tools. Choose where they go. The apps themselves are not changed.</p><div class="field"><label for="gn-rc-move">Move its apps to</label><select class="select" id="gn-rc-move"><option>Media</option><option>Library managers</option><option>Downloads</option></select></div></div>
+  <div class="dialog__foot"><button class="btn btn--danger btn--primary" type="button" data-closes>Remove category</button><button class="btn btn--quiet" type="button" data-closes>Keep it</button></div>
+</dialog>

@@ -1,0 +1,5 @@
+__pycache__/
+tools/paths.local.json
+contrast-report.txt
+areas/_starboard/out/
+.private-words

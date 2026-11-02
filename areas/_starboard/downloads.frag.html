@@ -1,0 +1,63 @@
+<!--meta {"title": "Downloads", "main": "downloads", "sub": "", "phone_note": "Rows keep the bar and percentage; the reason a download needs attention moves into its slide-out."}-->
+<!--note-->
+<ul style="margin:0;padding-left:var(--space-5)">
+  <li>Each row opens a <strong>download details slide-out</strong> with every message, the history of states and the actions the app supports (search again, remove, open in the app).</li>
+  <li>Rows are updated in place by id every 15 seconds, so focus and the open slide-out stay put. Downloads needing attention sort first; Sort and Group by app are in the toolbar.</li>
+  <li>"Pause updates" keeps one label and uses <code>aria-pressed</code>; Refresh becomes "Check again", the same word as on Apps.</li>
+</ul>
+<!--page-->
+<div class="page-head">
+  <div class="page-head__text"><h1>Downloads</h1><p class="page-head__summary">5 in the queue · 3 downloading at 18.4 MB/s · 1 needs attention · updated 4 seconds ago</p></div>
+  <div class="actions"><button class="btn" type="button" aria-pressed="false">{{i:pause}}Pause updates</button><button class="btn" type="button">{{i:refresh-cw}}Check again</button></div>
+</div>
+<div class="toolbar">
+  <div class="toolbar__row">
+    <div class="filter-chips" role="group" aria-label="Show">
+      <button class="filter-chip" type="button" aria-pressed="false">Needs attention, 1</button>
+      <button class="filter-chip" type="button" aria-pressed="false">Downloading, 3</button>
+      <button class="filter-chip" type="button" aria-pressed="false">Waiting, 1</button>
+      <button class="filter-chip" type="button" aria-pressed="false">Importing, 0</button>
+    </div>
+    <div class="toolbar__end">
+      <span class="toolbar__count">5 downloads</span>
+      <div class="menu-wrap"><button class="btn" type="button" aria-haspopup="menu" aria-controls="dl-sort">{{i:arrow-up-down}}Sort: Needs you first{{i:chevron-down}}</button><div class="menu" id="dl-sort" role="menu" aria-label="Sort"><button type="button" role="menuitemradio" aria-checked="true">Needs you first</button><button type="button" role="menuitemradio" aria-checked="false">Time left</button><button type="button" role="menuitemradio" aria-checked="false">App</button><button type="button" role="menuitemradio" aria-checked="false">Recently added</button></div></div>
+    </div>
+  </div>
+</div>
+<ul class="rows" aria-label="Queue">
+  <li class="row row--opens row--no-lead"><div><div class="row__title"><button type="button" data-opens="dl-details">Harbour Lights S02E05</button></div><div class="row__meta">Sonarr · qBittorrent · 1.4 GB · stalled for 2 hours</div></div><div class="row__side"><span class="numeric">61%</span><span class="chip" data-tone="warning">Needs attention</span></div><div class="progress" data-tone="warning" role="progressbar" aria-valuenow="61" aria-valuemin="0" aria-valuemax="100" aria-label="Harbour Lights S02E05, 61%"><span style="width:61%"></span></div></li>
+  <li class="row row--opens row--no-lead"><div><div class="row__title"><button type="button" data-opens="dl-details">The Long Field (2023)</button></div><div class="row__meta">Radarr · SABnzbd · 8.2 GB · 4 minutes left</div></div><div class="row__side"><span class="numeric">88%</span><span class="chip" data-tone="info">Downloading</span></div><div class="progress" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" aria-label="The Long Field, 88%"><span style="width:88%"></span></div></li>
+  <li class="row row--opens row--no-lead"><div><div class="row__title"><button type="button" data-opens="dl-details">Coastal Recordings, Vol. 2</button></div><div class="row__meta">Lidarr · qBittorrent · 412 MB · 9 minutes left</div></div><div class="row__side"><span class="numeric">34%</span><span class="chip" data-tone="info">Downloading</span></div><div class="progress" role="progressbar" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100" aria-label="Coastal Recordings, 34%"><span style="width:34%"></span></div></li>
+  <li class="row row--opens row--no-lead"><div><div class="row__title"><button type="button" data-opens="dl-details">The Glass Harbour (audiobook)</button></div><div class="row__meta">Storyarr · qBittorrent · 610 MB · 3 minutes left</div></div><div class="row__side"><span class="numeric">68%</span><span class="chip" data-tone="info">Downloading</span></div><div class="progress" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100" aria-label="The Glass Harbour, 68%"><span style="width:68%"></span></div></li>
+  <li class="row row--opens row--no-lead"><div><div class="row__title"><button type="button" data-opens="dl-details">Night Ferry S01E01</button></div><div class="row__meta">Sonarr · SABnzbd · 2.1 GB · fourth in line</div></div><div class="row__side"><span class="numeric">0%</span><span class="chip">Waiting</span></div><div class="progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Night Ferry S01E01, 0%"><span style="width:0%"></span></div></li>
+</ul>
+<!--phone-->
+<div class="filter-chips" role="group" aria-label="Show (phone)" style="flex-wrap:nowrap;overflow-x:auto"><button class="filter-chip" type="button" aria-pressed="false" style="flex:none">Needs attention, 1</button><button class="filter-chip" type="button" aria-pressed="false" style="flex:none">Downloading, 3</button><button class="filter-chip" type="button" aria-pressed="false" style="flex:none">Waiting, 1</button></div>
+<ul class="rows">
+  <li class="row row--opens row--no-lead"><div><div class="row__title"><button type="button" data-opens="dl-details">Harbour Lights S02E05</button></div><div class="row__meta">Sonarr · stalled</div></div><div class="row__side"><span class="chip" data-tone="warning">Needs attention</span></div><div class="progress" data-tone="warning" role="progressbar" aria-valuenow="61" aria-valuemin="0" aria-valuemax="100" aria-label="61%"><span style="width:61%"></span></div></li>
+  <li class="row row--opens row--no-lead"><div><div class="row__title"><button type="button" data-opens="dl-details">The Long Field (2023)</button></div><div class="row__meta">Radarr · 88% · 4 min left</div></div><div class="row__side"><span class="chip" data-tone="info">Downloading</span></div><div class="progress" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" aria-label="88%"><span style="width:88%"></span></div></li>
+</ul>
+<!--panels-->
+<div class="side-panel-layer" id="dl-details" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="dd-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="dd-h">Harbour Lights S02E05</h2><button class="icon-btn" type="button" data-closes aria-label="Close download details">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <div class="meter"><div class="meter__label"><span><span class="chip" data-tone="warning">Needs attention</span></span><span class="numeric">0.85 of 1.4 GB (61%)</span></div><div class="progress" data-tone="warning" role="progressbar" aria-valuenow="61" aria-valuemin="0" aria-valuemax="100" aria-label="61% downloaded"><span style="width:61%"></span></div></div>
+      <div class="notice" data-tone="warning">{{i:triangle-alert}}<div class="notice__body"><span class="notice__title">Stalled for 2 hours</span><p>No one is sharing the rest of this download. Search again to find another release.</p></div></div>
+      <section style="display:grid;gap:var(--space-3)" aria-labelledby="dd-msg-h"><h3 id="dd-msg-h">Messages from Sonarr</h3>
+        <ul class="rows"><li class="row row--no-lead"><div><div class="row__title">The download is stalled with no connections</div><div class="row__meta">Today at 09:14</div></div></li><li class="row row--no-lead"><div><div class="row__title">Release is 3 days old, fewer than 5 sources</div><div class="row__meta">Today at 07:02</div></div></li></ul>
+      </section>
+      <dl class="facts"><dt>App</dt><dd>Sonarr</dd><dt>Download client</dt><dd>qBittorrent</dd><dt>Size</dt><dd class="numeric">1.4 GB</dd><dt>Added</dt><dd>Today at 06:58</dd><dt>Release</dt><dd>Harbour.Lights.S02E05.1080p.WEB</dd></dl>
+      <section style="display:grid;gap:var(--space-3)" aria-labelledby="dd-hist-h"><h3 id="dd-hist-h">History</h3>
+        <div class="table-wrap"><table class="table"><thead><tr><th scope="col">Time</th><th scope="col">State</th></tr></thead><tbody><tr><td class="numeric">09:14</td><td><span class="chip" data-tone="warning">Needs attention</span></td></tr><tr><td class="numeric">07:01</td><td><span class="chip" data-tone="info">Downloading</span></td></tr><tr><td class="numeric">06:58</td><td><span class="chip">Waiting</span></td></tr></tbody></table></div>
+      </section>
+    </div>
+    <div class="side-panel__foot"><button class="btn btn--primary" type="button">{{i:search}}Search again</button><a class="btn" href="#" target="_blank" rel="noopener">{{i:external-link}}Open in Sonarr<span class="visually-hidden"> (opens in a new tab)</span></a><button class="btn btn--danger" type="button" data-dialog="dl-remove">{{i:trash-2}}Remove</button></div>
+  </aside>
+</div>
+<dialog class="dialog" id="dl-remove" aria-labelledby="dl-remove-h">
+  <div class="panel-header"><h2 class="panel-header__title" id="dl-remove-h">Remove Harbour Lights S02E05?</h2><button class="icon-btn" type="button" data-closes aria-label="Close">{{i:x}}</button></div>
+  <div class="dialog__body"><p>qBittorrent stops the download and deletes the part already downloaded. Sonarr keeps the episode as wanted, so it can search again.</p><label class="check"><input type="checkbox"><span class="check__text">Also block this release, so it is not chosen again</span></label></div>
+  <div class="dialog__foot"><button class="btn btn--danger btn--primary" type="button" data-closes>Remove download</button><button class="btn btn--quiet" type="button" data-closes>Keep it</button></div>
+</dialog>

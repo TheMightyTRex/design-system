@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Set up Storyarr · Storyarr</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  /* Board only. Icon sizes are listed in the README but missing from components.css
+     (storyarr-missing-components.md, item 1). */
+  svg.i { width: var(--icon-md); height: var(--icon-md); }
+  svg.i-lg { width: var(--icon-lg); height: var(--icon-lg); }
+  svg.i-xl { width: 32px; height: 32px; }
+  /* The library's display rules (.rows, .media-grid, .notice) override the hidden attribute (item 2). */
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<!--ICONS-->
+<a class="skip-link" href="#main">Skip to main content</a>
+<nav class="rail" aria-label="Main menu"><div class="rail__logo"><a href="storyarr-my-library.html" aria-label="Storyarr, My library" style="min-height:0;padding:0"><svg viewBox="0 0 32 32" width="36" height="36" aria-hidden="true"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg></a></div><a href="storyarr-my-library.html">{{i-lg:book-open}}Library<span class="count" style="position:absolute;top:4px;right:8px">12<span class="visually-hidden"> library items to review</span></span></a><a href="storyarr-discover.html">{{i-lg:compass}}Discover</a><a href="storyarr-activity.html">{{i-lg:activity}}Activity</a><a href="storyarr-settings-general.html">{{i-lg:settings}}Settings</a><div class="rail__end"><span class="avatar" aria-hidden="true">A</span><span class="visually-hidden">Signed in as Alex</span><button class="icon-btn icon-btn--bare" type="button" aria-label="Sign out">{{i:log-out}}</button><button class="btn btn--quiet btn--compact" type="button" data-opens="panel-release-notes" style="font-size:var(--text-xs);padding:0 4px">v1.10.0</button></div></nav>
+<div class="with-rail">
+<header class="site-header">
+  <div class="site-header__bar">
+    <span class="phone-menu-button"><button class="icon-btn" type="button" data-opens="phone-menu" aria-controls="phone-menu" aria-expanded="false" aria-label="Menu">{{i-lg:menu}}</button></span>
+    <a class="site-header__brand" href="storyarr-my-library.html"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg>Storyarr</a>
+    
+    <form class="site-header__search search-field" role="search" onsubmit="return false"><input class="input" type="search" aria-label="Search books, authors or narrators" placeholder="Search books, authors or narrators"><button class="visually-hidden">Search</button></form>
+    <div class="site-header__actions"><button class="icon-btn" type="button" data-dialog="display-dialog">{{i-lg:sun}}<span class="label">Display</span></button></div>
+  </div>
+  
+</header>
+<main class="page" id="main" style="grid-template-columns:minmax(0,1fr)">
+
+<div class="notice" role="note" data-board>{{i:info}}<div class="notice__body"><span class="notice__title">What changed and why</span><p><strong>One wizard for setup and upgrades</strong>: the same step list, the same buttons (Continue, Back, Skip this step) and "Keep the defaults and finish" at the top. Today the two wizards use different classes, shells and button names.</p><p><strong>One question per step</strong> ("Connect a library server?") instead of a whole Settings section with its own Save. Continue saves the answer, so nothing is lost silently.</p><p><strong>No capitals typed in source</strong> ("STEP 1 OF 9"), no contractions ("Let's set up your library"). Done steps say "done" to screen readers, not only with a tick.</p><p><strong>Connecting a server stays a dialog</strong>: it is a short task that must finish before the next step.</p></div></div>
+<div class="page-head">
+  <div class="page-head__text"><h1>Set up Storyarr</h1><p class="page-head__summary">Step 3 of 7 · about 5 minutes · you can change everything later in Settings</p></div>
+  <div class="actions"><button class="btn btn--quiet" type="button">Keep the defaults and finish</button></div>
+</div>
+<ol class="steps" aria-label="Steps"><li data-done>Display<span class="visually-hidden">, done</span></li><li data-done>Book details<span class="visually-hidden">, done</span></li><li aria-current="step">Library server<span class="visually-hidden">, current step</span></li><li>Library folders</li><li>Download sources</li><li>Download client</li><li>Finish</li></ol>
+<section class="panel" aria-labelledby="q-h" style="max-width:760px">
+  <div style="display:grid;gap:var(--space-1)"><h2 id="q-h">Connect a library server?</h2><p class="muted">Storyarr reads the books you already have from your library server and adds new ones to it.</p></div>
+  <fieldset><legend class="visually-hidden">Library server</legend><div class="option-cards">
+    <label class="option-card"><input type="radio" name="ob-srv" checked><strong>Audiobookshelf</strong><small>For audiobooks, and ebooks if you keep them there.</small></label>
+    <label class="option-card"><input type="radio" name="ob-srv"><strong>Calibre-Web</strong><small>For ebooks.</small></label>
+    <label class="option-card"><input type="radio" name="ob-srv"><strong>Not now</strong><small>Storyarr keeps books in its own folders until you connect one.</small></label>
+  </div></fieldset>
+  <div class="actions"><button class="btn" type="button" data-dialog="dlg-connect">{{i:plug}}Connect Audiobookshelf</button></div>
+  <div class="notice" data-tone="success" role="status">{{i:circle-check}}<div class="notice__body"><span class="notice__title">Audiobookshelf connected</span><p>Found 2 libraries: Fiction audiobooks and Children's audiobooks.</p></div></div>
+  <div class="actions" style="padding-top:var(--space-4);border-top:1px solid var(--color-divider)"><button class="btn btn--primary" type="button">Continue</button><button class="btn" type="button">Back</button><button class="btn btn--quiet" type="button">Skip this step</button></div>
+</section>
+
+<div data-board style="padding-top:var(--space-6);border-top:2px solid var(--color-text);display:grid;gap:var(--space-1)"><p class="small muted">Board: another tab or state of this page</p><h2>Finish step</h2><p class="muted small">The last step sums up the answers, with a link to change each one, and one button.</p></div>
+<section class="panel" aria-labelledby="fin-h" style="max-width:760px">
+  <h2 id="fin-h">Ready to go</h2>
+  <dl class="facts"><dt>Display</dt><dd>Light, text 125% · <a href="#">Change<span class="visually-hidden"> display</span></a></dd><dt>Book details</dt><dd>Hardcover · <a href="#">Change<span class="visually-hidden"> book details</span></a></dd><dt>Library server</dt><dd>Audiobookshelf, 2 libraries</dd><dt>Library folders</dt><dd><code>/data/audiobooks</code>, <code>/data/ebooks</code></dd><dt>Download sources</dt><dd>Skipped · <a href="storyarr-settings-downloads.html">Set up later in Settings</a></dd><dt>Download client</dt><dd>qBittorrent</dd></dl>
+  <div class="actions"><a class="btn btn--primary" href="storyarr-discover.html">Start browsing</a><button class="btn" type="button">Back</button></div>
+</section>
+<section data-board aria-labelledby="phone-h" style="display:grid;gap:var(--space-3);padding-top:var(--space-6);border-top:2px solid var(--color-text)"><h2 id="phone-h">On a phone (390px wide)</h2><p class="muted">The wizard on a phone.</p><div style="display:flex;flex-wrap:wrap;gap:var(--space-6)"><figure style="margin:0;display:grid;gap:8px;align-content:start"><div data-phone="phone=1" data-title="Phone preview: On phones the step list wraps above the question. It should collapse to "Step 3 of 7" (missing component), so Continue stays close." data-height="760" style="width:392px;height:762px;border:1px solid var(--color-border);background:var(--color-bg)"></div><figcaption class="small muted" style="max-width:390px">On phones the step list wraps above the question. It should collapse to "Step 3 of 7" (missing component), so Continue stays close.</figcaption></figure><figure style="margin:0;display:grid;gap:8px;align-content:start"><div data-phone="phone=1&dialog=dlg-connect" data-title="Phone preview: The connection dialog nearly fills the width." data-height="760" style="width:392px;height:762px;border:1px solid var(--color-border);background:var(--color-bg)"></div><figcaption class="small muted" style="max-width:390px">The connection dialog nearly fills the width.</figcaption></figure></div></section>
+
+</main>
+<footer class="site-footer"><span>Storyarr 1.10.0</span><button class="btn btn--quiet btn--compact" type="button" data-opens="panel-release-notes">Release notes</button><a href="index-storyarr.html" data-board>All Storyarr boards</a></footer>
+</div>
+<div class="side-panel-layer" id="phone-menu" hidden><div class="side-panel-backdrop"></div><nav class="phone-menu" aria-label="Main menu"><div class="panel-header"><span class="panel-header__brand"><svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg>Storyarr</span><button class="icon-btn" type="button" data-closes aria-label="Close menu">{{i:x}}</button></div><form class="phone-menu__search" role="search" onsubmit="return false"><input class="input" type="search" aria-label="Search books, authors or narrators" placeholder="Search books, authors or narrators"></form><div class="phone-menu__sections"><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="pm-library">{{i-lg:book-open}}Library{{i:chevron-right phone-menu__chevron}}</button><ul id="pm-library" hidden><li><a href="storyarr-my-library.html">{{i:book-open}}My library</a></li><li><a href="storyarr-following.html">{{i:bookmark}}Following</a></li><li><a href="storyarr-library-review.html">{{i:list-checks}}Library review</a></li></ul></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="pm-discover">{{i-lg:compass}}Discover{{i:chevron-right phone-menu__chevron}}</button><ul id="pm-discover" hidden><li><a href="storyarr-discover.html">{{i:sparkles}}For you</a></li><li><a href="storyarr-discover.html">{{i:library}}Your series</a></li><li><a href="storyarr-discover.html#browse">{{i:layout-grid}}Browse</a></li><li><a href="storyarr-calendar.html">{{i:calendar-days}}Calendar</a></li><li><a href="storyarr-discover.html">{{i:layers}}Collections</a></li><li><a href="storyarr-discover.html">{{i:award}}Awards</a></li><li><a href="storyarr-discover.html">{{i:list}}Your lists</a></li></ul></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="pm-activity">{{i-lg:activity}}Activity{{i:chevron-right phone-menu__chevron}}</button><ul id="pm-activity" hidden><li><a href="storyarr-activity.html">{{i:list-ordered}}Queue</a></li><li><a href="storyarr-activity.html#wanted">{{i:clock}}Wanted</a></li><li><a href="storyarr-activity.html#history">{{i:history}}History</a></li></ul></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="pm-settings">{{i-lg:settings}}Settings{{i:chevron-right phone-menu__chevron}}</button><ul id="pm-settings" hidden><li><a href="storyarr-settings-general.html">{{i:sliders-horizontal}}General</a></li><li><a href="storyarr-settings-accounts.html">{{i:user-round}}Accounts</a></li><li><a href="storyarr-settings-sources.html">{{i:book-marked}}Sources</a></li><li><a href="storyarr-settings-library.html">{{i:library}}Library</a></li><li><a href="storyarr-settings-downloads.html">{{i:download}}Downloads</a></li><li><a href="storyarr-settings-system.html">{{i:scroll-text}}System</a></li></ul></div></div><div class="phone-menu__foot"><span style="display:flex;gap:8px;align-items:center"><span class="avatar" aria-hidden="true">A</span><span>Alex<br><span class="small muted">Administrator</span></span></span><button class="btn" type="button">{{i:log-out}}Sign out</button></div></nav></div>
+
+<div class="side-panel-layer" id="panel-release-notes" hidden><div class="side-panel-backdrop"></div><aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="panel-release-notes-h"><div class="panel-header"><h2 class="panel-header__title" id="panel-release-notes-h">Release notes</h2><span style="display:flex;gap:4px"><button class="icon-btn" type="button" data-closes aria-label="Close Release notes">{{i:x}}</button></span></div><div class="side-panel__body"><p class="small muted">Version 1.10.0, 28 October 2026 · current version</p>
+<details class="disclosure" open><summary>Added</summary><div class="disclosure__body"><p><strong>Narrator pages</strong>: open a narrator from any book to find every book they read in your library.</p><p><strong>Slide-outs</strong>: book summaries, requests and connections open beside the list.</p></div></details>
+<details class="disclosure"><summary>Changed</summary><div class="disclosure__body"><p><strong>Settings</strong>: every section saves the same way, with a save bar that stays in view.</p></div></details>
+<details class="disclosure"><summary>Fixed</summary><div class="disclosure__body"><p><strong>Notifications</strong>: deleting a channel now asks first.</p></div></details>
+<details class="disclosure"><summary>Database changes</summary><div class="disclosure__body"><p>Adds a narrator table. A backup is made before the upgrade; restore it from Settings, System, Upgrades.</p></div></details></div></aside></div>
+<dialog class="dialog" id="dlg-connect" aria-labelledby="dlg-connect-h"><div class="panel-header"><h2 class="panel-header__title" id="dlg-connect-h">Connect Audiobookshelf</h2><button class="icon-btn" type="button" data-closes aria-label="Close">{{i:x}}</button></div><div class="dialog__body"><div class="field"><label for="cn-a">Server address</label><span class="hint" id="cn-ah">The address Storyarr uses to reach Audiobookshelf.</span><input class="input" id="cn-a" aria-describedby="cn-ah" value="http://audiobookshelf:13378"></div><div class="field"><label for="cn-k">API key</label><span class="hint" id="cn-kh">In Audiobookshelf: Settings, then API keys.</span><input class="input" id="cn-k" type="password" aria-describedby="cn-kh"></div></div><div class="dialog__foot"><button class="btn btn--primary" type="button" data-closes>Test and connect</button><button class="btn btn--quiet" type="button" data-closes>Cancel</button></div></dialog>
+
+<dialog class="dialog" id="display-dialog" aria-labelledby="display-h">
+  <div class="panel-header"><h2 class="panel-header__title" id="display-h">Display and accessibility</h2><button class="icon-btn" type="button" data-closes aria-label="Close Display and accessibility">{{i:x}}</button></div>
+  <div class="dialog__body">
+    <p class="small muted">Saved in this browser. Changes apply at once.</p>
+    <fieldset><legend class="field__label">Theme</legend><div class="segmented"><label><input type="radio" name="d-theme" value="light" data-display="theme" checked><span>Light</span></label><label><input type="radio" name="d-theme" value="dark" data-display="theme"><span>Dark</span></label></div></fieldset>
+    <fieldset><legend class="field__label">Text size</legend><div class="segmented"><label><input type="radio" name="d-text" value="100" data-display="text" checked><span>100%</span></label><label><input type="radio" name="d-text" value="125" data-display="text"><span>125%</span></label><label><input type="radio" name="d-text" value="150" data-display="text"><span>150%</span></label><label><input type="radio" name="d-text" value="175" data-display="text"><span>175%</span></label></div></fieldset>
+    <div>
+      <label class="switch"><span>High contrast</span><input type="checkbox" role="switch" data-display="contrast"></label>
+      <label class="switch"><span>Reduce motion</span><input type="checkbox" role="switch" data-display="motion"></label>
+      <label class="switch"><span>Underline links</span><input type="checkbox" role="switch" data-display="underline"></label>
+      <label class="switch"><span>Wider text spacing</span><input type="checkbox" role="switch" data-display="spacing"></label>
+    </div>
+  </div>
+  <div class="dialog__foot"><button class="btn btn--primary" type="button" data-closes>Done</button><button class="btn btn--quiet" type="button">Reset to defaults</button></div>
+</dialog>
+<script src="../components.js"></script>
+<script src="storyarr-board.js"></script>
+</body>
+</html>

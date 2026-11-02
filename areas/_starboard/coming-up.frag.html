@@ -1,0 +1,62 @@
+<!--meta {"title": "Coming up", "main": "upcoming", "sub": "", "phone_note": "Day headings stay; the range control and filter chips share one scrolling row."}-->
+<!--note-->
+<ul style="margin:0;padding-left:var(--space-5)">
+  <li>Filter chips (Wanted, In library, and one per app) and a range control (This week, Two weeks, Month) in one toolbar.</li>
+  <li>Selecting an item opens a <strong>slide-out</strong> with the cover, overview, date and a link to the app, the same shape as Storyarr's calendar day panel.</li>
+  <li>Day headings are real h2s with ids built from the date, not a counter.</li>
+</ul>
+<!--page-->
+<div class="page-head">
+  <div class="page-head__text"><h1>Coming up</h1><p class="page-head__summary">9 releases in the next two weeks · 6 wanted · 3 already in the library</p></div>
+</div>
+<div class="toolbar">
+  <div class="toolbar__row">
+    <fieldset class="segmented" aria-label="Range"><legend class="visually-hidden">Range</legend><label><input type="radio" name="cu-range"><span>This week</span></label><label><input type="radio" name="cu-range" checked><span>Two weeks</span></label><label><input type="radio" name="cu-range"><span>Month</span></label></fieldset>
+    <div class="filter-chips" role="group" aria-label="Show only">
+      <button class="filter-chip" type="button" aria-pressed="false">Wanted, 6</button>
+      <button class="filter-chip" type="button" aria-pressed="false">In library, 3</button>
+      <button class="filter-chip" type="button" aria-pressed="false">{{i:tv}}Sonarr, 5</button>
+      <button class="filter-chip" type="button" aria-pressed="false">{{i:film}}Radarr, 2</button>
+      <button class="filter-chip" type="button" aria-pressed="false">{{i:book}}Storyarr, 2</button>
+    </div>
+  </div>
+</div>
+<section aria-labelledby="d-2026-11-02" style="display:grid;gap:var(--space-2)">
+  <h2 class="group-heading" id="d-2026-11-02">Today, Monday 2 November</h2>
+  <ul class="rows">
+    <li class="row row--opens"><div class="cover" style="width:40px;background:linear-gradient(160deg,#154a96,#135c2e)"></div><div><div class="row__title"><button type="button" data-opens="cu-item">Harbour Lights · S02E06</button></div><div class="row__meta">"The Second Lamp" · 21:00 · Sonarr</div></div><div class="row__side"><span class="chip">Wanted</span></div></li>
+    <li class="row row--opens"><div class="cover" style="width:40px;background:linear-gradient(160deg,#6b4500,#9b1c14)"></div><div><div class="row__title"><button type="button" data-opens="cu-item">Salt Roads</button></div><div class="row__meta">Book · J. Okafor · Storyarr</div></div><div class="row__side"><span class="chip" data-tone="success">In library</span></div></li>
+  </ul>
+</section>
+<section aria-labelledby="d-2026-11-04" style="display:grid;gap:var(--space-2)">
+  <h2 class="group-heading" id="d-2026-11-04">Wednesday 4 November</h2>
+  <ul class="rows">
+    <li class="row row--opens"><div class="cover" style="width:40px;background:linear-gradient(160deg,#323a77,#af4e24)"></div><div><div class="row__title"><button type="button" data-opens="cu-item">The Long Field</button></div><div class="row__meta">Film · digital release · Radarr</div></div><div class="row__side"><span class="chip">Wanted</span></div></li>
+    <li class="row row--opens"><div class="cover" style="width:40px"></div><div><div class="row__title"><button type="button" data-opens="cu-item">Night Ferry · S01E03</button></div><div class="row__meta">"Low Water" · 22:00 · Sonarr</div></div><div class="row__side"><span class="chip">Wanted</span></div></li>
+  </ul>
+</section>
+<section aria-labelledby="d-2026-11-09" style="display:grid;gap:var(--space-2)">
+  <h2 class="group-heading" id="d-2026-11-09">Monday 9 November</h2>
+  <ul class="rows">
+    <li class="row row--opens"><div class="cover" style="width:40px;background:linear-gradient(160deg,#154a96,#135c2e)"></div><div><div class="row__title"><button type="button" data-opens="cu-item">Harbour Lights · S02E07</button></div><div class="row__meta">"Fog Bell" · 21:00 · Sonarr</div></div><div class="row__side"><span class="chip">Wanted</span></div></li>
+  </ul>
+</section>
+<!--phone-->
+<div class="filter-chips" role="group" aria-label="Show only (phone)" style="flex-wrap:nowrap;overflow-x:auto"><button class="filter-chip" type="button" aria-pressed="false" style="flex:none">Two weeks{{i:chevron-down}}</button><button class="filter-chip" type="button" aria-pressed="true" style="flex:none">Wanted, 6</button><button class="filter-chip" type="button" aria-pressed="false" style="flex:none">In library, 3</button></div>
+<h2 class="group-heading" id="p-d-2026-11-02">Today, Monday 2 November</h2>
+<ul class="rows">
+  <li class="row row--opens" style="grid-template-columns:auto minmax(0,1fr)"><div class="cover" style="width:40px;background:linear-gradient(160deg,#154a96,#135c2e)"></div><div><div class="row__title"><button type="button" data-opens="cu-item">Harbour Lights · S02E06</button></div><div class="row__meta">21:00 · Sonarr</div></div><div class="row__side" style="grid-column:1/-1;justify-content:start"><span class="chip">Wanted</span></div></li>
+</ul>
+<!--panels-->
+<div class="side-panel-layer" id="cu-item" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="cu-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="cu-h">Monday 2 November</h2><button class="icon-btn" type="button" data-closes aria-label="Close Monday 2 November">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <div class="side-panel__lead"><div class="cover" style="background:linear-gradient(160deg,#154a96,#135c2e);color:#fff">Harbour Lights</div><div style="display:grid;gap:var(--space-2)"><h3 style="font-size:var(--text-lg)">Harbour Lights · S02E06</h3><span class="chip" style="justify-self:start">Wanted</span><span class="small muted">"The Second Lamp" · 48 min</span></div></div>
+      <p>The search for the missing trawler turns up a lamp that should not still be burning.</p>
+      <dl class="facts"><dt>Airs</dt><dd>Today at 21:00</dd><dt>App</dt><dd>Sonarr</dd><dt>Searching</dt><dd>Sonarr searches automatically after it airs</dd></dl>
+    </div>
+    <div class="side-panel__foot"><a class="btn btn--primary" href="#" target="_blank" rel="noopener">{{i:external-link}}Open in Sonarr<span class="visually-hidden"> (opens in a new tab)</span></a></div>
+  </aside>
+</div>

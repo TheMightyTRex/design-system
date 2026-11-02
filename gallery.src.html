@@ -1,0 +1,821 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shared components</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<style>
+  /* Gallery layout only; not part of the library. */
+  .g-shell { display: grid; grid-template-columns: 240px minmax(0, 1fr); min-height: 100vh; }
+  .g-nav { position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: var(--space-6) var(--space-4); border-right: 1px solid var(--color-divider); background: var(--color-header); }
+  .g-nav h1 { font-size: var(--text-lg); margin-bottom: var(--space-1); }
+  .g-nav p { color: var(--color-text-muted); font-size: var(--text-sm); margin-bottom: var(--space-4); }
+  .g-nav ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; }
+  .g-nav a { display: block; padding: var(--space-2) var(--space-3); color: var(--color-text); font-size: var(--text-sm); text-decoration: none; }
+  .g-nav a:hover { background: var(--color-control-active); }
+  .g-nav .g-group { margin-top: var(--space-4); color: var(--color-text-muted); font-size: var(--text-xs); font-weight: 700; padding: 0 var(--space-3); }
+  .g-main { padding: var(--space-8); display: grid; gap: var(--space-12); max-width: 1180px; }
+  .g-display { position: sticky; top: 0; z-index: 40; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-6); padding: var(--space-3) var(--space-8); background: var(--color-header); border-bottom: 1px solid var(--color-divider); }
+  .g-display .switch { min-height: 0; gap: var(--space-2); font-size: var(--text-sm); }
+  .g-section { display: grid; gap: var(--space-6); scroll-margin-top: 90px; }
+  .g-section > header { display: grid; gap: var(--space-2); padding-bottom: var(--space-3); border-bottom: 2px solid var(--color-text); }
+  .g-item { display: grid; gap: var(--space-3); scroll-margin-top: 90px; }
+  .g-item > h3 { font-size: var(--text-lg); }
+  .g-demo { padding: var(--space-6); border: 1px solid var(--color-divider); background: var(--color-bg); display: grid; gap: var(--space-4); overflow: hidden; }
+  .g-demo--row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+  .g-notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-3) var(--space-6); font-size: var(--text-sm); }
+  .g-notes h4 { font-size: var(--text-sm); margin-bottom: var(--space-1); }
+  .g-notes ul { margin: 0; padding-left: var(--space-5); display: grid; gap: 2px; }
+  .g-notes code { font-size: var(--text-xs); }
+  .g-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: var(--space-2); }
+  .g-swatch { display: grid; grid-template-columns: 40px 1fr; gap: var(--space-2); align-items: center; font-size: var(--text-xs); }
+  .g-swatch span:first-child { height: 40px; border: 1px solid var(--color-border); }
+  .g-frame { border: 1px solid var(--color-border); background: var(--color-bg); position: relative; overflow: hidden; }
+  .g-frame .site-header { position: relative; }
+  .g-frame .rail { position: absolute; }
+  .g-phone { width: 390px; max-width: 100%; }
+  .g-table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+  .g-table th, .g-table td { text-align: left; vertical-align: top; padding: var(--space-2) var(--space-3); border-top: 1px solid var(--color-divider); }
+  .g-table th { background: var(--color-surface-sunken); }
+  svg.i { width: var(--icon-md); height: var(--icon-md); }
+  svg.i-lg { width: var(--icon-lg); height: var(--icon-lg); }
+  svg.i-xl { width: 32px; height: 32px; }
+  @media (max-width: 860px) {
+    .g-shell { grid-template-columns: 1fr; }
+    .g-nav { position: static; height: auto; }
+    .g-main { padding: var(--space-4); }
+    .g-display { padding: var(--space-3) var(--space-4); }
+  }
+</style>
+</head>
+<body>
+<!--ICONS-->
+<a class="skip-link" href="#g-main">Skip to the components</a>
+<div class="g-shell">
+<nav class="g-nav" aria-label="Components">
+  <h1>Shared components</h1>
+  <p>Storyarr and Starboard, version 1. One library, two apps.</p>
+  <ol>
+    <li class="g-group">Foundations</li>
+    <li><a href="#colour">Colour</a></li>
+    <li><a href="#type">Type, space and icons</a></li>
+    <li class="g-group">Shell</li>
+    <li><a href="#header">Header and menus</a></li>
+    <li><a href="#phone">Phone header and menu</a></li>
+    <li><a href="#page-head">Page head</a></li>
+    <li class="g-group">Actions</li>
+    <li><a href="#buttons">Buttons</a></li>
+    <li><a href="#menus">Menu button</a></li>
+    <li class="g-group">Inputs</li>
+    <li><a href="#fields">Fields</a></li>
+    <li><a href="#choices">Checkboxes, switches and choices</a></li>
+    <li><a href="#filters">Filter chips and applied filters</a></li>
+    <li class="g-group">Content</li>
+    <li><a href="#status">Status, counts and tags</a></li>
+    <li><a href="#facts">Facts, stats and meters</a></li>
+    <li><a href="#rows">Rows and tables</a></li>
+    <li><a href="#notices">Notices, empty and loading</a></li>
+    <li><a href="#disclosure">Disclosure, help and steps</a></li>
+    <li class="g-group">Containers</li>
+    <li><a href="#cards">Panels and cards</a></li>
+    <li><a href="#media">Covers and media cards</a></li>
+    <li><a href="#cover-actions">Cover actions</a></li>
+    <li><a href="#series-head">Series header and logo</a></li>
+    <li><a href="#shelf">Shelf</a></li>
+    <li><a href="#toolbar">Section toolbar</a></li>
+    <li><a href="#settings">Settings rows and save bar</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#calendar-month">Calendar month</a></li>
+    <li><a href="#slide-out">Slide-out</a></li>
+    <li><a href="#dialog">Dialog</a></li>
+    <li class="g-group">Patterns</li>
+    <li><a href="#which">Slide-out, dialog or page</a></li>
+    <li><a href="#events">Event list</a></li>
+    <li><a href="#changes-preview">What will change</a></li>
+    <li><a href="#month-nav">Earlier and later</a></li>
+    <li><a href="#check-history">Recent checks</a></li>
+  </ol>
+</nav>
+
+<div>
+<div class="g-display" role="group" aria-label="Display settings for this page">
+  <fieldset class="segmented" aria-label="Theme">
+    <legend class="visually-hidden">Theme</legend>
+    <label><input type="radio" name="g-theme" value="light" data-display="theme" checked><span>Light</span></label>
+    <label><input type="radio" name="g-theme" value="dark" data-display="theme"><span>Dark</span></label>
+  </fieldset>
+  <fieldset class="segmented" aria-label="Text size">
+    <legend class="visually-hidden">Text size</legend>
+    <label><input type="radio" name="g-text" value="100" data-display="text" checked><span>100%</span></label>
+    <label><input type="radio" name="g-text" value="125" data-display="text"><span>125%</span></label>
+    <label><input type="radio" name="g-text" value="150" data-display="text"><span>150%</span></label>
+  </fieldset>
+  <label class="switch"><span>High contrast</span><input type="checkbox" role="switch" data-display="contrast"></label>
+  <label class="switch"><span>Wider spacing</span><input type="checkbox" role="switch" data-display="spacing"></label>
+  <label class="switch"><span>Reduce motion</span><input type="checkbox" role="switch" data-display="motion"></label>
+</div>
+
+<main class="g-main" id="g-main">
+
+<!-- FOUNDATIONS -->
+<section class="g-section" id="colour" aria-labelledby="colour-h">
+  <header><h2 id="colour-h">Colour</h2><p class="muted">Role names only. Components never use a raw colour, so a theme is a change of values. Every text pair meets WCAG 2.2 AA (4.5:1) in Light, Dark and High contrast.</p></header>
+  <div class="g-demo">
+    <div class="g-swatches" id="g-swatches"></div>
+  </div>
+  <h3>Chart series</h3>
+  <div class="g-demo g-demo--row" aria-label="Series colours 1 to 7, then empty">
+    <span class="tag" style="border-left:14px solid var(--series-1)">1</span><span class="tag" style="border-left:14px solid var(--series-2)">2</span><span class="tag" style="border-left:14px solid var(--series-3)">3</span><span class="tag" style="border-left:14px solid var(--series-4)">4</span><span class="tag" style="border-left:14px solid var(--series-5)">5</span><span class="tag" style="border-left:14px solid var(--series-6)">6</span><span class="tag" style="border-left:14px solid var(--series-7)">7</span><span class="tag" style="border-left:14px solid var(--series-empty-line)">Empty</span>
+  </div>
+  <div class="g-notes">
+    <div><h4>Use</h4><ul><li><code>--color-accent</code> for the one main action, the current page bar and links.</li><li><code>--color-text-muted</code> for meta lines and hints, never for the only copy of something important.</li><li><code>--status-*</code> pairs only inside chips, notices, stats and edges, always with words.</li></ul></div>
+    <div><h4>Accent</h4><ul><li>Teal (UX-02, option B); changing it is one token in each theme.</li></ul></div>
+    <div><h4>Chart series</h4><ul><li><code>--series-1</code> to <code>--series-7</code> in a fixed order that follows the thing, never its rank. Checked for colour blindness, and 3:1 against the surface, in all four themes.</li><li><code>--series-empty</code> with a hatch for free space.</li></ul></div>
+  </div>
+</section>
+
+<section class="g-section" id="type" aria-labelledby="type-h">
+  <header><h2 id="type-h">Type, space and icons</h2><p class="muted">One typeface, Atkinson Hyperlegible Next, at five sizes that follow the Text size setting. Space on a 4px scale. Icons from Lucide at 16, 18 and 20px, 2px stroke.</p></header>
+  <div class="g-demo">
+    <p style="font-size:var(--text-2xl);font-weight:700">Page heading (2rem, rare)</p>
+    <h1>Page heading, h1 (1.5rem)</h1>
+    <h2>Section heading, h2 (1.25rem)</h2>
+    <h3>Group heading, h3 (1rem, 600)</h3>
+    <p>Body text (1rem). The quick brown fox reads three chapters before supper.</p>
+    <p class="small muted">Small and muted (0.875rem): meta lines, hints and counts.</p>
+    <p style="font-size:var(--text-xs)">Extra small (0.75rem): chips and tags only.</p>
+    <div class="g-demo--row" aria-label="Spacing scale" role="img">
+      <span style="display:inline-block;width:4px;height:24px;background:var(--color-accent)"></span>
+      <span style="display:inline-block;width:8px;height:24px;background:var(--color-accent)"></span>
+      <span style="display:inline-block;width:12px;height:24px;background:var(--color-accent)"></span>
+      <span style="display:inline-block;width:16px;height:24px;background:var(--color-accent)"></span>
+      <span style="display:inline-block;width:24px;height:24px;background:var(--color-accent)"></span>
+      <span style="display:inline-block;width:32px;height:24px;background:var(--color-accent)"></span>
+      <span style="display:inline-block;width:48px;height:24px;background:var(--color-accent)"></span>
+      <span class="small muted">4, 8, 12, 16, 24, 32, 48</span>
+    </div>
+    <div class="g-demo--row">{{i:book-open}}{{i:compass}}{{i:activity}}{{i:settings}}{{i:server}}{{i:hard-drive}}{{i:download}}{{i:search}}{{i:sun}}{{i:menu}}{{i:x}}{{i:check}}{{i:circle-help}}{{i:triangle-alert}}</div>
+  </div>
+  <div class="g-notes">
+    <div><h4>Rules</h4><ul><li>Sentence case everywhere. No capitals for emphasis, no all-caps labels.</li><li>Numbers that change use <code>.numeric</code> (tabular figures).</li><li>An icon beside a word is decoration (<code>aria-hidden</code>); an icon alone needs a name.</li></ul></div>
+  </div>
+</section>
+
+<!-- SHELL -->
+<section class="g-section" id="header" aria-labelledby="header-h">
+  <header><h2 id="header-h">Header and menus</h2><p class="muted">The main menu is the rail on the left. Header row 1 holds the 1st level, search and Display. Row 2 holds the page's 2nd level, only when the page has one. All three levels have icons.</p></header>
+  <div class="g-demo" style="padding:0">
+    <div class="g-frame" style="height:220px">
+      <nav class="rail" aria-label="Main menu (example)" style="height:100%">
+        <div class="rail__logo"><svg viewBox="0 0 32 32" width="32" height="32" aria-hidden="true"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg></div>
+        <a href="#header" aria-current="page">{{i-lg:book-open}}Library</a>
+        <a href="#header">{{i-lg:compass}}Discover</a>
+      </nav>
+      <div class="with-rail">
+        <header class="site-header">
+          <div class="site-header__bar">
+            <nav class="menu-tabs" aria-label="Library (example)">
+              <a href="#header" aria-current="page">{{i:book-open}}<span class="menu-tabs__label">My library</span></a>
+              <a href="#header">{{i:bookmark}}<span class="menu-tabs__label">Following</span></a>
+              <a href="#header">{{i:list-checks}}<span class="menu-tabs__label">Library review</span> <span class="count">12<span class="visually-hidden"> to review</span></span></a>
+            </nav>
+            <form class="site-header__search search-field" role="search" onsubmit="return false"><input class="input" type="search" aria-label="Search books or authors" placeholder="Search books or authors"><button class="visually-hidden">Search</button></form>
+            <div class="site-header__actions"><button class="icon-btn" type="button">{{i-lg:sun}}<span class="label">Display</span></button></div>
+          </div>
+          <div class="site-header__tabs">
+            <nav class="menu-tabs" aria-label="Library shelves (example)">
+              <a href="#header" aria-current="page">{{i:book-copy}}<span class="menu-tabs__label">In my libraries</span></a>
+              <a href="#header">{{i:users}}<span class="menu-tabs__label">Authors</span></a>
+              <a href="#header">{{i:library}}<span class="menu-tabs__label">Series</span></a>
+              <a href="#header">{{i:archive}}<span class="menu-tabs__label">All saved titles</span></a>
+            </nav>
+          </div>
+        </header>
+      </div>
+    </div>
+  </div>
+  <div class="g-notes">
+    <div><h4>Use</h4><ul><li>Nothing else goes in the header: page actions live in the page head or the section toolbar.</li><li>Tabs that do not fit show icons only (<code>.is-compact</code>) with the names as tooltips; the 2nd level scrolls sideways.</li><li>A count on a tab says what it counts in hidden text.</li></ul></div>
+    <div><h4>Accessibility</h4><ul><li>Each tab row is a <code>nav</code> with its own name; the current tab has <code>aria-current="page"</code> and a 3px bar, not colour alone.</li><li>Search is a plain box with a hidden submit button, so voice control can say "Search".</li></ul></div>
+    <div><h4>Classes</h4><ul><li><code>.rail</code>, <code>.site-header</code>, <code>.site-header__bar</code>, <code>.site-header__tabs</code>, <code>.menu-tabs</code>, <code>.menu-tabs__label</code>, <code>.count</code>, <code>.update-dot</code></li></ul></div>
+  </div>
+</section>
+
+<section class="g-section" id="phone" aria-labelledby="phone-h">
+  <header><h2 id="phone-h">Phone header and menu</h2><p class="muted">On phones the header is the menu button, the name and Display. The ☰ menu slides from the left with search, the main menu and the 1st level. The 2nd level stays under the header and scrolls sideways.</p></header>
+  <div class="g-demo">
+    <div class="g-frame g-phone">
+      <header class="site-header">
+        <div class="site-header__bar" style="height:60px;padding-inline:16px;gap:12px">
+          <button class="icon-btn" type="button" data-opens="g-phone-menu" aria-controls="g-phone-menu" aria-expanded="false">{{i-lg:menu}}<span class="visually-hidden">Menu, upgrade available</span><span class="update-dot" aria-hidden="true"></span></button>
+          <span class="panel-header__brand"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg>App name</span>
+          <button class="icon-btn" type="button" style="margin-left:auto" aria-label="Display">{{i-lg:sun}}</button>
+        </div>
+        <div class="site-header__tabs"><nav class="menu-tabs" aria-label="Shelves (phone example)"><a href="#phone" aria-current="page">{{i:book-copy}}In my libraries</a><a href="#phone">{{i:users}}Authors</a><a href="#phone">{{i:library}}Series</a></nav></div>
+      </header>
+      <div style="padding:16px" class="small muted">Press the menu button to open the drawer.</div>
+    </div>
+    <div class="side-panel-layer" id="g-phone-menu" hidden>
+      <div class="side-panel-backdrop"></div>
+      <nav class="phone-menu" aria-label="Main menu">
+        <div class="panel-header"><span class="panel-header__brand"><svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg>App name</span><button class="icon-btn" type="button" data-closes aria-label="Close menu">{{i:x}}</button></div>
+        <form class="phone-menu__search" role="search" onsubmit="return false"><input class="input" type="search" aria-label="Search books or authors" placeholder="Search books or authors"></form>
+        <div class="phone-menu__sections">
+          <div class="phone-menu__section" data-current><button type="button" aria-expanded="true" aria-controls="g-pm-1">{{i-lg:book-open}}Library{{i:chevron-right phone-menu__chevron}}</button>
+            <ul id="g-pm-1"><li><a href="#phone" aria-current="page">{{i:book-open}}My library</a></li><li><a href="#phone">{{i:bookmark}}Following</a></li><li><a href="#phone">{{i:list-checks}}Library review</a></li></ul></div>
+          <div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="g-pm-2">{{i-lg:compass}}Discover{{i:chevron-right phone-menu__chevron}}</button>
+            <ul id="g-pm-2" hidden><li><a href="#phone">{{i:sparkles}}For you</a></li><li><a href="#phone">{{i:calendar-days}}Calendar</a></li></ul></div>
+          <div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="g-pm-3">{{i-lg:settings}}Settings{{i:chevron-right phone-menu__chevron}}</button>
+            <ul id="g-pm-3" hidden><li><a href="#phone">{{i:sliders-horizontal}}General</a></li><li><a href="#phone">{{i:download}}Downloads</a></li></ul></div>
+        </div>
+        <div class="phone-menu__foot"><span style="display:flex;gap:8px;align-items:center"><span class="avatar">A</span><span>Alex<br><span class="small muted">Administrator</span></span></span><button class="btn" type="button">{{i:log-out}}Sign out</button></div>
+      </nav>
+    </div>
+  </div>
+  <div class="g-notes">
+    <div><h4>Behaviour</h4><ul><li>Focus moves to Close; Tab stays inside; Escape, Close or a press outside closes it and focus returns to the menu button.</li><li>The section you are in starts open. Choosing a page closes the menu.</li><li>Only the main menu and the 1st level have icons in the drawer.</li></ul></div>
+    <div><h4>Classes</h4><ul><li><code>.phone-menu</code>, <code>.phone-menu__search</code>, <code>.phone-menu__section</code>, <code>.phone-menu__foot</code>, <code>.panel-header</code></li></ul></div>
+  </div>
+</section>
+
+<section class="g-section" id="page-head" aria-labelledby="page-head-h">
+  <header><h2 id="page-head-h">Page head</h2><p class="muted">One visible h1 on every page, an optional one-line summary, and the page's own actions on the right.</p></header>
+  <div class="g-demo">
+    <div class="page-head">
+      <div class="page-head__text"><h1>Disk health</h1><p class="page-head__summary">6 disks · 1 needs attention · checked 4 minutes ago</p></div>
+      <div class="actions"><button class="btn" type="button">{{i:refresh-cw}}Check now</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIONS -->
+<section class="g-section" id="buttons" aria-labelledby="buttons-h">
+  <header><h2 id="buttons-h">Buttons</h2><p class="muted">44px high, square, bold 0.875rem. One primary button per view. Words say what happens: "Save connection", not "OK".</p></header>
+  <div class="g-demo g-demo--row">
+    <button class="btn btn--primary" type="button">{{i:plus}}Add list</button>
+    <button class="btn" type="button">Test connection</button>
+    <button class="btn btn--quiet" type="button">Cancel</button>
+    <button class="btn btn--danger" type="button">{{i:trash-2}}Remove</button>
+    <button class="btn" type="button" disabled>Saving…</button>
+    <button class="btn btn--compact" type="button">Compact (tables only)</button>
+  </div>
+  <div class="g-demo g-demo--row">
+    <button class="icon-btn" type="button" aria-label="Close">{{i:x}}</button>
+    <button class="icon-btn" type="button">{{i-lg:sun}}<span>Display</span></button>
+    <button class="icon-btn icon-btn--bare" type="button" aria-label="More actions for Dune">{{i:ellipsis}}</button>
+    <span class="address" style="display:inline-flex;gap:8px;align-items:center"><code>http://example.test:8080</code><button class="copy-btn" type="button" data-copy="http://example.test:8080" aria-label="Copy address">{{i:copy}}</button></span>
+    <div class="split-btn"><button type="button">{{i:refresh-cw}}Refresh all</button><button type="button" aria-label="Choose what to refresh">{{i:chevron-down}}</button></div>
+  </div>
+  <div class="g-notes">
+    <div><h4>Variants</h4><ul><li><code>.btn--primary</code>: the one main action.</li><li><code>.btn--quiet</code>: Cancel and secondary links.</li><li><code>.btn--danger</code>: removing; asks first in a dialog.</li><li><code>.btn--compact</code>: 32px, inside dense tables only.</li></ul></div>
+    <div><h4>Accessibility</h4><ul><li>Icon-only buttons have a name that includes the thing: "More actions for Dune".</li><li>Disabled buttons say why nearby, or stay enabled and explain on press.</li></ul></div>
+  </div>
+</section>
+
+<section class="g-section" id="menus" aria-labelledby="menus-h">
+  <header><h2 id="menus-h">Menu button</h2><p class="muted">Related actions in one button instead of a row of them (the Lists menu). Opens with focus on the first item; arrow keys move; Escape closes.</p></header>
+  <div class="g-demo g-demo--row" style="min-height:300px;align-items:flex-start">
+    <div class="menu-wrap">
+      <button class="btn" type="button" aria-haspopup="menu" aria-controls="g-menu-lists">{{i:list}}Lists{{i:chevron-down}}</button>
+      <div class="menu" id="g-menu-lists" role="menu" aria-label="Lists" data-align="start">
+        <button type="button" role="menuitem">{{i:plus}}Add list</button>
+        <hr>
+        <button type="button" role="menuitem">{{i:refresh-cw}}Refresh all lists</button>
+        <button type="button" role="menuitem">Refresh Goodreads lists</button>
+        <button type="button" role="menuitem">Refresh StoryGraph lists</button>
+      </div>
+    </div>
+    <div class="menu-wrap">
+      <button class="btn" type="button" aria-haspopup="menu" aria-controls="g-menu-sort">{{i:arrow-up-down}}Sort: Title{{i:chevron-down}}</button>
+      <div class="menu" id="g-menu-sort" role="menu" aria-label="Sort" data-align="start">
+        <div class="menu__label">Sort by</div>
+        <button type="button" role="menuitemradio" aria-checked="true">Title</button>
+        <button type="button" role="menuitemradio" aria-checked="false">Author</button>
+        <button type="button" role="menuitemradio" aria-checked="false">Recently added</button>
+      </div>
+    </div>
+  </div>
+  <div class="g-notes">
+    <div><h4>Use</h4><ul><li>For actions, use <code>menuitem</code>; for one choice from a list (sort), <code>menuitemradio</code>. For a form value, use a select instead.</li><li>Keep the button's name the same while it works ("Lists"); say progress in a status line.</li></ul></div>
+    <div><h4>Classes</h4><ul><li><code>.menu-wrap</code>, <code>.menu</code>, <code>.menu__label</code>, <code>[data-align="start"]</code></li></ul></div>
+  </div>
+</section>
+
+<!-- INPUTS -->
+<section class="g-section" id="fields" aria-labelledby="fields-h">
+  <header><h2 id="fields-h">Fields</h2><p class="muted">A visible label above every control, a hint under the label when needed, and an error that says how to fix it.</p></header>
+  <div class="g-demo">
+    <div class="form-grid">
+      <div class="field"><label for="g-f1">Server address</label><span class="hint" id="g-f1h">The address this app uses to reach qBittorrent.</span><input class="input" id="g-f1" aria-describedby="g-f1h" value="http://qbittorrent:8080"></div>
+      <div class="field"><label for="g-f2">Download category</label><input class="input" id="g-f2" aria-invalid="true" aria-describedby="g-f2e" value="story arr"><span class="field-error" id="g-f2e">{{i:circle-alert}}Use letters, numbers, - or _ only, with no spaces.</span></div>
+      <div class="field"><label for="g-f3">Check for new releases</label><select class="select" id="g-f3"><option>Every day</option><option>Every week</option><option>Never</option></select></div>
+      <div class="field"><label for="g-f4">Minimum free space</label><div class="input-group"><input class="input" id="g-f4" inputmode="numeric" value="50"><span class="input-group__unit">GB</span></div></div>
+      <div class="field" data-span="all"><label for="g-f5">Notes</label><textarea class="textarea" id="g-f5">Kept for the family account.</textarea></div>
+    </div>
+  </div>
+  <div class="g-notes">
+    <div><h4>Rules</h4><ul><li>No placeholder as a label. Placeholders only show an example.</li><li>Errors appear on leaving the field or on save, never while typing; focus moves to the first error on save.</li><li>Units sit beside the box, not in the label.</li></ul></div>
+    <div><h4>Classes</h4><ul><li><code>.field</code>, <code>.hint</code>, <code>.field-error</code>, <code>.input</code>, <code>.select</code>, <code>.textarea</code>, <code>.input-group</code>, <code>.form-grid</code></li></ul></div>
+  </div>
+</section>
+
+<section class="g-section" id="choices" aria-labelledby="choices-h">
+  <header><h2 id="choices-h">Checkboxes, switches and choices</h2><p class="muted">Checkboxes for things saved with a Save button; switches for things that apply at once; segmented controls for two to five short options; option cards when each option needs a line of explanation.</p></header>
+  <div class="g-demo">
+    <div class="form-grid">
+      <fieldset><legend class="field__label">Formats to request</legend>
+        <label class="check"><input type="checkbox" checked><span class="check__text">Ebooks</span></label>
+        <label class="check"><input type="checkbox" checked><span class="check__text">Audiobooks<span class="check__hint">Unabridged only.</span></span></label>
+      </fieldset>
+      <div>
+        <label class="switch"><span class="check__text"><strong>Underline links</strong><span class="check__hint">Links do not rely on colour.</span></span><input type="checkbox" role="switch"></label>
+        <label class="switch"><span class="check__text"><strong>Reduce motion</strong></span><input type="checkbox" role="switch" checked></label>
+      </div>
+    </div>
+    <fieldset><legend class="field__label">Cover size on My library</legend>
+      <div class="segmented"><label><input type="radio" name="g-size"><span>Small</span></label><label><input type="radio" name="g-size" checked><span>Medium</span></label><label><input type="radio" name="g-size"><span>Large</span></label></div>
+    </fieldset>
+    <fieldset><legend class="field__label">When a book is released</legend>
+      <div class="option-cards">
+        <label class="option-card"><input type="radio" name="g-oc" checked><strong>Request it automatically</strong><small>Storyarr searches your download sources on release day.</small></label>
+        <label class="option-card"><input type="radio" name="g-oc"><strong>Add it to Wanted</strong><small>You choose when to search.</small></label>
+      </div>
+    </fieldset>
+  </div>
+</section>
+
+<section class="g-section" id="filters" aria-labelledby="filters-h">
+  <header><h2 id="filters-h">Filter chips and applied filters</h2><p class="muted">Filter chips are toggle buttons in a toolbar. Applied filters show what is in use, each with a remove button, and a Clear all.</p></header>
+  <div class="g-demo">
+    <div class="filter-chips" role="group" aria-label="Format">
+      <button class="filter-chip" type="button" aria-pressed="true">Audiobooks</button>
+      <button class="filter-chip" type="button" aria-pressed="false">Ebooks</button>
+      <button class="filter-chip" type="button" aria-pressed="false">Missing</button>
+    </div>
+    <div class="applied"><span class="muted">Showing:</span>
+      <span class="applied__item">Audiobooks<button type="button" aria-label="Remove filter: Audiobooks">{{i:x}}</button></span>
+      <span class="applied__item">Library: Fiction<button type="button" aria-label="Remove filter: Library Fiction">{{i:x}}</button></span>
+      <button class="btn btn--quiet btn--compact" type="button">Clear all</button>
+    </div>
+  </div>
+  <div class="g-notes"><div><h4>Rules</h4><ul><li>Every filter and sort starts from the current address, so two changes in a row both stick.</li><li>Filters are in the address, so Back and shared links keep them.</li></ul></div></div>
+</section>
+
+<!-- CONTENT -->
+<section class="g-section" id="status" aria-labelledby="status-h">
+  <header><h2 id="status-h">Status, counts and tags</h2><p class="muted">A status chip shows a word, a shape and a colour together, so it works without colour. One vocabulary across both apps (guides/CONTENT-DESIGN.md).</p></header>
+  <div class="g-demo g-demo--row">
+    <span class="chip" data-tone="success">{{i:circle-check}}In library</span>
+    <span class="chip" data-tone="info">{{i:info}}Downloading</span>
+    <span class="chip" data-tone="warning">{{i:triangle-alert}}Needs review</span>
+    <span class="chip" data-tone="danger">{{i:circle-x}}Failed</span>
+    <span class="chip" data-tone="muted">{{i:minus}}Paused</span>
+    <span class="chip">{{i:clock}}Wanted</span>
+  </div>
+  <div class="g-demo g-demo--row">
+    <span>Library review <span class="count">12<span class="visually-hidden"> to review</span></span></span>
+    <span class="tag">Audiobook</span><span class="tag">Unabridged</span>
+    <span class="avatar" aria-hidden="true">AL</span>
+    <span class="app-icon" aria-hidden="true">J</span>
+    <span>v1.9.0<span class="update-dot" aria-hidden="true"></span> <span class="visually-hidden">Upgrade available</span></span>
+  </div>
+  <h3>Where status goes</h3>
+  <div class="g-demo">
+    <section class="panel" aria-labelledby="g-ts-h"><div class="panel__head"><div class="title-status"><h3 id="g-ts-h">Jellyfin</h3><span class="title-status__chips"><span class="chip" data-tone="success">{{i:circle-check}}Up to date</span></span></div><span class="small muted">Version 10.11.2</span></div><dl class="facts"><dt>Live TV</dt><dd>42 channels</dd></dl></section>
+  </div>
+  <div class="g-demo">
+    <ul class="rows" aria-label="Connections">
+      <li class="row row--no-lead"><div><p class="row__title">Sonarr<span class="status-icon" data-tone="success" title="Connected">{{i:circle-check}}<span class="visually-hidden">Connected</span></span></p><p class="row__meta">127.0.0.1:8989</p></div></li>
+      <li class="row row--no-lead"><div><p class="row__title">SABnzbd<span class="status-icon" data-tone="danger" title="Not connected">{{i:circle-x}}<span class="visually-hidden">Not connected</span></span></p><p class="row__meta">127.0.0.1:8085</p></div></li>
+    </ul>
+  </div>
+  <div class="g-notes">
+    <div><h4>Shapes</h4><ul><li>Success, info and neutral: a dot. Warning: a diamond. Danger: a square. Muted: a ring.</li><li>High contrast adds a border to every chip.</li></ul></div>
+    <div><h4>Chip style</h4><ul><li>Outline with an icon (style B, chosen on the UX-04 board).</li></ul></div>
+    <div><h4>Where status goes</h4><ul>
+      <li><strong>A heading:</strong> <code>.title-status</code>, chips straight after the name, centred on its line. Never on a line of their own under it. Details such as a version go on the right.</li>
+      <li><strong>A list of things with a state:</strong> <code>.status-icon</code> straight after the name, the word in hidden text and a tooltip.</li>
+      <li><strong>A row with actions:</strong> the chip in <code>.row__side</code>. <strong>A card:</strong> in <code>.card__meta</code>. <strong>A stat tile:</strong> under the value. <strong>A cover:</strong> its corner.</li>
+      <li>At most two chips in one place; more belongs in a facts list.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section class="g-section" id="facts" aria-labelledby="facts-h">
+  <header><h2 id="facts-h">Facts, stats and meters</h2></header>
+  <div class="g-demo">
+    <dl class="facts">
+      <dt>Author</dt><dd><a href="#facts">Mara Ellison</a></dd>
+      <dt>Series</dt><dd><a href="#facts">The Glass Harbour, book 2</a></dd>
+      <dt>Narrated by</dt><dd><a href="#facts">Sam Oduya</a></dd>
+      <dt>Published</dt><dd>21 Sept 2026</dd>
+      <dt>Length</dt><dd>11 hr 42 min</dd>
+    </dl>
+    <div class="stats">
+      <div class="stat" data-tone="success"><span class="stat__value">6</span><span class="stat__label">Disks healthy</span></div>
+      <div class="stat" data-tone="warning"><span class="stat__value">1</span><span class="stat__label">Needs attention</span></div>
+      <div class="stat"><span class="stat__value">2,418</span><span class="stat__label">Books in library</span></div>
+    </div>
+    <div class="meter"><div class="meter__label"><span>Media pool</span><span class="numeric">7.2 of 9.1 TB used (79%)</span></div><div class="progress" data-tone="warning" role="img" aria-label="79% used"><span style="width:79%"></span></div></div>
+  </div>
+  <div class="g-notes"><div><h4>Rules</h4><ul><li>The value is always in words beside the bar.</li><li>Facts lists put Author first, then Series; names link to their pages.</li></ul></div></div>
+</section>
+
+<section class="g-section" id="rows" aria-labelledby="rows-h">
+  <header><h2 id="rows-h">Rows and tables</h2><p class="muted">Rows for lists of things with actions (queue, connections, services). A row that opens a slide-out has its title as the button and the whole row as the target. Tables only for real tabular data (logs, history); on phones they stack.</p></header>
+  <div class="g-demo">
+    <ul class="rows">
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">q</span><div><div class="row__title"><button type="button" data-opens="g-panel-edit">qBittorrent</button></div><div class="row__meta">Torrents · category storyarr · v5.0.3</div></div><div class="row__side"><span class="chip" data-tone="success">{{i:circle-check}}Connected</span><button class="btn btn--compact" type="button">Test</button></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">S</span><div><div class="row__title"><button type="button" data-opens="g-panel-edit">SABnzbd</button></div><div class="row__meta">Usenet · category books</div></div><div class="row__side"><span class="chip" data-tone="danger">{{i:circle-x}}Cannot connect</span><button class="btn btn--compact" type="button">Test</button></div></li>
+      <li class="row row--no-lead"><div><div class="row__title">The Glass Harbour</div><div class="row__meta">Downloading · 412 MB of 610 MB · 3 min left</div></div><div class="row__side"><button class="icon-btn icon-btn--bare" type="button" aria-label="Pause The Glass Harbour">{{i:pause}}</button></div><div class="progress" role="img" aria-label="68% downloaded"><span style="width:68%"></span></div></li>
+    </ul>
+    <div class="table-wrap" data-stack>
+      <table class="table">
+        <thead><tr><th scope="col" aria-sort="descending"><button type="button">Time{{i:arrow-up-down}}</button></th><th scope="col">Level</th><th scope="col">Message</th></tr></thead>
+        <tbody>
+          <tr><td data-label="Time" class="numeric">22:41</td><td data-label="Level"><span class="chip" data-tone="danger">{{i:circle-x}}Error</span></td><td data-label="Message">SABnzbd did not answer within 10 seconds.</td></tr>
+          <tr><td data-label="Time" class="numeric">22:40</td><td data-label="Level"><span class="chip">{{i:clock}}Info</span></td><td data-label="Message">Checked 4 reading lists.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="g-section" id="notices" aria-labelledby="notices-h">
+  <header><h2 id="notices-h">Notices, empty and loading</h2></header>
+  <div class="g-demo">
+    <div class="notice" role="status">{{i:info}}<div class="notice__body"><span class="notice__title">Upgrade available</span><p>Version 1.10.0 is ready. Read the release notes before upgrading.</p></div></div>
+    <div class="notice" data-tone="success" role="status">{{i:circle-check}}<div class="notice__body"><span class="notice__title">Connection saved</span><p>qBittorrent answered in 120 ms.</p></div></div>
+    <div class="notice" data-tone="warning">{{i:triangle-alert}}<div class="notice__body"><span class="notice__title">Disk 3 needs attention</span><p>12 sectors were reallocated this week. Back up its data.</p></div><button class="btn btn--compact" type="button">View disk</button></div>
+    <div class="notice" data-tone="danger" role="alert">{{i:circle-alert}}<div class="notice__body"><span class="notice__title">Connection saved. Test unsuccessful.</span><p>Check the address and password, then test again.</p></div></div>
+    <div class="empty">{{i-xl:inbox empty__icon}}<h3>Nothing in the queue</h3><p>When you request a book, it shows here while it downloads.</p><a class="btn btn--primary" href="#notices">Discover books</a></div>
+    <div class="cards" aria-busy="true" aria-label="Loading">
+      <div class="card"><span class="skeleton" style="width:60%"></span><span class="skeleton" style="width:90%"></span><span class="skeleton" style="width:40%"></span></div>
+      <div class="card"><span class="skeleton" style="width:50%"></span><span class="skeleton" style="width:80%"></span><span class="skeleton" style="width:30%"></span></div>
+    </div>
+    <div class="g-demo--row"><button class="btn" type="button" onclick="SharedComponents.toast('Settings saved.')">Show a toast</button><span class="small muted">The loading bar runs along the bottom of the header:</span></div>
+    <div class="loading-bar" data-active></div>
+  </div>
+  <div class="g-notes">
+    <div><h4>Rules</h4><ul><li>Errors say what happened and what to do, in the page, not only in a toast.</li><li>Empty states say what is missing, why, and the one next step.</li><li>Skeletons have the shape of the content; never a spinner on its own for a whole page.</li></ul></div>
+    <div><h4>Roles</h4><ul><li>Success and info: <code>role="status"</code>. Errors that block: <code>role="alert"</code>.</li></ul></div>
+  </div>
+</section>
+
+<section class="g-section" id="disclosure" aria-labelledby="disclosure-h">
+  <header><h2 id="disclosure-h">Disclosure, help and steps</h2></header>
+  <div class="g-demo">
+    <div>
+      <details class="disclosure" open><summary>v1.10.0 <span class="disclosure__meta">21 Sept 2026 · current version</span></summary><div class="disclosure__body"><p>Reading lists, bigger covers and a new header.</p></div></details>
+      <details class="disclosure"><summary>v1.9.0 <span class="disclosure__meta">1 Aug 2026</span></summary><div class="disclosure__body"><p>Earlier fixes.</p></div></details>
+    </div>
+    <div class="g-demo--row"><span>Download category</span><span class="help"><button type="button" aria-expanded="false" aria-controls="g-help-1" aria-label="About the download category">{{i:circle-help}}</button><span class="help__text" id="g-help-1">qBittorrent files each download under this label and saves it in the label's folder.</span></span></div>
+    <ol class="steps" aria-label="Upgrade steps">
+      <li data-done>Back up</li><li aria-current="step">Review changes</li><li>Upgrade</li><li>Check</li>
+    </ol>
+    <div class="load-more"><span>Showing 40 of 2,418 books</span><button class="btn" type="button">Show 40 more</button></div>
+  </div>
+</section>
+
+<!-- CONTAINERS -->
+<section class="g-section" id="cards" aria-labelledby="cards-h">
+  <header><h2 id="cards-h">Panels and cards</h2><p class="muted">A panel groups content. A card is one thing that opens its slide-out or page; the whole card is the target, and its other buttons sit above it.</p></header>
+  <div class="g-demo">
+    <ul class="cards">
+      <li class="card"><div class="card__top"><span class="app-icon" aria-hidden="true">J</span><h3 class="card__title"><button type="button" data-opens="g-panel-app">Jellyfin</button></h3></div><p class="small muted">Films, series and music.</p><div class="card__meta"><span class="chip" data-tone="success">{{i:circle-check}}Running</span><span>Updated 2 days ago</span></div></li>
+      <li class="card" data-tone="warning"><div class="card__top"><span class="app-icon" aria-hidden="true">{{i:hard-drive}}</span><h3 class="card__title"><button type="button" data-opens="g-panel-app">Disk 3 · 4 TB</button></h3></div><div class="meter"><div class="meter__label"><span>Used</span><span class="numeric">3.1 of 3.6 TB</span></div><div class="progress"><span style="width:86%"></span></div></div><div class="card__meta"><span class="chip" data-tone="warning">{{i:triangle-alert}}Needs attention</span></div></li>
+      <li class="card"><div class="card__top"><span class="app-icon" aria-hidden="true">S</span><h3 class="card__title"><a href="#cards">Storyarr</a></h3></div><p class="small muted">Books and audiobooks.</p><div class="card__meta card__actions"><button class="copy-btn" type="button" data-copy="http://example.test:8000" aria-label="Copy Storyarr address">{{i:copy}}</button><span>example.test:8000</span></div></li>
+    </ul>
+    <section class="panel" aria-labelledby="g-panel-h"><div class="panel__head"><h3 id="g-panel-h">Network</h3><span class="small muted">Checked 1 minute ago</span></div><dl class="facts"><dt>Outside address</dt><dd>reachable</dd><dt>VPN</dt><dd><span class="chip" data-tone="success">{{i:circle-check}}Connected</span></dd></dl></section>
+  </div>
+</section>
+
+<section class="g-section" id="media" aria-labelledby="media-h">
+  <header><h2 id="media-h">Covers and media cards</h2><p class="muted">Covers at 2:3; audiobook squares are letterboxed, not cropped. Small, Medium and Large come from the account's cover size setting.</p></header>
+  <div class="g-demo">
+    <ul class="media-grid">
+      <li class="media-card"><div class="cover" style="background:linear-gradient(160deg,#323a77,#af4e24);color:#fff">The Glass Harbour</div><span class="media-card__title"><button type="button" data-opens="g-panel-book">The Glass Harbour</button></span><span class="media-card__meta">Mara Ellison · Book 2</span></li>
+      <li class="media-card"><div class="cover" style="background:linear-gradient(160deg,#135c2e,#154a96);color:#fff">Salt Roads</div><span class="media-card__title"><button type="button" data-opens="g-panel-book">Salt Roads</button></span><span class="media-card__meta">J. Okafor</span></li>
+      <li class="media-card"><div class="cover">No cover</div><span class="media-card__title"><button type="button" data-opens="g-panel-book">An Unknown Book</button></span><span class="media-card__meta">Unknown author</span></li>
+      <li class="media-card"><div class="cover"><span style="display:grid;place-items:center;width:100%;aspect-ratio:1;background:linear-gradient(160deg,#6b4500,#9b1c14);color:#fff">Square audio</span><span class="cover__badge chip" data-tone="info">Audiobook</span></div><span class="media-card__title"><button type="button" data-opens="g-panel-book">Night Ferry</button></span><span class="media-card__meta">Read by Sam Oduya</span></li>
+    </ul>
+  </div>
+  <div class="g-notes"><div><h4>Behaviour</h4><ul><li>Pressing a book opens its summary slide-out; the full page is a link inside it.</li><li>The focus ring sits on the cover, so it is visible on any artwork.</li></ul></div></div>
+</section>
+
+<section class="g-section" id="cover-actions" aria-labelledby="cover-actions-h">
+  <header><h2 id="cover-actions-h">Cover actions</h2><p class="muted">UX-42. Pressing the cover or the title opens the book's Summary. A column of 44px actions runs down the cover's right edge: Details, Ebook, Audiobook, Add to a list and More. "On the cover" (the default) shows the column on hover and keyboard focus, and always on touch screens; "Beside the cover" puts it next to the art, always shown. Each person chooses in Settings, Display.</p></header>
+  <div class="g-demo">
+    <h3>On the cover (default)</h3>
+    <ul class="media-grid"><li class="media-card cover-card" data-actions="on"><button class="cover-card__open" type="button" aria-label="The Salt Road, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#2b4f6e;color:#fff;font-weight:700;padding:var(--space-2)">The Salt Road</div><div class="cover-actions" role="group" aria-label="Actions for The Salt Road"><button class="cover-actions__btn" type="button" aria-label="Details of The Salt Road">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Ebook of The Salt Road in library">{{i:book-open}}<span class="cover-actions__tick" aria-hidden="true">{{i:check}}</span><span class="cover-actions__tip" aria-hidden="true">Ebook in library</span></button><button class="cover-actions__btn" type="button" aria-label="Get the audiobook of The Salt Road">{{i:headphones}}<span class="cover-actions__tip" aria-hidden="true">Get the audiobook</span></button><button class="cover-actions__btn" type="button" aria-label="Add The Salt Road to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for The Salt Road" aria-haspopup="menu" aria-controls="g-cover-menu-1">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div><span class="media-card__title">The Salt Road</span><span class="media-card__meta">Mara Ellison</span><div class="menu" id="g-cover-menu-1" role="menu" aria-label="More for The Salt Road" data-fixed><a href="#" role="menuitem">{{i:external-link}}Open the book page</a><button type="button" role="menuitem">{{i:download}}Get both formats</button></div></li><li class="media-card cover-card" data-actions="on"><button class="cover-card__open" type="button" aria-label="Half a Lantern, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#7a2e3b;color:#fff;font-weight:700;padding:var(--space-2)">Half a Lantern</div><div class="cover-actions" role="group" aria-label="Actions for Half a Lantern"><button class="cover-actions__btn" type="button" aria-label="Details of Half a Lantern">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Get the ebook of Half a Lantern">{{i:book-open}}<span class="cover-actions__tip" aria-hidden="true">Get the ebook</span></button><button class="cover-actions__btn" type="button" aria-label="Audiobook of Half a Lantern in library">{{i:headphones}}<span class="cover-actions__tick" aria-hidden="true">{{i:check}}</span><span class="cover-actions__tip" aria-hidden="true">Audiobook in library</span></button><button class="cover-actions__btn" type="button" aria-label="Add Half a Lantern to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for Half a Lantern" aria-haspopup="menu" aria-controls="g-cover-menu-2">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div><span class="media-card__title">Half a Lantern</span><span class="media-card__meta">Owen Brightwater</span><div class="menu" id="g-cover-menu-2" role="menu" aria-label="More for Half a Lantern" data-fixed><a href="#" role="menuitem">{{i:external-link}}Open the book page</a><button type="button" role="menuitem">{{i:download}}Get both formats</button></div></li><li class="media-card cover-card" data-actions="on"><button class="cover-card__open" type="button" aria-label="The Cartographer's Daughter and the Long Winter Crossing, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#2f5d50;color:#fff;font-weight:700;padding:var(--space-2)">The Cartographer's Daughter and the Long Winter Crossing</div><div class="cover-actions" role="group" aria-label="Actions for The Cartographer's Daughter and the Long Winter Crossing"><button class="cover-actions__btn" type="button" aria-label="Details of The Cartographer's Daughter and the Long Winter Crossing">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Get the ebook of The Cartographer's Daughter and the Long Winter Crossing">{{i:book-open}}<span class="cover-actions__tip" aria-hidden="true">Get the ebook</span></button><button class="cover-actions__btn" type="button" aria-label="Get the audiobook of The Cartographer's Daughter and the Long Winter Crossing">{{i:headphones}}<span class="cover-actions__tip" aria-hidden="true">Get the audiobook</span></button><button class="cover-actions__btn" type="button" aria-label="Add The Cartographer's Daughter and the Long Winter Crossing to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for The Cartographer's Daughter and the Long Winter Crossing" aria-haspopup="menu" aria-controls="g-cover-menu-3">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div><span class="media-card__title">The Cartographer's Daughter and the Long Winter Crossing</span><span class="media-card__meta">Lise Moreau</span><div class="menu" id="g-cover-menu-3" role="menu" aria-label="More for The Cartographer's Daughter and the Long Winter Crossing" data-fixed><a href="#" role="menuitem">{{i:external-link}}Open the book page</a><button type="button" role="menuitem">{{i:download}}Get both formats</button></div></li><li class="media-card cover-card" data-actions="on"><button class="cover-card__open" type="button" aria-label="Beneath the Weir, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#5b3f7a;color:#fff;font-weight:700;padding:var(--space-2)">Beneath the Weir</div><div class="cover-actions" role="group" aria-label="Actions for Beneath the Weir"><button class="cover-actions__btn" type="button" aria-label="Details of Beneath the Weir">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Ebook of Beneath the Weir in library">{{i:book-open}}<span class="cover-actions__tick" aria-hidden="true">{{i:check}}</span><span class="cover-actions__tip" aria-hidden="true">Ebook in library</span></button><button class="cover-actions__btn" type="button" aria-label="Audiobook of Beneath the Weir in library">{{i:headphones}}<span class="cover-actions__tick" aria-hidden="true">{{i:check}}</span><span class="cover-actions__tip" aria-hidden="true">Audiobook in library</span></button><button class="cover-actions__btn" type="button" aria-label="Add Beneath the Weir to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for Beneath the Weir" aria-haspopup="menu" aria-controls="g-cover-menu-4">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div><span class="media-card__title">Beneath the Weir</span><span class="media-card__meta">Tomas Ferrand</span><div class="menu" id="g-cover-menu-4" role="menu" aria-label="More for Beneath the Weir" data-fixed><a href="#" role="menuitem">{{i:external-link}}Open the book page</a><button type="button" role="menuitem">{{i:download}}Get both formats</button></div></li><li class="media-card cover-card" data-actions="on"><button class="cover-card__open" type="button" aria-label="Sleeping Lanterns, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#8a5a1f;color:#fff;font-weight:700;padding:var(--space-2)">Sleeping Lanterns</div><div class="cover-actions" role="group" aria-label="Actions for Sleeping Lanterns"><button class="cover-actions__btn" type="button" aria-label="Details of Sleeping Lanterns">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Get the ebook of Sleeping Lanterns">{{i:book-open}}<span class="cover-actions__tip" aria-hidden="true">Get the ebook</span></button><button class="cover-actions__btn" type="button" aria-label="Get the audiobook of Sleeping Lanterns">{{i:headphones}}<span class="cover-actions__tip" aria-hidden="true">Get the audiobook</span></button><button class="cover-actions__btn" type="button" aria-label="Add Sleeping Lanterns to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for Sleeping Lanterns" aria-haspopup="menu" aria-controls="g-cover-menu-5">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div><span class="media-card__title">Sleeping Lanterns</span><span class="media-card__meta">Mara Ellison</span><div class="menu" id="g-cover-menu-5" role="menu" aria-label="More for Sleeping Lanterns" data-fixed><a href="#" role="menuitem">{{i:external-link}}Open the book page</a><button type="button" role="menuitem">{{i:download}}Get both formats</button></div></li></ul>
+    <h3>Beside the cover</h3>
+    <ul class="media-grid" style="--cover-w:180px"><li class="media-card cover-card" data-actions="beside"><button class="cover-card__open" type="button" aria-label="The Salt Road, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#2b4f6e;color:#fff;font-weight:700;padding:var(--space-2)">The Salt Road</div><div class="cover-actions" role="group" aria-label="Actions for The Salt Road"><button class="cover-actions__btn" type="button" aria-label="Details of The Salt Road">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Ebook of The Salt Road in library">{{i:book-open}}<span class="cover-actions__tick" aria-hidden="true">{{i:check}}</span><span class="cover-actions__tip" aria-hidden="true">Ebook in library</span></button><button class="cover-actions__btn" type="button" aria-label="Get the audiobook of The Salt Road">{{i:headphones}}<span class="cover-actions__tip" aria-hidden="true">Get the audiobook</span></button><button class="cover-actions__btn" type="button" aria-label="Add The Salt Road to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for The Salt Road" aria-haspopup="menu" aria-controls="g-cover-menu-6">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div><span class="media-card__title">The Salt Road</span><span class="media-card__meta">Mara Ellison</span><div class="menu" id="g-cover-menu-6" role="menu" aria-label="More for The Salt Road" data-fixed><a href="#" role="menuitem">{{i:external-link}}Open the book page</a><button type="button" role="menuitem">{{i:download}}Get both formats</button></div></li><li class="media-card cover-card" data-actions="beside"><button class="cover-card__open" type="button" aria-label="Half a Lantern, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#7a2e3b;color:#fff;font-weight:700;padding:var(--space-2)">Half a Lantern</div><div class="cover-actions" role="group" aria-label="Actions for Half a Lantern"><button class="cover-actions__btn" type="button" aria-label="Details of Half a Lantern">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Get the ebook of Half a Lantern">{{i:book-open}}<span class="cover-actions__tip" aria-hidden="true">Get the ebook</span></button><button class="cover-actions__btn" type="button" aria-label="Audiobook of Half a Lantern in library">{{i:headphones}}<span class="cover-actions__tick" aria-hidden="true">{{i:check}}</span><span class="cover-actions__tip" aria-hidden="true">Audiobook in library</span></button><button class="cover-actions__btn" type="button" aria-label="Add Half a Lantern to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for Half a Lantern" aria-haspopup="menu" aria-controls="g-cover-menu-7">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div><span class="media-card__title">Half a Lantern</span><span class="media-card__meta">Owen Brightwater</span><div class="menu" id="g-cover-menu-7" role="menu" aria-label="More for Half a Lantern" data-fixed><a href="#" role="menuitem">{{i:external-link}}Open the book page</a><button type="button" role="menuitem">{{i:download}}Get both formats</button></div></li><li class="media-card cover-card" data-actions="beside"><button class="cover-card__open" type="button" aria-label="The Cartographer's Daughter and the Long Winter Crossing, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#2f5d50;color:#fff;font-weight:700;padding:var(--space-2)">The Cartographer's Daughter and the Long Winter Crossing</div><div class="cover-actions" role="group" aria-label="Actions for The Cartographer's Daughter and the Long Winter Crossing"><button class="cover-actions__btn" type="button" aria-label="Details of The Cartographer's Daughter and the Long Winter Crossing">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Get the ebook of The Cartographer's Daughter and the Long Winter Crossing">{{i:book-open}}<span class="cover-actions__tip" aria-hidden="true">Get the ebook</span></button><button class="cover-actions__btn" type="button" aria-label="Get the audiobook of The Cartographer's Daughter and the Long Winter Crossing">{{i:headphones}}<span class="cover-actions__tip" aria-hidden="true">Get the audiobook</span></button><button class="cover-actions__btn" type="button" aria-label="Add The Cartographer's Daughter and the Long Winter Crossing to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for The Cartographer's Daughter and the Long Winter Crossing" aria-haspopup="menu" aria-controls="g-cover-menu-8">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div><span class="media-card__title">The Cartographer's Daughter and the Long Winter Crossing</span><span class="media-card__meta">Lise Moreau</span><div class="menu" id="g-cover-menu-8" role="menu" aria-label="More for The Cartographer's Daughter and the Long Winter Crossing" data-fixed><a href="#" role="menuitem">{{i:external-link}}Open the book page</a><button type="button" role="menuitem">{{i:download}}Get both formats</button></div></li><li class="media-card cover-card" data-actions="beside"><button class="cover-card__open" type="button" aria-label="Beneath the Weir, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#5b3f7a;color:#fff;font-weight:700;padding:var(--space-2)">Beneath the Weir</div><div class="cover-actions" role="group" aria-label="Actions for Beneath the Weir"><button class="cover-actions__btn" type="button" aria-label="Details of Beneath the Weir">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Ebook of Beneath the Weir in library">{{i:book-open}}<span class="cover-actions__tick" aria-hidden="true">{{i:check}}</span><span class="cover-actions__tip" aria-hidden="true">Ebook in library</span></button><button class="cover-actions__btn" type="button" aria-label="Audiobook of Beneath the Weir in library">{{i:headphones}}<span class="cover-actions__tick" aria-hidden="true">{{i:check}}</span><span class="cover-actions__tip" aria-hidden="true">Audiobook in library</span></button><button class="cover-actions__btn" type="button" aria-label="Add Beneath the Weir to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for Beneath the Weir" aria-haspopup="menu" aria-controls="g-cover-menu-9">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div><span class="media-card__title">Beneath the Weir</span><span class="media-card__meta">Tomas Ferrand</span><div class="menu" id="g-cover-menu-9" role="menu" aria-label="More for Beneath the Weir" data-fixed><a href="#" role="menuitem">{{i:external-link}}Open the book page</a><button type="button" role="menuitem">{{i:download}}Get both formats</button></div></li><li class="media-card cover-card" data-actions="beside"><button class="cover-card__open" type="button" aria-label="Sleeping Lanterns, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#8a5a1f;color:#fff;font-weight:700;padding:var(--space-2)">Sleeping Lanterns</div><div class="cover-actions" role="group" aria-label="Actions for Sleeping Lanterns"><button class="cover-actions__btn" type="button" aria-label="Details of Sleeping Lanterns">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Get the ebook of Sleeping Lanterns">{{i:book-open}}<span class="cover-actions__tip" aria-hidden="true">Get the ebook</span></button><button class="cover-actions__btn" type="button" aria-label="Get the audiobook of Sleeping Lanterns">{{i:headphones}}<span class="cover-actions__tip" aria-hidden="true">Get the audiobook</span></button><button class="cover-actions__btn" type="button" aria-label="Add Sleeping Lanterns to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for Sleeping Lanterns" aria-haspopup="menu" aria-controls="g-cover-menu-10">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div><span class="media-card__title">Sleeping Lanterns</span><span class="media-card__meta">Mara Ellison</span><div class="menu" id="g-cover-menu-10" role="menu" aria-label="More for Sleeping Lanterns" data-fixed><a href="#" role="menuitem">{{i:external-link}}Open the book page</a><button type="button" role="menuitem">{{i:download}}Get both formats</button></div></li></ul>
+    <h3>In rows (UX-44 A)</h3>
+    <p class="muted">Books in order, search results and Following. The whole row opens the Summary; the same five actions sit at the end. On phones they go under the title.</p>
+    <div class="rows" style="border-top:1px solid var(--color-divider)"><div class="book-row book-row--lead" style="border-bottom:1px solid var(--color-divider)"><button class="book-row__open" type="button" aria-label="The Salt Road, details" data-opens="g-panel-book"></button><span class="stat__value" style="min-width:2ch;text-align:center">1</span><div class="book-row__art"><div class="cover" style="background:#2b4f6e"></div></div><div class="book-row__text"><span class="book-row__title">The Salt Road</span><span class="small muted">Mara Ellison · 2017</span><span><span class="chip" data-tone="success">{{i:circle-check}}In library</span></span></div><div class="cover-actions cover-actions--row" role="group" aria-label="Actions for The Salt Road"><button class="cover-actions__btn" type="button" aria-label="Details of The Salt Road">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Ebook of The Salt Road in library">{{i:book-open}}<span class="cover-actions__tick" aria-hidden="true">{{i:check}}</span><span class="cover-actions__tip" aria-hidden="true">Ebook in library</span></button><button class="cover-actions__btn" type="button" aria-label="Get the audiobook of The Salt Road">{{i:headphones}}<span class="cover-actions__tip" aria-hidden="true">Get the audiobook</span></button><button class="cover-actions__btn" type="button" aria-label="Add The Salt Road to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for The Salt Road" aria-haspopup="menu">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div><div class="book-row book-row--lead" style="border-bottom:1px solid var(--color-divider)"><button class="book-row__open" type="button" aria-label="Half a Lantern, details" data-opens="g-panel-book"></button><span class="stat__value" style="min-width:2ch;text-align:center">2</span><div class="book-row__art"><div class="cover" style="background:#7a2e3b"></div></div><div class="book-row__text"><span class="book-row__title">Half a Lantern</span><span class="small muted">Mara Ellison · 2017</span><span><span class="chip" data-tone="success">{{i:circle-check}}In library</span></span></div><div class="cover-actions cover-actions--row" role="group" aria-label="Actions for Half a Lantern"><button class="cover-actions__btn" type="button" aria-label="Details of Half a Lantern">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Get the ebook of Half a Lantern">{{i:book-open}}<span class="cover-actions__tip" aria-hidden="true">Get the ebook</span></button><button class="cover-actions__btn" type="button" aria-label="Audiobook of Half a Lantern in library">{{i:headphones}}<span class="cover-actions__tick" aria-hidden="true">{{i:check}}</span><span class="cover-actions__tip" aria-hidden="true">Audiobook in library</span></button><button class="cover-actions__btn" type="button" aria-label="Add Half a Lantern to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for Half a Lantern" aria-haspopup="menu">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div><div class="book-row book-row--lead" style="border-bottom:1px solid var(--color-divider)"><button class="book-row__open" type="button" aria-label="The Tide Clock, details" data-opens="g-panel-book"></button><span class="stat__value" style="min-width:2ch;text-align:center">3</span><div class="book-row__art"><div class="cover" style="background:#2f5d50"></div></div><div class="book-row__text"><span class="book-row__title">The Tide Clock</span><span class="small muted">Mara Ellison · 2017</span><span><span class="chip" data-tone="neutral">{{i:bookmark}}Wanted</span></span></div><div class="cover-actions cover-actions--row" role="group" aria-label="Actions for The Tide Clock"><button class="cover-actions__btn" type="button" aria-label="Details of The Tide Clock">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Get the ebook of The Tide Clock">{{i:book-open}}<span class="cover-actions__tip" aria-hidden="true">Get the ebook</span></button><button class="cover-actions__btn" type="button" aria-label="Get the audiobook of The Tide Clock">{{i:headphones}}<span class="cover-actions__tip" aria-hidden="true">Get the audiobook</span></button><button class="cover-actions__btn" type="button" aria-label="Add The Tide Clock to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for The Tide Clock" aria-haspopup="menu">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div></div>
+    <h3>Small cover tiles (UX-44 B)</h3>
+    <p class="muted">Series gaps and calendar day cards. One 44px More button on the corner; its menu says each action in words. The cover opens the Summary.</p>
+    <ul class="media-grid" style="--cover-w:96px"><li class="media-card cover-card" data-actions="more"><button class="cover-card__open" type="button" aria-label="The Tide Clock, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#2f5d50"></div><button class="cover-card__more" type="button" aria-haspopup="menu" aria-controls="g-tile-menu-0" aria-label="More for The Tide Clock">{{i:ellipsis}}</button></div><span class="media-card__title">The Tide Clock</span><span class="media-card__meta">Book 2</span><div class="menu" id="g-tile-menu-0" role="menu" aria-label="More for The Tide Clock" data-fixed><button type="button" role="menuitem">{{i:info}}View details</button><button type="button" role="menuitem">{{i:book-open}}Get the ebook</button><button type="button" role="menuitem">{{i:headphones}}Get the audiobook</button><button type="button" role="menuitem">{{i:list-plus}}Add to a list</button><a href="#" role="menuitem">{{i:external-link}}Open the book page</a></div></li><li class="media-card cover-card" data-actions="more"><button class="cover-card__open" type="button" aria-label="Beneath the Weir, a Very Long Title That Wraps, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#5b3f7a"></div><button class="cover-card__more" type="button" aria-haspopup="menu" aria-controls="g-tile-menu-1" aria-label="More for Beneath the Weir, a Very Long Title That Wraps">{{i:ellipsis}}</button></div><span class="media-card__title">Beneath the Weir, a Very Long Title That Wraps</span><span class="media-card__meta">Book 3</span><div class="menu" id="g-tile-menu-1" role="menu" aria-label="More for Beneath the Weir, a Very Long Title That Wraps" data-fixed><button type="button" role="menuitem">{{i:info}}View details</button><button type="button" role="menuitem">{{i:book-open}}Get the ebook</button><button type="button" role="menuitem">{{i:headphones}}Get the audiobook</button><button type="button" role="menuitem">{{i:list-plus}}Add to a list</button><a href="#" role="menuitem">{{i:external-link}}Open the book page</a></div></li><li class="media-card cover-card" data-actions="more"><button class="cover-card__open" type="button" aria-label="North of Quiet, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#8a5a1f"></div><button class="cover-card__more" type="button" aria-haspopup="menu" aria-controls="g-tile-menu-2" aria-label="More for North of Quiet">{{i:ellipsis}}</button></div><span class="media-card__title">North of Quiet</span><span class="media-card__meta">Book 4</span><div class="menu" id="g-tile-menu-2" role="menu" aria-label="More for North of Quiet" data-fixed><button type="button" role="menuitem">{{i:info}}View details</button><button type="button" role="menuitem">{{i:book-open}}Get the ebook</button><button type="button" role="menuitem">{{i:headphones}}Get the audiobook</button><button type="button" role="menuitem">{{i:list-plus}}Add to a list</button><a href="#" role="menuitem">{{i:external-link}}Open the book page</a></div></li></ul>
+    <h3>Square show art in the book shape (FEAT-R, fill 4)</h3>
+    <p class="muted">Radio artwork is square. It sits at the top of the 2:3 shape, never cropped, with the same outline as books; the label below takes the image's main colour (read in the browser) and carries the station and the name as real text. Without a colour the label is neutral; without an image the square shows the name.</p>
+    <ul class="media-grid" style="--cover-w:148px"><li class="media-card"><div class="show-art" role="img" aria-label="The Unbelievable Truth, BBC Radio 4" style="--show-art-bg:rgb(10 75 72);--show-art-fg:#fff"><span class="show-art__img" style="display:grid;place-items:center;background:linear-gradient(160deg,#0f7a74,#123);color:#fff;font-weight:700;padding:8px;text-align:center">The Unbelievable Truth</span><span class="show-art__label" aria-hidden="true"><span class="show-art__station">BBC Radio 4</span><span class="show-art__name">The Unbelievable Truth</span></span></div><span class="media-card__title">The Unbelievable Truth</span><span class="media-card__meta">BBC Radio 4 · 22 series</span></li><li class="media-card"><div class="show-art" role="img" aria-label="ElvenQuest, BBC Radio 4 Extra"><span class="show-art__img" style="display:grid;place-items:center;background:linear-gradient(160deg,#0f7a74,#123);color:#fff;font-weight:700;padding:8px;text-align:center">ElvenQuest</span><span class="show-art__label" aria-hidden="true"><span class="show-art__station">BBC Radio 4 Extra</span><span class="show-art__name">ElvenQuest</span></span></div><span class="media-card__title">ElvenQuest</span><span class="media-card__meta">BBC Radio 4 Extra · 22 series</span></li><li class="media-card"><div class="show-art" role="img" aria-label="Quiet Carriage, BBC Radio 4"><span class="show-art__text" aria-hidden="true">Quiet Carriage</span><span class="show-art__label" aria-hidden="true"><span class="show-art__station">BBC Radio 4</span><span class="show-art__name">Quiet Carriage</span></span></div><span class="media-card__title">Quiet Carriage</span><span class="media-card__meta">BBC Radio 4 · 22 series</span></li></ul>
+    <h3>Logo tile</h3>
+    <ul class="cards" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))"><li class="card"><span class="logo-tile" aria-hidden="true"><span class="logo-tile__text">BBC Radio 4</span></span><h3 class="card__title"><a href="#cover-actions">BBC Radio 4</a></h3><p class="small muted">5 shows · 3 following</p></li></ul>
+  </div>
+  <div class="g-notes">
+    <div><h4>Behaviour</h4><ul><li>Tab goes to the cover ("The Salt Road, details"), then to each action in order.</li><li>Every icon has a full name ("Get the audiobook of The Salt Road", "Audiobook of The Salt Road in library") and a hover label that also shows on keyboard focus.</li><li>A format in the library is a tick on its icon plus "in library" in its name; the old badges along the bottom of the cover go.</li><li>Progress and errors from getting a format show in a status line under the title.</li><li>Titles always take two lines of space, so covers line up.</li></ul></div>
+    <div><h4>Classes</h4><ul><li><code>.cover-card[data-actions="on"|"beside"]</code> on a <code>.media-card</code>, <code>.cover-card__open</code>, <code>.cover-card__art</code>, <code>.cover-card__status</code></li><li><code>.cover-actions</code>, <code>.cover-actions__btn</code>, <code>.cover-actions__tick</code>, <code>.cover-actions__tip</code></li><li>More: a <code>.menu[data-fixed]</code>, so it is not cut off inside a shelf</li><li>Rows: <code>.book-row</code> (<code>--lead</code>), <code>.book-row__open</code>, <code>.book-row__art</code>, <code>.book-row__text</code>, <code>.book-row__title</code>, <code>.cover-actions--row</code></li><li>Small tiles: <code>.cover-card[data-actions="more"]</code>, <code>.cover-card__more</code></li><li>Radio: <code>.show-art</code> (<code>__img</code>, <code>__text</code>, <code>__label</code>, <code>__station</code>, <code>__name</code>; <code>--show-art-bg</code>, <code>--show-art-fg</code>), <code>.logo-tile</code> (<code>__text</code>)</li></ul></div>
+  </div>
+</section>
+
+<section class="g-section" id="series-head" aria-labelledby="series-head-h">
+  <header><h2 id="series-head-h">Series header and logo</h2><p class="muted">UX-43. The top of a series (or radio show) page. A logo with a transparent background is drawn in one solid colour with a CSS mask (<code>.logo-mask</code>), so it follows every theme; each logo uses the text colour or the accent colour. With no logo, the name is set large as a wordmark. The name is always the page's h1. The fan of covers is decoration and is hidden on phones; the books are listed below it. The logo here is made up.</p></header>
+  <div class="g-demo" style="padding:0">
+    <header class="series-head">
+      <div class="series-head__text">
+        <span class="logo-mask" role="img" aria-label="The Glass Harbour" style="--logo:url(&quot;data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20640%20120%22%3E%20%3Cg%20fill%3D%22%23000%22%3E%20%3Cpath%20d%3D%22M38%2018h14l3%2010h-20z%22/%3E%3Cpath%20d%3D%22M36%2030h18l6%2074H30z%22/%3E%3Crect%20x%3D%2224%22%20y%3D%22104%22%20width%3D%2242%22%20height%3D%228%22/%3E%20%3Cpath%20d%3D%22M45%206l9%2010H36z%22/%3E%20%3Cpath%20d%3D%22M60%2022l40-10v4l-40%209zM30%2022l-28-9v4l28%208z%22%20opacity%3D%22.55%22/%3E%20%3Ctext%20x%3D%2284%22%20y%3D%2258%22%20font-family%3D%22Georgia%2C%20%27Times%20New%20Roman%27%2C%20serif%22%20font-size%3D%2230%22%20letter-spacing%3D%226%22%3ETHE%3C/text%3E%20%3Ctext%20x%3D%2280%22%20y%3D%22104%22%20font-family%3D%22Georgia%2C%20%27Times%20New%20Roman%27%2C%20serif%22%20font-size%3D%2254%22%20font-weight%3D%22700%22%20letter-spacing%3D%222%22%3EGLASS%20HARBOUR%3C/text%3E%20%3Crect%20x%3D%22186%22%20y%3D%2246%22%20width%3D%22430%22%20height%3D%223%22/%3E%20%3C/g%3E%20%3C/svg%3E&quot;);--logo-ratio:640 / 120"></span>
+        <h1 class="series-head__name">The Glass Harbour series</h1>
+        <p class="series-head__meta"><span>By <a href="#series-head">Mara Ellison</a></span><span><strong>6 books</strong> and 1 story collection</span><span>Next: book 7, Low Water, 12 March 2027</span></p>
+        <p class="series-head__desc">A harbour town where the lighthouse keeper keeps more than the light. Quiet mysteries, one each winter.</p>
+        <div class="series-head__progress"><span>4 of 6 books in your library</span><div class="progress" role="progressbar" aria-label="Books in your library" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"><span style="width:67%"></span></div></div>
+        <div class="series-head__actions"><button class="btn btn--primary" type="button">Get the 2 missing books</button><button class="btn" type="button" aria-pressed="true">Following</button><button class="btn btn--quiet" type="button" data-opens="g-panel-logo" aria-controls="g-panel-logo" aria-expanded="false">Change logo</button></div>
+      </div>
+      <div class="cover-fan" aria-hidden="true"><span style="display:grid;align-content:end;padding:8px;color:#fff;font-weight:700;font-size:12px;background:linear-gradient(160deg,#1f4f66,#0b2233)">The Glass Harbour</span><span style="display:grid;align-content:end;padding:8px;color:#fff;font-weight:700;font-size:12px;background:linear-gradient(160deg,#323a77,#af4e24)">Salt Roads</span><span style="display:grid;align-content:end;padding:8px;color:#fff;font-weight:700;font-size:12px;background:linear-gradient(160deg,#135c2e,#154a96)">Night Ferry</span><span style="display:grid;align-content:end;padding:8px;color:#fff;font-weight:700;font-size:12px;background:linear-gradient(160deg,#6b2f5a,#2b1030)">Low Tide</span></div>
+    </header>
+  </div>
+  <div class="g-demo" style="padding:0">
+    <header class="series-head">
+      <div class="series-head__text">
+        <h1 class="series-head__name wordmark">Salt Roads</h1>
+        <p class="series-head__meta"><span>By <a href="#series-head">J. Okafor</a></span><span><strong>3 books</strong></span></p>
+        <div class="series-head__actions"><button class="btn" type="button">Follow</button><button class="btn btn--quiet" type="button">Add a logo</button></div>
+      </div>
+    </header>
+  </div>
+  <div class="g-notes">
+    <div><h4>Behaviour</h4><ul><li>Logos are saved once on the server and shared by everyone; admins add, change or remove them in the Series logo slide-out.</li><li>Three ways: From a cover (draw a box, threshold, Invert, clean up), Find online (Wikimedia Commons, with the licence and a wrong-match warning) and Upload your own.</li><li>In the slide-out, arrow keys move between the tabs, and on the cover arrow keys move the box (Shift and arrow keys resize it).</li></ul></div>
+    <div><h4>Classes</h4><ul><li><code>.logo-mask</code> (<code>--logo</code>, <code>--logo-ratio</code>, <code>data-colour="accent"</code>), <code>.wordmark</code></li><li><code>.series-head</code>, <code>__text</code>, <code>__name</code>, <code>__meta</code>, <code>__desc</code>, <code>__progress</code>, <code>__actions</code>, <code>.cover-fan</code></li><li>Slide-out: <code>.logo-saved</code>, <code>.logo-tabs</code>, <code>.logo-pane</code>, <code>.logo-step</code>, <code>.logo-candidates</code>, <code>.logo-candidate</code>, <code>.cover-pick</code>, <code>.logo-crop</code>, <code>.range</code>, <code>.checker</code>, <code>.logo-drop</code>, <code>.logo-preview</code>, <code>.inline-form</code></li></ul></div>
+  </div>
+</section>
+
+<section class="g-section" id="shelf" aria-labelledby="shelf-h">
+  <header><h2 id="shelf-h">Shelf</h2><p class="muted">UX-30, option A. One row of covers that scrolls sideways, with no scroll bar. At each end the covers fade into the page, with an arrow over the fade; the arrow and fade show only when there are more books that way. On phones there are no arrows; the fade alone says there is more.</p></header>
+  <div class="g-demo">
+    <div class="section-head"><h3>For you</h3><a href="#">View all</a></div>
+    <div class="shelf-scroller" style="--shelf-cover-w:148px">
+      <ul class="shelf-track" aria-label="For you"><li class="media-card cover-card" data-actions="on"><button class="cover-card__open" type="button" aria-label="The Salt Road, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#2b4f6e;color:#fff;font-weight:700;padding:var(--space-2)">The Salt Road</div><div class="cover-actions" role="group" aria-label="Actions for The Salt Road"><button class="cover-actions__btn" type="button" aria-label="Details of The Salt Road">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Ebook of The Salt Road in library">{{i:book-open}}<span class="cover-actions__tick" aria-hidden="true">{{i:check}}</span><span class="cover-actions__tip" aria-hidden="true">Ebook in library</span></button><button class="cover-actions__btn" type="button" aria-label="Get the audiobook of The Salt Road">{{i:headphones}}<span class="cover-actions__tip" aria-hidden="true">Get the audiobook</span></button><button class="cover-actions__btn" type="button" aria-label="Add The Salt Road to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for The Salt Road" aria-haspopup="menu" aria-controls="g-cover-menu-11">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div><span class="media-card__title">The Salt Road</span><span class="media-card__meta">Mara Ellison</span><div class="menu" id="g-cover-menu-11" role="menu" aria-label="More for The Salt Road" data-fixed><a href="#" role="menuitem">{{i:external-link}}Open the book page</a><button type="button" role="menuitem">{{i:download}}Get both formats</button></div></li><li class="media-card cover-card" data-actions="on"><button class="cover-card__open" type="button" aria-label="Half a Lantern, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#7a2e3b;color:#fff;font-weight:700;padding:var(--space-2)">Half a Lantern</div><div class="cover-actions" role="group" aria-label="Actions for Half a Lantern"><button class="cover-actions__btn" type="button" aria-label="Details of Half a Lantern">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Get the ebook of Half a Lantern">{{i:book-open}}<span class="cover-actions__tip" aria-hidden="true">Get the ebook</span></button><button class="cover-actions__btn" type="button" aria-label="Audiobook of Half a Lantern in library">{{i:headphones}}<span class="cover-actions__tick" aria-hidden="true">{{i:check}}</span><span class="cover-actions__tip" aria-hidden="true">Audiobook in library</span></button><button class="cover-actions__btn" type="button" aria-label="Add Half a Lantern to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for Half a Lantern" aria-haspopup="menu" aria-controls="g-cover-menu-12">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div><span class="media-card__title">Half a Lantern</span><span class="media-card__meta">Owen Brightwater</span><div class="menu" id="g-cover-menu-12" role="menu" aria-label="More for Half a Lantern" data-fixed><a href="#" role="menuitem">{{i:external-link}}Open the book page</a><button type="button" role="menuitem">{{i:download}}Get both formats</button></div></li><li class="media-card cover-card" data-actions="on"><button class="cover-card__open" type="button" aria-label="The Cartographer's Daughter and the Long Winter Crossing, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#2f5d50;color:#fff;font-weight:700;padding:var(--space-2)">The Cartographer's Daughter and the Long Winter Crossing</div><div class="cover-actions" role="group" aria-label="Actions for The Cartographer's Daughter and the Long Winter Crossing"><button class="cover-actions__btn" type="button" aria-label="Details of The Cartographer's Daughter and the Long Winter Crossing">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Get the ebook of The Cartographer's Daughter and the Long Winter Crossing">{{i:book-open}}<span class="cover-actions__tip" aria-hidden="true">Get the ebook</span></button><button class="cover-actions__btn" type="button" aria-label="Get the audiobook of The Cartographer's Daughter and the Long Winter Crossing">{{i:headphones}}<span class="cover-actions__tip" aria-hidden="true">Get the audiobook</span></button><button class="cover-actions__btn" type="button" aria-label="Add The Cartographer's Daughter and the Long Winter Crossing to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for The Cartographer's Daughter and the Long Winter Crossing" aria-haspopup="menu" aria-controls="g-cover-menu-13">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div><span class="media-card__title">The Cartographer's Daughter and the Long Winter Crossing</span><span class="media-card__meta">Lise Moreau</span><div class="menu" id="g-cover-menu-13" role="menu" aria-label="More for The Cartographer's Daughter and the Long Winter Crossing" data-fixed><a href="#" role="menuitem">{{i:external-link}}Open the book page</a><button type="button" role="menuitem">{{i:download}}Get both formats</button></div></li><li class="media-card cover-card" data-actions="on"><button class="cover-card__open" type="button" aria-label="Beneath the Weir, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#5b3f7a;color:#fff;font-weight:700;padding:var(--space-2)">Beneath the Weir</div><div class="cover-actions" role="group" aria-label="Actions for Beneath the Weir"><button class="cover-actions__btn" type="button" aria-label="Details of Beneath the Weir">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Ebook of Beneath the Weir in library">{{i:book-open}}<span class="cover-actions__tick" aria-hidden="true">{{i:check}}</span><span class="cover-actions__tip" aria-hidden="true">Ebook in library</span></button><button class="cover-actions__btn" type="button" aria-label="Audiobook of Beneath the Weir in library">{{i:headphones}}<span class="cover-actions__tick" aria-hidden="true">{{i:check}}</span><span class="cover-actions__tip" aria-hidden="true">Audiobook in library</span></button><button class="cover-actions__btn" type="button" aria-label="Add Beneath the Weir to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for Beneath the Weir" aria-haspopup="menu" aria-controls="g-cover-menu-14">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div><span class="media-card__title">Beneath the Weir</span><span class="media-card__meta">Tomas Ferrand</span><div class="menu" id="g-cover-menu-14" role="menu" aria-label="More for Beneath the Weir" data-fixed><a href="#" role="menuitem">{{i:external-link}}Open the book page</a><button type="button" role="menuitem">{{i:download}}Get both formats</button></div></li><li class="media-card cover-card" data-actions="on"><button class="cover-card__open" type="button" aria-label="Sleeping Lanterns, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#8a5a1f;color:#fff;font-weight:700;padding:var(--space-2)">Sleeping Lanterns</div><div class="cover-actions" role="group" aria-label="Actions for Sleeping Lanterns"><button class="cover-actions__btn" type="button" aria-label="Details of Sleeping Lanterns">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Get the ebook of Sleeping Lanterns">{{i:book-open}}<span class="cover-actions__tip" aria-hidden="true">Get the ebook</span></button><button class="cover-actions__btn" type="button" aria-label="Get the audiobook of Sleeping Lanterns">{{i:headphones}}<span class="cover-actions__tip" aria-hidden="true">Get the audiobook</span></button><button class="cover-actions__btn" type="button" aria-label="Add Sleeping Lanterns to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for Sleeping Lanterns" aria-haspopup="menu" aria-controls="g-cover-menu-15">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div><span class="media-card__title">Sleeping Lanterns</span><span class="media-card__meta">Mara Ellison</span><div class="menu" id="g-cover-menu-15" role="menu" aria-label="More for Sleeping Lanterns" data-fixed><a href="#" role="menuitem">{{i:external-link}}Open the book page</a><button type="button" role="menuitem">{{i:download}}Get both formats</button></div></li><li class="media-card cover-card" data-actions="on"><button class="cover-card__open" type="button" aria-label="Glass Harbour, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#24566e;color:#fff;font-weight:700;padding:var(--space-2)">Glass Harbour</div><div class="cover-actions" role="group" aria-label="Actions for Glass Harbour"><button class="cover-actions__btn" type="button" aria-label="Details of Glass Harbour">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Ebook of Glass Harbour in library">{{i:book-open}}<span class="cover-actions__tick" aria-hidden="true">{{i:check}}</span><span class="cover-actions__tip" aria-hidden="true">Ebook in library</span></button><button class="cover-actions__btn" type="button" aria-label="Get the audiobook of Glass Harbour">{{i:headphones}}<span class="cover-actions__tip" aria-hidden="true">Get the audiobook</span></button><button class="cover-actions__btn" type="button" aria-label="Add Glass Harbour to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for Glass Harbour" aria-haspopup="menu" aria-controls="g-cover-menu-16">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div><span class="media-card__title">Glass Harbour</span><span class="media-card__meta">Mara Ellison</span><div class="menu" id="g-cover-menu-16" role="menu" aria-label="More for Glass Harbour" data-fixed><a href="#" role="menuitem">{{i:external-link}}Open the book page</a><button type="button" role="menuitem">{{i:download}}Get both formats</button></div></li><li class="media-card cover-card" data-actions="on"><button class="cover-card__open" type="button" aria-label="North of Quiet, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#6b2f5a;color:#fff;font-weight:700;padding:var(--space-2)">North of Quiet</div><div class="cover-actions" role="group" aria-label="Actions for North of Quiet"><button class="cover-actions__btn" type="button" aria-label="Details of North of Quiet">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Get the ebook of North of Quiet">{{i:book-open}}<span class="cover-actions__tip" aria-hidden="true">Get the ebook</span></button><button class="cover-actions__btn" type="button" aria-label="Get the audiobook of North of Quiet">{{i:headphones}}<span class="cover-actions__tip" aria-hidden="true">Get the audiobook</span></button><button class="cover-actions__btn" type="button" aria-label="Add North of Quiet to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for North of Quiet" aria-haspopup="menu" aria-controls="g-cover-menu-17">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div><span class="media-card__title">North of Quiet</span><span class="media-card__meta">Aidan Reyes</span><div class="menu" id="g-cover-menu-17" role="menu" aria-label="More for North of Quiet" data-fixed><a href="#" role="menuitem">{{i:external-link}}Open the book page</a><button type="button" role="menuitem">{{i:download}}Get both formats</button></div></li><li class="media-card cover-card" data-actions="on"><button class="cover-card__open" type="button" aria-label="A Map of Lost Things, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#3d5a2a;color:#fff;font-weight:700;padding:var(--space-2)">A Map of Lost Things</div><div class="cover-actions" role="group" aria-label="Actions for A Map of Lost Things"><button class="cover-actions__btn" type="button" aria-label="Details of A Map of Lost Things">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Get the ebook of A Map of Lost Things">{{i:book-open}}<span class="cover-actions__tip" aria-hidden="true">Get the ebook</span></button><button class="cover-actions__btn" type="button" aria-label="Audiobook of A Map of Lost Things in library">{{i:headphones}}<span class="cover-actions__tick" aria-hidden="true">{{i:check}}</span><span class="cover-actions__tip" aria-hidden="true">Audiobook in library</span></button><button class="cover-actions__btn" type="button" aria-label="Add A Map of Lost Things to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for A Map of Lost Things" aria-haspopup="menu" aria-controls="g-cover-menu-18">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div><span class="media-card__title">A Map of Lost Things</span><span class="media-card__meta">Lise Moreau</span><div class="menu" id="g-cover-menu-18" role="menu" aria-label="More for A Map of Lost Things" data-fixed><a href="#" role="menuitem">{{i:external-link}}Open the book page</a><button type="button" role="menuitem">{{i:download}}Get both formats</button></div></li><li class="media-card cover-card" data-actions="on"><button class="cover-card__open" type="button" aria-label="The Paper Orchard, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#4a3b2a;color:#fff;font-weight:700;padding:var(--space-2)">The Paper Orchard</div><div class="cover-actions" role="group" aria-label="Actions for The Paper Orchard"><button class="cover-actions__btn" type="button" aria-label="Details of The Paper Orchard">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Get the ebook of The Paper Orchard">{{i:book-open}}<span class="cover-actions__tip" aria-hidden="true">Get the ebook</span></button><button class="cover-actions__btn" type="button" aria-label="Get the audiobook of The Paper Orchard">{{i:headphones}}<span class="cover-actions__tip" aria-hidden="true">Get the audiobook</span></button><button class="cover-actions__btn" type="button" aria-label="Add The Paper Orchard to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for The Paper Orchard" aria-haspopup="menu" aria-controls="g-cover-menu-19">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div><span class="media-card__title">The Paper Orchard</span><span class="media-card__meta">Hana Sato</span><div class="menu" id="g-cover-menu-19" role="menu" aria-label="More for The Paper Orchard" data-fixed><a href="#" role="menuitem">{{i:external-link}}Open the book page</a><button type="button" role="menuitem">{{i:download}}Get both formats</button></div></li><li class="media-card cover-card" data-actions="on"><button class="cover-card__open" type="button" aria-label="Winter Lines, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#1f4f66;color:#fff;font-weight:700;padding:var(--space-2)">Winter Lines</div><div class="cover-actions" role="group" aria-label="Actions for Winter Lines"><button class="cover-actions__btn" type="button" aria-label="Details of Winter Lines">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Get the ebook of Winter Lines">{{i:book-open}}<span class="cover-actions__tip" aria-hidden="true">Get the ebook</span></button><button class="cover-actions__btn" type="button" aria-label="Get the audiobook of Winter Lines">{{i:headphones}}<span class="cover-actions__tip" aria-hidden="true">Get the audiobook</span></button><button class="cover-actions__btn" type="button" aria-label="Add Winter Lines to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for Winter Lines" aria-haspopup="menu" aria-controls="g-cover-menu-20">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div><span class="media-card__title">Winter Lines</span><span class="media-card__meta">Ruth Calder</span><div class="menu" id="g-cover-menu-20" role="menu" aria-label="More for Winter Lines" data-fixed><a href="#" role="menuitem">{{i:external-link}}Open the book page</a><button type="button" role="menuitem">{{i:download}}Get both formats</button></div></li><li class="media-card cover-card" data-actions="on"><button class="cover-card__open" type="button" aria-label="The Quiet Engine, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#2b4f6e;color:#fff;font-weight:700;padding:var(--space-2)">The Quiet Engine</div><div class="cover-actions" role="group" aria-label="Actions for The Quiet Engine"><button class="cover-actions__btn" type="button" aria-label="Details of The Quiet Engine">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Get the ebook of The Quiet Engine">{{i:book-open}}<span class="cover-actions__tip" aria-hidden="true">Get the ebook</span></button><button class="cover-actions__btn" type="button" aria-label="Get the audiobook of The Quiet Engine">{{i:headphones}}<span class="cover-actions__tip" aria-hidden="true">Get the audiobook</span></button><button class="cover-actions__btn" type="button" aria-label="Add The Quiet Engine to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for The Quiet Engine" aria-haspopup="menu" aria-controls="g-cover-menu-21">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div><span class="media-card__title">The Quiet Engine</span><span class="media-card__meta">Aidan Reyes</span><div class="menu" id="g-cover-menu-21" role="menu" aria-label="More for The Quiet Engine" data-fixed><a href="#" role="menuitem">{{i:external-link}}Open the book page</a><button type="button" role="menuitem">{{i:download}}Get both formats</button></div></li><li class="media-card cover-card" data-actions="on"><button class="cover-card__open" type="button" aria-label="Moth Hour, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#7a2e3b;color:#fff;font-weight:700;padding:var(--space-2)">Moth Hour</div><div class="cover-actions" role="group" aria-label="Actions for Moth Hour"><button class="cover-actions__btn" type="button" aria-label="Details of Moth Hour">{{i:info}}<span class="cover-actions__tip" aria-hidden="true">Details</span></button><button class="cover-actions__btn" type="button" aria-label="Ebook of Moth Hour in library">{{i:book-open}}<span class="cover-actions__tick" aria-hidden="true">{{i:check}}</span><span class="cover-actions__tip" aria-hidden="true">Ebook in library</span></button><button class="cover-actions__btn" type="button" aria-label="Get the audiobook of Moth Hour">{{i:headphones}}<span class="cover-actions__tip" aria-hidden="true">Get the audiobook</span></button><button class="cover-actions__btn" type="button" aria-label="Add Moth Hour to a list">{{i:list-plus}}<span class="cover-actions__tip" aria-hidden="true">Add to a list</span></button><button class="cover-actions__btn" type="button" aria-label="More for Moth Hour" aria-haspopup="menu" aria-controls="g-cover-menu-22">{{i:ellipsis}}<span class="cover-actions__tip" aria-hidden="true">More</span></button></div></div><span class="media-card__title">Moth Hour</span><span class="media-card__meta">Tomas Ferrand</span><div class="menu" id="g-cover-menu-22" role="menu" aria-label="More for Moth Hour" data-fixed><a href="#" role="menuitem">{{i:external-link}}Open the book page</a><button type="button" role="menuitem">{{i:download}}Get both formats</button></div></li></ul>
+      <div class="shelf-edge shelf-edge--start" hidden><button class="shelf-arrow" type="button" aria-label="Earlier books in For you">{{i:chevron-left}}</button></div>
+      <div class="shelf-edge shelf-edge--end"><button class="shelf-arrow" type="button" aria-label="More books in For you">{{i:chevron-right}}</button></div>
+    </div>
+  </div>
+  <div class="g-notes">
+    <div><h4>Behaviour</h4><ul><li>Each arrow press moves one screen less one cover. With Reduce motion on, the shelf jumps instead of sliding.</li><li>Tabbing to a book scrolls it fully into view, clear of the fade.</li><li>Arrows are named "Earlier books in &lt;shelf&gt;" and "More books in &lt;shelf&gt;". "View all" stays in the heading.</li><li>Shelves that load more as you go keep loading when the arrow reaches the end.</li></ul></div>
+    <div><h4>Classes</h4><ul><li><code>.shelf-scroller</code>, <code>.shelf-track</code>, <code>.shelf-edge--start</code>, <code>.shelf-edge--end</code>, <code>.shelf-arrow</code></li><li>Set <code>--shelf-cover-w</code> to the cover width and <code>--shelf-fade-bg</code> to the colour behind the shelf.</li></ul></div>
+  </div>
+</section>
+
+<section class="g-section" id="toolbar" aria-labelledby="toolbar-h">
+  <header><h2 id="toolbar-h">Section toolbar</h2><p class="muted">Design D: everything that changes what the list shows, on one line under the heading. The same on every list in both apps.</p></header>
+  <div class="g-demo">
+    <div class="toolbar">
+      <div class="toolbar__row">
+        <fieldset class="segmented" aria-label="View"><legend class="visually-hidden">View</legend><label><input type="radio" name="g-view" checked><span>{{i:layout-grid}}<span class="visually-hidden">Covers</span></span></label><label><input type="radio" name="g-view"><span>{{i:list}}<span class="visually-hidden">List</span></span></label></fieldset>
+        <div class="toolbar__search"><input class="input" type="search" aria-label="Search this list" placeholder="Title, author or narrator"></div>
+        <div class="filter-chips" role="group" aria-label="Format"><button class="filter-chip" type="button" aria-pressed="false">Audiobooks</button><button class="filter-chip" type="button" aria-pressed="false">Ebooks</button></div>
+        <div class="toolbar__end"><span class="toolbar__count">2,418 books</span>
+          <div class="menu-wrap"><button class="btn" type="button" aria-haspopup="menu" aria-controls="g-menu-sort2">{{i:arrow-up-down}}Sort: Title{{i:chevron-down}}</button><div class="menu" id="g-menu-sort2" role="menu" aria-label="Sort"><button type="button" role="menuitemradio" aria-checked="true">Title</button><button type="button" role="menuitemradio" aria-checked="false">Author</button></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="g-section" id="settings" aria-labelledby="settings-h">
+  <header><h2 id="settings-h">Settings rows and save bar</h2><p class="muted">Label and explanation on the left, the control on the right. Things with several fields (a connection, an account) open a slide-out to edit, so the list stays in view.</p></header>
+  <div class="g-demo">
+    <section class="settings-section" aria-labelledby="g-set-h">
+      <div class="settings-section__head"><h3 id="g-set-h">Download clients</h3><p class="small muted">Where requested books are sent to download.</p></div>
+      <ul class="settings-rows">
+        <li class="setting"><div class="setting__text"><span class="setting__label" id="g-s1">Check connections</span><span class="setting__hint">How often to test each client in the background.</span></div><div class="setting__control"><select class="select" aria-labelledby="g-s1" style="max-width:220px"><option>Every 5 minutes</option><option>Every hour</option></select></div></li>
+        <li class="setting"><div class="setting__text"><span class="setting__label">Remove finished downloads</span><span class="setting__hint">After they are imported and have seeded to the ratio set in the client.</span></div><div class="setting__control"><label class="switch"><span class="visually-hidden">Remove finished downloads</span><input type="checkbox" role="switch" checked></label></div></li>
+        <li class="setting setting--opens"><div class="setting__text"><span class="setting__label">qBittorrent</span><span class="setting__hint">Category storyarr · <span class="chip" data-tone="success">{{i:circle-check}}Connected</span></span></div><div class="setting__control"><button class="btn" type="button" data-opens="g-panel-edit">{{i:pencil}}Edit<span class="visually-hidden"> qBittorrent</span></button></div></li>
+      </ul>
+      <div class="save-bar" role="region" aria-label="Unsaved changes"><span class="save-bar__text">2 unsaved changes</span><button class="btn btn--primary" type="button">Save changes</button><button class="btn btn--quiet" type="button">Discard</button></div>
+    </section>
+  </div>
+</section>
+
+<section class="g-section" id="timeline" aria-labelledby="timeline-h">
+  <header><h2 id="timeline-h">Timeline</h2><p class="muted">What happened to one thing, newest first. Used in a request's slide-out and a backup run's details. Shapes match the status chips.</p></header>
+  <div class="g-demo">
+    <ol class="timeline">
+      <li class="timeline__item" data-tone="success"><span class="timeline__title">Imported to Fiction</span><span class="timeline__meta">Today, 22:48 · 610 MB, audiobook</span></li>
+      <li class="timeline__item"><span class="timeline__title">Downloaded</span><span class="timeline__meta">Today, 22:41 · qBittorrent, category storyarr</span></li>
+      <li class="timeline__item" data-tone="warning"><span class="timeline__title">First release stalled; tried the next one</span><span class="timeline__meta">Today, 21:10 · no seeders for 2 hours</span></li>
+      <li class="timeline__item"><span class="timeline__title">Requested</span><span class="timeline__meta">Yesterday, 18:02 · by Alex</span></li>
+    </ol>
+  </div>
+  <div class="g-notes"><div><h4>Rules</h4><ul><li>Each entry says what happened and when; the reason goes in the meta line.</li><li>An ordered list, so screen readers say how many steps there were.</li></ul></div></div>
+</section>
+
+<section class="g-section" id="calendar-month" aria-labelledby="calendar-month-h">
+  <header><h2 id="calendar-month-h">Calendar month</h2><p class="muted">A real table, weeks from Monday. A day with releases shows small covers, the first title and a button that opens the day's slide-out. Weekday names shorten on narrow screens; on phones the month becomes an agenda of only the days with releases.</p></header>
+  <div class="g-demo">
+    <table class="calendar"><caption class="visually-hidden">Releases in November 2026 (first two weeks)</caption><thead><tr><th scope="col"><span class="calendar__long">Monday</span><abbr class="calendar__short" title="Monday">Mon</abbr></th><th scope="col"><span class="calendar__long">Tuesday</span><abbr class="calendar__short" title="Tuesday">Tue</abbr></th><th scope="col"><span class="calendar__long">Wednesday</span><abbr class="calendar__short" title="Wednesday">Wed</abbr></th><th scope="col"><span class="calendar__long">Thursday</span><abbr class="calendar__short" title="Thursday">Thu</abbr></th><th scope="col"><span class="calendar__long">Friday</span><abbr class="calendar__short" title="Friday">Fri</abbr></th><th scope="col"><span class="calendar__long">Saturday</span><abbr class="calendar__short" title="Saturday">Sat</abbr></th><th scope="col"><span class="calendar__long">Sunday</span><abbr class="calendar__short" title="Sunday">Sun</abbr></th></tr></thead><tbody><tr><td data-label="Monday 26 October" data-outside data-empty><span class="calendar__day numeric">26</span></td><td data-label="Tuesday 27 October" data-outside data-empty><span class="calendar__day numeric">27</span></td><td data-label="Wednesday 28 October" data-outside data-empty><span class="calendar__day numeric">28</span></td><td data-label="Thursday 29 October" data-outside data-empty><span class="calendar__day numeric">29</span></td><td data-label="Friday 30 October" data-outside data-empty><span class="calendar__day numeric">30</span></td><td data-label="Saturday 31 October" data-outside data-empty><span class="calendar__day numeric">31</span></td><td data-label="Sunday 1 November"><span class="calendar__day numeric">1</span><div class="calendar__covers"><div class="cover cover--mini" aria-hidden="true" style="background:linear-gradient(160deg,#323a77,#af4e24)"></div></div><div class="calendar__titles small clamp-2">The Tidewright</div><button class="btn btn--compact calendar__open" type="button">1 release<span class="visually-hidden"> on Sunday 1 November</span></button></td></tr><tr><td data-label="Monday 2 November" aria-current="date" data-empty><span class="calendar__day numeric">2</span></td><td data-label="Tuesday 3 November"><span class="calendar__day numeric">3</span><div class="calendar__covers"><div class="cover cover--mini" aria-hidden="true" style="background:linear-gradient(160deg,#0f4c45,#a8781a)"></div><div class="cover cover--mini" aria-hidden="true" style="background:linear-gradient(160deg,#5a1e3a,#c0712a)"></div><div class="cover cover--mini" aria-hidden="true" style="background:linear-gradient(160deg,#323a77,#af4e24)"></div></div><div class="calendar__titles small clamp-2">Night Ferry and 3 more</div><button class="btn btn--compact calendar__open" type="button">4 releases<span class="visually-hidden"> on Tuesday 3 November</span></button></td><td data-label="Wednesday 4 November" data-empty><span class="calendar__day numeric">4</span></td><td data-label="Thursday 5 November"><span class="calendar__day numeric">5</span><div class="calendar__covers"><div class="cover cover--mini" aria-hidden="true" style="background:linear-gradient(160deg,#5a1e3a,#c0712a)"></div></div><div class="calendar__titles small clamp-2">A Small Weather</div><button class="btn btn--compact calendar__open" type="button">1 release<span class="visually-hidden"> on Thursday 5 November</span></button></td><td data-label="Friday 6 November" data-empty><span class="calendar__day numeric">6</span></td><td data-label="Saturday 7 November" data-empty><span class="calendar__day numeric">7</span></td><td data-label="Sunday 8 November" data-empty><span class="calendar__day numeric">8</span></td></tr></tbody></table>
+  </div>
+  <div class="g-notes"><div><h4>Rules</h4><ul><li>Each day's button says how many releases and names the date in hidden text.</li><li>Covers are decorative beside the title; the app's icon stands in when there is no cover.</li><li>Days outside the month or the range are greyed out and have no button.</li></ul></div></div>
+</section>
+
+<section class="g-section" id="slide-out" aria-labelledby="slide-out-h">
+  <header><h2 id="slide-out-h">Slide-out</h2><p class="muted">From the right, over a dimmed page. For the details of one thing, and for editing it, without losing your place in the list. Its header wears the page background (<code>--color-slide-header</code>) and its body is the raised surface: white in Light, the dark surface in Dark. The phone menu, which slides from the left, looks the same.</p></header>
+  <div class="g-demo g-demo--row">
+    <button class="btn" type="button" data-opens="g-panel-display">{{i:sun}}Display and accessibility</button>
+    <button class="btn" type="button" data-opens="g-panel-book">Book summary</button>
+    <button class="btn" type="button" data-opens="g-panel-edit">Edit a connection</button>
+    <button class="btn" type="button" data-opens="g-panel-app">App or disk details</button>
+  </div>
+  <div class="g-notes">
+    <div><h4>Behaviour</h4><ul><li>Focus moves to Close; Tab stays inside; Escape, Close or a press outside closes it; focus returns to what opened it.</li><li>The page behind does not scroll. Its address can include the open item, so Back closes it.</li><li>Editing: Save and Cancel in a footer that stays put; Remove on the far right, which asks first.</li></ul></div>
+    <div><h4>Sizes</h4><ul><li>420px; <code>.side-panel--wide</code> 640px for logs or long forms; full width on phones.</li></ul></div>
+    <div><h4>Colour</h4><ul><li>Header: the page background, so it reads as part of the page. Body and footer: the raised surface. Dialogs keep the plain header, so a slide-out and a dialog look different at a glance.</li><li>High contrast keeps a solid line under the header.</li></ul></div>
+    <div><h4>Classes</h4><ul><li><code>.side-panel-layer</code>, <code>.side-panel-backdrop</code>, <code>.side-panel</code>, <code>.panel-header</code>, <code>.side-panel__body</code>, <code>.side-panel__foot</code>, <code>.side-panel__lead</code></li></ul></div>
+  </div>
+</section>
+
+<section class="g-section" id="dialog" aria-labelledby="dialog-h">
+  <header><h2 id="dialog-h">Dialog</h2><p class="muted">A modal, only for a decision or a short task that must finish before going on: confirming a removal, adding a list, a password check. Its header is plain (the panel header colour), unlike a slide-out's.</p></header>
+  <div class="g-demo g-demo--row">
+    <button class="btn btn--danger" type="button" data-dialog="g-dialog">{{i:trash-2}}Remove qBittorrent</button>
+  </div>
+  <dialog class="dialog" id="g-dialog" aria-labelledby="g-dialog-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="g-dialog-h">Remove qBittorrent?</h2><button class="icon-btn" type="button" data-closes aria-label="Close">{{i:x}}</button></div>
+    <div class="dialog__body"><p>Books already downloaded stay where they are. Downloads in progress stop being tracked.</p></div>
+    <div class="dialog__foot"><button class="btn btn--danger btn--primary" type="button" data-closes>Remove qBittorrent</button><button class="btn btn--quiet" type="button" data-closes>Keep it</button></div>
+  </dialog>
+</section>
+
+<section class="g-section" id="which" aria-labelledby="which-h">
+  <header><h2 id="which-h">Slide-out, dialog or page</h2><p class="muted">The rule both apps follow when something opens.</p></header>
+  <table class="g-table">
+    <thead><tr><th scope="col">Use</th><th scope="col">When</th><th scope="col">Examples</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Slide-out</th><td>Details of one item in a list, or editing it, where seeing the list still helps. Can hold a few actions. Also settings people change while looking at the page.</td><td>Book summary; a request in the queue; a download client, indexer or reading account; a user; a log entry; an app, disk or download on Starboard; a backup run; Release notes; Display and accessibility.</td></tr>
+      <tr><th scope="row">Dialog</th><td>A decision or a short task that must be finished or cancelled before going on. One or two fields at most.</td><td>Remove or reset (confirm); Add list; a password check before a download or restore.</td></tr>
+      <tr><th scope="row">Page</th><td>Something people come back to, link to or spend time in; long content with its own sections.</td><td>Book, author and series pages; narrator page; Disk health; Settings sections; Upgrade wizard.</td></tr>
+      <tr><th scope="row">In place</th><td>A small change to a value people are already looking at.</td><td>Switches and selects in settings rows; filter chips; cover size.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="g-section" id="events" aria-labelledby="events-h">
+  <header><h2 id="events-h">Event list</h2><p class="muted">Things that happened, newest first, each with its time and a status icon (the word is hidden text and a tooltip). Used for disk events on Starboard. For the history of one thing with steps, use the Timeline.</p></header>
+  <div class="g-demo">
+    <ul class="rows">
+      <li class="row row--no-lead"><p><span class="status-icon" data-tone="danger" title="Problem">{{i:circle-x}}<span class="visually-hidden">Problem: </span></span><span class="small muted numeric">2026-11-02 09:15 </span>/dev/sdc: SMART self-test failed</p></li>
+      <li class="row row--no-lead"><p><span class="status-icon" data-tone="warning" title="Worth a look">{{i:triangle-alert}}<span class="visually-hidden">Worth a look: </span></span><span class="small muted numeric">2026-11-01 03:00 </span>/dev/sdb: reallocated sectors 0 to 8</p></li>
+      <li class="row row--no-lead"><p><span class="status-icon" title="Information">{{i:info}}<span class="visually-hidden">Information: </span></span><span class="small muted numeric">2026-10-31 03:00 </span>/dev/sda: extended self-test completed</p></li>
+    </ul>
+  </div>
+  <div class="g-notes"><div><h4>Classes</h4><ul><li><code>.rows</code>, <code>.row--no-lead</code>, <code>.status-icon[data-tone]</code>, <code>.numeric</code></li></ul></div></div>
+</section>
+
+<section class="g-section" id="changes-preview" aria-labelledby="changes-preview-h">
+  <header><h2 id="changes-preview-h">What will change</h2><p class="muted">Before anything is copied or changed in another app, a table says what happens to each thing, with one chip per row. Then one primary button does it. Used for Copy app settings on Starboard.</p></header>
+  <div class="g-demo">
+    <div class="table-wrap" data-stack><table class="table"><caption class="visually-hidden">Download clients</caption>
+      <thead><tr><th scope="col">Name</th><th scope="col">What happens</th></tr></thead>
+      <tbody>
+        <tr><th scope="row" data-label="Name">qBittorrent (qBittorrent)</th><td data-label="What happens"><span class="chip" data-tone="info">{{i:info}}Will be added</span></td></tr>
+        <tr><th scope="row" data-label="Name">SABnzbd (SABnzbd)</th><td data-label="What happens"><span class="chip" data-tone="muted">{{i:minus}}Already there</span></td></tr>
+        <tr><th scope="row" data-label="Name">Naming</th><td data-label="What happens"><span class="chip" data-tone="warning">{{i:triangle-alert}}Will be replaced</span></td></tr>
+      </tbody></table></div>
+    <div class="actions"><button class="btn btn--primary" type="button">{{i:copy}}Copy</button></div>
+  </div>
+  <div class="g-notes"><div><h4>Words</h4><ul><li>Will be added, Already there (left as it is), Will be replaced. Nothing already there is changed unless the row says Will be replaced.</li></ul></div></div>
+</section>
+
+<section class="g-section" id="month-nav" aria-labelledby="month-nav-h">
+  <header><h2 id="month-nav-h">Earlier and later</h2><p class="muted">Moving a calendar a month at a time. The buttons name the month they go to; Back to now appears only away from the current window. Above the first month, in the calendar view only.</p></header>
+  <div class="g-demo">
+    <div class="actions"><button class="btn" type="button">{{i:chevron-left}}Earlier: October</button><button class="btn btn--quiet" type="button">Back to now</button><button class="btn" type="button">Later: December{{i:chevron-right}}</button></div>
+  </div>
+</section>
+
+<section class="g-section" id="check-history" aria-labelledby="check-history-h">
+  <header><h2 id="check-history-h">Recent checks</h2><p class="muted">The last checks of one app, newest first, in its slide-out. A small table: time, a status chip with any message under it, and how long it took. Check again in the slide-out checks only that app.</p></header>
+  <div class="g-demo">
+    <div class="table-wrap" data-stack><table class="table"><caption class="visually-hidden">Recent checks of Sonarr, newest first</caption>
+      <thead><tr><th scope="col">Time</th><th scope="col">Result</th><th scope="col">Answered in</th></tr></thead>
+      <tbody>
+        <tr><td data-label="Time" class="numeric">17:05</td><td data-label="Result"><span class="chip" data-tone="success">{{i:circle-check}}Running</span></td><td data-label="Answered in" class="numeric">6 ms</td></tr>
+        <tr><td data-label="Time" class="numeric">17:00</td><td data-label="Result"><span class="chip" data-tone="danger">{{i:circle-x}}Not responding</span><div class="small muted">Cannot reach Sonarr</div></td><td data-label="Answered in" class="numeric"></td></tr>
+      </tbody></table></div>
+    <p class="small muted">When it is down, the notice says for how long: "Not responding for 12 minutes."</p>
+  </div>
+</section>
+
+</main>
+</div>
+</div>
+
+<!-- Slide-outs used by the demos -->
+  <div class="side-panel-layer" id="g-panel-logo" hidden>
+    <div class="side-panel-backdrop"></div>
+    <aside class="side-panel side-panel--wide" role="dialog" aria-modal="true" aria-labelledby="g-pl-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="g-pl-h">Series logo</h2><button class="icon-btn" type="button" data-closes aria-label="Close series logo">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <section class="logo-saved" aria-labelledby="g-pl-saved"><h3 id="g-pl-saved">{{i:hard-drive}}Saved logo</h3>
+        <div class="logo-saved__row"><span class="logo-mask" role="img" aria-label="Saved logo for The Glass Harbour" style="--logo:url(&quot;data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20640%20120%22%3E%20%3Cg%20fill%3D%22%23000%22%3E%20%3Cpath%20d%3D%22M38%2018h14l3%2010h-20z%22/%3E%3Cpath%20d%3D%22M36%2030h18l6%2074H30z%22/%3E%3Crect%20x%3D%2224%22%20y%3D%22104%22%20width%3D%2242%22%20height%3D%228%22/%3E%20%3Cpath%20d%3D%22M45%206l9%2010H36z%22/%3E%20%3Cpath%20d%3D%22M60%2022l40-10v4l-40%209zM30%2022l-28-9v4l28%208z%22%20opacity%3D%22.55%22/%3E%20%3Ctext%20x%3D%2284%22%20y%3D%2258%22%20font-family%3D%22Georgia%2C%20%27Times%20New%20Roman%27%2C%20serif%22%20font-size%3D%2230%22%20letter-spacing%3D%226%22%3ETHE%3C/text%3E%20%3Ctext%20x%3D%2280%22%20y%3D%22104%22%20font-family%3D%22Georgia%2C%20%27Times%20New%20Roman%27%2C%20serif%22%20font-size%3D%2254%22%20font-weight%3D%22700%22%20letter-spacing%3D%222%22%3EGLASS%20HARBOUR%3C/text%3E%20%3Crect%20x%3D%22186%22%20y%3D%2246%22%20width%3D%22430%22%20height%3D%223%22/%3E%20%3C/g%3E%20%3C/svg%3E&quot;);--logo-ratio:640 / 120"></span>
+          <div class="logo-saved__text"><span>Saved on this server at <code>config/series-logos/hardcover-1042.svg</code></span><span class="muted">Uploaded</span><div class="series-head__actions"><button class="btn btn--danger" type="button">Remove</button></div></div></div></section>
+      <div class="logo-tabs" role="tablist" aria-label="Ways to get a logo">
+        <button type="button" role="tab" aria-selected="true">{{i:book-open}}From a cover</button>
+        <button type="button" role="tab" aria-selected="false" tabindex="-1">{{i:globe}}Find online</button>
+        <button type="button" role="tab" aria-selected="false" tabindex="-1">{{i:upload}}Upload your own</button>
+      </div>
+      <div class="logo-pane" role="tabpanel" tabindex="0" aria-label="Find online">
+        <ul class="logo-candidates">
+          <li class="logo-candidate" aria-current="true"><span class="logo-candidate__art"><span class="logo-mask" role="img" aria-label="Preview of Glass Harbour wordmark.svg" style="--logo:url(&quot;data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20640%20120%22%3E%20%3Cg%20fill%3D%22%23000%22%3E%20%3Cpath%20d%3D%22M38%2018h14l3%2010h-20z%22/%3E%3Cpath%20d%3D%22M36%2030h18l6%2074H30z%22/%3E%3Crect%20x%3D%2224%22%20y%3D%22104%22%20width%3D%2242%22%20height%3D%228%22/%3E%20%3Cpath%20d%3D%22M45%206l9%2010H36z%22/%3E%20%3Cpath%20d%3D%22M60%2022l40-10v4l-40%209zM30%2022l-28-9v4l28%208z%22%20opacity%3D%22.55%22/%3E%20%3Ctext%20x%3D%2284%22%20y%3D%2258%22%20font-family%3D%22Georgia%2C%20%27Times%20New%20Roman%27%2C%20serif%22%20font-size%3D%2230%22%20letter-spacing%3D%226%22%3ETHE%3C/text%3E%20%3Ctext%20x%3D%2280%22%20y%3D%22104%22%20font-family%3D%22Georgia%2C%20%27Times%20New%20Roman%27%2C%20serif%22%20font-size%3D%2254%22%20font-weight%3D%22700%22%20letter-spacing%3D%222%22%3EGLASS%20HARBOUR%3C/text%3E%20%3Crect%20x%3D%22186%22%20y%3D%2246%22%20width%3D%22430%22%20height%3D%223%22/%3E%20%3C/g%3E%20%3C/svg%3E&quot;);--logo-ratio:640 / 120"></span></span><span class="logo-candidate__text"><b>Glass Harbour wordmark.svg</b><span class="muted">Wikimedia Commons, SVG, 640 by 120</span><span class="muted">Licence: public domain</span></span><button class="btn" type="button">Use this logo</button></li>
+          <li class="logo-candidate"><span class="logo-candidate__art"></span><span class="logo-candidate__text"><b>Harbour Aachen Logo.png</b><span class="muted">Wikimedia Commons, PNG, 800 by 300</span><span class="muted">Licence: CC BY-SA 4.0</span><span class="chip" data-tone="warning">Probably not this series: it does not mention Mara Ellison</span></span><button class="btn" type="button">Use this logo</button></li>
+        </ul>
+        <div class="logo-drop"><label for="g-logo-file"><strong>Upload a logo</strong></label><span class="hint">SVG, PNG or WebP with a transparent background, up to 1 MB.</span><input id="g-logo-file" type="file" accept="image/svg+xml,image/png,image/webp"></div>
+      </div>
+      <fieldset class="field"><legend>Colour</legend><div class="segmented"><label><input type="radio" name="g-logo-colour" checked><span>Text colour</span></label><label><input type="radio" name="g-logo-colour"><span>Accent colour</span></label></div></fieldset>
+      <div class="logo-preview"><div class="logo-preview__light"><span class="logo-mask" role="img" aria-label="Logo on the light theme" style="--logo:url(&quot;data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20640%20120%22%3E%20%3Cg%20fill%3D%22%23000%22%3E%20%3Cpath%20d%3D%22M38%2018h14l3%2010h-20z%22/%3E%3Cpath%20d%3D%22M36%2030h18l6%2074H30z%22/%3E%3Crect%20x%3D%2224%22%20y%3D%22104%22%20width%3D%2242%22%20height%3D%228%22/%3E%20%3Cpath%20d%3D%22M45%206l9%2010H36z%22/%3E%20%3Cpath%20d%3D%22M60%2022l40-10v4l-40%209zM30%2022l-28-9v4l28%208z%22%20opacity%3D%22.55%22/%3E%20%3Ctext%20x%3D%2284%22%20y%3D%2258%22%20font-family%3D%22Georgia%2C%20%27Times%20New%20Roman%27%2C%20serif%22%20font-size%3D%2230%22%20letter-spacing%3D%226%22%3ETHE%3C/text%3E%20%3Ctext%20x%3D%2280%22%20y%3D%22104%22%20font-family%3D%22Georgia%2C%20%27Times%20New%20Roman%27%2C%20serif%22%20font-size%3D%2254%22%20font-weight%3D%22700%22%20letter-spacing%3D%222%22%3EGLASS%20HARBOUR%3C/text%3E%20%3Crect%20x%3D%22186%22%20y%3D%2246%22%20width%3D%22430%22%20height%3D%223%22/%3E%20%3C/g%3E%20%3C/svg%3E&quot;);--logo-ratio:640 / 120"></span><small>Light</small></div><div class="logo-preview__dark"><span class="logo-mask" role="img" aria-label="Logo on the dark theme" style="--logo:url(&quot;data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20640%20120%22%3E%20%3Cg%20fill%3D%22%23000%22%3E%20%3Cpath%20d%3D%22M38%2018h14l3%2010h-20z%22/%3E%3Cpath%20d%3D%22M36%2030h18l6%2074H30z%22/%3E%3Crect%20x%3D%2224%22%20y%3D%22104%22%20width%3D%2242%22%20height%3D%228%22/%3E%20%3Cpath%20d%3D%22M45%206l9%2010H36z%22/%3E%20%3Cpath%20d%3D%22M60%2022l40-10v4l-40%209zM30%2022l-28-9v4l28%208z%22%20opacity%3D%22.55%22/%3E%20%3Ctext%20x%3D%2284%22%20y%3D%2258%22%20font-family%3D%22Georgia%2C%20%27Times%20New%20Roman%27%2C%20serif%22%20font-size%3D%2230%22%20letter-spacing%3D%226%22%3ETHE%3C/text%3E%20%3Ctext%20x%3D%2280%22%20y%3D%22104%22%20font-family%3D%22Georgia%2C%20%27Times%20New%20Roman%27%2C%20serif%22%20font-size%3D%2254%22%20font-weight%3D%22700%22%20letter-spacing%3D%222%22%3EGLASS%20HARBOUR%3C/text%3E%20%3Crect%20x%3D%22186%22%20y%3D%2246%22%20width%3D%22430%22%20height%3D%223%22/%3E%20%3C/g%3E%20%3C/svg%3E&quot;);--logo-ratio:640 / 120"></span><small>Dark</small></div></div>
+    </div>
+    <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Save logo</button><button class="btn btn--quiet" type="button" data-closes>Cancel</button></div>
+    </aside>
+  </div>
+<div class="side-panel-layer" id="g-panel-book" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="g-pb-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="g-pb-h">Summary</h2><button class="icon-btn" type="button" data-closes aria-label="Close summary">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <div class="side-panel__lead"><div class="cover" style="background:linear-gradient(160deg,#323a77,#af4e24);color:#fff">The Glass Harbour</div><div style="display:grid;gap:8px"><h3 style="font-size:var(--text-lg)">The Glass Harbour</h3><span class="chip" data-tone="success">{{i:circle-check}}In library</span><span class="small muted">Ebook and audiobook</span></div></div>
+      <dl class="facts"><dt>Author</dt><dd><a href="#media">Mara Ellison</a></dd><dt>Series</dt><dd><a href="#media">The Glass Harbour, book 2</a></dd><dt>Narrated by</dt><dd><a href="#media">Sam Oduya</a></dd><dt>Published</dt><dd>21 Sept 2026</dd><dt>Pages</dt><dd>412</dd></dl>
+      <p>A harbour town keeps its secrets in glass. When the lighthouse keeper vanishes, his niece finds the lamp still lit.</p>
+    </div>
+    <div class="side-panel__foot"><a class="btn btn--primary" href="#media">Open book page</a><button class="btn" type="button">{{i:download}}Search for audiobook</button></div>
+  </aside>
+</div>
+
+<div class="side-panel-layer" id="g-panel-edit" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="g-pe-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="g-pe-h">qBittorrent</h2><button class="icon-btn" type="button" data-closes aria-label="Close qBittorrent">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <div class="notice" data-tone="success" role="status">{{i:circle-check}}<div class="notice__body"><span class="notice__title">Connected</span><p>Tested 2 minutes ago, version 5.0.3.</p></div></div>
+      <div class="field"><label for="g-pe-1">Server address</label><input class="input" id="g-pe-1" value="http://qbittorrent:8080"></div>
+      <div class="field"><label for="g-pe-2">Username</label><input class="input" id="g-pe-2" autocomplete="off" value="admin"></div>
+      <div class="field"><label for="g-pe-3">Password</label><span class="hint" id="g-pe-3h">Leave blank to keep the saved password.</span><input class="input" id="g-pe-3" type="password" aria-describedby="g-pe-3h"></div>
+      <div class="field"><label for="g-pe-4">Download category</label><span class="hint" id="g-pe-4h">Letters, numbers, - and _ only.</span><input class="input" id="g-pe-4" aria-describedby="g-pe-4h" value="storyarr"></div>
+      <dl class="facts"><dt>Download folder</dt><dd><code>/data/torrents/storyarr</code></dd></dl>
+    </div>
+    <div class="side-panel__foot"><button class="btn btn--primary" type="button">Save and test</button><button class="btn btn--quiet" type="button" data-closes>Cancel</button><button class="btn btn--danger" type="button">{{i:trash-2}}Remove</button></div>
+  </aside>
+</div>
+
+<div class="side-panel-layer" id="g-panel-display" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="g-pd-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="g-pd-h">Display and accessibility</h2><button class="icon-btn" type="button" data-closes aria-label="Close display and accessibility">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <fieldset><legend>Theme</legend><div class="segmented"><label><input type="radio" name="g-pd-theme" checked><span>Match device</span></label><label><input type="radio" name="g-pd-theme"><span>Light</span></label><label><input type="radio" name="g-pd-theme"><span>Dark</span></label></div></fieldset>
+      <fieldset><legend>Text size</legend><div class="segmented"><label><input type="radio" name="g-pd-text" checked><span>100%</span></label><label><input type="radio" name="g-pd-text"><span>125%</span></label><label><input type="radio" name="g-pd-text"><span>150%</span></label><label><input type="radio" name="g-pd-text"><span>175%</span></label></div></fieldset>
+      <fieldset><legend>Reduce motion</legend><div class="segmented"><label><input type="radio" name="g-pd-motion" checked><span>Match device</span></label><label><input type="radio" name="g-pd-motion"><span>On</span></label><label><input type="radio" name="g-pd-motion"><span>Off</span></label></div></fieldset>
+      <label class="switch"><span>High contrast</span><input type="checkbox" role="switch"></label>
+      <label class="switch"><span>Underline links</span><input type="checkbox" role="switch"></label>
+      <label class="switch"><span>Wider text spacing</span><input type="checkbox" role="switch"></label>
+      <p class="small muted">Choices apply at once and are kept in this browser.</p>
+    </div>
+    <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Done</button><button class="btn" type="button">Reset</button></div>
+  </aside>
+</div>
+
+<div class="side-panel-layer" id="g-panel-app" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="g-pa-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="g-pa-h">Disk 3</h2><button class="icon-btn" type="button" data-closes aria-label="Close Disk 3">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <div class="notice" data-tone="warning">{{i:triangle-alert}}<div class="notice__body"><span class="notice__title">Needs attention</span><p>12 sectors were reallocated this week. Back up its data and plan to replace it.</p></div></div>
+      <div class="meter"><div class="meter__label"><span>Used</span><span class="numeric">3.1 of 3.6 TB (86%)</span></div><div class="progress" data-tone="warning"><span style="width:86%"></span></div></div>
+      <dl class="facts"><dt>Model</dt><dd>4 TB, 5400 rpm</dd><dt>Temperature</dt><dd>38°C</dd><dt>Powered on</dt><dd>3 years, 41 days</dd><dt>Last SMART check</dt><dd>Today, 03:00</dd></dl>
+      <details class="disclosure"><summary>SMART report</summary><div class="disclosure__body"><code class="code-block">Reallocated sectors: 12
+Pending sectors: 0</code></div></details>
+    </div>
+    <div class="side-panel__foot"><button class="btn" type="button">{{i:refresh-cw}}Check again</button></div>
+  </aside>
+</div>
+
+<script src="components.js"></script>
+<script>
+  // Colour swatches, read from the live tokens so they follow the theme.
+  const names = ["bg","header","surface","surface-raised","surface-sunken","text","text-muted","border","divider","accent","accent-text","accent-soft","focus","count"];
+  const tones = ["success","info","warning","danger","muted"];
+  const box = document.getElementById("g-swatches");
+  for (const n of names) box.insertAdjacentHTML("beforeend", `<div class="g-swatch"><span style="background:var(--color-${n})"></span><span><code>--color-${n}</code></span></div>`);
+  for (const t of tones) box.insertAdjacentHTML("beforeend", `<div class="g-swatch"><span style="background:var(--status-${t}-bg);border-color:var(--status-${t}-fg);border-width:3px"></span><span><code>--status-${t}-*</code></span></div>`);
+</script>
+</body>
+</html>

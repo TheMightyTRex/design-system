@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Disk health · Starboard board</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  /* Board only, as in the gallery: icon sizes (no icon size class in the library yet). */
+  svg.i { width: var(--icon-md); height: var(--icon-md); }
+  svg.i-lg { width: var(--icon-lg); height: var(--icon-lg); }
+  svg.i-xl { width: 32px; height: 32px; }
+</style>
+</head>
+<body>
+<!--ICONS-->
+<a class="skip-link" href="#main">Skip to main content</a>
+<aside aria-label="About this board" style="padding:var(--space-4) var(--space-8);background:var(--color-surface-sunken);border-bottom:1px solid var(--color-divider)">
+  <div class="notice" style="max-width:1100px">{{i:info}}<div class="notice__body"><span class="notice__title">What changed and why</span>
+<ul style="margin:0;padding-left:var(--space-5)">
+  <li>Large disk cards become <strong>one compact row per disk, sorted by tone</strong> (failing, then to check, then healthy), so nine or more disks fit on one page.</li>
+  <li>Each disk opens a wide <strong>SMART report slide-out</strong>: facts, problem counters, the full attribute table, self-tests and that disk's events. The full table was not available before.</li>
+  <li>Summary tiles (disks, to check, hottest, oldest) lead; the temperature and age charts move under the list as meters.</li>
+</ul>
+  </div><a class="btn btn--compact" href="index-starboard.html">All boards</a></div>
+</aside>
+<header class="site-header">
+  <div class="site-header__bar">
+    <a class="site-header__brand" href="starboard-apps.html" style="display:inline-flex;padding-left:var(--space-5)"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg>Starboard</a>
+    <nav class="menu-tabs" aria-label="Main menu"><a href="starboard-apps.html">{{i:layout-grid}}<span class="menu-tabs__label">Apps</span></a><a href="starboard-search.html">{{i:search}}<span class="menu-tabs__label">Search</span></a><a href="starboard-downloads.html">{{i:download}}<span class="menu-tabs__label">Downloads</span></a><a href="starboard-coming-up.html">{{i:calendar-days}}<span class="menu-tabs__label">Coming up</span></a><a href="starboard-overview.html" aria-current="page">{{i:activity}}<span class="menu-tabs__label">System</span></a><a href="starboard-settings-apps.html">{{i:settings}}<span class="menu-tabs__label">Settings</span></a></nav>
+    <form class="site-header__search search-field" role="search" action="starboard-search.html"><input class="input" type="search" name="q" aria-label="Search films, series, music and books" placeholder="Search films, series, music, books"><button class="visually-hidden" type="submit">Search</button></form>
+    <div class="site-header__actions"><button class="icon-btn" type="button" data-dialog="display-dialog">{{i-lg:sun}}<span class="label">Display</span></button></div>
+  </div>
+  <div class="site-header__tabs"><nav class="menu-tabs" aria-label="System"><a href="starboard-overview.html">{{i:gauge}}<span class="menu-tabs__label">Overview</span></a><a href="starboard-storage.html">{{i:hard-drive}}<span class="menu-tabs__label">Storage</span></a><a href="starboard-disk-health.html" aria-current="page">{{i:heart-pulse}}<span class="menu-tabs__label">Disk health</span> <span class="count">1<span class="visually-hidden"> to check</span></span></a><a href="starboard-monitor.html">{{i:chart-line}}<span class="menu-tabs__label">Monitor</span></a><a href="starboard-network.html">{{i:network}}<span class="menu-tabs__label">Network</span></a><a href="starboard-backup.html">{{i:archive}}<span class="menu-tabs__label">Backup and restore</span></a></nav></div>
+</header>
+<main id="main" tabindex="-1">
+<div class="page">
+<div class="page-head">
+  <div class="page-head__text"><h1>Disk health</h1><p class="page-head__summary">6 disks · 1 to check · last SMART reports today at 03:00</p></div>
+  <div class="actions"><button class="btn" type="button">{{i:refresh-cw}}Check again</button></div>
+</div>
+<div class="stats">
+  <div class="stat"><span class="stat__value">6</span><span class="stat__label">Disks</span></div>
+  <div class="stat" data-tone="warning"><span class="stat__value">1</span><span class="stat__label">To check</span><span class="chip" data-tone="warning" style="justify-self:start">Needs attention</span></div>
+  <div class="stat"><span class="stat__value">41°C</span><span class="stat__label">Hottest, Disk 4</span></div>
+  <div class="stat"><span class="stat__value">5.2 years</span><span class="stat__label">Oldest, Disk 1</span></div>
+</div>
+<div class="table-wrap" data-stack>
+  <table class="table">
+    <caption class="visually-hidden">Disks, most urgent first</caption>
+    <thead><tr><th scope="col">Disk</th><th scope="col">Status</th><th scope="col">Model</th><th scope="col">Size</th><th scope="col" class="numeric">Temperature</th><th scope="col" class="numeric">Powered on</th><th scope="col">Last self-test</th><th scope="col"><span class="visually-hidden">Details</span></th></tr></thead>
+    <tbody>
+      <tr><td data-label="Disk"><strong>Disk 3 <span class="small muted">sdc</span></strong></td><td data-label="Status"><span class="chip" data-tone="warning">Needs attention</span><br><span class="small">12 reallocated sectors</span></td><td data-label="Model">4 TB, 5400 rpm</td><td data-label="Size">4 TB</td><td data-label="Temperature" class="numeric">38°C</td><td data-label="Powered on" class="numeric">3.1 years</td><td data-label="Last self-test">Passed, 1 Nov</td><td><button class="btn btn--compact" type="button" data-opens="disk-smart">SMART report<span class="visually-hidden"> for Disk 3</span></button></td></tr>
+      <tr><td data-label="Disk"><strong>Disk 4 <span class="small muted">sdd</span></strong></td><td data-label="Status"><span class="chip" data-tone="success">Healthy</span></td><td data-label="Model">8 TB, 7200 rpm</td><td data-label="Size">8 TB</td><td data-label="Temperature" class="numeric">41°C</td><td data-label="Powered on" class="numeric">1.4 years</td><td data-label="Last self-test">Passed, 1 Nov</td><td><button class="btn btn--compact" type="button" data-opens="disk-smart">SMART report<span class="visually-hidden"> for Disk 4</span></button></td></tr>
+      <tr><td data-label="Disk"><strong>Disk 1 <span class="small muted">sda</span></strong></td><td data-label="Status"><span class="chip" data-tone="success">Healthy</span></td><td data-label="Model">4 TB, 5400 rpm</td><td data-label="Size">4 TB</td><td data-label="Temperature" class="numeric">36°C</td><td data-label="Powered on" class="numeric">5.2 years</td><td data-label="Last self-test">Passed, 1 Nov</td><td><button class="btn btn--compact" type="button" data-opens="disk-smart">SMART report<span class="visually-hidden"> for Disk 1</span></button></td></tr>
+      <tr><td data-label="Disk"><strong>Disk 2 <span class="small muted">sdb</span></strong></td><td data-label="Status"><span class="chip" data-tone="success">Healthy</span></td><td data-label="Model">8 TB, 7200 rpm</td><td data-label="Size">8 TB</td><td data-label="Temperature" class="numeric">39°C</td><td data-label="Powered on" class="numeric">2.0 years</td><td data-label="Last self-test">Passed, 1 Nov</td><td><button class="btn btn--compact" type="button" data-opens="disk-smart">SMART report<span class="visually-hidden"> for Disk 2</span></button></td></tr>
+      <tr><td data-label="Disk"><strong>Disk 5 <span class="small muted">sde</span></strong></td><td data-label="Status"><span class="chip" data-tone="success">Healthy</span></td><td data-label="Model">3.6 TB, 5400 rpm</td><td data-label="Size">3.6 TB</td><td data-label="Temperature" class="numeric">35°C</td><td data-label="Powered on" class="numeric">0.8 years</td><td data-label="Last self-test">Passed, 1 Nov</td><td><button class="btn btn--compact" type="button" data-opens="disk-smart">SMART report<span class="visually-hidden"> for Disk 5</span></button></td></tr>
+      <tr><td data-label="Disk"><strong>System <span class="small muted">nvme0</span></strong></td><td data-label="Status"><span class="chip" data-tone="success">Healthy</span></td><td data-label="Model">240 GB solid state</td><td data-label="Size">240 GB</td><td data-label="Temperature" class="numeric">33°C</td><td data-label="Powered on" class="numeric">2.6 years</td><td data-label="Last self-test">Passed, 1 Nov</td><td><button class="btn btn--compact" type="button" data-opens="disk-smart">SMART report<span class="visually-hidden"> for the system disk</span></button></td></tr>
+    </tbody>
+  </table>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:var(--space-4)">
+  <section class="panel" aria-labelledby="dh-temp-h"><div class="panel__head"><h2 id="dh-temp-h">Temperature</h2><span class="small muted">Under 45°C is fine</span></div>
+    <div class="meter"><div class="meter__label"><span>Disk 4</span><span class="numeric">41°C</span></div><div class="progress" role="img" aria-label="41 degrees"><span style="width:68%"></span></div></div>
+    <div class="meter"><div class="meter__label"><span>Disk 2</span><span class="numeric">39°C</span></div><div class="progress" role="img" aria-label="39 degrees"><span style="width:65%"></span></div></div>
+    <div class="meter"><div class="meter__label"><span>Disk 3</span><span class="numeric">38°C</span></div><div class="progress" role="img" aria-label="38 degrees"><span style="width:63%"></span></div></div>
+    <div class="meter"><div class="meter__label"><span>Disk 1</span><span class="numeric">36°C</span></div><div class="progress" role="img" aria-label="36 degrees"><span style="width:60%"></span></div></div>
+  </section>
+  <section class="panel" aria-labelledby="dh-age-h"><div class="panel__head"><h2 id="dh-age-h">Powered on</h2><span class="small muted">Plan to replace after about 5 years</span></div>
+    <div class="meter"><div class="meter__label"><span>Disk 1</span><span class="numeric">5.2 years</span></div><div class="progress" data-tone="warning" role="img" aria-label="5.2 years"><span style="width:87%"></span></div></div>
+    <div class="meter"><div class="meter__label"><span>Disk 3</span><span class="numeric">3.1 years</span></div><div class="progress" role="img" aria-label="3.1 years"><span style="width:52%"></span></div></div>
+    <div class="meter"><div class="meter__label"><span>System</span><span class="numeric">2.6 years</span></div><div class="progress" role="img" aria-label="2.6 years"><span style="width:43%"></span></div></div>
+    <div class="meter"><div class="meter__label"><span>Disk 2</span><span class="numeric">2.0 years</span></div><div class="progress" role="img" aria-label="2.0 years"><span style="width:33%"></span></div></div>
+  </section>
+</div>
+<section class="panel" aria-labelledby="dh-ev-h"><div class="panel__head"><h2 id="dh-ev-h">Recent events</h2><span class="small muted">Self-tests and changes, newest first</span></div>
+  <ul class="rows">
+    <li class="row row--no-lead"><div><div class="row__title">Disk 3: reallocated sectors rose from 4 to 12</div><div class="row__meta">Today at 03:00</div></div><div class="row__side"><span class="chip" data-tone="warning">Needs attention</span></div></li>
+    <li class="row row--no-lead"><div><div class="row__title">Short self-test passed on all 6 disks</div><div class="row__meta">Sunday 1 November at 04:00</div></div><div class="row__side"><span class="chip" data-tone="success">Passed</span></div></li>
+  </ul>
+</section>
+</div>
+</main>
+<footer class="site-footer"><span>Starboard v0.2.0</span><a href="starboard-settings-about.html">About and updates</a></footer>
+<section aria-labelledby="board-phone-h" style="display:grid;gap:var(--space-4);padding:var(--space-8);border-top:2px solid var(--color-text);background:var(--color-surface-sunken)">
+  <div style="display:grid;gap:var(--space-1)"><h2 id="board-phone-h">On a phone (390px)</h2><p class="small muted">The table becomes one row per disk, still sorted by what needs checking first; each row opens the SMART report.</p></div>
+  <div style="width:390px;border:1px solid var(--color-border);background:var(--color-bg);overflow:hidden">
+      <header class="site-header" style="position:relative">
+        <div class="site-header__bar" style="height:60px;padding-inline:var(--space-4);gap:var(--space-3)">
+          <button class="icon-btn" type="button" data-opens="phone-menu" aria-controls="phone-menu" aria-expanded="false">{{i-lg:menu}}<span class="visually-hidden">Menu</span></button>
+          <span class="panel-header__brand"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg>Starboard</span>
+          <button class="icon-btn" type="button" style="margin-left:auto" data-dialog="display-dialog" aria-label="Display">{{i-lg:sun}}</button>
+        </div>
+        <div class="site-header__tabs"><nav class="menu-tabs" aria-label="System (phone)"><a href="starboard-overview.html">{{i:gauge}}<span class="menu-tabs__label">Overview</span></a><a href="starboard-storage.html">{{i:hard-drive}}<span class="menu-tabs__label">Storage</span></a><a href="starboard-disk-health.html" aria-current="page">{{i:heart-pulse}}<span class="menu-tabs__label">Disk health</span> <span class="count">1<span class="visually-hidden"> to check</span></span></a><a href="starboard-monitor.html">{{i:chart-line}}<span class="menu-tabs__label">Monitor</span></a><a href="starboard-network.html">{{i:network}}<span class="menu-tabs__label">Network</span></a><a href="starboard-backup.html">{{i:archive}}<span class="menu-tabs__label">Backup and restore</span></a></nav></div>
+      </header>
+      <div style="display:grid;gap:var(--space-4);padding:var(--space-4)">
+<ul class="rows">
+  <li class="row row--opens row--no-lead"><div><div class="row__title"><button type="button" data-opens="disk-smart">Disk 3 · 4 TB</button></div><div class="row__meta">12 reallocated sectors · 38°C · 3.1 years</div></div><div class="row__side"><span class="chip" data-tone="warning">Needs attention</span></div></li>
+  <li class="row row--opens row--no-lead"><div><div class="row__title"><button type="button" data-opens="disk-smart">Disk 4 · 8 TB</button></div><div class="row__meta">41°C · 1.4 years</div></div><div class="row__side"><span class="chip" data-tone="success">Healthy</span></div></li>
+</ul>
+      </div>
+  </div>
+</section>
+<div class="side-panel-layer" id="phone-menu" hidden>
+  <div class="side-panel-backdrop"></div>
+  <nav class="phone-menu" aria-label="Main menu">
+    <div class="panel-header"><span class="panel-header__brand"><svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg>Starboard</span><button class="icon-btn" type="button" data-closes aria-label="Close menu">{{i:x}}</button></div>
+    <form class="phone-menu__search" role="search" action="starboard-search.html"><input class="input" type="search" name="q" aria-label="Search films, series, music and books" placeholder="Search films, series, music, books"></form>
+    <div class="phone-menu__sections"><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="pm-apps">{{i-lg:layout-grid}}Apps{{i:chevron-right phone-menu__chevron}}</button><ul id="pm-apps" hidden><li><a href="starboard-apps.html">{{i:layout-grid}}Apps</a></li><li><a href="starboard-other-services.html">{{i:server-cog}}Other services</a></li></ul></div><div class="phone-menu__section"><a href="starboard-search.html" style="display:flex;align-items:center;gap:var(--space-3);min-height:52px;padding:0 var(--space-4);font-weight:var(--weight-strong);text-decoration:none;color:var(--color-text)">{{i-lg:search}}Search</a></div><div class="phone-menu__section"><a href="starboard-downloads.html" style="display:flex;align-items:center;gap:var(--space-3);min-height:52px;padding:0 var(--space-4);font-weight:var(--weight-strong);text-decoration:none;color:var(--color-text)">{{i-lg:download}}Downloads</a></div><div class="phone-menu__section"><a href="starboard-coming-up.html" style="display:flex;align-items:center;gap:var(--space-3);min-height:52px;padding:0 var(--space-4);font-weight:var(--weight-strong);text-decoration:none;color:var(--color-text)">{{i-lg:calendar-days}}Coming up</a></div><div class="phone-menu__section" data-current><button type="button" aria-expanded="true" aria-controls="pm-system">{{i-lg:activity}}System{{i:chevron-right phone-menu__chevron}}</button><ul id="pm-system"><li><a href="starboard-overview.html">{{i:gauge}}Overview</a></li><li><a href="starboard-storage.html">{{i:hard-drive}}Storage</a></li><li><a href="starboard-disk-health.html" aria-current="page">{{i:heart-pulse}}Disk health</a></li><li><a href="starboard-monitor.html">{{i:chart-line}}Monitor</a></li><li><a href="starboard-network.html">{{i:network}}Network</a></li><li><a href="starboard-backup.html">{{i:archive}}Backup and restore</a></li></ul></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="pm-settings">{{i-lg:settings}}Settings{{i:chevron-right phone-menu__chevron}}</button><ul id="pm-settings" hidden><li><a href="starboard-settings-apps.html">{{i:app-window}}Manage apps</a></li><li><a href="starboard-settings-general.html">{{i:sliders-horizontal}}General</a></li><li><a href="starboard-settings-security.html">{{i:shield-check}}Security</a></li><li><a href="starboard-settings-about.html">{{i:info}}About and updates</a></li></ul></div></div>
+    <div class="phone-menu__foot"><span class="small muted">Starboard v0.2.0</span><button class="btn" type="button">{{i:log-out}}Sign out</button></div>
+  </nav>
+</div>
+<div class="side-panel-layer" id="disk-smart" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel side-panel--wide" role="dialog" aria-modal="true" aria-labelledby="ds-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="ds-h">Disk 3, SMART report</h2><button class="icon-btn" type="button" data-closes aria-label="Close Disk 3 SMART report">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <div class="notice" data-tone="warning">{{i:triangle-alert}}<div class="notice__body"><span class="notice__title">Needs attention</span><p>12 sectors were reallocated, 8 of them this week. Back up what is on it and plan to replace it.</p></div></div>
+      <dl class="facts"><dt>Model</dt><dd>4 TB, 5400 rpm</dd><dt>Device</dt><dd><code>/dev/sdc</code></dd><dt>Temperature</dt><dd>38°C</dd><dt>Powered on</dt><dd>3 years, 41 days (27,150 hours)</dd><dt>Report from</dt><dd>Today at 03:00</dd></dl>
+      <section style="display:grid;gap:var(--space-3)" aria-labelledby="ds-c-h"><h3 id="ds-c-h">Counters that should stay at zero</h3>
+        <div class="stats" style="grid-template-columns:repeat(3,1fr)"><div class="stat" data-tone="warning"><span class="stat__value">12</span><span class="stat__label">Reallocated sectors</span></div><div class="stat"><span class="stat__value">0</span><span class="stat__label">Pending sectors</span></div><div class="stat"><span class="stat__value">0</span><span class="stat__label">Uncorrectable</span></div></div>
+      </section>
+      <section style="display:grid;gap:var(--space-3)" aria-labelledby="ds-a-h"><h3 id="ds-a-h">All attributes</h3>
+        <div class="table-wrap"><table class="table"><thead><tr><th scope="col" class="numeric">ID</th><th scope="col">Attribute</th><th scope="col" class="numeric">Value</th><th scope="col" class="numeric">Worst</th><th scope="col" class="numeric">Threshold</th><th scope="col" class="numeric">Raw</th></tr></thead><tbody>
+          <tr><td class="numeric">1</td><td>Read error rate</td><td class="numeric">200</td><td class="numeric">200</td><td class="numeric">51</td><td class="numeric">0</td></tr>
+          <tr><td class="numeric">5</td><td>Reallocated sectors <span class="chip" data-tone="warning">Needs attention</span></td><td class="numeric">198</td><td class="numeric">198</td><td class="numeric">140</td><td class="numeric">12</td></tr>
+          <tr><td class="numeric">9</td><td>Power-on hours</td><td class="numeric">63</td><td class="numeric">63</td><td class="numeric">0</td><td class="numeric">27150</td></tr>
+          <tr><td class="numeric">194</td><td>Temperature</td><td class="numeric">112</td><td class="numeric">98</td><td class="numeric">0</td><td class="numeric">38</td></tr>
+          <tr><td class="numeric">197</td><td>Pending sectors</td><td class="numeric">200</td><td class="numeric">200</td><td class="numeric">0</td><td class="numeric">0</td></tr>
+          <tr><td class="numeric">198</td><td>Uncorrectable</td><td class="numeric">100</td><td class="numeric">253</td><td class="numeric">0</td><td class="numeric">0</td></tr>
+          <tr><td class="numeric">199</td><td>Cable errors</td><td class="numeric">200</td><td class="numeric">200</td><td class="numeric">0</td><td class="numeric">0</td></tr>
+        </tbody></table></div>
+      </section>
+      <section style="display:grid;gap:var(--space-3)" aria-labelledby="ds-t-h"><h3 id="ds-t-h">Self-tests</h3>
+        <ul class="rows"><li class="row row--no-lead"><div><div class="row__title">Short test</div><div class="row__meta">Sunday 1 November at 04:00</div></div><div class="row__side"><span class="chip" data-tone="success">Passed</span></div></li><li class="row row--no-lead"><div><div class="row__title">Long test</div><div class="row__meta">Sunday 4 October at 04:00 · 9 hours</div></div><div class="row__side"><span class="chip" data-tone="success">Passed</span></div></li></ul>
+      </section>
+      <section style="display:grid;gap:var(--space-3)" aria-labelledby="ds-e-h"><h3 id="ds-e-h">Events for this disk</h3>
+        <ul class="rows"><li class="row row--no-lead"><div><div class="row__title">Reallocated sectors rose from 4 to 12</div><div class="row__meta">Today at 03:00</div></div></li><li class="row row--no-lead"><div><div class="row__title">Reallocated sectors rose from 0 to 4</div><div class="row__meta">Tuesday 27 October at 03:00</div></div></li></ul>
+      </section>
+    </div>
+    <div class="side-panel__foot"><button class="btn" type="button">{{i:refresh-cw}}Check again</button><button class="btn btn--quiet" type="button">{{i:download}}Download the full report</button></div>
+  </aside>
+</div>
+<dialog class="dialog" id="display-dialog" aria-labelledby="display-h">
+  <div class="panel-header"><h2 class="panel-header__title" id="display-h">Display and accessibility</h2><button class="icon-btn" type="button" data-closes aria-label="Close display and accessibility">{{i:x}}</button></div>
+  <div class="dialog__body">
+    <fieldset><legend class="field__label">Theme</legend><div class="segmented"><label><input type="radio" name="d-theme" value="light" data-display="theme" checked><span>Light</span></label><label><input type="radio" name="d-theme" value="dark" data-display="theme"><span>Dark</span></label></div></fieldset>
+    <fieldset><legend class="field__label">Text size</legend><div class="segmented"><label><input type="radio" name="d-text" value="100" data-display="text" checked><span>100%</span></label><label><input type="radio" name="d-text" value="125" data-display="text"><span>125%</span></label><label><input type="radio" name="d-text" value="150" data-display="text"><span>150%</span></label><label><input type="radio" name="d-text" value="175" data-display="text"><span>175%</span></label></div></fieldset>
+    <div>
+      <label class="switch"><span class="check__text"><strong>High contrast</strong></span><input type="checkbox" role="switch" data-display="contrast"></label>
+      <label class="switch"><span class="check__text"><strong>Reduce motion</strong></span><input type="checkbox" role="switch" data-display="motion"></label>
+      <label class="switch"><span class="check__text"><strong>Underline links</strong></span><input type="checkbox" role="switch" data-display="underline"></label>
+      <label class="switch"><span class="check__text"><strong>Wider text spacing</strong></span><input type="checkbox" role="switch" data-display="spacing"></label>
+    </div>
+  </div>
+  <div class="dialog__foot"><button class="btn btn--primary" type="button" data-closes>Done</button><button class="btn btn--quiet" type="button">Reset</button></div>
+</dialog>
+<script src="../components.js"></script>
+</body>
+</html>

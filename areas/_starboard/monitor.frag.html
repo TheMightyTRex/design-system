@@ -1,0 +1,35 @@
+<!--meta {"title": "Monitor", "main": "system", "sub": "monitor", "phone_note": "Charts stack one per row; Pause stays in the page head."}-->
+<!--note-->
+<ul style="margin:0;padding-left:var(--space-5)">
+  <li>Monitor is kept as a page but <strong>uses the same line chart as Overview</strong>, with a table view and keyboard reading, instead of its own sparklines. Overview's time range links here as "Live".</li>
+  <li>Pause keeps one label and uses <code>aria-pressed</code>. Charts update in place, so a focused chart or open table keeps focus.</li>
+  <li>The processor threads become a labelled list of meters, so each value is in words, not only in a tooltip.</li>
+</ul>
+<!--page-->
+<div class="page-head">
+  <div class="page-head__text"><h1>Monitor</h1><p class="page-head__summary">Live while this page is open · every 2 seconds · last 3 minutes</p></div>
+  <div class="actions"><button class="btn" type="button" aria-pressed="false">{{i:pause}}Pause</button></div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(560px,1fr));gap:var(--space-4)">
+<!--chart {"id":"m-cpu","title":"Processor","now":"27% now","unit":"%","max":100,"labels":["3 min","2.5","2","1.5","1","0.5","now"],"series":[["Processor",[18,22,35,51,30,24,27]]],"desc":"Processor use over the last 3 minutes, between 18% and 51%, now 27%."}-->
+<!--chart {"id":"m-mem","title":"Memory","now":"70% now","unit":"%","max":100,"labels":["3 min","2.5","2","1.5","1","0.5","now"],"series":[["Memory",[69,69,70,70,71,70,70]]],"desc":"Memory use steady at about 70% over the last 3 minutes."}-->
+<!--chart {"id":"m-temp","title":"Processor temperature","now":"78°C now","tone":["warning","Hot"],"unit":"°","max":100,"labels":["3 min","2.5","2","1.5","1","0.5","now"],"series":[["Temperature",[75,76,78,80,79,78,78]]],"desc":"Processor temperature between 75 and 80 degrees over the last 3 minutes, which is hot."}-->
+<!--chart {"id":"m-net","max":25,"title":"Network","now":"Download 18.4 MB/s · Upload 1.2 MB/s","unit":"","labels":["3 min","2.5","2","1.5","1","0.5","now"],"series":[["Download, MB/s",[16,17,19,21,18,18,18.4]],["Upload, MB/s",[1,1.1,1.3,1.4,1.2,1.2,1.2]]],"desc":"Download speed between 16 and 21 MB/s and upload around 1.2 MB/s over the last 3 minutes."}-->
+</div>
+<section class="panel" aria-labelledby="m-cores-h">
+  <div class="panel__head"><h2 id="m-cores-h">Processor threads</h2><span class="small muted">8 threads, now</span></div>
+  <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--space-3) var(--space-6)">
+    <li class="meter"><div class="meter__label"><span>Thread 1</span><span class="numeric">42%</span></div><div class="progress" aria-hidden="true"><span style="width:42%"></span></div></li>
+    <li class="meter"><div class="meter__label"><span>Thread 2</span><span class="numeric">18%</span></div><div class="progress" aria-hidden="true"><span style="width:18%"></span></div></li>
+    <li class="meter"><div class="meter__label"><span>Thread 3</span><span class="numeric">91%</span></div><div class="progress" data-tone="warning" aria-hidden="true"><span style="width:91%"></span></div></li>
+    <li class="meter"><div class="meter__label"><span>Thread 4</span><span class="numeric">12%</span></div><div class="progress" aria-hidden="true"><span style="width:12%"></span></div></li>
+    <li class="meter"><div class="meter__label"><span>Thread 5</span><span class="numeric">25%</span></div><div class="progress" aria-hidden="true"><span style="width:25%"></span></div></li>
+    <li class="meter"><div class="meter__label"><span>Thread 6</span><span class="numeric">9%</span></div><div class="progress" aria-hidden="true"><span style="width:9%"></span></div></li>
+    <li class="meter"><div class="meter__label"><span>Thread 7</span><span class="numeric">30%</span></div><div class="progress" aria-hidden="true"><span style="width:30%"></span></div></li>
+    <li class="meter"><div class="meter__label"><span>Thread 8</span><span class="numeric">16%</span></div><div class="progress" aria-hidden="true"><span style="width:16%"></span></div></li>
+  </ul>
+</section>
+<!--phone-->
+<div class="page-head"><div class="page-head__text"><h1 style="font-size:var(--text-xl)">Monitor</h1><p class="page-head__summary">Live · every 2 seconds</p></div><div class="actions" style="width:100%;margin-left:0"><button class="btn" type="button" aria-pressed="false" style="flex:1">{{i:pause}}Pause</button></div></div>
+<!--chart {"id":"p-m-cpu","title":"Processor","now":"27%","unit":"%","max":100,"labels":["3 min","2.5","2","1.5","1","0.5","now"],"series":[["Processor",[18,22,35,51,30,24,27]]],"desc":"Processor use over the last 3 minutes, now 27%."}-->
+<!--panels-->

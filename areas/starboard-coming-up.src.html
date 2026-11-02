@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coming up · Starboard board</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  /* Board only, as in the gallery: icon sizes (no icon size class in the library yet). */
+  svg.i { width: var(--icon-md); height: var(--icon-md); }
+  svg.i-lg { width: var(--icon-lg); height: var(--icon-lg); }
+  svg.i-xl { width: 32px; height: 32px; }
+</style>
+</head>
+<body>
+<!--ICONS-->
+<a class="skip-link" href="#main">Skip to main content</a>
+<aside aria-label="About this board" style="padding:var(--space-4) var(--space-8);background:var(--color-surface-sunken);border-bottom:1px solid var(--color-divider)">
+  <div class="notice" style="max-width:1100px">{{i:info}}<div class="notice__body"><span class="notice__title">What changed and why</span>
+<ul style="margin:0;padding-left:var(--space-5)">
+  <li>Filter chips (Wanted, In library, and one per app) and a range control (This week, Two weeks, Month) in one toolbar.</li>
+  <li>Selecting an item opens a <strong>slide-out</strong> with the cover, overview, date and a link to the app, the same shape as Storyarr's calendar day panel.</li>
+  <li>Day headings are real h2s with ids built from the date, not a counter.</li>
+</ul>
+  </div><a class="btn btn--compact" href="index-starboard.html">All boards</a></div>
+</aside>
+<header class="site-header">
+  <div class="site-header__bar">
+    <a class="site-header__brand" href="starboard-apps.html" style="display:inline-flex;padding-left:var(--space-5)"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg>Starboard</a>
+    <nav class="menu-tabs" aria-label="Main menu"><a href="starboard-apps.html">{{i:layout-grid}}<span class="menu-tabs__label">Apps</span></a><a href="starboard-search.html">{{i:search}}<span class="menu-tabs__label">Search</span></a><a href="starboard-downloads.html">{{i:download}}<span class="menu-tabs__label">Downloads</span></a><a href="starboard-coming-up.html" aria-current="page">{{i:calendar-days}}<span class="menu-tabs__label">Coming up</span></a><a href="starboard-overview.html">{{i:activity}}<span class="menu-tabs__label">System</span></a><a href="starboard-settings-apps.html">{{i:settings}}<span class="menu-tabs__label">Settings</span></a></nav>
+    <form class="site-header__search search-field" role="search" action="starboard-search.html"><input class="input" type="search" name="q" aria-label="Search films, series, music and books" placeholder="Search films, series, music, books"><button class="visually-hidden" type="submit">Search</button></form>
+    <div class="site-header__actions"><button class="icon-btn" type="button" data-dialog="display-dialog">{{i-lg:sun}}<span class="label">Display</span></button></div>
+  </div>
+  
+</header>
+<main id="main" tabindex="-1">
+<div class="page">
+<div class="page-head">
+  <div class="page-head__text"><h1>Coming up</h1><p class="page-head__summary">9 releases in the next two weeks · 6 wanted · 3 already in the library</p></div>
+</div>
+<div class="toolbar">
+  <div class="toolbar__row">
+    <fieldset class="segmented" aria-label="Range"><legend class="visually-hidden">Range</legend><label><input type="radio" name="cu-range"><span>This week</span></label><label><input type="radio" name="cu-range" checked><span>Two weeks</span></label><label><input type="radio" name="cu-range"><span>Month</span></label></fieldset>
+    <div class="filter-chips" role="group" aria-label="Show only">
+      <button class="filter-chip" type="button" aria-pressed="false">Wanted, 6</button>
+      <button class="filter-chip" type="button" aria-pressed="false">In library, 3</button>
+      <button class="filter-chip" type="button" aria-pressed="false">{{i:tv}}Sonarr, 5</button>
+      <button class="filter-chip" type="button" aria-pressed="false">{{i:film}}Radarr, 2</button>
+      <button class="filter-chip" type="button" aria-pressed="false">{{i:book}}Storyarr, 2</button>
+    </div>
+  </div>
+</div>
+<section aria-labelledby="d-2026-11-02" style="display:grid;gap:var(--space-2)">
+  <h2 class="group-heading" id="d-2026-11-02">Today, Monday 2 November</h2>
+  <ul class="rows">
+    <li class="row row--opens"><div class="cover" style="width:40px;background:linear-gradient(160deg,#154a96,#135c2e)"></div><div><div class="row__title"><button type="button" data-opens="cu-item">Harbour Lights · S02E06</button></div><div class="row__meta">"The Second Lamp" · 21:00 · Sonarr</div></div><div class="row__side"><span class="chip">Wanted</span></div></li>
+    <li class="row row--opens"><div class="cover" style="width:40px;background:linear-gradient(160deg,#6b4500,#9b1c14)"></div><div><div class="row__title"><button type="button" data-opens="cu-item">Salt Roads</button></div><div class="row__meta">Book · J. Okafor · Storyarr</div></div><div class="row__side"><span class="chip" data-tone="success">In library</span></div></li>
+  </ul>
+</section>
+<section aria-labelledby="d-2026-11-04" style="display:grid;gap:var(--space-2)">
+  <h2 class="group-heading" id="d-2026-11-04">Wednesday 4 November</h2>
+  <ul class="rows">
+    <li class="row row--opens"><div class="cover" style="width:40px;background:linear-gradient(160deg,#323a77,#af4e24)"></div><div><div class="row__title"><button type="button" data-opens="cu-item">The Long Field</button></div><div class="row__meta">Film · digital release · Radarr</div></div><div class="row__side"><span class="chip">Wanted</span></div></li>
+    <li class="row row--opens"><div class="cover" style="width:40px"></div><div><div class="row__title"><button type="button" data-opens="cu-item">Night Ferry · S01E03</button></div><div class="row__meta">"Low Water" · 22:00 · Sonarr</div></div><div class="row__side"><span class="chip">Wanted</span></div></li>
+  </ul>
+</section>
+<section aria-labelledby="d-2026-11-09" style="display:grid;gap:var(--space-2)">
+  <h2 class="group-heading" id="d-2026-11-09">Monday 9 November</h2>
+  <ul class="rows">
+    <li class="row row--opens"><div class="cover" style="width:40px;background:linear-gradient(160deg,#154a96,#135c2e)"></div><div><div class="row__title"><button type="button" data-opens="cu-item">Harbour Lights · S02E07</button></div><div class="row__meta">"Fog Bell" · 21:00 · Sonarr</div></div><div class="row__side"><span class="chip">Wanted</span></div></li>
+  </ul>
+</section>
+</div>
+</main>
+<footer class="site-footer"><span>Starboard v0.2.0</span><a href="starboard-settings-about.html">About and updates</a></footer>
+<section aria-labelledby="board-phone-h" style="display:grid;gap:var(--space-4);padding:var(--space-8);border-top:2px solid var(--color-text);background:var(--color-surface-sunken)">
+  <div style="display:grid;gap:var(--space-1)"><h2 id="board-phone-h">On a phone (390px)</h2><p class="small muted">Day headings stay; the range control and filter chips share one scrolling row.</p></div>
+  <div style="width:390px;border:1px solid var(--color-border);background:var(--color-bg);overflow:hidden">
+      <header class="site-header" style="position:relative">
+        <div class="site-header__bar" style="height:60px;padding-inline:var(--space-4);gap:var(--space-3)">
+          <button class="icon-btn" type="button" data-opens="phone-menu" aria-controls="phone-menu" aria-expanded="false">{{i-lg:menu}}<span class="visually-hidden">Menu</span></button>
+          <span class="panel-header__brand"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg>Starboard</span>
+          <button class="icon-btn" type="button" style="margin-left:auto" data-dialog="display-dialog" aria-label="Display">{{i-lg:sun}}</button>
+        </div>
+        
+      </header>
+      <div style="display:grid;gap:var(--space-4);padding:var(--space-4)">
+<div class="filter-chips" role="group" aria-label="Show only (phone)" style="flex-wrap:nowrap;overflow-x:auto"><button class="filter-chip" type="button" aria-pressed="false" style="flex:none">Two weeks{{i:chevron-down}}</button><button class="filter-chip" type="button" aria-pressed="true" style="flex:none">Wanted, 6</button><button class="filter-chip" type="button" aria-pressed="false" style="flex:none">In library, 3</button></div>
+<h2 class="group-heading" id="p-d-2026-11-02">Today, Monday 2 November</h2>
+<ul class="rows">
+  <li class="row row--opens" style="grid-template-columns:auto minmax(0,1fr)"><div class="cover" style="width:40px;background:linear-gradient(160deg,#154a96,#135c2e)"></div><div><div class="row__title"><button type="button" data-opens="cu-item">Harbour Lights · S02E06</button></div><div class="row__meta">21:00 · Sonarr</div></div><div class="row__side" style="grid-column:1/-1;justify-content:start"><span class="chip">Wanted</span></div></li>
+</ul>
+      </div>
+  </div>
+</section>
+<div class="side-panel-layer" id="phone-menu" hidden>
+  <div class="side-panel-backdrop"></div>
+  <nav class="phone-menu" aria-label="Main menu">
+    <div class="panel-header"><span class="panel-header__brand"><svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg>Starboard</span><button class="icon-btn" type="button" data-closes aria-label="Close menu">{{i:x}}</button></div>
+    <form class="phone-menu__search" role="search" action="starboard-search.html"><input class="input" type="search" name="q" aria-label="Search films, series, music and books" placeholder="Search films, series, music, books"></form>
+    <div class="phone-menu__sections"><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="pm-apps">{{i-lg:layout-grid}}Apps{{i:chevron-right phone-menu__chevron}}</button><ul id="pm-apps" hidden><li><a href="starboard-apps.html">{{i:layout-grid}}Apps</a></li><li><a href="starboard-other-services.html">{{i:server-cog}}Other services</a></li></ul></div><div class="phone-menu__section"><a href="starboard-search.html" style="display:flex;align-items:center;gap:var(--space-3);min-height:52px;padding:0 var(--space-4);font-weight:var(--weight-strong);text-decoration:none;color:var(--color-text)">{{i-lg:search}}Search</a></div><div class="phone-menu__section"><a href="starboard-downloads.html" style="display:flex;align-items:center;gap:var(--space-3);min-height:52px;padding:0 var(--space-4);font-weight:var(--weight-strong);text-decoration:none;color:var(--color-text)">{{i-lg:download}}Downloads</a></div><div class="phone-menu__section"><a href="starboard-coming-up.html" style="display:flex;align-items:center;gap:var(--space-3);min-height:52px;padding:0 var(--space-4);font-weight:var(--weight-strong);text-decoration:none;color:var(--color-accent)" aria-current="page">{{i-lg:calendar-days}}Coming up</a></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="pm-system">{{i-lg:activity}}System{{i:chevron-right phone-menu__chevron}}</button><ul id="pm-system" hidden><li><a href="starboard-overview.html">{{i:gauge}}Overview</a></li><li><a href="starboard-storage.html">{{i:hard-drive}}Storage</a></li><li><a href="starboard-disk-health.html">{{i:heart-pulse}}Disk health</a></li><li><a href="starboard-monitor.html">{{i:chart-line}}Monitor</a></li><li><a href="starboard-network.html">{{i:network}}Network</a></li><li><a href="starboard-backup.html">{{i:archive}}Backup and restore</a></li></ul></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="pm-settings">{{i-lg:settings}}Settings{{i:chevron-right phone-menu__chevron}}</button><ul id="pm-settings" hidden><li><a href="starboard-settings-apps.html">{{i:app-window}}Manage apps</a></li><li><a href="starboard-settings-general.html">{{i:sliders-horizontal}}General</a></li><li><a href="starboard-settings-security.html">{{i:shield-check}}Security</a></li><li><a href="starboard-settings-about.html">{{i:info}}About and updates</a></li></ul></div></div>
+    <div class="phone-menu__foot"><span class="small muted">Starboard v0.2.0</span><button class="btn" type="button">{{i:log-out}}Sign out</button></div>
+  </nav>
+</div>
+<div class="side-panel-layer" id="cu-item" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="cu-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="cu-h">Monday 2 November</h2><button class="icon-btn" type="button" data-closes aria-label="Close Monday 2 November">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <div class="side-panel__lead"><div class="cover" style="background:linear-gradient(160deg,#154a96,#135c2e);color:#fff">Harbour Lights</div><div style="display:grid;gap:var(--space-2)"><h3 style="font-size:var(--text-lg)">Harbour Lights · S02E06</h3><span class="chip" style="justify-self:start">Wanted</span><span class="small muted">"The Second Lamp" · 48 min</span></div></div>
+      <p>The search for the missing trawler turns up a lamp that should not still be burning.</p>
+      <dl class="facts"><dt>Airs</dt><dd>Today at 21:00</dd><dt>App</dt><dd>Sonarr</dd><dt>Searching</dt><dd>Sonarr searches automatically after it airs</dd></dl>
+    </div>
+    <div class="side-panel__foot"><a class="btn btn--primary" href="#" target="_blank" rel="noopener">{{i:external-link}}Open in Sonarr<span class="visually-hidden"> (opens in a new tab)</span></a></div>
+  </aside>
+</div>
+<dialog class="dialog" id="display-dialog" aria-labelledby="display-h">
+  <div class="panel-header"><h2 class="panel-header__title" id="display-h">Display and accessibility</h2><button class="icon-btn" type="button" data-closes aria-label="Close display and accessibility">{{i:x}}</button></div>
+  <div class="dialog__body">
+    <fieldset><legend class="field__label">Theme</legend><div class="segmented"><label><input type="radio" name="d-theme" value="light" data-display="theme" checked><span>Light</span></label><label><input type="radio" name="d-theme" value="dark" data-display="theme"><span>Dark</span></label></div></fieldset>
+    <fieldset><legend class="field__label">Text size</legend><div class="segmented"><label><input type="radio" name="d-text" value="100" data-display="text" checked><span>100%</span></label><label><input type="radio" name="d-text" value="125" data-display="text"><span>125%</span></label><label><input type="radio" name="d-text" value="150" data-display="text"><span>150%</span></label><label><input type="radio" name="d-text" value="175" data-display="text"><span>175%</span></label></div></fieldset>
+    <div>
+      <label class="switch"><span class="check__text"><strong>High contrast</strong></span><input type="checkbox" role="switch" data-display="contrast"></label>
+      <label class="switch"><span class="check__text"><strong>Reduce motion</strong></span><input type="checkbox" role="switch" data-display="motion"></label>
+      <label class="switch"><span class="check__text"><strong>Underline links</strong></span><input type="checkbox" role="switch" data-display="underline"></label>
+      <label class="switch"><span class="check__text"><strong>Wider text spacing</strong></span><input type="checkbox" role="switch" data-display="spacing"></label>
+    </div>
+  </div>
+  <div class="dialog__foot"><button class="btn btn--primary" type="button" data-closes>Done</button><button class="btn btn--quiet" type="button">Reset</button></div>
+</dialog>
+<script src="../components.js"></script>
+</body>
+</html>

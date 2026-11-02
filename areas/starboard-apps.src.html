@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apps · Starboard board</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  /* Board only, as in the gallery: icon sizes (no icon size class in the library yet). */
+  svg.i { width: var(--icon-md); height: var(--icon-md); }
+  svg.i-lg { width: var(--icon-lg); height: var(--icon-lg); }
+  svg.i-xl { width: 32px; height: 32px; }
+</style>
+</head>
+<body>
+<!--ICONS-->
+<a class="skip-link" href="#main">Skip to main content</a>
+<aside aria-label="About this board" style="padding:var(--space-4) var(--space-8);background:var(--color-surface-sunken);border-bottom:1px solid var(--color-divider)">
+  <div class="notice" style="max-width:1100px">{{i:info}}<div class="notice__body"><span class="notice__title">What changed and why</span>
+<ul style="margin:0;padding-left:var(--space-5)">
+  <li>Each card now opens an <strong>app details slide-out</strong> (status, update, addresses, the app's own warnings, Edit). Open is its own button, so the card is no longer only a link out of Starboard.</li>
+  <li><strong>Updates is no longer a separate page</strong>: an Update available filter chip and the slide-out show it. The Apps sub-menu is Apps and Other services. Settings, Apps is renamed <strong>Manage apps</strong>, so only one page is called Apps.</li>
+  <li>The two status pills become one summary line, announced once. The hero search is gone: the header search does the same job.</li>
+</ul>
+  </div><a class="btn btn--compact" href="index-starboard.html">All boards</a></div>
+</aside>
+<header class="site-header">
+  <div class="site-header__bar">
+    <a class="site-header__brand" href="starboard-apps.html" style="display:inline-flex;padding-left:var(--space-5)"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg>Starboard</a>
+    <nav class="menu-tabs" aria-label="Main menu"><a href="starboard-apps.html" aria-current="page">{{i:layout-grid}}<span class="menu-tabs__label">Apps</span></a><a href="starboard-search.html">{{i:search}}<span class="menu-tabs__label">Search</span></a><a href="starboard-downloads.html">{{i:download}}<span class="menu-tabs__label">Downloads</span></a><a href="starboard-coming-up.html">{{i:calendar-days}}<span class="menu-tabs__label">Coming up</span></a><a href="starboard-overview.html">{{i:activity}}<span class="menu-tabs__label">System</span></a><a href="starboard-settings-apps.html">{{i:settings}}<span class="menu-tabs__label">Settings</span></a></nav>
+    <form class="site-header__search search-field" role="search" action="starboard-search.html"><input class="input" type="search" name="q" aria-label="Search films, series, music and books" placeholder="Search films, series, music, books"><button class="visually-hidden" type="submit">Search</button></form>
+    <div class="site-header__actions"><button class="icon-btn" type="button" data-dialog="display-dialog">{{i-lg:sun}}<span class="label">Display</span></button></div>
+  </div>
+  <div class="site-header__tabs"><nav class="menu-tabs" aria-label="Apps"><a href="starboard-apps.html" aria-current="page">{{i:layout-grid}}<span class="menu-tabs__label">Apps</span></a><a href="starboard-other-services.html">{{i:server-cog}}<span class="menu-tabs__label">Other services</span></a></nav></div>
+</header>
+<main id="main" tabindex="-1">
+<div class="page">
+<div class="page-head">
+  <div class="page-head__text"><h1>Apps</h1><p class="page-head__summary">11 of 12 running · 1 not responding · 2 updates available · checked 1 minute ago</p></div>
+  <div class="actions"><button class="btn" type="button">{{i:refresh-cw}}Check again</button><a class="btn btn--quiet" href="starboard-settings-apps.html">{{i:app-window}}Manage apps</a></div>
+</div>
+
+<div class="notice" data-tone="danger" role="alert">{{i:circle-alert}}<div class="notice__body"><span class="notice__title">Lidarr is not responding</span><p>It has not answered for 12 minutes. Check that its container is running.</p></div><button class="btn btn--compact" type="button" data-opens="app-details-lidarr">View Lidarr</button></div>
+
+<div class="toolbar">
+  <div class="toolbar__row">
+    <div class="toolbar__search"><input class="input" type="search" aria-label="Filter apps by name" placeholder="Filter apps by name"></div>
+    <div class="filter-chips" role="group" aria-label="Show only">
+      <button class="filter-chip" type="button" aria-pressed="false">Not responding, 1</button>
+      <button class="filter-chip" type="button" aria-pressed="false">Update available, 2</button>
+      <button class="filter-chip" type="button" aria-pressed="false">Has warnings, 1</button>
+    </div>
+    <div class="toolbar__end"><span class="toolbar__count">12 apps</span></div>
+  </div>
+</div>
+
+<section aria-labelledby="g-media" style="display:grid;gap:var(--space-3)">
+  <h2 class="group-heading" id="g-media">Media</h2>
+  <ul class="cards">
+    <li class="card"><div class="card__top"><span class="app-icon" aria-hidden="true">J</span><h3 class="card__title"><button type="button" data-opens="app-details">Jellyfin</button></h3></div><p class="small muted">Films, series and music.</p><div class="card__meta"><span class="chip" data-tone="success">Running</span><span class="numeric">v10.10.3</span><span class="numeric">42 ms</span></div><div class="card__meta card__actions"><a class="btn" href="#" target="_blank" rel="noopener">{{i:external-link}}Open<span class="visually-hidden"> Jellyfin (opens in a new tab)</span></a><button class="copy-btn" type="button" data-copy="http://homeserver.local:8096" aria-label="Copy home address for Jellyfin">{{i:copy}}</button><code>homeserver.local:8096</code></div></li>
+    <li class="card"><div class="card__top"><span class="app-icon" aria-hidden="true">Je</span><h3 class="card__title"><button type="button" data-opens="app-details">Jellyseerr</button></h3></div><p class="small muted">Requests from the household.</p><div class="card__meta"><span class="chip" data-tone="success">Running</span><span class="numeric">v2.1.0</span><span class="numeric">51 ms</span></div><div class="card__meta card__actions"><a class="btn" href="#" target="_blank" rel="noopener">{{i:external-link}}Open<span class="visually-hidden"> Jellyseerr (opens in a new tab)</span></a><button class="copy-btn" type="button" data-copy="http://homeserver.local:5055" aria-label="Copy home address for Jellyseerr">{{i:copy}}</button><code>homeserver.local:5055</code></div></li>
+    <li class="card"><div class="card__top"><span class="app-icon" aria-hidden="true">A</span><h3 class="card__title"><button type="button" data-opens="app-details">Audiobookshelf</button></h3></div><p class="small muted">Audiobooks and podcasts.</p><div class="card__meta"><span class="chip" data-tone="success">Running</span><span class="numeric">v2.17.2</span><span class="numeric">38 ms</span></div><div class="card__meta card__actions"><a class="btn" href="#" target="_blank" rel="noopener">{{i:external-link}}Open<span class="visually-hidden"> Audiobookshelf (opens in a new tab)</span></a><button class="copy-btn" type="button" data-copy="http://homeserver.local:13378" aria-label="Copy home address for Audiobookshelf">{{i:copy}}</button><code>homeserver.local:13378</code></div></li>
+  </ul>
+</section>
+
+<section aria-labelledby="g-lib" style="display:grid;gap:var(--space-3)">
+  <h2 class="group-heading" id="g-lib">Library managers</h2>
+  <ul class="cards">
+    <li class="card" data-tone="danger"><div class="card__top"><span class="app-icon" aria-hidden="true">L</span><h3 class="card__title"><button type="button" data-opens="app-details-lidarr">Lidarr</button></h3></div><p class="small muted">Finds and organises music.</p><div class="card__meta"><span class="chip" data-tone="danger">Not responding</span><span>for 12 minutes</span></div><div class="card__meta card__actions"><a class="btn" href="#" target="_blank" rel="noopener">{{i:external-link}}Open<span class="visually-hidden"> Lidarr (opens in a new tab)</span></a><button class="copy-btn" type="button" data-copy="http://homeserver.local:8686" aria-label="Copy home address for Lidarr">{{i:copy}}</button><code>homeserver.local:8686</code></div></li>
+    <li class="card"><div class="card__top"><span class="app-icon" aria-hidden="true">S</span><h3 class="card__title"><button type="button" data-opens="app-details">Sonarr</button></h3></div><p class="small muted">Finds and organises series.</p><div class="card__meta"><span class="chip" data-tone="success">Running</span><span class="chip" data-tone="info">Update available</span><span class="numeric">v4.0.11</span></div><div class="card__meta card__actions"><a class="btn" href="#" target="_blank" rel="noopener">{{i:external-link}}Open<span class="visually-hidden"> Sonarr (opens in a new tab)</span></a><button class="copy-btn" type="button" data-copy="http://homeserver.local:8989" aria-label="Copy home address for Sonarr">{{i:copy}}</button><code>homeserver.local:8989</code></div></li>
+    <li class="card"><div class="card__top"><span class="app-icon" aria-hidden="true">R</span><h3 class="card__title"><button type="button" data-opens="app-details">Radarr</button></h3></div><p class="small muted">Finds and organises films.</p><div class="card__meta"><span class="chip" data-tone="success">Running</span><span class="numeric">v5.14.0</span><span class="numeric">60 ms</span></div><div class="card__meta card__actions"><a class="btn" href="#" target="_blank" rel="noopener">{{i:external-link}}Open<span class="visually-hidden"> Radarr (opens in a new tab)</span></a><button class="copy-btn" type="button" data-copy="http://homeserver.local:7878" aria-label="Copy home address for Radarr">{{i:copy}}</button><code>homeserver.local:7878</code></div></li>
+    <li class="card"><div class="card__top"><span class="app-icon" aria-hidden="true">St</span><h3 class="card__title"><button type="button" data-opens="app-details">Storyarr</button></h3></div><p class="small muted">Books and audiobooks.</p><div class="card__meta"><span class="chip" data-tone="success">Running</span><span class="numeric">v0.5.2</span><span class="numeric">47 ms</span></div><div class="card__meta card__actions"><a class="btn" href="#" target="_blank" rel="noopener">{{i:external-link}}Open<span class="visually-hidden"> Storyarr (opens in a new tab)</span></a><button class="copy-btn" type="button" data-copy="http://homeserver.local:8000" aria-label="Copy home address for Storyarr">{{i:copy}}</button><code>homeserver.local:8000</code></div></li>
+    <li class="card"><div class="card__top"><span class="app-icon" aria-hidden="true">P</span><h3 class="card__title"><button type="button" data-opens="app-details">Prowlarr</button></h3></div><p class="small muted">Sources for the other managers.</p><div class="card__meta"><span class="chip" data-tone="success">Running</span><span class="chip" data-tone="info">Update available</span><span class="numeric">v1.26.1</span></div><div class="card__meta card__actions"><a class="btn" href="#" target="_blank" rel="noopener">{{i:external-link}}Open<span class="visually-hidden"> Prowlarr (opens in a new tab)</span></a><button class="copy-btn" type="button" data-copy="http://homeserver.local:9696" aria-label="Copy home address for Prowlarr">{{i:copy}}</button><code>homeserver.local:9696</code></div></li>
+  </ul>
+</section>
+
+<section aria-labelledby="g-dl" style="display:grid;gap:var(--space-3)">
+  <h2 class="group-heading" id="g-dl">Downloads</h2>
+  <ul class="cards">
+    <li class="card"><div class="card__top"><span class="app-icon" aria-hidden="true">q</span><h3 class="card__title"><button type="button" data-opens="app-details">qBittorrent</button></h3></div><p class="small muted">Torrents, through the VPN.</p><div class="card__meta"><span class="chip" data-tone="success">Running</span><span class="numeric">v5.0.3</span><span class="numeric">35 ms</span></div><div class="card__meta card__actions"><a class="btn" href="#" target="_blank" rel="noopener">{{i:external-link}}Open<span class="visually-hidden"> qBittorrent (opens in a new tab)</span></a><button class="copy-btn" type="button" data-copy="http://homeserver.local:8080" aria-label="Copy home address for qBittorrent">{{i:copy}}</button><code>homeserver.local:8080</code></div></li>
+    <li class="card"><div class="card__top"><span class="app-icon" aria-hidden="true">Sa</span><h3 class="card__title"><button type="button" data-opens="app-details">SABnzbd</button></h3></div><p class="small muted">Usenet downloads.</p><div class="card__meta"><span class="chip" data-tone="success">Running</span><span class="numeric">v4.4.1</span><span class="numeric">29 ms</span></div><div class="card__meta card__actions"><a class="btn" href="#" target="_blank" rel="noopener">{{i:external-link}}Open<span class="visually-hidden"> SABnzbd (opens in a new tab)</span></a><button class="copy-btn" type="button" data-copy="http://homeserver.local:8085" aria-label="Copy home address for SABnzbd">{{i:copy}}</button><code>homeserver.local:8085</code></div></li>
+  </ul>
+</section>
+</div>
+</main>
+<footer class="site-footer"><span>Starboard v0.2.0</span><a href="starboard-settings-about.html">About and updates</a></footer>
+<section aria-labelledby="board-phone-h" style="display:grid;gap:var(--space-4);padding:var(--space-8);border-top:2px solid var(--color-text);background:var(--color-surface-sunken)">
+  <div style="display:grid;gap:var(--space-1)"><h2 id="board-phone-h">On a phone (390px)</h2><p class="small muted">Cards stack in one column. Open stays on the card; everything else is in the details slide-out, which fills the screen.</p></div>
+  <div style="width:390px;border:1px solid var(--color-border);background:var(--color-bg);overflow:hidden">
+      <header class="site-header" style="position:relative">
+        <div class="site-header__bar" style="height:60px;padding-inline:var(--space-4);gap:var(--space-3)">
+          <button class="icon-btn" type="button" data-opens="phone-menu" aria-controls="phone-menu" aria-expanded="false">{{i-lg:menu}}<span class="visually-hidden">Menu</span></button>
+          <span class="panel-header__brand"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg>Starboard</span>
+          <button class="icon-btn" type="button" style="margin-left:auto" data-dialog="display-dialog" aria-label="Display">{{i-lg:sun}}</button>
+        </div>
+        <div class="site-header__tabs"><nav class="menu-tabs" aria-label="Apps (phone)"><a href="starboard-apps.html" aria-current="page">{{i:layout-grid}}<span class="menu-tabs__label">Apps</span></a><a href="starboard-other-services.html">{{i:server-cog}}<span class="menu-tabs__label">Other services</span></a></nav></div>
+      </header>
+      <div style="display:grid;gap:var(--space-4);padding:var(--space-4)">
+<div class="page-head"><div class="page-head__text"><h1 style="font-size:var(--text-xl)">Apps</h1><p class="page-head__summary">11 of 12 running · 1 not responding</p></div></div>
+<div class="filter-chips" role="group" aria-label="Show only (phone)" style="flex-wrap:nowrap;overflow-x:auto">
+  <button class="filter-chip" type="button" aria-pressed="false" style="flex:none">Not responding, 1</button>
+  <button class="filter-chip" type="button" aria-pressed="true" style="flex:none">Update available, 2</button>
+  <button class="filter-chip" type="button" aria-pressed="false" style="flex:none">Has warnings, 1</button>
+</div>
+<ul class="cards" style="grid-template-columns:1fr">
+  <li class="card"><div class="card__top"><span class="app-icon" aria-hidden="true">S</span><h3 class="card__title"><button type="button" data-opens="app-details">Sonarr</button></h3></div><div class="card__meta"><span class="chip" data-tone="success">Running</span><span class="chip" data-tone="info">Update available</span></div><div class="card__meta card__actions"><a class="btn" href="#" target="_blank" rel="noopener" style="flex:1">{{i:external-link}}Open<span class="visually-hidden"> Sonarr (opens in a new tab)</span></a></div></li>
+  <li class="card"><div class="card__top"><span class="app-icon" aria-hidden="true">P</span><h3 class="card__title"><button type="button" data-opens="app-details">Prowlarr</button></h3></div><div class="card__meta"><span class="chip" data-tone="success">Running</span><span class="chip" data-tone="info">Update available</span></div><div class="card__meta card__actions"><a class="btn" href="#" target="_blank" rel="noopener" style="flex:1">{{i:external-link}}Open<span class="visually-hidden"> Prowlarr (opens in a new tab)</span></a></div></li>
+</ul>
+      </div>
+  </div>
+</section>
+<div class="side-panel-layer" id="phone-menu" hidden>
+  <div class="side-panel-backdrop"></div>
+  <nav class="phone-menu" aria-label="Main menu">
+    <div class="panel-header"><span class="panel-header__brand"><svg viewBox="0 0 32 32" width="24" height="24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg>Starboard</span><button class="icon-btn" type="button" data-closes aria-label="Close menu">{{i:x}}</button></div>
+    <form class="phone-menu__search" role="search" action="starboard-search.html"><input class="input" type="search" name="q" aria-label="Search films, series, music and books" placeholder="Search films, series, music, books"></form>
+    <div class="phone-menu__sections"><div class="phone-menu__section" data-current><button type="button" aria-expanded="true" aria-controls="pm-apps">{{i-lg:layout-grid}}Apps{{i:chevron-right phone-menu__chevron}}</button><ul id="pm-apps"><li><a href="starboard-apps.html" aria-current="page">{{i:layout-grid}}Apps</a></li><li><a href="starboard-other-services.html">{{i:server-cog}}Other services</a></li></ul></div><div class="phone-menu__section"><a href="starboard-search.html" style="display:flex;align-items:center;gap:var(--space-3);min-height:52px;padding:0 var(--space-4);font-weight:var(--weight-strong);text-decoration:none;color:var(--color-text)">{{i-lg:search}}Search</a></div><div class="phone-menu__section"><a href="starboard-downloads.html" style="display:flex;align-items:center;gap:var(--space-3);min-height:52px;padding:0 var(--space-4);font-weight:var(--weight-strong);text-decoration:none;color:var(--color-text)">{{i-lg:download}}Downloads</a></div><div class="phone-menu__section"><a href="starboard-coming-up.html" style="display:flex;align-items:center;gap:var(--space-3);min-height:52px;padding:0 var(--space-4);font-weight:var(--weight-strong);text-decoration:none;color:var(--color-text)">{{i-lg:calendar-days}}Coming up</a></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="pm-system">{{i-lg:activity}}System{{i:chevron-right phone-menu__chevron}}</button><ul id="pm-system" hidden><li><a href="starboard-overview.html">{{i:gauge}}Overview</a></li><li><a href="starboard-storage.html">{{i:hard-drive}}Storage</a></li><li><a href="starboard-disk-health.html">{{i:heart-pulse}}Disk health</a></li><li><a href="starboard-monitor.html">{{i:chart-line}}Monitor</a></li><li><a href="starboard-network.html">{{i:network}}Network</a></li><li><a href="starboard-backup.html">{{i:archive}}Backup and restore</a></li></ul></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="pm-settings">{{i-lg:settings}}Settings{{i:chevron-right phone-menu__chevron}}</button><ul id="pm-settings" hidden><li><a href="starboard-settings-apps.html">{{i:app-window}}Manage apps</a></li><li><a href="starboard-settings-general.html">{{i:sliders-horizontal}}General</a></li><li><a href="starboard-settings-security.html">{{i:shield-check}}Security</a></li><li><a href="starboard-settings-about.html">{{i:info}}About and updates</a></li></ul></div></div>
+    <div class="phone-menu__foot"><span class="small muted">Starboard v0.2.0</span><button class="btn" type="button">{{i:log-out}}Sign out</button></div>
+  </nav>
+</div>
+<div class="side-panel-layer" id="app-details" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="app-details-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="app-details-h">Sonarr</h2><button class="icon-btn" type="button" data-closes aria-label="Close Sonarr details">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <div style="display:flex;gap:var(--space-3);align-items:center">
+        <span class="app-icon" aria-hidden="true">S</span>
+        <div style="display:grid;gap:var(--space-1)"><span class="chip" data-tone="success" style="justify-self:start">Running</span><span class="small muted">Replied in 84 ms · checked 1 minute ago</span></div>
+      </div>
+      <div class="notice" role="status">{{i:circle-arrow-up}}<div class="notice__body"><span class="notice__title">Update available</span><p>Version 4.0.12 is out. You have 4.0.11. Sonarr updates when its container image is updated.</p></div></div>
+      <section style="display:grid;gap:var(--space-3)" aria-labelledby="ad-addr-h">
+        <h3 id="ad-addr-h">Addresses</h3>
+        <dl class="facts">
+          <dt>Home</dt><dd><code>http://homeserver.local:8989</code> <button class="copy-btn" type="button" data-copy="http://homeserver.local:8989" aria-label="Copy home address for Sonarr">{{i:copy}}</button></dd>
+          <dt>Outside</dt><dd><code>https://sonarr.example.com</code> <button class="copy-btn" type="button" data-copy="https://sonarr.example.com" aria-label="Copy outside address for Sonarr">{{i:copy}}</button><br><span class="chip" data-tone="success">Reachable from outside</span></dd>
+        </dl>
+      </section>
+      <section style="display:grid;gap:var(--space-3)" aria-labelledby="ad-warn-h">
+        <h3 id="ad-warn-h">Warnings from Sonarr</h3>
+        <ul class="rows">
+          <li class="row row--no-lead"><div><div class="row__title">Indexers unavailable due to failures for more than 6 hours</div><div class="row__meta">First seen today at 08:12</div></div><div class="row__side"><span class="chip" data-tone="warning">Needs attention</span></div></li>
+        </ul>
+      </section>
+      <section style="display:grid;gap:var(--space-3)" aria-labelledby="ad-more-h">
+        <h3 id="ad-more-h">About this app</h3>
+        <dl class="facts">
+          <dt>Category</dt><dd>Library managers</dd>
+          <dt>Version</dt><dd class="numeric">4.0.11</dd>
+          <dt>Search</dt><dd>Searched from Starboard's Search page</dd>
+          <dt>Followed by</dt><dd>No other services</dd>
+        </dl>
+      </section>
+    </div>
+    <div class="side-panel__foot"><a class="btn btn--primary" href="#" target="_blank" rel="noopener">{{i:external-link}}Open Sonarr<span class="visually-hidden"> (opens in a new tab)</span></a><button class="btn" type="button" data-opens="app-edit">{{i:pencil}}Edit app</button><button class="btn btn--quiet" type="button">{{i:refresh-cw}}Check now</button></div>
+  </aside>
+</div>
+
+<div class="side-panel-layer" id="app-edit" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel side-panel--wide" role="dialog" aria-modal="true" aria-labelledby="app-edit-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="app-edit-h">Edit Sonarr</h2><button class="icon-btn" type="button" data-closes aria-label="Close Edit Sonarr">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <ol class="steps" aria-label="Steps"><li aria-current="step">Connection</li><li>Adding options</li></ol>
+      <section style="display:grid;gap:var(--space-4)" aria-labelledby="ae-conn-h">
+        <h3 id="ae-conn-h">Connection</h3>
+        <div class="form-grid">
+          <div class="field"><label for="ae-kind">Kind of app</label><select class="select" id="ae-kind"><option>Sonarr</option><option>Radarr</option><option>Lidarr</option><option>Jellyfin</option><option>qBittorrent</option><option>Other web app</option></select></div>
+          <div class="field"><label for="ae-name">Name</label><input class="input" id="ae-name" value="Sonarr" maxlength="60"></div>
+          <div class="field" data-span="all"><label for="ae-url">Address Starboard uses</label><span class="hint" id="ae-url-h">On Docker, the container name and port, such as http://sonarr:8989.</span><input class="input" id="ae-url" inputmode="url" aria-describedby="ae-url-h" value="http://sonarr:8989"></div>
+          <div class="field" data-span="all"><label for="ae-key">API key</label><span class="hint" id="ae-key-h">In Sonarr: Settings, General. Leave blank to keep the saved key; it is never shown again.</span><input class="input" id="ae-key" type="password" autocomplete="off" aria-describedby="ae-key-h"></div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:var(--space-3);align-items:center"><button class="btn" type="button">{{i:zap}}Test connection</button></div>
+        <div class="notice" data-tone="success" role="status">{{i:circle-check}}<div class="notice__body"><span class="notice__title">Connected</span><p>Sonarr 4.0.11 answered in 84 ms.</p></div></div>
+      </section>
+      <section style="display:grid;gap:var(--space-4)" aria-labelledby="ae-show-h">
+        <h3 id="ae-show-h">On the dashboard</h3>
+        <div class="form-grid">
+          <div class="field"><label for="ae-cat">Category</label><span class="hint" id="ae-cat-h">Change the list in Settings, General.</span><select class="select" id="ae-cat" aria-describedby="ae-cat-h"><option>Library managers</option><option>Media</option><option>Downloads</option><option>Tools</option></select></div>
+          <div class="field"><label for="ae-icon">Icon</label><span class="hint" id="ae-icon-h">A name from the dashboard icons collection.</span><input class="input" id="ae-icon" aria-describedby="ae-icon-h" value="sonarr"></div>
+          <div class="field" data-span="all"><label for="ae-desc">Description</label><input class="input" id="ae-desc" maxlength="200" value="Finds and organises series."></div>
+          <div class="field" data-span="all"><label for="ae-link">Address to open in your browser</label><span class="hint" id="ae-link-h">Leave blank to use the address Starboard uses.</span><input class="input" id="ae-link" inputmode="url" aria-describedby="ae-link-h" value="http://homeserver.local:8989"></div>
+          <div class="field" data-span="all"><label for="ae-out">Outside address</label><span class="hint" id="ae-out-h">The address that works away from home. Starboard checks it can be reached.</span><input class="input" id="ae-out" inputmode="url" aria-describedby="ae-out-h" value="https://sonarr.example.com"></div>
+        </div>
+        <div>
+          <label class="switch"><span class="check__text"><strong>Show on the dashboard</strong></span><input type="checkbox" role="switch" checked></label>
+          <label class="switch"><span class="check__text"><strong>Background service</strong><span class="check__hint">It has no web page, so it is listed under Apps, Other services.</span></span><input type="checkbox" role="switch"></label>
+        </div>
+      </section>
+    </div>
+    <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-opens="app-edit-2">Save and continue</button><button class="btn btn--quiet" type="button" data-closes>Cancel</button><button class="btn btn--danger" type="button" data-dialog="remove-app">{{i:trash-2}}Remove</button></div>
+  </aside>
+</div>
+
+<div class="side-panel-layer" id="app-edit-2" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel side-panel--wide" role="dialog" aria-modal="true" aria-labelledby="app-edit-2-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="app-edit-2-h">Edit Sonarr</h2><button class="icon-btn" type="button" data-closes aria-label="Close Edit Sonarr">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <ol class="steps" aria-label="Steps"><li data-done>Connection</li><li aria-current="step">Adding options</li></ol>
+      <div class="notice" data-tone="success" role="status">{{i:circle-check}}<div class="notice__body"><span class="notice__title">Sonarr saved</span><p>Now choose what Starboard uses when you add a series from Search.</p></div></div>
+      <section style="display:grid;gap:var(--space-4)" aria-labelledby="ae2-h">
+        <h3 id="ae2-h">Adding options</h3>
+        <div class="form-grid">
+          <div class="field"><label for="ae2-q">Quality profile</label><select class="select" id="ae2-q"><option>HD 1080p</option><option>Any</option><option>Ultra HD</option></select></div>
+          <div class="field"><label for="ae2-f">Folder</label><select class="select" id="ae2-f"><option>/data/media/series</option><option>/data/media/kids-series</option></select></div>
+        </div>
+        <label class="switch"><span class="check__text"><strong>Search as soon as something is added</strong><span class="check__hint">On: Sonarr looks for every episode straight away.</span></span><input type="checkbox" role="switch" checked></label>
+      </section>
+    </div>
+    <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Save adding options</button><button class="btn btn--quiet" type="button" data-closes>Skip for now</button></div>
+  </aside>
+</div>
+
+<dialog class="dialog" id="remove-app" aria-labelledby="remove-app-h">
+  <div class="panel-header"><h2 class="panel-header__title" id="remove-app-h">Remove Sonarr?</h2><button class="icon-btn" type="button" data-closes aria-label="Close">{{i:x}}</button></div>
+  <div class="dialog__body"><p>Sonarr leaves the dashboard and Search. Sonarr itself, its files and its settings stay as they are. You can add it again at any time.</p></div>
+  <div class="dialog__foot"><button class="btn btn--danger btn--primary" type="button" data-closes>Remove Sonarr</button><button class="btn btn--quiet" type="button" data-closes>Keep it</button></div>
+</dialog>
+
+<div class="side-panel-layer" id="app-details-lidarr" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="adl-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="adl-h">Lidarr</h2><button class="icon-btn" type="button" data-closes aria-label="Close Lidarr details">{{i:x}}</button></div>
+    <div class="side-panel__body">
+      <div style="display:flex;gap:var(--space-3);align-items:center"><span class="app-icon" aria-hidden="true">L</span><div style="display:grid;gap:var(--space-1)"><span class="chip" data-tone="danger" style="justify-self:start">Not responding</span><span class="small muted">No answer since 10:48 · checked 1 minute ago</span></div></div>
+      <div class="notice" data-tone="danger">{{i:circle-alert}}<div class="notice__body"><span class="notice__title">Starboard could not reach Lidarr</span><p>The connection was refused at http://lidarr:8686. Check that its container is running, then select Check now.</p></div></div>
+      <details class="disclosure"><summary>Technical details</summary><div class="disclosure__body"><code class="code-block">GET http://lidarr:8686/api/v1/system/status
+Connection refused after 3 tries (10:48, 10:53, 10:58)</code></div></details>
+      <section style="display:grid;gap:var(--space-3)" aria-labelledby="adl-hist-h">
+        <h3 id="adl-hist-h">Recent checks</h3>
+        <ul class="rows">
+          <li class="row row--no-lead"><div><div class="row__title">Not responding</div><div class="row__meta">Today, 10:48 to now</div></div></li>
+          <li class="row row--no-lead"><div><div class="row__title">Running</div><div class="row__meta">Yesterday 06:02 to today 10:47 · about 70 ms</div></div></li>
+        </ul>
+      </section>
+      <dl class="facts"><dt>Home address</dt><dd><code>http://homeserver.local:8686</code></dd><dt>Category</dt><dd>Library managers</dd><dt>Last version seen</dt><dd class="numeric">2.8.2</dd></dl>
+    </div>
+    <div class="side-panel__foot"><button class="btn btn--primary" type="button">{{i:refresh-cw}}Check now</button><button class="btn" type="button" data-opens="app-edit">{{i:pencil}}Edit app</button></div>
+  </aside>
+</div>
+<dialog class="dialog" id="display-dialog" aria-labelledby="display-h">
+  <div class="panel-header"><h2 class="panel-header__title" id="display-h">Display and accessibility</h2><button class="icon-btn" type="button" data-closes aria-label="Close display and accessibility">{{i:x}}</button></div>
+  <div class="dialog__body">
+    <fieldset><legend class="field__label">Theme</legend><div class="segmented"><label><input type="radio" name="d-theme" value="light" data-display="theme" checked><span>Light</span></label><label><input type="radio" name="d-theme" value="dark" data-display="theme"><span>Dark</span></label></div></fieldset>
+    <fieldset><legend class="field__label">Text size</legend><div class="segmented"><label><input type="radio" name="d-text" value="100" data-display="text" checked><span>100%</span></label><label><input type="radio" name="d-text" value="125" data-display="text"><span>125%</span></label><label><input type="radio" name="d-text" value="150" data-display="text"><span>150%</span></label><label><input type="radio" name="d-text" value="175" data-display="text"><span>175%</span></label></div></fieldset>
+    <div>
+      <label class="switch"><span class="check__text"><strong>High contrast</strong></span><input type="checkbox" role="switch" data-display="contrast"></label>
+      <label class="switch"><span class="check__text"><strong>Reduce motion</strong></span><input type="checkbox" role="switch" data-display="motion"></label>
+      <label class="switch"><span class="check__text"><strong>Underline links</strong></span><input type="checkbox" role="switch" data-display="underline"></label>
+      <label class="switch"><span class="check__text"><strong>Wider text spacing</strong></span><input type="checkbox" role="switch" data-display="spacing"></label>
+    </div>
+  </div>
+  <div class="dialog__foot"><button class="btn btn--primary" type="button" data-closes>Done</button><button class="btn btn--quiet" type="button">Reset</button></div>
+</dialog>
+<script src="../components.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!--meta {"title": "Manage apps", "main": "settings", "sub": "settings-apps", "phone_note": "One button per row (More actions); Edit opens the slide-out full screen."}-->
+<!--note-->
+<ul style="margin:0;padding-left:var(--space-5)">
+  <li>Renamed <strong>Manage apps</strong>, so Apps means only the launcher. The 17-field modal is replaced by an <strong>add and edit slide-out</strong> in two clear steps: Connection, then Adding options.</li>
+  <li>Four buttons per row (two arrows, Edit and Remove) become Edit plus one <strong>More actions menu</strong> (Move up, Move down, Hide, Remove). Moving keeps focus on the moved row.</li>
+  <li>Remove asks in a <strong>dialog</strong>, not in a toast that vanishes after 6 seconds.</li>
+</ul>
+<!--page-->
+<div class="page-head">
+  <div class="page-head__text"><h1>Manage apps</h1><p class="page-head__summary">12 apps and 4 services, in the order they appear on the dashboard.</p></div>
+  <div class="actions"><button class="btn btn--primary" type="button" data-opens="app-edit">{{i:plus}}Add an app</button></div>
+</div>
+<section class="settings-section" style="max-width:none" aria-labelledby="ma-lib-h">
+  <div class="settings-section__head"><h2 id="ma-lib-h">Library managers</h2><p class="small muted">Sonarr, Radarr, Lidarr and Storyarr are also searched from Search.</p></div>
+  <ul class="rows" style="border-top:0">
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">S</span><div><div class="row__title"><button type="button" data-opens="app-edit">Sonarr</button></div><div class="row__meta">http://sonarr:8989 · searched · outside address set</div></div><div class="row__side"><span class="chip" data-tone="success">Connected</span><button class="btn btn--compact" type="button" data-opens="app-edit">{{i:pencil}}Edit<span class="visually-hidden"> Sonarr</span></button>
+      <div class="menu-wrap"><button class="icon-btn icon-btn--bare" type="button" aria-haspopup="menu" aria-controls="ma-m1" aria-label="More actions for Sonarr">{{i:ellipsis}}</button><div class="menu" id="ma-m1" role="menu" aria-label="Sonarr"><button type="button" role="menuitem">{{i:arrow-up}}Move up</button><button type="button" role="menuitem">{{i:arrow-down}}Move down</button><button type="button" role="menuitem">{{i:eye}}Hide from the dashboard</button><hr><button type="button" role="menuitem" data-dialog="remove-app">{{i:trash-2}}Remove</button></div></div></div></li>
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">R</span><div><div class="row__title"><button type="button" data-opens="app-edit">Radarr</button></div><div class="row__meta">http://radarr:7878 · searched</div></div><div class="row__side"><span class="chip" data-tone="success">Connected</span><button class="btn btn--compact" type="button" data-opens="app-edit">{{i:pencil}}Edit<span class="visually-hidden"> Radarr</span></button><div class="menu-wrap"><button class="icon-btn icon-btn--bare" type="button" aria-haspopup="menu" aria-controls="ma-m2" aria-label="More actions for Radarr">{{i:ellipsis}}</button><div class="menu" id="ma-m2" role="menu" aria-label="Radarr"><button type="button" role="menuitem">Move up</button><button type="button" role="menuitem">Move down</button><button type="button" role="menuitem">Hide from the dashboard</button><hr><button type="button" role="menuitem">Remove</button></div></div></div></li>
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">L</span><div><div class="row__title"><button type="button" data-opens="app-edit">Lidarr</button></div><div class="row__meta">http://lidarr:8686 · searched</div></div><div class="row__side"><span class="chip" data-tone="danger">Cannot connect</span><button class="btn btn--compact" type="button" data-opens="app-edit">{{i:pencil}}Edit<span class="visually-hidden"> Lidarr</span></button><div class="menu-wrap"><button class="icon-btn icon-btn--bare" type="button" aria-haspopup="menu" aria-controls="ma-m3" aria-label="More actions for Lidarr">{{i:ellipsis}}</button><div class="menu" id="ma-m3" role="menu" aria-label="Lidarr"><button type="button" role="menuitem">Move up</button><button type="button" role="menuitem">Move down</button><button type="button" role="menuitem">Hide from the dashboard</button><hr><button type="button" role="menuitem">Remove</button></div></div></div></li>
+  </ul>
+</section>
+<section class="settings-section" style="max-width:none" aria-labelledby="ma-media-h">
+  <div class="settings-section__head"><h2 id="ma-media-h">Media</h2></div>
+  <ul class="rows" style="border-top:0">
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">J</span><div><div class="row__title"><button type="button" data-opens="app-edit">Jellyfin</button></div><div class="row__meta">http://jellyfin:8096 · outside address set</div></div><div class="row__side"><span class="chip" data-tone="success">Connected</span><button class="btn btn--compact" type="button" data-opens="app-edit">{{i:pencil}}Edit<span class="visually-hidden"> Jellyfin</span></button><div class="menu-wrap"><button class="icon-btn icon-btn--bare" type="button" aria-haspopup="menu" aria-controls="ma-m4" aria-label="More actions for Jellyfin">{{i:ellipsis}}</button><div class="menu" id="ma-m4" role="menu" aria-label="Jellyfin"><button type="button" role="menuitem">Move up</button><button type="button" role="menuitem">Move down</button><button type="button" role="menuitem">Hide from the dashboard</button><hr><button type="button" role="menuitem">Remove</button></div></div></div></li>
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">A</span><div><div class="row__title"><button type="button" data-opens="app-edit">Audiobookshelf</button></div><div class="row__meta">http://audiobookshelf:80 · hidden from the dashboard</div></div><div class="row__side"><span class="chip" data-tone="muted">Hidden</span><button class="btn btn--compact" type="button" data-opens="app-edit">{{i:pencil}}Edit<span class="visually-hidden"> Audiobookshelf</span></button><div class="menu-wrap"><button class="icon-btn icon-btn--bare" type="button" aria-haspopup="menu" aria-controls="ma-m5" aria-label="More actions for Audiobookshelf">{{i:ellipsis}}</button><div class="menu" id="ma-m5" role="menu" aria-label="Audiobookshelf"><button type="button" role="menuitem">Move up</button><button type="button" role="menuitem">Move down</button><button type="button" role="menuitem">Show on the dashboard</button><hr><button type="button" role="menuitem">Remove</button></div></div></div></li>
+  </ul>
+</section>
+<section class="settings-section" style="max-width:none" aria-labelledby="ma-bg-h">
+  <div class="settings-section__head"><h2 id="ma-bg-h">Other services</h2><p class="small muted">Services with no web page. They appear under Apps, Other services.</p></div>
+  <ul class="rows" style="border-top:0">
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:shield-check}}</span><div><div class="row__title"><button type="button" data-opens="app-edit">VPN</button></div><div class="row__meta">No address · follows qBittorrent</div></div><div class="row__side"><span class="chip" data-tone="success">Running</span><button class="btn btn--compact" type="button" data-opens="app-edit">{{i:pencil}}Edit<span class="visually-hidden"> VPN</span></button></div></li>
+  </ul>
+</section>
+<!--phone-->
+<ul class="rows">
+  <li class="row row--opens"><span class="app-icon" aria-hidden="true">S</span><div><div class="row__title"><button type="button" data-opens="app-edit">Sonarr</button></div><div class="row__meta"><span class="chip" data-tone="success">Connected</span></div></div><div class="row__side"><button class="icon-btn icon-btn--bare" type="button" aria-label="More actions for Sonarr">{{i:ellipsis}}</button></div></li>
+  <li class="row row--opens"><span class="app-icon" aria-hidden="true">L</span><div><div class="row__title"><button type="button" data-opens="app-edit">Lidarr</button></div><div class="row__meta"><span class="chip" data-tone="danger">Cannot connect</span></div></div><div class="row__side"><button class="icon-btn icon-btn--bare" type="button" aria-label="More actions for Lidarr">{{i:ellipsis}}</button></div></li>
+</ul>
+<button class="btn btn--primary" type="button" data-opens="app-edit" style="width:100%">{{i:plus}}Add an app</button>
+<!--panels-->
+<!--include:app-edit-->

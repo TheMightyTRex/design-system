@@ -1,0 +1,47 @@
+<!--meta {"title": "Network", "main": "system", "sub": "network", "phone_note": "Outside access rows keep the app name and its reachability chip; the address moves to the slide-out."}-->
+<!--note-->
+<ul style="margin:0;padding-left:var(--space-5)">
+  <li>"Who can open Starboard" was a setting shown as a stat. It is now a one-line link to Settings, Security.</li>
+  <li>Outside access rows open the <strong>same app details slide-out</strong> as Apps, so reachability, the address and Edit are in one place.</li>
+  <li>Download and Upload are words, not arrows; the time range is labelled.</li>
+</ul>
+<!--page-->
+<div class="page-head">
+  <div class="page-head__text"><h1>Network</h1><p class="page-head__summary">2 connections up · 9 of 10 outside addresses reachable · updated 1 minute ago</p></div>
+  <div class="actions"><button class="btn" type="button">{{i:refresh-cw}}Check again</button></div>
+</div>
+<div class="stats">
+  <div class="stat"><span class="stat__value">18.4 MB/s</span><span class="stat__label">Download now</span></div>
+  <div class="stat"><span class="stat__value">1.2 MB/s</span><span class="stat__label">Upload now</span></div>
+  <div class="stat" data-tone="warning"><span class="stat__value">9 of 10</span><span class="stat__label">Outside addresses reachable</span><span class="chip" data-tone="warning" style="justify-self:start">1 not reachable</span></div>
+</div>
+<p class="small">{{i:shield-check}} Phones and computers on your home network can open Starboard. <a href="starboard-settings-security.html">Change who can open it in Security</a></p>
+<div style="display:flex;flex-wrap:wrap;gap:var(--space-3);align-items:center;justify-content:space-between">
+  <h2>Traffic</h2>
+  <fieldset style="display:flex;gap:var(--space-3);align-items:center"><legend class="visually-hidden">Time range</legend><span class="small muted" aria-hidden="true">Time range</span><div class="segmented"><label><input type="radio" name="nw-r"><span>Last hour</span></label><label><input type="radio" name="nw-r" checked><span>6 hours</span></label><label><input type="radio" name="nw-r"><span>24 hours</span></label></div></fieldset>
+</div>
+<!--chart {"id":"n-traffic","max":25,"title":"Download and upload","now":"Download 18.4 MB/s · Upload 1.2 MB/s","unit":"","labels":["10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00"],"series":[["Download, MB/s",[2,4,3,12,22,16,8,5,9,14,20,19,18]],["Upload, MB/s",[0.5,0.8,0.6,1.1,1.6,1.2,0.9,0.7,0.8,1.0,1.4,1.3,1.2]]],"desc":"Download peaked at 22 MB/s and is now 18.4; upload stayed under 2 MB/s over the last 6 hours."}-->
+<section class="panel" aria-labelledby="nw-if-h">
+  <div class="panel__head"><h2 id="nw-if-h">Network connections</h2><span class="small muted">Since the server started 23 days ago</span></div>
+  <ul class="rows">
+    <li class="row"><span class="app-icon" aria-hidden="true">{{i:network}}</span><div><div class="row__title">Wired, eth0</div><div class="row__meta"><code>homeserver.local</code> · 1 Gb/s · received 4.2 TB · sent 310 GB</div></div><div class="row__side"><span class="chip" data-tone="success">Connected</span></div></li>
+    <li class="row"><span class="app-icon" aria-hidden="true">{{i:shield-check}}</span><div><div class="row__title">VPN, wg0</div><div class="row__meta">Used by qBittorrent · received 2.9 TB · sent 1.1 TB</div></div><div class="row__side"><span class="chip" data-tone="success">Connected</span></div></li>
+  </ul>
+</section>
+<section class="panel" aria-labelledby="nw-out-h">
+  <div class="panel__head"><h2 id="nw-out-h">Outside access</h2><span class="small muted">Checked from the server. Some routers cannot reach their own outside address, so confirm from a phone on mobile data.</span></div>
+  <ul class="rows">
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">L</span><div><div class="row__title"><button type="button" data-opens="app-details">Lidarr</button></div><div class="row__meta"><code>https://lidarr.example.com</code> · no answer</div></div><div class="row__side"><span class="chip" data-tone="danger">Not reachable</span></div></li>
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">J</span><div><div class="row__title"><button type="button" data-opens="app-details">Jellyfin</button></div><div class="row__meta"><code>https://media.example.com</code> · 120 ms</div></div><div class="row__side"><span class="chip" data-tone="success">Reachable</span></div></li>
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">S</span><div><div class="row__title"><button type="button" data-opens="app-details">Sonarr</button></div><div class="row__meta"><code>https://sonarr.example.com</code> · 140 ms</div></div><div class="row__side"><span class="chip" data-tone="success">Reachable</span></div></li>
+  </ul>
+</section>
+<!--phone-->
+<h2>Outside access</h2>
+<ul class="rows">
+  <li class="row row--opens"><span class="app-icon" aria-hidden="true">L</span><div><div class="row__title"><button type="button" data-opens="app-details">Lidarr</button></div></div><div class="row__side"><span class="chip" data-tone="danger">Not reachable</span></div></li>
+  <li class="row row--opens"><span class="app-icon" aria-hidden="true">J</span><div><div class="row__title"><button type="button" data-opens="app-details">Jellyfin</button></div></div><div class="row__side"><span class="chip" data-tone="success">Reachable</span></div></li>
+</ul>
+<!--panels-->
+<!--include:app-details-->
+<!--include:app-edit-->

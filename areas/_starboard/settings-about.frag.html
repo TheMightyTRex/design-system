@@ -1,0 +1,30 @@
+<!--meta {"title": "About and updates", "main": "settings", "sub": "about", "phone_note": "The version notice and the command block go full width; the copy button stays beside the command."}-->
+<!--note-->
+<ul style="margin:0;padding-left:var(--space-5)">
+  <li>Renamed <strong>About and updates</strong>, so it no longer shares the name Updates with the apps' updates (which now live on Apps).</li>
+  <li>The version and an available update are a notice at the top with the release notes; the GitHub check is a switch that applies at once.</li>
+  <li>The update command has a copy button and the steps it takes are a short list, not a paragraph.</li>
+</ul>
+<!--page-->
+<div class="page-head">
+  <div class="page-head__text"><h1>About and updates</h1><p class="page-head__summary">Your version and how to update Starboard.</p></div>
+</div>
+<div class="notice" role="status" style="max-width:880px">{{i:circle-arrow-up}}<div class="notice__body"><span class="notice__title">Version 0.2.1 is out</span><p>You have 0.2.0. Read what changed, then run the update command on the server.</p></div><a class="btn btn--compact" href="#" target="_blank" rel="noopener">Release notes<span class="visually-hidden"> (opens in a new tab)</span></a></div>
+<section class="settings-section" aria-labelledby="ab-up-h">
+  <div class="settings-section__head"><h2 id="ab-up-h">Updates</h2><p class="small muted">Updates run on the server, so the dashboard never needs access to Docker.</p></div>
+  <ul class="settings-rows">
+    <li class="setting"><div class="setting__text"><span class="setting__label">Check GitHub for new releases</span><span class="setting__hint">On: Starboard checks once a day and shows a notice here.</span></div><div class="setting__control"><label class="switch"><span class="visually-hidden">Check GitHub for new releases</span><input type="checkbox" role="switch" checked></label></div></li>
+  </ul>
+  <h3>How to update</h3>
+  <p>Run this on the server, in the folder you installed Starboard into:</p>
+  <div style="display:flex;gap:var(--space-2);align-items:center;max-width:520px"><code class="code-block" style="flex:1">./update.sh</code><button class="copy-btn" type="button" data-copy="./update.sh" aria-label="Copy the update command">{{i:copy}}</button></div>
+  <ol class="small" style="margin:0;padding-left:var(--space-5);display:grid;gap:var(--space-1)"><li>It backs up your settings.</li><li>It installs the newest release.</li><li>If the new version does not start, it goes back to the previous one.</li></ol>
+</section>
+<section class="settings-section" aria-labelledby="ab-ab-h">
+  <div class="settings-section__head"><h2 id="ab-ab-h">About</h2></div>
+  <dl class="facts"><dt>Version</dt><dd class="numeric">0.2.0, installed 30 October 2026</dd><dt>Source code</dt><dd><a href="#" target="_blank" rel="noopener">Starboard on GitHub<span class="visually-hidden"> (opens in a new tab)</span></a></dd></dl>
+</section>
+<!--phone-->
+<div class="notice" role="status">{{i:circle-arrow-up}}<div class="notice__body"><span class="notice__title">Version 0.2.1 is out</span><p>You have 0.2.0.</p></div></div>
+<div style="display:flex;gap:var(--space-2);align-items:center"><code class="code-block" style="flex:1">./update.sh</code><button class="copy-btn" type="button" data-copy="./update.sh" aria-label="Copy the update command (phone)">{{i:copy}}</button></div>
+<!--panels-->
