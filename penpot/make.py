@@ -82,9 +82,14 @@ icons = {k: icons[k] for k in dict.fromkeys(used) if k in icons}
 data = {"font": "Atkinson Hyperlegible Next", "themes": themes, "core": core, "icons": icons}
 src = (here / "plugin.src.js").read_text()
 assert "/*DATA*/null" in src
-(here / "plugin.js").write_text(
-    "// Made by penpot/make.py from plugin.src.js, tokens.css and icons.svg: change those, not this file.\n"
-    + src.replace("/*DATA*/null", json.dumps(data, separators=(",", ":"))))
+# The type-checking lines are for editors only. Penpot runs plugins in SES, which refuses any code that
+# contains the text of an import expression or an HTML comment, even inside a comment.
+src = "\n".join(line for line in src.splitlines() if not line.startswith(("/// <reference", "/** @typedef {import(")))
+code = ("// Made by penpot/make.py from plugin.src.js, tokens.css and icons.svg: change those, not this file.\n"
+        + src.replace("/*DATA*/null", json.dumps(data, separators=(",", ":"))) + "\n")
+for refused in ("import(", "<!--", "-->"):
+    assert refused not in code, f"plugin.js contains {refused!r}, which Penpot's sandbox refuses"
+(here / "plugin.js").write_text(code)
 
 # Tokens for Penpot's Tokens panel: Core, then one colour set per theme, and a theme for each.
 def tok(value, kind):

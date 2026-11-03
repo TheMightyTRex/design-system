@@ -1,11 +1,5 @@
 // Made by penpot/make.py from plugin.src.js, tokens.css and icons.svg: change those, not this file.
 // @ts-check
-/// <reference types="@penpot/plugin-types" />
-/** @typedef {import("@penpot/plugin-types").Font} Font */
-/** @typedef {import("@penpot/plugin-types").LibraryColor} LibraryColor */
-/** @typedef {import("@penpot/plugin-types").LibraryTypography} LibraryTypography */
-/** @typedef {import("@penpot/plugin-types").Board} Board */
-/** @typedef {import("@penpot/plugin-types").Shape} Shape */
 // TRex Design System for Penpot: builds the design system into the open file. penpot/make.py writes the
 // library's values in place of DATA and saves the result as plugin.js; change this file, then run make.py.
 

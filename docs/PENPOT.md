@@ -60,8 +60,11 @@ When the library changes:
 
 1. Run `python3 penpot/make.py`. It writes `penpot/plugin.js` and `penpot/tokens.json` from `tokens.css`
    and `icons.svg`.
-2. Commit and push, as in [Make a change](https://themightytrex.github.io/design-system/resources/make-a-change.html).
-3. Run the plugin again in a new file, and replace the shared library with it.
+2. Run `penpot/test.sh`. It runs the plugin in SES, the sandbox Penpot runs plugins in, against a stand-in
+   for Penpot, and fails if the sandbox refuses the code or any part of the build fails. SES refuses code
+   that contains the text of an import expression or an HTML comment, even in a comment.
+3. Commit and push, as in [Make a change](https://themightytrex.github.io/design-system/resources/make-a-change.html).
+4. Run the plugin again in a new file, and replace the shared library with it.
 
 Change `penpot/plugin.src.js` to change what the plugin builds, never `plugin.js`.
 
