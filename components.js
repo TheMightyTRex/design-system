@@ -190,34 +190,53 @@
           await navigator.clipboard.writeText(button.dataset.copy);
           toast("Copied");
         } catch {
-          toast("Your browser did not allow copying", { tone: "info", detail: "Select the text and copy it instead." });
+          toast("Your browser did not allow copying", { tone: "warning", detail: "Select the text and copy it instead." });
         }
       });
     });
   }
-  /* Toast (option C): toast("Follow saved", { detail, tone: "success" | "info", action: { label, run } }).
-     Up to three stack in the corner, newest at the bottom, read out through one role="status" region.
-     Each stays 5 seconds, or 10 with an action, and waits while the pointer or keyboard focus is on it.
-     Returns a function that closes it. Settings pages use savedNote() instead. */
+  /* Toast (option C): toast("Follow saved", { detail, tone, action: { label, run } }).
+     Tones: "success" (the default), "info", "warning" and "danger" (an error). Up to three stack in the
+     corner, newest at the bottom; a new one pushes out the oldest that is not an error. Success and
+     information stay 5 seconds (10 with an action), a warning 10, and an error until it is closed. Each
+     waits while the pointer or keyboard focus is on it. Errors are read out at once (role="alert"), the
+     rest politely (role="status"). Shortcuts: toast.error(message, options), toast.warning(...).
+     Returns a function that closes it. Settings pages use savedNote() for success instead. */
   // Icons come from the page's own sprite (<use href="#i-name">) unless the app names a sprite file:
   // data-sprite="/icons/sprite.svg" on this script tag, or window.SharedComponentsSprite (Starboard sets it).
   const scriptSprite = document.currentScript?.dataset.sprite || "";
   const sprite = (name) =>
     `<svg class="i" aria-hidden="true" focusable="false"><use href="${window.SharedComponentsSprite || scriptSprite}#i-${name}"/></svg>`;
+  const TONES = {
+    success: { icon: "circle-check", time: 5000 },
+    info: { icon: "info", time: 5000 },
+    warning: { icon: "triangle-alert", time: 10000 },
+    danger: { icon: "circle-alert", time: 0 },
+  };
+  function announcer(id, role) {
+    let region = document.getElementById(id);
+    if (!region) {
+      region = document.createElement("div");
+      region.id = id;
+      region.className = "visually-hidden";
+      region.setAttribute("role", role);
+      document.body.append(region);
+    }
+    return region;
+  }
   function toast(message, options = {}) {
     let stack = document.getElementById("toast-stack");
     if (!stack) {
       stack = document.createElement("div");
       stack.id = "toast-stack";
       stack.className = "toasts";
-      stack.setAttribute("role", "status");
       document.body.append(stack);
     }
-    const tone = options.tone === "info" ? "info" : "success";
+    const tone = TONES[options.tone] ? options.tone : "success";
     const item = document.createElement("div");
     item.className = "toast";
     item.dataset.tone = tone;
-    item.innerHTML = `${sprite(tone === "info" ? "info" : "circle-check")}<span class="toast__text"><span class="toast__title"></span></span>`;
+    item.innerHTML = `${sprite(TONES[tone].icon)}<span class="toast__text"><span class="toast__title"></span></span>`;
     item.querySelector(".toast__title").textContent = message;
     if (options.detail) {
       const detail = document.createElement("span");
@@ -244,17 +263,25 @@
     shut.addEventListener("click", () => close());
     item.append(shut);
     stack.append(item);
-    while (stack.children.length > 3) stack.firstElementChild.remove();
+    while (stack.children.length > 3)
+      (stack.querySelector('.toast:not([data-tone="danger"])') || stack.firstElementChild).remove();
 
-    let left = options.action ? 10000 : 5000;
+    // Read out through a separate region, so the toast's own buttons stay out of the announcement.
+    const region = announcer(tone === "danger" ? "toast-alert" : "toast-status", tone === "danger" ? "alert" : "status");
+    region.textContent = "";
+    setTimeout(() => (region.textContent = [message, options.detail].filter(Boolean).join(". ")), 50);
+
+    let left = tone === "danger" ? 0 : Math.max(TONES[tone].time, options.action ? 10000 : 0);
     let started = Date.now();
-    let timer = setTimeout(close, left);
+    let timer = left ? setTimeout(close, left) : null;
     const pause = () => {
+      if (!timer) return;
       clearTimeout(timer);
+      timer = null;
       left -= Date.now() - started;
     };
     const resume = () => {
-      if (item.matches(":hover, :focus-within")) return;
+      if (!left || timer || item.matches(":hover, :focus-within")) return;
       started = Date.now();
       timer = setTimeout(close, Math.max(left, 2000));
     };
@@ -270,6 +297,8 @@
     }
     return close;
   }
+  toast.error = (message, options = {}) => toast(message, { ...options, tone: "danger" });
+  toast.warning = (message, options = {}) => toast(message, { ...options, tone: "warning" });
 
   /* Saved note (option D): savedNote(note) shows "Saved at 16:31" in a .saved-note beside the button that
      saved, and hides it at the next change in the same form or settings section. */

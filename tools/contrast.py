@@ -49,6 +49,8 @@ PAIRS = [
     ("color-border", "color-surface-raised", 3), ("color-border", "color-bg", 3),
     ("color-focus", "color-bg", 3), ("color-focus", "color-surface-raised", 3),
     ("color-text", "color-header", 4.5), ("color-text-muted", "color-header", 4.5),
+    # Error toast: text and detail on the danger tint.
+    ("color-text", "status-danger-bg", 4.5), ("color-text-muted", "status-danger-bg", 4.5),
 ]
 TONES = ["success", "info", "neutral", "warning", "danger", "muted"]
 
@@ -61,7 +63,7 @@ for name, t in THEMES:
         r = ratio(t[fg], t[bg])
         ok = r >= need
         fails += not ok
-        print(f"  {'ok  ' if ok else 'FAIL'} {fg[6:] if fg.startswith('color-') else fg} on {bg[6:]}: {r:.2f} (needs {need})")
+        print(f"  {'ok  ' if ok else 'FAIL'} {fg[6:] if fg.startswith('color-') else fg} on {bg.replace('color-', '')}: {r:.2f} (needs {need})")
     for tone in TONES:
         fg = t[f"status-{tone}-fg"]
         # Chip style B: tone text and border on the surface and on raised surfaces; notices use the tint.

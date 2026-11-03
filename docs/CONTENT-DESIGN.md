@@ -219,6 +219,13 @@ blame.
 - "We could not reach Prowlarr. Check that it is running, then select **Try again**. Your requests are
   kept."
 - Details (codes, responses) go in an expandable "Technical details" section.
+- Where the error shows: beside the thing it belongs to (a field, a row, a connection), as a danger notice
+  at the top of the page, or, when nothing on the page belongs to it, as an error toast. An error toast
+  stays until it is closed and can carry one action ("Try again"). Never pass a raw error message to a
+  toast: write what happened and what to do, and put the raw message in "Technical details" or the log.
+
+**Toasts.** Four kinds: success, information, warning and error. A warning says what may go wrong and
+what to do: "Disk 3 is 92% full". An error follows the error pattern.
 
 **Confirmation (toast).** Past tense, specific, short, no full stop: "Follow saved", "3 books added to
 Wanted". An optional line of detail: "New books by Ben Aaronovitch come in by themselves". One optional next

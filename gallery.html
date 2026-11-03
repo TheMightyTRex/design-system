@@ -683,12 +683,14 @@
 </section>
 
 <section class="g-section" id="toasts" aria-labelledby="toasts-h">
-  <header><h2 id="toasts-h">Toasts and saved notes</h2><p class="muted">A toast confirms a routine action: a card in the corner with a coloured edge, a title, an optional line of detail, one optional action and Close. On settings pages the confirmation is a saved note beside the button instead. An error is never only a toast; it stays in the page.</p></header>
+  <header><h2 id="toasts-h">Toasts and saved notes</h2><p class="muted">A toast is a short message about something that happened: a card in the corner with a coloured edge, a title, an optional line of detail, one optional action and Close. Success, information, warning or error. On settings pages a success is a saved note beside the button instead. An error that belongs to something on the page (a field, a row) also shows there.</p></header>
   <div class="g-demo g-demo--row">
     <button class="btn" type="button" onclick="SharedComponents.toast('Follow saved')">Success</button>
     <button class="btn" type="button" onclick="SharedComponents.toast('Follow saved', { detail: 'New books by Ben Aaronovitch come in by themselves' })">With detail</button>
     <button class="btn" type="button" onclick="SharedComponents.toast('3 books added to Wanted', { action: { label: 'Undo', run: () => SharedComponents.toast('Undone', { tone: 'info' }) } })">With Undo</button>
     <button class="btn" type="button" onclick="SharedComponents.toast('Search started', { tone: 'info', detail: 'Results in about a minute' })">Information</button>
+    <button class="btn" type="button" onclick="SharedComponents.toast.warning('Prowlarr is slow to answer', { detail: 'Searches may take longer than usual' })">Warning</button>
+    <button class="btn" type="button" onclick="SharedComponents.toast.error('We could not reach Prowlarr', { detail: 'Check that it is running. Your requests are kept.', action: { label: 'Try again', run: () => SharedComponents.toast('Prowlarr answered', { tone: 'success' }) } })">Error</button>
   </div>
   <div class="g-demo">
     <form class="inline-save" onsubmit="event.preventDefault(); SharedComponents.savedNote(this.querySelector('.saved-note'))">
@@ -699,10 +701,10 @@
     <p class="small muted">Select Save changes: the note appears beside it and goes at the next change.</p>
   </div>
   <div class="g-notes">
-    <div><h4>Toast</h4><ul><li>Bottom right, full width on phones. Up to three stack, newest at the bottom.</li><li>Success (tick) or information (i): icon, edge and words, never colour alone.</li><li>Title in the past tense, no full stop: "Follow saved". Detail is one short line.</li></ul></div>
-    <div><h4>Timing</h4><ul><li>5 seconds; 10 with an action. It waits while the pointer or keyboard focus is on it.</li><li>Read out through one <code>role="status"</code> region, without moving focus.</li></ul></div>
+    <div><h4>Toast</h4><ul><li>Bottom right, full width on phones. Up to three stack, newest at the bottom.</li><li>Success (tick), information (i), warning (triangle) or error (circle, on a red tint): icon, edge and words, never colour alone.</li><li>Title in the past tense, no full stop: "Follow saved". Detail is one short line.</li></ul></div>
+    <div><h4>Timing</h4><ul><li>Success and information: 5 seconds, 10 with an action. Warning: 10 seconds. Error: until it is closed. Each waits while the pointer or keyboard focus is on it.</li><li>Errors are read out at once (<code>role="alert"</code>), the rest politely (<code>role="status"</code>), without moving focus. A new toast never pushes out an error.</li></ul></div>
     <div><h4>Saved note</h4><ul><li>Settings pages only: "Saved at 16:31", beside the button that saved. Stays until the next change.</li></ul></div>
-    <div><h4>Code</h4><ul><li><code>SharedComponents.toast(title, { detail, tone, action: { label, run } })</code></li><li><code>SharedComponents.savedNote(element)</code></li><li><code>.toasts</code>, <code>.toast[data-tone]</code>, <code>.toast__text</code>, <code>__title</code>, <code>__detail</code>, <code>__action</code>, <code>__close</code>, <code>.saved-note</code></li></ul></div>
+    <div><h4>Code</h4><ul><li><code>SharedComponents.toast(title, { detail, tone, action: { label, run } })</code>; tone is success, info, warning or danger</li><li><code>SharedComponents.toast.error(title, options)</code>, <code>toast.warning(...)</code></li><li><code>SharedComponents.savedNote(element)</code></li><li><code>.toasts</code>, <code>.toast[data-tone]</code>, <code>.toast__text</code>, <code>__title</code>, <code>__detail</code>, <code>__action</code>, <code>__close</code>, <code>.saved-note</code></li></ul></div>
   </div>
 </section>
 

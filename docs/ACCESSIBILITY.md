@@ -79,7 +79,7 @@ separate low-vision font switch.
 | Tabs / sub-menu | Navigation links with `aria-current="page"`, or real tabs with arrow-key support; never a mix |
 | Filter chips | Toggle buttons with `aria-pressed`; the count is part of the name ("Waiting, 1") |
 | Loading bar | `role="progressbar"` or a live text label; hidden from screen readers when idle |
-| Toast | One `role="status"` stack; focus never moves to it; at least 5 seconds, 10 with an action, and it waits while the pointer or keyboard focus is on it; Close is named with the message; never the only place an error appears |
+| Toast | Read out through hidden regions: errors through `role="alert"`, the rest through `role="status"`; focus never moves to it. Success and info at least 5 seconds (10 with an action), warning 10, error until closed; each waits while the pointer or keyboard focus is on it; Close is named with the message |
 | Saved note | `role="status"` beside the button that saved; stays until the next change |
 
 ## 4. Themes
