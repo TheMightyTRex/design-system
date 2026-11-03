@@ -1,6 +1,6 @@
 # Content design guide
 
-Version 1.2, 3 November 2026. How every word in Storyarr and Starboard is written: page titles, menus,
+Version 1.3, 3 November 2026. How every word in Storyarr and Starboard is written: page titles, menus,
 buttons, settings, messages, release notes, help and the README. It applies to new text and to anything you
 touch. Help articles also follow `HELP-WRITING.md`.
 
@@ -307,13 +307,26 @@ time, with the exact date and time in words for screen readers.
 **A change from a date.** A muted tag under the title: "From 1 December 2026". Only for a change that has an
 agreed date and has not happened yet. Leave it off once the change is live.
 
-**Release notes and upgrade wizard.** Group as Added, Changed and Fixed. Each item:
+**Release notes and upgrade wizard.** Group as Added, Changed, Fixed and Security. Each item:
 - a bold headline that says what the person can now do, in sentence case, with no marketing words
   ("seamlessly", "easily", "enhanced");
 - one or two sentences on what changed and who it helps;
 - "Find out more in **<help topic>**" when a topic exists.
 Write for the person using the app, not the developer. Never compare with before ("you used to…"): describe
 the new state. Database changes and the way back go in their own section.
+
+**Security in release notes.** Rule: every release with a security fix has a Security section, after Fixed,
+that lists every security fix. Each fix is one bold title and one sentence, written so a person can judge it:
+what could happen, to whom, and what happens now. No codes alone, no "various security improvements", and
+nothing that helps someone attack an older version they cannot yet update: name the problem, not the exact
+request.
+- "**Sign-in.** The password is never put in the page address, even if Enter is pressed before the page has
+  loaded."
+- "**Saved keys.** A saved API key goes only to the server it was saved for, never to a new address or across
+  a redirect."
+The last item names the checks the release passed and where the results are: "**Checks.** This release passed
+Trivy, OWASP ZAP, Gitleaks, Bandit, ShellCheck and Hadolint. The results are on the security page." The checks
+themselves are in `SECURITY-CHECKS.md`.
 
 **What is new (announcement).** For a release's headline feature, in the release notes slide-out or the
 upgrade guide.

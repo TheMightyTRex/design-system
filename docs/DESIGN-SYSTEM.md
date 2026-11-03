@@ -2,7 +2,8 @@
 
 Version 0.1 (draft for the redesign), 1 November 2026. The target every page moves towards. What exists today
 is in `COMPONENTS.md`; the redesign plan behind it is kept privately. Words are in `CONTENT-DESIGN.md`;
-accessibility in `ACCESSIBILITY.md`; the component reference is `LIBRARY.md`.
+accessibility in `ACCESSIBILITY.md`; security checks and how to report them in `SECURITY-CHECKS.md`; the
+component reference is `LIBRARY.md`.
 
 **For AI agents:** when you build or touch UI, use these tokens, templates and components. If something you
 need is missing, add it here first (and say so to David) instead of inventing a one-off style.
