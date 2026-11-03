@@ -84,7 +84,7 @@ function text(characters, o = {}) {
   }
   t.fills = [fill(o.colour || "color-text")];
   t.growType = "auto-width";
-  t.name = characters.length > 40 ? characters.slice(0, 40) : characters;
+  t.name = layerName(characters);
   return t;
 }
 
@@ -97,7 +97,7 @@ function text(characters, o = {}) {
  */
 function box(name, o = {}) {
   const b = penpot.createBoard();
-  b.name = name;
+  b.name = layerName(name);
   b.fills = o.fill ? [fill(o.fill)] : [];
   b.strokes = o.stroke ? [stroke(o.stroke[0], o.stroke[1])] : [];
   b.clipContent = false;
@@ -118,6 +118,12 @@ function box(name, o = {}) {
   return b;
 }
 
+/** A layer name Penpot accepts: it reads "/" as a group divider and refuses a name ending in one. @param {string} name */
+function layerName(name) {
+  const clean = name.replace(/\s*\/+\s*/g, " ").replace(/\s+/g, " ").trim();
+  return (clean.length > 40 ? clean.slice(0, 40).trim() : clean) || "Layer";
+}
+
 /** @param {Board} parent @param {...Shape} children */
 function add(parent, ...children) {
   for (const child of children) {
@@ -135,7 +141,7 @@ function icon(name, size = DATA.core.size["icon-md"], colour = "color-text") {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${c ? c.hex : "#000000"}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`;
   const g = penpot.createShapeFromSvg(svg);
   if (!g) throw new Error(`Penpot did not read the icon ${name}`);
-  g.name = name;
+  g.name = layerName(name);
   g.resize(size, size);
   return g;
 }
@@ -153,7 +159,7 @@ function rect(w, h, colour) {
  * @param {Shape} shape @param {string} path @param {string} name @param {Board} row
  */
 function component(shape, path, name, row) {
-  shape.name = name;
+  shape.name = layerName(name);
   const c = penpot.library.local.createComponent([shape]);
   c.name = name;
   c.path = path;

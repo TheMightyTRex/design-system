@@ -6,8 +6,16 @@ lockdown({ errorTaming: "unsafe", consoleTaming: "unsafe" });
 const code = fs.readFileSync(process.env.CODE || "/w/penpot/plugin.js", "utf8");
 const made = { boards: 0, texts: 0, rects: 0, svgs: 0, pages: [], colours: 0, typographies: 0, components: [], messages: [] };
 let handler = null, current = null;
+// Penpot's own name rule (common/path_names.cljc, normalize-path-name): no blank names, none ending in "/".
+const checkName = (v) => {
+  const n = typeof v === "string" ? v.trim() : v;
+  const clean = typeof n === "string" ? n.split("/").map((x) => x.trim()).filter(Boolean).join(" / ") : null;
+  if (typeof n !== "string" || n.endsWith("/") || !clean) throw new Error("[PENPOT PLUGIN] Value not valid. Code: :name");
+  if (n.includes("/")) made.slashNames = (made.slashNames || 0) + 1;
+};
 const shape = (type) => {
-  const s = { type, name: "", x: 0, y: 0, width: 100, height: 100, fills: [], strokes: [], children: [], parent: null,
+  const s = { type, x: 0, y: 0,
+    set name(v) { checkName(v); s._name = v; }, get name() { return s._name; }, width: 100, height: 100, fills: [], strokes: [], children: [], parent: null,
     resize(w, h) { if (!(w > 0 && h > 0)) throw new Error(`bad size ${w}x${h} on ${type} ${s.name}`); s.width = w; s.height = h; },
     appendChild(c) {
       if (!c || !c.type) throw new Error("appendChild of nothing");
@@ -61,6 +69,6 @@ console.log(`pages ${made.pages.map((p) => p.name).join(", ")} | boards ${made.b
 const paths = {}; for (const c of made.components) paths[c.path] = (paths[c.path] || 0) + 1;
 console.log("components:", JSON.stringify(paths));
 const loose = made.pages.flatMap((p) => p.shapes.filter((s) => !s.parent && s.type !== "board")).length;
-console.log("shapes left outside any board:", loose);
+console.log("shapes left outside any board:", loose, "| names with /:", made.slashNames || 0);
 const failedParts = made.messages.filter((m) => m.type === "step" && m.status === "failed").length;
 if (failedParts || loose) process.exit(1);
