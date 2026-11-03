@@ -4,17 +4,31 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Make a change · TRex Design System</title>
-<!-- Made by resources/make.py from resources/content/make-a-change.html: change that file, not this one. -->
+<!-- Made by resources/make.py from resources/content/make-a-change.html: change the source, not this file. -->
 <link rel="stylesheet" href="../tokens.css">
 <link rel="stylesheet" href="../components.css">
 <style>
-  /* Resources pages only; not part of the library. */
+  /* The site's own layout; not part of the library. */
   svg.i { width: var(--icon-md); height: var(--icon-md); }
   svg.i-lg { width: var(--icon-lg); height: var(--icon-lg); }
   .g-logo { flex: none; }
+  .s-shell { display: grid; grid-template-columns: 240px minmax(0, 1fr); }
+  .s-nav { position: sticky; top: calc(var(--header-h) + var(--tabs-h)); align-self: start; max-height: calc(100vh - var(--header-h) - var(--tabs-h)); overflow-y: auto; padding: var(--space-6) var(--space-4); border-right: 1px solid var(--color-divider); }
+  .s-nav h2 { font-size: var(--text-sm); color: var(--color-text-muted); padding: 0 var(--space-3); margin-bottom: var(--space-2); }
+  .s-nav ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; }
+  .s-nav a { display: block; padding: var(--space-2) var(--space-3); color: var(--color-text); font-size: var(--text-sm); text-decoration: none; border-left: 3px solid transparent; }
+  .s-nav a:hover { background: var(--color-control-active); }
+  .s-nav .s-group { margin-top: var(--space-4); color: var(--color-text-muted); font-size: var(--text-xs); font-weight: 700; padding: 0 var(--space-3); }
+  .s-main { min-width: 0; }
+  .s-main .page h2 { scroll-margin-top: calc(var(--header-h) + var(--tabs-h) + var(--space-4)); }
+  @media (max-width: 860px) {
+    .s-shell { grid-template-columns: 1fr; }
+    .s-nav { display: none; }
+  }
+
+  /* Resources pages only. */
   .r-page { max-width: 1000px; }
   .r-page .prose { max-width: 80ch; }
-  .r-page .prose h2 { scroll-margin-top: calc(var(--header-h) + var(--tabs-h) + var(--space-4)); }
   .r-page .cards { list-style: none; padding: 0; }
   .r-page .code-block { white-space: pre-wrap; overflow-wrap: anywhere; }
   .r-page li > .command, .r-page .command + .command { margin-top: var(--space-2); }
@@ -26,25 +40,24 @@
 <a class="skip-link" href="#main">Skip to main content</a>
 <header class="site-header site-header--no-rail">
   <div class="site-header__bar">
-    <button class="icon-btn phone-menu-button" type="button" data-opens="r-site-menu" aria-controls="r-site-menu" aria-expanded="false">{{i-lg:menu}}<span class="visually-hidden">Menu</span></button>
+    <button class="icon-btn phone-menu-button" type="button" data-opens="s-site-menu" aria-controls="s-site-menu" aria-expanded="false">{{i-lg:menu}}<span class="visually-hidden">Menu</span></button>
     <a class="site-header__brand" href="../gallery.html"><svg class="g-logo" width="28" height="28" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect x="1" y="1" width="30" height="30" fill="var(--color-logo-tile)"/><path fill="var(--color-bg)" d="M17 6.5h7.5q2.5 0 2.5 2.2V11h-4v.8h2.6v1.6H21v2.2l2.6 1.5-.6 1-2-1.1V20q0 2.2-2.4 2.9l.9 3.8h1.6V28h-4.3l-.9-4.4h-1.6l-.8 3.1h1.4V28h-4.1l1-4.9q-3.6-1-8.7.3 3.4-3.6 8.2-5.2 3.3-1.3 3.9-4.6V8.4q0-1.9 1.4-1.9Z"/><circle cx="20" cy="8.6" r="1" fill="var(--color-logo-star)"/></svg><span>TRex Design System</span></a>
-    <nav class="menu-tabs" aria-label="Main"><a href="../gallery.html">{{i:layout-grid}}<span class="menu-tabs__label">Components</span></a><a href="../areas/index-storyarr.html">{{i:book-open}}<span class="menu-tabs__label">Storyarr boards</span></a><a href="../areas/index-starboard.html">{{i:server}}<span class="menu-tabs__label">Starboard boards</span></a><a href="https://github.com/TheMightyTRex/design-system/tree/main/docs">{{i:file-text}}<span class="menu-tabs__label">Guides</span></a><a href="index.html" aria-current="page">{{i:wrench}}<span class="menu-tabs__label">Resources</span></a></nav>
+    <nav class="menu-tabs" aria-label="Main"><a href="../gallery.html">{{i:layout-grid}}<span class="menu-tabs__label">Components</span></a><a href="../areas/index-storyarr.html">{{i:monitor}}<span class="menu-tabs__label">Boards</span></a><a href="https://github.com/TheMightyTRex/design-system/tree/main/docs">{{i:file-text}}<span class="menu-tabs__label">Guides</span></a><a href="../resources/index.html" aria-current="page">{{i:wrench}}<span class="menu-tabs__label">Resources</span></a></nav>
     <div class="site-header__actions"><button class="icon-btn" type="button" data-opens="g-panel-display" aria-haspopup="dialog" aria-expanded="false">{{i-lg:sun}}<span class="label">Display</span></button></div>
   </div>
-  <div class="site-header__tabs"><nav class="menu-tabs" aria-label="Resources"><a href="index.html">{{i:house}}<span class="menu-tabs__label">Overview</span></a><a href="tools.html">{{i:wrench}}<span class="menu-tabs__label">Tools</span></a><a href="outside-tools.html">{{i:globe}}<span class="menu-tabs__label">Outside tools</span></a><a href="make-a-change.html" aria-current="page">{{i:file-pen}}<span class="menu-tabs__label">Make a change</span></a><a href="get-feedback.html">{{i:send}}<span class="menu-tabs__label">Get feedback</span></a></nav></div>
+  <div class="site-header__tabs"><nav class="menu-tabs" aria-label="Resources"><a href="../resources/index.html">{{i:house}}<span class="menu-tabs__label">Overview</span></a><a href="../resources/tools.html">{{i:wrench}}<span class="menu-tabs__label">Tools</span></a><a href="../resources/outside-tools.html">{{i:globe}}<span class="menu-tabs__label">Outside tools</span></a><a href="../resources/make-a-change.html" aria-current="page">{{i:file-pen}}<span class="menu-tabs__label">Make a change</span></a><a href="../resources/get-feedback.html">{{i:send}}<span class="menu-tabs__label">Get feedback</span></a></nav></div>
 </header>
-<div class="side-panel-layer" id="r-site-menu" hidden>
+<div class="side-panel-layer" id="s-site-menu" hidden>
   <div class="side-panel-backdrop"></div>
   <nav class="phone-menu" aria-label="Menu">
     <div class="panel-header"><span class="panel-header__brand"><svg class="g-logo" width="24" height="24" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect x="1" y="1" width="30" height="30" fill="var(--color-logo-tile)"/><path fill="var(--color-bg)" d="M17 6.5h7.5q2.5 0 2.5 2.2V11h-4v.8h2.6v1.6H21v2.2l2.6 1.5-.6 1-2-1.1V20q0 2.2-2.4 2.9l.9 3.8h1.6V28h-4.3l-.9-4.4h-1.6l-.8 3.1h1.4V28h-4.1l1-4.9q-3.6-1-8.7.3 3.4-3.6 8.2-5.2 3.3-1.3 3.9-4.6V8.4q0-1.9 1.4-1.9Z"/><circle cx="20" cy="8.6" r="1" fill="var(--color-logo-star)"/></svg>TRex Design System</span><button class="icon-btn" type="button" data-closes aria-label="Close menu">{{i:x}}</button></div>
     <div class="phone-menu__sections">
-      <div class="phone-menu__section"><a href="../gallery.html">{{i-lg:layout-grid}}Components</a></div><div class="phone-menu__section"><a href="../areas/index-storyarr.html">{{i-lg:book-open}}Storyarr boards</a></div><div class="phone-menu__section"><a href="../areas/index-starboard.html">{{i-lg:server}}Starboard boards</a></div><div class="phone-menu__section"><a href="https://github.com/TheMightyTRex/design-system/tree/main/docs">{{i-lg:file-text}}Guides</a></div>
-      <div class="phone-menu__section" data-current><button type="button" aria-expanded="true" aria-controls="r-sm-1">{{i-lg:wrench}}Resources{{i:chevron-right phone-menu__chevron}}</button>
-        <ul id="r-sm-1"><li><a href="index.html">Overview</a></li><li><a href="tools.html">Tools</a></li><li><a href="outside-tools.html">Outside tools</a></li><li><a href="make-a-change.html" aria-current="page">Make a change</a></li><li><a href="get-feedback.html">Get feedback</a></li></ul></div>
+      <div class="phone-menu__section"><a href="../gallery.html">{{i-lg:layout-grid}}Components</a></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="s-sm-boards">{{i-lg:monitor}}Boards{{i:chevron-right phone-menu__chevron}}</button><ul id="s-sm-boards" hidden><li><a href="../areas/index-storyarr.html">Storyarr boards</a></li><li><a href="../areas/index-starboard.html">Starboard boards</a></li></ul></div><div class="phone-menu__section"><a href="https://github.com/TheMightyTRex/design-system/tree/main/docs">{{i-lg:file-text}}Guides</a></div><div class="phone-menu__section" data-current><button type="button" aria-expanded="true" aria-controls="s-sm-resources">{{i-lg:wrench}}Resources{{i:chevron-right phone-menu__chevron}}</button><ul id="s-sm-resources"><li><a href="../resources/index.html">Overview</a></li><li><a href="../resources/tools.html">Tools</a></li><li><a href="../resources/outside-tools.html">Outside tools</a></li><li><a href="../resources/make-a-change.html" aria-current="page">Make a change</a></li><li><a href="../resources/get-feedback.html">Get feedback</a></li></ul></div>
     </div>
   </nav>
 </div>
-<main class="page r-page" id="main" tabindex="-1">
+<main class="s-main" id="main" tabindex="-1">
+<div class="page r-page">
 <div class="page-head"><div class="page-head__text"><h1>Make a change</h1><p class="page-head__summary">How to change the design system so the change reaches Storyarr and Starboard, checked and in step.</p></div></div>
 
 <div class="prose">
@@ -90,6 +103,7 @@
 <li><a href="https://github.com/TheMightyTRex/design-system/blob/main/CONTRIBUTING.md">Contributing</a>: the licences your change is shared under.</li>
 </ul>
 </div>
+</div>
 </main>
 <footer class="site-footer"><div class="site-footer__app"><span class="site-footer__brand"><svg class="g-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="1" y="1" width="30" height="30" fill="var(--color-logo-tile)"/><path fill="var(--color-bg)" d="M17 6.5h7.5q2.5 0 2.5 2.2V11h-4v.8h2.6v1.6H21v2.2l2.6 1.5-.6 1-2-1.1V20q0 2.2-2.4 2.9l.9 3.8h1.6V28h-4.3l-.9-4.4h-1.6l-.8 3.1h1.4V28h-4.1l1-4.9q-3.6-1-8.7.3 3.4-3.6 8.2-5.2 3.3-1.3 3.9-4.6V8.4q0-1.9 1.4-1.9Z"/><circle cx="20" cy="8.6" r="1" fill="var(--color-logo-star)"/></svg>TRex Design System</span><span>Version 1</span><nav aria-label="TRex Design System"><ul class="site-footer__links"><li><a href="https://github.com/TheMightyTRex/design-system/tree/main/docs">Help</a></li><li><a href="https://github.com/TheMightyTRex/design-system#readme">About</a></li><li><a href="https://github.com/TheMightyTRex/design-system/commits/main">Updates</a></li></ul></nav></div><a class="site-footer__maker" href="https://github.com/TheMightyTRex" rel="me"><svg class="maker-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="1" y="1" width="30" height="30" fill="var(--color-logo-tile)"/><path fill="var(--color-bg)" d="M17 6.5h7.5q2.5 0 2.5 2.2V11h-4v.8h2.6v1.6H21v2.2l2.6 1.5-.6 1-2-1.1V20q0 2.2-2.4 2.9l.9 3.8h1.6V28h-4.3l-.9-4.4h-1.6l-.8 3.1h1.4V28h-4.1l1-4.9q-3.6-1-8.7.3 3.4-3.6 8.2-5.2 3.3-1.3 3.9-4.6V8.4q0-1.9 1.4-1.9Z"/><circle cx="20" cy="8.6" r="1" fill="var(--color-logo-star)"/></svg>TheMightyTRexUK<span class="visually-hidden">, on GitHub</span>{{i:external-link}}</a></footer>
 <div class="side-panel-layer" id="g-panel-display" hidden>
@@ -119,6 +133,7 @@
   }
   addEventListener("resize", fit);
   fit();
+  document.querySelectorAll("#s-site-menu a").forEach((a) => a.addEventListener("click", () => document.getElementById("s-site-menu").closeLayer?.(false)));
 </script>
 </body>
 </html>

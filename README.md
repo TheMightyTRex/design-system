@@ -62,6 +62,10 @@ The area boards open the same way: start at `areas/index-storyarr.html` or `area
 The pages are in `resources/`. Change the bodies in `resources/content/`, then run
 `python3 resources/make.py` and `python3 tools/build.py`.
 
+The site's header, main menu (Components, Boards, Guides, Resources), phone menu and footer come from
+`tools/sitepage.py`, used by the resources pages and both board indexes. The gallery keeps its own copy, because
+its header also has search: change both when the main menu changes.
+
 ## Change a component and sync it
 
 In short: pull first, change the library here (never the copies in the apps), build the gallery, check

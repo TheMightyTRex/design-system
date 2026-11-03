@@ -1,0 +1,53 @@
+<div class="page" style="max-width:1100px">
+  <div class="page-head">
+    <div class="page-head__text"><h1>Starboard boards</h1><p class="page-head__summary">One board per area, built with the shared component library only. 2 November 2026.</p></div>
+  </div>
+  <div class="notice">{{i:info}}<div class="notice__body"><span class="notice__title">How to read the boards</span><p>Each board starts with what changed and why, then the full page at desktop width, then the part that changes on a phone. Select a row, card or button to open its slide-out; Escape closes it. Display in the header switches theme and text size. The audit is <code>audit-starboard.md</code>; components the library still lacks are in <code>starboard-missing-components.md</code>.</p></div></div>
+
+  <section class="settings-section" style="max-width:none" aria-labelledby="ix-org-h">
+    <div class="settings-section__head"><h2 id="ix-org-h">The new organisation</h2></div>
+    <dl class="facts">
+      <dt>Main menu (header row 1)</dt><dd>Apps · Search · Downloads · Coming up · System · Settings</dd>
+      <dt>Apps</dt><dd>Apps · Other services (Updates folded into Apps)</dd>
+      <dt>System</dt><dd>Overview · Storage · Disk health · Monitor · Network · Backup and restore</dd>
+      <dt>Settings</dt><dd>Manage apps · General · Security · About and updates</dd>
+      <dt>Slide-outs</dt><dd>App details, add and edit app (two steps), Search's Add, download details, Coming up item, health warning, storage folder, disk SMART report, backup run, saved copy</dd>
+      <dt>Dialogs</dt><dd>Display, and confirmations for Remove app, Remove download, Remove category, Restore, Download backup, Sign out everywhere, Turn off network access</dd>
+    </dl>
+  </section>
+
+  <section class="settings-section" style="max-width:none" aria-labelledby="ix-apps-h">
+    <div class="settings-section__head"><h2 id="ix-apps-h">Apps, Search, Downloads and Coming up</h2></div>
+    <ul class="rows">
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:layout-grid}}</span><div><div class="row__title"><a href="starboard-apps.html">Apps</a></div><div class="row__meta">Cards open an app details slide-out; Open is its own button; Updates becomes a filter chip; one summary line replaces the status pills.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:server-cog}}</span><div><div class="row__title"><a href="starboard-other-services.html">Other services</a></div><div class="row__meta">Same rows and slide-out as Apps; "follows" shown on the row; hints become the empty state.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:search}}</span><div><div class="row__title"><a href="starboard-search.html">Search</a></div><div class="row__meta">Add modal becomes an Add slide-out so the result stays visible; toolbar with kind chips; h2 Results with h3 items.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:download}}</span><div><div class="row__title"><a href="starboard-downloads.html">Downloads</a></div><div class="row__meta">Download details slide-out with messages, history and actions; rows update in place; Sort added; Pause updates keeps one label.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:calendar-days}}</span><div><div class="row__title"><a href="starboard-coming-up.html">Coming up</a></div><div class="row__meta">Range control and filter chips (Wanted, In library, by app); each item opens a slide-out like Storyarr's calendar day panel.</div></div></li>
+    </ul>
+  </section>
+
+  <section class="settings-section" style="max-width:none" aria-labelledby="ix-sys-h">
+    <div class="settings-section__head"><h2 id="ix-sys-h">System</h2></div>
+    <ul class="rows">
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:gauge}}</span><div><div class="row__title"><a href="starboard-overview.html">Overview</a></div><div class="row__meta">Needs attention moves first with a warning slide-out; stat tiles say warnings in words; labelled time range with a Live link.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:hard-drive}}</span><div><div class="row__title"><a href="starboard-storage.html">Storage</a></div><div class="row__meta">One list fullest first instead of every folder three times; folder slide-out with growth; set-up hint becomes the empty state.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:heart-pulse}}</span><div><div class="row__title"><a href="starboard-disk-health.html">Disk health</a></div><div class="row__meta">Compact row per disk sorted by tone; wide SMART report slide-out with the full attribute table, self-tests and events.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:chart-line}}</span><div><div class="row__title"><a href="starboard-monitor.html">Monitor</a></div><div class="row__meta">Same line chart as Overview with a table view; Pause keeps one label; processor threads as labelled meters.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:network}}</span><div><div class="row__title"><a href="starboard-network.html">Network</a></div><div class="row__meta">"Who can open Starboard" becomes a link to Security; outside access rows open the app details slide-out.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:archive}}</span><div><div class="row__title"><a href="starboard-backup.html">Backup and restore</a></div><div class="row__meta">Two sections instead of three; backup run and saved copy slide-outs; password asked once, in the confirm dialog.</div></div></li>
+    </ul>
+  </section>
+
+  <section class="settings-section" style="max-width:none" aria-labelledby="ix-set-h">
+    <div class="settings-section__head"><h2 id="ix-set-h">Settings, Sign in and Set up</h2></div>
+    <ul class="rows">
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:app-window}}</span><div><div class="row__title"><a href="starboard-settings-apps.html">Manage apps</a></div><div class="row__meta">Renamed from Apps; the 17-field modal becomes a two-step add and edit slide-out; More actions menu; Remove confirms in a dialog.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:sliders-horizontal}}</span><div><div class="row__title"><a href="starboard-settings-general.html">General</a></div><div class="row__meta">Sections with their own Save; categories become an editable list; card options are switches.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:shield-check}}</span><div><div class="row__title"><a href="starboard-settings-security.html">Security</a></div><div class="row__meta">Three sections with h2s; Sign out everywhere and turning off network access confirm in dialogs.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:info}}</span><div><div class="row__title"><a href="starboard-settings-about.html">About and updates</a></div><div class="row__meta">Renamed from Updates; update notice with release notes; copyable update command.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:key-round}}</span><div><div class="row__title"><a href="starboard-sign-in.html">Sign in</a></div><div class="row__meta">Slim header with Display before signing in; error tied to the field.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:user}}</span><div><div class="row__title"><a href="starboard-set-up.html">Set up</a></div><div class="row__meta">Setup code first, with where to find it as its hint; Display in a slim header.</div></div></li>
+    </ul>
+  </section>
+</div>
