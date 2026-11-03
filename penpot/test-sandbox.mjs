@@ -9,7 +9,11 @@ let handler = null, current = null;
 const shape = (type) => {
   const s = { type, name: "", x: 0, y: 0, width: 100, height: 100, fills: [], strokes: [], children: [], parent: null,
     resize(w, h) { if (!(w > 0 && h > 0)) throw new Error(`bad size ${w}x${h} on ${type} ${s.name}`); s.width = w; s.height = h; },
-    appendChild(c) { if (!c || !c.type) throw new Error("appendChild of nothing"); c.parent = s; s.children.push(c); c.layoutChild = s.flex ? { verticalSizing: "auto", horizontalSizing: "auto" } : undefined; } };
+    appendChild(c) {
+      if (!c || !c.type) throw new Error("appendChild of nothing");
+      c.parent = s; s.children.push(c);
+      c.layoutChild = s.flex ? new Proxy({}, { set(t, k, v) { if (/Sizing$/.test(String(k)) && !["fill", "fix", "auto"].includes(v)) throw new Error(`[PENPOT PLUGIN] Value not valid: :${v}. Code: :${String(k)}`); t[k] = v; return true; } }) : undefined;
+    } };
   (current?.shapes || []).push(s);
   return s;
 };
@@ -23,7 +27,21 @@ const penpotMock = {
   closePlugin() {},
   createPage() { const p = { name: "", shapes: [] }; made.pages.push(p); return p; },
   openPage(p) { current = p; },
-  createBoard() { made.boards++; const b = shape("board"); b.addFlexLayout = () => (b.flex = { appendChild: (c) => b.appendChild(c) }); return b; },
+  createBoard() {
+    made.boards++;
+    const b = shape("board");
+    // The values the running Penpot accepts (common/types/shape/layout.cljc), which are narrower than its types.
+    const allowed = { dir: ["row", "row-reverse", "column", "column-reverse"], wrap: ["wrap", "nowrap"],
+      alignItems: ["start", "end", "center", "stretch"], justifyContent: ["start", "center", "end", "space-between", "space-around", "space-evenly", "stretch"],
+      horizontalSizing: ["fill", "fix", "auto"], verticalSizing: ["fill", "fix", "auto"] };
+    b.addFlexLayout = () => (b.flex = new Proxy({ appendChild: (c) => b.appendChild(c) }, {
+      set(target, key, value) {
+        if (allowed[key] && !allowed[key].includes(value)) throw new Error(`[PENPOT PLUGIN] Value not valid: :${value}. Code: :${String(key)}`);
+        target[key] = value;
+        return true;
+      } }));
+    return b;
+  },
   createText(t) { made.texts++; const s = shape("text"); s.characters = t; s.applyTypography = (ty) => { if (!ty) throw new Error("applyTypography of nothing for " + t); }; return s; },
   createRectangle() { made.rects++; return shape("rect"); },
   createShapeFromSvg(svg) { if (!svg.includes("<svg") || svg.includes("undefined")) throw new Error("bad svg"); made.svgs++; return shape("group"); },

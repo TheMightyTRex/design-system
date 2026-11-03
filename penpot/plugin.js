@@ -105,8 +105,9 @@ function box(name, o = {}) {
   flex.columnGap = o.gap ?? 0;
   const [top, right, bottom, left] = o.pad || [o.padY ?? 0, o.padX ?? 0, o.padY ?? 0, o.padX ?? 0];
   flex.topPadding = top; flex.rightPadding = right; flex.bottomPadding = bottom; flex.leftPadding = left;
-  flex.horizontalSizing = w === "hug" ? "fit-content" : "auto";
-  flex.verticalSizing = h === "hug" ? "fit-content" : "auto";
+  // Penpot accepts "auto" (fits the content), "fix" and "fill", whatever its published types say.
+  flex.horizontalSizing = /** @type {any} */ (w === "hug" ? "auto" : "fix");
+  flex.verticalSizing = /** @type {any} */ (h === "hug" ? "auto" : "fix");
   return b;
 }
 
