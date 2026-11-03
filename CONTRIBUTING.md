@@ -21,12 +21,10 @@ Every word, in the components, the gallery, the guides and commit messages, foll
 
 ## Making a change
 
-1. Change the library files, not the copies inside the apps.
-2. Run `python3 tools/build.py` and check the gallery in all four themes and at 175% text.
-3. Run `python3 tools/contrast.py`. It must report 0 failures.
-4. Meet the accessibility floor in `docs/ACCESSIBILITY.md` (WCAG 2.2 AA).
-5. Add the change to the decisions list in `docs/LIBRARY.md` when it changes how something looks or works.
-6. Commit, push, then run `python3 tools/sync.py` and commit in each app.
+Follow [Make a change](https://themightytrex.github.io/design-system/resources/make-a-change.html): pull, change the library here, build, check four themes
+and 175% text, check contrast, record the decision in `docs/LIBRARY.md`, run the privacy check and commit.
+Ask the owner before you push, or open a pull request. To test a change with people, read
+[Get feedback](https://themightytrex.github.io/design-system/resources/get-feedback.html).
 
 ## Licences
 

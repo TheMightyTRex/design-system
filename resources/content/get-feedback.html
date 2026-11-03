@@ -1,0 +1,71 @@
+<div class="page-head"><div class="page-head__text"><h1>Get feedback</h1><p class="page-head__summary">The best ways to find out whether a design works, in order: watch real people use it, run automatic checks, and collect feedback in the product.</p></div></div>
+
+<div class="prose">
+<p class="prose__lead">Nothing tells you more than watching someone use what you made. Automatic checks catch some problems quickly, and feedback in the product keeps finding them once the design is live. Use all three.</p>
+
+<h2 id="people">Test with real people</h2>
+<p>Give someone a task and watch them do it. Where they hesitate, go the wrong way or give up is where the design needs work.</p>
+<ul>
+<li>Test with five people a round. Five people find most of the problems in what they test. Fix those, then test again with five more.</li>
+<li>Give tasks, not directions. Describe the goal in the person's own words: "You want every new book by Priya Shah". Never name the page or the button.</li>
+<li>Ask people to think aloud, and stay quiet. If they ask for help, ask what they would try next.</li>
+<li>Write down what happened, not what you think of it: the task, what they did, and the words they used.</li>
+<li>Pay everyone for their time.</li>
+</ul>
+
+<h3 id="assistive">Include people who use assistive technology</h3>
+<p>Every round includes people who use:</p>
+<ul>
+<li>a screen reader, such as NVDA, VoiceOver or TalkBack</li>
+<li>a magnifier or large text</li>
+<li>voice control</li>
+<li>a keyboard or switch access instead of a mouse</li>
+</ul>
+<p>They test on their own devices with their own settings, because that is how they use every site. A problem they find often affects many other people too.</p>
+<p>Snaglist can record each task as a series of steps with the technical details, so nothing is lost. Read <a href="https://github.com/TheMightyTRex/snaglist/blob/main/docs/guides/run-a-test-session.md">Run a test session with Snaglist</a>.</p>
+
+<h2 id="automatic">Run automatic accessibility checks</h2>
+<p>Automatic checks find problems such as low contrast, missing labels, missing alt text and headings out of order. They cannot tell whether a page makes sense to the person using it, so they never replace testing with people.</p>
+<ul>
+<li>In this repository, <code>tools/contrast.py</code> checks every colour pair in every theme. Read <a href="tools.html#contrast">Check contrast</a>.</li>
+<li>On a page, use a browser checker such as axe DevTools, WAVE or Lighthouse. Read <a href="outside-tools.html#automatic">Run automatic checks</a>.</li>
+<li>In your tests, run axe-core with Playwright, so a new problem stops a release.</li>
+</ul>
+<p>To find problems and fix them in order, read <a href="https://github.com/TheMightyTRex/snaglist/blob/main/docs/guides/find-and-fix-accessibility-problems.md">Find and fix accessibility problems</a>.</p>
+
+<h2 id="snaglist">Collect feedback in the product with Snaglist</h2>
+<p><a href="https://github.com/TheMightyTRex/snaglist">Snaglist</a> is one file, under the MIT licence, that adds a 'Send feedback' button to any website or app. It uses this design system's tokens, so it matches Storyarr and Starboard. With it, people can:</p>
+<ul>
+<li>report a bug or a UX problem</li>
+<li>suggest a feature or an improvement</li>
+<li>record a series of steps</li>
+<li>run 'Check this page for accessibility problems'</li>
+</ul>
+<p>Each report:</p>
+<ul>
+<li>goes to GitHub issues, to an email address, or to the site's own server</li>
+<li>carries the technical details a developer needs, such as errors, timings and the part of the page</li>
+<li>keeps no personal information: emails, phone numbers, addresses and keys are replaced</li>
+<li>is shown in full to the person before it is sent, and they can take parts out</li>
+</ul>
+
+<div class="notice" data-tone="success" role="note">{{i:circle-check}}<div class="notice__body"><span class="notice__title">Tip:</span><p>Activate Snaglist for a test session, then deactivate it, so it appears only while you are asking for feedback.</p></div></div>
+
+<h3 id="snaglist-links">Start with Snaglist</h3>
+<ul>
+<li><a href="https://themightytrex.github.io/snaglist/">Try the Snaglist demo</a></li>
+<li><a href="https://themightytrex.github.io/snaglist/configure.html">Set up Snaglist for your site</a>: the set-up tool writes the code for you.</li>
+<li><a href="https://github.com/TheMightyTRex/snaglist/blob/main/docs/README.md">Snaglist help centre</a></li>
+<li><a href="https://github.com/TheMightyTRex/snaglist/blob/main/docs/guides/run-a-test-session.md">Run a test session with Snaglist</a></li>
+<li><a href="https://github.com/TheMightyTRex/snaglist/blob/main/docs/guides/find-and-fix-accessibility-problems.md">Find and fix accessibility problems</a></li>
+</ul>
+
+<h2 id="act">Act on what you find</h2>
+<ol>
+<li>Sort the reports: what stops someone finishing a task comes first. For reports on GitHub, read <a href="https://github.com/TheMightyTRex/snaglist/blob/main/docs/topics/triage-reports-on-github.md">Triage reports on GitHub</a>.</li>
+<li>Fix a shared component in this repository, not in the app. Read <a href="make-a-change.html">Make a change</a>.</li>
+<li>Test the fix with the people who found the problem, when you can.</li>
+</ol>
+</div>
+
+<nav class="r-next" aria-label="More resources"><a class="btn" href="outside-tools.html">Outside tools for accessibility and testing</a><a class="btn" href="make-a-change.html">Make a change</a></nav>

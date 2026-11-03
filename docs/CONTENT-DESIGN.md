@@ -1,8 +1,53 @@
 # Content design guide
 
-Version 1.1, 3 November 2026. How every word in Storyarr and Starboard is written: page titles, menus,
+Version 1.2, 3 November 2026. How every word in Storyarr and Starboard is written: page titles, menus,
 buttons, settings, messages, release notes, help and the README. It applies to new text and to anything you
 touch. Help articles also follow `HELP-WRITING.md`.
+
+## About this guide
+
+### What it is
+
+This is a content design system, not only a style guide. A style guide is a set of rules written by writers,
+for writers. A content design system adds ready-made patterns for the moments that come up again and again:
+an empty page, an error, a confirmation, a setting. With a pattern to start from, anyone can make a sound
+decision about words without starting from a blank page.
+
+It sits beside the component library in this repository, so words are designed with the components rather
+than added at the end. It has four layers:
+
+| Layer | What it covers | Where |
+|---|---|---|
+| Voice | How both apps sound | Section 1 |
+| Rules | Plain English, word choices, punctuation, links and statuses | Sections 2 to 6 |
+| Patterns | Ready-made words for common moments | Section 7 |
+| Checks | Accessibility in content, and the checklist | Sections 8 and 9 |
+
+### Who it is for
+
+Anyone who puts words in front of the people who use Storyarr or Starboard: developers writing a button or
+an error, designers making a board, people writing help or release notes, and AI assistants doing any of
+these. It is public, so you may also use it in your own projects under the guide licence (CC BY 4.0).
+
+### How to use it
+
+1. Read section 1 once, so you know how the apps sound.
+2. Before you write something new, find its pattern in section 7 and start from that.
+3. Keep sections 2 and 5 open while you write: the rules, and the words each app uses.
+4. Before you finish, go through the checklist in section 9.
+
+The gallery, the tools and the other guides are listed in
+[Design resources and tools](https://themightytrex.github.io/design-system/resources/).
+
+### Propose a change
+
+Open an issue or a pull request on the
+[design system repository](https://github.com/TheMightyTRex/design-system). Name the section and the rule
+you want to add, change or remove, and give the words before and after. The guide is reviewed after any
+release that changes words in either app. How to make and test a change is in
+[Make a change](https://themightytrex.github.io/design-system/resources/make-a-change.html).
+
+---
 
 **For AI agents:** treat every rule marked **Rule** as a check that must pass before a change is finished.
 Section 9 is the checklist. When a rule and an on-screen label disagree, copy the label exactly (rule 2.11).

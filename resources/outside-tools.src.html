@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Outside tools for accessibility and testing · TRex Design System</title>
+<!-- Made by resources/make.py from resources/content/outside-tools.html: change that file, not this one. -->
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  /* Resources pages only; not part of the library. */
+  svg.i { width: var(--icon-md); height: var(--icon-md); }
+  svg.i-lg { width: var(--icon-lg); height: var(--icon-lg); }
+  .g-logo { flex: none; }
+  .r-page { max-width: 1000px; }
+  .r-page .prose { max-width: 80ch; }
+  .r-page .prose h2 { scroll-margin-top: calc(var(--header-h) + var(--tabs-h) + var(--space-4)); }
+  .r-page .cards { list-style: none; padding: 0; }
+  .r-page .code-block { white-space: pre-wrap; overflow-wrap: anywhere; }
+  .r-page li > .command, .r-page .command + .command { margin-top: var(--space-2); }
+  .r-next { display: flex; flex-wrap: wrap; gap: var(--space-3); padding-top: var(--space-6); border-top: 1px solid var(--color-divider); }
+</style>
+</head>
+<body>
+<!--ICONS-->
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header site-header--no-rail">
+  <div class="site-header__bar">
+    <button class="icon-btn phone-menu-button" type="button" data-opens="r-site-menu" aria-controls="r-site-menu" aria-expanded="false">{{i-lg:menu}}<span class="visually-hidden">Menu</span></button>
+    <a class="site-header__brand" href="../gallery.html"><svg class="g-logo" width="28" height="28" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect x="1" y="1" width="30" height="30" fill="var(--color-logo-tile)"/><path fill="var(--color-bg)" d="M17 6.5h7.5q2.5 0 2.5 2.2V11h-4v.8h2.6v1.6H21v2.2l2.6 1.5-.6 1-2-1.1V20q0 2.2-2.4 2.9l.9 3.8h1.6V28h-4.3l-.9-4.4h-1.6l-.8 3.1h1.4V28h-4.1l1-4.9q-3.6-1-8.7.3 3.4-3.6 8.2-5.2 3.3-1.3 3.9-4.6V8.4q0-1.9 1.4-1.9Z"/><circle cx="20" cy="8.6" r="1" fill="var(--color-logo-star)"/></svg><span>TRex Design System</span></a>
+    <nav class="menu-tabs" aria-label="Main"><a href="../gallery.html">{{i:layout-grid}}<span class="menu-tabs__label">Components</span></a><a href="../areas/index-storyarr.html">{{i:book-open}}<span class="menu-tabs__label">Storyarr boards</span></a><a href="../areas/index-starboard.html">{{i:server}}<span class="menu-tabs__label">Starboard boards</span></a><a href="https://github.com/TheMightyTRex/design-system/tree/main/docs">{{i:file-text}}<span class="menu-tabs__label">Guides</span></a><a href="index.html" aria-current="page">{{i:wrench}}<span class="menu-tabs__label">Resources</span></a></nav>
+    <div class="site-header__actions"><button class="icon-btn" type="button" data-opens="g-panel-display" aria-haspopup="dialog" aria-expanded="false">{{i-lg:sun}}<span class="label">Display</span></button></div>
+  </div>
+  <div class="site-header__tabs"><nav class="menu-tabs" aria-label="Resources"><a href="index.html">{{i:house}}<span class="menu-tabs__label">Overview</span></a><a href="tools.html">{{i:wrench}}<span class="menu-tabs__label">Tools</span></a><a href="outside-tools.html" aria-current="page">{{i:globe}}<span class="menu-tabs__label">Outside tools</span></a><a href="make-a-change.html">{{i:file-pen}}<span class="menu-tabs__label">Make a change</span></a><a href="get-feedback.html">{{i:send}}<span class="menu-tabs__label">Get feedback</span></a></nav></div>
+</header>
+<div class="side-panel-layer" id="r-site-menu" hidden>
+  <div class="side-panel-backdrop"></div>
+  <nav class="phone-menu" aria-label="Menu">
+    <div class="panel-header"><span class="panel-header__brand"><svg class="g-logo" width="24" height="24" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect x="1" y="1" width="30" height="30" fill="var(--color-logo-tile)"/><path fill="var(--color-bg)" d="M17 6.5h7.5q2.5 0 2.5 2.2V11h-4v.8h2.6v1.6H21v2.2l2.6 1.5-.6 1-2-1.1V20q0 2.2-2.4 2.9l.9 3.8h1.6V28h-4.3l-.9-4.4h-1.6l-.8 3.1h1.4V28h-4.1l1-4.9q-3.6-1-8.7.3 3.4-3.6 8.2-5.2 3.3-1.3 3.9-4.6V8.4q0-1.9 1.4-1.9Z"/><circle cx="20" cy="8.6" r="1" fill="var(--color-logo-star)"/></svg>TRex Design System</span><button class="icon-btn" type="button" data-closes aria-label="Close menu">{{i:x}}</button></div>
+    <div class="phone-menu__sections">
+      <div class="phone-menu__section"><a href="../gallery.html">{{i-lg:layout-grid}}Components</a></div><div class="phone-menu__section"><a href="../areas/index-storyarr.html">{{i-lg:book-open}}Storyarr boards</a></div><div class="phone-menu__section"><a href="../areas/index-starboard.html">{{i-lg:server}}Starboard boards</a></div><div class="phone-menu__section"><a href="https://github.com/TheMightyTRex/design-system/tree/main/docs">{{i-lg:file-text}}Guides</a></div>
+      <div class="phone-menu__section" data-current><button type="button" aria-expanded="true" aria-controls="r-sm-1">{{i-lg:wrench}}Resources{{i:chevron-right phone-menu__chevron}}</button>
+        <ul id="r-sm-1"><li><a href="index.html">Overview</a></li><li><a href="tools.html">Tools</a></li><li><a href="outside-tools.html" aria-current="page">Outside tools</a></li><li><a href="make-a-change.html">Make a change</a></li><li><a href="get-feedback.html">Get feedback</a></li></ul></div>
+    </div>
+  </nav>
+</div>
+<main class="page r-page" id="main" tabindex="-1">
+<div class="page-head"><div class="page-head__text"><h1>Outside tools for accessibility and testing</h1><p class="page-head__summary">Free tools from other makers that check contrast, find accessibility problems, and let you use a page the way many people do.</p></div></div>
+
+<div class="prose">
+<p>Every link on this page goes to another site. Each tool is free. Most of them are already part of your computer or phone.</p>
+
+<h2 id="contrast">Check colour contrast</h2>
+<p>Text needs a contrast of 4.5:1 against its background, and control borders and the focus ring need 3:1. <code>tools/contrast.py</code> checks the tokens; these tools check any two colours.</p>
+<ul>
+<li><a href="https://webaim.org/resources/contrastchecker/">WebAIM Contrast Checker</a>: enter two colours and it gives the ratio and whether it passes.</li>
+<li><a href="https://www.tpgi.com/color-contrast-checker/">Colour Contrast Analyser</a>: an app for Windows and Mac that picks colours from anything on the page, including pictures.</li>
+</ul>
+
+<h2 id="automatic">Run automatic checks</h2>
+<p>These go through a page and list problems such as missing labels, missing alt text and headings out of order. They find only some problems, so always test with people too.</p>
+<ul>
+<li><a href="https://www.deque.com/axe/devtools/">axe DevTools</a>: a browser extension; the free version checks the whole page.</li>
+<li><a href="https://wave.webaim.org/">WAVE</a>: marks each problem on the page itself, which helps when you are learning.</li>
+<li><a href="https://developer.chrome.com/docs/lighthouse/overview">Lighthouse</a>: part of Chrome and Edge, in the developer tools.</li>
+<li><a href="https://accessibilityinsights.io/">Accessibility Insights</a>: automatic checks, plus a guided check of what a tool cannot test.</li>
+<li><a href="https://playwright.dev/docs/accessibility-testing">Playwright with axe-core</a>: runs the same checks in your automated tests, so a problem stops a release. <a href="https://github.com/dequelabs/axe-core">axe-core</a> is the engine.</li>
+</ul>
+<p>Snaglist has a check of its own, 'Check this page for accessibility problems', that people can run on any page. Read <a href="get-feedback.html#snaglist">Feedback in the product with Snaglist</a>.</p>
+
+<h2 id="screen-readers">Use a screen reader</h2>
+<p>A screen reader reads the page aloud, or shows it on a braille display. Use one to check that every control has a name, headings are in order and changes are announced.</p>
+<ul>
+<li><a href="https://www.nvaccess.org/">NVDA</a>: for Windows.</li>
+<li><a href="https://support.apple.com/guide/voiceover/welcome/mac">VoiceOver</a>: part of every Mac, iPhone and iPad.</li>
+<li><a href="https://support.google.com/accessibility/android/answer/6283677">TalkBack</a>: part of Android phones.</li>
+<li><a href="https://help.gnome.org/users/orca/stable/">Orca</a>: for Linux desktops.</li>
+</ul>
+
+<h2 id="magnifiers">Use a magnifier</h2>
+<p>A magnifier enlarges part of the page, so only a small part is in view at once. Check that messages appear near the thing they belong to, and that nothing needs a wide view to make sense. Also try the gallery's Display slide-out at 175% text.</p>
+<ul>
+<li><a href="https://support.microsoft.com/en-gb/windows/use-magnifier-to-make-things-on-the-screen-easier-to-see-414948ba-8b1c-d3bd-8615-0e5e32204198">Windows Magnifier</a>: part of Windows.</li>
+<li><a href="https://support.apple.com/en-gb/guide/mac-help/mh35715/mac">Zoom on a Mac</a>: part of macOS.</li>
+</ul>
+
+<h2 id="voice">Use voice control</h2>
+<p>People who use voice control say the name of the control they want, for example "Save changes". It works only when the words on a control match its name in the code, which is one more reason to name controls by their visible label.</p>
+<ul>
+<li><a href="https://support.apple.com/en-gb/102225">Voice Control</a>: part of every Mac, iPhone and iPad.</li>
+<li><a href="https://support.microsoft.com/en-gb/topic/get-started-with-voice-access-bd2aa2dc-46c2-486c-93ae-3d75f7d053a4">Voice access on Windows</a>: part of Windows 11.</li>
+<li><a href="https://support.google.com/accessibility/android/answer/6151848">Voice Access on Android</a>: for Android phones.</li>
+</ul>
+
+<h2 id="standards">Read the standard</h2>
+<ul>
+<li><a href="https://www.w3.org/WAI/WCAG22/quickref/">How to meet WCAG 2.2</a>: every success criterion, with ways to meet it. This design system meets level AA.</li>
+<li><a href="https://www.w3.org/WAI/test-evaluate/preliminary/">A first review of web accessibility</a>: checks you can make on any page without a tool, from the W3C.</li>
+</ul>
+</div>
+
+<nav class="r-next" aria-label="More resources"><a class="btn" href="get-feedback.html">Get feedback</a><a class="btn" href="tools.html">Tools in this repository</a></nav>
+</main>
+<footer class="site-footer"><div class="site-footer__app"><span class="site-footer__brand"><svg class="g-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="1" y="1" width="30" height="30" fill="var(--color-logo-tile)"/><path fill="var(--color-bg)" d="M17 6.5h7.5q2.5 0 2.5 2.2V11h-4v.8h2.6v1.6H21v2.2l2.6 1.5-.6 1-2-1.1V20q0 2.2-2.4 2.9l.9 3.8h1.6V28h-4.3l-.9-4.4h-1.6l-.8 3.1h1.4V28h-4.1l1-4.9q-3.6-1-8.7.3 3.4-3.6 8.2-5.2 3.3-1.3 3.9-4.6V8.4q0-1.9 1.4-1.9Z"/><circle cx="20" cy="8.6" r="1" fill="var(--color-logo-star)"/></svg>TRex Design System</span><span>Version 1</span><nav aria-label="TRex Design System"><ul class="site-footer__links"><li><a href="https://github.com/TheMightyTRex/design-system/tree/main/docs">Help</a></li><li><a href="https://github.com/TheMightyTRex/design-system#readme">About</a></li><li><a href="https://github.com/TheMightyTRex/design-system/commits/main">Updates</a></li></ul></nav></div><a class="site-footer__maker" href="https://github.com/TheMightyTRex" rel="me"><svg class="maker-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="1" y="1" width="30" height="30" fill="var(--color-logo-tile)"/><path fill="var(--color-bg)" d="M17 6.5h7.5q2.5 0 2.5 2.2V11h-4v.8h2.6v1.6H21v2.2l2.6 1.5-.6 1-2-1.1V20q0 2.2-2.4 2.9l.9 3.8h1.6V28h-4.3l-.9-4.4h-1.6l-.8 3.1h1.4V28h-4.1l1-4.9q-3.6-1-8.7.3 3.4-3.6 8.2-5.2 3.3-1.3 3.9-4.6V8.4q0-1.9 1.4-1.9Z"/><circle cx="20" cy="8.6" r="1" fill="var(--color-logo-star)"/></svg>TheMightyTRexUK<span class="visually-hidden">, on GitHub</span>{{i:external-link}}</a></footer>
+<div class="side-panel-layer" id="g-panel-display" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="g-pd-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="g-pd-h">Display and accessibility</h2><button class="icon-btn" type="button" data-closes aria-label="Close display and accessibility">{{i:x}}</button></div>
+    <form class="side-panel__body" data-display-save="ds-display">
+      <fieldset><legend>Theme</legend><div class="segmented"><label><input type="radio" name="g-pd-theme" value="system" data-display="theme" checked><span>Match device</span></label><label><input type="radio" name="g-pd-theme" value="light" data-display="theme"><span>Light</span></label><label><input type="radio" name="g-pd-theme" value="dark" data-display="theme"><span>Dark</span></label></div></fieldset>
+      <fieldset><legend>Text size</legend><div class="segmented"><label><input type="radio" name="g-pd-text" value="100" data-display="text" checked><span>100%</span></label><label><input type="radio" name="g-pd-text" value="125" data-display="text"><span>125%</span></label><label><input type="radio" name="g-pd-text" value="150" data-display="text"><span>150%</span></label><label><input type="radio" name="g-pd-text" value="175" data-display="text"><span>175%</span></label></div></fieldset>
+      <fieldset><legend>Reduce motion</legend><div class="segmented"><label><input type="radio" name="g-pd-motion" value="device" data-display="motion" checked><span>Match device</span></label><label><input type="radio" name="g-pd-motion" value="on" data-display="motion"><span>On</span></label><label><input type="radio" name="g-pd-motion" value="off" data-display="motion"><span>Off</span></label></div></fieldset>
+      <label class="switch"><span>High contrast</span><input type="checkbox" role="switch" data-display="contrast"></label>
+      <label class="switch"><span>Underline links</span><input type="checkbox" role="switch" data-display="underline"></label>
+      <label class="switch"><span>Wider text spacing</span><input type="checkbox" role="switch" data-display="spacing"></label>
+      <p class="small muted">Choices apply at once and are kept in this browser.</p>
+    </form>
+    <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Done</button><button class="btn" type="button" data-display-reset="ds-display">Reset</button></div>
+  </aside>
+</div>
+<script src="../components.js"></script>
+<script>
+  // Main menu: icons only when the names do not fit (.is-compact), as in the gallery and the apps.
+  const bar = document.querySelector(".site-header__bar");
+  const mainTabs = bar.querySelector(".menu-tabs");
+  function fit() {
+    mainTabs.classList.remove("is-compact");
+    if (bar.scrollWidth > bar.clientWidth || mainTabs.scrollWidth > mainTabs.clientWidth) mainTabs.classList.add("is-compact");
+  }
+  addEventListener("resize", fit);
+  fit();
+</script>
+</body>
+</html>

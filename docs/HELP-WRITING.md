@@ -1,10 +1,38 @@
 # Help writing guide
 
-Version 1.0, 3 November 2026. How help is written for Storyarr and Starboard: the help centre in each
+Version 1.1, 3 November 2026. How help is written for Storyarr and Starboard: the help centre in each
 repository and any help shown inside the apps. Every word also follows `CONTENT-DESIGN.md`.
+
+## About this guide
+
+### What it is for
+
+Help answers the question someone has at the moment they have it. This guide sets out how that help is
+organised and laid out, so every app's help centre works in the same way: the same three tiers, the same
+kinds of topic, the same layouts and the same checks. Someone who has used one help centre already
+knows how the next one is organised.
 
 Readers may know very little about computers. Write so that someone who has never opened a terminal can
 follow every step, and link to the basics for anything they might not know.
+
+### Who it is for
+
+Anyone who writes or checks help: the help centre in an app's repository, help shown inside an app, and
+README files that teach. That includes AI assistants: section 9 says what to give one and how to check what
+it writes. It is public, so you may also use it for your own projects under the guide licence (CC BY 4.0).
+
+### How to use it
+
+1. Choose the tier (section 1): a topic, a guide or the basics.
+2. For a topic, choose its one kind (section 2) and the area it belongs to (section 3).
+3. Copy the layout for that tier (sections 4 to 6) and write to the rules in section 7.
+4. Add screenshots only where section 8 says they help.
+5. Before you finish, go through the checklist in section 10 and the one in `CONTENT-DESIGN.md`.
+
+Working examples: the [Starboard help centre](https://github.com/TheMightyTRex/starboard/blob/main/docs/help/README.md)
+and the [Snaglist help centre](https://github.com/TheMightyTRex/snaglist/blob/main/docs/README.md). The gallery,
+the tools and the other guides are listed in
+[Design resources and tools](https://themightytrex.github.io/design-system/resources/).
 
 ## 1. The three tiers
 

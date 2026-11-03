@@ -1,0 +1,55 @@
+<div class="page-head"><div class="page-head__text"><h1>Outside tools for accessibility and testing</h1><p class="page-head__summary">Free tools from other makers that check contrast, find accessibility problems, and let you use a page the way many people do.</p></div></div>
+
+<div class="prose">
+<p>Every link on this page goes to another site. Each tool is free. Most of them are already part of your computer or phone.</p>
+
+<h2 id="contrast">Check colour contrast</h2>
+<p>Text needs a contrast of 4.5:1 against its background, and control borders and the focus ring need 3:1. <code>tools/contrast.py</code> checks the tokens; these tools check any two colours.</p>
+<ul>
+<li><a href="https://webaim.org/resources/contrastchecker/">WebAIM Contrast Checker</a>: enter two colours and it gives the ratio and whether it passes.</li>
+<li><a href="https://www.tpgi.com/color-contrast-checker/">Colour Contrast Analyser</a>: an app for Windows and Mac that picks colours from anything on the page, including pictures.</li>
+</ul>
+
+<h2 id="automatic">Run automatic checks</h2>
+<p>These go through a page and list problems such as missing labels, missing alt text and headings out of order. They find only some problems, so always test with people too.</p>
+<ul>
+<li><a href="https://www.deque.com/axe/devtools/">axe DevTools</a>: a browser extension; the free version checks the whole page.</li>
+<li><a href="https://wave.webaim.org/">WAVE</a>: marks each problem on the page itself, which helps when you are learning.</li>
+<li><a href="https://developer.chrome.com/docs/lighthouse/overview">Lighthouse</a>: part of Chrome and Edge, in the developer tools.</li>
+<li><a href="https://accessibilityinsights.io/">Accessibility Insights</a>: automatic checks, plus a guided check of what a tool cannot test.</li>
+<li><a href="https://playwright.dev/docs/accessibility-testing">Playwright with axe-core</a>: runs the same checks in your automated tests, so a problem stops a release. <a href="https://github.com/dequelabs/axe-core">axe-core</a> is the engine.</li>
+</ul>
+<p>Snaglist has a check of its own, 'Check this page for accessibility problems', that people can run on any page. Read <a href="get-feedback.html#snaglist">Feedback in the product with Snaglist</a>.</p>
+
+<h2 id="screen-readers">Use a screen reader</h2>
+<p>A screen reader reads the page aloud, or shows it on a braille display. Use one to check that every control has a name, headings are in order and changes are announced.</p>
+<ul>
+<li><a href="https://www.nvaccess.org/">NVDA</a>: for Windows.</li>
+<li><a href="https://support.apple.com/guide/voiceover/welcome/mac">VoiceOver</a>: part of every Mac, iPhone and iPad.</li>
+<li><a href="https://support.google.com/accessibility/android/answer/6283677">TalkBack</a>: part of Android phones.</li>
+<li><a href="https://help.gnome.org/users/orca/stable/">Orca</a>: for Linux desktops.</li>
+</ul>
+
+<h2 id="magnifiers">Use a magnifier</h2>
+<p>A magnifier enlarges part of the page, so only a small part is in view at once. Check that messages appear near the thing they belong to, and that nothing needs a wide view to make sense. Also try the gallery's Display slide-out at 175% text.</p>
+<ul>
+<li><a href="https://support.microsoft.com/en-gb/windows/use-magnifier-to-make-things-on-the-screen-easier-to-see-414948ba-8b1c-d3bd-8615-0e5e32204198">Windows Magnifier</a>: part of Windows.</li>
+<li><a href="https://support.apple.com/en-gb/guide/mac-help/mh35715/mac">Zoom on a Mac</a>: part of macOS.</li>
+</ul>
+
+<h2 id="voice">Use voice control</h2>
+<p>People who use voice control say the name of the control they want, for example "Save changes". It works only when the words on a control match its name in the code, which is one more reason to name controls by their visible label.</p>
+<ul>
+<li><a href="https://support.apple.com/en-gb/102225">Voice Control</a>: part of every Mac, iPhone and iPad.</li>
+<li><a href="https://support.microsoft.com/en-gb/topic/get-started-with-voice-access-bd2aa2dc-46c2-486c-93ae-3d75f7d053a4">Voice access on Windows</a>: part of Windows 11.</li>
+<li><a href="https://support.google.com/accessibility/android/answer/6151848">Voice Access on Android</a>: for Android phones.</li>
+</ul>
+
+<h2 id="standards">Read the standard</h2>
+<ul>
+<li><a href="https://www.w3.org/WAI/WCAG22/quickref/">How to meet WCAG 2.2</a>: every success criterion, with ways to meet it. This design system meets level AA.</li>
+<li><a href="https://www.w3.org/WAI/test-evaluate/preliminary/">A first review of web accessibility</a>: checks you can make on any page without a tool, from the W3C.</li>
+</ul>
+</div>
+
+<nav class="r-next" aria-label="More resources"><a class="btn" href="get-feedback.html">Get feedback</a><a class="btn" href="tools.html">Tools in this repository</a></nav>

@@ -1,0 +1,45 @@
+<div class="page-head"><div class="page-head__text"><h1>Make a change</h1><p class="page-head__summary">How to change the design system so the change reaches Storyarr and Starboard, checked and in step.</p></div></div>
+
+<div class="prose">
+<p class="prose__lead">This repository is the one source of the library. Change it here, check it, commit it, and then copy it into both apps. This takes 10 steps.</p>
+
+<div class="notice" role="note">{{i:info}}<div class="notice__body"><span class="notice__title">Before you begin:</span><p>You need Python 3, git, and copies of this repository, Storyarr and Starboard. Run <code>tools/install-hooks.sh</code> once, so the privacy check runs before every commit.</p></div></div>
+
+<h2 id="steps">Steps</h2>
+<ol>
+<li>Pull first, so you start from the latest version.
+<code class="code-block">git pull</code></li>
+<li>Change the library here: <code>tokens.css</code>, <code>components.css</code>, <code>components.js</code>, <code>icons.svg</code> or a guide in <code>docs</code>. Never change the copies inside the apps: the next sync replaces them. To add an icon, read <a href="tools.html#icons">Add an icon</a>.</li>
+<li>Build the gallery and boards. If you changed these pages, run <code>python3 resources/make.py</code> first.
+<code class="code-block">python3 tools/build.py</code></li>
+<li>Check the gallery. Open <code>gallery.html</code>, select <strong>Display</strong> and check the change in each theme: Light, Dark, High contrast and High contrast dark. Then check it at 175% text and at phone width.</li>
+<li>Check contrast. The report must end with "0 failures".
+<code class="code-block">python3 tools/contrast.py &gt; contrast-report.txt</code></li>
+<li>Check the words against the checklist in the <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/CONTENT-DESIGN.md">content design guide</a>, and the accessibility floor in the <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/ACCESSIBILITY.md">accessibility guide</a>.</li>
+<li>Record the decision. When the change alters how something looks or works, add it to the decisions list in <code>docs/LIBRARY.md</code>.</li>
+<li>Run the privacy check, then commit.
+<code class="code-block">tools/check-private.sh</code>
+<code class="code-block">git commit -am "Toasts: an action on warning toasts"</code></li>
+<li>Ask before you push. The owner of the repository approves every push. If you do not own it, open a pull request instead.
+<code class="code-block">git push</code></li>
+<li>Copy the library into both apps, then commit in each app, rebuild it and test it.
+<code class="code-block">python3 tools/sync.py --check</code>
+<code class="code-block">python3 tools/sync.py</code></li>
+</ol>
+
+<p>The first time you sync, tell <code>sync.py</code> where the apps are: read <a href="tools.html#sync">Copy the library into the apps</a>.</p>
+
+<h2 id="done">How you know it worked</h2>
+<ul>
+<li>The gallery shows the change in all four themes and at 175% text.</li>
+<li><code>contrast-report.txt</code> ends with "0 failures".</li>
+<li><code>python3 tools/sync.py --check</code> lists no changes, and each app shows the change after its rebuild.</li>
+</ul>
+
+<h2 id="more">Find out more</h2>
+<ul>
+<li><a href="tools.html">Tools in this repository</a></li>
+<li><a href="get-feedback.html">Get feedback</a>: test the change with people before and after it ships.</li>
+<li><a href="https://github.com/TheMightyTRex/design-system/blob/main/CONTRIBUTING.md">Contributing</a>: the licences your change is shared under.</li>
+</ul>
+</div>

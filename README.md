@@ -34,6 +34,7 @@ change the copies inside the apps.
 | `docs/CONTENT-DESIGN.md` | How every word is written: voice, rules, words each app uses, status vocabulary, patterns |
 | `docs/HELP-WRITING.md` | How help is written: tiers, kinds of topic, categories, layouts, screenshots |
 | `docs/ACCESSIBILITY.md` | The accessibility floor and how to test it |
+| `resources/` | The Design resources and tools pages: what you can use, the tools, outside tools, how to make a change and how to get feedback |
 | `tools/` | Build, contrast, icon, sync and privacy scripts |
 
 ## Look at the gallery
@@ -45,31 +46,27 @@ phone menu and the dialog all work. The gallery is also published at
 
 The area boards open the same way: start at `areas/index-storyarr.html` or `areas/index-starboard.html`.
 
+## Design resources and tools
+
+[Design resources and tools](https://themightytrex.github.io/design-system/resources/) lists everything here you can use, on five pages:
+
+- [Overview](https://themightytrex.github.io/design-system/resources/): the gallery, tokens, palettes, icons, font, boards, guides and licences.
+- [Tools in this repository](https://themightytrex.github.io/design-system/resources/tools.html): what each script does and the command that runs it.
+- [Outside tools for accessibility and testing](https://themightytrex.github.io/design-system/resources/outside-tools.html): contrast checkers, automatic
+  checks, screen readers, magnifiers and voice control.
+- [Make a change](https://themightytrex.github.io/design-system/resources/make-a-change.html): the 10 steps from `git pull` to the change in both apps.
+- [Get feedback](https://themightytrex.github.io/design-system/resources/get-feedback.html): testing with real people, automatic checks, and feedback in the
+  product with [Snaglist](https://github.com/TheMightyTRex/snaglist).
+
+The pages are in `resources/`. Change the bodies in `resources/content/`, then run
+`python3 resources/make.py` and `python3 tools/build.py`.
+
 ## Change a component and sync it
 
-You need Python 3 and checkouts of Storyarr and Starboard.
-
-1. Pull first, so you start from the latest library: `git pull`.
-2. Change `tokens.css`, `components.css`, `components.js` or `icons.svg`. To add an icon, add its Lucide
-   name to `tools/icons.txt` and run `python3 tools/icons.py "$(tr '\n' ' ' < tools/icons.txt)"`.
-3. Rebuild the gallery and the area boards: `python3 tools/build.py`. Check the gallery in all four themes
-   and at 175% text.
-4. Check contrast: `python3 tools/contrast.py > contrast-report.txt`. It must end with `0 failures`.
-5. Tell `tools/sync.py` where the apps are, once. By default it looks for `../starboard` and `../storyarr`
-   next to this repository. To use other folders, set `STARBOARD_WEB` and `STORYARR_SHARED`, or copy them
-   into `tools/paths.local.json`, which git ignores:
-
-   ```json
-   {
-     "STARBOARD_WEB": "~/src/starboard/web",
-     "STORYARR_SHARED": "~/src/storyarr/apps/web/src/shared"
-   }
-   ```
-
-6. Preview the copy with `python3 tools/sync.py --check`, then run `python3 tools/sync.py`. It writes the
-   library into Starboard (`web/css`, `web/js`, `web/icons`) and Storyarr (`apps/web/src/shared/`). It does
-   not commit.
-7. Commit and push here, then commit in each app, rebuild it and test it.
+In short: pull first, change the library here (never the copies in the apps), build the gallery, check
+four themes and 175% text, run `tools/contrast.py` (0 failures), run `tools/check-private.sh`, commit, ask
+before you push, then run `tools/sync.py` and commit in each app. Every step, with its command, is in
+[Make a change](https://themightytrex.github.io/design-system/resources/make-a-change.html).
 
 `tools/install-hooks.sh` adds a pre-commit check that stops private details (home network addresses, email
 addresses, keys and the words in your own `.private-words` file) from being committed.

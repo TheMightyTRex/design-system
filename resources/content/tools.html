@@ -1,0 +1,40 @@
+<div class="page-head"><div class="page-head__text"><h1>Tools in this repository</h1><p class="page-head__summary">The scripts in the <code>tools</code> folder: what each one does and the command that runs it.</p></div></div>
+
+<div class="prose">
+<div class="notice" role="note">{{i:info}}<div class="notice__body"><span class="notice__title">Before you begin:</span><p>You need Python 3 and a copy of the repository. Run every command from the repository's own folder.</p></div></div>
+
+<h2 id="build">Build the gallery and boards: build.py</h2>
+<p>Turns each <code>.src.html</code> file into the page people open. It replaces <code>&#123;&#123;i:name&#125;&#125;</code> with an icon and <code>&lt;!--ICONS--&gt;</code> with the icon file. Change the <code>.src.html</code> file, never the page it makes.</p>
+<code class="code-block">python3 tools/build.py</code>
+<p>The pages in <code>resources</code> are made from <code>resources/content</code>. After you change one, run this before <code>build.py</code>:</p>
+<code class="code-block">python3 resources/make.py</code>
+
+<h2 id="contrast">Check contrast: contrast.py</h2>
+<p>Measures every text and control colour pair against WCAG 2.2 AA (Web Content Accessibility Guidelines): in all four themes, and in Light and Dark for every palette. Text needs 4.5:1, and control borders and the focus ring need 3:1. The report must end with "0 failures".</p>
+<code class="code-block">python3 tools/contrast.py &gt; contrast-report.txt</code>
+
+<h2 id="palettes">Make the palettes: palettes.py</h2>
+<p>Writes the five colour palettes in <code>palettes/</code> and the gallery's Palettes section. A palette changes only the colours. Status colours, chart series and High contrast stay the same, so their meanings never change. Run <code>contrast.py</code> after it.</p>
+<code class="code-block">python3 tools/palettes.py</code>
+
+<h2 id="icons">Add an icon: icons.py</h2>
+<p>Rebuilds <code>icons.svg</code> from Lucide. Add the icon's Lucide name to <code>tools/icons.txt</code>, then run:</p>
+<code class="code-block">python3 tools/icons.py "$(tr '\n' ' ' &lt; tools/icons.txt)"</code>
+
+<h2 id="sync">Copy the library into the apps: sync.py</h2>
+<p>Copies <code>tokens.css</code>, <code>components.css</code>, <code>components.js</code> and the icons into Storyarr and Starboard, so both apps use the same components. It does not commit. Add <code>--check</code> to list what would change without writing anything.</p>
+<code class="code-block">python3 tools/sync.py --check</code>
+<code class="code-block">python3 tools/sync.py</code>
+<p>By default it looks for <code>../starboard</code> and <code>../storyarr</code> beside this repository. To use other folders, set <code>STARBOARD_WEB</code> and <code>STORYARR_SHARED</code>, or put them in <code>tools/paths.local.json</code>, which git ignores:</p>
+<code class="code-block">{
+  "STARBOARD_WEB": "~/src/starboard/web",
+  "STORYARR_SHARED": "~/src/storyarr/apps/web/src/shared"
+}</code>
+
+<h2 id="private">Keep private details out: check-private.sh and install-hooks.sh</h2>
+<p><code>check-private.sh</code> stops a commit that would publish home network addresses, email addresses, keys, or the words in your own <code>.private-words</code> file (one word a line; git ignores it). <code>install-hooks.sh</code> runs the check before every commit in your copy. Run it once.</p>
+<code class="code-block">tools/install-hooks.sh</code>
+<code class="code-block">tools/check-private.sh</code>
+</div>
+
+<nav class="r-next" aria-label="More resources"><a class="btn" href="outside-tools.html">Outside tools for accessibility and testing</a><a class="btn" href="make-a-change.html">Make a change</a></nav>
