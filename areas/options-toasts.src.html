@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toast options · TRex Design System</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  /* Board only: icon sizes, the page frames and the five proposals. */
+  svg.i { width: var(--icon-md); height: var(--icon-md); }
+  svg.i-lg { width: var(--icon-lg); height: var(--icon-lg); }
+  .o-grid { display: grid; gap: var(--space-8); }
+  .o-opt { display: grid; gap: var(--space-3); }
+  .o-opt > header { display: grid; gap: var(--space-1); padding-bottom: var(--space-2); border-bottom: 2px solid var(--color-text); }
+  .o-frames { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: var(--space-4); align-items: start; }
+  .o-frame { position: relative; height: 300px; overflow: hidden; border: 1px solid var(--color-border); background: var(--color-bg); }
+  .o-frame--phone { max-width: 260px; height: 420px; }
+  .o-frame__bar { height: 44px; background: var(--color-header); border-bottom: 1px solid var(--color-divider); display: flex; align-items: center; padding: 0 var(--space-3); font-weight: var(--weight-heading); font-size: var(--text-sm); }
+  .o-frame__page { padding: var(--space-3); display: grid; gap: var(--space-2); }
+  .o-line { height: 12px; background: var(--color-surface-sunken); }
+  .o-line--short { width: 60%; }
+  .o-frame .btn { justify-self: start; }
+  .o-notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-2) var(--space-6); font-size: var(--text-sm); }
+  .o-notes h3 { font-size: var(--text-sm); margin-bottom: var(--space-1); }
+  .o-notes ul { margin: 0; padding-left: var(--space-5); display: grid; gap: 2px; }
+
+  /* The toast itself, in each proposal. */
+  .t { position: absolute; display: flex; align-items: center; gap: var(--space-3); font-size: var(--text-sm); }
+  .t button { flex: none; }
+  /* A: today. */
+  .t--a { left: 50%; bottom: var(--space-4); transform: translateX(-50%); padding: var(--space-3) var(--space-4); background: var(--color-text); color: var(--color-bg); box-shadow: var(--shadow-raised); white-space: nowrap; }
+  /* B: bar with icon, one action and Close. */
+  .t--b { left: 50%; bottom: var(--space-4); transform: translateX(-50%); padding: var(--space-1) var(--space-1) var(--space-1) var(--space-4); background: var(--color-text); color: var(--color-bg); box-shadow: var(--shadow-raised); white-space: nowrap; }
+  .t--b .t__action { min-height: 36px; padding: 0 var(--space-3); border: 1px solid currentColor; background: none; color: inherit; font: inherit; font-weight: var(--weight-strong); }
+  .t--b .t__close { width: 36px; height: 36px; display: grid; place-items: center; border: 0; background: none; color: inherit; }
+  /* C: card at the bottom right, toned edge, stacks. */
+  .t-stack { position: absolute; right: var(--space-3); bottom: var(--space-3); display: grid; gap: var(--space-2); width: min(300px, calc(100% - 24px)); }
+  .t--c { position: static; align-items: start; padding: var(--space-3); background: var(--color-surface-raised); color: var(--color-text); border: 1px solid var(--color-border); border-left: var(--status-edge-w) solid var(--status-success-fg); box-shadow: var(--shadow-raised); }
+  .t--c[data-tone="info"] { border-left-color: var(--status-info-fg); }
+  .t--c > svg { color: var(--status-success-fg); margin-top: 2px; }
+  .t--c[data-tone="info"] > svg { color: var(--status-info-fg); }
+  .t--c .t__text { display: grid; gap: 2px; flex: 1; }
+  .t--c .t__title { font-weight: var(--weight-heading); }
+  .t--c .t__close { width: 32px; height: 32px; display: grid; place-items: center; border: 0; background: none; color: var(--color-text-muted); }
+  .o-frame--phone .t-stack { left: var(--space-2); right: var(--space-2); width: auto; }
+  /* D: in place, next to the button that did it. */
+  .t--d { position: static; color: var(--status-success-fg); font-weight: var(--weight-strong); }
+  /* E: a tinted strip under the header. */
+  .t--e { left: 0; right: 0; top: 44px; padding: var(--space-2) var(--space-3); background: var(--status-success-bg); color: var(--status-success-fg); border-bottom: 1px solid var(--status-success-fg); }
+  .t--e .t__close { margin-left: auto; width: 32px; height: 32px; display: grid; place-items: center; border: 0; background: none; color: inherit; }
+  @media (max-width: 800px) { .o-frames { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<!--ICONS-->
+<a class="skip-link" href="#main">Skip to main content</a>
+<main id="main" class="page" style="max-width:1100px">
+  <div class="page-head">
+    <div class="page-head__text"><h1>Toast options</h1><p class="page-head__summary">Five ways to confirm that something worked. Each is shown on a computer page and on a phone. 3 November 2026.</p></div>
+    <div class="actions"><a class="btn" href="../gallery.html#notices">Back to the gallery</a></div>
+  </div>
+
+  <div class="notice">{{i:info}}<div class="notice__body"><span class="notice__title">The same in every option</span>
+    <ul style="margin:0;padding-left:var(--space-5)">
+      <li>A toast confirms a routine action in a few words: "Settings saved", "3 books added to Wanted". An error is never only a toast; it stays in the page.</li>
+      <li>Read out by screen readers through <code>role="status"</code>, without moving focus.</li>
+      <li>Stays at least 5 seconds (today's code uses 4, below our own rule), and longer with an action: it waits while the pointer or keyboard focus is on it, and one with Undo stays until it is closed or 10 seconds pass.</li>
+      <li>Never covers the button that made it, the save bar or the phone's own controls.</li>
+    </ul>
+  </div></div>
+
+  <div class="o-grid">
+
+  <section class="o-opt" aria-labelledby="oa-h">
+    <header><h2 id="oa-h">A. Dark bar, words only (today)</h2><p class="muted">A dark bar at the bottom centre, in the text colour. Plain words, no buttons.</p></header>
+    <div class="o-frames">
+      <div class="o-frame" aria-hidden="true"><div class="o-frame__bar">Settings</div><div class="o-frame__page"><div class="o-line"></div><div class="o-line o-line--short"></div><span class="btn btn--primary btn--compact">Save changes</span></div><div class="t t--a">Settings saved</div></div>
+      <div class="o-frame o-frame--phone" aria-hidden="true"><div class="o-frame__bar">Settings</div><div class="o-frame__page"><div class="o-line"></div><div class="o-line o-line--short"></div></div><div class="t t--a">Settings saved</div></div>
+    </div>
+    <div class="o-notes"><div><h3>Good</h3><ul><li>Small and quiet; already built in both apps.</li></ul></div><div><h3>Less good</h3><ul><li>No room for Undo or Open Activity, which our content guide allows.</li><li>No icon, so success and information look the same.</li></ul></div></div>
+  </section>
+
+  <section class="o-opt" aria-labelledby="ob-h">
+    <header><h2 id="ob-h">B. Dark bar with an icon, one action and Close</h2><p class="muted">Option A grown up: a tick, the words, one optional next step and a Close button.</p></header>
+    <div class="o-frames">
+      <div class="o-frame" aria-hidden="true"><div class="o-frame__bar">Wanted</div><div class="o-frame__page"><div class="o-line"></div><div class="o-line o-line--short"></div></div><div class="t t--b">{{i:circle-check}}3 books added to Wanted<button class="t__action" type="button" tabindex="-1">Undo</button><button class="t__close" type="button" tabindex="-1">{{i:x}}</button></div></div>
+      <div class="o-frame o-frame--phone" aria-hidden="true"><div class="o-frame__bar">Wanted</div><div class="o-frame__page"><div class="o-line"></div></div><div class="t t--b" style="white-space:normal;width:calc(100% - 16px)">{{i:circle-check}}<span style="flex:1">3 books added</span><button class="t__action" type="button" tabindex="-1">Undo</button><button class="t__close" type="button" tabindex="-1">{{i:x}}</button></div></div>
+    </div>
+    <div class="o-notes"><div><h3>Good</h3><ul><li>Keeps today's look, so nothing feels new.</li><li>Room for Undo; the tick tells success at a glance.</li></ul></div><div><h3>Less good</h3><ul><li>One line only: a longer message wraps on phones.</li></ul></div></div>
+  </section>
+
+  <section class="o-opt" aria-labelledby="oc-h">
+    <header><h2 id="oc-h">C. Card at the corner, with a coloured edge</h2><p class="muted">A raised card at the bottom right (full width on phones), with the status edge used by stat tiles. Up to three stack, newest at the bottom.</p></header>
+    <div class="o-frames">
+      <div class="o-frame" aria-hidden="true"><div class="o-frame__bar">Activity</div><div class="o-frame__page"><div class="o-line"></div><div class="o-line o-line--short"></div></div>
+        <div class="t-stack"><div class="t t--c" data-tone="info">{{i:info}}<span class="t__text"><span class="t__title">Search started</span><span class="muted">Results in about a minute</span></span><button class="t__close" type="button" tabindex="-1">{{i:x}}</button></div><div class="t t--c">{{i:circle-check}}<span class="t__text"><span class="t__title">Follow saved</span><span class="muted">New books by Ben Aaronovitch come in by themselves</span></span><button class="t__close" type="button" tabindex="-1">{{i:x}}</button></div></div></div>
+      <div class="o-frame o-frame--phone" aria-hidden="true"><div class="o-frame__bar">Activity</div><div class="o-frame__page"><div class="o-line"></div></div><div class="t-stack"><div class="t t--c">{{i:circle-check}}<span class="t__text"><span class="t__title">Follow saved</span><span class="muted">New books come in by themselves</span></span><button class="t__close" type="button" tabindex="-1">{{i:x}}</button></div></div></div>
+    </div>
+    <div class="o-notes"><div><h3>Good</h3><ul><li>Title and a line of detail; success and information differ by icon, edge and words.</li><li>Matches stat tiles and notices, so it belongs to the family.</li></ul></div><div><h3>Less good</h3><ul><li>Larger, and can cover the corner of a list on small windows.</li><li>A stack of three is more to read out.</li></ul></div></div>
+  </section>
+
+  <section class="o-opt" aria-labelledby="od-h">
+    <header><h2 id="od-h">D. In place, beside the button</h2><p class="muted">No floating message: the words appear next to the button that did the work, and stay until the next change.</p></header>
+    <div class="o-frames">
+      <div class="o-frame" aria-hidden="true"><div class="o-frame__bar">Settings</div><div class="o-frame__page"><div class="o-line"></div><div class="o-line o-line--short"></div><div style="display:flex;gap:12px;align-items:center"><span class="btn btn--primary btn--compact">Save changes</span><span class="t t--d">{{i:circle-check}}Saved at 16:31</span></div></div></div>
+      <div class="o-frame o-frame--phone" aria-hidden="true"><div class="o-frame__bar">Settings</div><div class="o-frame__page"><div class="o-line"></div><span class="btn btn--primary btn--compact">Save changes</span><span class="t t--d">{{i:circle-check}}Saved at 16:31</span></div></div>
+    </div>
+    <div class="o-notes"><div><h3>Good</h3><ul><li>Right where the person is looking; nothing to dismiss, nothing timed.</li><li>Best for screen magnifier users, who may never see a corner.</li></ul></div><div><h3>Less good</h3><ul><li>Only works when the action has a place on the page; a bulk action from a menu has none.</li><li>Best paired with B or C for those.</li></ul></div></div>
+  </section>
+
+  <section class="o-opt" aria-labelledby="oe-h">
+    <header><h2 id="oe-h">E. Tinted strip under the header</h2><p class="muted">A full-width strip in the status colour, just under the header, over the page.</p></header>
+    <div class="o-frames">
+      <div class="o-frame" aria-hidden="true"><div class="o-frame__bar">Library</div><div class="o-frame__page"><div class="o-line"></div><div class="o-line o-line--short"></div></div><div class="t t--e">{{i:circle-check}}Library scan finished: 12 books added<button class="t__close" type="button" tabindex="-1">{{i:x}}</button></div></div>
+      <div class="o-frame o-frame--phone" aria-hidden="true"><div class="o-frame__bar">Library</div><div class="o-frame__page"><div class="o-line"></div></div><div class="t t--e">{{i:circle-check}}<span style="flex:1">12 books added</span><button class="t__close" type="button" tabindex="-1">{{i:x}}</button></div></div>
+    </div>
+    <div class="o-notes"><div><h3>Good</h3><ul><li>Hard to miss; reads well on phones.</li></ul></div><div><h3>Less good</h3><ul><li>Looks like a notice, so the two blur together.</li><li>Covers the top of the page and the 2nd-level menu.</li></ul></div></div>
+  </section>
+
+  </div>
+
+  <div class="notice" data-tone="success">{{i:sparkles}}<div class="notice__body"><span class="notice__title">Suggestion</span><p>B for most confirmations, with D for settings pages, where the words sit beside Save changes. Both keep today's look and add Undo where it helps.</p></div></div>
+</main>
+</body>
+</html>

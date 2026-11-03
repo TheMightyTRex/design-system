@@ -20,6 +20,7 @@ change the copies inside the apps.
 
 | Path | What it is |
 |---|---|
+| `palettes/` | Five more colour lists (Indigo, Forest, Plum, Ember, Graphite) for a new design or site: load one after `tokens.css` |
 | `tokens.css` | Every colour, size, space and motion value as role names, for Light, Dark, High contrast and High contrast dark |
 | `components.css` | Every component, in `@layer shared`, using only the tokens |
 | `components.js` | The behaviour every component must have (menus, slide-outs, dialogs, phone menu, filter chips, copy, help, display settings), in plain JavaScript |

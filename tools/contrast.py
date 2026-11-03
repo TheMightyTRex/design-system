@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Checks every text and control colour pair in tokens.css against WCAG 2.2 AA in all four themes.
+"""Checks every text and control colour pair in tokens.css against WCAG 2.2 AA in all four themes, and in
+Light and Dark for every palette in palettes/ (written by tools/palettes.py).
 
 Run: python3 tools/contrast.py > contrast-report.txt   (exit code 1 if any pair fails)
 """
@@ -20,6 +21,11 @@ dark = {**light, **block(r':root\[data-theme="dark"\]')}
 hc = {**light, **block(r":root\.pref-contrast")}
 hcd = {**dark, **hc, **block(r':root\.pref-contrast\[data-theme="dark"\],\s*:root\.pref-contrast\.is-dark')}
 THEMES = [("Light", light), ("Dark", dark), ("High contrast", hc), ("High contrast dark", hcd)]
+PALETTES = pathlib.Path(__file__).resolve().parent.parent / "palettes" / "palettes.json"
+if PALETTES.exists():
+    import json
+    for name, p in json.loads(PALETTES.read_text()).items():
+        THEMES += [(f"{p['label']} light", {**light, **p["light"]}), (f"{p['label']} dark", {**dark, **p["dark"]})]
 
 
 def lum(h):

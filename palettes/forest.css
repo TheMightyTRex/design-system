@@ -1,0 +1,64 @@
+/* Forest palette for the TRex Design System. Natural and steady: libraries, gardens, health.
+   Load after tokens.css and before components.css. Written by tools/palettes.py: edit that, not this. */
+:root:where(:not(.pref-contrast)) {
+  --color-bg: #f2fdf6;
+  --color-header: #fdfffe;
+  --color-surface: #f8fefa;
+  --color-surface-raised: #ffffff;
+  --color-surface-sunken: #e7f4eb;
+  --color-text: #141615;
+  --color-text-muted: #46574c;
+  --color-border: #819688;
+  --color-divider: #c6dbcd;
+  --color-panel-header: #ffffff;
+  --color-accent-soft: #e6ede7;
+  --color-accent-text: #ffffff;
+  --color-accent: #2f6b3a;
+  --color-focus: #2f6b3a;
+  --color-count: #9a3412;
+  --color-count-text: #ffffff;
+  --color-logo-tile: #1f4d2b;
+  --color-logo-star: #c2410c;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):where(:not(.pref-contrast)) {
+    --color-bg: #132419;
+    --color-header: #182a1e;
+    --color-surface: #203427;
+    --color-surface-raised: #283d2f;
+    --color-surface-sunken: #0f1d14;
+    --color-text: #f3f6f4;
+    --color-text-muted: #a8bdaf;
+    --color-border: #748c7c;
+    --color-divider: #354c3d;
+    --color-panel-header: #283d2f;
+    --color-accent-soft: #2a4733;
+    --color-accent-text: #132419;
+    --color-accent: #86d39a;
+    --color-focus: #86d39a;
+    --color-count: #b4461b;
+    --color-count-text: #ffffff;
+    --color-logo-tile: #bbf7d0;
+    --color-logo-star: #fdba74;
+  }
+}
+:root[data-theme="dark"]:where(:not(.pref-contrast)) {
+  --color-bg: #132419;
+  --color-header: #182a1e;
+  --color-surface: #203427;
+  --color-surface-raised: #283d2f;
+  --color-surface-sunken: #0f1d14;
+  --color-text: #f3f6f4;
+  --color-text-muted: #a8bdaf;
+  --color-border: #748c7c;
+  --color-divider: #354c3d;
+  --color-panel-header: #283d2f;
+  --color-accent-soft: #2a4733;
+  --color-accent-text: #132419;
+  --color-accent: #86d39a;
+  --color-focus: #86d39a;
+  --color-count: #b4461b;
+  --color-count-text: #ffffff;
+  --color-logo-tile: #bbf7d0;
+  --color-logo-star: #fdba74;
+}

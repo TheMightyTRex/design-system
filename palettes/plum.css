@@ -1,0 +1,64 @@
+/* Plum palette for the TRex Design System. Warm and personal: media, music, journals.
+   Load after tokens.css and before components.css. Written by tools/palettes.py: edit that, not this. */
+:root:where(:not(.pref-contrast)) {
+  --color-bg: #fbf2fd;
+  --color-header: #fefdff;
+  --color-surface: #fdf8fe;
+  --color-surface-raised: #ffffff;
+  --color-surface-sunken: #f3e6f5;
+  --color-text: #161416;
+  --color-text-muted: #554558;
+  --color-border: #938097;
+  --color-divider: #d8c5dc;
+  --color-panel-header: #ffffff;
+  --color-accent-soft: #f0e5f2;
+  --color-accent-text: #ffffff;
+  --color-accent: #7e2a8f;
+  --color-focus: #7e2a8f;
+  --color-count: #a14400;
+  --color-count-text: #ffffff;
+  --color-logo-tile: #4a1d5c;
+  --color-logo-star: #c2410c;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):where(:not(.pref-contrast)) {
+    --color-bg: #221225;
+    --color-header: #28172b;
+    --color-surface: #311f35;
+    --color-surface-raised: #3b263f;
+    --color-surface-sunken: #1b0e1e;
+    --color-text: #f5f3f6;
+    --color-text-muted: #baa7be;
+    --color-border: #89728e;
+    --color-divider: #49334e;
+    --color-panel-header: #3b263f;
+    --color-accent-soft: #48304e;
+    --color-accent-text: #221225;
+    --color-accent: #e2a6f0;
+    --color-focus: #e2a6f0;
+    --color-count: #b4461b;
+    --color-count-text: #ffffff;
+    --color-logo-tile: #f0d4fa;
+    --color-logo-star: #fcd34d;
+  }
+}
+:root[data-theme="dark"]:where(:not(.pref-contrast)) {
+  --color-bg: #221225;
+  --color-header: #28172b;
+  --color-surface: #311f35;
+  --color-surface-raised: #3b263f;
+  --color-surface-sunken: #1b0e1e;
+  --color-text: #f5f3f6;
+  --color-text-muted: #baa7be;
+  --color-border: #89728e;
+  --color-divider: #49334e;
+  --color-panel-header: #3b263f;
+  --color-accent-soft: #48304e;
+  --color-accent-text: #221225;
+  --color-accent: #e2a6f0;
+  --color-focus: #e2a6f0;
+  --color-count: #b4461b;
+  --color-count-text: #ffffff;
+  --color-logo-tile: #f0d4fa;
+  --color-logo-star: #fcd34d;
+}

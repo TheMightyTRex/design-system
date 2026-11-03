@@ -51,6 +51,7 @@ spacing). Slide-outs, menus, the phone menu and the dialog all work in the galle
 | Component | Classes | Notes |
 |---|---|---|
 | Colour roles | `--color-*`, `--status-<tone>-bg/-fg`, `--chart-*`, `--series-1` to `--series-7`, `--series-empty` | Four themes; accent is one token (UX-02 board offers Indigo, Teal, Amber) |
+| Palettes | `palettes/indigo.css`, `forest.css`, `plum.css`, `ember.css`, `graphite.css` (Teal, the default, is `tokens.css`) | For building a new design or site with the same components: load `tokens.css`, one palette, then `components.css`. Light and Dark colours only; status colours, chart series and High contrast stay the same. Written by `tools/palettes.py`; not synced into the apps |
 | Type | `--text-xs` to `--text-2xl`, `--font` | One typeface; scales with Text size |
 | Space and size | `--space-1` to `--space-12`, `--control-h` (44px), `--control-h-compact` (32px, dense tables only) | |
 | Icons | `icons.svg`, `svg.i`, `.i-lg`, `.i-xl` | Lucide, 2px stroke, decorative beside words |

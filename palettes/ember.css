@@ -1,0 +1,64 @@
+/* Ember palette for the TRex Design System. Bright and lively: home, food, events.
+   Load after tokens.css and before components.css. Written by tools/palettes.py: edit that, not this. */
+:root:where(:not(.pref-contrast)) {
+  --color-bg: #fdf7f2;
+  --color-header: #fffefd;
+  --color-surface: #fefbf8;
+  --color-surface-raised: #ffffff;
+  --color-surface-sunken: #f5ede6;
+  --color-text: #161514;
+  --color-text-muted: #584e45;
+  --color-border: #978b80;
+  --color-divider: #dcd0c5;
+  --color-panel-header: #ffffff;
+  --color-accent-soft: #f4e8e3;
+  --color-accent-text: #ffffff;
+  --color-accent: #a43e12;
+  --color-focus: #a43e12;
+  --color-count: #1d4ed8;
+  --color-count-text: #ffffff;
+  --color-logo-tile: #7c2d12;
+  --color-logo-star: #1e40af;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):where(:not(.pref-contrast)) {
+    --color-bg: #251b12;
+    --color-header: #2b2017;
+    --color-surface: #35291f;
+    --color-surface-raised: #3f3226;
+    --color-surface-sunken: #1e150e;
+    --color-text: #f6f4f3;
+    --color-text-muted: #beb2a7;
+    --color-border: #8e7f72;
+    --color-divider: #4e4033;
+    --color-panel-header: #3f3226;
+    --color-accent-soft: #51392a;
+    --color-accent-text: #251b12;
+    --color-accent: #ffb38a;
+    --color-focus: #ffb38a;
+    --color-count: #2563eb;
+    --color-count-text: #ffffff;
+    --color-logo-tile: #fed7aa;
+    --color-logo-star: #93c5fd;
+  }
+}
+:root[data-theme="dark"]:where(:not(.pref-contrast)) {
+  --color-bg: #251b12;
+  --color-header: #2b2017;
+  --color-surface: #35291f;
+  --color-surface-raised: #3f3226;
+  --color-surface-sunken: #1e150e;
+  --color-text: #f6f4f3;
+  --color-text-muted: #beb2a7;
+  --color-border: #8e7f72;
+  --color-divider: #4e4033;
+  --color-panel-header: #3f3226;
+  --color-accent-soft: #51392a;
+  --color-accent-text: #251b12;
+  --color-accent: #ffb38a;
+  --color-focus: #ffb38a;
+  --color-count: #2563eb;
+  --color-count-text: #ffffff;
+  --color-logo-tile: #fed7aa;
+  --color-logo-star: #93c5fd;
+}

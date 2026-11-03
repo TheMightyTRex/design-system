@@ -1,0 +1,64 @@
+/* Indigo palette for the TRex Design System. Calm and focused: tools, dashboards, reading.
+   Load after tokens.css and before components.css. Written by tools/palettes.py: edit that, not this. */
+:root:where(:not(.pref-contrast)) {
+  --color-bg: #f0f1ff;
+  --color-header: #fdfdff;
+  --color-surface: #f7f8ff;
+  --color-surface-raised: #ffffff;
+  --color-surface-sunken: #e4e6f7;
+  --color-text: #141416;
+  --color-text-muted: #42445b;
+  --color-border: #7d7f9a;
+  --color-divider: #c2c4df;
+  --color-panel-header: #ffffff;
+  --color-accent-soft: #e8e7f9;
+  --color-accent-text: #ffffff;
+  --color-accent: #4338ca;
+  --color-focus: #4338ca;
+  --color-count: #a61e4d;
+  --color-count-text: #ffffff;
+  --color-logo-tile: #312e81;
+  --color-logo-star: #c2410c;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):where(:not(.pref-contrast)) {
+    --color-bg: #101227;
+    --color-header: #14162e;
+    --color-surface: #1c1e38;
+    --color-surface-raised: #232642;
+    --color-surface-sunken: #0c0e20;
+    --color-text: #f3f3f6;
+    --color-text-muted: #a4a6c1;
+    --color-border: #6f7291;
+    --color-divider: #303351;
+    --color-panel-header: #232642;
+    --color-accent-soft: #2e3252;
+    --color-accent-text: #101227;
+    --color-accent: #a5b4fc;
+    --color-focus: #a5b4fc;
+    --color-count: #b8336a;
+    --color-count-text: #ffffff;
+    --color-logo-tile: #c7d2fe;
+    --color-logo-star: #fdba74;
+  }
+}
+:root[data-theme="dark"]:where(:not(.pref-contrast)) {
+  --color-bg: #101227;
+  --color-header: #14162e;
+  --color-surface: #1c1e38;
+  --color-surface-raised: #232642;
+  --color-surface-sunken: #0c0e20;
+  --color-text: #f3f3f6;
+  --color-text-muted: #a4a6c1;
+  --color-border: #6f7291;
+  --color-divider: #303351;
+  --color-panel-header: #232642;
+  --color-accent-soft: #2e3252;
+  --color-accent-text: #101227;
+  --color-accent: #a5b4fc;
+  --color-focus: #a5b4fc;
+  --color-count: #b8336a;
+  --color-count-text: #ffffff;
+  --color-logo-tile: #c7d2fe;
+  --color-logo-star: #fdba74;
+}
