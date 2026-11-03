@@ -188,26 +188,103 @@
       button.addEventListener("click", async () => {
         try {
           await navigator.clipboard.writeText(button.dataset.copy);
-          toast("Copied.");
+          toast("Copied");
         } catch {
-          toast("Your browser did not allow copying. Select the text and copy it instead.");
+          toast("Your browser did not allow copying", { tone: "info", detail: "Select the text and copy it instead." });
         }
       });
     });
   }
-  function toast(message) {
-    let region = document.getElementById("toast");
-    if (!region) {
-      region = document.createElement("div");
-      region.id = "toast";
-      region.className = "toast";
-      region.setAttribute("role", "status");
-      document.body.append(region);
+  /* Toast (option C): toast("Follow saved", { detail, tone: "success" | "info", action: { label, run } }).
+     Up to three stack in the corner, newest at the bottom, read out through one role="status" region.
+     Each stays 5 seconds, or 10 with an action, and waits while the pointer or keyboard focus is on it.
+     Returns a function that closes it. Settings pages use savedNote() instead. */
+  const sprite = (name) =>
+    `<svg class="i" aria-hidden="true" focusable="false"><use href="#i-${name}"/></svg>`;
+  function toast(message, options = {}) {
+    let stack = document.getElementById("toast-stack");
+    if (!stack) {
+      stack = document.createElement("div");
+      stack.id = "toast-stack";
+      stack.className = "toasts";
+      stack.setAttribute("role", "status");
+      document.body.append(stack);
     }
-    region.hidden = false;
-    region.textContent = message;
-    clearTimeout(toast.timer);
-    toast.timer = setTimeout(() => (region.hidden = true), 4000);
+    const tone = options.tone === "info" ? "info" : "success";
+    const item = document.createElement("div");
+    item.className = "toast";
+    item.dataset.tone = tone;
+    item.innerHTML = `${sprite(tone === "info" ? "info" : "circle-check")}<span class="toast__text"><span class="toast__title"></span></span>`;
+    item.querySelector(".toast__title").textContent = message;
+    if (options.detail) {
+      const detail = document.createElement("span");
+      detail.className = "toast__detail";
+      detail.textContent = options.detail;
+      item.querySelector(".toast__text").append(detail);
+    }
+    if (options.action) {
+      const action = document.createElement("button");
+      action.type = "button";
+      action.className = "btn btn--quiet btn--compact toast__action";
+      action.textContent = options.action.label;
+      action.addEventListener("click", () => {
+        options.action.run?.();
+        close();
+      });
+      item.append(action);
+    }
+    const shut = document.createElement("button");
+    shut.type = "button";
+    shut.className = "icon-btn icon-btn--bare toast__close";
+    shut.setAttribute("aria-label", `Close message: ${message}`);
+    shut.innerHTML = sprite("x");
+    shut.addEventListener("click", () => close());
+    item.append(shut);
+    stack.append(item);
+    while (stack.children.length > 3) stack.firstElementChild.remove();
+
+    let left = options.action ? 10000 : 5000;
+    let started = Date.now();
+    let timer = setTimeout(close, left);
+    const pause = () => {
+      clearTimeout(timer);
+      left -= Date.now() - started;
+    };
+    const resume = () => {
+      if (item.matches(":hover, :focus-within")) return;
+      started = Date.now();
+      timer = setTimeout(close, Math.max(left, 2000));
+    };
+    item.addEventListener("pointerenter", pause);
+    item.addEventListener("focusin", pause);
+    item.addEventListener("pointerleave", resume);
+    item.addEventListener("focusout", () => setTimeout(resume));
+    function close() {
+      clearTimeout(timer);
+      const hadFocus = item.contains(document.activeElement);
+      item.remove();
+      if (hadFocus) document.querySelector("main")?.focus();
+    }
+    return close;
+  }
+
+  /* Saved note (option D): savedNote(note) shows "Saved at 16:31" in a .saved-note beside the button that
+     saved, and hides it at the next change in the same form or settings section. */
+  function savedNote(note, text) {
+    const now = new Date();
+    const time = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+    note.setAttribute("role", "status");
+    note.innerHTML = `${sprite("circle-check")}<span></span>`;
+    note.querySelector("span").textContent = text || `Saved at ${time}`;
+    note.hidden = false;
+    const scope = note.closest("form, .settings-section") || document;
+    const hide = () => {
+      note.hidden = true;
+      scope.removeEventListener("input", hide);
+      scope.removeEventListener("change", hide);
+    };
+    scope.addEventListener("input", hide);
+    scope.addEventListener("change", hide);
   }
 
   /* Display and accessibility: theme, text size and reading aids are classes on <html>. Inputs carry
@@ -319,7 +396,7 @@
     setupCopy(root);
     setupDisplay(root);
   }
-  window.SharedComponents = { setup, openLayer, toast };
+  window.SharedComponents = { setup, openLayer, toast, savedNote };
   // An app that wires its own behaviour (Starboard's page scripts) loads this file with data-manual, or
   // sets window.SharedComponentsManual = true first, and calls setup() or openLayer() itself.
   const manual = window.SharedComponentsManual || document.currentScript?.hasAttribute("data-manual");

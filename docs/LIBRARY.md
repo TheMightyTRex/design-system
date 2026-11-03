@@ -115,7 +115,8 @@ spacing). Slide-outs, menus, the phone menu and the dialog all work in the galle
 | Time ago | `<time datetime>` with `.visually-hidden` exact time | "Updated 10 seconds ago" on screen, the exact time for screen readers |
 | Empty state | `.empty`, `.empty__icon` | What, why, one next step |
 | Loading | `.skeleton`, `.loading-bar[data-active]`, `aria-busy` | Skeletons in the shape of the content |
-| Toast | `.toast` | Short confirmations only; never the only place an error shows |
+| Toast (option C) | `.toasts`, `.toast[data-tone="success"\|"info"]`, `.toast__text`, `.toast__title`, `.toast__detail`, `.toast__action`, `.toast__close`; `SharedComponents.toast(title, { detail, tone, action })` | Card in the corner (full width on phones), status edge and icon, up to three stacked. 5 seconds, 10 with an action, waits under the pointer or focus. Confirmations only; never the only place an error shows |
+| Saved note (option D) | `.saved-note`; `SharedComponents.savedNote(element)` | Settings pages: "Saved at 16:31" beside the button that saved, instead of a toast; goes at the next change |
 | Help | `.help`, `.help__text` | A disclosure button, not a hover tooltip |
 | Disclosure | `.disclosure` (`details`), `.disclosure__body`, `.disclosure__meta` | Releases list, SMART report, advanced settings |
 | Steps | `.steps`, `aria-current="step"`, `[data-done]` | Onboarding and upgrade wizard |

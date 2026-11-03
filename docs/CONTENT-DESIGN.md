@@ -220,8 +220,12 @@ blame.
   kept."
 - Details (codes, responses) go in an expandable "Technical details" section.
 
-**Confirmation (toast).** Past tense, specific, short: "Follow saved", "3 books added to Wanted".
-One optional next step: "Undo" or "Open Activity". No celebration for routine actions.
+**Confirmation (toast).** Past tense, specific, short, no full stop: "Follow saved", "3 books added to
+Wanted". An optional line of detail: "New books by Ben Aaronovitch come in by themselves". One optional next
+step: "Undo" or "Open Activity". No celebration for routine actions.
+
+**Confirmation on a settings page (saved note).** No toast: the words appear beside the button that saved,
+"Saved at 16:31", and stay until the next change.
 
 **Destructive dialog.** Title asks the question with the object: "Delete The Hollow Boy?". The body says what
 is removed, what is kept and how to get it back. The button names the action: "Delete book". Type-to-confirm
