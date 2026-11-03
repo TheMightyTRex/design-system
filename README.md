@@ -34,6 +34,8 @@ change the copies inside the apps.
 | `docs/CONTENT-DESIGN.md` | How every word is written: voice, rules, words each app uses, status vocabulary, patterns |
 | `docs/HELP-WRITING.md` | How help is written: tiers, kinds of topic, categories, layouts, screenshots |
 | `docs/ACCESSIBILITY.md` | The accessibility floor and how to test it |
+| `penpot/` | The Penpot plugin that builds the design system in a Penpot file, and `tokens.json` for Penpot's Tokens panel, both made by `penpot/make.py` |
+| `docs/PENPOT.md` | How to build, share and keep the Penpot file in step |
 | `docs/SECURITY-CHECKS.md` | The security checks both apps run, how to sort what they find, and how to record the results and release notes |
 | `resources/` | The Design resources and tools pages: what you can use, the tools, outside tools, how to make a change and how to get feedback |
 | `tools/` | Build, contrast, icon, sync and privacy scripts |
@@ -47,6 +49,14 @@ phone menu and the dialog all work. The gallery is also published at
 
 The boards open the same way: start at `areas/index.html`, choose an app, then a board in the menu. Each board
 shows in the page; Open on its own shows it in the whole window.
+
+## Penpot
+
+The design system can be built in [Penpot](https://penpot.app), the free and open-source design tool, by a plugin
+made from this library: install `https://themightytrex.github.io/design-system/penpot/manifest.json` in Penpot's
+plugin manager and select **Build the design system**. It adds the colours for all four themes, the text styles,
+the icons and the main components to the file's library. Penpot's Tokens panel can import `penpot/tokens.json`.
+Steps, sharing and connecting an AI assistant: [The design system in Penpot](docs/PENPOT.md).
 
 ## Design resources and tools
 

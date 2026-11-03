@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TRex Design System for Penpot</title>
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font); }
+  main { display: grid; gap: var(--space-4); padding: var(--space-4); }
+  h1 { font-size: var(--text-lg); margin: 0; }
+  p { margin: 0; font-size: var(--text-sm); line-height: 1.5; }
+  ol { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--space-2); font-size: var(--text-sm); }
+  li { display: grid; grid-template-columns: 7rem 1fr; gap: var(--space-2); }
+  li .chip { justify-self: start; }
+  .detail { color: var(--color-text-muted); overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<main>
+  <h1>TRex Design System</h1>
+  <p>Builds the design system into this file: the colours for all four themes and the text styles in the file's library, then four pages: Cover, Foundations, Icons and Components. Every colour, text style and component is added to the library, so other files can use it.</p>
+  <div class="notice" role="note"><div class="notice__body"><span class="notice__title">Before you begin:</span><p>Open a new, empty file. The plugin adds to the file each time it runs.</p></div></div>
+  <div class="actions"><button class="btn btn--primary" type="button" id="build">Build the design system</button><button class="btn btn--quiet" type="button" id="close">Close</button></div>
+  <ol id="steps" aria-live="polite"></ol>
+  <p id="result" role="status"></p>
+</main>
+<script>
+  const theme = new URLSearchParams(location.search).get("theme");
+  document.documentElement.dataset.theme = theme === "dark" ? "dark" : "light";
+  const steps = document.getElementById("steps");
+  const result = document.getElementById("result");
+  const button = document.getElementById("build");
+  const send = (message) => parent.postMessage(message, "*");
+  const rows = new Map();
+  const words = { working: ["info", "Building…"], done: ["success", "Done"], failed: ["danger", "Failed"] };
+  button.addEventListener("click", () => {
+    button.disabled = true;
+    result.textContent = "";
+    steps.replaceChildren();
+    rows.clear();
+    send({ type: "build" });
+  });
+  document.getElementById("close").addEventListener("click", () => send({ type: "close" }));
+  window.addEventListener("message", (event) => {
+    const m = event.data;
+    if (!m || typeof m !== "object") return;
+    if (m.type === "font" && !m.name) result.textContent = "Atkinson Hyperlegible Next is not in this Penpot, so the text uses Penpot's default font.";
+    if (m.type === "step") {
+      let row = rows.get(m.label);
+      if (!row) {
+        row = document.createElement("li");
+        rows.set(m.label, row);
+        steps.append(row);
+      }
+      const [tone, word] = words[m.status];
+      row.replaceChildren();
+      const name = document.createElement("span");
+      name.textContent = m.label;
+      const chip = document.createElement("span");
+      chip.className = "chip";
+      chip.dataset.tone = tone;
+      chip.textContent = word;
+      const detail = document.createElement("span");
+      detail.className = "detail";
+      detail.textContent = m.detail || "";
+      const right = document.createElement("span");
+      right.append(chip, " ", detail);
+      row.append(name, right);
+    }
+    if (m.type === "finished") {
+      button.disabled = false;
+      result.textContent = m.failed
+        ? `Finished with ${m.failed} part${m.failed === 1 ? "" : "s"} not built. The reason is beside each one.`
+        : "Finished. To share it, add this file as a shared library from its menu in your projects.";
+    }
+  });
+</script>
+</body>
+</html>

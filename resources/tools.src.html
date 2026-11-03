@@ -82,6 +82,10 @@
 <p>Rebuilds <code>icons.svg</code> from Lucide. Add the icon's Lucide name to <code>tools/icons.txt</code>, then run:</p>
 <div class="command"><code class="code-block">python3 tools/icons.py "$(tr '\n' ' ' &lt; tools/icons.txt)"</code><button class="copy-btn" type="button" data-copy="python3 tools/icons.py &quot;$(tr &#x27;\n&#x27; &#x27; &#x27; &lt; tools/icons.txt)&quot;" aria-label="Copy command">{{i:copy}}</button></div>
 
+<h2 id="penpot">Make the Penpot plugin: penpot/make.py</h2>
+<p>Writes <code>penpot/plugin.js</code> and <code>penpot/tokens.json</code> from <code>tokens.css</code> and <code>icons.svg</code>, so the Penpot file matches the library. Change <code>penpot/plugin.src.js</code>, never <code>plugin.js</code>. Read <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/PENPOT.md">The design system in Penpot</a>.</p>
+<div class="command"><code class="code-block">python3 penpot/make.py</code><button class="copy-btn" type="button" data-copy="python3 penpot/make.py" aria-label="Copy command">{{i:copy}}</button></div>
+
 <h2 id="sync">Copy the library into the apps: sync.py</h2>
 <p>Copies <code>tokens.css</code>, <code>components.css</code>, <code>components.js</code> and the icons into Storyarr and Starboard, so both apps use the same components. It does not commit. Add <code>--check</code> to list what would change without writing anything.</p>
 <div class="command"><code class="code-block">python3 tools/sync.py --check</code><button class="copy-btn" type="button" data-copy="python3 tools/sync.py --check" aria-label="Copy command">{{i:copy}}</button></div>
