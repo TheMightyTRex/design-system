@@ -88,6 +88,7 @@
     <li><a href="#phone">Phone header and menu</a></li>
     <li><a href="#page-head">Page head</a></li>
     <li><a href="#footer">Footer</a></li>
+    <li><a href="#display-button">Display button</a></li>
     <li class="g-group">Actions</li>
     <li><a href="#buttons">Buttons</a></li>
     <li><a href="#menus">Menu button</a></li>
@@ -100,6 +101,7 @@
     <li><a href="#facts">Facts, stats and meters</a></li>
     <li><a href="#rows">Rows and tables</a></li>
     <li><a href="#notices">Notices, empty and loading</a></li>
+    <li><a href="#callouts">Callouts</a></li>
     <li><a href="#disclosure">Disclosure, help and steps</a></li>
     <li class="g-group">Containers</li>
     <li><a href="#cards">Panels and cards</a></li>
@@ -119,6 +121,10 @@
     <li><a href="#changes-preview">What will change</a></li>
     <li><a href="#month-nav">Earlier and later</a></li>
     <li><a href="#check-history">Recent checks</a></li>
+    <li><a href="#help-article">Help article</a></li>
+    <li><a href="#whats-new">What is new</a></li>
+    <li><a href="#retiring">Retiring something and dated changes</a></li>
+    <li><a href="#time-ago">Time ago</a></li>
     <li><a href="#ux-notes">UX notes</a></li>
   </ol>
   <p class="g-none" hidden data-g-none>No components match.</p>
@@ -281,6 +287,18 @@
     <div><h4>Right: the maker</h4><ul><li>The dinosaur mark and TheMightyTRexUK, one link to the GitHub profile. Its name for screen readers ends "on GitHub".</li><li>The same in every app; the mark follows the theme.</li></ul></div>
     <div><h4>Behaviour</h4><ul><li>Links are 44px targets. Muted text, the text colour on hover.</li><li>On phones the maker goes under the app's links.</li><li>Not shown on Sign in and Set up.</li></ul></div>
     <div><h4>Classes</h4><ul><li><code>.site-footer</code>, <code>.site-footer__app</code>, <code>.site-footer__brand</code>, <code>.site-footer__links</code>, <code>.site-footer__maker</code>, <code>.maker-mark</code></li></ul></div>
+  </div>
+</section>
+
+<section class="g-section" id="display-button" aria-labelledby="display-button-h">
+  <header><h2 id="display-button-h">Display button</h2><p class="muted">The same button and slide-out in every app: the last item in the header, on every page, Sign in and Set up included. It opens Display and accessibility.</p></header>
+  <div class="g-demo g-demo--row">
+    <button class="icon-btn" type="button" data-opens="g-panel-display" aria-haspopup="dialog" aria-expanded="false">{{i-lg:sun}}<span class="label">Display</span></button>
+  </div>
+  <div class="g-notes">
+    <div><h4>The button</h4><ul><li><code>.icon-btn</code>, the sun icon and the word Display. On phones the word is hidden from sight but still read out.</li><li><code>aria-haspopup="dialog"</code> and <code>aria-expanded</code>.</li></ul></div>
+    <div><h4>The slide-out</h4><ul><li>Titled Display and accessibility; Close is named "Close display and accessibility".</li><li>In this order: Theme (Match device, Light, Dark), Text size (100% to 175%), Reduce motion (Match device, On, Off), High contrast, Underline links, Wider text spacing. An app adds its own after these (Starboard: Design).</li><li>Choices apply at once. Done and Reset in the foot.</li></ul></div>
+    <div><h4>Saving</h4><ul><li>To the person's account where the app has accounts; otherwise in the browser.</li><li><code>components.js</code> applies the choices from <code>data-display</code> inputs. <code>data-display-save="key"</code> on the form keeps them in the browser; <code>data-display-reset="key"</code> on Reset.</li></ul></div>
   </div>
 </section>
 
@@ -496,6 +514,21 @@
   <div class="g-notes">
     <div><h4>Rules</h4><ul><li>Errors say what happened and what to do, in the page, not only in a toast.</li><li>Empty states say what is missing, why, and the one next step.</li><li>Skeletons have the shape of the content; never a spinner on its own for a whole page.</li></ul></div>
     <div><h4>Roles</h4><ul><li>Success and info: <code>role="status"</code>. Errors that block: <code>role="alert"</code>.</li></ul></div>
+  </div>
+</section>
+
+<section class="g-section" id="callouts" aria-labelledby="callouts-h">
+  <header><h2 id="callouts-h">Callouts</h2><p class="muted">A notice in help and long text. One colour means one thing, and the first words say it, so the meaning never rests on colour. No steps and no emoji inside a callout.</p></header>
+  <div class="g-demo">
+    <div class="notice">{{i:info}}<div class="notice__body"><span class="notice__title">Before you begin:</span><p>Sign in as an administrator, and have your Jellyfin API key to hand.</p></div></div>
+    <div class="notice" data-tone="warning">{{i:triangle-alert}}<div class="notice__body"><span class="notice__title">Limitation:</span><p>Listening progress copies across only for books that are in both libraries.</p></div></div>
+    <div class="notice" data-tone="danger">{{i:circle-alert}}<div class="notice__body"><span class="notice__title">Warning:</span><p>Deleting a backup removes it from the disk. It cannot be restored.</p></div></div>
+    <div class="notice" data-tone="success">{{i:sparkles}}<div class="notice__body"><span class="notice__title">Tip:</span><p>Activate alerts so Starboard tells you when a disk fills up.</p></div></div>
+    <div class="notice" data-tone="muted">{{i:file-text}}<div class="notice__body"><span class="notice__title">Example:</span><p>Alex keeps films on disk 1 and music on disk 2, so a full disk stops only one of them.</p></div></div>
+  </div>
+  <div class="g-notes">
+    <div><h4>Meaning</h4><ul><li>Info: before you begin. Warning: a limitation. Danger: cannot be undone. Success: a tip. Muted: an example or aside.</li></ul></div>
+    <div><h4>Classes</h4><ul><li><code>.notice</code>, <code>.notice[data-tone="warning|danger|success|muted"]</code>, <code>.notice__title</code>, <code>.notice__body</code></li></ul></div>
   </div>
 </section>
 
@@ -751,10 +784,98 @@
   </div>
 </section>
 
+<section class="g-section" id="help-article" aria-labelledby="help-article-h">
+  <header><h2 id="help-article-h">Help article</h2><p class="muted">Help topics, guides and release notes shown in an app use <code>.prose</code>. The layouts and rules are in <code>docs/HELP-WRITING.md</code>. A topic does one task; a guide is mostly links to topics.</p></header>
+  <div class="g-demo">
+    <article class="prose" aria-labelledby="g-topic-h">
+      <p class="small muted"><a href="#help-article">Help centre</a> · Backup and restore</p>
+      <h1 id="g-topic-h">Back up your settings</h1>
+      <p class="prose__kind">How-to</p>
+      <p class="prose__lead">Save a copy of Starboard's settings, so you can put them back after a new install. It takes about a minute.</p>
+      <h2>Before you begin</h2>
+      <ul><li>Sign in as an administrator. Read <a href="#help-article">Choose who can open Starboard</a>.</li></ul>
+      <h2>Steps</h2>
+      <ol>
+        <li>Go to <b>Settings</b>, then <b>Backup</b>.</li>
+        <li>Select <b>Back up now</b>. A message says when the copy is saved.</li>
+        <li>Select <b>Download the backup (ZIP)</b> to keep a copy on another computer.</li>
+      </ol>
+      <div class="notice" data-tone="success">{{i:sparkles}}<div class="notice__body"><span class="notice__title">Tip:</span><p>Activate 'Back up every night' and Starboard keeps the last 7 copies for you.</p></div></div>
+      <h2>Things to note</h2>
+      <ul><li>A backup holds settings only.<ul><li>Films, music and books stay on their disks and are not copied.</li><li>To copy those too, read <a href="#help-article">Back up the server</a>.</li></ul></li></ul>
+      <h2>Find out more</h2>
+      <table><thead><tr><th scope="col">Article</th><th scope="col">What it covers</th></tr></thead><tbody><tr><td><a href="#help-article">Restore a saved copy</a></td><td>Putting a backup back</td></tr><tr><td><a href="#help-article">Move Starboard to a new computer</a></td><td>The whole move, step by step</td></tr></tbody></table>
+    </article>
+  </div>
+  <div class="g-demo">
+    <article class="prose" aria-labelledby="g-guide-h">
+      <p class="small muted"><a href="#help-article">Help centre</a> · Guides</p>
+      <h1 id="g-guide-h">Move Starboard to a new computer</h1>
+      <p class="prose__lead">For anyone replacing their server. At the end, Starboard runs on the new computer with all your apps and settings. Allow about an hour.</p>
+      <h2>The steps at a glance</h2>
+      <ol><li>Back up your settings</li><li>Install Starboard on the new computer</li><li>Restore the saved copy</li><li>Check your apps</li></ol>
+      <h2>Step 1: Back up your settings</h2>
+      <p>Save a copy on the old computer first, while it still runs. Follow <a href="#help-article">Back up your settings</a>. You know it worked when the download finishes.</p>
+    </article>
+  </div>
+  <div class="g-notes">
+    <div><h4>Topic</h4><ul><li>Area line, title in the reader's words, kind, then the answer first.</li><li>Before you begin, Steps, Things to note, If it does not work, Find out more. Empty sections are left out. Reference topics add When would you use it.</li></ul></div>
+    <div><h4>Guide</h4><ul><li>Named after the outcome. Who it is for, what you will have and how long it takes.</li><li>The steps at a glance, then one short section per step, each a link to its topic.</li></ul></div>
+    <div><h4>Classes</h4><ul><li><code>.prose</code>, <code>.prose__lead</code>, <code>.prose__kind</code>; callouts are <code>.notice</code></li></ul></div>
+  </div>
+</section>
+
+<section class="g-section" id="whats-new" aria-labelledby="whats-new-h">
+  <header><h2 id="whats-new-h">What is new</h2><p class="muted">The headline feature of a release, in the release notes slide-out or the upgrade guide. A new feature gets How to start; an improvement does not. Describe the new state, never a comparison with before.</p></header>
+  <div class="g-demo" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr))">
+    <article class="panel stack-2" aria-labelledby="g-new-h">
+      <span class="tag" style="justify-self:start">New feature</span>
+      <h3 id="g-new-h">Know when a disk is failing</h3>
+      <p>Starboard checks every disk each night and tells you before one stops working.</p>
+      <div class="g-frame" role="img" aria-label="The Disk health page, with disk 3 marked Needs attention" style="aspect-ratio:16/9;background:var(--color-surface-sunken);border:1px solid var(--color-divider)"></div>
+      <h4>What is new</h4>
+      <ul><li>A nightly check of every disk</li><li>An alert when a disk needs attention</li><li>Each disk's history in one place</li></ul>
+      <h4>How to start</h4>
+      <ol><li>Activate alerts in <b>Settings</b>.</li><li>Go to <b>System</b>, then <b>Disk health</b>.</li></ol>
+      <div class="actions"><a class="btn btn--primary" href="#whats-new">Open the guide: Check disk health</a></div>
+    </article>
+    <article class="panel stack-2" aria-labelledby="g-better-h">
+      <span class="tag" style="justify-self:start">Improvement</span>
+      <h3 id="g-better-h">Downloads now show time left</h3>
+      <p>Each download says when it should finish, so you know whether to wait.</p>
+      <h4>What has changed</h4>
+      <ul><li>Time left on every download</li><li>Speed in words, not arrows</li><li>Finished downloads move to the end</li></ul>
+      <p>Find it in <b>Downloads</b>.</p>
+      <p class="small muted">Nothing to set up.</p>
+      <div class="actions"><a class="btn" href="#whats-new">Open the guide: Manage downloads</a></div>
+    </article>
+  </div>
+  <div class="g-notes">
+    <div><h4>Words</h4><ul><li>The title is the benefit, under nine words. One sentence on what it means for the reader.</li><li>Three gains. The button is always "Open the guide: &lt;topic&gt;".</li></ul></div>
+    <div><h4>Picture</h4><ul><li>One picture of it working, with made-up data, described in its alt text.</li></ul></div>
+  </div>
+</section>
+
+<section class="g-section" id="retiring" aria-labelledby="retiring-h">
+  <header><h2 id="retiring-h">Retiring something and dated changes</h2><p class="muted">A removal is not news: say what is going, the date and what to do instead, in the app until the date passes. A change with an agreed date gets a From tag under its title; leave the tag off once the change is live.</p></header>
+  <div class="g-demo">
+    <div class="notice" data-tone="warning">{{i:triangle-alert}}<div class="notice__body"><span class="notice__title">Limitation: Classic layout ends on 1 December 2026</span><p>Shelf layout replaces it, and your settings move across. Read <a href="#retiring">Switch to Shelf layout</a>.</p></div></div>
+    <div class="stack-1"><h3>Quiet hours for downloads</h3><span class="tag" style="justify-self:start">From 1 December 2026</span></div>
+  </div>
+</section>
+
+<section class="g-section" id="time-ago" aria-labelledby="time-ago-h">
+  <header><h2 id="time-ago-h">Time ago</h2><p class="muted">Relative words on screen, the exact time for screen readers and in the markup.</p></header>
+  <div class="g-demo g-demo--row">
+    <p class="small muted">Updated <time datetime="2026-11-03T16:31:00">10 seconds ago<span class="visually-hidden">, at 16:31 on 3 November 2026</span></time></p>
+  </div>
+  <div class="g-notes"><div><h4>Markup</h4><ul><li><code>&lt;time datetime="2026-11-03T16:31:00"&gt;</code> with the words, and the exact time in <code>.visually-hidden</code>.</li></ul></div></div>
+</section>
+
 <section class="g-section" id="ux-notes" aria-labelledby="ux-notes-h">
   <header><h2 id="ux-notes-h">UX notes</h2><p class="muted">For testing only: <code>ux-notes.js</code> puts Note an issue in the corner of every page. Choose the part of the page (click it, or Tab to it and press Enter), say what is wrong, the kind and how bad it is. Notes lists them, with Copy as text, Download and Mark as fixed. Each app turns it on with a setting and can keep the notes on its server; here they stay in this browser.</p></header>
   <div class="g-demo">
-    <div class="actions"><button class="btn" type="button" id="g-ux-start">Turn on UX notes</button><button class="btn" type="button" id="g-ux-stop">Turn off</button></div>
+    <div class="actions"><button class="btn" type="button" id="g-ux-start">Activate UX notes</button><button class="btn" type="button" id="g-ux-stop">Deactivate</button></div>
     <p class="small muted">Starts with <code>UxNotes.start({ app: "Gallery" })</code>; a store with list, add, update and remove keeps them elsewhere.</p>
   </div>
 </section>
@@ -824,16 +945,16 @@
   <div class="side-panel-backdrop"></div>
   <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="g-pd-h">
     <div class="panel-header"><h2 class="panel-header__title" id="g-pd-h">Display and accessibility</h2><button class="icon-btn" type="button" data-closes aria-label="Close display and accessibility">{{i:x}}</button></div>
-    <form class="side-panel__body" data-g-display>
-      <fieldset><legend>Theme</legend><div class="segmented"><label><input type="radio" name="theme" value="system"><span>Match device</span></label><label><input type="radio" name="theme" value="light"><span>Light</span></label><label><input type="radio" name="theme" value="dark"><span>Dark</span></label></div></fieldset>
-      <fieldset><legend>Text size</legend><div class="segmented"><label><input type="radio" name="text" value="100"><span>100%</span></label><label><input type="radio" name="text" value="125"><span>125%</span></label><label><input type="radio" name="text" value="150"><span>150%</span></label><label><input type="radio" name="text" value="175"><span>175%</span></label></div></fieldset>
-      <fieldset><legend>Reduce motion</legend><div class="segmented"><label><input type="radio" name="motion" value="device"><span>Match device</span></label><label><input type="radio" name="motion" value="on"><span>On</span></label><label><input type="radio" name="motion" value="off"><span>Off</span></label></div></fieldset>
-      <label class="switch"><span>High contrast</span><input type="checkbox" role="switch" name="contrast"></label>
-      <label class="switch"><span>Underline links</span><input type="checkbox" role="switch" name="underline"></label>
-      <label class="switch"><span>Wider text spacing</span><input type="checkbox" role="switch" name="spacing"></label>
+    <form class="side-panel__body" data-display-save="ds-display">
+      <fieldset><legend>Theme</legend><div class="segmented"><label><input type="radio" name="g-pd-theme" value="system" data-display="theme" checked><span>Match device</span></label><label><input type="radio" name="g-pd-theme" value="light" data-display="theme"><span>Light</span></label><label><input type="radio" name="g-pd-theme" value="dark" data-display="theme"><span>Dark</span></label></div></fieldset>
+      <fieldset><legend>Text size</legend><div class="segmented"><label><input type="radio" name="g-pd-text" value="100" data-display="text" checked><span>100%</span></label><label><input type="radio" name="g-pd-text" value="125" data-display="text"><span>125%</span></label><label><input type="radio" name="g-pd-text" value="150" data-display="text"><span>150%</span></label><label><input type="radio" name="g-pd-text" value="175" data-display="text"><span>175%</span></label></div></fieldset>
+      <fieldset><legend>Reduce motion</legend><div class="segmented"><label><input type="radio" name="g-pd-motion" value="device" data-display="motion" checked><span>Match device</span></label><label><input type="radio" name="g-pd-motion" value="on" data-display="motion"><span>On</span></label><label><input type="radio" name="g-pd-motion" value="off" data-display="motion"><span>Off</span></label></div></fieldset>
+      <label class="switch"><span>High contrast</span><input type="checkbox" role="switch" data-display="contrast"></label>
+      <label class="switch"><span>Underline links</span><input type="checkbox" role="switch" data-display="underline"></label>
+      <label class="switch"><span>Wider text spacing</span><input type="checkbox" role="switch" data-display="spacing"></label>
       <p class="small muted">Choices apply at once and are kept in this browser.</p>
     </form>
-    <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Done</button><button class="btn" type="button" data-g-display-reset>Reset</button></div>
+    <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Done</button><button class="btn" type="button" data-display-reset="ds-display">Reset</button></div>
   </aside>
 </div>
 
@@ -862,36 +983,6 @@ Pending sectors: 0</code></div></details>
   const tones = ["success","info","warning","danger","muted"];
   const box = document.getElementById("g-swatches");
   for (const n of names) box.insertAdjacentHTML("beforeend", `<div class="g-swatch"><span style="background:var(--color-${n})"></span><span><code>--color-${n}</code></span></div>`);
-
-  // Display and accessibility: the same choices as the apps, kept in this browser.
-  const form = document.querySelector("[data-g-display]");
-  const defaults = { theme: "system", text: "100", motion: "device", contrast: false, underline: false, spacing: false };
-  const read = () => { try { return { ...defaults, ...JSON.parse(localStorage.getItem("ds-display") || "{}") }; } catch { return { ...defaults }; } };
-  function apply(prefs) {
-    const html = document.documentElement;
-    if (prefs.theme === "system") html.removeAttribute("data-theme"); else html.dataset.theme = prefs.theme;
-    ["125", "150", "175"].forEach((size) => html.classList.toggle(`pref-text-${size}`, prefs.text === size));
-    html.classList.toggle("pref-motion", prefs.motion === "on");
-    for (const k of ["contrast", "underline", "spacing"]) html.classList.toggle(`pref-${k}`, prefs[k]);
-    for (const el of form.elements) {
-      if (el.type === "radio") el.checked = prefs[el.name] === el.value;
-      if (el.type === "checkbox") el.checked = prefs[el.name];
-    }
-  }
-  form.addEventListener("change", () => {
-    const prefs = { ...defaults };
-    for (const el of form.elements) {
-      if (el.type === "radio" && el.checked) prefs[el.name] = el.value;
-      if (el.type === "checkbox") prefs[el.name] = el.checked;
-    }
-    try { localStorage.setItem("ds-display", JSON.stringify(prefs)); } catch {}
-    apply(prefs);
-  });
-  document.querySelector("[data-g-display-reset]").addEventListener("click", () => {
-    try { localStorage.removeItem("ds-display"); } catch {}
-    apply(defaults);
-  });
-  apply(read());
 
   // Main menu: icons only when the names do not fit beside search (.is-compact), as in the apps.
   const bar = document.querySelector(".site-header__bar");

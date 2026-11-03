@@ -1,7 +1,7 @@
 # TRex Design System: the component library
 
 Version 1, 2 November 2026. One component library for both apps, so they look and behave as one family.
-It follows `DESIGN-SYSTEM.md` and the guides in this folder (`CONTENT-DESIGN.md` and `ACCESSIBILITY.md`).
+It follows `DESIGN-SYSTEM.md` and the guides in this folder (`CONTENT-DESIGN.md`, `HELP-WRITING.md` and `ACCESSIBILITY.md`).
 File names in the tables below are relative to the root of the repository.
 
 **Open `gallery.html` in a browser** to see every component live. The gallery uses the same header and menus
@@ -66,6 +66,7 @@ spacing). Slide-outs, menus, the phone menu and the dialog all work in the galle
 | Phone menu | `.phone-menu-button`, `.phone-menu`, `.phone-menu__section > a` (an item with no 1st level), `.phone-menu__search`, `.phone-menu__section`, `.phone-menu__foot` | Drawer from the left; search, main menu, 1st level; account and sign out at the foot |
 | Page and page head | `.page`, `.page--narrow` (Sign in, Set up), `.section-head`, `.section-head__control`, `.page-head`, `.page-head__text`, `.page-head__summary` | One visible h1; page actions on the right |
 | Footer | `.site-footer`, `.site-footer__app`, `.site-footer__brand`, `.site-footer__links`, `.site-footer__maker`, `.maker-mark` | On every page but Sign in and Set up. Left: app icon, name, "Version 0.7.4", then Help (only when the app has a help centre), About, Updates. Right: the dinosaur mark and TheMightyTRexUK, one link to the GitHub profile (copy the markup from the gallery) |
+| Display button | `.icon-btn` (sun icon, `.label` Display), `aria-haspopup="dialog"`, opening a `.side-panel` titled Display and accessibility; inputs with `data-display`, `data-display-save`, `data-display-reset` | Last item in the header on every page. The choices and their order are in `ACCESSIBILITY.md` section 1 |
 
 ### Actions
 | Component | Classes | Notes |
@@ -108,7 +109,9 @@ spacing). Slide-outs, menus, the phone menu and the dialog all work in the galle
 | Rows | `.rows`, `.row`, `.row--no-lead`, `.row--opens`, `.row__title`, `.row__meta`, `.row__side` | `.row--opens`: the whole row opens a slide-out |
 | Group heading | `.group-heading` | Sentence case, no capitals |
 | Table | `.table-wrap[data-stack]`, `.table`, `th[aria-sort]` | Real tables only; stack into cards on phones |
-| Notice | `.notice[data-tone]`, `.notice__title`, `.notice__body` | Icon and words; `role="status"` or `role="alert"` |
+| Notice and callout | `.notice[data-tone]` (`success`, `warning`, `danger`, `muted`; none is info), `.notice__title`, `.notice__body` | Icon and words; `role="status"` or `role="alert"`. As a callout in long text, the title is the lead word: Before you begin (info), Limitation (warning), Warning (danger, cannot be undone), Tip (success), Example (muted) |
+| Prose | `.prose`, `.prose__lead`, `.prose__kind` | Help topics, guides and release notes shown in an app (`HELP-WRITING.md`) |
+| Time ago | `<time datetime>` with `.visually-hidden` exact time | "Updated 10 seconds ago" on screen, the exact time for screen readers |
 | Empty state | `.empty`, `.empty__icon` | What, why, one next step |
 | Loading | `.skeleton`, `.loading-bar[data-active]`, `aria-busy` | Skeletons in the shape of the content |
 | Toast | `.toast` | Short confirmations only; never the only place an error shows |

@@ -1,29 +1,34 @@
-# Storyarr accessibility guide
+# Accessibility guide
 
-Version 1.0, 1 November 2026. The floor is **WCAG 2.2 level AA** on every page, in every theme (Light, Dark,
-High contrast) and both layouts (Classic, Shelf). Content rules are in `CONTENT-DESIGN.md` section 8.
+Version 1.1, 3 November 2026. For Storyarr and Starboard. The floor is **WCAG 2.2 level AA** on every page, in
+every theme (Light, Dark, High contrast) and every layout (Storyarr: Classic and Shelf). Content rules are in
+`CONTENT-DESIGN.md` section 8.
 
 **For AI agents:** every item marked **Check** must pass before a UI change is finished. Section 6 says how
 to test each one.
 
-## 1. Display and accessibility panel
+## 1. Display and accessibility
 
-Already built (fix 07, Settings → General, the **Display** button in the header, and the onboarding step).
+Every page of both apps, Sign in and Set up included, has the **Display** button as the last item in the
+header. It opens the Display and accessibility slide-out (gallery: Display button). The choices, in this
+order:
 
 | Setting | Values | Default |
 |---|---|---|
-| Theme | Match device, Light, Dark | Light (target: Match device) |
+| Theme | Match device, Light, Dark | Match device |
 | Text size | 100%, 125%, 150%, 175% | 100% |
-| High contrast | On, off | Off |
-| Reduce motion | On, off; also follows the device setting | Device |
-| Underline links | On, off | Off |
-| Wider text spacing | On, off | Off |
-| Reset, Done | Buttons | |
+| Reduce motion | Match device, On, Off | Match device |
+| High contrast | Switch | Inactive |
+| Underline links | Switch | Inactive |
+| Wider text spacing | Switch | Inactive |
+| An app's own choices | After these (Starboard: Design) | |
+| Done, Reset | Buttons in the foot | |
 
-Today the choices are saved in each browser. Task UX-29 moves them to the person's account.
+Choices apply at once. They are saved to the person's account where the app has accounts (Storyarr task
+UX-29), otherwise in the browser. `components.js` applies them from `data-display` inputs.
 
-Since v0.4.8 every page uses Atkinson Hyperlegible Next, a typeface designed for readers with low vision, so the
-Low-vision font switch was removed.
+Every page uses Atkinson Hyperlegible Next, a typeface designed for readers with low vision, so there is no
+separate low-vision font switch.
 
 ## 2. Checks
 

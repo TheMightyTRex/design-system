@@ -30,7 +30,8 @@ change the copies inside the apps.
 | `docs/LIBRARY.md` | The component reference: every class, the rule for slide-out, dialog or page, and how each app adopts the library |
 | `docs/DESIGN-SYSTEM.md` | Principles, tokens, shell, page templates and consistency rules |
 | `docs/COMPONENTS.md` | Storyarr's interface before the redesign, and the duplicates to merge |
-| `docs/CONTENT-DESIGN.md` | How every word is written: voice, rules, status vocabulary |
+| `docs/CONTENT-DESIGN.md` | How every word is written: voice, rules, words each app uses, status vocabulary, patterns |
+| `docs/HELP-WRITING.md` | How help is written: tiers, kinds of topic, categories, layouts, screenshots |
 | `docs/ACCESSIBILITY.md` | The accessibility floor and how to test it |
 | `tools/` | Build, contrast, icon, sync and privacy scripts |
 

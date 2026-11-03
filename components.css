@@ -1366,6 +1366,12 @@
     background: var(--status-danger-bg);
     color: var(--status-danger-fg);
   }
+  /* Muted: an aside the reader may skip (the "Example:" callout). */
+  .notice[data-tone="muted"] {
+    border-color: var(--status-muted-fg);
+    background: var(--status-muted-bg);
+    color: var(--status-muted-fg);
+  }
   :root[data-theme="dark"] .notice p {
     color: inherit;
   }
@@ -3569,6 +3575,80 @@
     .site-footer__maker {
       margin-left: calc(var(--space-2) * -1);
     }
+  }
+
+  /* Prose: long text such as help topics and release notes shown in the app. Headings keep their order,
+     lists and steps get room, and an on-screen label in a step is bold. Callouts are .notice. */
+  .prose {
+    max-width: 72ch;
+    display: grid;
+    gap: var(--space-4);
+    line-height: 1.6;
+  }
+  .prose > * {
+    margin: 0;
+  }
+  .prose h1 {
+    font-size: var(--text-2xl);
+  }
+  .prose h2 {
+    margin-top: var(--space-4);
+    font-size: var(--text-xl);
+  }
+  .prose h3 {
+    margin-top: var(--space-2);
+    font-size: var(--text-lg);
+  }
+  .prose__lead {
+    font-size: var(--text-lg);
+  }
+  .prose__kind {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+  }
+  .prose ul,
+  .prose ol {
+    display: grid;
+    gap: var(--space-2);
+    padding-left: var(--space-6);
+  }
+  .prose li > ul,
+  .prose li > ol {
+    margin-top: var(--space-2);
+  }
+  .prose ol > li::marker {
+    font-weight: var(--weight-strong);
+  }
+  .prose a {
+    text-decoration: underline;
+  }
+  .prose figure {
+    display: grid;
+    gap: var(--space-2);
+  }
+  .prose figure img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--color-divider);
+  }
+  .prose figcaption {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+  }
+  .prose table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+  }
+  .prose th,
+  .prose td {
+    padding: var(--space-2) var(--space-3);
+    border-top: 1px solid var(--color-divider);
+    text-align: left;
+    vertical-align: top;
+  }
+  .prose th {
+    background: var(--color-surface-sunken);
   }
 
   /* 7. Phones and narrow windows ---------------------------------------------------------------- */

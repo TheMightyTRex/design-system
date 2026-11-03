@@ -210,21 +210,71 @@
     toast.timer = setTimeout(() => (region.hidden = true), 4000);
   }
 
-  /* Display settings: theme, text size and reading aids are classes on <html>. */
+  /* Display and accessibility: theme, text size and reading aids are classes on <html>. Inputs carry
+     data-display="theme|text|motion|contrast|underline|spacing". Theme "system" follows the device.
+     Reduce motion is a switch, or radios valued "device", "on" and "off" (the device setting still
+     applies unless the choice is "on"). A form with data-display-save="<key>" keeps the choices in
+     this browser and restores them; a [data-display-reset] button inside it, or one anywhere with
+     data-display-reset="<key>", goes back to the defaults written in the markup. An app that saves to the person's account leaves data-display-save off. */
+  function applyDisplay(input) {
+    const html = document.documentElement;
+    const kind = input.dataset.display;
+    if (input.type === "radio" && !input.checked) return;
+    if (kind === "theme") {
+      if (input.value === "system") html.removeAttribute("data-theme");
+      else html.dataset.theme = input.value;
+    }
+    if (kind === "text")
+      ["125", "150", "175"].forEach((size) =>
+        html.classList.toggle(`pref-text-${size}`, input.value === size),
+      );
+    if (kind === "motion" && input.type === "radio")
+      html.classList.toggle("pref-motion", input.value === "on");
+    else if (["contrast", "spacing", "motion", "underline"].includes(kind))
+      html.classList.toggle(`pref-${kind}`, input.checked);
+  }
   function setupDisplay(root = document) {
     root.querySelectorAll("[data-display]").forEach((input) => {
       if (input.dataset.ready) return;
       input.dataset.ready = "1";
-      input.addEventListener("change", () => {
-        const html = document.documentElement;
-        const kind = input.dataset.display;
-        if (kind === "theme") html.dataset.theme = input.value;
-        if (kind === "text")
-          ["125", "150", "175"].forEach((size) =>
-            html.classList.toggle(`pref-text-${size}`, input.value === size),
-          );
-        if (["contrast", "spacing", "motion", "underline"].includes(kind))
-          html.classList.toggle(`pref-${kind}`, input.checked);
+      input.addEventListener("change", () => applyDisplay(input));
+    });
+    root.querySelectorAll("[data-display-save]").forEach((form) => {
+      if (form.dataset.displayReady) return;
+      form.dataset.displayReady = "1";
+      const key = form.dataset.displaySave;
+      const inputs = [...form.querySelectorAll("[data-display]")];
+      const save = () => {
+        const prefs = {};
+        for (const el of inputs) {
+          if (el.type === "radio" && el.checked) prefs[el.dataset.display] = el.value;
+          if (el.type === "checkbox") prefs[el.dataset.display] = el.checked;
+        }
+        try {
+          localStorage.setItem(key, JSON.stringify(prefs));
+        } catch {}
+      };
+      let prefs = {};
+      try {
+        prefs = JSON.parse(localStorage.getItem(key) || "{}");
+      } catch {}
+      for (const el of inputs) {
+        const value = prefs[el.dataset.display];
+        if (value === undefined) continue;
+        if (el.type === "radio") el.checked = el.value === value;
+        if (el.type === "checkbox") el.checked = value;
+      }
+      inputs.forEach(applyDisplay);
+      form.addEventListener("change", save);
+      const reset =
+        form.querySelector("[data-display-reset]") ||
+        document.querySelector(`[data-display-reset="${key}"]`);
+      reset?.addEventListener("click", () => {
+        for (const el of inputs) el.checked = el.defaultChecked;
+        try {
+          localStorage.removeItem(key);
+        } catch {}
+        inputs.forEach(applyDisplay);
       });
     });
   }
