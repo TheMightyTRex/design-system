@@ -59,7 +59,8 @@ there to switch between Light, Dark and the two High contrast themes.
 When the library changes:
 
 1. Run `python3 penpot/make.py`. It writes `penpot/plugin.js` and `penpot/tokens.json` from `tokens.css`
-   and `icons.svg`.
+   and `icons.svg`, and gives `plugin.js` a new address in `manifest.json`, so Penpot loads the new version
+   at once instead of a copy the browser kept.
 2. Run `penpot/test.sh`. It runs the plugin in SES, the sandbox Penpot runs plugins in, against a stand-in
    for Penpot, and fails if the sandbox refuses the code or any part of the build fails. SES refuses code
    that contains the text of an import expression or an HTML comment, even in a comment.

@@ -91,6 +91,13 @@ for refused in ("import(", "<!--", "-->"):
     assert refused not in code, f"plugin.js contains {refused!r}, which Penpot's sandbox refuses"
 (here / "plugin.js").write_text(code)
 
+# A new address for each build, so no browser or Penpot can keep running an old plugin.js after an update.
+import hashlib
+stamp = hashlib.sha256(code.encode()).hexdigest()[:10]
+manifest = json.loads((here / "manifest.json").read_text())
+manifest["code"] = f"plugin.js?v={stamp}"
+(here / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+
 # Tokens for Penpot's Tokens panel: Core, then one colour set per theme, and a theme for each.
 def tok(value, kind):
     return {"$value": value, "$type": kind}
@@ -112,5 +119,6 @@ tokens["$themes"] = [{"name": n, "group": "Theme", "selectedTokenSets": {"Core":
 tokens["$metadata"] = {"tokenSetOrder": ["Core", *themes]}
 (here / "tokens.json").write_text(json.dumps(tokens, indent=2) + "\n")
 
+print("penpot/manifest.json: plugin.js?v=" + stamp)
 print("penpot/plugin.js:", ", ".join(f"{n} {len(c)} colours" for n, c in themes.items()), f"| {len(icons)} icons")
 print("penpot/tokens.json:", len(tokens) - 2, "sets")
