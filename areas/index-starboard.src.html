@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Starboard boards · TRex Design System</title>
-<!-- Made by areas/_starboard/index.py from areas/_starboard/_index.html: change the source, not this file. -->
+<!-- Made by areas/make_index.py: change the source, not this file. -->
 <link rel="stylesheet" href="../tokens.css">
 <link rel="stylesheet" href="../components.css">
 <style>
@@ -12,6 +12,7 @@
   svg.i { width: var(--icon-md); height: var(--icon-md); }
   svg.i-lg { width: var(--icon-lg); height: var(--icon-lg); }
   .g-logo { flex: none; }
+  svg.s-logo { flex: none; width: 20px; height: 20px; }
   .s-shell { display: grid; grid-template-columns: 240px minmax(0, 1fr); }
   .s-nav { position: sticky; top: calc(var(--header-h) + var(--tabs-h)); align-self: start; max-height: calc(100vh - var(--header-h) - var(--tabs-h)); overflow-y: auto; padding: var(--space-6) var(--space-4); border-right: 1px solid var(--color-divider); }
   .s-nav h2 { font-size: var(--text-sm); color: var(--color-text-muted); padding: 0 var(--space-3); margin-bottom: var(--space-2); }
@@ -25,37 +26,51 @@
     .s-shell { grid-template-columns: 1fr; }
     .s-nav { display: none; }
   }
+
+  .b-head { display: flex; gap: var(--space-4); align-items: center; }
+  .b-head svg.s-logo, .b-card svg.s-logo { width: 56px; height: 56px; }
+  .b-facts { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); font-size: var(--text-sm); color: var(--color-text-muted); }
+  .s-nav a[aria-current] { border-left-color: var(--color-accent); font-weight: 700; }
+  .b-view { display: grid; grid-template-rows: auto minmax(0, 1fr); height: calc(100vh - var(--header-h) - var(--tabs-h)); }
+  .b-view[hidden] { display: none; }
+  .b-bar { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); align-items: center; justify-content: space-between; padding: var(--space-3) var(--space-6); border-bottom: 1px solid var(--color-divider); }
+  .b-bar h1 { font-size: var(--text-lg); }
+  .b-bar .actions { gap: var(--space-2); }
+  .b-frame { width: 100%; height: 100%; border: 0; background: var(--color-bg); }
+  .b-cards { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4); }
+  .b-card { display: grid; gap: var(--space-3); align-content: start; }
+  .b-card .b-head h2 { font-size: var(--text-xl); }
+  @media (max-width: 860px) { .b-bar { padding: var(--space-3) var(--space-4); } }
 </style>
 </head>
-<body>
+<body data-prefix="starboard-">
 <!--ICONS-->
 <a class="skip-link" href="#main">Skip to main content</a>
 <header class="site-header site-header--no-rail">
   <div class="site-header__bar">
     <button class="icon-btn phone-menu-button" type="button" data-opens="s-site-menu" aria-controls="s-site-menu" aria-expanded="false">{{i-lg:menu}}<span class="visually-hidden">Menu</span></button>
     <a class="site-header__brand" href="../gallery.html"><svg class="g-logo" width="28" height="28" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect x="1" y="1" width="30" height="30" fill="var(--color-logo-tile)"/><path fill="var(--color-bg)" d="M17 6.5h7.5q2.5 0 2.5 2.2V11h-4v.8h2.6v1.6H21v2.2l2.6 1.5-.6 1-2-1.1V20q0 2.2-2.4 2.9l.9 3.8h1.6V28h-4.3l-.9-4.4h-1.6l-.8 3.1h1.4V28h-4.1l1-4.9q-3.6-1-8.7.3 3.4-3.6 8.2-5.2 3.3-1.3 3.9-4.6V8.4q0-1.9 1.4-1.9Z"/><circle cx="20" cy="8.6" r="1" fill="var(--color-logo-star)"/></svg><span>TRex Design System</span></a>
-    <nav class="menu-tabs" aria-label="Main"><a href="../gallery.html">{{i:layout-grid}}<span class="menu-tabs__label">Components</span></a><a href="../areas/index-storyarr.html" aria-current="page">{{i:monitor}}<span class="menu-tabs__label">Boards</span></a><a href="https://github.com/TheMightyTRex/design-system/tree/main/docs">{{i:file-text}}<span class="menu-tabs__label">Guides</span></a><a href="../resources/index.html">{{i:wrench}}<span class="menu-tabs__label">Resources</span></a></nav>
+    <nav class="menu-tabs" aria-label="Main"><a href="../gallery.html">{{i:layout-grid}}<span class="menu-tabs__label">Components</span></a><a href="../areas/index.html" aria-current="page">{{i:monitor}}<span class="menu-tabs__label">Boards</span></a><a href="https://github.com/TheMightyTRex/design-system/tree/main/docs">{{i:file-text}}<span class="menu-tabs__label">Guides</span></a><a href="../resources/index.html">{{i:wrench}}<span class="menu-tabs__label">Resources</span></a></nav>
     <div class="site-header__actions"><button class="icon-btn" type="button" data-opens="g-panel-display" aria-haspopup="dialog" aria-expanded="false">{{i-lg:sun}}<span class="label">Display</span></button></div>
   </div>
-  <div class="site-header__tabs"><nav class="menu-tabs" aria-label="Boards"><a href="../areas/index-storyarr.html">{{i:book-open}}<span class="menu-tabs__label">Storyarr boards</span></a><a href="../areas/index-starboard.html" aria-current="page">{{i:server}}<span class="menu-tabs__label">Starboard boards</span></a></nav></div>
+  <div class="site-header__tabs"><nav class="menu-tabs" aria-label="Boards"><a href="../areas/index-starboard.html" aria-current="page"><svg class="s-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg><span class="menu-tabs__label">Starboard</span></a><a href="../areas/index-storyarr.html"><svg class="s-logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect width="64" height="64" fill="#c2552c"/><path d="M8 26c8-3 16-3 23 1v26c-7-4-15-4-23-1z" fill="#fff"/><path d="M56 26c-8-3-16-3-23 1v26c7-4 15-4 23-1z" fill="#fff"/><rect x="25" y="13" width="4" height="10" fill="#fff"/><rect x="30" y="7" width="4" height="16" fill="#fff"/><rect x="35" y="11" width="4" height="12" fill="#fff"/></svg><span class="menu-tabs__label">Storyarr</span></a></nav></div>
 </header>
 <div class="side-panel-layer" id="s-site-menu" hidden>
   <div class="side-panel-backdrop"></div>
   <nav class="phone-menu" aria-label="Menu">
     <div class="panel-header"><span class="panel-header__brand"><svg class="g-logo" width="24" height="24" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect x="1" y="1" width="30" height="30" fill="var(--color-logo-tile)"/><path fill="var(--color-bg)" d="M17 6.5h7.5q2.5 0 2.5 2.2V11h-4v.8h2.6v1.6H21v2.2l2.6 1.5-.6 1-2-1.1V20q0 2.2-2.4 2.9l.9 3.8h1.6V28h-4.3l-.9-4.4h-1.6l-.8 3.1h1.4V28h-4.1l1-4.9q-3.6-1-8.7.3 3.4-3.6 8.2-5.2 3.3-1.3 3.9-4.6V8.4q0-1.9 1.4-1.9Z"/><circle cx="20" cy="8.6" r="1" fill="var(--color-logo-star)"/></svg>TRex Design System</span><button class="icon-btn" type="button" data-closes aria-label="Close menu">{{i:x}}</button></div>
     <div class="phone-menu__sections">
-      <div class="phone-menu__section"><a href="../gallery.html">{{i-lg:layout-grid}}Components</a></div><div class="phone-menu__section" data-current><button type="button" aria-expanded="true" aria-controls="s-sm-boards">{{i-lg:monitor}}Boards{{i:chevron-right phone-menu__chevron}}</button><ul id="s-sm-boards"><li><a href="../areas/index-storyarr.html">Storyarr boards</a></li><li><a href="../areas/index-starboard.html" aria-current="page">Starboard boards</a></li></ul></div><div class="phone-menu__section"><a href="https://github.com/TheMightyTRex/design-system/tree/main/docs">{{i-lg:file-text}}Guides</a></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="s-sm-resources">{{i-lg:wrench}}Resources{{i:chevron-right phone-menu__chevron}}</button><ul id="s-sm-resources" hidden><li><a href="../resources/index.html">Overview</a></li><li><a href="../resources/tools.html">Tools</a></li><li><a href="../resources/outside-tools.html">Outside tools</a></li><li><a href="../resources/make-a-change.html">Make a change</a></li><li><a href="../resources/get-feedback.html">Get feedback</a></li></ul></div>
+      <div class="phone-menu__section"><a href="../gallery.html">{{i-lg:layout-grid}}Components</a></div><div class="phone-menu__section" data-current><button type="button" aria-expanded="true" aria-controls="s-sm-boards">{{i-lg:monitor}}Boards{{i:chevron-right phone-menu__chevron}}</button><ul id="s-sm-boards"><li><a href="../areas/index.html">All boards</a></li><li><a href="../areas/index-starboard.html" aria-current="page">Starboard</a></li><li><a href="../areas/index-storyarr.html">Storyarr</a></li></ul></div><div class="phone-menu__section"><a href="https://github.com/TheMightyTRex/design-system/tree/main/docs">{{i-lg:file-text}}Guides</a></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="s-sm-resources">{{i-lg:wrench}}Resources{{i:chevron-right phone-menu__chevron}}</button><ul id="s-sm-resources" hidden><li><a href="../resources/index.html">Overview</a></li><li><a href="../resources/tools.html">Tools</a></li><li><a href="../resources/outside-tools.html">Outside tools</a></li><li><a href="../resources/make-a-change.html">Make a change</a></li><li><a href="../resources/get-feedback.html">Get feedback</a></li></ul></div>
     </div>
   </nav>
 </div>
 <div class="s-shell">
-<nav class="s-nav" aria-labelledby="s-nav-h"><h2 id="s-nav-h">Starboard boards</h2><ol><li class="s-group">Apps, Search, Downloads and Coming up</li><li><a href="starboard-apps.html">Apps</a></li><li><a href="starboard-other-services.html">Other services</a></li><li><a href="starboard-search.html">Search</a></li><li><a href="starboard-downloads.html">Downloads</a></li><li><a href="starboard-coming-up.html">Coming up</a></li><li class="s-group">System</li><li><a href="starboard-overview.html">Overview</a></li><li><a href="starboard-storage.html">Storage</a></li><li><a href="starboard-disk-health.html">Disk health</a></li><li><a href="starboard-monitor.html">Monitor</a></li><li><a href="starboard-network.html">Network</a></li><li><a href="starboard-backup.html">Backup and restore</a></li><li class="s-group">Settings, Sign in and Set up</li><li><a href="starboard-settings-apps.html">Manage apps</a></li><li><a href="starboard-settings-general.html">General</a></li><li><a href="starboard-settings-security.html">Security</a></li><li><a href="starboard-settings-about.html">About and updates</a></li><li><a href="starboard-sign-in.html">Sign in</a></li><li><a href="starboard-set-up.html">Set up</a></li></ol></nav>
+<nav class="s-nav" aria-labelledby="s-nav-h"><h2 id="s-nav-h">Starboard boards</h2><ol><li><a href="#">Overview</a></li><li class="s-group">Apps, Search, Downloads and Coming up</li><li><a href="#apps">Apps</a></li><li><a href="#other-services">Other services</a></li><li><a href="#search">Search</a></li><li><a href="#downloads">Downloads</a></li><li><a href="#coming-up">Coming up</a></li><li class="s-group">System</li><li><a href="#overview">Overview</a></li><li><a href="#storage">Storage</a></li><li><a href="#disk-health">Disk health</a></li><li><a href="#monitor">Monitor</a></li><li><a href="#network">Network</a></li><li><a href="#backup">Backup and restore</a></li><li class="s-group">Settings, Sign in and Set up</li><li><a href="#settings-apps">Manage apps</a></li><li><a href="#settings-general">General</a></li><li><a href="#settings-security">Security</a></li><li><a href="#settings-about">About and updates</a></li><li><a href="#sign-in">Sign in</a></li><li><a href="#set-up">Set up</a></li></ol></nav>
 <main class="s-main" id="main" tabindex="-1">
-<div class="page" style="max-width:1100px">
-  <div class="page-head">
-    <div class="page-head__text"><h1>Starboard boards</h1><p class="page-head__summary">One board per area, built with the shared component library only. 2 November 2026.</p></div>
-  </div>
-  <div class="notice">{{i:info}}<div class="notice__body"><span class="notice__title">How to read the boards</span><p>Each board starts with what changed and why, then the full page at desktop width, then the part that changes on a phone. Select a row, card or button to open its slide-out; Escape closes it. Display in the header switches theme and text size. The audit is <code>audit-starboard.md</code>; components the library still lacks are in <code>starboard-missing-components.md</code>.</p></div></div>
+<div class="page" id="b-overview">
+<div class="page-head"><div class="b-head"><svg class="s-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg><div class="page-head__text"><h1>Starboard boards</h1><p class="page-head__summary">An accessible dashboard for a home media server: the apps it runs, downloads, storage, disk health and backups. Plain HTML and JavaScript, using the library as it is.</p></div></div></div>
+<p class="b-facts"><span>17 boards</span><span>2 November 2026</span><span>Built only from the shared component library</span><a href="https://github.com/TheMightyTRex/starboard">Starboard on GitHub</a></p>
+<div class="notice">{{i:info}}<div class="notice__body"><span class="notice__title">How to read the boards</span><p>Each board starts with what changed and why, then the full page at desktop width, then the part that changes on a phone. Select a row, card or button to open its slide-out; Escape closes it. Display in the header switches theme and text size. The audit is <code>audit-starboard.md</code>; components the library still lacks are in <code>starboard-missing-components.md</code>.</p></div></div>
 
   <section class="settings-section" style="max-width:none" aria-labelledby="ix-org-h">
     <div class="settings-section__head"><h2 id="ix-org-h">The new organisation</h2></div>
@@ -72,38 +87,42 @@
   <section class="settings-section" style="max-width:none" aria-labelledby="ix-apps-h">
     <div class="settings-section__head"><h2 id="ix-apps-h">Apps, Search, Downloads and Coming up</h2></div>
     <ul class="rows">
-      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:layout-grid}}</span><div><div class="row__title"><a href="starboard-apps.html">Apps</a></div><div class="row__meta">Cards open an app details slide-out; Open is its own button; Updates becomes a filter chip; one summary line replaces the status pills.</div></div></li>
-      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:server-cog}}</span><div><div class="row__title"><a href="starboard-other-services.html">Other services</a></div><div class="row__meta">Same rows and slide-out as Apps; "follows" shown on the row; hints become the empty state.</div></div></li>
-      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:search}}</span><div><div class="row__title"><a href="starboard-search.html">Search</a></div><div class="row__meta">Add modal becomes an Add slide-out so the result stays visible; toolbar with kind chips; h2 Results with h3 items.</div></div></li>
-      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:download}}</span><div><div class="row__title"><a href="starboard-downloads.html">Downloads</a></div><div class="row__meta">Download details slide-out with messages, history and actions; rows update in place; Sort added; Pause updates keeps one label.</div></div></li>
-      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:calendar-days}}</span><div><div class="row__title"><a href="starboard-coming-up.html">Coming up</a></div><div class="row__meta">Range control and filter chips (Wanted, In library, by app); each item opens a slide-out like Storyarr's calendar day panel.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:layout-grid}}</span><div><div class="row__title"><a href="#apps">Apps</a></div><div class="row__meta">Cards open an app details slide-out; Open is its own button; Updates becomes a filter chip; one summary line replaces the status pills.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:server-cog}}</span><div><div class="row__title"><a href="#other-services">Other services</a></div><div class="row__meta">Same rows and slide-out as Apps; "follows" shown on the row; hints become the empty state.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:search}}</span><div><div class="row__title"><a href="#search">Search</a></div><div class="row__meta">Add modal becomes an Add slide-out so the result stays visible; toolbar with kind chips; h2 Results with h3 items.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:download}}</span><div><div class="row__title"><a href="#downloads">Downloads</a></div><div class="row__meta">Download details slide-out with messages, history and actions; rows update in place; Sort added; Pause updates keeps one label.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:calendar-days}}</span><div><div class="row__title"><a href="#coming-up">Coming up</a></div><div class="row__meta">Range control and filter chips (Wanted, In library, by app); each item opens a slide-out like Storyarr's calendar day panel.</div></div></li>
     </ul>
   </section>
 
   <section class="settings-section" style="max-width:none" aria-labelledby="ix-sys-h">
     <div class="settings-section__head"><h2 id="ix-sys-h">System</h2></div>
     <ul class="rows">
-      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:gauge}}</span><div><div class="row__title"><a href="starboard-overview.html">Overview</a></div><div class="row__meta">Needs attention moves first with a warning slide-out; stat tiles say warnings in words; labelled time range with a Live link.</div></div></li>
-      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:hard-drive}}</span><div><div class="row__title"><a href="starboard-storage.html">Storage</a></div><div class="row__meta">One list fullest first instead of every folder three times; folder slide-out with growth; set-up hint becomes the empty state.</div></div></li>
-      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:heart-pulse}}</span><div><div class="row__title"><a href="starboard-disk-health.html">Disk health</a></div><div class="row__meta">Compact row per disk sorted by tone; wide SMART report slide-out with the full attribute table, self-tests and events.</div></div></li>
-      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:chart-line}}</span><div><div class="row__title"><a href="starboard-monitor.html">Monitor</a></div><div class="row__meta">Same line chart as Overview with a table view; Pause keeps one label; processor threads as labelled meters.</div></div></li>
-      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:network}}</span><div><div class="row__title"><a href="starboard-network.html">Network</a></div><div class="row__meta">"Who can open Starboard" becomes a link to Security; outside access rows open the app details slide-out.</div></div></li>
-      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:archive}}</span><div><div class="row__title"><a href="starboard-backup.html">Backup and restore</a></div><div class="row__meta">Two sections instead of three; backup run and saved copy slide-outs; password asked once, in the confirm dialog.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:gauge}}</span><div><div class="row__title"><a href="#overview">Overview</a></div><div class="row__meta">Needs attention moves first with a warning slide-out; stat tiles say warnings in words; labelled time range with a Live link.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:hard-drive}}</span><div><div class="row__title"><a href="#storage">Storage</a></div><div class="row__meta">One list fullest first instead of every folder three times; folder slide-out with growth; set-up hint becomes the empty state.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:heart-pulse}}</span><div><div class="row__title"><a href="#disk-health">Disk health</a></div><div class="row__meta">Compact row per disk sorted by tone; wide SMART report slide-out with the full attribute table, self-tests and events.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:chart-line}}</span><div><div class="row__title"><a href="#monitor">Monitor</a></div><div class="row__meta">Same line chart as Overview with a table view; Pause keeps one label; processor threads as labelled meters.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:network}}</span><div><div class="row__title"><a href="#network">Network</a></div><div class="row__meta">"Who can open Starboard" becomes a link to Security; outside access rows open the app details slide-out.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:archive}}</span><div><div class="row__title"><a href="#backup">Backup and restore</a></div><div class="row__meta">Two sections instead of three; backup run and saved copy slide-outs; password asked once, in the confirm dialog.</div></div></li>
     </ul>
   </section>
 
   <section class="settings-section" style="max-width:none" aria-labelledby="ix-set-h">
     <div class="settings-section__head"><h2 id="ix-set-h">Settings, Sign in and Set up</h2></div>
     <ul class="rows">
-      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:app-window}}</span><div><div class="row__title"><a href="starboard-settings-apps.html">Manage apps</a></div><div class="row__meta">Renamed from Apps; the 17-field modal becomes a two-step add and edit slide-out; More actions menu; Remove confirms in a dialog.</div></div></li>
-      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:sliders-horizontal}}</span><div><div class="row__title"><a href="starboard-settings-general.html">General</a></div><div class="row__meta">Sections with their own Save; categories become an editable list; card options are switches.</div></div></li>
-      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:shield-check}}</span><div><div class="row__title"><a href="starboard-settings-security.html">Security</a></div><div class="row__meta">Three sections with h2s; Sign out everywhere and turning off network access confirm in dialogs.</div></div></li>
-      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:info}}</span><div><div class="row__title"><a href="starboard-settings-about.html">About and updates</a></div><div class="row__meta">Renamed from Updates; update notice with release notes; copyable update command.</div></div></li>
-      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:key-round}}</span><div><div class="row__title"><a href="starboard-sign-in.html">Sign in</a></div><div class="row__meta">Slim header with Display before signing in; error tied to the field.</div></div></li>
-      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:user}}</span><div><div class="row__title"><a href="starboard-set-up.html">Set up</a></div><div class="row__meta">Setup code first, with where to find it as its hint; Display in a slim header.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:app-window}}</span><div><div class="row__title"><a href="#settings-apps">Manage apps</a></div><div class="row__meta">Renamed from Apps; the 17-field modal becomes a two-step add and edit slide-out; More actions menu; Remove confirms in a dialog.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:sliders-horizontal}}</span><div><div class="row__title"><a href="#settings-general">General</a></div><div class="row__meta">Sections with their own Save; categories become an editable list; card options are switches.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:shield-check}}</span><div><div class="row__title"><a href="#settings-security">Security</a></div><div class="row__meta">Three sections with h2s; Sign out everywhere and turning off network access confirm in dialogs.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:info}}</span><div><div class="row__title"><a href="#settings-about">About and updates</a></div><div class="row__meta">Renamed from Updates; update notice with release notes; copyable update command.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:key-round}}</span><div><div class="row__title"><a href="#sign-in">Sign in</a></div><div class="row__meta">Slim header with Display before signing in; error tied to the field.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:user}}</span><div><div class="row__title"><a href="#set-up">Set up</a></div><div class="row__meta">Setup code first, with where to find it as its hint; Display in a slim header.</div></div></li>
     </ul>
   </section>
 </div>
+<section class="b-view" id="b-view" aria-labelledby="b-title" hidden>
+  <div class="b-bar"><h1 id="b-title" tabindex="-1">Board</h1><div class="actions"><a class="btn btn--compact" href="#">{{i:arrow-left}}All Starboard boards</a><a class="btn btn--compact" id="b-own" href="#">{{i:external-link}}Open on its own</a></div></div>
+  <iframe class="b-frame" title="Board"></iframe>
+</section>
 </main>
 </div>
 <footer class="site-footer"><div class="site-footer__app"><span class="site-footer__brand"><svg class="g-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="1" y="1" width="30" height="30" fill="var(--color-logo-tile)"/><path fill="var(--color-bg)" d="M17 6.5h7.5q2.5 0 2.5 2.2V11h-4v.8h2.6v1.6H21v2.2l2.6 1.5-.6 1-2-1.1V20q0 2.2-2.4 2.9l.9 3.8h1.6V28h-4.3l-.9-4.4h-1.6l-.8 3.1h1.4V28h-4.1l1-4.9q-3.6-1-8.7.3 3.4-3.6 8.2-5.2 3.3-1.3 3.9-4.6V8.4q0-1.9 1.4-1.9Z"/><circle cx="20" cy="8.6" r="1" fill="var(--color-logo-star)"/></svg>TRex Design System</span><span>Version 1</span><nav aria-label="TRex Design System"><ul class="site-footer__links"><li><a href="https://github.com/TheMightyTRex/design-system/tree/main/docs">Help</a></li><li><a href="https://github.com/TheMightyTRex/design-system#readme">About</a></li><li><a href="https://github.com/TheMightyTRex/design-system/commits/main">Updates</a></li></ul></nav></div><a class="site-footer__maker" href="https://github.com/TheMightyTRex" rel="me"><svg class="maker-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="1" y="1" width="30" height="30" fill="var(--color-logo-tile)"/><path fill="var(--color-bg)" d="M17 6.5h7.5q2.5 0 2.5 2.2V11h-4v.8h2.6v1.6H21v2.2l2.6 1.5-.6 1-2-1.1V20q0 2.2-2.4 2.9l.9 3.8h1.6V28h-4.3l-.9-4.4h-1.6l-.8 3.1h1.4V28h-4.1l1-4.9q-3.6-1-8.7.3 3.4-3.6 8.2-5.2 3.3-1.3 3.9-4.6V8.4q0-1.9 1.4-1.9Z"/><circle cx="20" cy="8.6" r="1" fill="var(--color-logo-star)"/></svg>TheMightyTRexUK<span class="visually-hidden">, on GitHub</span>{{i:external-link}}</a></footer>
@@ -135,6 +154,61 @@
   addEventListener("resize", fit);
   fit();
   document.querySelectorAll("#s-site-menu a").forEach((a) => a.addEventListener("click", () => document.getElementById("s-site-menu").closeLayer?.(false)));
+</script>
+<script>
+  // Show the board the address names (#my-library) in the page, or the overview when it names none.
+  const prefix = document.body.dataset.prefix;
+  const overview = document.getElementById("b-overview");
+  const view = document.getElementById("b-view");
+  const frame = view.querySelector("iframe");
+  const heading = document.getElementById("b-title");
+  const own = document.getElementById("b-own");
+  const navLinks = [...document.querySelectorAll(".s-nav a")];
+  const baseTitle = document.title;
+  const nameOf = (slug) => navLinks.find((a) => a.getAttribute("href") === "#" + slug)?.textContent;
+  function show(moveFocus) {
+    const slug = decodeURIComponent(location.hash.slice(1));
+    const name = slug && nameOf(slug);
+    for (const a of navLinks) {
+      if (a.getAttribute("href") === (name ? "#" + slug : "#")) a.setAttribute("aria-current", "page");
+      else a.removeAttribute("aria-current");
+    }
+    overview.hidden = !!name;
+    view.hidden = !name;
+    if (!name) { document.title = baseTitle; frame.removeAttribute("src"); return; }
+    const src = prefix + slug + ".html";
+    if (frame.getAttribute("src") !== src) frame.setAttribute("src", src);
+    frame.title = name + " board";
+    heading.textContent = name;
+    own.href = src;
+    document.title = name + " · " + baseTitle;
+    window.scrollTo(0, 0);
+    if (moveFocus) heading.focus();
+  }
+  addEventListener("hashchange", () => show(true));
+  show(false);
+  // The board follows this page's Display choices, and its own links stay in step with the address.
+  const syncDisplay = () => {
+    const doc = frame.contentDocument;
+    if (!doc) return;
+    doc.documentElement.className = document.documentElement.className;
+    if (document.documentElement.dataset.theme) doc.documentElement.dataset.theme = document.documentElement.dataset.theme;
+    else doc.documentElement.removeAttribute("data-theme");
+  };
+  new MutationObserver(syncDisplay).observe(document.documentElement, { attributes: true, attributeFilter: ["class", "data-theme"] });
+  frame.addEventListener("load", () => {
+    const doc = frame.contentDocument;
+    if (!doc) return;
+    syncDisplay();
+    // A link back to the boards list leaves the frame.
+    doc.querySelectorAll('a[href^="index-"]').forEach((a) => (a.target = "_top"));
+    // Moving to another board inside the frame updates the address and the menu.
+    const file = frame.contentWindow.location.pathname.split("/").pop();
+    if (file.startsWith(prefix)) {
+      const slug = file.slice(prefix.length).replace(/\.html$/, "");
+      if (nameOf(slug) && location.hash !== "#" + slug) { history.replaceState(null, "", "#" + slug); show(false); }
+    }
+  });
 </script>
 </body>
 </html>

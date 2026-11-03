@@ -27,7 +27,7 @@ change the copies inside the apps.
 | `icons.svg` | Lucide icons as an SVG sprite (`<use href="#i-book-open">`); `tools/icons.txt` lists them |
 | `fonts/` | Atkinson Hyperlegible Next, with its licence |
 | `gallery.src.html`, `gallery.html` | The live gallery of every component (edit the `.src` file, then build) |
-| `areas/` | Design boards for each area of both apps, built from the library (`index-storyarr.html`, `index-starboard.html`) |
+| `areas/` | Design boards for each area of both apps, built from the library. `index.html` is the Boards landing page; `index-starboard.html` and `index-storyarr.html` show each app's boards in the page, chosen from the menu, written by `areas/make_index.py` |
 | `docs/LIBRARY.md` | The component reference: every class, the rule for slide-out, dialog or page, and how each app adopts the library |
 | `docs/DESIGN-SYSTEM.md` | Principles, tokens, shell, page templates and consistency rules |
 | `docs/COMPONENTS.md` | Storyarr's interface before the redesign, and the duplicates to merge |
@@ -45,7 +45,8 @@ theme (Light, Dark, High contrast), the text size, wider spacing and reduced mot
 phone menu and the dialog all work. The gallery is also published at
 <https://themightytrex.github.io/design-system/gallery.html>.
 
-The area boards open the same way: start at `areas/index-storyarr.html` or `areas/index-starboard.html`.
+The boards open the same way: start at `areas/index.html`, choose an app, then a board in the menu. Each board
+shows in the page; Open on its own shows it in the whole window.
 
 ## Design resources and tools
 
@@ -63,7 +64,7 @@ The pages are in `resources/`. Change the bodies in `resources/content/`, then r
 `python3 resources/make.py` and `python3 tools/build.py`.
 
 The site's header, main menu (Components, Boards, Guides, Resources), phone menu and footer come from
-`tools/sitepage.py`, used by the resources pages and both board indexes. The gallery keeps its own copy, because
+`tools/sitepage.py`, used by the resources pages and the Boards pages. The gallery keeps its own copy, because
 its header also has search: change both when the main menu changes.
 
 ## Change a component and sync it

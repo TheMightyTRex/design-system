@@ -14,13 +14,14 @@ def ic(name, size="i"):
 
 
 def logo(px=32):
+    # Storyarr's own mark (apps/web/public/assets/storyarr.svg): an open book with three sound bars.
     return (
-        f'<svg viewBox="0 0 32 32" width="{px}" height="{px}" aria-hidden="true">'
-        '<rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/>'
-        '<rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/>'
-        '<rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/>'
-        '<path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" '
-        'fill="var(--color-logo-star)"/></svg>'
+        f'<svg viewBox="0 0 64 64" width="{px}" height="{px}" aria-hidden="true" focusable="false">'
+        '<rect width="64" height="64" fill="#c2552c"/>'
+        '<path d="M8 26c8-3 16-3 23 1v26c-7-4-15-4-23-1z" fill="#fff"/>'
+        '<path d="M56 26c-8-3-16-3-23 1v26c7-4 15-4 23-1z" fill="#fff"/>'
+        '<rect x="25" y="13" width="4" height="10" fill="#fff"/><rect x="30" y="7" width="4" height="16" fill="#fff"/>'
+        '<rect x="35" y="11" width="4" height="12" fill="#fff"/></svg>'
     )
 
 
