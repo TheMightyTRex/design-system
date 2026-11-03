@@ -199,8 +199,11 @@
      Up to three stack in the corner, newest at the bottom, read out through one role="status" region.
      Each stays 5 seconds, or 10 with an action, and waits while the pointer or keyboard focus is on it.
      Returns a function that closes it. Settings pages use savedNote() instead. */
+  // Icons come from the page's own sprite (<use href="#i-name">) unless the app names a sprite file:
+  // data-sprite="/icons/sprite.svg" on this script tag, or window.SharedComponentsSprite (Starboard sets it).
+  const scriptSprite = document.currentScript?.dataset.sprite || "";
   const sprite = (name) =>
-    `<svg class="i" aria-hidden="true" focusable="false"><use href="#i-${name}"/></svg>`;
+    `<svg class="i" aria-hidden="true" focusable="false"><use href="${window.SharedComponentsSprite || scriptSprite}#i-${name}"/></svg>`;
   function toast(message, options = {}) {
     let stack = document.getElementById("toast-stack");
     if (!stack) {
