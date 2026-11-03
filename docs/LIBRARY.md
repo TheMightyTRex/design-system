@@ -1,12 +1,13 @@
-# Shared components: Storyarr and Starboard
+# TRex Design System: the component library
 
 Version 1, 2 November 2026. One component library for both apps, so they look and behave as one family.
 It follows `DESIGN-SYSTEM.md` and the guides in this folder (`CONTENT-DESIGN.md` and `ACCESSIBILITY.md`).
 File names in the tables below are relative to the root of the repository.
 
-**Open `gallery.html` in a browser** to see every component live, with Light, Dark, High contrast, text size,
-wider spacing and reduced motion switches at the top. Slide-outs, menus, the phone menu and the dialog all
-work in the gallery.
+**Open `gallery.html` in a browser** to see every component live. The gallery uses the same header and menus
+as the apps: the main menu and search in row 1, the component groups in row 2, and Display opens the Display
+and accessibility slide-out (theme, text size, reduced motion, high contrast, underlined links, wider
+spacing). Slide-outs, menus, the phone menu and the dialog all work in the gallery.
 
 ## Files
 
@@ -64,7 +65,7 @@ work in the gallery.
 | Count and update dot | `.count`, `.update-dot` | Meaning in hidden text |
 | Phone menu | `.phone-menu-button`, `.phone-menu`, `.phone-menu__section > a` (an item with no 1st level), `.phone-menu__search`, `.phone-menu__section`, `.phone-menu__foot` | Drawer from the left; search, main menu, 1st level; account and sign out at the foot |
 | Page and page head | `.page`, `.page--narrow` (Sign in, Set up), `.section-head`, `.section-head__control`, `.page-head`, `.page-head__text`, `.page-head__summary` | One visible h1; page actions on the right |
-| Footer | `.site-footer` | Version and links |
+| Footer | `.site-footer`, `.site-footer__app`, `.site-footer__brand`, `.site-footer__links`, `.site-footer__maker`, `.maker-mark` | On every page but Sign in and Set up. Left: app icon, name, "Version 0.7.4", then Help (only when the app has a help centre), About, Updates. Right: the dinosaur mark and TheMightyTRexUK, one link to the GitHub profile (copy the markup from the gallery) |
 
 ### Actions
 | Component | Classes | Notes |

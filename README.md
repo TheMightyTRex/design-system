@@ -1,4 +1,6 @@
-# Design system for Storyarr and Starboard
+# TRex Design System
+
+The design system for Storyarr and Starboard.
 
 One design system for two self-hosted apps, so they look, read and behave as one family. It holds the
 shared component library (tokens, components, behaviour and icons), the design rules, the content design

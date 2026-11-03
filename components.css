@@ -3501,15 +3501,74 @@
     font-weight: var(--weight-strong);
   }
 
-  /* Footer: version, links. */
+  /* Footer: on every page, under main. Left: the app's icon, name and version, then Help (when the
+     app has a help centre), About and Updates. Right: the maker mark, the T-rex and TheMightyTRexUK,
+     linking to the GitHub profile. On phones the maker mark goes under the app's links. */
   .site-footer {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-2) var(--space-4);
-    padding: var(--space-4) var(--space-8) var(--space-6);
+    align-items: center;
+    gap: var(--space-2) var(--space-6);
+    padding: var(--space-3) var(--space-8) var(--space-4);
     border-top: 1px solid var(--color-divider);
     color: var(--color-text-muted);
     font-size: var(--text-sm);
+  }
+  .site-footer__app {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 var(--space-4);
+  }
+  .site-footer__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-text);
+    font-weight: var(--weight-strong);
+  }
+  .site-footer__brand svg,
+  .site-footer__maker svg.maker-mark {
+    flex: none;
+    width: 24px;
+    height: 24px;
+  }
+  .site-footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 calc(var(--space-2) * -1); /* the links' padding, so their text lines up */
+    padding: 0;
+    list-style: none;
+  }
+  .site-footer__links a,
+  .site-footer__maker {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 44px;
+    padding-inline: var(--space-2);
+    color: var(--color-text-muted);
+  }
+  .site-footer__links a:hover,
+  .site-footer__maker:hover {
+    color: var(--color-text);
+  }
+  .site-footer__maker {
+    margin-left: auto;
+    text-decoration: none;
+    font-weight: var(--weight-strong);
+  }
+  .site-footer__maker .i {
+    width: var(--icon-sm, 16px);
+    height: var(--icon-sm, 16px);
+  }
+  @media (max-width: 720px) {
+    .site-footer {
+      padding-inline: var(--space-4);
+    }
+    .site-footer__maker {
+      margin-left: calc(var(--space-2) * -1);
+    }
   }
 
   /* 7. Phones and narrow windows ---------------------------------------------------------------- */
