@@ -2,7 +2,7 @@
   "name": "TRex Design System",
   "description": "Builds the TRex Design System for Storyarr and Starboard into the open file: colours for four themes, text styles, icons and components.",
   "version": 2,
-  "code": "plugin.js?v=a3d1f7d8d9",
+  "code": "plugin.js?v=ef479ae6c2",
   "icon": "icon.svg",
   "permissions": [
     "content:read",

@@ -65,7 +65,10 @@ When the library changes:
    for Penpot, and fails if the sandbox refuses the code or any part of the build fails. SES refuses code
    that contains the text of an import expression or an HTML comment, even in a comment.
 3. Commit and push, as in [Make a change](https://themightytrex.github.io/design-system/resources/make-a-change.html).
-4. Run the plugin again in a new file, and replace the shared library with it.
+4. In Penpot, remove the plugin and install it again from the same address: Penpot keeps the code address it
+   read when it installed the plugin, so an installed plugin keeps running its old build. The plugin window
+   shows its build number, which matches `code` in `manifest.json` when it is up to date.
+5. Run the plugin again in a new file, and replace the shared library with it.
 
 Change `penpot/plugin.src.js` to change what the plugin builds, never `plugin.js`.
 

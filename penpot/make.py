@@ -89,11 +89,12 @@ code = ("// Made by penpot/make.py from plugin.src.js, tokens.css and icons.svg:
         + src.replace("/*DATA*/null", json.dumps(data, separators=(",", ":"))) + "\n")
 for refused in ("import(", "<!--", "-->"):
     assert refused not in code, f"plugin.js contains {refused!r}, which Penpot's sandbox refuses"
-(here / "plugin.js").write_text(code)
-
-# A new address for each build, so no browser or Penpot can keep running an old plugin.js after an update.
+# A build number and a new address for each build, so no browser can keep running an old plugin.js.
 import hashlib
 stamp = hashlib.sha256(code.encode()).hexdigest()[:10]
+assert '"/*BUILD*/"' in code
+code = code.replace('"/*BUILD*/"', f'"{stamp}"')
+(here / "plugin.js").write_text(code)
 manifest = json.loads((here / "manifest.json").read_text())
 manifest["code"] = f"plugin.js?v={stamp}"
 (here / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")

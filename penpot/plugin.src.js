@@ -15,6 +15,7 @@
 const DATA = /*DATA*/null;
 
 const UI = "https://themightytrex.github.io/design-system/penpot/ui.html";
+const BUILD = "/*BUILD*/"; // make.py writes the build number, the same as in manifest.json
 const THEME = "Light"; // Components use the Light colours; the other themes are in the library and Foundations.
 
 penpot.ui.open("TRex Design System", `${UI}?theme=${penpot.theme}`, { width: 380, height: 600 });
@@ -24,6 +25,7 @@ const tell = (message) => penpot.ui.sendMessage(message);
 const pause = () => new Promise((done) => setTimeout(done, 30));
 
 penpot.ui.onMessage(async (/** @type {{type: string}} */ message) => {
+  if (message.type === "ready") tell({ type: "build-number", build: BUILD });
   if (message.type === "build") await build();
   if (message.type === "close") penpot.closePlugin();
 });

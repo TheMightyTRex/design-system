@@ -25,6 +25,7 @@
   <div class="actions"><button class="btn btn--primary" type="button" id="build">Build the design system</button><button class="btn btn--quiet" type="button" id="close">Close</button></div>
   <ol id="steps" aria-live="polite"></ol>
   <p id="result" role="status"></p>
+  <p class="detail" id="build-number"></p>
 </main>
 <script>
   // Penpot passes its theme in the address: after the # for version 2 plugins, otherwise after the ?.
@@ -44,9 +45,11 @@
     send({ type: "build" });
   });
   document.getElementById("close").addEventListener("click", () => send({ type: "close" }));
+  send({ type: "ready" });
   window.addEventListener("message", (event) => {
     const m = event.data;
     if (!m || typeof m !== "object") return;
+    if (m.type === "build-number") document.getElementById("build-number").textContent = `Plugin build ${m.build}`;
     if (m.type === "font" && !m.name) result.textContent = "Atkinson Hyperlegible Next is not in this Penpot, so the text uses Penpot's default font.";
     if (m.type === "step") {
       let row = rows.get(m.label);
