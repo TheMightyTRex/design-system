@@ -164,7 +164,7 @@ Names (David, 4 November 2026: "Side menu, Level 1 menu and Level 2 Menu"):
 
 | Use | When | Examples |
 |---|---|---|
-| Slide-out | Details of one item in a list, or editing it, where seeing the list still helps; longer reading beside the page | Book summary; a request; a download client, indexer, reading account or user; a log entry; an app, disk, download or backup run on Starboard; release notes; Display and accessibility |
+| Slide-out | Details of one item in a list, or editing it, where seeing the list still helps; longer reading beside the page | Book summary; a request; a download client, indexer, reading account or user; a log entry; an app, disk, download or backup run on Starboard; release notes; Display and accessibility; a wizard's "What is…" help |
 | Dialog | A decision or short task that must finish before going on; one or two fields | Confirm remove or reset; Add list; a password check before a download or restore |
 | Page | Something people return to, link to or spend time in | Book, author, series and narrator pages; Disk health; each Settings section; Upgrade wizard |
 | In place | A small change to a value already in view | Switches and selects in settings rows; filter chips; cover size |

@@ -14,7 +14,7 @@ dialog or page" in `LIBRARY.md`).
 | Progress bar | Top of the wizard | `.wizard-progress` (a `.meter` with a `.progress` bar) |
 | Step bar for a step in parts | Under the progress bar, only on a step in parts | `.steps.steps--sub` |
 | The step | Under them | `.wizard`, with `.wizard__foot` for the buttons |
-| Help | At the end of the part of the step it explains | `.help-links` with `.help-link` buttons, opening a `.dialog.dialog--scroll` |
+| Help | At the end of the part of the step it explains | `.help-links` with `.help-link` buttons, opening a slide-out (`.side-panel`) |
 | Review aids, testing only | Beside the step on computers, under it on phones | `.wizard-aside` holding `.wizard-next` (What happens next) and `.wizard-tree` (decision tree) |
 
 **Review aids are for testing, never the finished product (David, 4 November 2026).** What happens next
@@ -109,9 +109,13 @@ Testing only (section 1).
 - **The links go at the end of the part they explain**, not under the heading: the API key link after the
   API key fields. `.help-links` holds them, one `.help-link` each, written as the question ("What is a
   terminal?").
-- A link opens a dialog (`.dialog.dialog--scroll`, `data-close-outside`): the heading and close button and
-  the foot ("Back to set-up") stay in view, and only the text scrolls, with its own scroll bar.
-- A press on the dimmed page outside the dialog closes it, as Escape and Close do. Focus returns to the link.
+- A link opens a slide-out (`.side-panel-layer` with `.side-panel`, opened with `data-opens`), because help is
+  longer reading beside the step ("Slide-out, dialog or page" in `LIBRARY.md`; 4 November 2026). The step stays
+  in view beside it on computers; on phones the slide-out is full width.
+- The panel header (the question and Close) and the foot ("Back to set-up") stay in view, and only
+  `.side-panel__body` scrolls.
+- It follows every slide-out's behaviour: focus moves to Close, Tab stays inside, Escape, Close and a press
+  outside close it, focus returns to the link, and the page behind does not scroll.
 - Help follows `HELP-WRITING.md`: the basics first, then what it means for this step. Pictures are
   figures made from real text, with a caption that says what they show.
 
