@@ -3674,9 +3674,8 @@
   .wizard-progress .numeric {
     white-space: nowrap;
   }
-  /* The step bar for a step in parts: as wide as the progress bar, the parts sharing it equally with a
-     line between them. Its numbers carry on the progress bar's count: start it with
-     style="counter-reset: step 5" when the first part is step 6. */
+  /* The step bar for a step in parts: as wide as the progress bar, the parts numbered 1, 2, 3 and
+     sharing it equally, with a line between them. Each part is still a step in the progress bar's total. */
   .steps--sub {
     flex-wrap: nowrap;
     gap: var(--space-6);
@@ -4232,18 +4231,32 @@
     .item-header__art {
       width: 96px;
     }
-    /* On phones each part's number sits above its name, so the names keep their width. */
+    /* On phones the step bar is just its numbers, joined by lines; a done part's number becomes a
+       tick. The names stay for screen readers (font-size 0 hides them from sight only). */
     .steps--sub {
-      gap: var(--space-3);
+      --mark: max(28px, calc(1.7 * var(--text-sm)));
+      gap: 0;
     }
     .steps--sub li {
-      flex-direction: column;
       justify-content: center;
-      gap: var(--space-1);
-      text-align: center;
+      padding: 0;
+      border: 0;
+      font-size: 0;
+    }
+    .steps--sub li::before {
+      width: var(--mark);
+      height: var(--mark);
+      border-width: 2px;
+      font-size: var(--text-sm);
+    }
+    .steps--sub li[aria-current="step"]::before {
+      border-color: var(--color-accent);
+      outline: var(--focus-w) solid var(--color-accent-soft);
+      color: var(--color-accent);
     }
     .steps--sub li + li::after {
-      width: var(--space-3);
+      right: calc(50% + var(--mark) / 2);
+      width: calc(100% - var(--mark));
     }
     /* Wizard steps become "Step 3 of 7" on phones. */
     .steps--collapse li {

@@ -789,7 +789,7 @@
     <div class="wizard-layout">
       <div class="wizard-main">
         <div class="meter wizard-progress"><div class="meter__label"><span>New install · step 7 of 18 · Build your media server</span><span class="numeric">11 to go</span></div><div class="progress" role="progressbar" aria-label="Set-up progress" aria-valuemin="1" aria-valuemax="18" aria-valuenow="7" aria-valuetext="Step 7 of 18: Usenet"><span style="width:39%"></span></div></div>
-        <ol class="steps steps--sub" aria-label="Download apps, steps 6 to 8" style="counter-reset: step 5"><li data-done>Torrent<span class="visually-hidden">, done</span></li><li aria-current="step">Usenet<span class="visually-hidden">, current part</span></li><li>Download options</li></ol>
+        <ol class="steps steps--sub" aria-label="Parts of Download apps"><li data-done>Torrent<span class="visually-hidden">, done</span></li><li aria-current="step">Usenet<span class="visually-hidden">, current part</span></li><li>Download options</li></ol>
         <div class="wizard">
           <div class="stack-4">
             <h3 tabindex="-1">Choose a Usenet app</h3>
@@ -846,7 +846,7 @@
     <div class="dialog__foot"><button class="btn btn--primary" type="button" data-closes>Back to set-up</button></div>
   </dialog>
   <div class="g-notes">
-    <div><h4>Shape</h4><ul><li>Progress bar, then the step bar for a step in parts, then the step. The step bar is as wide as the progress bar, with a line between parts; each part is a step in the count (here steps 6 to 8 of 18).</li><li>Review aids (What happens next, decision tree) only while testing: beside the step from 1100px, under it below. Without them the step has the whole width.</li><li>The first question asks which job (new install, restore, migration); each has its own wizard (<code>.wizard-paths</code>).</li></ul></div>
+    <div><h4>Shape</h4><ul><li>Progress bar, then the step bar for a step in parts, then the step. The step bar is as wide as the progress bar, with a line between parts; parts are numbered 1, 2, 3 and each is a step in the count (here steps 6 to 8 of 18). On phones only the numbers show, with ticks for done parts.</li><li>Review aids (What happens next, decision tree) only while testing: beside the step from 1100px, under it below. Without them the step has the whole width.</li><li>The first question asks which job (new install, restore, migration); each has its own wizard (<code>.wizard-paths</code>).</li></ul></div>
     <div><h4>Steps</h4><ul><li>One question per step; steps that do not apply are left out, and the tree says why.</li><li>Option cards, one marked "(recommended)" with the reason. Never "easiest".</li><li>Continue first, then Back, then Skip this step.</li></ul></div>
     <div><h4>Help</h4><ul><li>"What is…" links at the end of the part they explain, opening <code>.dialog--scroll</code> with <code>data-close-outside</code>.</li><li>Addresses are links with a copy button; commands have a labelled copy button. Copying works on plain http.</li></ul></div>
     <div><h4>Classes</h4><ul><li><code>.wizard-layout</code>, <code>.wizard-main</code>, <code>.wizard-aside</code>, <code>.wizard-progress</code>, <code>.steps--sub</code>, <code>.wizard-paths</code>, <code>.wizard-next</code>, <code>.wizard-tree</code>, <code>.help-links</code>, <code>.help-link</code>, <code>.address</code>, <code>.copy-btn--label</code>, <code>.dialog--scroll</code>, <code>.wizard-summary</code></li></ul></div>

@@ -44,10 +44,11 @@ other below that. The step always comes first in the reading order.
 3. **A step with too much in it is split into parts**, each its own screen. `.steps--sub` under the
    progress bar names the parts, with done ones ticked and the current one outlined. It is as wide as the
    progress bar, the parts share the width equally, and a line joins each part to the next (in the
-   accent colour after a done part). **Each part is a step in the progress bar's total**, and the step
-   bar's numbers carry on that count: when the parts are steps 6 to 8 of 18, the bar shows 6, 7 and 8
-   (`style="counter-reset: step 5"`) and the progress bar says "step 7 of 18" on the second part. The
-   summary at the end shows the parts as one line.
+   accent colour after a done part). The parts are numbered 1, 2, 3 within the step. **Each part is a
+   step in the progress bar's total**: when Download apps is steps 6 to 8 of 18, the progress bar says
+   "step 7 of 18" on its second part. On phones the step bar is just the numbers joined by lines, and a
+   done part's number becomes a tick (the names stay for screen readers). The summary at the end
+   shows the parts as one line.
 4. **Choices are option cards** (`.option-cards`, one `.option-card` each), with a title and one line on
    what it means for the person.
 5. **Mark one choice "(recommended)"** where one suits most people, in the title, with the reason in its
