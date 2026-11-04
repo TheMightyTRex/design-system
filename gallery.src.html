@@ -227,6 +227,7 @@
     <div class="g-frame" style="height:220px">
       <nav class="rail" aria-label="Main menu (example)" style="height:100%">
         <div class="rail__logo"><svg viewBox="0 0 32 32" width="32" height="32" aria-hidden="true"><rect x="3" y="3" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="3" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><rect x="17" y="17" width="12" height="12" fill="var(--color-logo-tile)"/><path d="M23 3.5l1.9 4.4 4.7.4-3.6 3.1 1.1 4.6-4.1-2.5-4.1 2.5 1.1-4.6-3.6-3.1 4.7-.4Z" fill="var(--color-logo-star)"/></svg></div>
+        <button class="rail__search" type="button" data-search-open aria-controls="g-search" aria-expanded="false">{{i-lg:search}}Search</button>
         <a href="#header" aria-current="page">{{i-lg:book-open}}Library</a>
         <a href="#header">{{i-lg:compass}}Discover</a>
       </nav>
@@ -238,8 +239,8 @@
               <a href="#header">{{i:bookmark}}<span class="menu-tabs__label">Following</span></a>
               <a href="#header">{{i:list-checks}}<span class="menu-tabs__label">Library review</span> <span class="count">12<span class="visually-hidden"> to review</span></span></a>
             </nav>
-            <form class="site-header__search search-field" role="search" onsubmit="return false"><input class="input" type="search" aria-label="Search books or authors" placeholder="Search books or authors"><button class="visually-hidden">Search</button></form>
-            <div class="site-header__actions"><button class="icon-btn" type="button">{{i-lg:sun}}<span class="label">Display</span></button></div>
+            <form class="site-header__search search-field" id="g-search" role="search" onsubmit="return false"><input class="input" type="search" aria-label="Search books or authors" placeholder="Search books or authors"><button class="visually-hidden">Search</button></form>
+            <div class="site-header__actions"><button class="icon-btn site-header__search-btn" type="button" data-search-open aria-controls="g-search" aria-expanded="false" aria-label="Search">{{i-lg:search}}</button><button class="icon-btn" type="button">{{i-lg:sun}}<span class="label">Display</span></button></div>
           </div>
           <div class="site-header__tabs">
             <nav class="menu-tabs" aria-label="Library shelves (example)">
@@ -255,8 +256,9 @@
   </div>
   <div class="g-notes">
     <div><h4>Use</h4><ul><li>Nothing else goes in the header: page actions live in the page head or the section toolbar.</li><li>Tabs that do not fit show icons only (<code>.is-compact</code>) with the names as tooltips; the 2nd level scrolls sideways.</li><li>A count on a tab says what it counts in hidden text.</li></ul></div>
-    <div><h4>Accessibility</h4><ul><li>Each tab row is a <code>nav</code> with its own name; the current tab has <code>aria-current="page"</code> and a 3px bar, not colour alone.</li><li>Search is a plain box with a hidden submit button, so voice control can say "Search".</li></ul></div>
-    <div><h4>Classes</h4><ul><li><code>.rail</code>, <code>.site-header</code>, <code>.site-header__bar</code>, <code>.site-header__tabs</code>, <code>.menu-tabs</code>, <code>.menu-tabs__label</code>, <code>.count</code>, <code>.update-dot</code></li></ul></div>
+    <div><h4>Search button</h4><ul><li>Search is always one button away (David, 4 November 2026): <code>.rail__search</code>, first in the rail under the logo, moves focus to the header's search box.</li><li>On phones, where the box is hidden, <code>.site-header__search-btn</code> in the header opens the same box as a row under the header. Escape or a press outside closes it and returns focus.</li><li>Both buttons have <code>data-search-open</code> and <code>aria-controls</code> naming the search form; <code>components.js</code> does the rest. No single-key shortcut, so nothing fires while typing (WCAG 2.1.4).</li></ul></div>
+    <div><h4>Accessibility</h4><ul><li>Each tab row is a <code>nav</code> with its own name; the current tab has <code>aria-current="page"</code> and a 3px bar, not colour alone.</li><li>Search is a plain box with a hidden submit button, so voice control can say "Search". The phone search button says "Search" and reports <code>aria-expanded</code>.</li></ul></div>
+    <div><h4>Classes</h4><ul><li><code>.rail</code>, <code>.rail__search</code>, <code>.site-header</code>, <code>.site-header__search-btn</code>, <code>.site-header__bar</code>, <code>.site-header__tabs</code>, <code>.menu-tabs</code>, <code>.menu-tabs__label</code>, <code>.count</code>, <code>.update-dot</code></li></ul></div>
   </div>
 </section>
 

@@ -156,6 +156,45 @@
     });
   }
 
+  /* Search buttons: data-search-open on a button names the header search form (aria-controls). Where the
+     box is visible (computers), the button moves focus into it. Where it is hidden (phones), the button
+     opens it as a row under the header; Escape, or a press outside, closes it and returns focus. */
+  function setupSearch(root = document) {
+    root.querySelectorAll("[data-search-open]").forEach((button) => {
+      if (button.dataset.ready) return;
+      button.dataset.ready = "1";
+      const form = document.getElementById(button.getAttribute("aria-controls"));
+      const header = form?.closest(".site-header");
+      const input = form?.querySelector("input");
+      if (!form || !header || !input) return;
+      const close = (refocus) => {
+        if (!header.classList.contains("is-search-open")) return;
+        header.classList.remove("is-search-open");
+        document.querySelectorAll(`[data-search-open][aria-controls="${form.id}"]`).forEach((b) =>
+          b.setAttribute("aria-expanded", "false"),
+        );
+        if (refocus) (form.searchOpener || button).focus();
+      };
+      button.addEventListener("click", () => {
+        form.searchOpener = button;
+        if (form.offsetParent === null) {
+          header.classList.add("is-search-open");
+          button.setAttribute("aria-expanded", "true");
+        }
+        input.focus();
+      });
+      if (!form.dataset.searchReady) {
+        form.dataset.searchReady = "1";
+        form.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") close(true);
+        });
+        document.addEventListener("pointerdown", (event) => {
+          if (!form.contains(event.target) && !event.target.closest("[data-search-open]")) close(false);
+        });
+      }
+    });
+  }
+
   /* Phone menu sections fold open; the section you are in starts open. */
   function setupFolds(root = document) {
     root.querySelectorAll(".phone-menu__section > button[aria-controls]").forEach((button) => {
@@ -465,9 +504,10 @@
     setupFolds(root);
     setupToggles(root);
     setupCopy(root);
+    setupSearch(root);
     setupDisplay(root);
   }
-  window.SharedComponents = { setup, openLayer, toast, savedNote, copyText };
+  window.SharedComponents = { setup, setupSearch, openLayer, toast, savedNote, copyText };
   // An app that wires its own behaviour (Starboard's page scripts) loads this file with data-manual, or
   // sets window.SharedComponentsManual = true first, and calls setup() or openLayer() itself.
   const manual = window.SharedComponentsManual || document.currentScript?.hasAttribute("data-manual");

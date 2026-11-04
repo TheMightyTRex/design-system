@@ -17,3 +17,4 @@ search
 triangle-alert
 info
 headphones
+radio

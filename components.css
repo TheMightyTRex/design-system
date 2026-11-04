@@ -279,7 +279,8 @@
     height: 48px;
     margin-bottom: var(--space-3);
   }
-  .rail a {
+  .rail a,
+  .rail__search {
     position: relative;
     display: grid;
     justify-items: center;
@@ -291,7 +292,18 @@
     font-weight: var(--weight-strong);
     text-decoration: none;
   }
+  /* Search is always one button away: first in the rail, under the logo. */
+  .rail__search {
+    width: 100%;
+    margin-bottom: var(--space-2);
+    border: 0;
+    border-bottom: 1px solid var(--color-divider);
+    background: none;
+    font-family: inherit;
+    cursor: pointer;
+  }
   .rail a:hover,
+  .rail__search:hover,
   .rail a[aria-current="page"] {
     background: var(--color-control-active);
     color: var(--color-text);
@@ -311,6 +323,22 @@
   }
   .with-rail {
     padding-left: var(--rail-w);
+  }
+  /* The header's search button: shown where the search box is not (phones). It opens the same box as a
+     full-width row under the header bar. */
+  .site-header .site-header__search-btn {
+    display: none;
+  }
+  .site-header.is-search-open .site-header__search {
+    display: block;
+    position: absolute;
+    inset: 100% 0 auto 0;
+    max-width: none;
+    margin: 0;
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-header);
+    border-bottom: 1px solid var(--color-divider);
+    box-shadow: var(--shadow-raised);
   }
 
   /* Update dot: a small red dot on the version or the menu button. Its name says it in words. */
@@ -4196,6 +4224,9 @@
     .site-header__bar > .menu-tabs,
     .site-header__search {
       display: none;
+    }
+    .site-header .site-header__search-btn {
+      display: inline-flex;
     }
     .site-header__brand {
       display: inline-flex;
