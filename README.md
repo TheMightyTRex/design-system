@@ -34,6 +34,8 @@ change the copies inside the apps.
 | `docs/CONTENT-DESIGN.md` | How every word is written: voice, rules, words each app uses, status vocabulary, patterns |
 | `docs/HELP-WRITING.md` | How help is written: tiers, kinds of topic, categories, layouts, screenshots |
 | `docs/ACCESSIBILITY.md` | The accessibility floor and how to test it |
+| `docs/WCAG.md` | How the design system meets each point of WCAG 2.2 AA, after the GOV.UK Service Manual, and what each app must still do |
+| `docs/ALT-TEXT.md` | How to write text descriptions (alt text) for every kind of image, after the BBC's guidance |
 | `penpot/` | The Penpot plugin that builds the design system in a Penpot file, and `tokens.json` for Penpot's Tokens panel, both made by `penpot/make.py` |
 | `docs/PENPOT.md` | How to build, share and keep the Penpot file in step |
 | `docs/SECURITY-CHECKS.md` | The security checks both apps run, how to sort what they find, and how to record the results and release notes |

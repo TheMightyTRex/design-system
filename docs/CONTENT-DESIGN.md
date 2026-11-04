@@ -345,7 +345,8 @@ The full checklist is in `ACCESSIBILITY.md`. The content half:
 
 - Every control has a visible text name written as an action. Icon-only buttons have an `aria-label` with
   that name ("Close summary").
-- Alt text says what the image shows: "Cover of The Hollow Boy". Decorative images use `alt=""`.
+- Alt text says what the image shows: "Cover of The Hollow Boy". Decorative images use `alt=""`. How to
+  write every kind of text description is in `ALT-TEXT.md`.
 - No instruction depends on colour, shape, icon or position alone.
 - Status changes that happen without a page load (a download finishing, a search result) are announced in a
   live region, using the status vocabulary.

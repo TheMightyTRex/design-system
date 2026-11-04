@@ -1,8 +1,9 @@
 # Accessibility guide
 
-Version 1.1, 3 November 2026. For Storyarr and Starboard. The floor is **WCAG 2.2 level AA** on every page, in
+Version 1.2, 4 November 2026. For Storyarr and Starboard. The floor is **WCAG 2.2 level AA** on every page, in
 every theme (Light, Dark, High contrast) and every layout (Storyarr: Classic and Shelf). Content rules are in
-`CONTENT-DESIGN.md` section 8.
+`CONTENT-DESIGN.md` section 8. How each WCAG point is met, and what each app must still do, is in `WCAG.md`;
+how to write text descriptions for images is in `ALT-TEXT.md`.
 
 **For AI agents:** every item marked **Check** must pass before a UI change is finished. Section 6 says how
 to test each one.
@@ -39,16 +40,21 @@ separate low-vision font switch.
 
 **Keyboard and focus**
 - **Check:** everything works with a keyboard alone, in a logical order.
-- **Check:** focus is always visible (2px outline at 3:1 contrast against both neighbours).
+- **Check:** focus is always visible (3px outline at 3:1 contrast against both neighbours).
+- **Check:** the sticky header and save bar never cover what has focus (WCAG 2.4.11). The library's
+  `scroll-padding` does this for `.site-header` and `.save-bar`; never add a sticky part of your own.
 - **Check:** drawers and dialogs move focus in, trap it, return it to the opener on close, and close with
   Escape. Side panels (BookSummary, bookshelf drawer) follow the same rule.
 - **Check:** no keyboard trap anywhere else.
+- **Check:** no single-key shortcuts, or a way to deactivate them (WCAG 2.1.4).
+- **Check:** every drag has a way to do the same with buttons or the keyboard (WCAG 2.5.7).
 
 **Size and spacing**
 - **Check:** controls are at least 44 by 44 pixels (24 is the AA minimum; 44 is Storyarr's standard).
 - **Check:** works at 400% zoom and 320px width with no horizontal scrolling of the page (wide tables may
   scroll inside their own region).
 - **Check:** text uses relative units, so the text size setting and browser zoom both work.
+- **Check:** pages work in portrait and landscape (WCAG 1.3.4).
 
 **Colour and contrast**
 - **Check:** body text 4.5:1, large text and UI parts 3:1, in Light, Dark and High contrast.
@@ -62,10 +68,18 @@ separate low-vision font switch.
   paused.
 
 **Screen readers**
-- **Check:** icon-only buttons have an `aria-label`; covers have alt text "Cover of <title>".
+- **Check:** icon-only buttons have an `aria-label` that starts with any words they show; covers have the
+  text description "Cover of <title>", or `alt=""` inside a link that already names the book (`ALT-TEXT.md`).
+- **Check:** text in another language is marked with `lang`, such as a French book title (WCAG 3.1.2).
+- **Check:** any video has captions and any recorded speech a transcript (WCAG 1.2).
 - **Check:** status changes without a page load are announced (`aria-live="polite"`), such as downloads
   finishing and search results arriving.
 - **Check:** form fields have visible labels, and errors are tied to their field (`aria-describedby`).
+- **Check:** name, email, username and password fields have `autocomplete`; signing in allows pasting and
+  password managers, with no puzzle or CAPTCHA (WCAG 1.3.5, 3.3.8).
+- **Check:** nothing asks for the same information twice in one task (WCAG 3.3.7).
+- **Check:** Help, where the app has it, is in the footer of every page (WCAG 3.2.6).
+- **Check:** anything a toast offers, such as Undo, can also be done on the page (WCAG 2.2.1).
 - **Check:** horizontal shelves can be operated by buttons, not only by scrolling (task UX-30).
 
 ## 3. Components and their accessibility contract
@@ -73,7 +87,7 @@ separate low-vision font switch.
 | Component | Contract |
 |---|---|
 | Status chip | Text always present; icon `aria-hidden`; colour from the status tone tokens |
-| Cover | `alt="Cover of <title>"`; the clickable cover is a button or link with the title as its name |
+| Cover | `alt="Cover of <title>"` on its own; `alt=""` inside a link or button that already has the title as its name |
 | Drawer / side panel | `role="dialog"` or `aside` with a heading; focus moves to the heading; Escape closes |
 | Dialog | `role="dialog"` `aria-modal="true"`, labelled by its title; focus trapped |
 | Tabs / sub-menu | Navigation links with `aria-current="page"`, or real tabs with arrow-key support; never a mix |

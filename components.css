@@ -104,6 +104,17 @@
     outline: var(--focus-w) solid var(--color-focus);
     outline-offset: 2px;
   }
+  /* Focus not obscured (WCAG 2.2, 2.4.11): the sticky header and save bar never cover what has focus or
+     what a link scrolls to, because the page keeps their height clear when it scrolls. */
+  :root:has(.site-header) {
+    scroll-padding-top: calc(var(--header-h) + var(--space-4));
+  }
+  :root:has(.site-header__tabs) {
+    scroll-padding-top: calc(var(--header-h) + var(--tabs-h) + var(--space-4));
+  }
+  :root:has(.save-bar:not([hidden])) {
+    scroll-padding-bottom: calc(var(--control-h) + var(--space-8));
+  }
   .visually-hidden {
     position: absolute;
     width: 1px;

@@ -155,7 +155,7 @@ The idea in two or three sentences, with an everyday comparison where one helps.
 ## 8. Screenshots
 
 - Add one only after a step where the control might be hard to find. Leave obvious steps as text.
-- Everything a screenshot shows is also said in words (rule 2.20).
+- Everything a screenshot shows is also said in words (rule 2.20). Text descriptions follow `ALT-TEXT.md`.
 - Take them from a preview with made-up data (rule 2.23), never from a real server.
 - **Annotating:** a box drawn just outside the control, in the danger colour, with a curved arrow whose head
   touches the box. Never cover the label you are pointing at.
