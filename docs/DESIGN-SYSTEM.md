@@ -105,6 +105,7 @@ Line height 1.5 for body, 1.25 for headings. Weights 400 and 600 only. Low-visio
 - **Page actions in the header are menus, not rows of buttons:** related actions share one menu button (Lists:
   Add list, Refresh all lists, refresh one service). Menus open with focus on the first item, arrow keys move,
   Escape closes and returns focus.
+- **Menu names, renamed (David, 4 November 2026):** *side menu*, *level 1 menu* and *level 2 menu*, in place of main menu, 1st level and 2nd level below.
 - **Menu names (David, 2 November 2026):** *main menu* = the left rail; *1st level* = header row 1 (a
   section's pages: My library, Following...); *2nd level* = header row 2 (a page's own tabs: In my libraries,
   Authors...). Main menu, 1st and 2nd level all have icons. In the ☰ menu only the main menu and 1st level

@@ -39,11 +39,19 @@ spacing). Slide-outs, menus, the phone menu and the dialog all work in the galle
 
 ## Menu names
 
-- **Main menu:** the icon rail on the left, in both apps. Starboard moves to the rail (David, 4 November 2026: "I want you to use the side menu"), with Library, Discover, Activity, System and Settings; see `areas/starboard-menu.html`.
-- **1st level:** header row 1, the section's pages (My library, Following, Library review).
-- **2nd level:** header row 2, the page's own tabs (In my libraries, Authors, Series, All saved titles).
-- All three levels have icons. In the phone menu, only the main menu and the 1st level have icons; the
-  2nd level stays under the header on phones.
+Names (David, 4 November 2026: "Side menu, Level 1 menu and Level 2 Menu"):
+
+- **Side menu:** the icon rail on the left, in both apps: the logo with the app's name underneath, Search,
+  then the sections. Starboard moves to the side menu (David, 4 November 2026), with Library, Discover,
+  Activity, System and Settings; see `areas/starboard-menu.html`.
+- **Level 1 menu:** header row 1, the section's pages (Starboard: TV, Films, Radio, Books, Audiobooks). In
+  Starboard it starts with the server's own name, up to 10 characters, as plain text with no icon.
+- **Level 2 menu:** header row 2, a page's own tabs (Starboard: My library, Series, Authors, Stations), only
+  when the page has them.
+- On phones the header shows only the logo on the left, with no names (David, 4 November 2026); the app's
+  name and the server name stay for screen readers.
+- All three have icons. In the phone menu, only the side menu and the level 1 menu have icons; the level 2
+  menu stays under the header on phones.
 
 ## Components
 
@@ -60,9 +68,9 @@ spacing). Slide-outs, menus, the phone menu and the dialog all work in the galle
 ### Shell
 | Component | Classes | Notes |
 |---|---|---|
-| Main menu (rail) | `.rail`, `.rail__logo`, `.rail__search`, `.rail__end`, `.with-rail` | Both apps; hidden on phones. `.rail__search` is first, under the logo |
-| Header | `.site-header`, `.site-header--no-rail` (pages without a rail: name and logo start row 1), `.site-header__bar`, `.site-header__brand`, `.site-header__search`, `.site-header__search-btn` (phones), `.site-header__actions`, `.site-header__tabs` | Row 1: 1st level, search, Display. Row 2: 2nd level, only when the page has tabs. Nothing else |
-| Menu tabs (1st and 2nd level) | `.menu-tabs`, `.menu-tabs__label`, `.is-compact` | Icons and names; icons only when they do not fit; current page bar |
+| Side menu (rail) | `.rail`, `.rail__brand` and `.rail__name` (logo with the name underneath), `.rail__logo` (logo only), `.rail__search`, `.rail__end`, `.with-rail` | Both apps; hidden on phones. `.rail__search` comes straight after the brand |
+| Header | `.site-header`, `.site-header--no-rail` (pages without a rail: name and logo start row 1), `.site-header__bar`, `.site-header__brand`, `.site-header__search`, `.site-header__search-btn` (phones), `.site-header__server` (the server name, start of the level 1 menu), `.site-header__actions`, `.site-header__tabs` | Row 1: 1st level, search, Display. Row 2: 2nd level, only when the page has tabs. Nothing else |
+| Menu tabs (level 1 and level 2 menus) | `.menu-tabs`, `.menu-tabs__label`, `.is-compact` | Icons and names; icons only when they do not fit; current page bar |
 | Count and update dot | `.count`, `.update-dot` | Meaning in hidden text |
 | Phone menu | `.phone-menu-button`, `.phone-menu`, `.phone-menu__section > a` (an item with no 1st level), `.phone-menu__search`, `.phone-menu__section`, `.phone-menu__foot` | Drawer from the left; search, main menu, 1st level; account and sign out at the foot |
 | Page and page head | `.page`, `.page--narrow` (Sign in, Set up), `.section-head`, `.section-head__control`, `.page-head`, `.page-head__text`, `.page-head__summary` | One visible h1; page actions on the right |
