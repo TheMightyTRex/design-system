@@ -118,6 +118,7 @@ Names (David, 4 November 2026: "Side menu, Level 1 menu and Level 2 Menu"):
 | Rows | `.rows`, `.row`, `.row--no-lead`, `.row--opens`, `.row__title`, `.row__meta`, `.row__side` | `.row--opens`: the whole row opens a slide-out |
 | Group heading | `.group-heading` | Sentence case, no capitals |
 | Table | `.table-wrap[data-stack]`, `.table`, `th[aria-sort]` | Real tables only; stack into cards on phones |
+| Tables that line up | `.table.table--fixed` with the same `<colgroup>` in each; `col.col-id`, `.col-date`, `.col-state`, `.col-number`, `.col-quarter`, `.col-third`, and no class on the column that takes the rest | Several tables one after another, such as tasks by category or a menu by section, keep their columns in line (4 November 2026) |
 | Notice and callout | `.notice[data-tone]` (`success`, `warning`, `danger`, `muted`; none is info), `.notice__title`, `.notice__body` | Icon and words; `role="status"` or `role="alert"`. As a callout in long text, the title is the lead word: Before you begin (info), Limitation (warning), Warning (danger, cannot be undone), Tip (success), Example (muted) |
 | Prose | `.prose`, `.prose__lead`, `.prose__kind` | Help topics, guides and release notes shown in an app (`HELP-WRITING.md`) |
 | Time ago | `<time datetime>` with `.visually-hidden` exact time | "Updated 10 seconds ago" on screen, the exact time for screen readers |
