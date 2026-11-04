@@ -9,6 +9,13 @@ dialog or page" in `LIBRARY.md`).
 
 ## 1. Shape
 
+**Only what the app can show.** A wizard runs inside the app, so it starts once the app is installed and
+running. Anything needed before that (Docker, a folder, running the installer) belongs on the help page and in
+the installer, which checks it and stops with what to do. Never ask in the wizard about something the wizard
+could not run without (4 November 2026). A mock-up that shows those earlier steps marks them off as "Before the
+wizard", with their own count, and the wizard's progress starts at its own first step.
+
+
 | Part | Where | Classes |
 |---|---|---|
 | Progress bar | Top of the wizard | `.wizard-progress` (a `.meter` with a `.progress` bar) |
