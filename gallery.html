@@ -267,6 +267,7 @@
     <li><a href="#dialog">Dialog</a></li>
     <li class="g-group">Patterns</li>
     <li><a href="#which">Slide-out, dialog or page</a></li>
+    <li><a href="#wizard">Wizard</a></li>
     <li><a href="#events">Event list</a></li>
     <li><a href="#changes-preview">What will change</a></li>
     <li><a href="#month-nav">Earlier and later</a></li>
@@ -915,6 +916,76 @@
     <div class="dialog__body"><p>Books already downloaded stay where they are. Downloads in progress stop being tracked.</p></div>
     <div class="dialog__foot"><button class="btn btn--danger btn--primary" type="button" data-closes>Remove qBittorrent</button><button class="btn btn--quiet" type="button" data-closes>Keep it</button></div>
   </dialog>
+</section>
+
+<section class="g-section" id="wizard" aria-labelledby="wizard-h">
+  <header><h2 id="wizard-h">Wizard</h2><p class="muted">Every job done in steps: first-run set-up, upgrades, restores and migrations. The rules are in <code>docs/WIZARD.md</code>. Beside the step are two review aids, What happens next and the decision tree: they are for testing only, shown while an app's testing setting is on, never in the finished product.</p></header>
+  <div class="g-demo">
+    <div class="wizard-layout">
+      <div class="wizard-main">
+        <div class="meter wizard-progress"><div class="meter__label"><span>New install · step 7 of 18 · Build your media server</span><span class="numeric">11 to go</span></div><div class="progress" role="progressbar" aria-label="Set-up progress" aria-valuemin="1" aria-valuemax="18" aria-valuenow="7" aria-valuetext="Step 7 of 18: Usenet"><span style="width:39%"></span></div></div>
+        <ol class="steps steps--sub" aria-label="Download apps, steps 6 to 8" style="counter-reset: step 5"><li data-done>Torrent<span class="visually-hidden">, done</span></li><li aria-current="step">Usenet<span class="visually-hidden">, current part</span></li><li>Download options</li></ol>
+        <div class="wizard">
+          <div class="stack-4">
+            <h3 tabindex="-1">Choose a Usenet app</h3>
+            <p class="muted">The Usenet app fetches what the app finds, from your Usenet provider.</p>
+            <fieldset class="option-cards">
+              <legend class="visually-hidden">Usenet app</legend>
+              <label class="option-card"><input type="radio" name="g-wiz-app" checked><strong>SABnzbd (recommended)</strong><small>The one most guides use. Sets itself up from your provider's details.</small></label>
+              <label class="option-card"><input type="radio" name="g-wiz-app"><strong>NZBGet</strong><small>Uses less memory on a small server.</small></label>
+              <label class="option-card"><input type="radio" name="g-wiz-app"><strong>I do not use Usenet</strong><small>Leaves out the Usenet sites to search.</small></label>
+            </fieldset>
+            <p class="help-links"><button type="button" class="help-link" data-dialog="g-wiz-help"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-circle-help"/></svg><span>What is Usenet?</span></button><button type="button" class="help-link" data-dialog="g-wiz-help"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-circle-help"/></svg><span>What is SABnzbd?</span></button></p>
+            <p>After it is installed, SABnzbd is at <span class="address"><a href="http://192.0.2.10:8080" target="_blank" rel="noreferrer">http://192.0.2.10:8080<svg class="i" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg><span class="visually-hidden"> (opens in a new tab)</span></a><button type="button" class="copy-btn" data-copy="http://192.0.2.10:8080" data-copied="Address copied" aria-label="Copy http://192.0.2.10:8080"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg></button></span></p>
+            <div class="command"><code class="code-block">docker compose up -d sabnzbd</code><button type="button" class="btn copy-btn copy-btn--label" data-copy="docker compose up -d sabnzbd" data-copied="Command copied"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg><span>Copy</span></button></div>
+          </div>
+          <div class="wizard__foot"><button class="btn btn--primary" type="button">Continue to Download options</button><button class="btn" type="button">Back</button><button class="btn btn--quiet" type="button">Skip this step</button></div>
+        </div>
+      </div>
+      <aside class="wizard-aside" aria-label="Review aids, for testing only">
+        <p class="small muted" style="margin:0">Review aids, for testing only. Not in the finished product.</p>
+        <section class="panel" style="padding:var(--space-4)" aria-labelledby="g-wiz-next-h">
+          <h2 id="g-wiz-next-h" style="margin-bottom:var(--space-3)">What happens next</h2>
+          <ul class="wizard-next">
+            <li data-chosen><span class="wizard-next__if">If: SABnzbd<span class="wizard-next__tag">Your choice</span></span><span class="wizard-next__then">Next you enter your Usenet provider's details, and SABnzbd is installed with them.</span></li>
+            <li><span class="wizard-next__if">If: NZBGet</span><span class="wizard-next__then">The same, with NZBGet in /data/downloads/usenet.</span></li>
+            <li><span class="wizard-next__if">Skip this step</span><span class="wizard-next__then">You can add a Usenet app later in Settings, Download apps.</span></li>
+          </ul>
+        </section>
+        <details class="wizard-tree-toggle" open>
+          <summary><h2>Decision tree</h2></summary>
+          <p class="wizard-tree__flow">New install wizard, 18 steps</p>
+          <div class="panel" style="padding:var(--space-4)">
+            <ol class="wizard-tree">
+              <li><p class="wizard-tree__stage">Build your media server</p><ol>
+                <li class="wizard-tree__step" data-state="done"><span class="wizard-tree__mark" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span><span class="wizard-tree__title"><a href="#wizard">Library folders</a></span><span class="wizard-tree__meta">Done</span></li>
+                <li class="wizard-tree__step" data-kind="decision" data-state="done"><span class="wizard-tree__mark" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span><span class="wizard-tree__title"><a href="#wizard">Torrent</a></span><span class="wizard-tree__meta">Done · decision</span>
+                  <ul class="wizard-tree__branches"><li class="wizard-tree__branch" data-chosen><details><summary><svg class="i" aria-hidden="true" focusable="false"><use href="#i-circle-check"/></svg><b>qBittorrent</b><span class="visually-hidden"> (chosen)</span></summary><p>Installed in its own container, behind the VPN.</p></details></li><li class="wizard-tree__branch"><details><summary><svg class="i" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg><b>Transmission</b></summary><p>The same, with Transmission.</p></details></li></ul></li>
+                <li class="wizard-tree__step" data-kind="decision" data-state="current" aria-current="step"><span class="wizard-tree__mark" aria-hidden="true"><span>7</span></span><span class="wizard-tree__title"><a href="#wizard">Usenet</a></span><span class="wizard-tree__meta">You are here · decision</span></li>
+                <li class="wizard-tree__step" data-state="todo"><span class="wizard-tree__mark" aria-hidden="true"><span>8</span></span><span class="wizard-tree__title"><a href="#wizard">Download options</a></span></li>
+                <li class="wizard-tree__step" data-state="left-out"><span class="wizard-tree__mark" aria-hidden="true"></span><span class="wizard-tree__title">Music quality</span><span class="wizard-tree__meta">Left out: you do not follow music</span></li>
+              </ol></li>
+            </ol>
+          </div>
+        </details>
+      </aside>
+    </div>
+    <ul class="wizard-summary">
+      <li><svg class="i" aria-hidden="true" focusable="false"><use href="#i-circle-check"/></svg><span><strong>Download apps: qBittorrent and SABnzbd</strong><span class="small muted">Change them in Settings, Download apps.</span></span></li>
+      <li data-tone="warning"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-triangle-alert"/></svg><span><strong>Requests: skipped</strong><span class="small muted">Set them up later in Settings, Requests.</span></span></li>
+    </ul>
+  </div>
+  <dialog class="dialog dialog--scroll" id="g-wiz-help" aria-labelledby="g-wiz-help-h" data-close-outside>
+    <div class="panel-header"><h2 class="panel-header__title" id="g-wiz-help-h">What is Usenet?</h2><button class="icon-btn" type="button" data-closes aria-label="Close"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></div>
+    <div class="dialog__body" tabindex="0"><p>Usenet is a network of servers that keep copies of files people post. You pay a Usenet provider for access, and an indexer lists what is there.</p><h3>What you need</h3><ul><li>A Usenet provider, which you pay for each month.</li><li>An indexer, which lists the files.</li><li>A Usenet app, such as SABnzbd, which fetches them.</li></ul><h3>What this step does</h3><p>It installs the Usenet app and connects it to the app, so each download goes into the right folder.</p><p>Only this text scrolls. The heading, Close and Back to set-up stay in view. A press outside the dialog closes it.</p></div>
+    <div class="dialog__foot"><button class="btn btn--primary" type="button" data-closes>Back to set-up</button></div>
+  </dialog>
+  <div class="g-notes">
+    <div><h4>Shape</h4><ul><li>Progress bar, then the step bar for a step in parts, then the step. The step bar is as wide as the progress bar, with a line between parts; each part is a step in the count (here steps 6 to 8 of 18).</li><li>Review aids (What happens next, decision tree) only while testing: beside the step from 1100px, under it below. Without them the step has the whole width.</li><li>The first question asks which job (new install, restore, migration); each has its own wizard (<code>.wizard-paths</code>).</li></ul></div>
+    <div><h4>Steps</h4><ul><li>One question per step; steps that do not apply are left out, and the tree says why.</li><li>Option cards, one marked "(recommended)" with the reason. Never "easiest".</li><li>Continue first, then Back, then Skip this step.</li></ul></div>
+    <div><h4>Help</h4><ul><li>"What is…" links at the end of the part they explain, opening <code>.dialog--scroll</code> with <code>data-close-outside</code>.</li><li>Addresses are links with a copy button; commands have a labelled copy button. Copying works on plain http.</li></ul></div>
+    <div><h4>Classes</h4><ul><li><code>.wizard-layout</code>, <code>.wizard-main</code>, <code>.wizard-aside</code>, <code>.wizard-progress</code>, <code>.steps--sub</code>, <code>.wizard-paths</code>, <code>.wizard-next</code>, <code>.wizard-tree</code>, <code>.help-links</code>, <code>.help-link</code>, <code>.address</code>, <code>.copy-btn--label</code>, <code>.dialog--scroll</code>, <code>.wizard-summary</code></li></ul></div>
+  </div>
 </section>
 
 <section class="g-section" id="which" aria-labelledby="which-h">

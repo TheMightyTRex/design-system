@@ -125,17 +125,34 @@
   }
 
   /* Dialog: a native <dialog> opened with showModal() by a button with data-dialog="<id>". The
-     browser keeps focus inside; Escape closes; focus returns to the opener. */
+     browser keeps focus inside; Escape closes; focus returns to the button that opened it, even when
+     several buttons open the same dialog. With data-close-outside (help, never a dialog with fields),
+     a press on the dimmed page outside it closes it too. */
   function setupDialogs(root = document) {
     root.querySelectorAll("[data-dialog]").forEach((opener) => {
       if (opener.dataset.ready) return;
       opener.dataset.ready = "1";
       const dialog = document.getElementById(opener.dataset.dialog);
-      opener.addEventListener("click", () => dialog.showModal());
-      dialog.addEventListener("close", () => opener.focus());
+      if (!dialog) return;
+      opener.addEventListener("click", () => {
+        dialog.opener = opener;
+        dialog.showModal();
+      });
+      if (dialog.dataset.ready) return;
+      dialog.dataset.ready = "1";
+      dialog.addEventListener("close", () => dialog.opener?.focus());
       dialog.querySelectorAll("[data-closes]").forEach((el) =>
         el.addEventListener("click", () => dialog.close()),
       );
+      if (dialog.hasAttribute("data-close-outside")) {
+        dialog.addEventListener("click", (event) => {
+          if (event.target !== dialog) return;
+          const box = dialog.getBoundingClientRect();
+          const inside = event.clientX >= box.left && event.clientX <= box.right &&
+            event.clientY >= box.top && event.clientY <= box.bottom;
+          if (!inside) dialog.close();
+        });
+      }
     });
   }
 
@@ -180,18 +197,40 @@
     });
   }
 
-  /* Copy: copies data-copy and says so in the page's status region (role="status"). */
+  /* Copy: copies data-copy and says so in a toast (data-copied names it, such as "Address copied").
+     Browsers only open the clipboard to https and localhost, and home servers are often plain http,
+     so when it is refused, copy from a hidden text box instead. */
+  async function copyText(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      const box = document.createElement("textarea");
+      box.value = text;
+      box.setAttribute("readonly", "");
+      box.className = "visually-hidden";
+      const back = document.activeElement;
+      document.body.append(box);
+      box.select();
+      let done = false;
+      try {
+        done = document.execCommand("copy");
+      } catch {
+        done = false;
+      }
+      box.remove();
+      back?.focus();
+      return done;
+    }
+  }
   function setupCopy(root = document) {
     root.querySelectorAll("[data-copy]").forEach((button) => {
       if (button.dataset.ready) return;
       button.dataset.ready = "1";
       button.addEventListener("click", async () => {
-        try {
-          await navigator.clipboard.writeText(button.dataset.copy);
-          toast("Copied");
-        } catch {
-          toast("Your browser did not allow copying", { tone: "warning", detail: "Select the text and copy it instead." });
-        }
+        const text = button.dataset.copy;
+        if (await copyText(text)) toast(button.dataset.copied || "Copied", { detail: button.dataset.copied ? text : undefined });
+        else toast("Your browser did not allow copying", { tone: "warning", detail: `Select the text and copy it instead: ${text}` });
       });
     });
   }
@@ -428,7 +467,7 @@
     setupCopy(root);
     setupDisplay(root);
   }
-  window.SharedComponents = { setup, openLayer, toast, savedNote };
+  window.SharedComponents = { setup, openLayer, toast, savedNote, copyText };
   // An app that wires its own behaviour (Starboard's page scripts) loads this file with data-manual, or
   // sets window.SharedComponentsManual = true first, and calls setup() or openLayer() itself.
   const manual = window.SharedComponentsManual || document.currentScript?.hasAttribute("data-manual");
