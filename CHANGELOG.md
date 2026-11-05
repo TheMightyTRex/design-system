@@ -9,6 +9,10 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 ## [Unreleased]
 
 ### Added
+- **Releases as accordions.** `.disclosure.release` with `.release__counts` and `.release__type`: each release in its
+  own accordion, the installed one open, a count chip for each type of change and a bar in that type's colour.
+  `docs/LIBRARY.md` also sets Settings, Updates as three pages (Update settings, Releases, Restore) and Sign out
+  beside every Settings page title (5 November 2026).
 - **Help goes to the page's own article.** `docs/LIBRARY.md`, Header: the Help button opens the help centre article
   for the page you are on, or the help index's section when no one article covers it, with hidden text naming the
   subject. Each app keeps one list of pages and articles, and its build stops if a page has none or an article is

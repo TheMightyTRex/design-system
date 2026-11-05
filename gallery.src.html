@@ -605,8 +605,9 @@
   <header><h2 id="disclosure-h">Disclosure, help and steps</h2></header>
   <div class="g-demo">
     <div>
-      <details class="disclosure" open><summary>v1.10.0 <span class="disclosure__meta">21 Sept 2026 · current version</span></summary><div class="disclosure__body"><p>Reading lists, bigger covers and a new header.</p></div></details>
-      <details class="disclosure"><summary>v1.9.0 <span class="disclosure__meta">1 Aug 2026</span></summary><div class="disclosure__body"><p>Earlier fixes.</p></div></details>
+      <div class="releases-head"><p class="muted">You have version 1.10.0, the newest. 2 releases.</p><button type="button" class="btn btn--quiet">Open all</button></div>
+      <details class="disclosure release" open><summary><h3>Version 1.10.0</h3><span class="chip" data-tone="success">Installed</span><span class="release__date">21 September 2026</span><span class="release__counts"><span class="chip" data-tone="success">1 added</span><span class="chip" data-tone="warning">1 fixed</span></span></summary><div class="disclosure__body"><section class="release__type" data-type="added"><h4>Added</h4><ul><li><strong>Reading lists.</strong> Keep books to read next in lists of your own.</li></ul></section><section class="release__type" data-type="fixed"><h4>Fixed</h4><ul><li><strong>Bigger covers.</strong> Covers no longer blur at large text sizes.</li></ul></section><div class="release__type" data-type="settings"><h4>Your settings and the way back</h4><p>Nothing to choose. To go back, restore the copy saved before the upgrade.</p></div></div></details>
+      <details class="disclosure release"><summary><h3>Version 1.9.0</h3><span class="release__date">1 August 2026</span><span class="release__counts"><span class="chip" data-tone="info">2 changed</span><span class="chip" data-tone="danger">1 security</span></span></summary><div class="disclosure__body"><p>Earlier changes.</p></div></details>
     </div>
     <div class="g-demo--row"><span>Download category</span><span class="help"><button type="button" aria-expanded="false" aria-controls="g-help-1" aria-label="About the download category">{{i:circle-help}}</button><span class="help__text" id="g-help-1">qBittorrent files each download under this label and saves it in the label's folder.</span></span></div>
     <ol class="steps" aria-label="Upgrade steps">
