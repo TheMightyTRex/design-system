@@ -25,6 +25,11 @@ rule in `WIZARD.md` about questions, words and help still applies; this guide sa
   a card or a message never pushes the heading or the menu out of view.
 - **Measure the window at every step,** and again when it changes size (SIGWINCH). Draw the step again to fit: the
   frame, then the step's last lines, then the question that is waiting, so the person can carry on typing.
+- **A column, centred.** The frame, text and menu sit in a column at most 100 characters wide. In a wider window the
+  column is centred, with equal space either side; at 60 to 100 columns it is the whole window. The column is worked
+  out again at every step and every change of size, and the waiting question moves with it.
+- **Text wraps between words** at the column's width, and is wrapped again when the window changes size, never cut
+  mid-word.
 - **Below 60 columns or 20 lines,** use the plain way (section 1).
 - **A long list in a short window** shows what fits, then "4 more: type m to see them".
 
@@ -33,14 +38,18 @@ rule in `WIZARD.md` about questions, words and help still applies; this guide sa
 - One line in a box: the app's name in bold, a dim `|`, then the step's name, and `step 2 of 5` on the right:
   `Starboard | Your media server`.
 - Below it, a progress bar the width of the box, and the percentage done.
-- The box and the bar are the full width (at most 78 characters), and every line ends at the same column.
+- The box and the bar are the column's full width (at most 100 characters), and every line ends at the same column.
 
 ## 4. Questions
 
 - One question at a time, numbered answers, the recommended one first, marked with a dot and the word
   "(recommended)". Colour never carries the meaning on its own.
 - The default is in brackets, and Enter takes it: `› Your choice [1]:`.
-- Several answers at once are typed as numbers with commas: `1,2,7`.
+- **Several answers at once:** in the boxed way, a list with `[x]` and `[ ]`: Up and Down move, Space ticks or
+  unticks, Enter carries on, and a line under the list says so. Typing a number ticks that line too. The list is
+  drawn in place, never repeated. In plain mode (screen readers), the numbers are typed with commas: `1,2,7`.
+- **A job's progress:** one line, drawn in place and cut to the column; on a failure it stays, marked, and the
+  problem and its choices go below it (`WIZARD.md` section 5, A job's progress).
 - A long list on a short screen shows what fits, then "4 more: type m to see them".
 - Passwords and keys are typed hidden: say "(nothing shows as you type)". After Back, Enter keeps the one typed
   before, without showing it.

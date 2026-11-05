@@ -104,6 +104,20 @@ wizard (`TERMINAL.md`).
 - The count is for the chosen job only, and changes when a choice leaves steps out.
 - On phones the step list (`.steps--collapse`) becomes "Step 6 of 18" (`.steps__short`).
 
+### A job's progress, in the browser and the terminal
+
+When a step runs a job that takes time (installing, downloading, building, restoring):
+
+- **One bar per job, drawn once and updated in place.** It never repeats down the page or the window. A redraw
+  replaces it; a retry draws the step afresh with one new bar, and the jobs already done listed with a tick.
+- **Words beside the bar:** what is happening, "Please wait, this can take some time...", and which job of how many.
+- **Errors go below the bar.** The bar stays where it stopped, marked "did not finish", and the problem is under it
+  in plain words, with the choices: Try again (recommended), Show the details, or Stop. Never write over the bar,
+  and never move the error above it.
+- **No wrapping:** a bar line is cut to the width it has, so it never runs onto a second line.
+- In the browser it is `role="progressbar"` with `aria-valuetext` in words; the error is a notice below it, tied
+  to it with `aria-describedby`, and focus moves to the error's heading.
+
 ## 6. Review aid: What happens next
 
 Testing only (section 1).

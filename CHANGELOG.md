@@ -9,6 +9,10 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 ## [Unreleased]
 
 ### Added
+- **Progress bars, a column, and multiple choice.** `docs/WIZARD.md` section 5, A job's progress: one bar per job,
+  drawn once and updated in place, errors below it with Try again, Show the details or Stop. `docs/TERMINAL.md`:
+  a column at most 100 characters wide, centred in a wider window, text wrapped again at any size, and multiple
+  choice with the arrow keys and Space in the boxed way (5 November 2026).
 - **Symbols that move between keyboards.** `docs/HELP-WRITING.md` section 7, rule 4: a command with `|`, `~`, `\`,
   `"`, `@`, `$` or `&` links to keyboard help for US, UK and Ireland, German, French and Spanish keyboards, and a
   one-line command with `|` also shows a version without it (5 November 2026).
