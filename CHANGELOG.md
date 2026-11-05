@@ -9,6 +9,10 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 ## [Unreleased]
 
 ### Added
+- **One wizard, two ways to show it.** `docs/WIZARD.md` section 2: an app's browser and terminal set-ups ask the
+  same questions in the same order, with the same answers, defaults and help, and change together; both start with
+  "How do you want to start?", including "Already installed". A run first script hands over what it found and
+  decides nothing. A new check in section 13; `docs/TERMINAL.md` section 1 points to it (5 November 2026).
 - **A run first script, and the logo in a terminal.** `docs/TERMINAL.md` section 9: after the operating system is
   installed, one script sets up everything else. It asks about accessible mode first, in plain words, and passes it
   on; checks, then asks, then installs only what is missing; opens the browser wizard on a desktop or the terminal

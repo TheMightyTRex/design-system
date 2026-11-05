@@ -13,6 +13,9 @@ rule in `WIZARD.md` about questions, words and help still applies; this guide sa
   drawn over. Screen readers lose their place when a screen is redrawn, and read box characters aloud, so plain
   mode is the one for them. Say how to choose it in the help.
 - Both ask the same questions in the same order, with the same answers. Only the drawing changes.
+- **The browser set-up too.** The terminal wizard asks the same questions, in the same order, with the same
+  answers and help as the app's browser wizard. A change to one is made to the other in the same change
+  (`WIZARD.md` section 2, One wizard, two ways to show it).
 - `NO_COLOR` keeps the boxes and drops the colour.
 
 ## 2. Fit the window, and keep the frame in place

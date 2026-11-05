@@ -43,6 +43,24 @@ other below that. The step always comes first in the reading order.
 3. **Ask in the order a person would do the job by hand.** Install, sign in, decide what to follow, then
    build each part in the order it depends on the last.
 
+4. **The same first question in the browser and the terminal.** An app with both kinds of set-up asks "How do
+   you want to start?" in both, with the same answers, plus "Already installed" when the app finds itself there.
+   The recommended answer comes from what was found, never from a guess.
+
+### One wizard, two ways to show it
+
+An app that can be set up in a browser and in a terminal has **one set of questions**: the same steps, in the
+same order, with the same answers, defaults, words and help. The terminal is a different drawing, not a different
+wizard (`TERMINAL.md`).
+
+- **Change both together.** A step, question, answer, default or help text added to one is added to the other in
+  the same change. If one way truly cannot do something yet, the other says so in words and points to it, and the
+  gap is a task, not an accident.
+- **One source for the words** where the code allows it (a shared list of steps and help), so they cannot drift.
+- **A run first script hands over, it does not decide.** It finds what is on the computer (an existing install,
+  apps already running, the memory) and passes it on, so both set-ups recommend the same answers.
+- **Check it before every release:** walk each job in both and compare the steps side by side (section 13).
+
 ## 3. Steps
 
 1. **One question per step.** The heading is the question or the job ("Choose a torrent app"), never the
@@ -178,3 +196,5 @@ wrong while they are in it (5 November 2026):
 5. Keyboard only: every choice, link, dialog and Back works, and focus moves to each new step's heading.
 6. A screen reader hears the progress, the step's state and the chosen choice.
 7. Send feedback opens from every step, the report names the step, and the QR code scans with a phone.
+8. An app with a browser and a terminal set-up: every job walked in both, step by step side by side, asks the
+   same questions in the same order with the same defaults (section 2, One wizard, two ways to show it).
