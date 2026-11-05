@@ -2,7 +2,8 @@
 
 4 November 2026. One set of rules for every wizard in every app that uses the library: first-run set-up,
 upgrades, restores, migrations and any other job done in steps. The classes are in `components.css`, the
-behaviour in `components.js`, and a live example is in the gallery, section Wizard.
+behaviour in `components.js`, and a live example is in the gallery, section Wizard. A wizard in a terminal follows
+`TERMINAL.md` as well.
 
 A wizard is a page, not a dialog: people link to it, come back to it and spend time in it ("Slide-out,
 dialog or page" in `LIBRARY.md`).
@@ -152,7 +153,23 @@ Every word follows `CONTENT-DESIGN.md`. The ones wizards get wrong most often:
 - A link that leaves the app says "(opens in a new tab)".
 - An error is beside its field and says what to do.
 
-## 12. Checks before a wizard ships
+## 12. Feedback in a wizard
+
+Every wizard carries [Snaglist](https://github.com/TheMightyTRex/snaglist), so people can say where it went
+wrong while they are in it (5 November 2026):
+
+- The **Send feedback** button is always there, and each report says which step it came from (the step's
+  id as Snaglist's page or part), so a report can be followed back to the exact question.
+- Reports go to the app's GitHub issues by default. A wizard often runs on a computer that is not online yet,
+  so offer Snaglist's **Show as a QR code** too: the phone scans it and opens the same pre-filled issue. When
+  the browser says it is offline, that choice comes first, with the reason.
+- The QR code is never the only way: the link is shown as text with a Copy button, and Download keeps the whole
+  report.
+- When a step fails, its error message offers **Report this problem**, with the error already in the report.
+- Snaglist's privacy rules hold: nothing typed into the wizard's own fields, no passwords, keys or set-up codes.
+- A wizard in a terminal has the same feedback, drawn differently: see `TERMINAL.md`, section 6.
+
+## 13. Checks before a wizard ships
 
 1. Walk every job, and every choice that leaves steps out, to the end.
 2. Every step has help for each term and, for testing, What happens next and a place in the tree.
@@ -160,3 +177,4 @@ Every word follows `CONTENT-DESIGN.md`. The ones wizards get wrong most often:
 4. Four themes, 175% text, a phone at 390px wide: nothing wider than the screen.
 5. Keyboard only: every choice, link, dialog and Back works, and focus moves to each new step's heading.
 6. A screen reader hears the progress, the step's state and the chosen choice.
+7. Send feedback opens from every step, the report names the step, and the QR code scans with a phone.

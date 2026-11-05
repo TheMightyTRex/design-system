@@ -9,6 +9,11 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 ## [Unreleased]
 
 ### Added
+- **Terminal wizards.** `docs/TERMINAL.md` sets how a wizard looks in a terminal: boxed and plain ways to draw
+  it, the heading box, a menu on the bottom line with Back, Help, Feedback and Stop, help over the step, and
+  feedback sent as a QR code that fits the window (5 November 2026).
+- **Feedback in every wizard.** `docs/WIZARD.md` section 12: Snaglist on every step, each report naming its
+  step, and Show as a QR code for a computer that is not online yet (5 November 2026).
 - **Changelog rules.** `docs/CHANGELOGS.md` sets how every project keeps its changelog, after Keep a
   Changelog 1.1.0, and this changelog follows it (5 November 2026).
 - **Tables that line up.** `.table--fixed` with named column widths keeps the columns of several tables in
