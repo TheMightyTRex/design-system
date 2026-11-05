@@ -25,7 +25,7 @@ wizard", with their own count, and the wizard's progress starts at its own first
 | Help | At the end of the part of the step it explains | `.help-links` with `.help-link` buttons, opening a slide-out (`.side-panel`) |
 | Review aids, testing only | Beside the step on computers, under it on phones | `.wizard-aside` holding `.wizard-next` (What happens next) and `.wizard-tree` (decision tree) |
 
-**Review aids are for testing, never the finished product (David, 4 November 2026).** What happens next
+**Review aids are for testing, never the finished product (TheMightyTRexUK, 4 November 2026).** What happens next
 and the decision tree help people who review a wizard see where each choice leads. An app shows them only
 while its testing setting is on (the same setting as UX notes, `ux-notes.js`), and mock-ups show them.
 Leave `.wizard-aside` out of the page, or give it `hidden`, and the step takes the whole width.

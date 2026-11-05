@@ -6,7 +6,7 @@ accessibility in `ACCESSIBILITY.md`, `WCAG.md` and `ALT-TEXT.md`; security check
 component reference is `LIBRARY.md`.
 
 **For AI agents:** when you build or touch UI, use these tokens, templates and components. If something you
-need is missing, add it here first (and say so to David) instead of inventing a one-off style.
+need is missing, add it here first (and say so to TheMightyTRexUK) instead of inventing a one-off style.
 
 ## 1. Principles
 
@@ -105,8 +105,8 @@ Line height 1.5 for body, 1.25 for headings. Weights 400 and 600 only. Low-visio
 - **Page actions in the header are menus, not rows of buttons:** related actions share one menu button (Lists:
   Add list, Refresh all lists, refresh one service). Menus open with focus on the first item, arrow keys move,
   Escape closes and returns focus.
-- **Menu names, renamed (David, 4 November 2026):** *side menu*, *level 1 menu* and *level 2 menu*, in place of main menu, 1st level and 2nd level below.
-- **Menu names (David, 2 November 2026):** *main menu* = the left rail; *1st level* = header row 1 (a
+- **Menu names, renamed (TheMightyTRexUK, 4 November 2026):** *side menu*, *level 1 menu* and *level 2 menu*, in place of main menu, 1st level and 2nd level below.
+- **Menu names (TheMightyTRexUK, 2 November 2026):** *main menu* = the left rail; *1st level* = header row 1 (a
   section's pages: My library, Following...); *2nd level* = header row 2 (a page's own tabs: In my libraries,
   Authors...). Main menu, 1st and 2nd level all have icons. In the ☰ menu only the main menu and 1st level
   have icons. All icons live in `apps/web/src/navigation.ts`.
@@ -191,7 +191,7 @@ One rule for both apps, so a state is always in the same place relative to the t
   not resize them per page.
 - **Chart text** follows Text size: SVG text uses `--text-xs` or `--text-sm` in a viewBox drawn at the real width,
   or sits in HTML beside the chart.
-- **Slide-outs look like slide-outs** (2 November 2026, David). Every slide-out, including the phone menu, has its
+- **Slide-outs look like slide-outs** (2 November 2026, TheMightyTRexUK). Every slide-out, including the phone menu, has its
   header in the page background (`--color-slide-header`, which is `--color-bg` in every theme) and its body and
   foot on the raised surface (white in Light, the dark surface in Dark). Dialogs keep the plain panel header.
   **Display and accessibility** and **Release notes** are slide-outs, not dialogs.

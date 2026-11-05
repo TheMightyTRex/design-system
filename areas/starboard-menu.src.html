@@ -41,7 +41,7 @@
 <div class="page" style="display:grid;gap:var(--space-6)">
   <div class="notice" role="note">{{i:info}}<div class="notice__body"><span class="notice__title">What changed and why</span>
     <ul style="margin:0;padding-left:var(--space-5)">
-      <li><strong>Three names</strong> (David, 4 November 2026): the <strong>side menu</strong> on the left, the <strong>level 1 menu</strong> (header row 1: a section's pages) and the <strong>level 2 menu</strong> (header row 2: a page's own tabs, only when it has them).</li>
+      <li><strong>Three names</strong> (TheMightyTRexUK, 4 November 2026): the <strong>side menu</strong> on the left, the <strong>level 1 menu</strong> (header row 1: a section's pages) and the <strong>level 2 menu</strong> (header row 2: a page's own tabs, only when it has them).</li>
       <li><strong>The side menu</strong> has the logo with "Starboard" underneath, then Search, then the five sections: Library, Discover, Activity, System and Settings.</li>
       <li><strong>The level 1 menu starts with the server's own name</strong> ("T-Rex", made up here), up to 10 characters, as plain text with no icon. Screen readers hear "Server: T-Rex".</li>
       <li><strong>Search is always one button away:</strong> first in the side menu under the logo, and a search icon in the header on phones, where the search box is hidden today. Both open the same search box (new in the design system: <code>.rail__search</code>, <code>.site-header__search-btn</code>).</li>
@@ -62,7 +62,7 @@
   </section>
   <section aria-labelledby="name-h" style="display:grid;gap:var(--space-3)">
     <h2 id="name-h" style="margin:0">Server name</h2>
-    <p class="muted" style="margin:0;max-width:72ch"><strong>Decided (David, 4 November 2026): at the start of the level 1 menu</strong>, as in the header above. On phones the header shows only the logo on the left, with no names (David, 4 November 2026); screen readers still hear "Starboard" and "Server: T-Rex".</p>
+    <p class="muted" style="margin:0;max-width:72ch"><strong>Decided (TheMightyTRexUK, 4 November 2026): at the start of the level 1 menu</strong>, as in the header above. On phones the header shows only the logo on the left, with no names (TheMightyTRexUK, 4 November 2026); screen readers still hear "Starboard" and "Server: T-Rex".</p>
     <div class="notice" role="note">{{i:info}}<div class="notice__body"><span class="notice__title">The 10-character limit</span><ul style="margin:0;padding-left:var(--space-5)">
       <li>A new field in Settings, General: <strong>Server name</strong>, hint "Shown in the level 1 menu. Up to 10 characters.", with a live count ("5 of 10 characters").</li>
       <li>The field stops at 10 characters (<code>maxlength="10"</code>), and the server trims and checks it too, so the API cannot store a longer one.</li>
