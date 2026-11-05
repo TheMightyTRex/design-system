@@ -15,14 +15,24 @@ rule in `WIZARD.md` about questions, words and help still applies; this guide sa
 - Both ask the same questions in the same order, with the same answers. Only the drawing changes.
 - `NO_COLOR` keeps the boxes and drops the colour.
 
-## 2. The heading box
+## 2. Fit the window, and keep the frame in place
+
+- **The frame never moves.** The heading box and the progress bar stay at the top, and the menu stays on the bottom
+  two lines, at all times. Only the lines between them scroll (a scrolling area set between the two). A long list,
+  a card or a message never pushes the heading or the menu out of view.
+- **Measure the window at every step,** and again when it changes size (SIGWINCH). Draw the step again to fit: the
+  frame, then the step's last lines, then the question that is waiting, so the person can carry on typing.
+- **Below 60 columns or 20 lines,** use the plain way (section 1).
+- **A long list in a short window** shows what fits, then "4 more: type m to see them".
+
+## 3. The heading box
 
 - One line in a box: the app's name in bold, a dim `|`, then the step's name, and `step 2 of 5` on the right:
   `Starboard | Your media server`.
 - Below it, a progress bar the width of the box, and the percentage done.
 - The box and the bar are the full width (at most 78 characters), and every line ends at the same column.
 
-## 3. Questions
+## 4. Questions
 
 - One question at a time, numbered answers, the recommended one first, marked with a dot and the word
   "(recommended)". Colour never carries the meaning on its own.
@@ -34,20 +44,20 @@ rule in `WIZARD.md` about questions, words and help still applies; this guide sa
 - An answer the app refuses is explained on the next line in the app's own words, and the question is asked
   again.
 
-## 4. The menu on the bottom line
+## 5. The menu on the bottom line
 
 - Always the keys that work on this step, then what Enter does on the right:
   `b Back   ? Help   f Feedback   q Stop        Enter: recommended`.
 - **b Back** goes back one step, with the last answers as the defaults (the right side says "Enter: keep", and
   the step says "You came back to this step"). Back stops at the step that changed something: once files are
   written, earlier answers are changed in the app's settings instead.
-- **? Help** opens help as a box over the step (section 5).
-- **f Feedback** opens the feedback flow (section 6).
+- **? Help** opens help as a box over the step (section 6).
+- **f Feedback** opens the feedback flow (section 7).
 - **q Stop** stops with nothing else changed, and says how to carry on later.
 - In plain mode there is no menu bar: each step's first line says "Type b to go back, ? for help, f to send
   feedback or q to stop".
 
-## 5. Help as a box over the step
+## 6. Help as a box over the step
 
 - The step behind is dimmed, the box sits in the middle with "Help: " and the question as its title, and the
   bottom line says "Enter Close help".
@@ -55,7 +65,7 @@ rule in `WIZARD.md` about questions, words and help still applies; this guide sa
 - Closing it draws the step again exactly as it was, with the cursor at the question.
 - Plain mode prints the help under the question instead.
 
-## 6. Feedback, sent with a QR code
+## 7. Feedback, sent with a QR code
 
 The terminal version of Snaglist ("Feedback in a wizard" in `WIZARD.md`):
 
@@ -71,11 +81,21 @@ The terminal version of Snaglist ("Feedback in a wizard" in `WIZARD.md`):
 - **The QR code** holds a short pre-filled new-issue address: the kind, the step, the person's words cut to fit,
   and the version and system on one line. The whole report is saved on the server at the same time, and the
   issue says where.
-- **It must fit the window.** Half-block characters draw two rows of the code on each line, so the code's width
-  is its number of modules and its height is half that. In a window of 78 by 30, with one title line and the
-  two menu lines, the code can be version 8 at most (49 modules and a 2-module quiet zone), which holds about
-  190 bytes at error correction level L. Work out the largest version from the window's width and height, cut
-  the address to fit, and say when it was cut. If even the shortest address does not fit, say "Make the window
+- **It fits the window, and a larger window holds more.** Half-block characters draw two rows of the code on
+  each line, so the code's width is its number of modules and its height is half that. Use every line but the
+  title line and the two menu lines. Work out the largest version from the window's width and height, with the
+  standard 4-module quiet zone, or a 2-module one (which phones still read) when the window is small. Then put
+  in as much of the report as that version holds at error correction level L, from the most to the least:
+
+  | Tier | What it holds | Usual window |
+  |---|---|---|
+  | 1 | The report without its technical details | 140 by 60 and larger (version 22, about 1,000 bytes) |
+  | 2 | A short report: the kind, the step and the person's words cut to fit | 80 by 30 to 80 by 40 (version 8 to 12) |
+  | 3 | The step, the version and where the whole report is saved | in between |
+  | 4 | The title alone | 80 by 24, the usual SSH window (version 5, 2-module edge, about 100 bytes) |
+
+  The line above the code says which ("It holds a short report"); if there is no room there, the link's view
+  says it. The whole report is always saved on the server. If not even the title fits, say "Make the window
   larger, or use Show the link".
 - Draw it dark on light, in forced colours, so it scans on a dark terminal too. Show it on a view of its own:
   the title "Scan it with your phone's camera to open the report there", the code, and the menu
@@ -83,16 +103,17 @@ The terminal version of Snaglist ("Feedback in a wizard" in `WIZARD.md`):
 - Plain mode never draws the code (a screen reader cannot read it): it prints the link and saves the file.
 - When a step fails, offer **Report this problem** with the error already in the report.
 
-## 7. The end
+## 8. The end
 
 - The heading box says "Done", then a card with where to open the app (this computer, other devices) and the
   command to ask the questions again.
 - The menu line is cleared, the whole window scrolls again, and the cursor is left under the last line, ready
   for the shell.
 
-## 8. Checks before a terminal wizard ships
+## 9. Checks before a terminal wizard ships
 
-1. Walk every job to the end, boxed and plain, at 78 by 30 and at 60 by 20.
+1. Walk every job to the end, boxed and plain, at 80 by 24, 80 by 30, 140 by 60 and 60 by 20, and change the
+   window's size in the middle of a step: the heading, the bar and the menu stay in place.
 2. Back from every step, including after a hidden answer, keeps the answers and never shows a secret.
 3. Help and feedback open and close from every step, and the step comes back as it was.
 4. Plain mode: no clearing, no box characters, no QR code; a screen reader (espeakup or Orca) reads every

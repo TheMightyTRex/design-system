@@ -9,6 +9,10 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 ## [Unreleased]
 
 ### Added
+- **Terminal wizards fit the window.** `docs/TERMINAL.md` section 2: the heading box, progress bar and menu stay in
+  place and only the lines between them scroll; the window is measured at every step and when it changes size. The
+  feedback QR code holds more of the report the larger the window is, in four tiers, down to the title alone in
+  80 by 24 (5 November 2026).
 - **Terminal wizards.** `docs/TERMINAL.md` sets how a wizard looks in a terminal: boxed and plain ways to draw
   it, the heading box, a menu on the bottom line with Back, Help, Feedback and Stop, help over the step, and
   feedback sent as a QR code that fits the window (5 November 2026).
