@@ -147,6 +147,9 @@ The idea in two or three sentences, with an everyday comparison where one helps.
 4. **Commands are copied, not typed.** Put each command in its own `bash` block, and say what it does in the
    sentence before it. Mark anything the reader must change, such as `<your server>`, and say what to put
    there.
+   **Some people type them anyway,** so a command with a symbol that moves between keyboards (`|`, `~`, `\`,
+   `"`, `@`, `$`, `&`) links to the app's keyboard help (US, UK and Ireland, German, French and Spanish), and a
+   one-line command with `|` also shows a version without it. On UK keyboards the `¦` key is not `|`: say so.
 5. **One action per step,** starting with the verb. Start from a page the reader can find, and give the full
    path the first time (`CONTENT-DESIGN.md` rule 2.19).
 6. **Callouts by meaning** (`CONTENT-DESIGN.md` section 7): "Before you begin:", "Limitation:", "Warning:",
