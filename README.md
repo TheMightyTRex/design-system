@@ -33,6 +33,7 @@ change the copies inside the apps.
 | `docs/COMPONENTS.md` | Storyarr's interface before the redesign, and the duplicates to merge |
 | `docs/CONTENT-DESIGN.md` | How every word is written: voice, rules, words each app uses, status vocabulary, patterns |
 | `docs/HELP-WRITING.md` | How help is written: tiers, kinds of topic, categories, layouts, screenshots |
+| `docs/CHANGELOGS.md` | How every project keeps its changelog, after Keep a Changelog: Unreleased first, the six change types, links, withdrawn releases |
 | `docs/ACCESSIBILITY.md` | The accessibility floor and how to test it |
 | `docs/WCAG.md` | How the design system meets each point of WCAG 2.2 AA, after the GOV.UK Service Manual, and what each app must still do |
 | `docs/ALT-TEXT.md` | How to write text descriptions (alt text) for every kind of image, after the BBC's guidance |

@@ -1,8 +1,8 @@
 # Content design guide
 
-Version 1.3, 3 November 2026. How every word in Storyarr and Starboard is written: page titles, menus,
+Version 1.4, 5 November 2026. How every word in Storyarr and Starboard is written: page titles, menus,
 buttons, settings, messages, release notes, help and the README. It applies to new text and to anything you
-touch. Help articles also follow `HELP-WRITING.md`.
+touch. Help articles also follow `HELP-WRITING.md`; changelogs also follow `CHANGELOGS.md`.
 
 ## About this guide
 
@@ -307,7 +307,9 @@ time, with the exact date and time in words for screen readers.
 **A change from a date.** A muted tag under the title: "From 1 December 2026". Only for a change that has an
 agreed date and has not happened yet. Leave it off once the change is live.
 
-**Release notes and upgrade wizard.** Group as Added, Changed, Fixed and Security. Each item:
+**Release notes and upgrade wizard.** Group as Added, Changed, Deprecated, Removed, Fixed and Security, in
+that order, leaving out any type with nothing in it: the same types as the changelog (`CHANGELOGS.md`). Each
+item:
 - a bold headline that says what the person can now do, in sentence case, with no marketing words
   ("seamlessly", "easily", "enhanced");
 - one or two sentences on what changed and who it helps;

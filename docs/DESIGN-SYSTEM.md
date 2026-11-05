@@ -1,7 +1,7 @@
 # Storyarr design system
 
 Version 0.1 (draft for the redesign), 1 November 2026. The target every page moves towards. What exists today
-is in `COMPONENTS.md`; the redesign plan behind it is kept privately. Words are in `CONTENT-DESIGN.md`;
+is in `COMPONENTS.md`; the redesign plan behind it is kept privately. Words are in `CONTENT-DESIGN.md` and changelogs in `CHANGELOGS.md`;
 accessibility in `ACCESSIBILITY.md`, `WCAG.md` and `ALT-TEXT.md`; security checks and how to report them in `SECURITY-CHECKS.md`; the
 component reference is `LIBRARY.md`.
 
