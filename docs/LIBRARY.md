@@ -68,13 +68,13 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 ### Shell
 | Component | Classes | Notes |
 |---|---|---|
-| Side menu (rail) | `.rail`, `.rail__brand` and `.rail__name` (logo with the name underneath), `.rail__logo` (logo only), `.rail__search`, `.rail__end`, `.with-rail` | Both apps; hidden on phones. `.rail__search` comes straight after the brand |
-| Header | `.site-header`, `.site-header--no-rail` (pages without a rail: name and logo start row 1), `.site-header__bar`, `.site-header__brand`, `.site-header__search`, `.site-header__search-btn` (phones), `.site-header__server` (the server name, start of the level 1 menu), `.site-header__actions`, `.site-header__tabs` | Row 1: 1st level, search, Display. Row 2: 2nd level, only when the page has tabs. Nothing else |
+| Side menu (rail) | `.rail`, `.rail__brand` and `.rail__name` (logo with the name underneath), `.rail__logo` (logo only), `.rail__search`, `.rail__end`, `.rail__version`, `.with-rail` | Both apps; hidden on phones. `.rail__search` comes straight after the brand. The app's version, "v0.9.1", sits at the bottom in `.rail__end > .rail__version`: plain text, not a link |
+| Header | `.site-header`, `.site-header--no-rail` (pages without a rail: name and logo start row 1), `.site-header__bar`, `.site-header__brand`, `.site-header__search`, `.site-header__search-btn` (phones), `.site-header__server` (the server name, start of the level 1 menu), `.site-header__actions`, `.site-header__tabs` | Row 1: 1st level, search, Help, Display. Row 2: 2nd level, only when the page has tabs. Nothing else. Help opens the help centre article for the page you are on, not the help centre's front page: the article for what the page does, or the help index's section when no one article covers the page. Its hidden text names the article's subject ("Help with checking your disks' health (opens in a new tab)"). Every page with the header has its own link, kept in one list in the app, and the app's build stops if a page has none or an article is missing |
 | Menu tabs (level 1 and level 2 menus) | `.menu-tabs`, `.menu-tabs__label`, `.is-compact` | Icons and names; icons only when they do not fit; current page bar |
 | Count and update dot | `.count`, `.update-dot` | Meaning in hidden text |
-| Phone menu | `.phone-menu-button`, `.phone-menu`, `.phone-menu__section > a` (an item with no 1st level), `.phone-menu__search`, `.phone-menu__section`, `.phone-menu__foot` | Drawer from the left; search, main menu, 1st level; account and sign out at the foot |
+| Phone menu | `.phone-menu-button`, `.phone-menu`, `.phone-menu__section > a` (an item with no 1st level), `.phone-menu__search`, `.phone-menu__section`, `.phone-menu__foot` | Drawer from the left; search, main menu, 1st level; the version and sign out at the foot |
 | Page and page head | `.page`, `.page--narrow` (Sign in, Set up), `.section-head`, `.section-head__control`, `.page-head`, `.page-head__text`, `.page-head__summary` | One visible h1; page actions on the right |
-| Footer | `.site-footer`, `.site-footer__app`, `.site-footer__brand`, `.site-footer__links`, `.site-footer__maker`, `.maker-mark` | On every page but Sign in and Set up. Left: app icon, name, "Version 0.7.4", then Help (only when the app has a help centre), About, Updates. Right: the dinosaur mark and TheMightyTRexUK, one link to the GitHub profile (copy the markup from the gallery) |
+| Footer | `.site-footer`, `.site-footer__app`, `.site-footer__brand`, `.site-footer__links`, `.site-footer__maker`, `.maker-mark` | On every page but Sign in and Set up. Left: app icon and name, then Help (only when the app has a help centre), Release notes (opens the release notes slide-out), the app's GitHub repository, and About and updates, with "Upgrade available" when a newer release is out. The version is not in the footer: it is at the bottom of the side menu and the phone menu. Right: the dinosaur mark and TheMightyTRexUK, one link to the GitHub profile (copy the markup from the gallery) |
 | Display button | `.icon-btn` (sun icon, `.label` Display), `aria-haspopup="dialog"`, opening a `.side-panel` titled Display and accessibility; inputs with `data-display`, `data-display-save`, `data-display-reset` | Last item in the header on every page. The choices and their order are in `ACCESSIBILITY.md` section 1 |
 
 ### Actions
@@ -228,6 +228,6 @@ Built from the tokens, used by one app, so not in `components.css`:
 
 - **Starboard:** `.access-change` (what Starboard can access, with the command to change it), `.job-run` (a server job
   with Run now), the storage charts (`--media-*` map to `--series-*`), the release notes slide-out
-  (`.release-notes`, opened from the version in the footer).
+  (`.release-notes`, opened from Release notes in the footer).
 - **Storyarr:** the bookshelf and series views.
 

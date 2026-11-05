@@ -9,6 +9,12 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 ## [Unreleased]
 
 ### Added
+- **Help goes to the page's own article.** `docs/LIBRARY.md`, Header: the Help button opens the help centre article
+  for the page you are on, or the help index's section when no one article covers it, with hidden text naming the
+  subject. Each app keeps one list of pages and articles, and its build stops if a page has none or an article is
+  missing (5 November 2026).
+- **The version in the side menu.** `.rail__version` at the bottom of the rail, in plain text; the footer gains
+  Release notes and loses the version (5 November 2026).
 - **Progress bars, a column, and multiple choice.** `docs/WIZARD.md` section 5, A job's progress: one bar per job,
   drawn once and updated in place, errors below it with Try again, Show the details or Stop. `docs/TERMINAL.md`:
   a column at most 100 characters wide, centred in a wider window, text wrapped again at any size, and multiple

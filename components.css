@@ -343,6 +343,13 @@
     gap: var(--space-2);
     justify-items: center;
   }
+  /* The app's version at the bottom of the side menu: plain text, not a link (Release notes is in the footer). */
+  .rail__version {
+    padding-bottom: var(--space-2);
+    color: var(--color-text-muted);
+    font-size: var(--text-xs);
+    text-align: center;
+  }
   .with-rail {
     padding-left: var(--rail-w);
   }
