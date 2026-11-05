@@ -110,7 +110,36 @@ The terminal version of Snaglist ("Feedback in a wizard" in `WIZARD.md`):
 - The menu line is cleared, the whole window scrolls again, and the cursor is left under the last line, ready
   for the shell.
 
-## 9. Checks before a terminal wizard ships
+## 9. A run first script: the one thing to launch
+
+After the operating system is installed, a person launches one script and everything else is set up for them.
+Starboard's `run-first.sh` (the "Run first script") is the first one.
+
+- **One command,** shown first in the README and the help: `curl -fsSL …/run-first.sh | bash`. Show the careful
+  way too (download, read, run) and a `--check` option that only reports.
+- **Ask about the look first, in plain words, before anything is drawn:** "Press Enter to start, or type a for
+  accessible mode". Software that reads text aloud must be able to read that line. Accessible mode is the plain
+  way (section 1), and it is passed on to everything the script starts (`--plain`), so it holds for the whole
+  installation.
+- **The same frame as the wizard it starts:** heading box, progress bar, menu, help over the step. The first step
+  is a welcome with the app's logo (below) and what will happen.
+- **Check, then ask, then change.** List what is there and what is missing, with a tick or a cross and the word,
+  changing nothing. Then show the exact commands and ask once before running them. Install only what is missing,
+  and never run as root by itself: sudo asks for the password, and the script never types or keeps it.
+- **Choose the next wizard for the computer.** With a desktop, recommend the browser wizard and open it at the end,
+  with any one-time code filled in from the address (after `#`, so it never reaches the server's log). With no
+  desktop, recommend the terminal wizard. Always offer the other one.
+- **Safe to run again:** a second run finds everything in place, says so, and updates rather than downloads again.
+- **Answers come from the terminal** (`/dev/tty`), so it works when the script arrives through a pipe.
+
+### The logo in a terminal
+
+- Draw it with block characters (`█ ▀ ▄`, two pixels a character), about 20 characters wide and 10 lines tall,
+  beside the welcome text, in the logo's two colours (256-colour codes close to the tokens).
+- Only in the boxed way. Plain mode and screen readers get the app's name in words, never the blocks.
+- With `NO_COLOR` the shape stays, in the terminal's own colour.
+
+## 10. Checks before a terminal wizard ships
 
 1. Walk every job to the end, boxed and plain, at 80 by 24, 80 by 30, 140 by 60 and 60 by 20, and change the
    window's size in the middle of a step: the heading, the bar and the menu stay in place.
@@ -120,3 +149,5 @@ The terminal version of Snaglist ("Feedback in a wizard" in `WIZARD.md`):
    question.
 5. A QR code from each step scans with a phone, and the address it opens is the one shown by Show the link.
 6. Nothing typed as an answer, and no secret, appears on screen, in a log or in a report.
+7. A run first script: on a bare system with nothing installed, and again with everything installed, in a
+   throwaway virtual machine for each supported system.

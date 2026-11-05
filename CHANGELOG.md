@@ -9,6 +9,11 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 ## [Unreleased]
 
 ### Added
+- **A run first script, and the logo in a terminal.** `docs/TERMINAL.md` section 9: after the operating system is
+  installed, one script sets up everything else. It asks about accessible mode first, in plain words, and passes it
+  on; checks, then asks, then installs only what is missing; opens the browser wizard on a desktop or the terminal
+  wizard without one. The logo is drawn in block characters in the boxed way only. Checks are now section 10
+  (5 November 2026).
 - **Terminal wizards fit the window.** `docs/TERMINAL.md` section 2: the heading box, progress bar and menu stay in
   place and only the lines between them scroll; the window is measured at every step and when it changes size. The
   feedback QR code holds more of the report the larger the window is, in four tiers, down to the title alone in
