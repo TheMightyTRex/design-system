@@ -10,6 +10,7 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ### Added
 - **Two square help icons** (7 November 2026): `help` for help that opens in a slide-out and `help-new-tab` for help that opens in a new tab. In-page help is always a link that opens a slide-out, never a fold-out or a dialog.
+- **Wizard pieces in the gallery** (7 November 2026): choosing an outside service, required fields, a job bar with its count and the Check table; `WIZARD.md` and `TERMINAL.md` say where a step's help goes, how a job shows its count and how the Check step looks.
 - **Tidier tables** (7 November 2026): row headings look like their cells, in bold; `.table--middle` lines every cell up on the middle for a summary with Change buttons.
 - **New-tab links** (7 November 2026): every link that opens a new tab shows the `external-link` icon after its words.
 - **Required fields** (7 November 2026): a * after the label (`.field__required`); the key, "* = Required" (`.required-key`), at the bottom of the help slide-out, not in the form.
@@ -104,6 +105,7 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
   (2 November 2026).
 
 ### Fixed
+- **Meter words** (7 November 2026): the timer and count on the right of a meter stay on one line; `.nowrap` added to the utilities.
 - **Segmented switch** (7 November 2026): no gap between its buttons when it is a fieldset, and the buttons keep their width when the choice changes.
 - **Focus is not hidden** by the sticky header or the save bar when the page scrolls (WCAG 2.4.11,
   4 November 2026).

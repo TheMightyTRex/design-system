@@ -133,6 +133,7 @@
     <li class="g-group">Patterns</li>
     <li><a href="#which">Slide-out, dialog or page</a></li>
     <li><a href="#wizard">Wizard</a></li>
+    <li><a href="#wizard-pieces">Wizard pieces</a></li>
     <li><a href="#events">Event list</a></li>
     <li><a href="#changes-preview">What will change</a></li>
     <li><a href="#month-nav">Earlier and later</a></li>
@@ -240,7 +241,7 @@
               <a href="#header">{{i:list-checks}}<span class="menu-tabs__label">Library review</span> <span class="count">12<span class="visually-hidden"> to review</span></span></a>
             </nav>
             <form class="site-header__search search-field" id="g-search" role="search" onsubmit="return false"><input class="input" type="search" aria-label="Search books or authors" placeholder="Search books or authors"><button class="visually-hidden">Search</button></form>
-            <div class="site-header__actions"><button class="icon-btn site-header__search-btn" type="button" data-search-open aria-controls="g-search" aria-expanded="false" aria-label="Search">{{i-lg:search}}</button><button class="icon-btn" type="button">{{i-lg:sun}}<span class="label">Display</span></button></div>
+            <div class="site-header__actions"><button class="icon-btn site-header__search-btn" type="button" data-search-open aria-controls="g-search" aria-expanded="false" aria-label="Search">{{i-lg:search}}</button><a class="icon-btn" href="#" target="_blank" rel="noopener noreferrer">{{i-lg:help-new-tab}}<span class="label">Help</span><span class="visually-hidden"> with this page (opens in a new tab)</span></a><button class="icon-btn" type="button">{{i-lg:sun}}<span class="label">Display</span></button></div>
           </div>
           <div class="site-header__tabs">
             <nav class="menu-tabs" aria-label="Library shelves (example)">
@@ -811,9 +812,9 @@
               <label class="option-card"><input type="radio" name="g-wiz-app"><strong>NZBGet</strong><small>Uses less memory on a small server.</small></label>
               <label class="option-card"><input type="radio" name="g-wiz-app"><strong>I do not use Usenet</strong><small>Leaves out the Usenet sites to search.</small></label>
             </fieldset>
-            <p class="help-links"><button type="button" class="help-link" data-opens="g-wiz-help" aria-controls="g-wiz-help" aria-expanded="false">{{i:help}}<span>What is Usenet?</span></button><button type="button" class="help-link" data-opens="g-wiz-help" aria-controls="g-wiz-help" aria-expanded="false">{{i:help}}<span>What is SABnzbd?</span></button></p>
             <p>After it is installed, SABnzbd is at <span class="address"><a href="http://192.0.2.10:8080" target="_blank" rel="noreferrer">http://192.0.2.10:8080{{i:external-link}}<span class="visually-hidden"> (opens in a new tab)</span></a><button type="button" class="copy-btn" data-copy="http://192.0.2.10:8080" data-copied="Address copied" aria-label="Copy http://192.0.2.10:8080">{{i:copy}}</button></span></p>
             <div class="command"><code class="code-block">docker compose up -d sabnzbd</code><button type="button" class="btn copy-btn copy-btn--label" data-copy="docker compose up -d sabnzbd" data-copied="Command copied">{{i:copy}}<span>Copy</span></button></div>
+          <p class="help-links"><button type="button" class="help-link" data-opens="g-wiz-help" aria-controls="g-wiz-help" aria-expanded="false">{{i:help}}<span>What is Usenet?</span></button><button type="button" class="help-link" data-opens="g-wiz-help" aria-controls="g-wiz-help" aria-expanded="false">{{i:help}}<span>What is SABnzbd?</span></button><button type="button" class="help-link" data-opens="g-wiz-help" aria-controls="g-wiz-help" aria-expanded="false">{{i:help}}<span>Help with this step</span></button></p>
           </div>
           <div class="wizard__foot"><button class="btn btn--primary" type="button">Continue to Download options</button><button class="btn" type="button">Back</button><button class="btn btn--quiet" type="button">Skip this step</button></div>
         </div>
@@ -853,17 +854,52 @@
   </div>
   <div class="side-panel-layer" id="g-wiz-help" hidden>
     <div class="side-panel-backdrop"></div>
-    <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="g-wiz-help-h">
+    <aside class="side-panel side-panel--wide" role="dialog" aria-modal="true" aria-labelledby="g-wiz-help-h">
       <div class="panel-header"><h2 class="panel-header__title" id="g-wiz-help-h">What is Usenet?</h2><button class="icon-btn" type="button" data-closes aria-label="Close help">{{i:x}}</button></div>
       <div class="side-panel__body"><p>Usenet is a network of servers that keep copies of files people post. You pay a Usenet provider for access, and an indexer lists what is there.</p><h3>What you need</h3><ul><li>A Usenet provider, which you pay for each month.</li><li>An indexer, which lists the files.</li><li>A Usenet app, such as SABnzbd, which fetches them.</li></ul><h3>What this step does</h3><p>It installs the Usenet app and connects it to the app, so each download goes into the right folder.</p><p>Help is a slide-out: the step stays in view beside it. Only this text scrolls; the heading, Close and Back to set-up stay in view. A press outside closes it.</p></div>
-      <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Back to set-up</button></div>
+      <div class="side-panel__foot"><button class="btn" type="button" data-closes>Back to set-up</button><a class="help-link" href="#" target="_blank" rel="noopener noreferrer">{{i:help-new-tab}}<span>Read it in the help centre</span><span class="visually-hidden"> (opens in a new tab)</span></a></div>
     </aside>
   </div>
   <div class="g-notes">
     <div><h4>Shape</h4><ul><li>Progress bar, then the step bar for a step in parts, then the step. The step bar is as wide as the progress bar, with a line between parts; parts are numbered 1, 2, 3 and each is a step in the count (here steps 6 to 8 of 18). On phones only the numbers show, with ticks for done parts.</li><li>Review aids (What happens next, decision tree) only while testing: beside the step from 1100px, under it below. Without them the step has the whole width.</li><li>The first question asks which job (new install, restore, migration); each has its own wizard (<code>.wizard-paths</code>).</li></ul></div>
     <div><h4>Steps</h4><ul><li>One question per step; steps that do not apply are left out, and the tree says why.</li><li>Option cards, one marked "(recommended)" with the reason. Never "easiest".</li><li>Continue first, then Back, then Skip this step.</li></ul></div>
-    <div><h4>Help</h4><ul><li>"What is…" links at the end of the part they explain, opening a slide-out (<code>.side-panel</code>), so the step stays in view beside the help.</li><li>Addresses are links with a copy button; commands have a labelled copy button. Copying works on plain http.</li></ul></div>
+    <div><h4>Help</h4><ul><li>"What is…" links at the end of the part they explain, with the square help icon, opening a slide-out about half the screen wide (<code>.side-panel--wide</code>), so the step stays in view beside the help. The step's own help, with Help with this step, sits at the bottom of the step.</li><li>Addresses are links with a copy button; commands have a labelled copy button. Copying works on plain http.</li></ul></div>
     <div><h4>Classes</h4><ul><li><code>.wizard-layout</code>, <code>.wizard-main</code>, <code>.wizard-aside</code>, <code>.wizard-progress</code>, <code>.steps--sub</code>, <code>.wizard-paths</code>, <code>.wizard-next</code>, <code>.wizard-tree</code>, <code>.help-links</code>, <code>.help-link</code>, <code>.address</code>, <code>.copy-btn--label</code>, <code>.side-panel</code>, <code>.wizard-summary</code></li></ul></div>
+  </div>
+</section>
+
+<section class="g-section" id="wizard-pieces" aria-labelledby="wizard-pieces-h">
+  <header><h2 id="wizard-pieces-h">Wizard pieces</h2><p class="muted">Choosing an outside service, a required field, a job's bar with its count, and the check before anything is written (<code>docs/WIZARD.md</code>, sections 5 and 9).</p></header>
+  <div class="g-demo stack-4">
+    <fieldset aria-required="true"><legend class="field__label">VPN provider<span class="field__required" aria-hidden="true">*</span></legend>
+      <p class="hint">Choose the one you have an account with. Each link opens the provider's site in a new tab.</p>
+      <div class="option-cards option-cards--row">
+        <label class="option-card"><input type="radio" name="g-vpn"><strong>Example VPN</strong><small><a href="#" target="_blank" rel="noopener noreferrer">vpn.example.com<span class="visually-hidden"> (Example VPN's site, opens in a new tab)</span>{{i:external-link}}</a></small></label>
+        <label class="option-card"><input type="radio" name="g-vpn"><strong>Sample Private Network</strong><small><a href="#" target="_blank" rel="noopener noreferrer">network.example.org<span class="visually-hidden"> (Sample Private Network's site, opens in a new tab)</span>{{i:external-link}}</a></small></label>
+        <label class="option-card"><input type="radio" name="g-vpn"><strong>Another one that Gluetun supports</strong><small>Type its name below</small></label>
+      </div>
+    </fieldset>
+    <div class="form-stack">
+      <div class="field"><span class="field__label">Connection</span><span class="hint">WireGuard is quicker and simpler.</span>
+        <fieldset class="segmented"><legend class="visually-hidden">Connection</legend><label><input type="radio" name="g-conn" checked><span>WireGuard</span></label><label><input type="radio" name="g-conn"><span>OpenVPN</span></label></fieldset></div>
+      <div class="field"><label for="g-wg-key">WireGuard private key<span class="field__required" aria-hidden="true">*</span></label><input class="input" id="g-wg-key" type="password" required></div>
+    </div>
+    <div class="meter"><div class="meter__label"><span>Downloading and starting the apps. Please wait, this can take some time…</span><span class="nowrap"><span class="numeric">3 min 12 s</span><span class="numeric"> · 5 of 12 installed</span></span></div>
+      <div class="progress" role="progressbar" aria-label="Starting the apps" aria-valuetext="5 of 12 installed"><span style="width:42%"></span></div></div>
+    <div class="table-wrap" data-stack><table class="table table--fixed table--middle"><caption class="visually-hidden">What will be set up</caption>
+      <colgroup><col class="col-quarter"><col><col class="col-state"></colgroup>
+      <thead><tr><th scope="col">What</th><th scope="col">Your answer</th><th scope="col"><span class="visually-hidden">Change</span></th></tr></thead>
+      <tbody>
+        <tr><th scope="row" data-label="What">Media folder</th><td data-label="Your answer"><code>/srv/media</code></td><td data-label=""><button class="btn btn--quiet" type="button">Change<span class="visually-hidden"> media folder</span></button></td></tr>
+        <tr><th scope="row" data-label="What">VPN</th><td data-label="Your answer">Example VPN, WireGuard</td><td data-label=""><button class="btn btn--quiet" type="button">Change<span class="visually-hidden"> VPN</span></button></td></tr>
+      </tbody></table></div>
+    <p class="required-key"><span class="field__required">*</span>= Required <span class="muted">(shown at the bottom of the help slide-out, not in the form)</span></p>
+  </div>
+  <div class="g-notes">
+    <div><h4>Outside services</h4><ul><li>At most six, spelt as on their own sites, each with its site as a new-tab link and the <code>external-link</code> icon; then Another one. Nothing chosen the first time.</li></ul></div>
+    <div><h4>Required</h4><ul><li>A * after the label; the control is <code>required</code>. The key goes in the help slide-out.</li></ul></div>
+    <div><h4>Job count</h4><ul><li>After the timer: installed, then running, counted from Docker.</li></ul></div>
+    <div><h4>Classes</h4><ul><li><code>.option-cards--row</code>, <code>.field__required</code>, <code>.required-key</code>, <code>.segmented</code>, <code>.meter</code>, <code>.table--middle</code></li></ul></div>
   </div>
 </section>
 

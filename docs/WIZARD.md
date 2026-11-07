@@ -111,6 +111,10 @@ When a step runs a job that takes time (installing, downloading, building, resto
 - **One bar per job, drawn once and updated in place.** It never repeats down the page or the window. A redraw
   replaces it; a retry draws the step afresh with one new bar, and the jobs already done listed with a tick.
 - **Words beside the bar:** what is happening, "Please wait, this can take some time...", and which job of how many.
+- **On the right, after the timer, how far it has got** when the job can tell: "3 min 12 s · 5 of 12 installed"
+  while the apps download, then "9 of 12 running" while they start (TheMightyTRexUK, 7 November 2026). Count from
+  the thing itself (Docker), not from the job's words, and leave the count out when it cannot be asked. In the
+  browser the count is the bar's `aria-valuetext`; in the terminal it follows the timer on the bar line.
 - **Errors go below the bar.** The bar stays where it stopped, marked "did not finish", and the problem is under it
   in plain words, with the choices: Try again (recommended), Show the details, or Stop. Never write over the bar,
   and never move the error above it.
@@ -147,13 +151,20 @@ Testing only (section 1).
 - Every step has help for each thing a newcomer may not know: the app, the term, the folder, the command.
   Check this for every step before a wizard ships.
 - **The links go at the end of the part they explain**, not under the heading: the API key link after the
-  API key fields. `.help-links` holds them, one `.help-link` each, written as the question ("What is a
-  terminal?").
+  API key fields. `.help-links` holds them, one `.help-link` each with the square `help` icon, written as the
+  question ("What is a terminal?").
+- **A step's own help goes at the bottom of the step**, above the buttons, in one `.help-links` row: the step's
+  questions first ("Which one is right for me?"), then "Help with this step", which opens the step's help centre
+  article in the slide-out (TheMightyTRexUK, 7 November 2026). Never a fold-out (`details`) for help.
 - A link opens a slide-out (`.side-panel-layer` with `.side-panel`, opened with `data-opens`), because help is
   longer reading beside the step ("Slide-out, dialog or page" in `LIBRARY.md`; 4 November 2026). The step stays
   in view beside it on computers; on phones the slide-out is full width.
-- The panel header (the question and Close) and the foot ("Back to set-up") stay in view, and only
-  `.side-panel__body` scrolls.
+- The help slide-out is the wide one, about half the screen (`.side-panel--wide`). Its header (the question,
+  or "Help: " and the step's question, and Close) and its foot stay in view, and only `.side-panel__body` scrolls.
+  The foot has "Back to set-up" (a secondary button) first, then, when the help is a help centre article, "Read
+  it in the help centre" with the `help-new-tab` icon.
+- When the step has a required field, the help ends with the key "* = Required" (`.required-key`); the form
+  itself only has the stars (`LIBRARY.md`, Field).
 - It follows every slide-out's behaviour: focus moves to Close, Tab stays inside, Escape, Close and a press
   outside close it, focus returns to the link, and the page behind does not scroll.
 - Help follows `HELP-WRITING.md`: the basics first, then what it means for this step. Pictures are
@@ -167,6 +178,20 @@ Testing only (section 1).
   Copy beside the icon), because newcomers may not know the icon.
 - Copying works on plain http too: when the browser refuses the clipboard, `components.js` copies from a
   hidden text box. The toast says what was copied (`data-copied`, such as "Address copied").
+
+### Choosing an outside service (a VPN provider, a Usenet provider)
+
+- A grid of option cards that fits the width (`.option-cards--row`), at most six of the best known, each with
+  its name spelt as on the service's own site and its site under it as a new-tab link with the `external-link`
+  icon. Then one card, "Another one that … supports", which shows a field to type the name.
+- Nothing is chosen the first time: the service is the person's own. When they come back, their last answer is
+  kept. The terminal lists the same services, from the same list file, with no default the first time.
+
+### Check before writing
+
+- The step before anything is written is a table (`.table.table--fixed.table--middle` in `.table-wrap[data-stack]`):
+  What, Your answer and a Change button on each row that goes back to that step. Settings shown in full are a
+  table too, never a list of terms (TheMightyTRexUK, 7 November 2026).
 
 ## 10. The end
 
