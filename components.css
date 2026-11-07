@@ -720,7 +720,7 @@
     vertical-align: -0.15em;
   }
   /* Required fields: a * after the label (hidden from screen readers, which hear the control's required state),
-     and "* = Required" once at the bottom of the form, step or slide-out (LIBRARY.md, Fields). */
+     and "* = Required" at the bottom of the help slide-out, not in the form (LIBRARY.md, Fields). */
   .field__required {
     margin-left: 0.2em;
     color: var(--status-danger-fg);
