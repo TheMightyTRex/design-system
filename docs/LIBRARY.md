@@ -92,7 +92,8 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 ### Inputs
 | Component | Classes | Notes |
 |---|---|---|
-| Field | `.field`, `.field__label`, `.hint`, `.field-error` | Label above, hint, error that says how to fix it |
+| Links that open a new tab | `a[target="_blank"]` with the `external-link` icon last | Every link that opens a new tab shows the `external-link` icon after its words and says "(opens in a new tab)" for screen readers, such as a provider's site in a list (TheMightyTRexUK, 7 November 2026). Help that opens in a new tab uses `help-new-tab` in front instead |
+| Field | `.field`, `.field__label`, `.hint`, `.field-error`, `.field__required`, `.required-key` | Label above, hint, error that says how to fix it. **Required fields** (TheMightyTRexUK, 7 November 2026): a required field's label ends with `<span class="field__required" aria-hidden="true">*</span>` and its control has `required` (or `aria-required="true"` for a group of choices); a form, wizard step or slide-out with any required field ends with one `.required-key` line, "* = Required", at the bottom of its content above the buttons. Optional fields are not marked |
 | Text, select, text area | `.input`, `.select`, `.textarea` | 44px; `aria-invalid` shows the error border |
 | Search field | `.search-field` | Plain box; hidden submit button |
 | Input with unit | `.input-group`, `.input-group__unit` | |

@@ -714,6 +714,25 @@
     color: var(--color-text-muted);
     font-size: var(--text-sm);
   }
+  /* A link that opens a new tab: its words, then the external-link icon (LIBRARY.md, Links). */
+  a[target="_blank"] > .i:last-child {
+    margin-left: 0.25em;
+    vertical-align: -0.15em;
+  }
+  /* Required fields: a * after the label (hidden from screen readers, which hear the control's required state),
+     and "* = Required" once at the bottom of the form, step or slide-out (LIBRARY.md, Fields). */
+  .field__required {
+    margin-left: 0.2em;
+    color: var(--status-danger-fg);
+  }
+  .required-key {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+  }
+  .required-key .field__required {
+    margin: 0 0.2em 0 0;
+  }
   .field-error {
     display: flex;
     gap: var(--space-1);
@@ -926,6 +945,7 @@
     grid-column: 2;
     color: var(--color-text-muted);
     font-size: var(--text-sm);
+    overflow-wrap: anywhere;   /* a long address wraps inside the card */
   }
   .option-card:has(input:checked) {
     border-color: var(--color-accent);
