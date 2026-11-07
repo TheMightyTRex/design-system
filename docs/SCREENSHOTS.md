@@ -27,8 +27,10 @@ and 2.23).
 
 ## 1. When a screenshot earns its place
 
-- **There is no quota.** Test each picture: does it carry a step the reader could not otherwise follow? If not,
-  leave the step as text. Three or four pictures is a normal, complete article.
+- **An app may set a minimum, and Starboard's is 3 in every topic** (tier one, owner, 7 November 2026). Choose them
+  with the test below: the steps a reader could least follow from the words, the page they start on, and what
+  they see when it has worked. Beyond the minimum, test each picture: does it carry a step the reader could not
+  otherwise follow? If not, leave the step as text.
 - **Worth a picture:** a control with no words on it (a menu of three dots, an icon button), a dialog the reader
   has not seen before, a page where the control is hard to find.
 - **Rarely worth a picture:** a menu that looks the same on every page, a second table repeating the one above it,
@@ -126,7 +128,7 @@ Give an AI tool this with its task. It is the whole of this guide in rules it ca
 
 ```text
 Screenshots for help. Follow every rule; say which you could not.
-1. Only add a picture for a step a reader could not follow from words. No quota; 3 or 4 is normal.
+1. At least the app's minimum (Starboard: 3 per topic), then only for steps a reader could not follow from words.
    Report which steps you left as text.
 2. Made-up data only, from a test copy of the app. Never a real server or account. If real data cannot be
    avoided, replace it in the page with made-up values, add the visible note "Example data", and check both
