@@ -9,6 +9,7 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 ## [Unreleased]
 
 ### Added
+- **Terminal in the main design system** (7 November 2026): `terminal/` holds the terminal frame (`terminal-frame.sh`) and the QR encoder (`qr.py`) every app's terminal scripts use, copied by `tools/sync.py` (Starboard: `lib/terminal-frame.sh`, Run first's copy and `starboard/qr.py`); the frame takes the app's name, issue address and own feedback flow as settings. `DESIGN-SYSTEM.md` has a Terminal chapter, the README lists `WIZARD.md`, `TERMINAL.md` and `terminal/`, `TERMINAL.md` says step by step how the feedback QR code is made, and the gallery draws a question, a job bar, help, plain mode and a real QR code.
 - **Two square help icons** (7 November 2026): `help` for help that opens in a slide-out and `help-new-tab` for help that opens in a new tab. In-page help is always a link that opens a slide-out, never a fold-out or a dialog.
 - **Wizard pieces in the gallery** (7 November 2026): choosing an outside service, required fields, a job bar with its count and the Check table; `WIZARD.md` and `TERMINAL.md` say where a step's help goes, how a job shows its count and how the Check step looks.
 - **Tidier tables** (7 November 2026): row headings look like their cells, in bold; `.table--middle` lines every cell up on the middle for a summary with Change buttons.

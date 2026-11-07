@@ -217,3 +217,25 @@ Links rendered on the page can use the render-time copy, because they redraw wit
 - Covers wall: auto-fill grid with `--cover-m` minimum; titles under covers, two lines maximum.
 - Tables only for real tabular data (Activity history, logs); everything else uses Rows.
 - Numbers in rows right-aligned; dates as in the content guide.
+
+## 8. Terminal
+
+Both apps also run in a terminal: the Run first script, the installer and the terminal set-up. A terminal wizard
+is the same wizard as the browser one, with the same steps, words, answers and help, drawn as text
+(`WIZARD.md`, One wizard, two ways to show it). The full rules are in `TERMINAL.md`; the code is in `terminal/`.
+
+- **Two ways to draw it.** Boxed: a heading box ("App | step", "step 3 of 6"), a progress bar that ends where the
+  box does, the step, and a menu fixed on the bottom two lines (b Back, ? Help, f Feedback, q Stop, and on the
+  right what Enter does). Plain, for screen readers, `--plain`, a window under 60 by 20, `TERM=dumb` or no
+  terminal: numbered lines, never redrawn, no colour, and the first line says which keys work.
+- **Questions:** numbered answers, the recommended one first, marked with a dot and "(recommended)", or "(your
+  last answer)" when someone comes back; the default in brackets, and Enter takes it.
+- **Help** is a box over the step, titled "Help: " and the question; the step comes back as it was.
+- **A job** has one bar, drawn in place: the job, which job of how many, what it is doing, the timer, then how far
+  it has got ("5 of 12 installed"). Only Ctrl+C works while it runs, and keys typed meanwhile are hidden and
+  dropped. A failure keeps the bar, marked, with the problem and the choices below it.
+- **Feedback** is Snaglist's, drawn in the terminal: f from any question, or Report this problem after a failure.
+  The report goes to the phone as a QR code that fits the window (`TERMINAL.md`, section 7), or as a link or a
+  file. Nothing typed as an answer is ever in it.
+- **Every error has a number** (RF-01, IN-01) that the help centre explains.
+

@@ -25,6 +25,9 @@
   .g-section > header { display: grid; gap: var(--space-2); padding-bottom: var(--space-3); border-bottom: 2px solid var(--color-text); }
   .g-item { display: grid; gap: var(--space-3); scroll-margin-top: calc(var(--header-h) + var(--tabs-h) + var(--space-4)); }
   .g-item > h3 { font-size: var(--text-lg); }
+  .g-term-wrap { overflow-x: auto; max-width: 100%; }
+  .g-term { display: inline-block; margin: 0; padding: 12px 16px; background: #14182e; color: #e8eaf6; font: 13px/1.22 "DejaVu Sans Mono", ui-monospace, monospace; white-space: pre; }
+  .g-term--qr { background: #fff; color: #000; line-height: 1; }  /* dark on light, as a terminal draws it, so it scans */
   .g-demo { padding: var(--space-6); border: 1px solid var(--color-divider); background: var(--color-bg); display: grid; gap: var(--space-4); overflow: hidden; }
   .g-demo--row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
   .g-notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-3) var(--space-6); font-size: var(--text-sm); }
@@ -134,6 +137,7 @@
     <li><a href="#which">Slide-out, dialog or page</a></li>
     <li><a href="#wizard">Wizard</a></li>
     <li><a href="#wizard-pieces">Wizard pieces</a></li>
+    <li><a href="#terminal">Terminal</a></li>
     <li><a href="#events">Event list</a></li>
     <li><a href="#changes-preview">What will change</a></li>
     <li><a href="#month-nav">Earlier and later</a></li>
@@ -900,6 +904,108 @@
     <div><h4>Required</h4><ul><li>A * after the label; the control is <code>required</code>. The key goes in the help slide-out.</li></ul></div>
     <div><h4>Job count</h4><ul><li>After the timer: installed, then running, counted from Docker.</li></ul></div>
     <div><h4>Classes</h4><ul><li><code>.option-cards--row</code>, <code>.field__required</code>, <code>.required-key</code>, <code>.segmented</code>, <code>.meter</code>, <code>.table--middle</code></li></ul></div>
+  </div>
+</section>
+
+<section class="g-section" id="terminal" aria-labelledby="terminal-h">
+  <header><h2 id="terminal-h">Terminal</h2><p class="muted">The same wizard drawn in a terminal (<code>docs/TERMINAL.md</code>; the code is in <code>terminal/</code>). Each drawing is 80 columns, the usual window.</p></header>
+  <div class="g-demo stack-4">
+    <h3>A question</h3>
+    <div class="g-term-wrap" tabindex="0" role="region" aria-label="A question in a terminal, 80 columns"><pre class="g-term">┌──────────────────────────────────────────────────────────────────────────────┐
+│  App | Your home network                                        step 1 of 4  │
+└──────────────────────────────────────────────────────────────────────────────┘
+  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0%
+
+  Can phones and other computers on your home network open App?
+  ●  1  Yes, with your password (recommended)
+        Phones, tablets and other computers at home can open it.
+     2  No, only this computer
+        You can change this later in Settings, Security.
+
+  › Your choice [1]:
+
+
+────────────────────────────────────────────────────────────────────────────────
+  b Back   ? Help   f Feedback   q Stop                     Enter: recommended</pre></div>
+    <h3>A job's bar</h3>
+    <div class="g-term-wrap" tabindex="0" role="region" aria-label="A job&#x27;s bar in a terminal"><pre class="g-term">┌──────────────────────────────────────────────────────────────────────────────┐
+│  App | Install what is missing                                  step 3 of 6  │
+└──────────────────────────────────────────────────────────────────────────────┘
+  ███████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   33%
+
+  Please wait, this can take some time...
+
+  ✔ Downloading the installer
+  ██████████████▓▓▒▒▒▒▓▓▒▒░░░░░░░░░░░░░░ ⠧  Installing (2 of 3) · 1 min 12 s
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+  Ctrl+C Stop                                                      Please wait</pre></div>
+    <h3>Help, a box over the step</h3>
+    <div class="g-term-wrap" tabindex="0" role="region" aria-label="Help as a box over the step"><pre class="g-term">┌──────────────────────────────────────────────────────────────────────────────┐
+│  App | Your home network                                        step 1 of 4  │
+└──────────────────────────────────────────────────────────────────────────────┘
+  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░    0%
+
+  ┌─ Help: Can phones and other computers open App? ─────────────────────┐
+  │ Yes lets phones, tablets and other computers at home open App        │
+  │ with your password. No keeps it to this computer. You can            │
+  │ change it later in Settings, Security.                               │
+  └────────────────────────────────────────────────────────── Enter: back ─┘
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+  Enter Back</pre></div>
+    <h3>Plain mode, for screen readers</h3>
+    <div class="g-term-wrap" tabindex="0" role="region" aria-label="The same question in plain mode"><pre class="g-term">== App | Your home network (step 1 of 4)
+Type b to go back, ? for help, f to send feedback or q to stop.
+Can phones and other computers on your home network open App?
+  1. Yes, with your password (recommended): Phones, tablets and other computers at home can open it.
+  2. No, only this computer: You can change this later in Settings, Security.
+Your choice [1]:</pre></div>
+    <h3>Feedback as a QR code (80 by 30)</h3>
+    <p class="small muted">Made with <code>terminal/qr.py</code> from a made-up new-issue address. A phone's camera opens the report, ready to send.</p>
+    <div class="g-term-wrap" tabindex="0" role="region" aria-label="Feedback as a QR code"><pre class="g-term g-term--qr">Scan it with your phone&#x27;s camera to open the report there. It holds a short report.
+
+
+                 █▀▀▀▀▀█ ▀▀▄▀▄▀▀ ▄▀ ▄█▀██▄ ▀▄▄ ▀  ▀ ▄▀ █▀▀▀▀▀█
+                 █ ███ █  ▀▄▀▀██  █▄   ▀██▀█ ▄▄ ▀█▀ █▄ █ ███ █
+                 █ ▀▀▀ █   █▀▄  ▄ ▄█ █▀▀▀█▄█▀ ▀▀█▀ ▀▀▀ █ ▀▀▀ █
+                 ▀▀▀▀▀▀▀ █▄█ █ █ █ ▀ █ ▀ █ █▄█ ▀▄▀▄█ █ ▀▀▀▀▀▀▀
+                 ▀▀ ██▄▀  ▄█ ██▄ █▀▀▀███▀▀█▄█▀██▀▄▄▄ ▄▄█ ▄▄ ▄▀
+                 █ █▄██▀ ▄ █▄██▀ ▄▀▄▄ █▄ █▄ ▄ ▄▄▄███ ▀ ▄   █▀▀
+                   █▀ ▀▀▄█▀▄ █ ▀▀  ▀ ██ ▀▀▀▄▄█▀▄▄█ ▀ ▄ ▄█▀▀█ ▀
+                 ▀▀▀█  ▀ ██ █▄ ▀▄█▄██▄▄███  █ ▀▄▄ ▄ ▄ ▀ ▄▀▄██▄
+                 ▄▀▀█▀▄▀█▄▄██ ▀ █ ▄▀▀ ▀█▄▀█▀▄▄ ▄▀▀▄█▀▄▄▀▄▄ ▄▄▄
+                 ▄ █▀█▀▀  ▀█▀▄▄██▄▄ ▀▄█  █   █▄▄▀▀  ▄ ▄▄▀▄▄█▄█
+                  ▀█▄█▀▀▀█▀  █▄ █▄█▀ █▀▀▀█ ██▀ ▄  █▄▄█▀▀▀█▀▄▄
+                 ▄▄  █ ▀ ██  ▀▄▀▄ ▀▀▀█ ▀ ██ ▀ █▄█▄█▄██ ▀ █▄▄▀▀
+                 ▀▀▀ ▀▀▀█▀█▀█▀▀█ ▀ ▀ █▀██▀▀█ █▄▄ █▄  █▀██▀   ▀
+                 █ █ ▄▀▀█▀▀▄▄ ▄  ███▀▀ ▄▄▄██ ▄█ ▀ ▀▄▄▀▄ █▀▄█ ▄
+                 █▀▄▄▄█▀█ ▀█▀▄▀███ ▀▄█▄ ▀▄    █▄█▀ █▀▄█▀███  ▄
+                 ▀▀ ██▄▀▀▀▄▄█▄▄ ▄▄█ ▀▀█▀█▄  ▀█▄▄▄▀█▄█▄▄▀▄ ▀▄ ▀
+                 ▄▀ ▄█▄▀ ▀█▀▀█ ██▀ ██▄ ▀▄▄█▄▄▀██▄ █▄▄▄▀▄█▄ ▄ ▀
+                  ▄▄▄█ ▀▄██▀▄██▄█▀█▀▄ █ ▀█▄ ▄▀█▄█▄▀▀ ▀██▀▄ ███
+                 ▀  ▀▀ ▀▀█▀▄▀▄ ▀█ ▀▀▄█▀▀▀████▀▀█▄▀▄ ▀█▀▀▀██ █
+                 █▀▀▀▀▀█  █▀▀ █▄▀▀▀ ▄█ ▀ ███ ▀█▄▀ ▄███ ▀ █▀▄
+                 █ ███ █ █▀ ▀▀▄▀ ▄▄▄▄▀▀█▀█▀▀█  █ █▄▄▄▀▀▀▀▀▀  ▀
+                 █ ▀▀▀ █ ▄ ▀█ █▀ ▀█ ▄       ▀█▄▄█▀▄ ▀██▄▄█▄██▄
+                 ▀▀▀▀▀▀▀ ▀      ▀ ▀▀     ▀▀▀▀▀ ▀   ▀ ▀▀▀  ▀
+
+
+────────────────────────────────────────────────────────────────────────────────
+  Enter Done   l Show the link</pre></div>
+  </div>
+  <div class="g-notes">
+    <div><h4>Frame</h4><ul><li>Heading box, a bar that ends where the box does, the step, and the menu on the bottom two lines. Only the lines between them scroll.</li></ul></div>
+    <div><h4>Questions</h4><ul><li>Numbered, the recommended first with a dot; the default in brackets; Enter takes it.</li></ul></div>
+    <div><h4>Jobs</h4><ul><li>One bar, drawn in place, with the timer and the count; only Ctrl+C while it runs.</li></ul></div>
+    <div><h4>QR codes</h4><ul><li>The largest that fits the window, dark on light, holding as much of the report as fits; never in plain mode.</li></ul></div>
   </div>
 </section>
 

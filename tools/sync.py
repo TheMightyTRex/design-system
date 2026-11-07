@@ -6,7 +6,8 @@ the gallery (four themes, 175% text) and run tools/contrast.py, then run:  pytho
 Add --check to list what would change without writing anything.
 It writes (folders set in tools/paths.py):
   Starboard  STARBOARD_WEB/css/tokens.css (font path ../fonts/), css/components.css, js/components.js,
-             js/ux-notes.js, icons/sprite.svg (library icons plus Starboard's own)
+             js/ux-notes.js, icons/sprite.svg (library icons plus Starboard's own); and, next to the web folder,
+             lib/terminal-frame.sh, the copy in run-first.sh and starboard/qr.py (from terminal/)
   Storyarr   STORYARR_SHARED/tokens.css (no @font-face or --font: Storyarr loads the font itself),
              components.css, ux-notes.js
 It does not commit. Commit in each repo, then rebuild and test each app.
@@ -52,6 +53,19 @@ if STARBOARD.exists():
     write(sprite, "\n".join(['<svg xmlns="http://www.w3.org/2000/svg">'] + [
         f'<symbol id="i-{k}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
         f'stroke-linecap="round" stroke-linejoin="round">{merged[k]}</symbol>' for k in sorted(merged)] + ["</svg>"]) + "\n")
+    # The terminal frame and QR encoder (terminal/): the installer reads lib/terminal-frame.sh, the Run first script
+    # carries a copy between its "terminal-frame" lines (it arrives on its own through curl), and the terminal
+    # set-up's feedback draws its QR code with starboard/qr.py.
+    app = STARBOARD.parent
+    frame = (HERE / "terminal/terminal-frame.sh").read_text()
+    write(app / "lib/terminal-frame.sh", frame)
+    write(app / "starboard/qr.py", (HERE / "terminal/qr.py").read_text())
+    first = app / "run-first.sh"
+    if first.exists():
+        text = first.read_text()
+        a = text.index("\n", text.index("# terminal-frame: start")) + 1
+        b = text.index("# terminal-frame: end")
+        write(first, text[:a] + frame + text[b:])
 
 if STORYARR.exists():
     t = re.sub(r"@font-face \{.*?\}\n\n", "", tokens, count=1, flags=re.S)

@@ -117,6 +117,38 @@ The terminal version of Snaglist ("Feedback in a wizard" in `WIZARD.md`):
 - Plain mode never draws the code (a screen reader cannot read it): it prints the link and saves the file.
 - When a step fails, offer **Report this problem** with the error already in the report.
 
+### How the QR code is made
+
+The code is `terminal/qr.py` (standard library only, every QR version, levels L and M); Starboard's terminal
+set-up (`starboard/terminal_setup.py`, `qr_fit` and `_show_qr`) is the worked example. In order:
+
+1. **Save the whole report first**, on the computer, so the short one in the code can say where it is.
+2. **Measure the room:** the window's lines less three (the title line and the two menu lines), and its columns.
+3. **Find the largest code that fits:** `qr.largest_version(columns, lines, quiet)`, first with the standard
+   4-module quiet zone, then with a 2-module one. Two module rows go on each line (half blocks), so a code of
+   *n* modules is *n* columns wide and *n*/2 lines high, plus the quiet zone. Keep the 4-module edge unless it
+   leaves room for less than about 180 bytes and the 2-module edge allows a larger code.
+4. **Fill it from the most to the least:** the room is `qr.byte_capacity(version, "L")`, at most 1,200 bytes
+   (larger codes are hard to scan off a screen). Try, in order, the pre-filled new-issue address with the report
+   without its technical details; then shorter reports with the person's words cut to 300, 200, 140, 90 and 50
+   characters; then the step, the version and where the whole report is saved; then the title alone. Take the
+   first that fits.
+5. **Encode and draw:** `code = qr.encode(address, largest=version)`, then `qr.draw(code, quiet=edge)` gives the
+   lines, dark on light with the colours forced. Centre it.
+6. **Show it on a page of its own:** the title line "Scan it with your phone's camera to open the report there",
+   and beside it, when it fits, what the code holds ("It holds a short report. The whole report is in …"); the
+   code; the link under it when there is room; and the menu, Enter Done and l Show the link.
+7. **When nothing fits,** show the link with "The QR code does not fit this window. Make the window larger, or use
+   Show the link". Plain mode never draws a code: it prints the link and saves the file.
+
+The address is a GitHub new-issue link (`https://github.com/<owner>/<repo>/issues/new?title=…&body=…&labels=…`)
+with every part URL-encoded, so a phone opens the report ready to send, already saying the app, its version, the
+system and the step. Before the app itself is on the computer (a Run first script's first steps), the frame's own
+feedback shows that link without a code (`terminal-frame.sh`, `feedback`).
+
+In the browser, Snaglist offers the same choice, Show as a QR code (`WIZARD.md`, section 12), using the same
+address and the same order of what goes in.
+
 ## 8. The end
 
 - The heading box says "Done", then a card with where to open the app (this computer, other devices) and the

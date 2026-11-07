@@ -13,7 +13,7 @@ guide and the accessibility guide.
 - **[Starboard](https://github.com/TheMightyTRex/starboard):** an accessible dashboard for a home media
   server. Plain HTML and JavaScript; it uses the library as it is.
 
-Each app keeps a copy of the library files, made by `tools/sync.py`. This repository is the source: never
+Each app keeps a copy of the library files, made by `tools/sync.py`, including the terminal frame and QR encoder. This repository is the source: never
 change the copies inside the apps.
 
 ## What is in it
@@ -31,6 +31,9 @@ change the copies inside the apps.
 | `docs/LIBRARY.md` | The component reference: every class, the rule for slide-out, dialog or page, and how each app adopts the library |
 | `docs/DESIGN-SYSTEM.md` | Principles, tokens, shell, page templates and consistency rules |
 | `docs/COMPONENTS.md` | Storyarr's interface before the redesign, and the duplicates to merge |
+| `docs/WIZARD.md` | Every job done in steps, in the browser and the terminal: one question per step, buttons, a job's progress, help in a slide-out, outside services, the Check table, feedback with Snaglist |
+| `docs/TERMINAL.md` | How a wizard looks and behaves in a terminal: the frame, questions, the menu line, help boxes, job bars, plain mode for screen readers, and feedback as a QR code |
+| `terminal/` | The terminal frame every app's terminal scripts use (`terminal-frame.sh`) and the QR code encoder for feedback (`qr.py`); `terminal/README.md` says how to use them |
 | `docs/CONTENT-DESIGN.md` | How every word is written: voice, rules, words each app uses, status vocabulary, patterns |
 | `docs/HELP-WRITING.md` | How help is written: tiers, kinds of topic, categories, layouts, screenshots |
 | `docs/CHANGELOGS.md` | How every project keeps its changelog, after Keep a Changelog: Unreleased first, the six change types, links, withdrawn releases |
