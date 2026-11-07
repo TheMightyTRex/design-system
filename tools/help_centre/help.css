@@ -36,7 +36,11 @@ body { margin: 0; background: var(--color-bg); color: var(--color-text); font-fa
 html.help-banner-hidden .help-banner { display: none; }
 .help-footer__note { max-width: 75ch; margin-bottom: var(--space-4); }
 .help-footer__note p { margin: 0 0 var(--space-2); }
-@media (max-width: 48rem) { .help-banner { margin: var(--space-2) var(--space-4) 0; } }
+@media (max-width: 48rem) {
+  .help-banner { margin: var(--space-2) var(--space-4) 0; }
+  /* On phones the Ad label carries it: the longer explanation is kept for screen readers only. */
+  .help-banner__body p + p { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
 /* Three columns: the menu, the article, On this page. */
 .help-layout { display: grid; grid-template-columns: 17rem minmax(0, 1fr) 13rem; gap: var(--space-8); max-width: 92rem; margin-inline: auto; padding-inline: var(--space-4); box-sizing: border-box; }
 .help-layout--no-toc { grid-template-columns: 17rem minmax(0, 1fr); }
