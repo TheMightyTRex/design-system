@@ -74,6 +74,10 @@
 <p>Measures every text and control colour pair against WCAG 2.2 AA (Web Content Accessibility Guidelines): in all four themes, and in Light and Dark for every palette. Text needs 4.5:1, and control borders and the focus ring need 3:1. The report must end with "0 failures".</p>
 <div class="command"><code class="code-block">python3 tools/contrast.py &gt; contrast-report.txt</code><button class="copy-btn" type="button" data-copy="python3 tools/contrast.py &gt; contrast-report.txt" aria-label="Copy command">{{i:copy}}</button></div>
 
+<h2 id="annotate">Mark up a help screenshot: annotate.js</h2>
+<p>Draws the outline, curved arrow and step-number badge that <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/SCREENSHOTS.md">Screenshots in help</a> sets out, anchored to the page's own elements, then checks that each outline still wraps its control, nothing is off the screen or covered, and the badges match the article's steps. Paste it into the browser's console on a preview with made-up data, mark, check, then take the screenshot.</p>
+<div class="command"><code class="code-block">Annotate.mark("Add an app", { step: 2 }); Annotate.verify({ steps: [2] })</code><button class="copy-btn" type="button" data-copy="Annotate.mark(&quot;Add an app&quot;, { step: 2 }); Annotate.verify({ steps: [2] })" aria-label="Copy command">{{i:copy}}</button></div>
+
 <h2 id="palettes">Make the palettes: palettes.py</h2>
 <p>Writes the five colour palettes in <code>palettes/</code> and the gallery's Palettes section. A palette changes only the colours. Status colours, chart series and High contrast stay the same, so their meanings never change. Run <code>contrast.py</code> after it.</p>
 <div class="command"><code class="code-block">python3 tools/palettes.py</code><button class="copy-btn" type="button" data-copy="python3 tools/palettes.py" aria-label="Copy command">{{i:copy}}</button></div>
