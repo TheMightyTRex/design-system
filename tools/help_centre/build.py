@@ -27,6 +27,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 # Set from the app's help-centre.json by configure().
 ROOT = HELP = None
 FOOTER_NOTE = BANNER = ""
+FAVICON = None
 BANNER_LABEL = "Advertisement"
 STRIP = []
 SPONSORED = []
@@ -40,7 +41,7 @@ def configure(config_path):
     """Reads help-centre.json: name, repo, site, and optionally help_dir, branch, leave_out, sections, logo_file,
     footer_starts (text that begins a footer on every page, left out of search), search_example and front_door."""
     global ROOT, HELP, NAME, TITLE, REPO, BLOB, SITE, LOGO, STOP, EXAMPLE, LEAVE_OUT, SECTIONS, FRONT_DOOR
-    global FOOTER_NOTE, BANNER, BANNER_LABEL, STRIP, SPONSORED
+    global FOOTER_NOTE, BANNER, BANNER_LABEL, STRIP, SPONSORED, FAVICON
     cfg_file = pathlib.Path(config_path).resolve()
     cfg = json.loads(cfg_file.read_text(encoding="utf-8"))
     ROOT = cfg_file.parent
@@ -67,6 +68,7 @@ def configure(config_path):
     BANNER = re.sub(r'href="(?![a-z][a-z0-9+.-]*:|#|/)([^"]+)"', lambda m: f'href="{SITE}{m.group(1)}"', BANNER)
     BANNER = re.sub(r'<a href="(https?://(?!themightytrex\.github\.io)[^"]+)"', r'<a href="\1" rel="sponsored noopener"', BANNER)
     STRIP = cfg.get("strip_between", [])
+    FAVICON = ROOT / cfg["favicon_file"] if cfg.get("favicon_file") else None  # the browser tab's icon
     SPONSORED = cfg.get("sponsored_links", [])  # text in an address that marks an affiliate link, such as "a_aid="
     logo = (ROOT / cfg["logo_file"]).read_text(encoding="utf-8") if cfg.get("logo_file") else ""
     logo = re.sub(r"<\?xml[^>]*>|<!--.*?-->|<title[^>]*>.*?</title>", "", logo, flags=re.S).strip()
@@ -148,6 +150,7 @@ TEMPLATE = """<!doctype html>
 <title>{title} · {site_title}</title>
 <meta name="description" content="{description}">
 <link rel="canonical" href="{canonical}">
+<link rel="icon" href="{root}assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="{root}assets/css/tokens.css">
 <link rel="stylesheet" href="{root}assets/css/components.css">
 <link rel="stylesheet" href="{root}assets/css/help.css">
@@ -295,6 +298,10 @@ def build(out):
         shutil.copy(f, site / "assets" / "css" / "fonts" / f.name)
     shutil.copy(HERE / "help.css", site / "assets" / "css" / "help.css")
     shutil.copy(HERE / "help.js", site / "assets" / "help.js")
+    if FAVICON and FAVICON.exists():  # else the logo itself
+        shutil.copy(FAVICON, site / "assets" / "favicon.svg")
+    else:
+        (site / "assets" / "favicon.svg").write_text(re.sub(r'\sclass="help-logo"[^>]*?focusable="false"', ' xmlns="http://www.w3.org/2000/svg"', LOGO, count=1), encoding="utf-8")
     shutil.copy(DS / "components.js", site / "assets" / "components.js")
     shutil.copy(DS / "icons.svg", site / "assets" / "icons" / "sprite.svg")
     groups = nav_groups()
@@ -315,6 +322,17 @@ def build(out):
         conv = markdown.Markdown(extensions=["tables", "sane_lists", "toc", "pymdownx.superfences"],
                                  extension_configs={"toc": {"slugify": slug}}, output_format="html")
         body = fix_links(conv.convert(rest), md)
+        # Callouts written GitHub's way ("> [!TIP]" and the rest) become the library's notices, so they look the same
+        # on GitHub and here: TIP and NOTE are information, IMPORTANT success-coloured, WARNING and CAUTION warnings.
+        tones = {"NOTE": ("info", "info"), "TIP": ("info", "info"), "IMPORTANT": ("success", "circle-check"),
+                 "WARNING": ("warning", "triangle-alert"), "CAUTION": ("danger", "circle-alert")}
+        def callout(m):
+            tone, ic = tones[m.group(1)]
+            inner = re.sub(r"^\s*<p>\s*", "<p>", m.group(2).strip(), count=1)
+            return (f'<div class="notice help-callout" data-tone="{tone}">{icon(ic, root)}'
+                    f'<div class="notice__body">{inner}</div></div>')
+        body = re.sub(r"<blockquote>\s*<p>\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(.*?)</blockquote>",
+                      lambda m: callout(m) if m.group(1) in tones else m.group(0), body, flags=re.S)
         # A wide table scrolls sideways on its own: as a labelled region the keyboard can reach and scroll
         # (WCAG 2.1.1), named after the section it is in.
         def wrap_table(m, _n=[0]):
