@@ -184,6 +184,8 @@ One rule for both apps, so a state is always in the same place relative to the t
   a toast. Text fields save with `.inline-save` (one field) or `.save-bar` (several), and their Save button is
   secondary. At most one primary button in view. A slide-out or dialog that edits one thing (an app, a
   connection) keeps one Save as the primary button in its foot.
+- **Buttons start on the left**, the main action first, in every dialog, slide-out and wizard foot; a danger button
+  in a slide-out and Skip this step in a wizard sit apart on the right (LIBRARY.md, Button).
 - **Danger is shown before and after.** A button that opens a danger dialog is `.btn--danger`; delete and remove
   use the `trash-2` icon; the dialog's other button is **Cancel**.
 - **One-of-several filters** are `.segmented`; filter chips are for toggles that can be on together.

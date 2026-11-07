@@ -21,6 +21,14 @@ for n in names:
         a = " ".join(f'{"stroke-width" if k=="strokeWidth" else k}="{v}"' for k, v in kv if k != "key")
         parts.append(f"<{tag} {a}/>")
     out.append(f'<symbol id="i-{n}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{"".join(parts)}</symbol>')
+# The library's own icons, drawn in Lucide's style (24 grid, 2 stroke, square corners as the library). They are not in
+# Lucide, so they are added after every rebuild (TheMightyTRexUK, 7 November 2026).
+OWN = {
+    "help": '<path d="M3 3h18v18H3z"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/>',
+    "help-new-tab": '<path d="M11 3H3v18h18v-8"/><path d="M15 3h6v6"/><path d="M21 3l-5.5 5.5"/><path d="M7.59 11a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M10.5 18h.01"/>',
+}
+for n, shapes in OWN.items():
+    out.append(f'<symbol id="i-{n}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{shapes}</symbol>')
 out.append("</svg>")
 (pathlib.Path(__file__).resolve().parent.parent/"icons.svg").write_text("\n".join(out))
 print(len(names), "icons")

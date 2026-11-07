@@ -9,6 +9,8 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 ## [Unreleased]
 
 ### Added
+- **Two square help icons** (7 November 2026): `help` for help that opens in a slide-out and `help-new-tab` for help that opens in a new tab. In-page help is always a link that opens a slide-out, never a fold-out or a dialog.
+- **Where buttons sit** (7 November 2026): on the left, the main action first, in dialogs, slide-outs and wizards; danger and Skip apart on the right.
 - **Help centre.** `tools/help_centre/build.py` builds an app's Markdown help into web pages with this design
   system: search, a collapsible menu of every article on the left (it can be hidden), On this page following the
   article on the right with the section being read marked, Display and accessibility, and on phones one header bar

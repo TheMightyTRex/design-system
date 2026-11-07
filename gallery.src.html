@@ -213,7 +213,7 @@
       <span style="display:inline-block;width:48px;height:24px;background:var(--color-accent)"></span>
       <span class="small muted">4, 8, 12, 16, 24, 32, 48</span>
     </div>
-    <div class="g-demo--row">{{i:book-open}}{{i:compass}}{{i:activity}}{{i:settings}}{{i:server}}{{i:hard-drive}}{{i:download}}{{i:search}}{{i:sun}}{{i:menu}}{{i:x}}{{i:check}}{{i:circle-help}}{{i:triangle-alert}}</div>
+    <div class="g-demo--row">{{i:book-open}}{{i:compass}}{{i:activity}}{{i:settings}}{{i:server}}{{i:hard-drive}}{{i:download}}{{i:search}}{{i:sun}}{{i:menu}}{{i:x}}{{i:check}}{{i:circle-help}}{{i:help}}{{i:help-new-tab}}{{i:triangle-alert}}</div>
   </div>
   <div class="g-notes">
     <div><h4>Rules</h4><ul><li>Sentence case everywhere. No capitals for emphasis, no all-caps labels.</li><li>Numbers that change use <code>.numeric</code> (tabular figures).</li><li>An icon beside a word is decoration (<code>aria-hidden</code>); an icon alone needs a name.</li></ul></div>
@@ -811,7 +811,7 @@
               <label class="option-card"><input type="radio" name="g-wiz-app"><strong>NZBGet</strong><small>Uses less memory on a small server.</small></label>
               <label class="option-card"><input type="radio" name="g-wiz-app"><strong>I do not use Usenet</strong><small>Leaves out the Usenet sites to search.</small></label>
             </fieldset>
-            <p class="help-links"><button type="button" class="help-link" data-opens="g-wiz-help" aria-controls="g-wiz-help" aria-expanded="false">{{i:circle-help}}<span>What is Usenet?</span></button><button type="button" class="help-link" data-opens="g-wiz-help" aria-controls="g-wiz-help" aria-expanded="false">{{i:circle-help}}<span>What is SABnzbd?</span></button></p>
+            <p class="help-links"><button type="button" class="help-link" data-opens="g-wiz-help" aria-controls="g-wiz-help" aria-expanded="false">{{i:help}}<span>What is Usenet?</span></button><button type="button" class="help-link" data-opens="g-wiz-help" aria-controls="g-wiz-help" aria-expanded="false">{{i:help}}<span>What is SABnzbd?</span></button></p>
             <p>After it is installed, SABnzbd is at <span class="address"><a href="http://192.0.2.10:8080" target="_blank" rel="noreferrer">http://192.0.2.10:8080{{i:external-link}}<span class="visually-hidden"> (opens in a new tab)</span></a><button type="button" class="copy-btn" data-copy="http://192.0.2.10:8080" data-copied="Address copied" aria-label="Copy http://192.0.2.10:8080">{{i:copy}}</button></span></p>
             <div class="command"><code class="code-block">docker compose up -d sabnzbd</code><button type="button" class="btn copy-btn copy-btn--label" data-copy="docker compose up -d sabnzbd" data-copied="Command copied">{{i:copy}}<span>Copy</span></button></div>
           </div>
