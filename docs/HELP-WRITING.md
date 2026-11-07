@@ -157,11 +157,14 @@ The idea in two or three sentences, with an everyday comparison where one helps.
 
 ## 8. Screenshots
 
-- Add one only after a step where the control might be hard to find. Leave obvious steps as text.
+The full rules, for people and AI tools, are in `SCREENSHOTS.md`, with a mark-up helper in `tools/annotate.js`.
+In short:
+
+- Add one only for a step the reader could not follow from the words. There is no quota.
 - Everything a screenshot shows is also said in words (rule 2.20). Text descriptions follow `ALT-TEXT.md`.
-- Take them from a preview with made-up data (rule 2.23), never from a real server.
-- **Annotating:** a box drawn just outside the control, in the danger colour, with a curved arrow whose head
-  touches the box. Never cover the label you are pointing at.
+- Take them from a preview with made-up data (rule 2.23), never from a real server; never fake one.
+- **Marking up:** a red outline 5 pixels outside the control, a curved arrow whose filled head touches it, at
+  most three outlines, each with a badge carrying its step's number in the article.
 - Alt text names the page and the control by its label: "The Apps page, with Add an app outlined". Never
   "the button in the bottom right".
 
@@ -236,5 +239,5 @@ Then tell me: the tier and kind, every [needs checking], labels left as the app 
 - [ ] The answer comes first; empty sections left out
 - [ ] A guide links to topics instead of repeating their steps
 - [ ] Links to the parent and to related articles under "Find out more"
-- [ ] Screenshots only where needed, described in words, with made-up data
+- [ ] Screenshots only where needed, described in words, with made-up data, marked up to `SCREENSHOTS.md`
 - [ ] Everything in the `CONTENT-DESIGN.md` checklist

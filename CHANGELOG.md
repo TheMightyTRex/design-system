@@ -9,6 +9,12 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 ## [Unreleased]
 
 ### Added
+- **Screenshots in help.** `docs/SCREENSHOTS.md`: a picture only for a step the words cannot carry, made-up data
+  only (masking checked both ways, never blur alone, never a faked screen), settle times, a red outline 5px
+  outside the control with a curved arrow and a filled head, at most three per picture, each badged with its step
+  number in the article, text descriptions, checks before publishing, and a short version to give AI tools.
+  `tools/annotate.js` draws the mark-up from the page's own elements and checks it before capture
+  (7 November 2026).
 - **Releases as accordions.** `.disclosure.release` with `.release__counts` and `.release__type`: each release in its
   own accordion, the installed one open, a count chip for each type of change and a bar in that type's colour.
   `docs/LIBRARY.md` also sets Settings, Updates as three pages (Update settings, Releases, Restore) and Sign out

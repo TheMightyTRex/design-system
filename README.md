@@ -37,6 +37,7 @@ change the copies inside the apps.
 | `docs/ACCESSIBILITY.md` | The accessibility floor and how to test it |
 | `docs/WCAG.md` | How the design system meets each point of WCAG 2.2 AA, after the GOV.UK Service Manual, and what each app must still do |
 | `docs/ALT-TEXT.md` | How to write text descriptions (alt text) for every kind of image, after the BBC's guidance |
+| `docs/SCREENSHOTS.md` | Screenshots in help: when one earns its place, made-up data only, the outline, arrow and step-number mark-up, and a short version for AI tools; `tools/annotate.js` draws and checks the mark-up |
 | `penpot/` | The Penpot plugin that builds the design system in a Penpot file, and `tokens.json` for Penpot's Tokens panel, both made by `penpot/make.py` |
 | `docs/PENPOT.md` | How to build, share and keep the Penpot file in step |
 | `docs/SECURITY-CHECKS.md` | The security checks both apps run, how to sort what they find, and how to record the results and release notes |
