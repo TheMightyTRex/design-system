@@ -104,6 +104,7 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
   (2 November 2026).
 
 ### Fixed
+- **Segmented switch** (7 November 2026): no gap between its buttons when it is a fieldset, and the buttons keep their width when the choice changes.
 - **Focus is not hidden** by the sticky header or the save bar when the page scrolls (WCAG 2.4.11,
   4 November 2026).
 - **Penpot plugin** opens without "Something wrong has happened", uses layout sizes Penpot accepts and
