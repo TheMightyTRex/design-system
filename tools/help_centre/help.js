@@ -94,15 +94,28 @@
   // On a phone the menu opens over the page from the Menu button, and Escape closes it.
   var menuBtn = document.querySelector(".help-menu-btn"), nav = document.getElementById("help-nav");
   if (menuBtn && nav) {
-    var setOpen = function (open) {
+    var bodyOverflow = "";
+    var place = function () {
+      // Under the header, down to the bottom of the window, so a long menu scrolls inside itself.
       var header = document.querySelector(".site-header");
-      if (open && header) nav.style.top = header.getBoundingClientRect().bottom + "px"; // the header wraps on a phone
+      var top = header ? Math.max(0, header.getBoundingClientRect().bottom) : 0;
+      nav.style.top = top + "px";
+      nav.style.height = (window.innerHeight - top) + "px";
+    };
+    var setOpen = function (open) {
+      if (open) { place(); bodyOverflow = document.body.style.overflow; document.body.style.overflow = "hidden"; }
+      else { nav.style.height = ""; document.body.style.overflow = bodyOverflow; }
       nav.classList.toggle("is-open", open);
       menuBtn.setAttribute("aria-expanded", String(open));
+      var cur = open && nav.querySelector("[aria-current=page]");
+      if (cur) nav.scrollTop = Math.max(0, cur.offsetTop - nav.clientHeight / 3); // the page you are on, in view
       if (open) { var cur = nav.querySelector("[aria-current=page]") || nav.querySelector("button"); if (cur) cur.focus(); }
     };
     menuBtn.addEventListener("click", function () { setOpen(!nav.classList.contains("is-open")); });
     nav.addEventListener("keydown", function (e) { if (e.key === "Escape" && nav.classList.contains("is-open")) { setOpen(false); menuBtn.focus(); } });
+    window.addEventListener("resize", function () { if (nav.classList.contains("is-open")) place(); });
+    // Choosing an article, or the window growing past phone width, closes the menu.
+    nav.addEventListener("click", function (e) { if (e.target.closest("a") && nav.classList.contains("is-open")) setOpen(false); });
   }
 
   // On this page: the section being read is marked as you go down the article.

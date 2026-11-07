@@ -65,7 +65,7 @@ html.pref-underline .help-nav li a, html.pref-underline .help-toc a { text-decor
   .help-menu-btn { display: inline-flex; }
   .help-nav__hide, .help-nav__show { display: none !important; }
   .help-nav, html.help-nav-hidden .help-nav { display: none; position: fixed; inset: var(--header-h) 0 0 0; max-height: none; z-index: 20; background: var(--color-surface); padding: var(--space-4); border-top: 1px solid var(--color-divider); }
-  .help-nav.is-open, html.help-nav-hidden .help-nav.is-open { display: block; }
+  .help-nav.is-open, html.help-nav-hidden .help-nav.is-open { display: block; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
 }
 /* Phones: one column, and On this page opens inside the article, as there is no room beside it. */
 @media (max-width: 48rem) {
