@@ -49,6 +49,15 @@
     });
   }
 
+  // The banner can be hidden, and stays hidden in this browser; focus goes to the main content.
+  var bannerHide = document.querySelector(".help-banner__hide");
+  if (bannerHide) bannerHide.addEventListener("click", function () {
+    html.classList.add("help-banner-hidden");
+    try { localStorage.setItem("help-banner", "hidden"); } catch (e) { /* this page only */ }
+    var main = document.getElementById("main"); if (main) main.focus();
+    say("Hidden");
+  });
+
   // The left menu: each group opens and closes with its button; the whole menu hides and comes back.
   document.querySelectorAll(".help-nav__heading button").forEach(function (b) {
     b.addEventListener("click", function () {

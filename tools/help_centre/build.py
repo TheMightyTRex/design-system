@@ -26,6 +26,10 @@ DS = pathlib.Path(__file__).resolve().parent.parent.parent  # this design system
 HERE = pathlib.Path(__file__).resolve().parent
 # Set from the app's help-centre.json by configure().
 ROOT = HELP = None
+FOOTER_NOTE = BANNER = ""
+BANNER_LABEL = "Advertisement"
+STRIP = []
+SPONSORED = []
 NAME = TITLE = REPO = BLOB = SITE = LOGO = STOP = EXAMPLE = ""
 LEAVE_OUT = []
 SECTIONS = {}
@@ -36,6 +40,7 @@ def configure(config_path):
     """Reads help-centre.json: name, repo, site, and optionally help_dir, branch, leave_out, sections, logo_file,
     footer_starts (text that begins a footer on every page, left out of search), search_example and front_door."""
     global ROOT, HELP, NAME, TITLE, REPO, BLOB, SITE, LOGO, STOP, EXAMPLE, LEAVE_OUT, SECTIONS, FRONT_DOOR
+    global FOOTER_NOTE, BANNER, BANNER_LABEL, STRIP, SPONSORED
     cfg_file = pathlib.Path(config_path).resolve()
     cfg = json.loads(cfg_file.read_text(encoding="utf-8"))
     ROOT = cfg_file.parent
@@ -50,6 +55,19 @@ def configure(config_path):
     STOP = cfg.get("footer_starts", "")
     EXAMPLE = cfg.get("search_example", "Type what you want to do.")
     FRONT_DOOR = cfg.get("front_door", True)
+    # footer_note: Markdown shown in every page's footer (a notice the app wants on every page).
+    # banner: {"label", "markdown"}, shown at the top of every page as a labelled region that can be hidden.
+    # strip_between: two markers; anything between them in an article is left out (it is in the footer instead).
+    md = lambda text: markdown.markdown(text, output_format="html") if text else ""
+    FOOTER_NOTE = md(cfg.get("footer_note", ""))
+    BANNER = md((cfg.get("banner") or {}).get("markdown", ""))
+    BANNER_LABEL = (cfg.get("banner") or {}).get("label", "Advertisement")
+    # The banner is the same on every page: its own pages' links go to the full address, and links to other sites
+    # are marked as paid (rel="sponsored"), as an advertisement's links should be.
+    BANNER = re.sub(r'href="(?![a-z][a-z0-9+.-]*:|#|/)([^"]+)"', lambda m: f'href="{SITE}{m.group(1)}"', BANNER)
+    BANNER = re.sub(r'<a href="(https?://(?!themightytrex\.github\.io)[^"]+)"', r'<a href="\1" rel="sponsored noopener"', BANNER)
+    STRIP = cfg.get("strip_between", [])
+    SPONSORED = cfg.get("sponsored_links", [])  # text in an address that marks an affiliate link, such as "a_aid="
     logo = (ROOT / cfg["logo_file"]).read_text(encoding="utf-8") if cfg.get("logo_file") else ""
     logo = re.sub(r"<\?xml[^>]*>|<!--.*?-->|<title[^>]*>.*?</title>", "", logo, flags=re.S).strip()
     logo = re.sub(r'\s(role|aria-labelledby|aria-label)="[^"]*"', "", logo)  # the link names it
@@ -150,6 +168,7 @@ TEMPLATE = """<!doctype html>
     <button class="icon-btn" type="button" data-opens="help-display" aria-haspopup="dialog" aria-expanded="false">{icon_display}<span class="label">Display</span></button>
   </div>
 </header>
+{banner}
 <div class="help-layout{layout_class}">
 <nav class="help-nav" id="help-nav" aria-label="Help centre">
   <button class="btn btn--quiet help-nav__hide" type="button" aria-expanded="true" aria-controls="help-nav-groups">{icon_hide}<span>Hide the menu</span></button>
@@ -169,6 +188,7 @@ TEMPLATE = """<!doctype html>
 {toc}
 </div>
 <footer class="site-footer help-footer">
+  {footer_note}
   <p><a href="{root}index.html">Help centre</a> · <a href="{repo}">{name} on GitHub</a> · <a href="{repo}/issues">Report a problem with this help</a></p>
 </footer>
 <div class="side-panel-layer" id="help-display" hidden>
@@ -201,7 +221,8 @@ PREFS_JS = ("try{var p=JSON.parse(localStorage.getItem('help-display')||'{}'),r=
             "if(p.theme&&p.theme!=='system')r.dataset.theme=p.theme;if(p.text&&p.text!=='100')r.classList.add('pref-text-'+p.text);"
             "if(p.contrast)r.classList.add('pref-contrast');if(p.motion==='on')r.classList.add('pref-motion');"
             "if(p.motion==='off')r.classList.add('pref-motion-off');if(p.underline)r.classList.add('pref-underline');"
-            "if(p.spacing)r.classList.add('pref-spacing');if(localStorage.getItem('help-nav')==='hidden')r.classList.add('help-nav-hidden')}catch(e){}")
+            "if(p.spacing)r.classList.add('pref-spacing');if(localStorage.getItem('help-nav')==='hidden')r.classList.add('help-nav-hidden');"
+            "if(localStorage.getItem('help-banner')==='hidden')r.classList.add('help-banner-hidden')}catch(e){}")
 
 
 def icon(name, root, size=20):
@@ -250,7 +271,12 @@ def toc_html(body):
 def page(title, body, root, *, description="", crumbs="", kind="", edit="", canonical="", query="", nav="", toc=("", "")):
     return TEMPLATE.format(site_title=html.escape(TITLE), title=html.escape(title), description=html.escape(description[:200]), canonical=canonical,
                            root=root, logo=LOGO, crumbs=crumbs, kind=kind, body=body, edit=edit, repo=REPO, query=query,
-                           prefs_js=PREFS_JS, name=html.escape(NAME), nav=nav, toc=toc[0], toc_inline=toc[1],
+                           prefs_js=PREFS_JS, name=html.escape(NAME),
+                           footer_note=f'<div class="help-footer__note">{FOOTER_NOTE}</div>' if FOOTER_NOTE else "",
+                           banner=(f'<aside class="help-banner" id="help-banner" aria-label="{html.escape(BANNER_LABEL)}">'
+                                   f'<div class="help-banner__body"><span class="help-banner__label">{html.escape(BANNER_LABEL)}</span>{BANNER}</div>'
+                                   f'<button class="icon-btn help-banner__hide" type="button" aria-label="Hide this {html.escape(BANNER_LABEL.lower())}">'
+                                   f'{icon("x", root)}</button></aside>') if BANNER else "", nav=nav, toc=toc[0], toc_inline=toc[1],
                            layout_class="" if toc[0] else " help-layout--no-toc",
                            icon_menu=icon("menu", root), icon_search=icon("search", root), icon_display=icon("sun", root), icon_x=icon("x", root),
                            icon_hide=icon("chevron-left", root, 18), icon_show=icon("chevron-right", root, 18))
@@ -282,11 +308,28 @@ def build(out):
         depth = len(rel_out.parent.parts)
         root = "../" * depth
         text = md.read_text(encoding="utf-8")
+        if len(STRIP) == 2:
+            text = re.sub(re.escape(STRIP[0]) + r".*?" + re.escape(STRIP[1]), "", text, flags=re.S)
         trail, kind, rest = crumbs_and_body(text)
         # superfences: code samples inside numbered steps stay code (fenced_code misses them, and their HTML ran).
         conv = markdown.Markdown(extensions=["tables", "sane_lists", "toc", "pymdownx.superfences"],
                                  extension_configs={"toc": {"slugify": slug}}, output_format="html")
         body = fix_links(conv.convert(rest), md)
+        # A wide table scrolls sideways on its own: as a labelled region the keyboard can reach and scroll
+        # (WCAG 2.1.1), named after the section it is in.
+        def wrap_table(m, _n=[0]):
+            before = body[:m.start()]
+            head = re.findall(r"<h[23][^>]*>(.*?)</h[23]>", before, re.S)
+            name = plain(head[-1]) if head else title_guess
+            return (f'<div class="help-table" role="region" tabindex="0" aria-label="Table: {html.escape(name)}">'
+                    f"{m.group(0)}</div>")
+        title_guess = plain((re.search(r"<h1[^>]*>(.*?)</h1>", body, re.S) or [None, ""])[1]) or "table"
+        body = re.sub(r"<table>.*?</table>", wrap_table, body, flags=re.S)
+        # Affiliate links are marked as paid links (rel="sponsored") and open in a new tab, which they say.
+        for mark in SPONSORED:
+            body = re.sub(r'<a href="([^"]*' + re.escape(html.escape(mark)) + r'[^"]*)">(.*?)</a>',
+                          r'<a href="\1" rel="sponsored noopener" target="_blank">\2<span class="visually-hidden"> (opens in a new tab)</span></a>',
+                          body, flags=re.S)
         # Mermaid flowcharts (the guides' steps) are drawn in the browser, as GitHub draws them.
         body, charts = re.subn(r'(?:<div class="highlight">)?<pre[^>]*><code class="language-mermaid">(.*?)</code></pre>(?:</div>)?',
                                r'<pre class="mermaid">\1</pre>', body, flags=re.S)
