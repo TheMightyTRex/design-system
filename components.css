@@ -2795,14 +2795,15 @@
     inset: 0 0 0 auto;
     display: flex;
     flex-direction: column;
-    width: min(var(--panel-w), 100vw);
+    width: min(max(var(--panel-w), 33.333vw), 100vw);   /* about a third of the screen */
     background: var(--color-surface-raised);
     border-left: 1px solid var(--color-border);
     box-shadow: var(--shadow-raised);
     animation: slide-in-right var(--motion-panel);
   }
+  /* Release notes and help: about half the screen (LIBRARY.md, Slide-out widths). */
   .side-panel--wide {
-    width: min(640px, 100vw);
+    width: min(max(640px, 50vw), 100vw);
   }
   .side-panel__body {
     flex: 1;
@@ -4307,6 +4308,10 @@
   }
   .prose > * {
     margin: 0;
+    min-width: 0;      /* a long line (code, a table) scrolls inside itself instead of widening the text */
+  }
+  .prose pre {
+    overflow-x: auto;
   }
   .prose h1 {
     font-size: var(--text-2xl);

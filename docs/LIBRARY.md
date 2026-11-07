@@ -173,6 +173,8 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 | Page | Something people return to, link to or spend time in | Book, author, series and narrator pages; Disk health; each Settings section; Upgrade wizard |
 | In place | A small change to a value already in view | Switches and selects in settings rows; filter chips; cover size |
 
+**Slide-out widths** (TheMightyTRexUK, 7 November 2026): release notes and help take about half the screen (`.side-panel--wide`, at least 640px); every other slide-out takes about a third (at least 420px, `--panel-w`). On phones both take the whole width.
+
 Behaviour that every slide-out, dialog and phone menu must have: focus moves in (to Close), Tab stays inside,
 Escape and Close close it, a press outside closes a slide-out or menu, focus returns to the opener, and the page
 behind does not scroll. A slide-out's open item can be in the address, so Back closes it.
