@@ -1443,6 +1443,19 @@
     border-top: 1px solid var(--color-divider);
     vertical-align: top;
   }
+  /* A row's own heading (th scope="row") reads like its cells, in bold: no header shading, lined up with them. */
+  .table tbody th {
+    position: static;
+    background: none;
+    border-top: 1px solid var(--color-divider);
+    vertical-align: top;
+    white-space: normal;
+  }
+  /* A summary with a button on each row (such as Change): every cell on the row's middle line. */
+  .table--middle td,
+  .table--middle tbody th {
+    vertical-align: middle;
+  }
   .table th[aria-sort] button {
     display: inline-flex;
     gap: var(--space-1);

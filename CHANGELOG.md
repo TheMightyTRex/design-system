@@ -10,6 +10,7 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ### Added
 - **Two square help icons** (7 November 2026): `help` for help that opens in a slide-out and `help-new-tab` for help that opens in a new tab. In-page help is always a link that opens a slide-out, never a fold-out or a dialog.
+- **Tidier tables** (7 November 2026): row headings look like their cells, in bold; `.table--middle` lines every cell up on the middle for a summary with Change buttons.
 - **New-tab links** (7 November 2026): every link that opens a new tab shows the `external-link` icon after its words.
 - **Required fields** (7 November 2026): a * after the label, and "* = Required" once at the bottom of the form, step or slide-out (`.field__required`, `.required-key`).
 - **Slide-out widths** (7 November 2026): about half the screen for release notes and help (`.side-panel--wide`), about a third for every other slide-out.
