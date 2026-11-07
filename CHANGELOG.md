@@ -9,6 +9,11 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 ## [Unreleased]
 
 ### Added
+- **Help centre.** `tools/help_centre/build.py` builds an app's Markdown help into web pages with this design
+  system: search, a collapsible menu of every article on the left (it can be hidden), On this page following the
+  article on the right with the section being read marked, Display and accessibility, and on phones one header bar
+  with search and the menu as icons. Each app keeps a `help-centre.json`; `build.sh` runs it in a container
+  (7 November 2026).
 - **Screenshots in help.** `docs/SCREENSHOTS.md`: a picture only for a step the words cannot carry, made-up data
   only (masking checked both ways, never blur alone, never a faked screen), settle times, a red outline 5px
   outside the control with a curved arrow and a filled head, at most three per picture, each badged with its step
