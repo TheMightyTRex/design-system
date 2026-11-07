@@ -56,7 +56,12 @@ rule in `WIZARD.md` about questions, words and help still applies; this guide sa
 - Passwords and keys are typed hidden: say "(nothing shows as you type)". After Back, Enter keeps the one typed
   before, without showing it.
 - An answer the app refuses is explained on the next line in the app's own words, and the question is asked
-  again.
+  again. Refused again, the message and the question replace the last ones in place: the step never fills with
+  the same two lines.
+- A question with no default (the person's own service, such as their VPN provider) shows "Your choice:" with no
+  brackets, the menu does not say what Enter does, and Enter alone says "Choose one: type a number from 1 to 7".
+- A question longer than the column wraps between words, its first lines above, so the line the answer is typed
+  on fits. An address is never cut: it may run past the edge so it copies whole.
 
 ## 5. The menu on the bottom line
 

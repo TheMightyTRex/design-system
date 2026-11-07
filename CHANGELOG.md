@@ -106,6 +106,7 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
   (2 November 2026).
 
 ### Fixed
+- **Terminal frame** (7 November 2026): a long question wraps between words with the answer's line last; plain-mode answers wrap with their indent; with no questions to ask (--yes) a real window still gets the boxed frame, its menu showing only Ctrl+C (`TTY`).
 - **Meter words** (7 November 2026): the timer and count on the right of a meter stay on one line; `.nowrap` added to the utilities.
 - **Segmented switch** (7 November 2026): no gap between its buttons when it is a fieldset, and the buttons keep their width when the choice changes.
 - **Focus is not hidden** by the sticky header or the save bar when the page scrolls (WCAG 2.4.11,
