@@ -49,6 +49,15 @@
     });
   }
 
+  // Several banners: this page shows the next one in turn (counted in this browser), never changing while it is open.
+  var bannerBody = document.querySelector(".help-banner__body");
+  var bannerItems = bannerBody ? bannerBody.querySelectorAll(".help-banner__item") : [];
+  // The head script normally chooses (so it never flashes); when this browser keeps nothing, one is picked here.
+  if (bannerItems.length > 1 && html.dataset.banner === undefined) {
+    bannerItems[Math.floor(Math.random() * bannerItems.length)].classList.add("is-shown");
+    bannerBody.classList.add("is-rotating");
+  }
+
   // The banner can be hidden, and stays hidden in this browser; focus goes to the main content.
   var bannerHide = document.querySelector(".help-banner__hide");
   if (bannerHide) bannerHide.addEventListener("click", function () {

@@ -27,6 +27,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 # Set from the app's help-centre.json by configure().
 ROOT = HELP = None
 FOOTER_NOTE = BANNER = ""
+BANNER_COUNT = 0
 FAVICON = None
 BANNER_LABEL = "Advertisement"
 STRIP = []
@@ -41,7 +42,7 @@ def configure(config_path):
     """Reads help-centre.json: name, repo, site, and optionally help_dir, branch, leave_out, sections, logo_file,
     footer_starts (text that begins a footer on every page, left out of search), search_example and front_door."""
     global ROOT, HELP, NAME, TITLE, REPO, BLOB, SITE, LOGO, STOP, EXAMPLE, LEAVE_OUT, SECTIONS, FRONT_DOOR
-    global FOOTER_NOTE, BANNER, BANNER_LABEL, STRIP, SPONSORED, FAVICON
+    global FOOTER_NOTE, BANNER, BANNER_LABEL, BANNER_COUNT, STRIP, SPONSORED, FAVICON
     cfg_file = pathlib.Path(config_path).resolve()
     cfg = json.loads(cfg_file.read_text(encoding="utf-8"))
     ROOT = cfg_file.parent
@@ -61,12 +62,20 @@ def configure(config_path):
     # strip_between: two markers; anything between them in an article is left out (it is in the footer instead).
     md = lambda text: markdown.markdown(text, output_format="html") if text else ""
     FOOTER_NOTE = md(cfg.get("footer_note", ""))
-    BANNER = md((cfg.get("banner") or {}).get("markdown", ""))
-    BANNER_LABEL = (cfg.get("banner") or {}).get("label", "Advertisement")
-    # The banner is the same on every page: its own pages' links go to the full address, and links to other sites
-    # are marked as paid (rel="sponsored"), as an advertisement's links should be.
-    BANNER = re.sub(r'href="(?![a-z][a-z0-9+.-]*:|#|/)([^"]+)"', lambda m: f'href="{SITE}{m.group(1)}"', BANNER)
-    BANNER = re.sub(r'<a href="(https?://(?!themightytrex\.github\.io)[^"]+)"', r'<a href="\1" rel="sponsored noopener"', BANNER)
+    # banners: a list of {"label", "markdown"}; one shows on each page and the next page shows the next one, so
+    # nothing moves while it is read. "banner" (one only) still works.
+    raw = cfg.get("banners") or ([cfg["banner"]] if cfg.get("banner") else [])
+    BANNER_LABEL = (raw[0].get("label") if raw else None) or "Advertisement"
+
+    def one(b):
+        out = md(b.get("markdown", ""))
+        # The banner is the same on every page: its own pages' links go to the full address, and links to other sites
+        # are marked as paid (rel="sponsored"), as an advertisement's links should be.
+        out = re.sub(r'href="(?![a-z][a-z0-9+.-]*:|#|/)([^"]+)"', lambda m: f'href="{SITE}{m.group(1)}"', out)
+        return re.sub(r'<a href="(https?://(?!themightytrex\.github\.io)[^"]+)"', r'<a href="\1" rel="sponsored noopener"', out)
+    BANNER = "".join(f'<div class="help-banner__item" data-banner="{i}"><span class="help-banner__label">'
+                     f'{html.escape(b.get("label") or BANNER_LABEL)}</span>{one(b)}</div>' for i, b in enumerate(raw[:6]))
+    BANNER_COUNT = min(len(raw), 6)
     STRIP = cfg.get("strip_between", [])
     FAVICON = ROOT / cfg["favicon_file"] if cfg.get("favicon_file") else None  # the browser tab's icon
     SPONSORED = cfg.get("sponsored_links", [])  # text in an address that marks an affiliate link, such as "a_aid="
@@ -225,7 +234,11 @@ PREFS_JS = ("try{var p=JSON.parse(localStorage.getItem('help-display')||'{}'),r=
             "if(p.contrast)r.classList.add('pref-contrast');if(p.motion==='on')r.classList.add('pref-motion');"
             "if(p.motion==='off')r.classList.add('pref-motion-off');if(p.underline)r.classList.add('pref-underline');"
             "if(p.spacing)r.classList.add('pref-spacing');if(localStorage.getItem('help-nav')==='hidden')r.classList.add('help-nav-hidden');"
-            "if(localStorage.getItem('help-banner')==='hidden')r.classList.add('help-banner-hidden')}catch(e){}")
+            "if(localStorage.getItem('help-banner')==='hidden')r.classList.add('help-banner-hidden');"
+            "__ROTATE__}catch(e){}")
+# With two or more banners, which one this page shows (the next in turn, counted in this browser).
+ROTATE_JS = ("var b=Number(localStorage.getItem('help-banner-next'))||0;localStorage.setItem('help-banner-next',(b+1)%__BC__);"
+             "r.dataset.banner=b%__BC__")
 
 
 def icon(name, root, size=20):
@@ -274,10 +287,10 @@ def toc_html(body):
 def page(title, body, root, *, description="", crumbs="", kind="", edit="", canonical="", query="", nav="", toc=("", "")):
     return TEMPLATE.format(site_title=html.escape(TITLE), title=html.escape(title), description=html.escape(description[:200]), canonical=canonical,
                            root=root, logo=LOGO, crumbs=crumbs, kind=kind, body=body, edit=edit, repo=REPO, query=query,
-                           prefs_js=PREFS_JS, name=html.escape(NAME),
+                           prefs_js=PREFS_JS.replace("__ROTATE__", ROTATE_JS.replace("__BC__", str(BANNER_COUNT)) if BANNER_COUNT > 1 else ""), name=html.escape(NAME),
                            footer_note=f'<div class="help-footer__note">{FOOTER_NOTE}</div>' if FOOTER_NOTE else "",
                            banner=(f'<aside class="help-banner" id="help-banner" aria-label="{html.escape(BANNER_LABEL)}">'
-                                   f'<div class="help-banner__body"><span class="help-banner__label">{html.escape(BANNER_LABEL)}</span>{BANNER}</div>'
+                                   f'<div class="help-banner__body" data-count="{BANNER_COUNT}">{BANNER}</div>'
                                    f'<button class="icon-btn help-banner__hide" type="button" aria-label="Hide this {html.escape(BANNER_LABEL.lower())}">'
                                    f'{icon("x", root)}</button></aside>') if BANNER else "", nav=nav, toc=toc[0], toc_inline=toc[1],
                            layout_class="" if toc[0] else " help-layout--no-toc",

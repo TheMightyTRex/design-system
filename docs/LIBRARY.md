@@ -241,8 +241,10 @@ theme, desktop and phone, and open menu, search and Display.
 - **Header:** logo and name, search, Display. On phones it is one bar: **Menu**, logo, **Search** and **Display**
   as icon buttons with their names kept for screen readers. **Search** opens the search bar under the header with
   the cursor in it; Escape or the button again closes it and returns the focus to the button.
-- **Banner** (optional, `banner` in `help-centre.json`): a labelled region under the header (for example "Ad"),
-  with a button to hide it, remembered in the browser. Its links to other sites carry `rel="sponsored"`.
+- **Banner** (optional, `banner` or `banners` in `help-centre.json`): a labelled region under the header (for
+  example "Ad"), with a button to hide it, remembered in the browser. Its links to other sites carry
+  `rel="sponsored"`. With `banners` (up to six), each page shows one and the next page shows the next one in turn,
+  chosen before the page draws; nothing moves or changes while a page is open, so there is no carousel to pause.
 - **Left menu:** the help home's own lists, one group for each heading, each opening and closing with a button
   (`aria-expanded`, `aria-controls`). The page you are on has `aria-current="page"` and is scrolled into view.
   **Hide the menu** and **Show the menu** keep the choice. On tablets and phones the menu opens from **Menu**, over
@@ -258,7 +260,7 @@ theme, desktop and phone, and open menu, search and Display.
 - **Search:** a page that searches every article in the browser; every word must appear, titles count most.
 
 **For each app:** a `help-centre.json` at its root (name, repository, site address, help folder, logo, and the
-optional `leave_out`, `sections`, `footer_note`, `banner`, `sponsored_links`, `strip_between`, `search_example`,
+optional `leave_out`, `sections`, `footer_note`, `banner` or `banners`, `sponsored_links`, `strip_between`, `search_example`,
 `front_door`), and a workflow that checks out this repository and runs the builder. Starboard and Snaglist use it.
 Build one here with `tools/help_centre/build.sh` from the app's folder.
 
