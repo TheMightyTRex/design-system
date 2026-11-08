@@ -527,7 +527,6 @@
       li.append(a);
       return li;
     }));
-    delete nav.dataset.ready;
     setupAzJump(nav.parentNode || document);
   }
   function azGo(nav, letter) {
