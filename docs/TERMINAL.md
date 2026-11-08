@@ -62,6 +62,11 @@ rule in `WIZARD.md` about questions, words and help still applies; this guide sa
   brackets, the menu does not say what Enter does, and Enter alone says "Choose one: type a number from 1 to 7".
 - A question longer than the column wraps between words, its first lines above, so the line the answer is typed
   on fits. An address is never cut: it may run past the edge so it copies whole.
+- Typed keys show only while a question waits. Keys pressed between questions (Enter pressed twice, say) would
+  otherwise move the lines the step writes next. A line typed ahead like that is shown after the next question,
+  as if typed there.
+- A password is not a question of choice: run with `--yes` in a real window, the script still asks for it there,
+  rather than stopping.
 
 ## 5. The menu on the bottom line
 
