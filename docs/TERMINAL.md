@@ -159,6 +159,14 @@ feedback shows that link without a code (`terminal-frame.sh`, `feedback`).
 In the browser, Snaglist offers the same choice, Show as a QR code (`WIZARD.md`, section 12), using the same
 address and the same order of what goes in.
 
+### When it stops
+
+- Every way a script can stop has an error number, such as `RF-11` or `IN-21`, explained on one help page. The last
+  lines say why it stopped, then "Error IN-21. What it means and how to fix it:", then the address of that number's
+  help on a line of its own, so it is never cut and copies whole.
+- When one job does not finish, the job's line stays, marked, and the choices go under it: Try again
+  (recommended), Show the details, Carry on without it (when the rest can), Report this problem and Stop.
+
 ## 8. The end
 
 - The heading box says "Done", then a card with where to open the app (this computer, other devices) and the
