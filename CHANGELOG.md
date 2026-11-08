@@ -97,6 +97,10 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
   for Storyarr and Starboard (2 November 2026).
 
 ### Changed
+- **Terminal stops** (8 November 2026): a failed job shows its error number and the address of its help in
+  both looks; a script run by another ends on its own number, and the outer script adds none of its own; the frame's
+  STOP_FILE tells the outer script when the person stopped (q or Ctrl+C), which is not an error (Starboard DASH-147
+  and DASH-152).
 - **Release notes** in both apps use the six change types of the changelog rules: Added, Changed, Deprecated,
   Removed, Fixed and Security (5 November 2026).
 - **Wizard help** opens in a slide-out, not a dialog (4 November 2026).
