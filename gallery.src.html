@@ -124,6 +124,7 @@
     <li class="g-group">Containers</li>
     <li><a href="#cards">Panels and cards</a></li>
     <li><a href="#media">Covers and media cards</a></li>
+    <li><a href="#az-jump">A to Z jump list</a></li>
     <li><a href="#cover-actions">Cover actions</a></li>
     <li><a href="#series-head">Series header and logo</a></li>
     <li><a href="#shelf">Shelf</a></li>
@@ -646,6 +647,19 @@
     </ul>
   </div>
   <div class="g-notes"><div><h4>Behaviour</h4><ul><li>Pressing a book opens its summary slide-out; the full page is a link inside it.</li><li>The focus ring sits on the cover, so it is visible on any artwork.</li></ul></div></div>
+</section>
+
+<section class="g-section" id="az-jump" aria-labelledby="az-jump-h">
+  <header><h2 id="az-jump-h">A to Z jump list</h2><p class="muted">Over a long wall of covers: # for titles that start with a number, then A to Z, from the sort title ("The Expanse" is under E, "Émile" under E). Letters with nothing are shown but cannot be chosen, and say so to screen readers. It sticks under the header; the letter in view is marked with a bar. One Tab stop: Arrow keys, Home and End move, Enter jumps and focus moves to the letter's heading. On phones the row scrolls sideways. Classes: <code>.az-jump</code>, <code>.az-jump__letter</code>, <code>[aria-disabled="true"]</code>, <code>.wall-letter</code>. Behaviour: <code>SharedComponents.azLetter(title)</code>, <code>azJump(nav, letters)</code>, <code>azGo(nav, letter)</code> and the <code>az-jump</code> event for a wall that shows 40 at a time.</p></header>
+  <div class="g-demo">
+    <nav class="az-jump" aria-label="Jump to letter"><ol><li><a class="az-jump__letter" href="#letter-num">#</a></li><li><a class="az-jump__letter" href="#letter-a" aria-current="location">A</a></li><li><a class="az-jump__letter" href="#letter-b">B</a></li><li><a class="az-jump__letter" href="#letter-c">C</a></li><li><a class="az-jump__letter" href="#letter-d">D</a></li><li><a class="az-jump__letter" href="#letter-e">E</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="F, no titles">F</a></li><li><a class="az-jump__letter" href="#letter-g">G</a></li><li><a class="az-jump__letter" href="#letter-h">H</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="I, no titles">I</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="J, no titles">J</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="K, no titles">K</a></li><li><a class="az-jump__letter" href="#letter-l">L</a></li><li><a class="az-jump__letter" href="#letter-m">M</a></li><li><a class="az-jump__letter" href="#letter-n">N</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="O, no titles">O</a></li><li><a class="az-jump__letter" href="#letter-p">P</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="Q, no titles">Q</a></li><li><a class="az-jump__letter" href="#letter-r">R</a></li><li><a class="az-jump__letter" href="#letter-s">S</a></li><li><a class="az-jump__letter" href="#letter-t">T</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="U, no titles">U</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="V, no titles">V</a></li><li><a class="az-jump__letter" href="#letter-w">W</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="X, no titles">X</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="Y, no titles">Y</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="Z, no titles">Z</a></li></ol></nav>
+    <h3 class="wall-letter" id="letter-num" tabindex="-1">#</h3>
+    <ul class="media-grid" data-size="small"><li class="media-card"><div class="cover" style="background:#2b4f6e;color:#fff;font-weight:700;padding:var(--space-2)">24</div><span class="media-card__title">24</span><span class="media-card__meta">2001 to 2010</span></li><li class="media-card"><div class="cover" style="background:#2b4f6e;color:#fff;font-weight:700;padding:var(--space-2)">1917</div><span class="media-card__title">1917</span><span class="media-card__meta">2019</span></li></ul>
+    <h3 class="wall-letter" id="letter-a" tabindex="-1">A</h3>
+    <ul class="media-grid" data-size="small"><li class="media-card"><div class="cover" style="background:#2b4f6e;color:#fff;font-weight:700;padding:var(--space-2)">Arrival</div><span class="media-card__title">Arrival</span><span class="media-card__meta">2016</span></li><li class="media-card"><div class="cover" style="background:#2b4f6e;color:#fff;font-weight:700;padding:var(--space-2)">The Archers</div><span class="media-card__title">The Archers</span><span class="media-card__meta">Radio 4</span></li></ul>
+    <h3 class="wall-letter" id="letter-b" tabindex="-1">B</h3>
+    <ul class="media-grid" data-size="small"><li class="media-card"><div class="cover" style="background:#2b4f6e;color:#fff;font-weight:700;padding:var(--space-2)">Blue Planet II</div><span class="media-card__title">Blue Planet II</span><span class="media-card__meta">2017</span></li><li class="media-card"><div class="cover" style="background:#2b4f6e;color:#fff;font-weight:700;padding:var(--space-2)">Bluey</div><span class="media-card__title">Bluey</span><span class="media-card__meta">2018 to now</span></li></ul>
+  </div>
 </section>
 
 <section class="g-section" id="cover-actions" aria-labelledby="cover-actions-h">

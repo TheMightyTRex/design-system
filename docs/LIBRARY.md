@@ -144,6 +144,7 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 | Panel | `.panel[data-tone]`, `.panel__head` | Groups content |
 | Card | `.cards`, `.card[data-tone]`, `.card__top`, `.card__title`, `.card__meta`, `.card__actions` | One thing; whole card is the target; opens its slide-out or page |
 | Media card and grid | `.media-grid[data-size]`, `.media-card`, `.media-card__title`, `.media-card__meta`, `.media-row` | Books and films; Small, Medium, Large |
+| A to Z jump list | `nav.az-jump > ol > li > a.az-jump__letter`, `[aria-disabled="true"]`, `[aria-current="location"]`, `.wall-letter` headings (`#letter-a`, `#letter-num`) | Over a long wall: # then A to Z from the sort title, accents folded; letters with nothing shown but not choosable ("Q, no titles"); sticky under the header; 44px targets; one Tab stop with Arrow keys, Home and End; focus moves to the heading after a jump; sideways scrolling on phones. `SharedComponents.azLetter`, `azJump`, `azGo` and the `az-jump` event |
 | Section toolbar (design D) | `.toolbar`, `.toolbar__row`, `.toolbar__search`, `.toolbar__end`, `.toolbar__count` | Same on every list |
 | Save bar | `.save-bar`, `.save-bar__text` | The one way to save a settings section: sticks to the bottom while there are unsaved changes |
 | Timeline | `.timeline`, `.timeline__item[data-tone]`, `.timeline__title`, `.timeline__meta` | A request's history, a backup run; newest first |
