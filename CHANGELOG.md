@@ -98,6 +98,7 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
   for Storyarr and Starboard (2 November 2026).
 
 ### Changed
+- **A long job in plain mode is never silent** (9 November 2026): `TERMINAL.md` adds the rule, and `terminal-frame.sh` says "Still working: the job (12 min)" every 2 minutes while a job runs in plain mode, with the job's count when it has one.
 - **Terminal stops** (8 November 2026): a failed job shows its error number and the address of its help in
   both looks; a script run by another ends on its own number, and the outer script adds none of its own; the frame's
   STOP_FILE tells the outer script when the person stopped (q or Ctrl+C), which is not an error (Starboard DASH-147
