@@ -52,6 +52,9 @@ rule in `WIZARD.md` about questions, words and help still applies; this guide sa
   problem and its choices go below it (`WIZARD.md` section 5, A job's progress). The line reads: the job, which
   job of how many, what it is doing now, the timer, then how far it has got when it can tell ("· 5 of 12
   installed", then "· 9 of 12 running").
+- **A long job in plain mode is never silent:** a line when it starts, "Still working: the job (12 min)" every 2
+  minutes while it runs, with how far it has got when it can tell, and "Done" or "Did not finish" at the end, so a
+  screen reader user knows it has not stopped. Never more often than every 2 minutes: each line is read aloud.
 - A long list on a short screen shows what fits, then "4 more: type m to see them".
 - Passwords and keys are typed hidden: say "(nothing shows as you type)". After Back, Enter keeps the one typed
   before, without showing it.
