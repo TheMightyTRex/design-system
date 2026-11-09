@@ -113,6 +113,9 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 - **Slide-out headers** are in the page colour, and Display and accessibility is a slide-out
   (2 November 2026).
 
+### Removed
+- **Penpot** (9 November 2026): the Penpot plugin (`penpot/`), its tokens file and `docs/PENPOT.md` are removed, because the Penpot file did not work as expected. The gallery on GitHub Pages stays the way to see every component.
+
 ### Fixed
 - **Terminal frame** (7 November 2026): a long question wraps between words with the answer's line last; plain-mode answers wrap with their indent; with no questions to ask (--yes) a real window still gets the boxed frame, its menu showing only Ctrl+C (`TTY`).
 - **Meter words** (7 November 2026): the timer and count on the right of a meter stay on one line; `.nowrap` added to the utilities.
