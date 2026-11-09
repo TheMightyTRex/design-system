@@ -164,8 +164,13 @@ address and the same order of what goes in.
 - Every way a script can stop has an error number, such as `RF-11` or `IN-21`, explained on one help page. The last
   lines say why it stopped, then "Error IN-21. What it means and how to fix it:", then the address of that number's
   help on a line of its own, so it is never cut and copies whole.
-- When one job does not finish, the job's line stays, marked, and the choices go under it: Try again
-  (recommended), Show the details, Carry on without it (when the rest can), Report this problem and Stop.
+- When one job does not finish, the job's line stays, marked, and the choices go under it: the problem, its error
+  number and the address of its help on a line of its own (the same in the boxed frame and in plain lines), then Try
+  again (recommended), Show the details, Carry on without it (when the rest can), Report this problem and Stop.
+- When one script runs another (a Run first script runs the app's installer) and the inner one stops with its own
+  error number, the outer one ends on that number and its address, never on a second number of its own. The outer
+  one's own number is only for a stop the inner one gave no number for. A person's own stop (q or Ctrl+C) is not an
+  error and has no number: the frame writes "stopped" to STOP_FILE so the outer script can tell.
 
 ## 8. The end
 
