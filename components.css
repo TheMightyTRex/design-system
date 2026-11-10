@@ -302,7 +302,8 @@
     text-align: center;
   }
   .rail a,
-  .rail__search {
+  .rail__search,
+  .rail__feedback {
     position: relative;
     display: grid;
     justify-items: center;
@@ -326,6 +327,7 @@
   }
   .rail a:hover,
   .rail__search:hover,
+  .rail__feedback:hover,
   .rail a[aria-current="page"] {
     background: var(--color-control-active);
     color: var(--color-text);
@@ -336,6 +338,19 @@
     inset: 0 auto 0 calc(-1 * var(--space-2));
     width: 3px;
     background: var(--color-accent);
+  }
+  /* Send feedback at the foot of the side menu while Send feedback is activated (Settings, General): a menu item
+     under a line, opening Snaglist. Pages with no side menu, such as the set-up, keep Snaglist's corner button. */
+  .rail__feedback {
+    width: 100%;
+    border: 0;
+    border-top: 1px solid var(--color-divider);
+    background: none;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .rail__feedback[hidden] {
+    display: none;
   }
   .rail__end {
     margin-top: auto;
@@ -437,6 +452,28 @@
   }
   .phone-menu__section {
     border-bottom: 1px solid var(--color-divider);
+  }
+  /* Send feedback, its own row above the menu's foot while Send feedback is activated, like the section rows. */
+  .phone-menu__feedback {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    width: 100%;
+    min-height: 52px;
+    margin-top: auto;
+    padding: 0 var(--space-4);
+    border: 0;
+    border-top: 1px solid var(--color-divider);
+    background: transparent;
+    color: var(--color-text);
+    font: inherit;
+    font-size: var(--text-md);
+    font-weight: var(--weight-strong);
+    text-align: left;
+    cursor: pointer;
+  }
+  .phone-menu__feedback[hidden] {
+    display: none;
   }
   .phone-menu__section > button {
     display: flex;
@@ -4920,7 +4957,6 @@
       display: none;
     }
   }
-
   /* Sortable list (UX-51): rows in an order the person sets, by dragging the handle or with Move up and Move down.
      A marker row (such as "Stop upgrading here") is a dashed line with its words, moved the same way. */
   .sortable {
@@ -4988,3 +5024,39 @@
     .sortable__row.is-dragging { outline: 2px solid Highlight; }
   }
 }
+
+/* A plug-in style's two colours in the Display panel (DASH-284): decoration only, the name says it. */
+.style-swatch { display: inline-block; inline-size: 1em; block-size: 1em; margin-inline-end: var(--space-2); vertical-align: -0.1em;
+  border: 1px solid var(--color-border); background: linear-gradient(135deg, var(--sw-a) 50%, var(--sw-b) 50%); }
+
+/* The upgrade guide in a slide-out (Choose now): the frame fills the panel, and the page inside shows only the guide. */
+.panel-frame { display: block; inline-size: 100%; block-size: 100%; min-block-size: 70vh; border: 0; background: var(--color-bg); }
+.side-panel__body:has(> .panel-frame) { padding: 0; display: flex; }
+:root.in-panel :is(.rail, .site-header, .site-footer, .skip-link, .menu-tabs, [data-sign-out]) { display: none !important; }
+:root.in-panel body.with-rail { padding-inline-start: 0; }
+:root.in-panel .page-head h1 { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); }
+
+/* Send feedback (Snaglist) sits in the bottom-right corner of every page (DASH-288). It must never cover a control:
+   it steps aside while a slide-out or dialog is open, whose own buttons sit in that corner, and pages keep room at the
+   bottom so their last controls can scroll clear of it. Snaglist itself is copied unchanged; only its host is styled. */
+body:has(.side-panel-layer:not([hidden]), dialog[open]) snag-list { display: none; }
+:root:has(snag-list) #main { padding-block-end: 72px; }
+
+/* Send feedback (Snaglist) sits in the bottom left corner: the side menu's end keeps room above it. */
+:root.has-feedback .rail__end:not(:has(.rail__feedback)) { padding-block-end: 64px; }
+
+/* The set-up wizard's step marks (DASH-289): past, now and to come; the text above says the same in words. */
+.wizard-steps { display: flex; gap: var(--space-1); }
+.wizard-steps span { flex: 1; block-size: 6px; background: var(--color-divider); border-radius: var(--radius); }
+.wizard-steps .is-past { background: var(--color-text-muted); }
+.wizard-steps .is-now { background: var(--color-accent); }
+@media (forced-colors: active) { .wizard-steps span { border: 1px solid CanvasText; } .wizard-steps .is-now { background: Highlight; } }
+
+/* Still to set up (DASH-289, owner, 10 November 2026): a Starboard step shows its own page in the slide-out, under
+   the step's title, so the set-up is done there. The page fills what is left of the slide-out and scrolls itself. */
+.wizard-step { display: flex; flex-direction: column; gap: var(--space-4); block-size: 100%; }
+.wizard-step--framed { gap: 0; }
+.wizard-step--framed .wizard-step__head { padding: var(--space-4); border-block-end: 1px solid var(--color-divider); }
+.side-panel__body:has(> .wizard-step--framed) { padding: 0; display: flex; }
+.side-panel__body > .wizard-step--framed { flex: 1; min-block-size: 0; }
+.wizard-frame { flex: 1; min-block-size: 50vh; }
