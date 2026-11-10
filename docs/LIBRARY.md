@@ -102,6 +102,7 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 | Segmented control | `.segmented` | Two to five short options (theme, text size, view, cover size) |
 | Option cards | `.option-cards`, `.option-cards--row` (side by side), `.option-card` | Choices that need a line of explanation; text stays at the top of each card |
 | Filter chips | `.filter-chips`, `.filter-chip` with `aria-pressed` | In toolbars |
+| Sortable list | `.sortable`, `.sortable__row`, `.sortable__handle`, `.sortable__label`, `.sortable__meta`, `.sortable__moves` with `[data-move="up"]` and `[data-move="down"]`; `.sortable__row--marker`, `.sortable__row--off` | Rows in an order the person sets, such as Reelix's qualities best first (UX-51, TheMightyTRexUK, 10 November 2026). Move up and Move down on every row are the keyboard, screen reader and phone way; the handle drags with a mouse or finger. Each button's label names its row ("Move 1080p web up"). Buttons are never disabled: at an end the status says so. A marker row (Stop upgrading here) moves like any row. Each move announces the new place and fires `sortable-change` with `detail.order` (each row's `data-value`) |
 | Applied filters | `.applied`, `.applied__item` | Each removable, plus Clear all |
 | Form layout | `.form-grid`, `[data-span="all"]`, `fieldset` | |
 
