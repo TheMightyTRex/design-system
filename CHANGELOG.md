@@ -9,6 +9,7 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 ## [Unreleased]
 
 ### Added
+- **Heading font and side menu colour for styles** (11 November 2026): headings use `--font-heading` and the side menu `--color-rail` when a style sets them; neither is set by default, so headings keep the body's font and the side menu the header's colour.
 - **Update in the side menu** (9 November 2026): `.rail__update`, a dot and the word Update above `.rail__version` when a newer release is out, linking to About and updates.
 - **Adverts that take turns in the help centre** (8 November 2026): `help-centre.json` takes `banners`, a list of up to six, as well as `banner`. Each page shows one and the next page shows the next, chosen before the page draws so it never flashes; nothing changes while a page is open. Each keeps its own label, and the one Hide button hides them all.
 - **A to Z jump list** (8 November 2026): `.az-jump` over a long wall of covers, # then A to Z from the sort title ("The Expanse" under E, accents folded). Letters with nothing are shown but cannot be chosen and say so to screen readers; the row sticks under the header, keeps the letter in view marked with a bar, has 44px targets and one Tab stop (Arrow keys, Home, End), moves focus to the letter's heading (`.wall-letter`) after a jump, and scrolls sideways on phones. `components.js` adds `azLetter`, `azJump` and `azGo`, and an `az-jump` event for walls that show 40 at a time. In the gallery under Containers.

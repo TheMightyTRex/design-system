@@ -274,3 +274,5 @@ Built from the tokens, used by one app, so not in `components.css`:
   (`.release-notes`, opened from Release notes in the footer).
 - **Storyarr:** the bookshelf and series views.
 
+
+- 11 November 2026: `--font-heading` (headings h1 to h4) and `--color-rail` (the side menu) are optional, for Starboard's styles. Unset, nothing changes.
