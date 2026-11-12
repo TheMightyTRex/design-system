@@ -258,7 +258,7 @@ gallery's Settings patterns section shows each one.
 | 5 | **Form with Save** | Typed text only (an address, a name, a key). One Save per section, at its foot, with the saved note beside it; Test beside Save when the text can be tested | `.form-stack`, `.actions`, `.saved-note` |
 | 6 | **Status line and messages** | What is wrong or worth knowing: one sentence, then what to do, with at most one button | `.notice[data-tone]`, chip on the section's heading |
 | 7 | **Empty and error states** | A list with nothing in it, or a part that could not load: what is missing and the one thing to do | `.empty` with one primary button |
-| 8 | **Lists that open** | Things with several settings each (apps, sites, people): each row has its state chip and Edit, which opens a slide-out editor; Add at the foot of the list | `.rows > .row`, `.row__side`, slide-out |
+| 8 | **Lists that open** | Things with several settings each (apps, sites, people): each row has its state chip and Edit, which opens a slide-out editor; Add at the foot of the list. A long list of apps (Manage apps) shows the state as `.status-icon` after the name instead (section 5, Where status goes) | `.rows > .row`, `.row__side`, slide-out |
 | 9 | **Danger zone** | Remove, delete, reset, clear: last on the page, its own section with a red edge; each button opens a dialog that says what happens | `.settings-section--danger`, `.btn--danger`, danger dialog |
 
 Rules:
