@@ -181,7 +181,7 @@ One rule for both apps, so a state is always in the same place relative to the t
 - **One name for one action.** Re-reading status is **Check again**, everywhere (page heads, slide-outs, Updates).
   **Run now** only starts a server job. Name a slower job by what it does (Storage: **Sort by type again**).
 - **One way to save settings.** Choices (option cards, selects, switches, radios) save as soon as they change, with
-  a toast. Text fields save with `.inline-save` (one field) or `.save-bar` (several), and their Save button is
+  a saved note beside the control (section 9). Text fields save with `.inline-save` (one field) or `.save-bar` (several), and their Save button is
   secondary. At most one primary button in view. A slide-out or dialog that edits one thing (an app, a
   connection) keeps one Save as the primary button in its foot.
 - **Buttons start on the left**, the main action first, in every dialog, slide-out and wizard foot; a danger button
@@ -242,4 +242,33 @@ is the same wizard as the browser one, with the same steps, words, answers and h
   The report goes to the phone as a QR code that fits the window (`TERMINAL.md`, section 7), or as a link or a
   file. Nothing typed as an answer is ever in it.
 - **Every error has a number** (RF-01, IN-01) that the help centre explains.
+
+## 9. Settings patterns
+
+Approved by TheMightyTRexUK on 12 November 2026 (Starboard DASH-308 and DASH-310). Every Settings page, every
+plug-in's settings page and every settings slide-out is built from these nine patterns and nothing else. The
+gallery's Settings patterns section shows each one.
+
+| # | Pattern | Use it for | Code |
+|---|---|---|---|
+| 1 | **Section** | Each topic on a page: heading, one line about it, its state chip on the heading's line. Topic tabs above when a page has four sections or more | `.settings-section`, `.settings-section__head`, `.title-chip`, `.topic-tabs` |
+| 2 | **Setting rows** | One setting each: label and hint on the left, control on the right. Switches, selects and numbers apply at once and show the saved note beside the control | `.settings-rows > .setting`, `.setting__text`, `.setting__control`, `.saved-note`; a number with a unit uses `.input-unit` |
+| 3 | **Choice cards** | Two to four choices that each need a sentence | `.option-cards > .option-card` (radios) |
+| 4 | **Location** | Every folder: the folder in words with free space, the path small under it, Browse (opens in the right place), Set automatically (the right folder for this setting), and the typed path under Advanced | `.location` |
+| 5 | **Form with Save** | Typed text only (an address, a name, a key). One Save per section, at its foot, with the saved note beside it; Test beside Save when the text can be tested | `.form-stack`, `.actions`, `.saved-note` |
+| 6 | **Status line and messages** | What is wrong or worth knowing: one sentence, then what to do, with at most one button | `.notice[data-tone]`, chip on the section's heading |
+| 7 | **Empty and error states** | A list with nothing in it, or a part that could not load: what is missing and the one thing to do | `.empty` with one primary button |
+| 8 | **Lists that open** | Things with several settings each (apps, sites, people): each row has its state chip and Edit, which opens a slide-out editor; Add at the foot of the list | `.rows > .row`, `.row__side`, slide-out |
+| 9 | **Danger zone** | Remove, delete, reset, clear: last on the page, its own section with a red edge; each button opens a dialog that says what happens | `.settings-section--danger`, `.btn--danger`, danger dialog |
+
+Rules:
+
+- **No toast for a saved setting.** The saved note beside the control or the Save button says it ("Saved 16:31").
+  A toast is for things that happen elsewhere or later.
+- **A unit is part of the control** (`20 | MB/s`), never only in the label or the hint.
+- **A folder is never a bare text box.** Starboard knows where each app sees its folders; Browse shows the
+  computer's folders and gives the app the path as it sees it.
+- **Advanced settings** are hidden until the page's small Advanced settings switch is on (at the right of the
+  heading's line); a location's typed path is always under its own Type a path (Advanced).
+- **Slide-outs use the same patterns** inside; their one Save is the primary button in the foot.
 

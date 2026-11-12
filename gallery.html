@@ -269,6 +269,7 @@
     <li><a href="#shelf">Shelf</a></li>
     <li><a href="#toolbar">Section toolbar</a></li>
     <li><a href="#settings">Settings rows and save bar</a></li>
+    <li><a href="#settings-patterns">Settings patterns</a></li>
     <li><a href="#timeline">Timeline</a></li>
     <li><a href="#calendar-month">Calendar month</a></li>
     <li><a href="#slide-out">Slide-out</a></li>
@@ -908,6 +909,33 @@
       <div class="save-bar" role="region" aria-label="Unsaved changes"><span class="save-bar__text">2 unsaved changes</span><button class="btn btn--primary" type="button">Save changes</button><button class="btn btn--quiet" type="button">Discard</button></div>
     </section>
   </div>
+</section>
+
+<section class="g-section" id="settings-patterns" aria-labelledby="settings-patterns-h">
+  <header><h2 id="settings-patterns-h">Settings patterns</h2><p class="muted">Every Settings page uses only these nine: section, setting rows, choice cards, location, form with Save, status line, empty state, lists that open and the danger zone (DESIGN-SYSTEM.md, section 9).</p></header>
+  <div class="g-demo">
+    <section class="settings-section" aria-labelledby="g-sp1">
+      <div class="settings-section__head"><div class="title-chip"><h3 id="g-sp1">Download hours</h3><span class="chip" data-tone="success">On</span></div><p class="small muted">When the download apps may run, so the server stays quick in the evening.</p></div>
+      <ul class="settings-rows">
+        <li class="setting"><div class="setting__text"><span class="setting__label">Only at night</span><span class="setting__hint">Downloads run from midnight to 07:00.</span></div><div class="setting__control"><label class="switch"><span class="visually-hidden">Only at night</span><input type="checkbox" role="switch" checked></label><span class="saved-note"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg>Saved 16:31</span></div></li>
+        <li class="setting"><div class="setting__text"><span class="setting__label" id="g-sp-limit">Speed limit</span><span class="setting__hint">0 means no limit.</span></div><div class="setting__control"><span class="input-unit"><input class="input" value="20" inputmode="numeric" aria-labelledby="g-sp-limit"><span class="input-unit__unit">MB/s</span></span></div></li>
+      </ul>
+      <div class="option-cards" role="radiogroup" aria-label="Quality">
+        <label class="option-card"><input type="radio" name="g-sp-q" checked><strong>HD</strong><small>1080p. Looks sharp on a TV; about 4 GB a film.</small></label>
+        <label class="option-card"><input type="radio" name="g-sp-q"><strong>4K</strong><small>Sharper on big screens; about 15 GB a film.</small></label>
+        <label class="option-card"><input type="radio" name="g-sp-q"><strong>Saver</strong><small>720p. Good on phones; about 1.5 GB a film.</small></label>
+      </div>
+      <div class="location"><div class="location__now"><span class="location__label">YouTube and Spotify downloads</span><span class="location__words">Media, Downloads, Direct · 812 GB free</span><span class="location__path">/data/downloads/direct</span></div>
+        <div class="location__actions"><button class="btn" type="button"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-folder-open"/></svg>Browse</button><button class="btn btn--quiet" type="button">Set automatically</button></div>
+        <details class="location__type"><summary>Type a path (Advanced)</summary><input class="input" value="/data/downloads/direct" aria-label="Folder"></details></div>
+      <div class="empty"><p><strong>No sites to search yet</strong></p><p>Reelix finds nothing until it has one.</p><button class="btn btn--primary" type="button">Add a site</button></div>
+    </section>
+    <section class="settings-section settings-section--danger" aria-labelledby="g-sp9">
+      <div class="settings-section__head"><h3 id="g-sp9">Remove</h3><p class="small muted">Last on the page, with a dialog that says what happens.</p></div>
+      <div class="actions"><button class="btn btn--danger" type="button"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-trash-2"/></svg>Remove Reelix</button></div>
+    </section>
+  </div>
+  <div class="g-notes"><div><h4>Rules</h4><ul><li>A saved setting shows the saved note beside its control, never a toast.</li><li>A unit sits beside its number, as part of the control.</li><li>A folder is never a bare text box: Browse, Set automatically, and the typed path under Advanced.</li><li>Things with several settings open a slide-out editor; Add sits at the foot of the list.</li></ul></div></div>
 </section>
 
 <section class="g-section" id="timeline" aria-labelledby="timeline-h">
