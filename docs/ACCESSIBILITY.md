@@ -117,3 +117,23 @@ names. High contrast raises borders, focus rings and muted text, and removes sha
 3. Themes: Light, Dark, High contrast; check chips, focus rings and disabled controls.
 4. Screen reader: Orca on this computer, or NVDA on Windows; read the page headings list and one task.
 5. Automated: Starboard's `tools/a11y.sh` (axe-core and the checks above), before each release.
+
+**The standard accessibility test** (TheMightyTRexUK, 12 November 2026: "needs adding to standard accessibility
+testing"). Whenever an accessibility test is asked for, it is all of these, never a scan alone:
+
+| Part | How (Starboard) | What it checks |
+|---|---|---|
+| Scan | `tools/a11y.sh` | WCAG 2.2 AA by axe-core in Light, Dark and High contrast; structure; target size; reflow; forced colours; reduced motion |
+| Reading order | `ORDER=1 tools/a11y.sh` | what a screen reader reads against what is seen, on every page and in each app-card design; Tab never jumps back up a column; landmarks in order; the h1 first |
+| Keyboard walk | `TASKS=1 tools/a11y.sh` | the main tasks by keys alone: sign in, skip link, search, open an item, change a setting, edit in a slide-out, make and revoke a key, Show more |
+| Focus after actions | the walk, and the focus keeper in `common.js` | after a save, delete or redraw, focus stays where the person was, never the top of the page; slide-outs and dialogs give it back, or to a stand-in |
+| What is said | the walk | short spoken summaries only (counts, saved, errors); a whole list or section is never a live region |
+| A person | Orca or NVDA | the headings list and one task, listened to; tools cannot cover it |
+
+**Rules found by the reading-order check** (12 November 2026):
+- Nothing opens by itself on a page load; a slide-out opens only when the person asks for it.
+- A form in a slide-out starts in its first field; a confirm box starts on its first field, or on Cancel when the
+  choice is a danger.
+- A notice goes after the page's heading, never before the h1.
+- Show more moves focus to the first new item and says how many were added.
+
