@@ -6,6 +6,13 @@ All notable changes to the TRex Design System are listed here, newest first. The
 commit on 2 November 2026 is under Unreleased. Once versions are tagged, they will follow
 [Semantic Versioning](https://semver.org/).
 
+
+## 12 November 2026
+
+- Search field: every search box has a Search button with the search icon, inside the box at the right. It is the
+  default: components.js adds it to any `input type="search"`, including boxes added later in slide-outs and
+  dialogs. In a form it submits; a box that filters as you type gets a button that searches now. Opt out with
+  `data-no-search-icon`.
 ## [Unreleased]
 
 ### Added
