@@ -9,6 +9,9 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 12 November 2026
 
+- Loading line: the chase (a long and a short bar following each other across) replaces the single sweep. With
+  Reduce motion the line fades in and out across its width rather than standing still, so it still shows activity.
+
 - Which item to use (Starboard DASH-309): `DESIGN-SYSTEM.md` section 10 says when to use list rows, cards, panels,
   status chips and icons, filter chips, segmented controls, toolbars, the selection bar, notices, toasts, empty
   states, dialogs, slide-outs and tables, with eight rules. The gallery has a Which item to use table that links to
