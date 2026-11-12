@@ -217,6 +217,10 @@ Links rendered on the page can use the render-time copy, because they redraw wit
 - Covers wall: auto-fill grid with `--cover-m` minimum; titles under covers, two lines maximum.
 - Tables only for real tabular data (Activity history, logs); everything else uses Rows.
 - Numbers in rows right-aligned; dates as in the content guide.
+- **A state chip sits on its title's line** (12 November 2026): the title on the left, the chip at the right,
+  centred on the line; never on a line of its own under the title. Section headings, card headings, rows (in
+  `row__side`), slide-out titles and sub-headings all follow it. In code: `.title-chip` around the title and the chip;
+  on a narrow screen the chip wraps under the title, still at the right.
 
 ## 8. Terminal
 
