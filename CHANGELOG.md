@@ -9,6 +9,9 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 12 November 2026
 
+- Settings sections and locations take the page's width, as every other page does; the 880px limit is gone. Section
+  lines and setting text keep a readable length (75 characters).
+
 - Loading line: the chase (a long and a short bar following each other across) replaces the single sweep. With
   Reduce motion the line fades in and out across its width rather than standing still, so it still shows activity.
 

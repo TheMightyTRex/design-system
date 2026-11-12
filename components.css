@@ -2944,11 +2944,15 @@
     font-size: var(--text-sm);
   }
 
-  /* Settings: a section with a heading, then rows of label, explanation and control. */
+  /* Settings: a section with a heading, then rows of label, explanation and control. It takes the page's width, as
+     every other page does (TheMightyTRexUK, 12 November 2026); only its text keeps a readable length. */
   .settings-section {
     display: grid;
     gap: var(--space-4);
-    max-width: 880px;
+  }
+  .settings-section__head p,
+  .setting__text {
+    max-width: 75ch;
   }
   .settings-section__head {
     display: grid;
@@ -5211,7 +5215,7 @@ body:has(.side-panel-layer:not([hidden]), dialog[open]) snag-list { display: non
 /* A location (DASH-310): the folder in words with its free space, the path small under it, Browse that opens in
    the right place, Set automatically, and the typed path under Advanced. */
 .location { display: grid; gap: var(--space-3); padding: var(--space-3) var(--space-4); border: 1px solid var(--color-divider);
-  background: var(--color-surface); max-inline-size: 880px; }
+  background: var(--color-surface); }
 .location__now { display: grid; gap: 2px; min-inline-size: 0; }
 .location__label { font-weight: var(--weight-strong); }
 .location__words { color: var(--color-text-muted); font-size: var(--text-sm); }
