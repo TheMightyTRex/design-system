@@ -50,7 +50,8 @@ separate low-vision font switch.
 - **Check:** every drag has a way to do the same with buttons or the keyboard (WCAG 2.5.7).
 
 **Size and spacing**
-- **Check:** controls are at least 44 by 44 pixels (24 is the AA minimum; 44 is Storyarr's standard).
+- **Check:** controls are at least 44 by 44 pixels (24 is the AA minimum; 44 is Storyarr's standard). Ticks and
+  choices are 24 by 24 at least, and a row's or card's name is at least 24 pixels tall (`components.css`).
 - **Check:** works at 400% zoom and 320px width with no horizontal scrolling of the page (wide tables may
   scroll inside their own region).
 - **Check:** text uses relative units, so the text size setting and browser zoom both work.
@@ -105,7 +106,9 @@ names. High contrast raises borders, focus rings and muted text, and removes sha
 
 - Horizontal scroll shelves on Discover → For you (task UX-30).
 - Theme default is Light; target is Match device.
-- No automated contrast or axe check in CI yet (task A11Y-01).
+- Starboard has an automated check (12 November 2026): `tools/a11y.sh` runs axe-core (WCAG 2.2 AA) on every page in
+  Light, Dark and High contrast, with the structure, keyboard, slide-out focus, reflow, forced colours and reduced
+  motion checks of section 2. Storyarr has none yet (task A11Y-01).
 
 ## 6. How to test
 
@@ -113,4 +116,4 @@ names. High contrast raises borders, focus rings and muted text, and removes sha
 2. Zoom: browser at 400%, and the Text size setting at 175%.
 3. Themes: Light, Dark, High contrast; check chips, focus rings and disabled controls.
 4. Screen reader: Orca on this computer, or NVDA on Windows; read the page headings list and one task.
-5. Automated: axe in the Playwright UI tests (task A11Y-01).
+5. Automated: Starboard's `tools/a11y.sh` (axe-core and the checks above), before each release.
