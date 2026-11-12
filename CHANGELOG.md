@@ -9,6 +9,11 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 12 November 2026
 
+- Which item to use (Starboard DASH-309): `DESIGN-SYSTEM.md` section 10 says when to use list rows, cards, panels,
+  status chips and icons, filter chips, segmented controls, toolbars, the selection bar, notices, toasts, empty
+  states, dialogs, slide-outs and tables, with eight rules. The gallery has a Which item to use table that links to
+  each example.
+
 - Layout rule: a state chip sits on its title's line, at the right and centred, everywhere (`.title-chip`).
 
 - Search field: every search box has a Search button with the search icon, inside the box at the right. It is the

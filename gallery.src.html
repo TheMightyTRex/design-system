@@ -138,6 +138,7 @@
     <li><a href="#dialog">Dialog</a></li>
     <li class="g-group">Patterns</li>
     <li><a href="#which">Slide-out, dialog or page</a></li>
+    <li><a href="#which-item">Which item to use</a></li>
     <li><a href="#wizard">Wizard</a></li>
     <li><a href="#wizard-pieces">Wizard pieces</a></li>
     <li><a href="#terminal">Terminal</a></li>
@@ -1068,6 +1069,24 @@ Your choice [1]:</pre></div>
       <tr><th scope="row">Dialog</th><td>A decision or a short task that must be finished or cancelled before going on. One or two fields at most.</td><td>Remove or reset (confirm); Add list; a password check before a download or restore.</td></tr>
       <tr><th scope="row">Page</th><td>Something people come back to, link to or spend time in; long content with its own sections.</td><td>Book, author and series pages; narrator page; Disk health; Settings sections; Upgrade wizard.</td></tr>
       <tr><th scope="row">In place</th><td>A small change to a value people are already looking at.</td><td>Switches and selects in settings rows; filter chips; cover size.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="g-section" id="which-item" aria-labelledby="which-item-h">
+  <header><h2 id="which-item-h">Which item to use</h2><p class="muted">Pick by what the thing is, not how it should look. The rules are in DESIGN-SYSTEM.md, section 10 (Starboard DASH-309).</p></header>
+  <table class="g-table">
+    <thead><tr><th scope="col">Item</th><th scope="col">Use it for</th><th scope="col">Not for</th></tr></thead>
+    <tbody>
+      <tr><th scope="row"><a href="#rows">List rows</a></th><td>A list of things that each have a state or an action.</td><td>A table; covers to browse.</td></tr>
+      <tr><th scope="row"><a href="#cards">Cards</a></th><td>One thing people pick from a few, which opens its page or slide-out.</td><td>A box to group content (a panel); more than about 24.</td></tr>
+      <tr><th scope="row"><a href="#status">Status chips</a></th><td>A state in words, beside its name.</td><td>A number, a date or a count; more than two in one place.</td></tr>
+      <tr><th scope="row"><a href="#filters">Filter chips</a></th><td>Filters that can be on together, each with its count.</td><td>One choice of several (a segmented control).</td></tr>
+      <tr><th scope="row"><a href="#toolbar">Toolbar</a></th><td>Search, filters, sort and view on one line under a list's heading, the count at the end.</td><td>Actions on the items (a selection bar).</td></tr>
+      <tr><th scope="row"><a href="#notices">Notices</a></th><td>Something on this page to know or fix: one sentence and at most one button.</td><td>Things that happened elsewhere (a toast); a saved setting (a saved note).</td></tr>
+      <tr><th scope="row"><a href="#toasts">Toasts</a></th><td>Something that happened that the page does not show.</td><td>A saved setting; an error about a field or row.</td></tr>
+      <tr><th scope="row"><a href="#dialog">Dialogs</a></th><td>A decision or a short task, up to two fields.</td><td>Details or editing with several fields (a slide-out); help.</td></tr>
+      <tr><th scope="row"><a href="#rows">Tables</a></th><td>Real tabular data compared across columns: logs, history.</td><td>A list of things with actions (rows).</td></tr>
     </tbody>
   </table>
 </section>

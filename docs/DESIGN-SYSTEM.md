@@ -272,3 +272,45 @@ Rules:
   heading's line); a location's typed path is always under its own Type a path (Advanced).
 - **Slide-outs use the same patterns** inside; their one Save is the primary button in the foot.
 
+
+## 10. Repeated items: which one to use
+
+Starboard DASH-309, 12 November 2026. Settings have their nine patterns (section 9); this section does the same for
+the items every other page repeats. Pick by what the thing is, not by how it should look. The classes are in
+`LIBRARY.md`; the gallery shows each one.
+
+| Item | Use it for | Do not use it for | Code |
+|---|---|---|---|
+| **List rows** | A list of things that each have a state or an action: downloads, requests, apps, connections, jobs | Real tabular data (use a table); things people browse by picture (use cards or covers) | `.rows > .row`, `.row__title`, `.row__meta`, `.row__side` |
+| **Row that opens** | A row whose details or settings live in a slide-out | A row with several unrelated buttons | `.row--opens`; the title is the button, the whole row is the target |
+| **Cards** | One thing people pick from a few: an app, a drive, a plug-in in a catalogue. It opens its page or slide-out | A box to group content (use a panel); a list of more than about 24 (use rows) | `.cards > .card`, `.card__title`, `.card__meta`, `.card__actions` |
+| **Panels** | Grouping parts of a page under one heading: Overview's parts, a dashboard area | One clickable thing (use a card) | `.panel`, `.panel__head` |
+| **Status chips** | A state in words: Running, Needs attention, Not answering | A number, a date or a count (use the meta line or a count badge); more than two in one place (use facts) | `.chip[data-tone]`, beside its title (section 7) |
+| **Status icons** | The state of each thing in a long list of apps or permissions | A single heading's state (use a chip) | `.status-icon[data-tone]` |
+| **Filter chips** | Filters that can be on together: Films, Series, Missing | One choice of several (use a segmented control) | `.filter-chips > .filter-chip[aria-pressed]` |
+| **Segmented control** | One of two to five short choices that changes the view: Week or Month, Rows or Covers | Filters that combine | `.segmented` |
+| **Toolbar** | Everything that changes what a list shows, on one line under its heading: search, filters, sort, view, then the count at the end | Actions on the items (use a selection bar or the row's own buttons) | `.toolbar`, `.toolbar__row`, `.toolbar__end`, `.toolbar__count` |
+| **Selection bar** | Actions on several chosen items: Follow, Delete | One item's action (use the row) | `.selection-bar` |
+| **Notices** | Something on this page people should know or fix: one sentence, then what to do, with at most one button | Something that happened elsewhere or later (use a toast); a saved setting (use a saved note) | `.notice[data-tone]` with an icon and `.notice__title` |
+| **Toasts** | Something that happened that the page does not show: an update started, a file downloaded | A saved setting, an error that belongs to a field or row (show it there) | `SharedComponents.toast` |
+| **Empty state** | A list or part with nothing in it, or that could not load: what is missing and the one thing to do | A loading list (use skeletons) | `.empty` with one primary button |
+| **Dialogs** | A decision or a short task that must finish first: confirm a removal, a password, one or two fields | Details of an item, or editing something with several fields (use a slide-out); help (use a slide-out) | `<dialog class="dialog">`; danger: `.btn--danger` and Cancel |
+| **Slide-outs** | Details of one item, editing it, or help, while the list stays in view | Something people return to or link to (use a page) | `.side-panel` |
+| **Tables** | Real tabular data that people compare across columns: logs, history, a comparison | A list of things with actions (use rows) | `.table-wrap[data-stack] > .table`; stacks into cards on phones |
+
+Rules:
+
+- **One kind per list.** A list is all rows, all cards or one table, never a mix. A list that can be rows or covers
+  says so with a segmented control in its toolbar.
+- **The state is next to its name.** In a row it is the first thing in `.row__side`; on a card it is in
+  `.card__meta`; on a heading it is on the heading's line (section 7). Never on a line of its own.
+- **Actions sit after the state.** A row has at most two buttons; more go in its slide-out or a menu button. A card
+  has at most one button besides opening it.
+- **A filter shows its count**, such as `Films 12`, and `All` comes first. The toolbar's count says how many are
+  shown, such as `24 of 310`.
+- **A notice says what to do.** Its title is the state ("Not answering"), its sentence says why and what to do, and
+  its one button does that. Two notices in one place become one.
+- **Feedback goes where people look.** A saved setting: a saved note beside it. An error about a field or a row:
+  on the field or row, and focus goes there. Only what happens elsewhere or later is a toast.
+- **Dialogs are short.** Up to two fields. Anything longer is a slide-out with its one Save in the foot.
+- **Words for state changes** are Activate and Deactivate, never Turn on, Turn off, Enable or Disable.
