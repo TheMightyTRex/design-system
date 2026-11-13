@@ -137,7 +137,7 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 | Steps | `.steps`, `aria-current="step"`, `[data-done]` | Onboarding and upgrade wizard |
 | Command | `.command` with `.code-block` and `.copy-btn` (`.copy-btn--label` shows the word Copy) | Commands to copy (How to upgrade); wizards use the labelled button |
 | Line chart | `.chart`, `.chart__svg`, `.chart__grid`, `.chart__axis`, `.chart__line--1/--2`, `.chart__legend`, `.chart__swatch` | Second series dashed; always with a table view in a disclosure |
-| Load more | `.load-more` | Infinite lists end with a count and a button |
+| Load more as you scroll (UX-52) | `.load-more`, `.load-more__count`, `.load-more__status`; `SharedComponents.loadMore(box, { load, items, noun, pageSize, auto, maxAuto, said })`, then `reset()` after a new search, filter or A to Z jump | A long list ends with a count and a real Show more button. One IntersectionObserver per list loads the next page as the end comes within 600px of the screen; no scroll handlers, no timers. While loading, "Loading the next 40" shows; then a polite status says "40 more shown" and focus stays where it was. After three pages in a row it pauses ("Paused here so you can reach the end of the page") until the button is pressed, so the footer stays in reach. The button alone with Reduce motion, when the app's setting asks for it, without IntersectionObserver or without script; pressing it moves focus to the first new item. `DESIGN-SYSTEM.md` section 11 says when to use it |
 
 ### Containers
 | Component | Classes | Notes |

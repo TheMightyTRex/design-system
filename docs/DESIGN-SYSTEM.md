@@ -314,3 +314,32 @@ Rules:
   on the field or row, and focus goes there. Only what happens elsewhere or later is a toast.
 - **Dialogs are short.** Up to two fields. Anything longer is a slide-out with its one Save in the foot.
 - **Words for state changes** are Activate and Deactivate, never Turn on, Turn off, Enable or Disable.
+
+## 11. Load more as you scroll
+
+UX-52, owner, 9 November 2026. A long list can load its next page as its end comes into view, so people browse
+without pressing Show more each time. It is built on the Show more button, never instead of it.
+
+**Use it for** long walls and lists people browse in order: a library wall, a history, a wanted list.
+
+**Do not use it for** results people compare or come back to by position, a table people sort and scan, or a list
+with things after it that people need often. Use Show more alone, or pages.
+
+**How it behaves** (`SharedComponents.loadMore`, classes in `LIBRARY.md`):
+
+- The list ends with `.load-more`: a count ("Showing 40 of 2,418 films") and a real button ("Show 40 more"). The
+  button is in the page's markup, so it is there before any script and if script fails.
+- One IntersectionObserver per list watches that box and loads the next page when it comes within 600px of the
+  screen. No scroll handlers and no timers, so a list costs nothing while nobody scrolls.
+- While loading, a visible line says "Loading the next 40". When done, a polite status says "40 more shown" (or
+  "40 more films shown"). A whole list is never a live region.
+- Focus never moves on its own. A keyboard user who Tabs through the list reaches the new items next.
+- Pressing the button loads the next page and moves focus to the first new item, so reading carries on there.
+- **The footer stays in reach.** It loads only when the end comes into view, and after three pages in a row it
+  pauses with "Paused here so you can reach the end of the page". The button starts a new run.
+- **The button alone** when Reduce motion is on, when the person's setting asks for the button (an app offers one,
+  saved per account), and in a browser without IntersectionObserver.
+- **The A to Z list keeps working.** Jumping to a letter not yet shown loads up to it, moves focus to its heading,
+  and starts the count of pages again (`reset()`). Back to top is never covered.
+- A list of thousands may keep only what is near the screen (Show earlier titles at the top), so memory stays low.
+

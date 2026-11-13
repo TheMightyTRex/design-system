@@ -96,6 +96,7 @@ separate low-vision font switch.
 | Loading bar | `role="progressbar"` or a live text label; hidden from screen readers when idle |
 | Toast | Read out through hidden regions: errors through `role="alert"`, the rest through `role="status"`; focus never moves to it. Success and info at least 5 seconds (10 with an action), warning 10, error until closed; each waits while the pointer or keyboard focus is on it; Close is named with the message |
 | Saved note | `role="status"` beside the button that saved; stays until the next change |
+| Load more as you scroll | A real Show more button is always there; loading by itself keeps focus where it is, shows "Loading the next 40" and says "40 more shown" through a polite status; it pauses after three pages so the footer stays in reach; the button alone with Reduce motion or when the person's setting asks for it |
 
 ## 4. Themes
 
@@ -136,4 +137,5 @@ testing"). Whenever an accessibility test is asked for, it is all of these, neve
   choice is a danger.
 - A notice goes after the page's heading, never before the h1.
 - Show more moves focus to the first new item and says how many were added.
+- Loading by itself (UX-52) never moves focus, says how many were added politely, and pauses after three pages.
 

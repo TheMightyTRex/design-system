@@ -9,6 +9,13 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 13 November 2026
 
+- Load more as you scroll (UX-52, owner, 9 November 2026): `SharedComponents.loadMore(box, options)` loads a list's
+  next page as its end comes into view, with one IntersectionObserver per list. The Show more button stays as the
+  way for keyboard and screen reader users and is the only way with Reduce motion or when a setting asks for it.
+  "Loading the next 40" shows while it loads, a polite status says "40 more shown", focus stays where it was, and
+  it pauses after three pages so the footer stays in reach. New `.load-more__count` and `.load-more__status`; a
+  gallery example; `DESIGN-SYSTEM.md` section 11 says when to use it and when not.
+
 - Palettes an app can offer (Starboard's own style, TheMightyTRexUK, 13 November 2026): `tools/palettes.py` also
   writes `palettes/app-palettes.css`, all five palettes under `:root[data-palette="…"]`, weaker than High contrast.
   `tools/sync.py` copies it, with `palettes.json`, into Starboard (`css/palettes.css`, `palettes.json`); its

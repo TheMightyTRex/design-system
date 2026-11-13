@@ -264,6 +264,7 @@
     <li><a href="#cards">Panels and cards</a></li>
     <li><a href="#media">Covers and media cards</a></li>
     <li><a href="#az-jump">A to Z jump list</a></li>
+    <li><a href="#load-more">Load more as you scroll</a></li>
     <li><a href="#cover-actions">Cover actions</a></li>
     <li><a href="#series-head">Series header and logo</a></li>
     <li><a href="#shelf">Shelf</a></li>
@@ -767,7 +768,6 @@
     <ol class="steps" aria-label="Upgrade steps">
       <li data-done>Back up</li><li aria-current="step">Review changes</li><li>Upgrade</li><li>Check</li>
     </ol>
-    <div class="load-more"><span>Showing 40 of 2,418 books</span><button class="btn" type="button">Show 40 more</button></div>
   </div>
 </section>
 
@@ -807,6 +807,19 @@
     <ul class="media-grid" data-size="small"><li class="media-card"><div class="cover" style="background:#2b4f6e;color:#fff;font-weight:700;padding:var(--space-2)">Arrival</div><span class="media-card__title">Arrival</span><span class="media-card__meta">2016</span></li><li class="media-card"><div class="cover" style="background:#2b4f6e;color:#fff;font-weight:700;padding:var(--space-2)">The Archers</div><span class="media-card__title">The Archers</span><span class="media-card__meta">Radio 4</span></li></ul>
     <h3 class="wall-letter" id="letter-b" tabindex="-1">B</h3>
     <ul class="media-grid" data-size="small"><li class="media-card"><div class="cover" style="background:#2b4f6e;color:#fff;font-weight:700;padding:var(--space-2)">Blue Planet II</div><span class="media-card__title">Blue Planet II</span><span class="media-card__meta">2017</span></li><li class="media-card"><div class="cover" style="background:#2b4f6e;color:#fff;font-weight:700;padding:var(--space-2)">Bluey</div><span class="media-card__title">Bluey</span><span class="media-card__meta">2018 to now</span></li></ul>
+  </div>
+</section>
+
+<section class="g-section" id="load-more" aria-labelledby="load-more-h">
+  <header><h2 id="load-more-h">Load more as you scroll</h2><p class="muted">UX-52. A long list loads its next page as its end comes into view, and keeps a real Show more button for keyboard and screen reader users. While it loads, a line says "Loading the next 40"; then a screen reader hears "40 more shown" and focus stays where it was. After three pages in a row it stops, so the footer stays in reach, and the button carries on. The button is the only way when Reduce motion is on, when the person's setting asks for it, or without script. Pressing it moves focus to the first new item. Classes: <code>.load-more</code>, <code>.load-more__count</code>, <code>.load-more__status</code>. Behaviour: <code>SharedComponents.loadMore(box, { load, items, noun, pageSize, auto, maxAuto })</code>, with <code>reset()</code> after a new search, filter or A to Z jump.</p></header>
+  <div class="g-demo">
+    <ul class="rows" id="g-more-list" aria-label="Example books"></ul>
+    <div class="load-more" id="g-more"><span class="load-more__count" id="g-more-count"></span><button class="btn" type="button">Show 5 more</button></div>
+  </div>
+  <div class="g-notes">
+    <div><h4>When to use it</h4><ul><li>Long walls and lists people browse, such as a library or a history, where the order is the point.</li></ul></div>
+    <div><h4>When not to</h4><ul><li>Results people compare or come back to by position, a table to sort, or a page with things after the list that people need: use pages or Show more alone.</li></ul></div>
+    <div><h4>Keeping the footer in reach</h4><ul><li>It loads only when the end of the list comes into view, never on a timer, and stops after three pages in a row. The A to Z list and Back to top keep working.</li></ul></div>
   </div>
 </section>
 
@@ -1553,6 +1566,27 @@ Pending sectors: 0</code></div></details>
   addEventListener("load", spy);
   spy();
   for (const t of tones) box.insertAdjacentHTML("beforeend", `<div class="g-swatch"><span style="background:var(--status-${t}-bg);border-color:var(--status-${t}-fg);border-width:3px"></span><span><code>--status-${t}-*</code></span></div>`);
+  // Load more as you scroll (UX-52): a made-up list of 30 books, 5 at a time.
+  (() => {
+    const list = document.getElementById("g-more-list");
+    const box = document.getElementById("g-more");
+    const total = 30;
+    const add = () => {
+      const from = list.children.length;
+      for (let i = from; i < Math.min(from + 5, total); i++) {
+        const li = document.createElement("li");
+        li.className = "row";
+        li.innerHTML = `<div><span class="row__title"><a href="#load-more">Example book ${i + 1}</a></span></div>`;
+        list.append(li);
+      }
+      document.getElementById("g-more-count").textContent = `Showing ${list.children.length} of ${total} books`;
+      box.hidden = list.children.length >= total;
+      return list.children.length - from;
+    };
+    add();
+    SharedComponents.loadMore(box, { pageSize: 5, noun: "books", items: () => list.children,
+      load: () => new Promise((done) => setTimeout(() => done(add()), 400)) });
+  })();
 </script>
 </body>
 </html>
