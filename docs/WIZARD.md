@@ -27,7 +27,8 @@ wizard", with their own count, and the wizard's progress starts at its own first
 
 **Review aids are for testing, never the finished product (TheMightyTRexUK, 4 November 2026).** What happens next
 and the decision tree help people who review a wizard see where each choice leads. An app shows them only
-while its testing setting is on (the same setting as UX notes, `ux-notes.js`), and mock-ups show them.
+while its testing setting is active (the same setting as its Send feedback button, [Snaglist](https://github.com/TheMightyTRex/snaglist)),
+and mock-ups show them.
 Leave `.wizard-aside` out of the page, or give it `hidden`, and the step takes the whole width.
 
 `.wizard-layout` puts the step on the left and the review aids on the right from 1100px, one under the

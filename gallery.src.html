@@ -151,7 +151,6 @@
     <li><a href="#whats-new">What is new</a></li>
     <li><a href="#retiring">Retiring something and dated changes</a></li>
     <li><a href="#time-ago">Time ago</a></li>
-    <li><a href="#ux-notes">UX notes</a></li>
   </ol>
   <p class="g-none" hidden data-g-none>No components match.</p>
 </nav>
@@ -1239,14 +1238,6 @@ Your choice [1]:</pre></div>
   <div class="g-notes"><div><h4>Markup</h4><ul><li><code>&lt;time datetime="2026-11-03T16:31:00"&gt;</code> with the words, and the exact time in <code>.visually-hidden</code>.</li></ul></div></div>
 </section>
 
-<section class="g-section" id="ux-notes" aria-labelledby="ux-notes-h">
-  <header><h2 id="ux-notes-h">UX notes</h2><p class="muted">For testing only: <code>ux-notes.js</code> puts Note an issue in the corner of every page. Choose the part of the page (click it, or Tab to it and press Enter), say what is wrong, the kind and how bad it is. Notes lists them, with Copy as text, Download and Mark as fixed. Each app turns it on with a setting and can keep the notes on its server; here they stay in this browser.</p></header>
-  <div class="g-demo">
-    <div class="actions"><button class="btn" type="button" id="g-ux-start">Activate UX notes</button><button class="btn" type="button" id="g-ux-stop">Deactivate</button></div>
-    <p class="small muted">Starts with <code>UxNotes.start({ app: "Gallery" })</code>; a store with list, add, update and remove keeps them elsewhere.</p>
-  </div>
-</section>
-
 </main>
 </div>
 </div>
@@ -1341,10 +1332,7 @@ Pending sectors: 0</code></div></details>
 </div>
 
 <script src="components.js"></script>
-<script src="ux-notes.js"></script>
 <script>
-  document.getElementById("g-ux-start").addEventListener("click", () => UxNotes.start({ app: "Gallery" }));
-  document.getElementById("g-ux-stop").addEventListener("click", () => UxNotes.stop());
   // Colour swatches, read from the live tokens so they follow the theme.
   const names = ["bg","header","surface","surface-raised","surface-sunken","text","text-muted","border","divider","accent","accent-text","accent-soft","focus","count"];
   const tones = ["success","info","warning","danger","muted"];

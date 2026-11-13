@@ -6,12 +6,13 @@ the gallery (four themes, 175% text) and run tools/contrast.py, then run:  pytho
 Add --check to list what would change without writing anything.
 It writes (folders set in tools/paths.py):
   Starboard  STARBOARD_WEB/css/tokens.css (font path ../fonts/), css/components.css, js/components.js,
-             js/ux-notes.js, icons/sprite.svg (library icons plus Starboard's own), css/palettes.css and
+             icons/sprite.svg (library icons plus Starboard's own), css/palettes.css and
              palettes.json (palettes/, for the own style's colours); and, next to the web folder,
              lib/terminal-frame.sh, the copy in run-first.sh and starboard/qr.py (from terminal/)
   Storyarr   STORYARR_SHARED/tokens.css (no @font-face or --font: Storyarr loads the font itself),
-             components.css, ux-notes.js
-It does not commit. Commit in each repo, then rebuild and test each app.
+             components.css
+It does not commit. A file the library no longer has (RETIRED) is listed as "retired" while an app still has a
+copy, for the app to remove with git rm; sync.py never deletes anything. Commit in each repo, then rebuild and test each app.
 """
 import pathlib
 import re
@@ -42,7 +43,9 @@ def write(path, text, new=False):
 tokens = (HERE / "tokens.css").read_text()
 components = (HERE / "components.css").read_text()
 behaviour = (HERE / "components.js").read_text()
-notes = (HERE / "ux-notes.js").read_text()  # the UX notes tester (both apps)
+# No longer in the library: ux-notes.js, the UX notes tester, replaced by Snaglist (DEV-05, 13 November 2026:
+# github.com/TheMightyTRex/snaglist, which each app copies in itself).
+RETIRED = {"Starboard": ["js/ux-notes.js"], "Storyarr": ["ux-notes.js"]}
 icons = dict(re.findall(r'<symbol id="i-([^"]+)"[^>]*>(.*?)</symbol>', (HERE / "icons.svg").read_text(), re.S))
 note = "\n * Copied by tools/sync.py from github.com/TheMightyTRex/design-system: change it there, not here."
 
@@ -50,7 +53,6 @@ if STARBOARD.exists():
     write(STARBOARD / "css/tokens.css", tokens.replace('url("fonts/', 'url("../fonts/'))
     write(STARBOARD / "css/components.css", components)
     write(STARBOARD / "js/components.js", behaviour)
-    write(STARBOARD / "js/ux-notes.js", notes)
     # The palettes, for the own style's colours (owner, 13 November 2026): loaded only when one is chosen.
     write(STARBOARD / "css/palettes.css", (HERE / "palettes/app-palettes.css").read_text(), new=True)
     write(STARBOARD / "palettes.json", (HERE / "palettes/palettes.json").read_text(), new=True)
@@ -81,11 +83,13 @@ if STORYARR.exists():
                   " * Shared design tokens for Storyarr and Starboard (version 1, 2 November 2026)." + note +
                   "\n * Storyarr's copy leaves out the font (styles.css loads Atkinson Hyperlegible Next and sets --font).", 1)
     write(STORYARR / "tokens.css", t)
-    write(STORYARR / "ux-notes.js", notes)
     write(STORYARR / "components.css", components.replace(
         " * Shared components for Storyarr and Starboard (version 1, 2 November 2026).",
         " * Shared components for Storyarr and Starboard (version 1, 2 November 2026)." + note, 1))
 
 for name, folder in (("Starboard", STARBOARD), ("Storyarr", STORYARR)):
+    for old in RETIRED[name] if folder.exists() else []:
+        if (folder / old).exists():
+            print("retired", folder / old, "(no longer in the library: remove it from the app with git rm)")
     if not folder.exists():
         print("missing", name, folder, "(set it in tools/paths.local.json)")

@@ -9,6 +9,11 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 13 November 2026
 
+- UX notes leave the library (DEV-05, TheMightyTRexUK): `ux-notes.js`, its `.ux-dock`, `.ux-banner`, `.ux-outline`
+  and `.ux-notes` styles and its gallery section are gone. [Snaglist](https://github.com/TheMightyTRex/snaglist),
+  which grew from it, does the same and more, and each app copies it in itself. `tools/sync.py` no longer copies
+  `ux-notes.js` and lists any copy an app still has as "retired", for the app to remove.
+
 - Load more as you scroll (UX-52, owner, 9 November 2026): `SharedComponents.loadMore(box, options)` loads a list's
   next page as its end comes into view, with one IntersectionObserver per list. The Show more button stays as the
   way for keyboard and screen reader users and is the only way with Reduce motion or when a setting asks for it.
