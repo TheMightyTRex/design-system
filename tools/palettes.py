@@ -117,6 +117,21 @@ for name, (label, suits, hue, scale, light, dark) in PALETTES.items():
     ]))
 (OUT / "palettes.json").write_text(json.dumps(data, indent=2) + "\n")
 
+# Every palette in one file for an app that lets people choose (Starboard's own style, owner, 13 November 2026:
+# "add the design system colour options in the settings page"). The app sets data-palette="forest" on <html>, and
+# tools/sync.py copies this file in. Each rule is :where()-weak against High contrast, so High contrast and the app's
+# own styles win; Teal, the default, is tokens.css with no data-palette.
+app = ["/* Every palette for an app where people choose one: set data-palette on <html>. Load after tokens.css.",
+       "   Written by tools/palettes.py: edit that, not this. Teal, the default, needs no data-palette. */"]
+for name, d in data.items():
+    root = f':root[data-palette="{name}"]'
+    app += [rule(f"{root}:where(:not(.pref-contrast))", d["light"]),
+            "@media (prefers-color-scheme: dark) {",
+            rule(f'{root}:not([data-theme="light"]):where(:not(.pref-contrast))', d["dark"], "  "),
+            "}",
+            rule(f'{root}[data-theme="dark"]:where(:not(.pref-contrast))', d["dark"])]
+(OUT / "app-palettes.css").write_text("\n".join(app) + "\n")
+
 # The gallery section: each palette as swatches and a small sample, in Light and Dark side by side. The sample
 # sets the palette's colours on its own box, so the rest of the gallery keeps its own.
 TOKENS = (ROOT / "tokens.css").read_text()
@@ -149,7 +164,7 @@ section = f'''<!--PALETTES-->
 {cards}
   </div>
   <div class="g-notes">
-    <div><h4>Use one</h4><ul><li><code>&lt;link rel="stylesheet" href="tokens.css"&gt;</code>, then <code>palettes/forest.css</code>, then <code>components.css</code>.</li><li>Pick one palette per product and keep it. The people using it never choose one.</li></ul></div>
+    <div><h4>Use one</h4><ul><li><code>&lt;link rel="stylesheet" href="tokens.css"&gt;</code>, then <code>palettes/forest.css</code>, then <code>components.css</code>.</li><li>Pick one palette per product. An app may let people choose one (Starboard, own style): load <code>palettes/app-palettes.css</code> after <code>tokens.css</code> and set <code>data-palette</code> on <code>&lt;html&gt;</code>.</li></ul></div>
     <div><h4>Change one</h4><ul><li>Edit <code>tools/palettes.py</code>, run it, then <code>tools/build.py</code> and <code>tools/contrast.py</code> (0 failures).</li></ul></div>
   </div>
 </section>

@@ -6,7 +6,8 @@ the gallery (four themes, 175% text) and run tools/contrast.py, then run:  pytho
 Add --check to list what would change without writing anything.
 It writes (folders set in tools/paths.py):
   Starboard  STARBOARD_WEB/css/tokens.css (font path ../fonts/), css/components.css, js/components.js,
-             js/ux-notes.js, icons/sprite.svg (library icons plus Starboard's own); and, next to the web folder,
+             js/ux-notes.js, icons/sprite.svg (library icons plus Starboard's own), css/palettes.css and
+             palettes.json (palettes/, for the own style's colours); and, next to the web folder,
              lib/terminal-frame.sh, the copy in run-first.sh and starboard/qr.py (from terminal/)
   Storyarr   STORYARR_SHARED/tokens.css (no @font-face or --font: Storyarr loads the font itself),
              components.css, ux-notes.js
@@ -24,10 +25,13 @@ STORYARR = path("STORYARR_SHARED")
 CHECK = "--check" in sys.argv
 
 
-def write(path, text):
+def write(path, text, new=False):
+    """new: a file an app copy may not have yet (another branch); --check lists it as absent, not differs."""
     old = path.read_text() if path.exists() else None
     if old == text:
         print("same   ", path)
+    elif CHECK and new and old is None:
+        print("absent ", path)
     elif CHECK:
         print("differs", path)
     else:
@@ -47,6 +51,9 @@ if STARBOARD.exists():
     write(STARBOARD / "css/components.css", components)
     write(STARBOARD / "js/components.js", behaviour)
     write(STARBOARD / "js/ux-notes.js", notes)
+    # The palettes, for the own style's colours (owner, 13 November 2026): loaded only when one is chosen.
+    write(STARBOARD / "css/palettes.css", (HERE / "palettes/app-palettes.css").read_text(), new=True)
+    write(STARBOARD / "palettes.json", (HERE / "palettes/palettes.json").read_text(), new=True)
     sprite = STARBOARD / "icons/sprite.svg"
     own = dict(re.findall(r'<symbol id="i-([^"]+)"[^>]*>(.*?)</symbol>', sprite.read_text(), re.S)) if sprite.exists() else {}
     merged = {**own, **icons}

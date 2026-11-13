@@ -7,6 +7,14 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 [Semantic Versioning](https://semver.org/).
 
 
+## 13 November 2026
+
+- Palettes an app can offer (Starboard's own style, TheMightyTRexUK, 13 November 2026): `tools/palettes.py` also
+  writes `palettes/app-palettes.css`, all five palettes under `:root[data-palette="…"]`, weaker than High contrast.
+  `tools/sync.py` copies it, with `palettes.json`, into Starboard (`css/palettes.css`, `palettes.json`); its
+  `--check` lists a file an app copy does not have yet as absent. The gallery's palette note says so.
+
+
 ## 12 November 2026
 
 - Settings sections and locations take the page's width, as every other page does; the 880px limit is gone. Section

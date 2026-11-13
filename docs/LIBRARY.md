@@ -59,7 +59,7 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 | Component | Classes | Notes |
 |---|---|---|
 | Colour roles | `--color-*`, `--status-<tone>-bg/-fg`, `--chart-*`, `--series-1` to `--series-7`, `--series-empty` | Four themes; accent is one token (UX-02 board offers Indigo, Teal, Amber) |
-| Palettes | `palettes/indigo.css`, `forest.css`, `plum.css`, `ember.css`, `graphite.css` (Teal, the default, is `tokens.css`) | For building a new design or site with the same components: load `tokens.css`, one palette, then `components.css`. Light and Dark colours only; status colours, chart series and High contrast stay the same. Written by `tools/palettes.py`; not synced into the apps |
+| Palettes | `palettes/indigo.css`, `forest.css`, `plum.css`, `ember.css`, `graphite.css` (Teal, the default, is `tokens.css`) | For building a new design or site with the same components: load `tokens.css`, one palette, then `components.css`. Light and Dark colours only; status colours, chart series and High contrast stay the same. Written by `tools/palettes.py`. For an app where people choose (Starboard's own style, 13 November 2026), `palettes/app-palettes.css` holds all five under `:root[data-palette="…"]`; `tools/sync.py` copies it to Starboard's `css/palettes.css` with `palettes.json`. High contrast and an app's own styles still win |
 | Type | `--text-xs` to `--text-2xl`, `--font` | One typeface; scales with Text size |
 | Space and size | `--space-1` to `--space-12`, `--control-h` (44px), `--control-h-compact` (32px, dense tables only) | |
 | Icons | `icons.svg`, `svg.i`, `.i-lg`, `.i-xl` | Lucide, 2px stroke, decorative beside words |
