@@ -49,6 +49,7 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 ## [Unreleased]
 
 ### Added
+- **Card band and a compact app icon** (14 November 2026): `.card-band` puts a grey band across the top of a card (`.has-band`) with the logo, the name as the heading, and a status chip and when it last updated at the right, for Starboard's plug-in cards (DASH-428, design 2); `.app-icon--compact` is the 32px icon it uses, with initials on a tile when there is no logo.
 - **Heading font and side menu colour for styles** (11 November 2026): headings use `--font-heading` and the side menu `--color-rail` when a style sets them; neither is set by default, so headings keep the body's font and the side menu the header's colour.
 - **Update in the side menu** (9 November 2026): `.rail__update`, a dot and the word Update above `.rail__version` when a newer release is out, linking to About and updates.
 - **Adverts that take turns in the help centre** (8 November 2026): `help-centre.json` takes `banners`, a list of up to six, as well as `banner`. Each page shows one and the next page shows the next, chosen before the page draws so it never flashes; nothing changes while a page is open. Each keeps its own label, and the one Hide button hides them all.

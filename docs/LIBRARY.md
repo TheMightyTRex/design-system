@@ -114,7 +114,7 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 | Title with status | `.title-status`, `.title-status__chips` | A heading's status chips straight after the name, centred on its line; never on a line under it (see "Where status goes") |
 | Status icon | `.status-icon[data-tone]` | In a list of things with a state: an icon after the name, the word in hidden text and a tooltip |
 | Tag | `.tag` | Format or kind, not status |
-| Avatar, app icon | `.avatar`, `.app-icon` | |
+| Avatar, app icon | `.avatar`, `.app-icon`, `.app-icon--compact` (32px) | Initials on a tile when there is no logo; `.has-image` for a logo |
 | Cover | `.cover`, `.cover--row` (48px in rows), `.cover__badge` | 2:3; square audio covers letterboxed |
 | Facts | `.facts` (`dl`) | Author first, then Series; names are links |
 | Stat | `.stats`, `.stat[data-tone]`, `.stat__value`, `.stat__label` | Edge colour plus words |
@@ -144,6 +144,7 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 |---|---|---|
 | Panel | `.panel[data-tone]`, `.panel__head` | Groups content |
 | Card | `.cards`, `.card[data-tone]`, `.card__top`, `.card__title`, `.card__meta`, `.card__actions` | One thing; whole card is the target; opens its slide-out or page |
+| Card band (DASH-428) | `.has-band` on the card, `.card-band`, `.card-band__title` (the heading), `.card-band__sub`, `.card-band__side`, `.card-band__time` | A grey band across the top: the logo (`.app-icon--compact`), the name as the heading, a status chip and when it last updated at the right; Starboard's plug-in cards (design 2, "band with status", TheMightyTRexUK, 14 November 2026). The chip starts with hidden "Status: " and the time with hidden "Updated ", so each makes sense alone |
 | Media card and grid | `.media-grid[data-size]`, `.media-card`, `.media-card__title`, `.media-card__meta`, `.media-row` | Books and films; Small, Medium, Large |
 | A to Z jump list | `nav.az-jump > ol > li > a.az-jump__letter`, `[aria-disabled="true"]`, `[aria-current="location"]`, `.wall-letter` headings (`#letter-a`, `#letter-num`) | Over a long wall: # then A to Z from the sort title, accents folded; letters with nothing shown but not choosable ("Q, no titles"); sticky under the header; 44px targets; one Tab stop with Arrow keys, Home and End; focus moves to the heading after a jump; sideways scrolling on phones. `SharedComponents.azLetter`, `azJump`, `azGo` and the `az-jump` event |
 | Section toolbar (design D) | `.toolbar`, `.toolbar__row`, `.toolbar__search`, `.toolbar__end`, `.toolbar__count` | Same on every list |
