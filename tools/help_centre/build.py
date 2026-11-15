@@ -80,7 +80,7 @@ def configure(config_path):
     footer_starts (text that begins a footer on every page, left out of search), search_example, front_door, and the
     standard's areas, home, version_from or version, journey, featured, solver and plugins."""
     global ROOT, HELP, NAME, TITLE, REPO, BLOB, SITE, LOGO, STOP, EXAMPLE, LEAVE_OUT, SECTIONS, FRONT_DOOR, CFG
-    global FOOTER_NOTE, BANNER, BANNER_LABEL, BANNER_COUNT, STRIP, SPONSORED, FAVICON, COUNTER
+    global FOOTER_NOTE, NOTICE_LABEL, BANNER, BANNER_LABEL, BANNER_COUNT, STRIP, SPONSORED, FAVICON, COUNTER
     cfg_file = pathlib.Path(config_path).resolve()
     cfg = json.loads(cfg_file.read_text(encoding="utf-8"))
     CFG = cfg
@@ -97,7 +97,12 @@ def configure(config_path):
     EXAMPLE = cfg.get("search_example", "Type what you want to do.")
     FRONT_DOOR = cfg.get("front_door", True)
     md = lambda text: markdown.markdown(text, output_format="html") if text else ""
-    FOOTER_NOTE = md(cfg.get("footer_note", ""))
+    # The footer notice (DASH-436 follow-up): the footer shows one link, its first bold sentence (or "footer_link"),
+    # which opens a slide-out with the whole notice; the footer itself stays like the apps' footers.
+    note = (cfg.get("footer_note") or "").strip()
+    first = re.match(r"\*\*(.+?)\*\*\s*", note)
+    NOTICE_LABEL = cfg.get("footer_link") or (first.group(1).strip() if first else "")
+    FOOTER_NOTE = md(note[first.end():] if first and not cfg.get("footer_link") else note)
     # Visitor counting is off unless a help centre names its GoatCounter address: no cookies and no personal data,
     # and the footer says so on every page.
     gc = cfg.get("goatcounter", "")
@@ -105,6 +110,7 @@ def configure(config_path):
         raise SystemExit(f"goatcounter must look like https://<code>.goatcounter.com/count, not {gc!r}")
     COUNTER = (f'<script data-goatcounter="{gc}" async src="https://gc.zgo.at/count.js"></script>\n') if gc else ""
     if gc:
+        NOTICE_LABEL = NOTICE_LABEL or "Visit counting"
         FOOTER_NOTE += md("This help centre counts visits with [GoatCounter](https://www.goatcounter.com), "
                           "which uses no cookies and keeps no personal data.")
     raw = cfg.get("banners") or ([cfg["banner"]] if cfg.get("banner") else [])
@@ -510,6 +516,12 @@ def toc_html(body):
     return side, inline
 
 
+MAKER_MARK = ('<svg class="maker-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="1" y="1" width="30" height="30" '
+              'fill="var(--color-logo-tile)"/><path fill="var(--color-bg)" d="M17 6.5h7.5q2.5 0 2.5 2.2V11h-4v.8h2.6v1.6H21v2.2l2.6 1.5-.6 1-2-1.1V20q0 '
+              '2.2-2.4 2.9l.9 3.8h1.6V28h-4.3l-.9-4.4h-1.6l-.8 3.1h1.4V28h-4.1l1-4.9q-3.6-1-8.7.3 3.4-3.6 8.2-5.2 3.3-1.3 3.9-4.6V8.4q0-1.9 1.4-1.9Z"/>'
+              '<circle cx="20" cy="8.6" r="1" fill="var(--color-logo-star)"/></svg>')
+
+
 TEMPLATE = """<!doctype html>
 <html lang="en-GB">
 <head>
@@ -560,10 +572,18 @@ TEMPLATE = """<!doctype html>
 </main>
 </div>
 <footer class="site-footer help-footer">
-  {footer_note}
-  <p><a href="{root}index.html">Help centre</a> · <a href="{repo}">{name} on GitHub</a> · <a href="{repo}/issues">Report a problem with this help</a></p>
+  <div class="site-footer__app">
+    <span class="site-footer__brand">{logo}{name} help</span>
+    <nav aria-label="{name} help"><ul class="site-footer__links">
+      <li><a href="{root}index.html">Help centre</a></li>
+      <li><a href="{repo}" target="_blank" rel="noopener noreferrer">GitHub repository<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+      <li><a href="{repo}/issues" target="_blank" rel="noopener noreferrer">Report a problem with this help<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+      {notice_link}
+    </ul></nav>
+  </div>
+  <a class="site-footer__maker" href="https://github.com/TheMightyTRex" rel="me noopener noreferrer" target="_blank">{maker_mark}TheMightyTRexUK<span class="visually-hidden">, on GitHub (opens in a new tab)</span>{icon_external}</a>
 </footer>
-<div class="side-panel-layer" id="help-display" hidden>
+{notice_panel}<div class="side-panel-layer" id="help-display" hidden>
   <div class="side-panel-backdrop"></div>
   <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="help-display-h">
     <div class="panel-header"><h2 class="panel-header__title" id="help-display-h">Display and accessibility</h2><button class="icon-btn" type="button" data-closes aria-label="Close display and accessibility">{icon_x}</button></div>
@@ -613,7 +633,16 @@ class Site:
             canonical=SITE + out_rel, root=root, logo=LOGO, crumbs=crumbs, content=content, edit=edit, repo=REPO,
             name=html.escape(NAME), band=band, main_class=main_class, counter=COUNTER,
             prefs_js=PREFS_JS.replace("__ROTATE__", ROTATE_JS.replace("__BC__", str(BANNER_COUNT)) if BANNER_COUNT > 1 else ""),
-            footer_note=f'<div class="help-footer__note">{FOOTER_NOTE}</div>' if FOOTER_NOTE else "",
+            notice_link=(f'<li><button class="site-footer__link-btn" type="button" data-opens="help-notice" aria-haspopup="dialog" '
+                         f'aria-expanded="false">{html.escape(NOTICE_LABEL)}</button></li>') if NOTICE_LABEL else "",
+            notice_panel=(f'<div class="side-panel-layer" id="help-notice" hidden><div class="side-panel-backdrop"></div>'
+                          f'<aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="help-notice-h">'
+                          f'<div class="panel-header"><h2 class="panel-header__title" id="help-notice-h">{html.escape(NOTICE_LABEL)}</h2>'
+                          f'<button class="icon-btn" type="button" data-closes aria-label="Close">{icon("x", root)}</button></div>'
+                          f'<div class="side-panel__body help-notice">{FOOTER_NOTE}</div>'
+                          f'<div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Done</button></div>'
+                          f'</aside></div>') if NOTICE_LABEL else "",
+            maker_mark=MAKER_MARK, icon_external=icon("external-link", root, 16),
             banner=(f'<aside class="help-banner" id="help-banner" aria-label="{html.escape(BANNER_LABEL)}">'
                     f'<div class="help-banner__body" data-count="{BANNER_COUNT}">{BANNER}</div>'
                     f'<button class="icon-btn help-banner__hide" type="button" aria-label="Hide this {html.escape(BANNER_LABEL.lower())}">'
