@@ -63,8 +63,14 @@ separate low-vision font switch.
 - **Check:** links in body text are distinguishable without colour (underline, or Underline links on).
 
 **Motion**
-- **Check:** with Reduce motion on (or `prefers-reduced-motion`), slide-ins, fades and the loading bar
-  animation stop or become instant.
+- **Check:** with Reduce motion on (or `prefers-reduced-motion` with Match device), slide-ins, fades and the
+  loading bar animation stop or become instant.
+- **Check:** with Reduce motion off, everything moves even when the device asks for reduced motion: every
+  `prefers-reduced-motion` query leaves out `:root.pref-motion-off`, and scripts ask `motionStill()`, never the
+  media query alone.
+- **Check:** the side menu and header at every text size, with and without wider spacing, and in a window 600
+  pixels tall: no word breaks in the middle, nothing runs past an edge, overlaps or is cut off (the app's layout
+  check, as axe's reflow check does not see a menu that cuts off its own items).
 - **Check:** nothing flashes more than three times a second; anything moving for over five seconds can be
   paused.
 

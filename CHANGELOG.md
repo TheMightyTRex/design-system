@@ -7,6 +7,23 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 [Semantic Versioning](https://semver.org/).
 
 
+## 15 November 2026
+
+- Large text, wider spacing and short windows (Starboard DASH-437, found while writing Starboard's accessibility
+  help). The side menu grows with the text (`--rail-w` from `--text-xs` and `--rail-name-em`, never under 88px), so
+  "Starboard" and "Feedback" no longer break in the middle or run past its edge; in a short window it scrolls on its
+  own instead of squeezing its items on top of each other, and below 720 pixels tall its items sit a little closer.
+- The header gives way in steps when its items do not fit, instead of cutting off menu items or squeezing the search
+  box: icons only, then the Search button, then Help and Display as icons, then the level 1 menu under Menu. New in
+  `components.js`: `setupHeaderFit()` and `fitHeader()`, run by `setup()`, measuring again with one ResizeObserver
+  whenever the text size, spacing, a name or the window changes. New classes on `.site-header`:
+  `.is-search-folded`, `.is-actions-compact` and `.is-crowded`.
+- Reduce motion Off now means full movement even when the device asks for less. Every `prefers-reduced-motion` rule
+  in `tokens.css` and `components.css` leaves out `:root.pref-motion-off`; the shelf arrows and the A to Z jump ask
+  `motionStill()` (now also `SharedComponents.motionStill`), and Display radios set `pref-motion-off` for Off.
+- Phones: a row with no leading picture (`.row--no-lead`) keeps one column, `.row__meta` wraps long release names,
+  and buttons wrap their words at large text, so nothing pushes the page sideways.
+
 ## 14 November 2026
 
 - The help centre standard (Starboard DASH-436, chosen by the owner on 14 November 2026: "I also want this design to
