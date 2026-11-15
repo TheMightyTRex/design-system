@@ -1,114 +1,122 @@
-/* The help centre's own layout (tools/build_help.py), on top of the design system's tokens.css and
-   components.css. Only what the library has no class for. */
+/* The help centre's own layout (tools/help_centre/build.py), on top of the design system's tokens.css and
+   components.css. Only the page layout lives here: the side menu (.side-tree), top links (.top-links), journey,
+   flow chart, answer card, feature card, solver, version badge and plug-in card are components in components.css. */
 body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font); }
-.help-bar { flex-wrap: wrap; align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-4); height: auto; min-height: var(--header-h); }
+
+/* The header bar: name, the seven main items, then Menu (tablets and phones), Search and Display. */
+.help-bar { flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-4); padding: var(--space-2) var(--space-4); height: auto; min-height: var(--header-h); }
 .help-bar .site-header__brand { display: inline-flex; align-items: center; gap: var(--space-2); font-weight: 700; color: var(--color-text); text-decoration: none; }
-.help-search { display: flex; gap: var(--space-2); flex: 1 1 18rem; max-width: 34rem; margin-left: auto; }
+.help-bar .top-links { flex: 1 1 auto; min-width: 0; }
+.help-bar__tools { display: flex; gap: var(--space-1); margin-left: auto; }
+.help-menu-btn { display: none; }
+.help-search-btn { text-decoration: none; }
+.site-header { position: sticky; }
+
+/* The hub: the side menu, then the page. --help-header is the header's real height (help.js), which grows when
+   the seven items wrap at large text sizes. */
+.help-hub { display: grid; grid-template-columns: 18rem minmax(0, 1fr); max-width: 96rem; margin-inline: auto; min-height: calc(100vh - var(--header-h)); }
+.help-side { position: sticky; top: var(--help-header, var(--header-h)); align-self: start; max-height: calc(100vh - var(--help-header, var(--header-h))); overflow-y: auto; overscroll-behavior: contain;
+  box-sizing: border-box; padding: var(--space-4) var(--space-3) var(--space-6); border-right: 1px solid var(--color-divider); background: var(--color-surface-raised); }
+.help-search { display: flex; margin: 0 var(--space-1) var(--space-3); }
 .help-search .input { flex: 1; min-width: 0; }
-.help-page { padding: var(--space-6) 0 var(--space-12); min-width: 0; }
+.help-search--page { margin: 0; max-width: 40rem; gap: var(--space-2); }
+.help-main { min-width: 0; padding: var(--space-5) var(--space-6) var(--space-12); box-sizing: border-box; }
+.help-main--band { padding-top: 0; }
+.help-main--band .plugin-band { margin: 0 calc(-1 * var(--space-6)) var(--space-5); border-width: 0 0 1px; }
+.help-article { display: grid; grid-template-columns: minmax(0, 1fr) 13rem; gap: var(--space-8); }
+.help-article--no-toc { grid-template-columns: minmax(0, 1fr); }
+.help-article__body { min-width: 0; }
+
+/* Landing pages: the front page, each area's page, the problem solver and search. */
+.help-landing { display: grid; gap: var(--space-6); max-width: 72rem; }
+.help-landing h1 { margin: 0; font-size: var(--text-xl); }
+.help-landing__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-4); }
+.help-landing__intro { margin: calc(-1 * var(--space-3)) 0 0; max-width: 70ch; color: var(--color-text-muted); }
+.help-landing__group > h2 { margin: 0 0 var(--space-3); font-size: var(--text-lg); }
+.help-group-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); gap: var(--space-3); margin: 0; padding: 0; list-style: none; }
+.help-group-card h2 { margin: 0; font-size: var(--text-md); }
+.help-group-card p { margin: 0; color: var(--color-text-muted); font-size: var(--text-sm); }
+.help-group-card ul { display: grid; gap: var(--space-1); margin: 0; padding-left: var(--space-5); font-size: var(--text-sm); }
+
 /* The article, search results and footer. */
-.help-page .help-callout { margin-block: var(--space-4); }
-.help-page .help-callout p { margin: 0; }
-.help-page .help-callout p + p { margin-top: var(--space-2); }
+.help-callout { margin-block: var(--space-4); }
+.help-callout p { margin: 0; }
+.help-callout p + p { margin-top: var(--space-2); }
 .breadcrumbs ol { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-2); list-style: none; margin: 0 0 var(--space-4); padding: 0; font-size: var(--text-sm); color: var(--color-text-muted); }
 .breadcrumbs li + li::before { content: "›"; margin-right: var(--space-2); color: var(--color-text-muted); }
-.help-page .prose { max-width: 75ch; }
-.help-page .prose > * { min-width: 0; }
-.help-page .prose img { max-width: 100%; height: auto; }
-.help-page .prose table { border-collapse: collapse; }
+.help-article .prose { max-width: 75ch; }
+.help-article .prose > * { min-width: 0; }
+.help-article .prose img { max-width: 100%; height: auto; }
+.help-article .prose table { border-collapse: collapse; }
 .help-table { max-width: 100%; overflow-x: auto; }
 .help-table:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
-.help-page .prose th, .help-page .prose td { border: 1px solid var(--color-divider); padding: var(--space-2) var(--space-3); vertical-align: top; text-align: left; }
-.help-page .prose pre { max-width: 100%; overflow-x: auto; padding: var(--space-3); background: var(--color-surface-sunken); border-radius: var(--radius); }
-.help-page .prose hr { border: 0; border-top: 1px solid var(--color-divider); margin-block: var(--space-6); }
+.help-article .prose th, .help-article .prose td { border: 1px solid var(--color-divider); padding: var(--space-2) var(--space-3); vertical-align: top; text-align: left; }
+.help-article .prose pre:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+.help-article .prose pre { max-width: 100%; overflow-x: auto; padding: var(--space-3); background: var(--color-surface-sunken); }
+.help-article .prose hr { border: 0; border-top: 1px solid var(--color-divider); margin-block: var(--space-6); }
 .help-source { margin-top: var(--space-8); }
 .help-results { list-style: none; padding: 0; display: grid; gap: var(--space-4); }
-.help-results li { padding: var(--space-3) var(--space-4); border: 1px solid var(--color-divider); border-radius: var(--radius); background: var(--color-surface); }
+.help-results li { padding: var(--space-3) var(--space-4); border: 1px solid var(--color-divider); background: var(--color-surface); }
 .help-results a { font-weight: 700; font-size: var(--text-lg); }
 .help-results .help-meta { font-size: var(--text-sm); color: var(--color-text-muted); margin: var(--space-1) 0; }
 .help-results p { margin: var(--space-1) 0 0; }
-.help-results mark { background: var(--color-accent-soft); color: inherit; border-radius: 2px; }
+.help-results mark { background: var(--color-accent-soft); color: inherit; }
 .help-footer { padding: var(--space-6) var(--space-4); border-top: 1px solid var(--color-divider); font-size: var(--text-sm); }
-/* A banner at the top of every page (help-centre.json "banner"), labelled, that can be hidden. */
-.help-banner { display: flex; align-items: flex-start; gap: var(--space-3); max-width: 92rem; margin: var(--space-3) auto 0; padding: var(--space-3) var(--space-4); border: 1px solid var(--color-divider); border-radius: var(--radius); background: var(--color-surface); box-sizing: border-box; }
+.help-footer__note { max-width: 75ch; margin-bottom: var(--space-4); }
+.help-footer__note p { margin: 0 0 var(--space-2); }
+
+/* A banner at the top of every page (help-centre.json "banner" or "banners"), labelled, that can be hidden. */
+.help-banner { display: flex; align-items: flex-start; gap: var(--space-3); max-width: 96rem; margin: var(--space-3) auto; padding: var(--space-3) var(--space-4); border: 1px solid var(--color-divider); background: var(--color-surface); box-sizing: border-box; }
 .help-banner__body { flex: 1; min-width: 0; }
 .help-banner__body p { margin: 0; }
 .help-banner__body p + p { margin-top: var(--space-1); font-size: var(--text-sm); color: var(--color-text-muted); }
-.help-banner__label { display: inline-block; margin-right: var(--space-2); padding: 0 var(--space-2); border: 1px solid var(--color-border); border-radius: var(--radius); font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+.help-banner__label { display: inline-block; margin-right: var(--space-2); padding: 0 var(--space-2); border: 1px solid var(--color-border); font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
 .help-banner__body .help-banner__label + p { display: inline; }
 html.help-banner-hidden .help-banner { display: none; }
-/* "banners": one at a time, the next one on each page. The page's head script sets data-banner before it draws (kept
-   in this browser); if it cannot, help.js picks one; with no script, the first shows. */
+/* "banners": one at a time, the next one on each page, chosen before the page draws; with no script, the first. */
 .help-banner__item + .help-banner__item { display: none; }
 html[data-banner] .help-banner__item, .help-banner__body.is-rotating .help-banner__item { display: none; }
 html[data-banner="0"] .help-banner__item[data-banner="0"], html[data-banner="1"] .help-banner__item[data-banner="1"],
 html[data-banner="2"] .help-banner__item[data-banner="2"], html[data-banner="3"] .help-banner__item[data-banner="3"],
 html[data-banner="4"] .help-banner__item[data-banner="4"], html[data-banner="5"] .help-banner__item[data-banner="5"],
 .help-banner__body.is-rotating .help-banner__item.is-shown { display: block; }
-.help-footer__note { max-width: 75ch; margin-bottom: var(--space-4); }
-.help-footer__note p { margin: 0 0 var(--space-2); }
-@media (max-width: 48rem) {
-  .help-banner { margin: var(--space-2) var(--space-4) 0; }
-  /* On phones the Ad label carries it: the longer explanation is kept for screen readers only. */
-  .help-banner__body p + p { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-}
-/* Three columns: the menu, the article, On this page. */
-.help-layout { display: grid; grid-template-columns: 17rem minmax(0, 1fr) 13rem; gap: var(--space-8); max-width: 92rem; margin-inline: auto; padding-inline: var(--space-4); box-sizing: border-box; }
-.help-layout--no-toc { grid-template-columns: 17rem minmax(0, 1fr); }
-.help-nav, .help-toc { position: sticky; top: calc(var(--header-h) + var(--space-4)); align-self: start; max-height: calc(100vh - var(--header-h) - var(--space-8)); overflow-y: auto; padding-block: var(--space-6); }
-.help-nav__groups { display: grid; gap: var(--space-1); }
-.help-nav__heading { margin: 0; font-size: var(--text-md); }
-.help-nav__heading button { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: var(--space-2); min-height: 44px; padding: var(--space-2) var(--space-3); border: 0; border-radius: var(--radius); background: none; color: var(--color-text); font: inherit; font-weight: 700; text-align: left; cursor: pointer; }
-.help-nav__heading button::after { content: ""; flex: none; width: .5em; height: .5em; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); margin-top: -.25em; }
-.help-nav__heading button[aria-expanded="true"]::after { transform: rotate(225deg); margin-top: .2em; }
-.help-nav__heading button:hover { background: var(--color-surface-sunken); }
-.help-nav ul { list-style: none; margin: 0 0 var(--space-2); padding: 0 0 0 var(--space-3); border-left: 2px solid var(--color-divider); margin-left: var(--space-3); }
-.help-nav li a { display: block; padding: var(--space-2) var(--space-3); border-radius: var(--radius); color: var(--color-text); text-decoration: none; }
-.help-nav li a:hover { background: var(--color-surface-sunken); text-decoration: underline; }
-.help-nav li a[aria-current="page"] { background: var(--color-accent-soft); color: var(--color-text); font-weight: 700; box-shadow: inset 3px 0 0 var(--color-accent); }
-.help-nav__hide, .help-nav__show { min-height: 44px; margin-bottom: var(--space-2); }
-.help-nav__show { position: sticky; top: calc(var(--header-h) + var(--space-4)); align-self: start; margin-top: var(--space-6); white-space: nowrap; }
-html.help-nav-hidden .help-layout { grid-template-columns: max-content minmax(0, 1fr) 13rem; }
-html.help-nav-hidden .help-layout--no-toc { grid-template-columns: max-content minmax(0, 1fr); }
-html.help-nav-hidden .help-nav { display: none; }
-.help-toc__heading { font-size: var(--text-sm); text-transform: none; color: var(--color-text-muted); margin: 0 0 var(--space-2); }
+
+/* On this page: beside the article, marking the section being read; inside the article on narrow screens. */
+.help-toc { position: sticky; top: calc(var(--help-header, var(--header-h)) + var(--space-4)); align-self: start; max-height: calc(100vh - var(--header-h) - var(--space-8)); overflow-y: auto; }
+.help-toc__heading { font-size: var(--text-sm); color: var(--color-text-muted); margin: 0 0 var(--space-2); }
 .help-toc ul, .help-toc-inline ul { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--color-divider); }
 .help-toc a, .help-toc-inline a { display: block; padding: var(--space-1) var(--space-3); margin-left: -2px; border-left: 2px solid transparent; color: var(--color-text-muted); text-decoration: none; font-size: var(--text-sm); }
 .help-toc a:hover, .help-toc-inline a:hover { color: var(--color-text); text-decoration: underline; }
 .help-toc a[aria-current="location"] { border-left-color: var(--color-accent); color: var(--color-text); font-weight: 700; }
 .help-toc-inline { display: none; margin-bottom: var(--space-4); }
-.help-menu-btn, .help-search-btn { display: none; }
-.site-header { position: sticky; }
-html.pref-underline .help-nav li a, html.pref-underline .help-toc a { text-decoration: underline; }
-/* Narrower: thinner columns; On this page stays on the right. */
+html.pref-underline .help-toc a { text-decoration: underline; }
+
+/* Narrower: On this page goes inside the article. */
 @media (max-width: 75rem) {
-  .help-layout { grid-template-columns: 14rem minmax(0, 1fr) 11rem; gap: var(--space-6); }
-  .help-layout--no-toc { grid-template-columns: 14rem minmax(0, 1fr); }
-  html.help-nav-hidden .help-layout { grid-template-columns: max-content minmax(0, 1fr) 11rem; }
-}
-/* Tablets: the left menu opens from the Menu button; On this page still follows on the right. */
-@media (max-width: 60rem) {
-  .help-layout, html.help-nav-hidden .help-layout { grid-template-columns: minmax(0, 1fr) 11rem; }
-  .help-layout--no-toc, html.help-nav-hidden .help-layout--no-toc { grid-template-columns: minmax(0, 1fr); }
-  .help-menu-btn { display: inline-flex; }
-  .help-nav__hide, .help-nav__show { display: none !important; }
-  .help-nav, html.help-nav-hidden .help-nav { display: none; position: fixed; inset: var(--header-h) 0 0 0; max-height: none; z-index: 20; background: var(--color-surface); padding: var(--space-4); border-top: 1px solid var(--color-divider); }
-  .help-nav.is-open, html.help-nav-hidden .help-nav.is-open { display: block; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
-}
-/* Phones: one column, and On this page opens inside the article, as there is no room beside it. */
-@media (max-width: 48rem) {
-  .help-layout, html.help-nav-hidden .help-layout { grid-template-columns: minmax(0, 1fr); }
+  .help-article { grid-template-columns: minmax(0, 1fr); }
   .help-toc { display: none; }
   .help-toc-inline { display: block; }
 }
-
-/* Phones: one header bar. Search is an icon that opens the search bar under the header; the buttons show icons,
-   with their names kept for screen readers. */
+/* Tablets and phones: the side menu opens from Menu, over the page, with the area you are in open. The seven main
+   items are in it, so the bar keeps only the name and the buttons. With no script it stays above the page. */
+@media (max-width: 60rem) {
+  .help-hub { grid-template-columns: minmax(0, 1fr); }
+  .help-bar .top-links { display: none; }
+  .help-side { position: static; max-height: none; border-right: 0; border-bottom: 1px solid var(--color-divider); }
+  .js .help-menu-btn { display: inline-flex; }
+  .js .help-side { display: none; }
+  .js .help-side.is-open { display: block; position: fixed; top: var(--help-header, var(--header-h)); left: 0; right: 0; bottom: auto; z-index: 20;
+    height: calc(100vh - var(--help-header, var(--header-h))); height: calc(100dvh - var(--help-header, var(--header-h))); max-height: none; overflow-y: auto; border-top: 1px solid var(--color-divider); }
+  .help-main { padding: var(--space-4) var(--space-4) var(--space-12); }
+  .help-main--band { padding-top: 0; }
+  .help-main--band .plugin-band { margin-inline: calc(-1 * var(--space-4)); }
+  .help-banner { margin: var(--space-2) var(--space-4); }
+}
+/* Phones: the header buttons show icons, with their names kept for screen readers. */
 @media (max-width: 48rem) {
   .help-bar { flex-wrap: nowrap; gap: var(--space-2); }
-  .help-bar .site-header__brand span { display: none; }
+  .help-bar .site-header__brand span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .help-bar .icon-btn .label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  .help-search-btn { display: inline-flex; margin-left: auto; }
-  .help-search { display: none; position: absolute; left: 0; right: 0; top: 100%; max-width: none; margin: 0; padding: var(--space-3) var(--space-4); background: var(--color-header); border-bottom: 1px solid var(--color-divider); box-sizing: border-box; }
-  .help-search.is-open { display: flex; }
+  /* On phones the Ad label carries it: the longer explanation is kept for screen readers only. */
+  .help-banner__body p + p { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 }

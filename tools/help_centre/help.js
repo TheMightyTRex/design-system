@@ -1,4 +1,4 @@
-// The help centre's search and theme button (tools/build_help.py). Search runs in the browser over
+// The help centre's menu, search and Display (tools/help_centre/build.py). Search runs in the browser over
 // search-index.json: every word typed must appear; matches in the title count most, then headings, then text.
 (function () {
   "use strict";
@@ -67,73 +67,52 @@
     say("Hidden");
   });
 
-  // The left menu: each group opens and closes with its button; the whole menu hides and comes back.
-  document.querySelectorAll(".help-nav__heading button").forEach(function (b) {
-    b.addEventListener("click", function () {
-      var open = b.getAttribute("aria-expanded") !== "true";
-      b.setAttribute("aria-expanded", String(open));
-      document.getElementById(b.getAttribute("aria-controls")).hidden = !open;
-    });
-  });
-  // The page you are on is in view in the menu when a page opens (only the menu scrolls, not the page).
-  var navBox = document.getElementById("help-nav"), here = navBox && navBox.querySelector("[aria-current=page]");
-  if (here && navBox.scrollHeight > navBox.clientHeight) {
-    navBox.scrollTop = here.offsetTop - navBox.offsetTop - navBox.clientHeight / 3;
-  }
-  var hide = document.querySelector(".help-nav__hide"), show = document.querySelector(".help-nav__show");
-  function setHidden(hidden, focus) {
-    html.classList.toggle("help-nav-hidden", hidden);
-    if (hide) hide.setAttribute("aria-expanded", String(!hidden));
-    if (show) { show.hidden = !hidden; show.setAttribute("aria-expanded", String(!hidden)); }
-    try { localStorage.setItem("help-nav", hidden ? "hidden" : "shown"); } catch (e) { /* this page only */ }
-    if (focus) (hidden ? show : hide).focus();
-  }
-  if (hide && show) {
-    setHidden(html.classList.contains("help-nav-hidden"), false);
-    hide.addEventListener("click", function () { setHidden(true, true); say("Menu hidden"); });
-    show.addEventListener("click", function () { setHidden(false, true); say("Menu shown"); });
-  }
-  // On a phone the search is an icon: it opens the search bar under the header, with the cursor in it; Escape or
-  // the icon again closes it and puts the focus back on the icon.
-  var searchBtn = document.querySelector(".help-search-btn"), searchForm = document.getElementById("help-search");
-  if (searchBtn && searchForm) {
-    var setSearch = function (open, refocus) {
-      searchForm.classList.toggle("is-open", open);
-      searchBtn.setAttribute("aria-expanded", String(open));
-      if (open) searchForm.querySelector("input").focus(); else if (refocus) searchBtn.focus();
-    };
-    searchBtn.addEventListener("click", function () { setSearch(!searchForm.classList.contains("is-open"), false); });
-    searchForm.addEventListener("keydown", function (e) { if (e.key === "Escape" && searchForm.classList.contains("is-open")) setSearch(false, true); });
-    if (/search\.html$/.test(location.pathname)) { // on the search page the bar stays open, without moving the focus
-      searchForm.classList.add("is-open"); searchBtn.setAttribute("aria-expanded", "true");
+  // The header's real height, for the side menu and On this page to sit under it: it grows when the top links wrap.
+  var header = document.querySelector(".site-header");
+  var measure = function () { if (header) html.style.setProperty("--help-header", header.getBoundingClientRect().height + "px"); };
+  measure();
+  if (header && "ResizeObserver" in window) new ResizeObserver(measure).observe(header);
+
+  // The side menu (.side-tree in components.css) folds with details and summary, so it needs no script here.
+  // On tablets and phones it opens over the page from Menu, with the area you are in already open and the focus on
+  // the page you are on. While it is open the page behind is inert, so Tab stays in the menu; Escape, Menu again or
+  // choosing a page closes it, and the focus goes back to Menu.
+  var menuBtn = document.querySelector(".help-menu-btn"), side = document.getElementById("help-side");
+  var behind = function () { return document.querySelectorAll(".help-main, .help-footer, .help-banner, .skip-link"); };
+  var setOpen = function (open, refocus) {
+    if (!menuBtn || !side) return;
+    side.classList.toggle("is-open", open);
+    menuBtn.setAttribute("aria-expanded", String(open));
+    behind().forEach(function (el) { if (open) el.setAttribute("inert", ""); else el.removeAttribute("inert"); });
+    document.body.style.overflow = open ? "hidden" : "";
+    if (open) {
+      var here = side.querySelector(".side-tree a[aria-current=page]") || side.querySelector("input");
+      side.scrollTop = here ? Math.max(0, here.offsetTop - side.clientHeight / 3) : 0;
+      if (here) here.focus();
+      say("Menu open");
+    } else if (refocus) {
+      menuBtn.focus();
     }
+  };
+  if (menuBtn && side) {
+    menuBtn.addEventListener("click", function () { setOpen(!side.classList.contains("is-open"), true); });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && side.classList.contains("is-open")) { setOpen(false, true); }
+    });
+    side.addEventListener("click", function (e) { if (e.target.closest("a") && side.classList.contains("is-open")) setOpen(false, false); });
+    // Growing past tablet width closes it, as the menu is then beside the page.
+    window.matchMedia("(min-width: 60.0625rem)").addEventListener("change", function (m) { if (m.matches) setOpen(false, false); });
   }
 
-  // On a phone the menu opens over the page from the Menu button, and Escape closes it.
-  var menuBtn = document.querySelector(".help-menu-btn"), nav = document.getElementById("help-nav");
-  if (menuBtn && nav) {
-    var bodyOverflow = "";
-    var place = function () {
-      // Under the header, down to the bottom of the window, so a long menu scrolls inside itself.
-      var header = document.querySelector(".site-header");
-      var top = header ? Math.max(0, header.getBoundingClientRect().bottom) : 0;
-      nav.style.top = top + "px";
-      nav.style.height = (window.innerHeight - top) + "px";
-    };
-    var setOpen = function (open) {
-      if (open) { place(); bodyOverflow = document.body.style.overflow; document.body.style.overflow = "hidden"; }
-      else { nav.style.height = ""; document.body.style.overflow = bodyOverflow; }
-      nav.classList.toggle("is-open", open);
-      menuBtn.setAttribute("aria-expanded", String(open));
-      var cur = open && nav.querySelector("[aria-current=page]");
-      if (cur) nav.scrollTop = Math.max(0, cur.offsetTop - nav.clientHeight / 3); // the page you are on, in view
-      if (open) { var cur = nav.querySelector("[aria-current=page]") || nav.querySelector("button"); if (cur) cur.focus(); }
-    };
-    menuBtn.addEventListener("click", function () { setOpen(!nav.classList.contains("is-open")); });
-    nav.addEventListener("keydown", function (e) { if (e.key === "Escape" && nav.classList.contains("is-open")) { setOpen(false); menuBtn.focus(); } });
-    window.addEventListener("resize", function () { if (nav.classList.contains("is-open")) place(); });
-    // Choosing an article, or the window growing past phone width, closes the menu.
-    nav.addEventListener("click", function (e) { if (e.target.closest("a") && nav.classList.contains("is-open")) setOpen(false); });
+  // Search in the header: beside the menu, it moves the focus to the search box at the top of the side menu; on a
+  // tablet or phone it opens the menu first. With no script it is a link to the search page.
+  var searchBtn = document.querySelector(".help-search-btn"), searchBox = document.getElementById("help-q") || document.getElementById("help-side-q");
+  if (searchBtn && searchBox) {
+    searchBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      if (searchBox.id === "help-side-q" && menuBtn && getComputedStyle(menuBtn).display !== "none" && !side.classList.contains("is-open")) setOpen(true, false);
+      searchBox.focus();
+    });
   }
 
   // On this page: the section being read is marked as you go down the article.
@@ -170,6 +149,7 @@
   var hint = count.textContent; // the app's own example, written by the builder
   var input = document.getElementById("help-q");
   var docs = null;
+  var baseTitle = document.title;
 
   function words(q) {
     return q.toLowerCase().replace(/[^\w\s'-]/g, " ").split(/\s+/).filter(function (w) { return w.length > 1; });
@@ -219,7 +199,7 @@
         "<p>" + (snippet(r.d.text, terms) || escapeHtml(r.d.summary)) + "</p>";
       list.append(li);
     });
-    document.title = (q ? q + " · " : "") + "Search · Starboard help centre";
+    document.title = (q ? q + " · " : "") + baseTitle;
   }
 
   var params = new URLSearchParams(location.search);
