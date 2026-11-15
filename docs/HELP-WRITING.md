@@ -1,6 +1,6 @@
 # Help writing guide
 
-Version 1.2, 14 November 2026. How help is written for every help centre (Starboard, Snaglist, the plug-in
+Version 1.3, 15 November 2026. How help is written for every help centre (Starboard, Snaglist, the plug-in
 collection and any later one) and any help shown inside the apps. Section 11 is the help centre standard: the
 layout, the menus, flow charts, the journey, the problem solver and plug-in mode. Every word also follows `CONTENT-DESIGN.md`.
 
@@ -159,6 +159,27 @@ The idea in two or three sentences, with an everyday comparison where one helps.
 6. **Callouts by meaning** (`CONTENT-DESIGN.md` section 7): "Before you begin:", "Limitation:", "Warning:",
    "Tip:", "Example:". Never a callout without its lead word.
 
+### Simplest first, advanced apart
+
+Owner, 15 November 2026 (Starboard DASH-439): help shows the simplest set-up first, with additional apps and
+advanced options apart from it.
+
+1. **Split by need, not by person.** A guide walks a new person through one path with no choices; a how-to
+   assumes some context and does one task; a reference lists every setting; a basics article says why. Do not
+   mix them: explanation and lists of options do not belong inside a guide's steps.
+2. **Name sections by what they hold,** never by who the reader is: "The simplest set-up", "Add more apps",
+   "Advanced options", not "For beginners" or "For experts". People misjudge themselves, and the line is blurred.
+3. **Default path first.** The main steps use the defaults as they are. A choice a new person can skip says so in
+   one line ("You can change this later in Advanced options") and links down to it. Additional apps and advanced
+   options come after the main steps under their own headings, or in a disclosure (`details`) when short.
+   **The test:** a new person finishes the main task without opening or reading anything after the main steps.
+4. **Signpost at the top:** one line saying what the page covers (such as the default install) and where the rest
+   is.
+5. **One plain-language baseline.** Advanced sections follow the same writing rules; they are separate, not harder
+   to read.
+6. **Navigation:** Get started holds only the simplest path. Advanced and additional topics are found through the
+   side menu, search and links, and Developers stays its own area.
+
 ## 8. Screenshots
 
 The full rules, for people and AI tools, are in `SCREENSHOTS.md`, with a mark-up helper in `tools/annotate.js`.
@@ -240,6 +261,7 @@ Then tell me: the tier and kind, every [needs checking], labels left as the app 
 
 - [ ] The article is in the right tier, and a topic has exactly one kind
 - [ ] Title in the reader's words; other names given once near the top
+- [ ] The simplest path comes first; additional apps and advanced options are in their own sections (section 7, Simplest first, advanced apart)
 - [ ] The answer comes first; empty sections left out
 - [ ] A guide links to topics instead of repeating their steps
 - [ ] Links to the parent and to related articles under "Find out more"

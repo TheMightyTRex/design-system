@@ -9,6 +9,11 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 15 November 2026
 
+- `docs/HELP-WRITING.md` version 1.3 (Starboard DASH-439): a new part of section 7, "Simplest first, advanced apart".
+  Help is split by need, not by person; sections are named by what they hold ("Add more apps", "Advanced options");
+  the default path comes first, with additional apps and advanced options after it under their own headings; a
+  signpost at the top says what the page covers; Get started holds only the simplest path. The checklist has a line
+  for it.
 - Help centre builder (Starboard DASH-426, the plug-ins help centre): each plug-in's own logo, a rounded tile from the
   catalogue's `logo`, in the side menu, on its cards and in its band (written once to `assets/logos/`), with its
   initials or icon kept for a plug-in with none. `--strict` now also stops on any page still left as a placeholder
