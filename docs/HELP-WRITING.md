@@ -429,6 +429,8 @@ Install, Settings and Problems. The Problems page starts with a flow chart, as a
 - `footer_note`: its first bold sentence (or `footer_link`) is the footer's only notice link, which opens a slide-out with the
   whole note; the footer itself matches the apps' footers (the help centre's name and links on the left, TheMightyTRexUK
   on the right).
+- An area can have `link_card` (`title`, `text`, `to`, `button`, optional `icon`): one card at the top of its page leading
+  somewhere else, such as Starboard's Plug-ins area to the plug-ins' own help centre.
 - `goatcounter` (optional) turns on visitor counting: the GoatCounter address, such as
   `https://<code>.goatcounter.com/count`. Every page loads its counter, and the footer says that visits are counted
   without cookies or personal data. Leave it out and nothing is counted.

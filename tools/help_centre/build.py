@@ -397,7 +397,7 @@ def standard_areas():
     out = []
     for key, label, ic in STANDARD:
         a = by_key.get(key, {})
-        out.append({"key": key, "label": a.get("label", label), "icon": a.get("icon", ic), "intro": a.get("intro", ""),
+        out.append({"key": key, "label": a.get("label", label), "icon": a.get("icon", ic), "intro": a.get("intro", ""), "link_card": a.get("link_card"),
                     "none": a.get("none", f"There is nothing under {a.get('label', label)} yet."),
                     "groups": [{"key": g["key"], "label": g["label"], "intro": g.get("intro", ""), "pages": []} for g in a.get("groups", [])]})
     return out
@@ -725,6 +725,15 @@ def solver_card(s, root):
             f'<a class="btn btn--primary" href="{root}solver.html">{html.escape(s.get("button", "Start the problem solver"))}</a></section>')
 
 
+def link_card(c, root, key):
+    """An area's link card (help-centre.json, an area's "link_card"): one card at the top of the area's page that leads
+    somewhere else, such as another help centre, in the problem solver card's shape."""
+    to = c["to"] if c["to"].startswith(("https://", "http://")) else root + c["to"]
+    return (f'<section class="solver-card" aria-labelledby="link-card-{key}"><span class="side-tree__tile solver-card__tile">'
+            f'{icon(c.get("icon", "puzzle"), root, 28)}</span><div><h2 id="link-card-{key}">{html.escape(c["title"])}</h2>'
+            f'<p>{html.escape(c["text"])}</p></div><a class="btn btn--primary" href="{html.escape(to)}">{html.escape(c["button"])}</a></section>')
+
+
 def plugin_cards(group, root, level=3):
     cards = []
     for p in group["plugins"]:
@@ -952,6 +961,8 @@ def build(out):
                 cards.append(f'<ul class="help-group-cards">{"".join(items)}</ul>')
             if a["key"] == "fix" and CFG.get("solver"):
                 cards.insert(0, solver_card(CFG["solver"], root))
+            if a.get("link_card"):
+                cards.insert(0, link_card(a["link_card"], root, a["key"]))
             if not cards:
                 check_written(a["none"], f"help-centre.json, area {a['key']}")
                 cards.append(f'<p>{html.escape(a["none"])}</p>')
