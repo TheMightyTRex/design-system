@@ -9,6 +9,12 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 15 November 2026
 
+- Help centre builder (Starboard DASH-426, the plug-ins help centre): each plug-in's own logo, a rounded tile from the
+  catalogue's `logo`, in the side menu, on its cards and in its band (written once to `assets/logos/`), with its
+  initials or icon kept for a plug-in with none. `--strict` now also stops on any page still left as a placeholder
+  ("still to be written", TODO, TBD, TBC, lorem ipsum, outside code), and on an area left with placeholder words;
+  a help centre may give its own list as `placeholders`. In plug-in mode, the Plug-ins area keeps its own articles
+  (such as Starboard's Add a plug-in) in the side menu above the plug-in groups.
 - Large text, wider spacing and short windows (Starboard DASH-437, found while writing Starboard's accessibility
   help). The side menu grows with the text (`--rail-w` from `--text-xs` and `--rail-name-em`, never under 88px), so
   "Starboard" and "Feedback" no longer break in the middle or run past its edge; in a short window it scrolls on its

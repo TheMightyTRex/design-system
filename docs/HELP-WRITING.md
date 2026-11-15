@@ -368,7 +368,7 @@ plug-in the same eight pages in the same order: **Overview**, **Install**, **Set
 **Updates**, **Accessibility**, **Problems** and **For developers**. Overview is the plug-in's own README; the
 others are `help/plugins/<id>/<page>.md`. A page with nothing to say shows one line saying so (the builder writes
 one when the file is missing). A plug-in's pages start with its band (`.plugin-band`): the logo or initials, the
-name, the version and plug-in API, a status chip and **How to add it**. The home and the Plug-ins area show a card
+name, the version and plug-in API, a status chip and **How to add it**. The logo is the catalogue entry's `logo`, a rounded tile, shown wherever the plug-in is; a plug-in with none shows its icon or initials. When the Plug-ins area also has groups of its own articles, such as Add a plug-in, they stay in the side menu above the plug-in groups. The home and the Plug-ins area show a card
 for each plug-in in the grey band design (`.plugin-card`): logo, name and status chip, what it does, and links to
 Install, Settings and Problems. The Problems page starts with a flow chart, as any troubleshooting topic does.
 
@@ -407,5 +407,7 @@ Install, Settings and Problems. The Problems page starts with a flow chart, as a
 - `goatcounter` (optional) turns on visitor counting: the GoatCounter address, such as
   `https://<code>.goatcounter.com/count`. Every page loads its counter, and the footer says that visits are counted
   without cookies or personal data. Leave it out and nothing is counted.
+- `--strict` stops on a page left as a placeholder ("still to be written", TODO, TBD, TBC or lorem ipsum, outside
+  code) as well as on an article with no group; `placeholders` gives a help centre its own list of patterns.
 - The older settings still work: `leave_out`, `sections`, `footer_note`, `banner` or `banners`, `sponsored_links`,
   `strip_between`, `search_example`, `front_door`, `logo_file`, `favicon_file`.

@@ -26,6 +26,7 @@ point at GitHub. No library is loaded in the browser: the pages use this reposit
 components.js, fonts and icons, and help.css and help.js beside this file.
 """
 import argparse
+import base64
 import fnmatch
 import html
 import json
@@ -69,6 +70,9 @@ NOTHING = {"install": "{name} has no install steps of its own: add it like every
            "accessibility": "{name} has no accessibility notes of its own.", "problems": "There are no known problems with {name}.",
            "for-developers": "{name} has no notes for developers."}
 MARKER = re.compile(r"<!--\s*help:\s*([\w-]+)\s*/\s*([\w-]+)\s*-->")
+# Words that mark a page as not written yet (DASH-426). --strict stops on any of them in the Markdown a page is built
+# from, outside code, and in the settings' own words; a help centre may give its own list as "placeholders".
+PLACEHOLDERS = [r"still to be written", r"\bto be written\b", r"\bTODO\b", r"\bTBD\b", r"\bTBC\b", r"lorem ipsum"]
 
 
 def configure(config_path):
@@ -126,6 +130,17 @@ def configure(config_path):
 
 def warn(text):
     WARNINGS.append(text)
+
+
+def check_written(text, where):
+    """Warns when the words still say a page is to be written (PLACEHOLDERS), so --strict stops on it."""
+    words = re.sub(r"^```.*?^```[ \t]*$", "", text, flags=re.S | re.M)
+    words = re.sub(r"`[^`\n]*`|<!--.*?-->", "", words, flags=re.S)
+    for pat in CFG.get("placeholders", PLACEHOLDERS):
+        m = re.search(pat, words, flags=re.I if pat.islower() else 0)
+        if m:
+            warn(f"{where}: still a placeholder ({m.group(0)!r})")
+            return
 
 
 # ---- Markdown to a page ---------------------------------------------------------------------------------------
@@ -401,7 +416,8 @@ def plugin_list():
                 raise SystemExit(f"help-centre.json: plug-in {pid} is not in the catalogue and has no name")
             status = info.get("status") or (["Published", "success"] if info.get("published") else ["Not published yet", "muted"])
             items.append({"id": pid, "name": info["name"], "summary": info.get("description", ""), "version": info.get("version", ""),
-                          "api": info.get("starboard_api", ""), "status": status, "icon": info.get("icon", ""), "group": g["label"]})
+                          "api": info.get("starboard_api", ""), "status": status, "icon": info.get("icon", ""), "group": g["label"],
+                          "logo": info.get("logo", ""), "logo_ext": ""})
         groups.append({"label": g["label"], "key": slug(g["label"]), "plugins": items})
     missing = sorted(set(cat) - seen)
     if missing:
@@ -411,6 +427,8 @@ def plugin_list():
 
 def plugin_icon(p, root, compact=True):
     cls = "app-icon" + (" app-icon--compact" if compact else "")
+    if p.get("logo_ext"):  # its own logo, a rounded tile (API 1.14 logo), from the catalogue; the name is beside it
+        return f'<span class="{cls} has-image"><img src="{root}assets/logos/{p["id"]}.{p["logo_ext"]}" alt="" width="40" height="40"></span>'
     if p["icon"]:
         return f'<span class="{cls}" aria-hidden="true">{icon(p["icon"], root, 18)}</span>'
     initials = "".join(w[0] for w in re.findall(r"[A-Za-z0-9]+", p["name"])[:2]).upper()
@@ -452,6 +470,8 @@ def side_tree(tree, plugins, here, root, current_area="", current_group=""):
 
     for a in tree:
         if a["key"] == "plugins" and plugins:
+            if any(g["pages"] for g in a["groups"]):  # the area's own articles (adding, looking after) come first
+                out.append(area_html(a))
             for pg in plugins:
                 out.append(area_html({"key": "plugins:" + pg["key"], "label": pg["label"], "icon": "puzzle", "groups": [
                     {"key": p["id"], "label": p["name"], "lead": plugin_icon(p, root),
@@ -726,6 +746,14 @@ def build(out):
     standard = bool(CFG.get("areas"))
     plugins = plugin_list() if standard else []
     pc = CFG.get("plugins", {})
+    # Each plug-in's logo from the catalogue (a data address), written once as a file the pages share.
+    for g in plugins:
+        for p in g["plugins"]:
+            m = re.match(r"data:image/(svg\+xml|png);base64,([A-Za-z0-9+/=\s]+)$", p["logo"] or "")
+            if m:
+                p["logo_ext"] = "svg" if m.group(1).startswith("svg") else "png"
+                (site / "assets" / "logos").mkdir(exist_ok=True)
+                (site / "assets" / "logos" / f"{p['id']}.{p['logo_ext']}").write_bytes(base64.b64decode(m.group(2)))
     # Plug-in overviews may live outside the help folder (each plug-in's README): they are pages too.
     for g in plugins:
         for p in g["plugins"]:
@@ -744,6 +772,7 @@ def build(out):
     for md in pages:
         rel_out = page_path(md).as_posix()
         text = md.read_text(encoding="utf-8")
+        check_written(text, str(md.relative_to(ROOT)))
         area = group = ""
         if standard and rel_out != "index.html":
             m = MARKER.search(text)
@@ -826,6 +855,7 @@ def build(out):
                     pattern = pc.get("overview", "{id}/README.md") if key == "overview" else pc.get("pages", "help/plugins/{id}/{page}.md")
                     src = ROOT / pattern.format(id=p["id"], page=key)
                     if src.exists():
+                        check_written(src.read_text(encoding="utf-8"), str(src.relative_to(ROOT)))
                         _, _, text = crumbs_and_body(src.read_text(encoding="utf-8"))
                         text = re.sub(r"^# .*\n", "", text, count=1, flags=re.M)
                         body = convert(text, src, rel_out, root)
@@ -894,6 +924,7 @@ def build(out):
             if a["key"] == "fix" and CFG.get("solver"):
                 cards.insert(0, solver_card(CFG["solver"], root))
             if not cards:
+                check_written(a["none"], f"help-centre.json, area {a['key']}")
                 cards.append(f'<p>{html.escape(a["none"])}</p>')
             intro = f'<p class="help-landing__intro">{html.escape(a["intro"])}</p>' if a["intro"] else ""
             write(rel_out, S.page(rel_out, a["label"], f'<div class="help-landing"><h1>{html.escape(a["label"])}</h1>{intro}{"".join(cards)}</div>',
