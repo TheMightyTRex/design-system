@@ -404,5 +404,8 @@ Install, Settings and Problems. The Problems page starts with a flow chart, as a
   folder), a page of the help centre (`solver.html`, `areas/plugins.html`) or a full address.
 - `featured` takes `flow` (a small chart, in the format of 11.4) or `image` and `alt`.
 - With no `areas`, the builder keeps the older layout: the side menu is the help home's own lists.
+- `goatcounter` (optional) turns on visitor counting: the GoatCounter address, such as
+  `https://<code>.goatcounter.com/count`. Every page loads its counter, and the footer says that visits are counted
+  without cookies or personal data. Leave it out and nothing is counted.
 - The older settings still work: `leave_out`, `sections`, `footer_note`, `banner` or `banners`, `sponsored_links`,
   `strip_between`, `search_example`, `front_door`, `logo_file`, `favicon_file`.

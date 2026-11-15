@@ -76,7 +76,7 @@ def configure(config_path):
     footer_starts (text that begins a footer on every page, left out of search), search_example, front_door, and the
     standard's areas, home, version_from or version, journey, featured, solver and plugins."""
     global ROOT, HELP, NAME, TITLE, REPO, BLOB, SITE, LOGO, STOP, EXAMPLE, LEAVE_OUT, SECTIONS, FRONT_DOOR, CFG
-    global FOOTER_NOTE, BANNER, BANNER_LABEL, BANNER_COUNT, STRIP, SPONSORED, FAVICON
+    global FOOTER_NOTE, BANNER, BANNER_LABEL, BANNER_COUNT, STRIP, SPONSORED, FAVICON, COUNTER
     cfg_file = pathlib.Path(config_path).resolve()
     cfg = json.loads(cfg_file.read_text(encoding="utf-8"))
     CFG = cfg
@@ -94,6 +94,15 @@ def configure(config_path):
     FRONT_DOOR = cfg.get("front_door", True)
     md = lambda text: markdown.markdown(text, output_format="html") if text else ""
     FOOTER_NOTE = md(cfg.get("footer_note", ""))
+    # Visitor counting is off unless a help centre names its GoatCounter address: no cookies and no personal data,
+    # and the footer says so on every page.
+    gc = cfg.get("goatcounter", "")
+    if gc and not re.fullmatch(r"https://[a-z0-9-]+\.goatcounter\.com/count", gc):
+        raise SystemExit(f"goatcounter must look like https://<code>.goatcounter.com/count, not {gc!r}")
+    COUNTER = (f'<script data-goatcounter="{gc}" async src="https://gc.zgo.at/count.js"></script>\n') if gc else ""
+    if gc:
+        FOOTER_NOTE += md("This help centre counts visits with [GoatCounter](https://www.goatcounter.com), "
+                          "which uses no cookies and keeps no personal data.")
     raw = cfg.get("banners") or ([cfg["banner"]] if cfg.get("banner") else [])
     BANNER_LABEL = (raw[0].get("label") if raw else None) or "Advertisement"
 
@@ -494,7 +503,7 @@ TEMPLATE = """<!doctype html>
 <link rel="stylesheet" href="{root}assets/css/components.css">
 <link rel="stylesheet" href="{root}assets/css/help.css">
 <script>{prefs_js}</script>
-</head>
+{counter}</head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <header class="site-header site-header--no-rail">
@@ -582,7 +591,7 @@ class Site:
         return TEMPLATE.format(
             site_title=html.escape(TITLE), title=html.escape(title), description=html.escape(description[:200]),
             canonical=SITE + out_rel, root=root, logo=LOGO, crumbs=crumbs, content=content, edit=edit, repo=REPO,
-            name=html.escape(NAME), band=band, main_class=main_class,
+            name=html.escape(NAME), band=band, main_class=main_class, counter=COUNTER,
             prefs_js=PREFS_JS.replace("__ROTATE__", ROTATE_JS.replace("__BC__", str(BANNER_COUNT)) if BANNER_COUNT > 1 else ""),
             footer_note=f'<div class="help-footer__note">{FOOTER_NOTE}</div>' if FOOTER_NOTE else "",
             banner=(f'<aside class="help-banner" id="help-banner" aria-label="{html.escape(BANNER_LABEL)}">'
