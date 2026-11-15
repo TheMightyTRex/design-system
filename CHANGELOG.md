@@ -9,6 +9,9 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 15 November 2026
 
+- Card band (Starboard DASH-443): the heading keeps its own line. When the status chip and the time do not fit beside
+  it, they move under it, instead of the heading being squeezed onto two lines (`.card-band__title` grows from its
+  own width, `flex: 1 1 auto`, not from 8rem). Larger text still wraps it, and nothing is cut.
 - `docs/HELP-WRITING.md` version 1.3 (Starboard DASH-439): a new part of section 7, "Simplest first, advanced apart".
   Help is split by need, not by person; sections are named by what they hold ("Add more apps", "Advanced options");
   the default path comes first, with additional apps and advanced options after it under their own headings; a
