@@ -231,40 +231,44 @@ push, so every checkout picks it up.
 
 **Decisions:** which item to use (Starboard DASH-309, 12 November 2026): `DESIGN-SYSTEM.md` section 10 picks rows, cards, chips, filters, toolbars, notices, toasts, dialogs or tables by what the thing is; accent teal (UX-02 option B); status chip style B, outline with icon (UX-04); cover actions (UX-42: `.cover-card` with `.cover-actions` on the cover by default, beside it as a per-account setting); shelves without scroll bars (UX-30 option A: `.shelf-scroller`, arrows over an edge fade); covers always line up (`.media-card` titles take two lines); small covers (UX-44: `.book-row` with `.cover-actions--row` in rows, `.cover-card__more` with the actions in words on small tiles); square radio art in the book shape (FEAT-R decision 2, fill 4: `.show-art`, label in the image's colour) and `.logo-tile`; slide-outs look like slide-outs (TheMightyTRexUK, 2 November 2026: `--color-slide-header`, the page background, on slide-out and phone menu headers over a raised-surface body; dialogs keep the plain header; Display and accessibility and Release notes are slide-outs). App logos without a tile (TheMightyTRexUK, 2 November 2026: `.app-icon.has-image` is just the image, with no border or background; initials keep the tile). The logo editor on every way to get a logo (TheMightyTRexUK, 2 November 2026: From a cover, Find online and Upload your own all use the box, Shape from lightness or transparency, four cleaning levels, and a small eraser and paintbrush on `.checker[data-tool]`; found files show as plain pictures in `.logo-candidate__art > img`). Nicer scroll bars (TheMightyTRexUK, 2 November 2026): thin and square in every scrolling area, `--color-scrollbar` (the border colour, the text colour in High contrast) on a clear track; they stay visible, and only shelves hide theirs behind arrows. UX notes for testing (TheMightyTRexUK, 2 November 2026): `ux-notes.js` (copied to both apps by sync.py) puts Note an issue in the corner of every page while an app's testing setting is on; choose the part (click, or Tab and Enter), say what is wrong, the kind and how bad; Notes lists them with Copy as text, Download and Mark as fixed. Notes keep the page, the part, a selector and the display settings. An app passes a store to keep them on its server; otherwise they stay in the browser. Styles: `.ux-dock`, `.ux-banner` (at the bottom, clear of the header), `.ux-outline`, `.ux-notes`. Security checks the same in both apps (TheMightyTRexUK, 3 November 2026): `docs/SECURITY-CHECKS.md` sets the checks (tests, live journeys, Trivy, ZAP on a private network, Gitleaks, Bandit and Semgrep, ShellCheck, Hadolint, CodeQL, a separate review, install tests), how to sort findings, a security page in each app with a "Security checks for each release" table, and a Security section in every release's notes (`CONTENT-DESIGN.md`, release notes). Starboard is the worked example; Storyarr has to catch up. Focus not obscured (WCAG 2.2, 4 November 2026): the page keeps the sticky header (and row 2) and an open save bar clear when it scrolls, with `scroll-padding` on `:root`; `WCAG.md` and `ALT-TEXT.md` added after the GOV.UK Service Manual and BBC GEL. Search is always one button away (TheMightyTRexUK, 4 November 2026: "update the design system to ensure there is a search button"): `.rail__search` is first in the rail, under the logo, and moves focus to the header's search box; on phones, where the box is hidden, `.site-header__search-btn` in the header opens the same box as a row under the header, and Escape or a press outside closes it and returns focus to the button that opened it. Both use `data-search-open` and `aria-controls` (`setupSearch()` in `components.js`). No single-key shortcut (WCAG 2.1.4). The `radio` icon is added. Wizard rules (TheMightyTRexUK, 4 November 2026): `docs/WIZARD.md` sets one set of rules for every wizard, from the installer mock-up: the first question asks which job, each with its own wizard; one question per step; steps that do not apply left out; a step in parts has `.steps--sub`, as wide as the progress bar with a line between parts, numbered 1, 2, 3, each part counting in the progress bar's total, and on phones only the numbers, with ticks for done parts; "(recommended)" with a reason, never "easiest"; "What is…" help at the end of the part it explains, in a dialog that scrolls inside and closes on a press outside; addresses as links with copy; a summary of what was set and skipped. What happens next and the decision tree are review aids for testing only, never in the finished product. Copying falls back to a hidden text box on plain http (`copyText()` in `components.js`), and a dialog returns focus to the button that opened it. Step numbers grow with Text size. Changelogs (TheMightyTRexUK, 5 November 2026): `docs/CHANGELOGS.md` sets one way to keep `CHANGELOG.md` in every project, after Keep a Changelog 1.1.0: for people, never a commit log; an Unreleased section at the top; every version newest first, linked, as `## [x.y.z] (day month year)`, with dates as in `CONTENT-DESIGN.md` rather than year, month, day; changes under Added, Changed, Deprecated, Removed, Fixed and Security only; withdrawn releases marked `[Withdrawn]`. In-app release notes use the same six types. Terminal wizards and feedback (TheMightyTRexUK, 5 November 2026): `docs/TERMINAL.md` sets how a wizard looks in a terminal (boxed with a heading box reading "App | step", a progress bar and a menu fixed on the bottom line with b Back, ? Help, f Feedback and q Stop; or plain numbered lines for screen readers, never redrawn), with help as a box over the step and feedback sent as a QR code sized to the window; `docs/WIZARD.md` section 12 puts Snaglist on every wizard step, naming the step, with Show as a QR code for a computer that is not online yet.
 
-## Help centre (7 November 2026)
+## Help centre (7 November 2026; the standard since 14 November 2026)
 
 Every app's help is Markdown in its own repository, published as web pages by one builder,
-`tools/help_centre/build.py`, with this library's tokens, components, fonts and icons. Agreed by the owner on
-7 November 2026, after a check with axe-core (WCAG 2.2 AA): no problems on 25 combinations of page, light and dark
-theme, desktop and phone, and open menu, search and Display.
+`tools/help_centre/build.py`, with this library's tokens, components, fonts and icons. Since 14 November 2026 every
+help centre uses the standard the owner chose (Starboard DASH-436): the seven main items as top links, a hub with a
+side menu that folds (areas, groups, every article), the journey, the newest thing and the problem solver card on
+the home page, the latest version beside the heading, articles flow chart first with numbered answer cards, a
+problem solver page, and plug-in mode for a plug-in collection. `docs/HELP-WRITING.md` section 11 is the full
+standard, with the flow chart format and the shape of `help-centre.json`.
 
-**Layout**
+**Components** (in `components.css` and `components.js`, shown in the gallery under Help centre):
 
-- **Header:** logo and name, search, Display. On phones it is one bar: **Menu**, logo, **Search** and **Display**
-  as icon buttons with their names kept for screen readers. **Search** opens the search bar under the header with
-  the cursor in it; Escape or the button again closes it and returns the focus to the button.
-- **Banner** (optional, `banner` or `banners` in `help-centre.json`): a labelled region under the header (for
-  example "Ad"), with a button to hide it, remembered in the browser. Its links to other sites carry
-  `rel="sponsored"`. With `banners` (up to six), each page shows one and the next page shows the next one in turn,
-  chosen before the page draws; nothing moves or changes while a page is open, so there is no carousel to pause.
-- **Left menu:** the help home's own lists, one group for each heading, each opening and closing with a button
-  (`aria-expanded`, `aria-controls`). The page you are on has `aria-current="page"` and is scrolled into view.
-  **Hide the menu** and **Show the menu** keep the choice. On tablets and phones the menu opens from **Menu**, over
-  the page, scrolls inside itself, keeps the page behind still, and closes with Escape or when an article is chosen.
-- **Article:** breadcrumbs from the article's first line, the kind (How-to, Reference), `.prose`. A wide table is a
-  labelled region the keyboard can reach and scroll.
-- **On this page:** a small menu on the right listing the article's sections, marking the one being read with
-  `aria-current="location"` as you scroll. On phones it opens inside the article as a disclosure.
-- **Footer:** an optional note on every page (`footer_note`), then links to the help home, the repository and
-  reporting a problem with the help.
-- **Display and accessibility:** the same choices and classes as the apps (theme, text size, reduce motion, high
-  contrast, underline links, wider text spacing), applied before the page draws.
-- **Search:** a page that searches every article in the browser; every word must appear, titles count most.
+| Component | Classes | Rules |
+|---|---|---|
+| Top links | `nav.top-links > ul > li > a` | The seven main items, the current area with `aria-current="page"`. Hidden on tablets and phones, where the side menu carries them |
+| Side tree | `.side-tree`, `.side-tree__home`, `.side-tree__label`, `details.side-tree__area`, `details.side-tree__group`, `.side-tree__tile`, `.side-tree__count`, `.side-tree__chev` | A side menu that folds three levels deep, built from `details` and `summary`, so it works with no script. The page you are on has `aria-current="page"` and its area and group are open. `setupSideTrees()` opens them if a page forgets and scrolls the link into view inside a menu marked `data-side-scroll`. Any app may use it for a long side menu |
+| Journey | `section.journey`, `ol.journey__stages` (`--stages`), `li.journey__stage[data-tone="start|step|fix"]`, `.journey__marker`, `.journey__dot`, `.journey__n`, `h3.journey__label`, `ul.journey__cards`, `a.stage-card`, `.is-lead` | An ordered list, so a screen reader meets each stage and then its cards. The marker is decoration (`aria-hidden`); the label carries the number and the name. Stacks on phones with the path down the side |
+| Flow chart | `figure.flow-chart`, `.flow-chart__scroll` (`role="region"`, `tabindex="0"`), `svg.flow-chart__svg` (`--flow-w`), `details.flow-chart__words` and the drawing classes `.flow-chart__start`, `__question`, `__answer`, `__next`, `__step`, `__link`, `__line`, `__head`, `__text`, `__sub`, `__label`, `__pill`, `__n` | Drawn by `tools/help_centre/flowchart.py`. The SVG has `role="img"` and a short name; the words under it are the full text equivalent. It grows with Text size and scrolls inside its own region when narrow |
+| Answer card | `section.answer-card`, `.answer-card__band`, `.answer-card__n`, `.answer-card__body` | A numbered answer: the number and the heading (which keeps its id) on a grey band |
+| Feature card | `section.feature-card`, `.feature-card__text`, `.feature-card__pic` | The newest thing, with a chip saying which version it is new in and a small chart or picture |
+| Solver card and solver | `section.solver-card`, `.solver-card__tile`; `.solver[data-solver]`, `.solver__node`, `.solver__question`, `.solver__answers`, `.solver__choice`, `.solver__step`, `.solver__options`, `.solver__nav`, `.solver__progress` | With no script the solver is nested lists of links; `setupSolvers()` asks one question at a time, puts the focus on the new question, says it in a polite status, and offers Back (focus returns to the answer chosen) and Start again |
+| Version badge | `a.version-badge > .chip + b` | The latest version, no date, linking to the release notes |
+| Plug-in card and band | `ul.plugin-cards > li > article.card.has-band.plugin-card` (with `.card-band`, `.app-icon--compact`, `ul.plugin-card__links`); `.plugin-band`, `.plugin-band__name`, `.plugin-band__sub`, `.plugin-band__side` | The grey band design (DASH-428) for a plug-in in a list and at the top of its own pages. An `.app-icon` holds a sprite icon or the initials |
 
-**For each app:** a `help-centre.json` at its root (name, repository, site address, help folder, logo, and the
-optional `leave_out`, `sections`, `footer_note`, `banner` or `banners`, `sponsored_links`, `strip_between`, `search_example`,
-`front_door`), and a workflow that checks out this repository and runs the builder. Starboard and Snaglist use it.
-Build one here with `tools/help_centre/build.sh` from the app's folder.
+**Layout only in the help centre** (`tools/help_centre/help.css`): the header bar, the hub grid, the side menu's
+place and its phone overlay, area and landing pages, the article and On this page, the banner, search results and
+the footer. **Behaviour only in the help centre** (`tools/help_centre/help.js`): Menu on tablets and phones (the page
+behind is inert while it is open), Search moving the focus to the search box, Display and accessibility, the banner,
+On this page following the article, and search.
+
+**Accessibility:** checked on 14 November 2026 with axe-core 4.14 (WCAG 2.2 AA and best practice) on the home page,
+an article, the problem solver, an area page and plug-in pages of all three help centres, in Light, Dark, High
+contrast, 175% text and at phone width, with a reading order check, a Tab walk through the header, search, side menu
+and disclosures, focus after the menu and Display open and close, and the live regions.
+
+**For each app:** a `help-centre.json` at its root and a `<!-- help: <area> / <group> -->` line in each article
+(`HELP-WRITING.md` section 11), and a workflow that checks out this repository and runs the builder. Starboard,
+Snaglist and the plug-in collection use it. Build one here with `tools/help_centre/build.sh` from the app's folder.
 
 ## App-only patterns (2 November 2026)
 

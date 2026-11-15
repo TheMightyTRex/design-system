@@ -7,6 +7,33 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 [Semantic Versioning](https://semver.org/).
 
 
+## 14 November 2026
+
+- The help centre standard (Starboard DASH-436, chosen by the owner on 14 November 2026: "I also want this design to
+  become the standard. This is to be used in all help centres"). `tools/help_centre/build.py` now builds every help
+  centre the same way: the seven main items as top links (Home, Get started, Use it, Plug-ins, Accessibility, Fix a
+  problem, Developers) with Search and Display; a hub with a side menu that folds (areas, groups, every article),
+  the page you are on marked and its area and group open, opening from Menu on tablets and phones with the page
+  behind inert; a home page with the latest version beside the heading (read from the changelog, no date), the
+  journey, the newest thing and the problem solver card; a page for each area with a card for each group; a
+  problem solver page (up to four questions, lists of links with no script); articles flow chart first, with
+  numbered answer cards; and plug-in mode, where each plug-in is a folding item with the same eight pages. Every
+  article says its area and group in a `<!-- help: <area> / <group> -->` line; `--strict` stops the build when one
+  is missing. A help centre with no `areas` in `help-centre.json` keeps the older layout.
+- Flow charts with no library: `tools/help_centre/flowchart.py` reads a `flow` block (start, questions, steps, ends
+  and numbered answers, one a line, answers indented) or a simple Mermaid flowchart, draws it as SVG that follows
+  every theme and Text size, and writes the same paths out in words. Mermaid is no longer loaded from a CDN.
+- New components in `components.css`, with gallery examples under Help centre: `.top-links`, `.side-tree`,
+  `.journey` and `.stage-card`, `.flow-chart`, `.answer-card`, `.feature-card`, `.solver-card` and `.solver`,
+  `.version-badge`, `.plugin-cards`, `.plugin-card` and `.plugin-band`; an `.app-icon` can hold a sprite icon. New
+  behaviour in `components.js`: `setupSideTrees()` and `setupSolvers()`, run by `setup()`.
+- `tools/help_centre/help.css` keeps only the help centre's layout; `help.js` drops Hide the menu, and Search moves
+  the focus to the search box in the side menu. Code samples that scroll sideways can be reached with the keyboard.
+- `docs/HELP-WRITING.md` version 1.2: section 3 is the seven areas and their groups, and section 11 is the standard
+  (layout, side menu, journey, the flow chart format and when every article needs one, the problem solver, plug-in
+  mode and the shape of `help-centre.json`). `docs/LIBRARY.md`, Help centre, lists the components and their rules.
+
+
 ## 13 November 2026
 
 - UX notes leave the library (DEV-05, TheMightyTRexUK): `ux-notes.js`, its `.ux-dock`, `.ux-banner`, `.ux-outline`

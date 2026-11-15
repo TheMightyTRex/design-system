@@ -43,7 +43,25 @@ change the copies inside the apps.
 | `docs/SCREENSHOTS.md` | Screenshots in help: when one earns its place, made-up data only, the outline, arrow and step-number mark-up, and a short version for AI tools; `tools/annotate.js` draws and checks the mark-up |
 | `docs/SECURITY-CHECKS.md` | The security checks both apps run, how to sort what they find, and how to record the results and release notes |
 | `resources/` | The Design resources and tools pages: what you can use, the tools, outside tools, how to make a change and how to get feedback |
+| `tools/help_centre/` | The help centre builder every app's help uses: Markdown and `help-centre.json` in, the standard help centre out (`docs/HELP-WRITING.md` section 11) |
 | `tools/` | Build, contrast, icon, sync and privacy scripts |
+
+## Help centre components
+
+The help centre standard (owner, 14 November 2026) added these components to `components.css` and
+`components.js`. Each is in the gallery under **Help centre**, and `docs/LIBRARY.md` has its classes and rules.
+
+| Component | What it is |
+|---|---|
+| Top links (`.top-links`) | The seven main items of a help centre as quick links in the header |
+| Side tree (`.side-tree`) | A side menu that folds three levels deep (area, group, page), with the current page marked and open; works with no script |
+| Journey (`.journey`, `.stage-card`) | Stages on a dashed path, each with a column of cards under it |
+| Flow chart (`.flow-chart`) | A decision chart in SVG that follows every theme, with the same paths in words |
+| Answer card (`.answer-card`) | A numbered answer with its number and heading on a grey band |
+| Feature card (`.feature-card`) | The newest thing, with a chip and a small chart or picture |
+| Solver card and solver (`.solver-card`, `.solver`) | The way into the problem solver, and the solver itself: one question at a time, lists of links with no script |
+| Version badge (`.version-badge`) | The latest version beside a heading, with no date |
+| Plug-in card and band (`.plugin-card`, `.plugin-band`) | A plug-in in the grey band design, in a list and at the top of its pages |
 
 ## Look at the gallery
 
