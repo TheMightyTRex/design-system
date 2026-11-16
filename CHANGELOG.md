@@ -7,6 +7,14 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 [Semantic Versioning](https://semver.org/).
 
 
+## 16 November 2026
+
+- Side menu version (Starboard 0.19.1): `.rail__version` is a link to the app's update page, at least 44 by 44
+  pixels, underlined on hover. When a newer release is out, `.update-dot` sits just above the number inside the link
+  and pulses gently (a ring that grows and fades every 2.4 seconds, `update-dot-pulse`); it keeps still when Reduce
+  motion is on or the device asks for less motion. `.rail__update` (the dot with the word Update above the version)
+  is gone. `.update-dot[hidden]` now hides the dot. The gallery shows both states.
+
 ## 15 November 2026
 
 - Card band (Starboard DASH-443): the heading keeps its own line. When the status chip and the time do not fit beside
