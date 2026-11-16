@@ -5513,4 +5513,135 @@ body:has(.side-panel-layer:not([hidden]), dialog[open]) snag-list { display: non
   .plugin-band__side { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; margin-inline-start: auto; }
   @media (prefers-reduced-motion: reduce) { :root:not(.pref-motion-off) .side-tree__chev { transition: none; } }
   :root.pref-motion .side-tree__chev { transition: none; }
+
+  /* Signing in to an outside service from a wizard (Starboard DASH-446, TheMightyTRexUK, 16 November 2026): the sign-in
+     card (numbered steps with the link to open and the address to paste back), the QR code with its text alternative
+     and the short code, and a test's checks. WIZARD.md section 9, Signing in to an outside service. */
+  .signin-steps {
+    display: grid;
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: signin;
+  }
+  .signin-steps > li {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--space-2) var(--space-3);
+    align-items: start;
+    counter-increment: signin;
+  }
+  .signin-steps > li::before {
+    content: counter(signin);
+    display: inline-grid;
+    place-items: center;
+    width: max(24px, 1.7em);
+    height: max(24px, 1.7em);
+    border: 1px solid currentColor;
+    font-weight: var(--weight-heading);
+  }
+  .signin-steps > li > * { grid-column: 2; }
+  .signin-steps > li > :first-child { grid-row: 1; }
+  .signin-steps p { margin: 0; }
+  /* The address the sign-in ends on, as it looks in the browser: never the person's own, a made-up example. */
+  .signin-example {
+    display: block;
+    padding: var(--space-2) var(--space-3);
+    border: 1px dashed var(--color-border);
+    background: var(--color-surface-sunken);
+    overflow-wrap: anywhere;
+    font-size: var(--text-sm);
+  }
+  /* Two ways to finish, side by side and the same weight (option cards), then the chosen one's card. */
+  .signin-way { display: grid; gap: var(--space-4); }
+  .signin-card {
+    display: grid;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    border: 1px solid var(--color-divider);
+    background: var(--color-surface);
+  }
+  /* The QR code: always dark on white with its quiet zone, so a phone reads it in every theme; the text beside it
+     says the same (the page to open and the code), each with Copy. */
+  .qr-card {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--space-4) var(--space-6);
+    align-items: start;
+  }
+  .qr-card__code {
+    width: clamp(160px, 40vw, 220px);
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    border: 1px solid var(--color-divider);
+    line-height: 0;
+  }
+  .qr-card__code svg { display: block; width: 100%; height: auto; }
+  .qr-card__code path { fill: #000; }
+  .qr-card__text { display: grid; gap: var(--space-3); }
+  .qr-card__text p { margin: 0; }
+  @media (max-width: 560px) {
+    .qr-card { grid-template-columns: minmax(0, 1fr); }
+    .qr-card__code { justify-self: center; }
+  }
+  @media (forced-colors: active) {
+    .qr-card__code { forced-color-adjust: none; background: #fff; }
+  }
+  /* A short code to enter on another device: large, spaced, read out a character at a time by its label. */
+  .device-code {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-3);
+  }
+  .device-code__value {
+    padding: var(--space-1) var(--space-3);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface-sunken);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-heading);
+    letter-spacing: 0.12em;
+    font-variant-numeric: tabular-nums;
+  }
+  /* A wait that ends by itself: the words and the time left, then the busy bar (.progress--busy), which says the
+     same in words; the words are a polite live region, told only when they change. */
+  .signin-wait { display: grid; gap: var(--space-2); }
+  .signin-wait__words {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-1) var(--space-3);
+  }
+  /* A test's checks: one line each, its state in an icon and in words. */
+  .test-checks {
+    display: grid;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .test-checks li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 32px;
+  }
+  .test-checks li > svg { flex: none; width: 20px; height: 20px; }
+  .test-checks li[data-state="done"] > svg { color: var(--status-success-fg); }
+  .test-checks li[data-state="failed"] > svg { color: var(--status-danger-fg); }
+  .test-checks li[data-state="waiting"] { color: var(--color-text-muted); }
+  .test-checks__state { color: var(--color-text-muted); font-size: var(--text-sm); }
+  /* The result of Test connection beside the place it tested. */
+  .tested {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-1) var(--space-2);
+  }
+  .tested > svg { flex: none; width: 20px; height: 20px; }
+  .tested[data-tone="success"] > svg { color: var(--status-success-fg); }
+  .tested[data-tone="danger"] > svg { color: var(--status-danger-fg); }
+
 }

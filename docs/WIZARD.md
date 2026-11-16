@@ -188,6 +188,31 @@ Testing only (section 1).
 - Nothing is chosen the first time: the service is the person's own. When they come back, their last answer is
   kept. The terminal lists the same services, from the same list file, with no default the first time.
 
+### Signing in to an outside service (a cloud service)
+
+TheMightyTRexUK, 16 November 2026 (Starboard's Connect a cloud service). When a step signs in to a service on the
+service's own page (OAuth), never ask for the person's password for that service.
+
+- **Two ways to finish, the same weight**, as option cards: "Complete on the phone" and "Complete in this browser".
+  Offer the phone only where the service has a device flow (a short code entered on its own page, the wizard
+  waiting by itself); elsewhere offer the browser alone, with no empty choice. Remember the last way chosen.
+- **On the phone:** `.qr-card` with the QR code of the service's own page, dark on white in every theme. The QR code
+  is never the only way: the page is written out as an `.address` with Copy, and the code as a `.device-code` with
+  a labelled Copy button, its label spelling it out a character at a time. Under it, `.signin-wait`: the words and the
+  time left in a polite live region, said only when they change, and a busy bar. When the approval arrives the
+  wizard moves on by itself and says so; at the time limit it says so with Try again.
+- **In this browser:** `.signin-card` with `.signin-steps`: open the sign-in page (a new-tab link as the primary
+  button), what the browser shows after (a made-up example of the address in `.signin-example`), then the field for
+  the whole address. Say why in one plain sentence. The app checks what is pasted before it uses it.
+- **Keys or a password instead:** a service that signs in with keys asks for them on the step, each field with where
+  to find it.
+- **Then test before saving:** `.test-checks`, one line for each check (reach, write, read back, remove), each with
+  its state in an icon and in words. A failed check says what to do; a sign-in the service no longer accepts says
+  "Sign in again", which goes back to the sign-in step.
+- **Closing part way** ends the sign-in and keeps nothing; focus goes back to the button that opened the slide-out.
+- Anything set up this way gets **Test connection** beside it afterwards, with the result in `.tested` (an icon, the
+  word, and when it was tested), kept so it shows when the page is opened again.
+
 ### Check before writing
 
 - The step before anything is written is a table (`.table.table--fixed.table--middle` in `.table-wrap[data-stack]`):

@@ -1119,6 +1119,48 @@
   </div>
 </section>
 
+<section class="g-section" id="wizard-signin" aria-labelledby="wizard-signin-h">
+  <header><h2 id="wizard-signin-h">Signing in to an outside service</h2><p class="muted">A wizard step that signs in to a cloud service on its own page (<code>docs/WIZARD.md</code>, section 9). Two ways to finish, the same weight: on a phone with a QR code and a short code, waiting by itself; or in this browser with a link, then the address the sign-in ends on pasted back. Then the test's checks, and Test connection's result beside a place.</p></header>
+  <div class="g-demo stack-4">
+    <fieldset class="option-cards option-cards--row"><legend class="field__label">How do you want to sign in?</legend>
+      <label class="option-card"><input type="radio" name="g-way" checked><strong>Complete on the phone</strong><small>Scan a QR code and sign in there. Starboard waits by itself.</small></label>
+      <label class="option-card"><input type="radio" name="g-way"><strong>Complete in this browser</strong><small>Open the sign-in page here, then paste back the address it ends on.</small></label>
+    </fieldset>
+    <div class="signin-card">
+      <div class="qr-card">
+        <figure class="qr-card__code"><svg viewBox="0 0 29 29" role="img" aria-label="QR code for example.com/device"><path d="M4 4h7v7h-7zM5 5v5h5v-5zM6 6h3v3h-3zM18 4h7v7h-7zM19 5v5h5v-5zM20 6h3v3h-3zM4 18h7v7h-7zM5 19v5h5v-5zM6 20h3v3h-3zM13 5h2v2h-2zM12 9h3v1h-3zM14 13h4v2h-4zM18 17h3v3h-3zM13 20h2v4h-2zM22 22h3v3h-3z"/></svg></figure>
+        <div class="qr-card__text">
+          <p>On your phone, open <span class="address"><a href="#" target="_blank" rel="noopener noreferrer">example.com/device<span class="visually-hidden"> (opens in a new tab)</span></a><button class="copy-btn" type="button" data-copy="https://example.com/device" data-copied="Address copied" aria-label="Copy the address"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg></button></span></p>
+          <p>Enter this code:</p>
+          <p class="device-code"><span class="device-code__value" aria-label="Code: W, D, J, B, M, J, H, T">WDJB-MJHT</span><button class="btn copy-btn--label" type="button" data-copy="WDJB-MJHT" data-copied="Code copied"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg>Copy<span class="visually-hidden"> the code</span></button></p>
+        </div>
+      </div>
+      <div class="signin-wait"><div class="signin-wait__words" role="status"><span>Waiting for you to sign in on your phone…</span><span class="muted">9 min left</span></div>
+        <div class="progress progress--busy" role="progressbar" aria-label="Waiting for the sign-in" aria-valuetext="Waiting"><span></span></div></div>
+    </div>
+    <div class="signin-card">
+      <ol class="signin-steps">
+        <li><p>Open the sign-in page and sign in.</p><p><a class="btn btn--primary" href="#" target="_blank" rel="noopener noreferrer">Open the sign-in page<span class="visually-hidden"> (opens in a new tab)</span></a></p></li>
+        <li><p>Your browser then shows a page that does not load. Its address starts like this:</p><code class="signin-example">http://127.0.0.1:53682/?state=…&amp;code=…</code></li>
+        <li><div class="field"><label for="g-signin-paste">Paste that whole address</label><input class="input" id="g-signin-paste" spellcheck="false" autocomplete="off"></div></li>
+      </ol>
+    </div>
+    <ul class="test-checks" aria-label="The test">
+      <li data-state="done"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-circle-check"/></svg><span>Reach the folder</span><span class="test-checks__state">Done</span></li>
+      <li data-state="done"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-circle-check"/></svg><span>Write a small test file</span><span class="test-checks__state">Done</span></li>
+      <li data-state="failed"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-circle-alert"/></svg><span>Read it back</span><span class="test-checks__state">Did not work</span></li>
+      <li data-state="waiting"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-circle"/></svg><span>Remove it</span><span class="test-checks__state">Not tried</span></li>
+    </ul>
+    <p class="tested" data-tone="success"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-circle-check"/></svg><strong>Connected</strong><span class="muted">Tested 16 Nov, 10:40</span></p>
+  </div>
+  <div class="g-notes">
+    <div><h4>Two ways</h4><ul><li>Option cards, the same weight. The phone only where the service has a device flow; otherwise the link alone.</li></ul></div>
+    <div><h4>QR code</h4><ul><li>Dark on white in every theme. Never alone: the page and the code are written out, each with Copy.</li></ul></div>
+    <div><h4>Waiting</h4><ul><li>A polite live region with the words and the time left; a time limit, then Try again.</li></ul></div>
+    <div><h4>Classes</h4><ul><li><code>.signin-card</code>, <code>.signin-steps</code>, <code>.signin-example</code>, <code>.qr-card</code>, <code>.device-code</code>, <code>.signin-wait</code>, <code>.test-checks</code>, <code>.tested</code></li></ul></div>
+  </div>
+</section>
+
 <section class="g-section" id="terminal" aria-labelledby="terminal-h">
   <header><h2 id="terminal-h">Terminal</h2><p class="muted">The same wizard drawn in a terminal (<code>docs/TERMINAL.md</code>; the code is in <code>terminal/</code>). Each drawing is 80 columns, the usual window.</p></header>
   <div class="g-demo stack-4">

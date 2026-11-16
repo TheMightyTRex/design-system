@@ -9,6 +9,13 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 16 November 2026
 
+- Signing in to an outside service from a wizard (Starboard's Connect a cloud service): `.signin-card` and
+  `.signin-steps` (open the sign-in page, what the browser shows after, paste back the address it ends on),
+  `.qr-card` (a QR code dark on white in every theme, with the page and the code written out beside it),
+  `.device-code`, `.signin-wait` (the words and time left in a polite live region, with the busy bar),
+  `.test-checks` (each check's state in an icon and in words) and `.tested` (Test connection's result beside a
+  place). `WIZARD.md` section 9 has the rules: two ways to finish, the same weight, the phone only where the service
+  has a device flow; the gallery has a new section, Signing in to an outside service.
 - Card footer (`.card-foot`): a small strip across the foot of a card, edge to edge, a lighter grey than the band,
   with when the card last updated. The band keeps the logo, the name and the status chip on one line; the time
   moves to the footer (Starboard's dashboard). The gallery's banded cards show it.
