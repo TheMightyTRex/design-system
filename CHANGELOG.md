@@ -9,6 +9,8 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 16 November 2026
 
+- Headings wrap a word too long for the line (`overflow-wrap: anywhere` on h1 to h4), so a folder path or an address in
+  a heading never pushes a page sideways at 320 pixels (WCAG 1.4.10). Found on Starboard's Backup and restore.
 - The folder picker, Idea A (TheMightyTRexUK; Starboard's Bring in media, DASH-455): a first screen of places
   (`.folder-places`, `.folder-place`), a path bar with Back (`.folder-pathbar`), and each folder's size and what is in
   it (`.folder-row`, `__name`, `__meta`). Gallery section Folder picker; `LIBRARY.md` and `TERMINAL.md` say how. The
