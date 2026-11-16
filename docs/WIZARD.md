@@ -201,8 +201,8 @@ service's own page (OAuth), never ask for the person's password for that service
   a labelled Copy button, its label spelling it out a character at a time. Under it, `.signin-wait`: the words and the
   time left in a polite live region, said only when they change, and a busy bar. When the approval arrives the
   wizard moves on by itself and says so; at the time limit it says so with Try again.
-- **In this browser:** `.signin-card` with `.signin-steps`: open the sign-in page (a new-tab link as the primary
-  button), what the browser shows after (a made-up example of the address in `.signin-example`), then the field for
+- **In this browser:** `.signin-card` with `.signin-steps`: open the sign-in page (a new-tab link as a secondary
+  button: the step's primary button is Continue, after the address is pasted), what the browser shows after (a made-up example of the address in `.signin-example`), then the field for
   the whole address. Say why in one plain sentence. The app checks what is pasted before it uses it.
 - **Keys or a password instead:** a service that signs in with keys asks for them on the step, each field with where
   to find it.
