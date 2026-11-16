@@ -9,6 +9,10 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 16 November 2026
 
+- Card band: `.card.has-band` keeps the band at the top edge. `.card` set its padding later in the file, so banded
+  cards (the help centres' plug-in cards among them) had a white strip above the band.
+- Plug-in cards (`.plugin-cards`): at most three to a row, so a name and its chip share the band; two on medium
+  screens and one on a phone. The cards in a row are the same height.
 - Side menu version (Starboard 0.19.1): `.rail__version` is a link to the app's update page, at least 44 by 44
   pixels, underlined on hover. When a newer release is out, `.update-dot` sits just above the number inside the link
   and pulses gently (a ring that grows and fades every 2.4 seconds, `update-dot-pulse`); it keeps still when Reduce
