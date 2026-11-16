@@ -352,7 +352,7 @@ def draw(code, colour=True, quiet=QUIET):
 def svg_path(code, quiet=QUIET):
     """The code for a web page: (width in modules, an SVG path of the dark modules), one unit to a module with the quiet
     zone round it. The page draws it dark on white, so it scans in every theme (.qr-card; Starboard's cloud sign-in on a
-    phone, DASH-446)."""
+    phone, DASH-452)."""
     parts = []
     for y, row in enumerate(code.modules):
         x = 0

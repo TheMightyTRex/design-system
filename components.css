@@ -5514,7 +5514,7 @@ body:has(.side-panel-layer:not([hidden]), dialog[open]) snag-list { display: non
   @media (prefers-reduced-motion: reduce) { :root:not(.pref-motion-off) .side-tree__chev { transition: none; } }
   :root.pref-motion .side-tree__chev { transition: none; }
 
-  /* Signing in to an outside service from a wizard (Starboard DASH-446, TheMightyTRexUK, 16 November 2026): the sign-in
+  /* Signing in to an outside service from a wizard (Starboard DASH-452, TheMightyTRexUK, 16 November 2026): the sign-in
      card (numbered steps with the link to open and the address to paste back), the QR code with its text alternative
      and the short code, and a test's checks. WIZARD.md section 9, Signing in to an outside service. */
   .signin-steps {
