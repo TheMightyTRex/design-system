@@ -9,6 +9,10 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 16 November 2026
 
+- The folder picker, Idea A (TheMightyTRexUK; Starboard's Bring in media, DASH-455): a first screen of places
+  (`.folder-places`, `.folder-place`), a path bar with Back (`.folder-pathbar`), and each folder's size and what is in
+  it (`.folder-row`, `__name`, `__meta`). Gallery section Folder picker; `LIBRARY.md` and `TERMINAL.md` say how. The
+  `cloud` icon.
 - Signing in to an outside service from a wizard (Starboard's Connect a cloud service): `.signin-card` and
   `.signin-steps` (open the sign-in page, what the browser shows after, paste back the address it ends on),
   `.qr-card` (a QR code dark on white in every theme, with the page and the code written out beside it),

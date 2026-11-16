@@ -223,3 +223,14 @@ Starboard's `run-first.sh` (the "Run first script") is the first one.
 6. Nothing typed as an answer, and no secret, appears on screen, in a log or in a report.
 7. A run first script: on a bare system with nothing installed, and again with everything installed, in a
    throwaway virtual machine for each supported system.
+
+## Choosing a folder
+
+16 November 2026 (TheMightyTRexUK, Idea A). The same picker as the browser's, drawn as numbered lists:
+
+1. **Places first:** a numbered list of This computer, each disk, and each network share where the step brings
+   things in from them. A cloud service says it needs the browser to sign in.
+2. **Then the folders:** the path at the top (`Where you are: Drive 2 / Video`), then `1. Use this folder`, then
+   one line for each folder with its size and what is in it (`2. Films (1.9 TB, 412 films)`), and `b` to go back a
+   level (from the top of a place, back to the places). Enter takes Use this folder.
+3. A long list pages as every other list does. The words are the browser's.

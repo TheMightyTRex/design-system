@@ -29,6 +29,7 @@
   .g-term { display: inline-block; margin: 0; padding: 12px 16px; background: #14182e; color: #e8eaf6; font: 13px/1.22 "DejaVu Sans Mono", ui-monospace, monospace; white-space: pre; }
   .g-term--qr { background: #fff; color: #000; line-height: 1; }  /* dark on light, as a terminal draws it, so it scans */
   .g-demo { padding: var(--space-6); border: 1px solid var(--color-divider); background: var(--color-bg); display: grid; gap: var(--space-4); overflow: hidden; }
+  .g-fp { display: grid; gap: var(--space-3); padding: var(--space-4); flex: 1 1 300px; max-inline-size: 440px; }
   .g-demo--row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
   .g-notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-3) var(--space-6); font-size: var(--text-sm); }
   .g-notes h4 { font-size: var(--text-sm); margin-bottom: var(--space-1); }
@@ -822,6 +823,38 @@
     </section>
   </div>
   <div class="g-notes"><div><h4>Rules</h4><ul><li>A saved setting shows the saved note beside its control, never a toast.</li><li>A unit sits beside its number, as part of the control.</li><li>A folder is never a bare text box: Browse, Set automatically, and the typed path under Advanced.</li><li>Things with several settings open a slide-out editor; Add sits at the foot of the list.</li></ul></div></div>
+</section>
+
+<section class="g-section" id="folder-picker" aria-labelledby="folder-picker-h">
+  <header><h2 id="folder-picker-h">Folder picker</h2><p class="muted">Idea A (TheMightyTRexUK, 16 November 2026): places first, then one list of folders with a path bar and Back, each folder with its size and what is in it, and Use this folder. The same on a phone (the slide-out is full width), with a keyboard and a screen reader, and in a terminal (a numbered list with the path at the top).</p></header>
+  <div class="g-demo g-demo--row" style="align-items:start">
+    <div class="card g-fp" role="group" aria-label="Example: the places screen">
+      <h3>Choose a place</h3>
+      <div class="stack-3">
+        <p class="small muted">Where is the folder?</p>
+        <ul class="folder-places" aria-label="Places">
+          <li><button type="button" class="folder-place"><span class="folder-place__icon" aria-hidden="true">{{i:monitor}}</span><span class="folder-place__text"><span class="folder-place__name">This computer</span><span class="folder-place__detail">Folders under /mnt, /media, /srv, /home</span></span></button></li>
+          <li><button type="button" class="folder-place"><span class="folder-place__icon" aria-hidden="true">{{i:hard-drive}}</span><span class="folder-place__text"><span class="folder-place__name">Drive 2</span><span class="folder-place__detail">/mnt/disk2</span></span></button></li>
+          <li><button type="button" class="folder-place"><span class="folder-place__icon" aria-hidden="true">{{i:network}}</span><span class="folder-place__text"><span class="folder-place__name">//192.0.2.20/media</span><span class="folder-place__detail">Network share, read only</span></span></button></li>
+          <li><button type="button" class="folder-place"><span class="folder-place__icon" aria-hidden="true">{{i:cloud}}</span><span class="folder-place__text"><span class="folder-place__name">OneDrive</span><span class="folder-place__detail">Read only. Sign in to choose a folder</span></span></button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card g-fp" role="group" aria-label="Example: a folder">
+      <h3>Choose a folder</h3>
+      <div class="stack-3">
+        <div class="folder-pathbar"><button type="button" class="btn btn--quiet btn--compact">{{i:arrow-left}}Back</button><nav class="folder-crumbs" aria-label="Where you are"><button type="button" class="btn btn--quiet btn--compact">//192.0.2.20/media</button><span aria-hidden="true">/</span><button type="button" class="btn btn--quiet btn--compact" aria-current="location">Video</button></nav></div>
+        <p class="small muted">In //192.0.2.20/media / Video · 3 folders</p>
+        <ul class="folder-list" role="listbox" aria-label="Folders" tabindex="0" aria-activedescendant="g-fp-1">
+          <li role="option" id="g-fp-1" aria-selected="true">{{i:folder}}<span class="folder-row"><span class="folder-row__name">Films</span><span class="folder-row__meta">1.9 TB · 412 films</span></span></li>
+          <li role="option" id="g-fp-2" aria-selected="false">{{i:folder}}<span class="folder-row"><span class="folder-row__name">Kids</span><span class="folder-row__meta">640 GB · 38 films, 12 series</span></span></li>
+          <li role="option" id="g-fp-3" aria-selected="false">{{i:folder}}<span class="folder-row"><span class="folder-row__name">TV</span><span class="folder-row__meta">Counting…</span></span></li>
+        </ul>
+      </div>
+      <div class="actions"><button type="button" class="btn btn--primary">Use this folder</button><button type="button" class="btn">Cancel</button></div>
+    </div>
+  </div>
+  <div class="g-notes"><div><h4>Rules</h4><ul><li>Places first: This computer, each disk, then each network share and cloud service where the page brings things in from them.</li><li>Back goes up a folder, and from the top of a place back to the places.</li><li>Sizes and what is in each folder are counted after the list shows, so it never waits; Counting… until then.</li><li>Up and Down move, Enter or Right opens, Left or Backspace goes up, letters jump to a folder.</li><li>Use this folder chooses the folder you are in. One picker for every page that picks a folder.</li></ul></div></div>
 </section>
 
 <section class="g-section" id="timeline" aria-labelledby="timeline-h">

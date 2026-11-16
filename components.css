@@ -5257,6 +5257,29 @@ body:has(.side-panel-layer:not([hidden]), dialog[open]) snag-list { display: non
 .folder-list [role="option"]:hover { background: var(--color-surface-sunken); }
 @media (max-width: 560px) { .folder-field { flex-wrap: wrap; } .folder-field .btn { inline-size: 100%; } }
 
+/* The folder picker, Idea A (TheMightyTRexUK, 16 November 2026; Starboard DASH-455): a first screen of places, then one
+   list of folders with a path bar (Back, then where you are) and each folder's size and what is in it. Places are
+   buttons (one Tab stop each); the folders are a listbox, as before. Use this folder is the slide-out's primary. */
+.folder-places { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); }
+.folder-place { display: flex; align-items: center; gap: var(--space-3); inline-size: 100%; min-block-size: 56px;
+  padding: var(--space-2) var(--space-3); border: 1px solid var(--color-border); background: var(--color-surface);
+  color: var(--color-text); font: inherit; text-align: start; cursor: pointer; border-radius: var(--radius-control, 0); }
+.folder-place:hover { background: var(--color-surface-sunken); }
+.folder-place:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.folder-place__icon { display: grid; place-items: center; inline-size: 36px; block-size: 36px; flex: none;
+  background: var(--color-accent-soft); color: var(--color-accent); }
+.folder-place__text { display: grid; gap: 2px; min-inline-size: 0; }
+.folder-place__name { font-weight: var(--weight-strong); overflow-wrap: anywhere; }
+.folder-place__detail { color: var(--color-text-muted); font-size: var(--text-sm); overflow-wrap: anywhere; }
+.folder-pathbar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); padding-block-end: var(--space-2);
+  border-block-end: 1px solid var(--color-divider); }
+.folder-pathbar[hidden] { display: none; }
+.folder-pathbar .folder-crumbs { flex: 1; min-inline-size: 0; }
+.folder-row { display: grid; gap: 2px; min-inline-size: 0; padding-block: var(--space-1); }
+.folder-row__name { overflow-wrap: anywhere; }
+.folder-row__meta { color: var(--color-text-muted); font-size: var(--text-sm); }
+.folder-list [role="option"][aria-selected="true"] .folder-row__meta { color: var(--color-text); }
+
 /* Settings patterns (DASH-308, approved by TheMightyTRexUK, 12 November 2026). Every Settings page is built from
    nine patterns only: section, setting rows, choice cards, location, form with Save, status line, empty state,
    lists that open and the danger zone. DESIGN-SYSTEM.md section 9 has the rules. */
