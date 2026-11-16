@@ -6,7 +6,7 @@ apps: change it here, never in the copies.
 | File | What it is | Starboard's copy |
 |---|---|---|
 | `terminal-frame.sh` | The frame for a bash wizard: the heading box and progress bar, the menu on the bottom lines, questions with numbered answers, help boxes, one bar per job with its timer and count, cards, feedback, plain mode for screen readers, and redrawing when the window changes size | `lib/terminal-frame.sh`, and a copy inside `run-first.sh` between its `terminal-frame` lines (that script arrives on its own through curl) |
-| `qr.py` | A QR code encoder in the Python standard library, for feedback sent to a phone (`TERMINAL.md`, section 7) | `starboard/qr.py` |
+| `qr.py` | A QR code encoder in the Python standard library, for feedback sent to a phone (`TERMINAL.md`, section 7), and `svg_path()` for a QR code on a web page (`.qr-card`) | `starboard/qr.py` |
 
 ## Using the frame
 
