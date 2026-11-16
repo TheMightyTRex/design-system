@@ -1472,6 +1472,23 @@
     font-size: var(--text-xs);
     white-space: nowrap;
   }
+  /* Card footer (owner, 16 November 2026): a small strip across the foot of a card, edge to edge, a lighter grey than
+     the band, for when the card last updated. It keeps the band to one line: the band has the logo, the name and the
+     status chip; the footer has the time. Put it last in the card. Markup: .card-foot > time.card-band__time (with
+     words a screen reader can read on their own, such as "Updated 2 minutes ago"). */
+  .card-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-2);
+    margin: auto calc(-1 * var(--space-4)) calc(-1 * var(--space-4));
+    padding: var(--space-1) var(--space-4);
+    border-top: 1px solid var(--color-divider);
+    background: color-mix(in srgb, var(--color-surface-sunken) 45%, var(--color-surface));
+    color: var(--color-text-muted);
+    font-size: var(--text-xs);
+  }
   /* Cover: a book cover at 2:3; audiobook squares are letterboxed, never cropped. */
   .cover {
     position: relative;

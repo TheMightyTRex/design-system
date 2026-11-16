@@ -9,6 +9,9 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 16 November 2026
 
+- Card footer (`.card-foot`): a small strip across the foot of a card, edge to edge, a lighter grey than the band,
+  with when the card last updated. The band keeps the logo, the name and the status chip on one line; the time
+  moves to the footer (Starboard's dashboard). The gallery's banded cards show it.
 - Card band: `.card.has-band` keeps the band at the top edge. `.card` set its padding later in the file, so banded
   cards (the help centres' plug-in cards among them) had a white strip above the band.
 - Plug-in cards (`.plugin-cards`): at most three to a row, so a name and its chip share the band; two on medium
