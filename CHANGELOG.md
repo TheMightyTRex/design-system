@@ -7,6 +7,11 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 [Semantic Versioning](https://semver.org/).
 
 
+## 17 November 2026
+
+- `tokens.css`: one theme set `--color-slide-header` twice; the extra line is gone. No change to how anything looks.
+  Found by Biome in Starboard's new code checks.
+
 ## 16 November 2026
 
 - Headings wrap a word too long for the line (`overflow-wrap: anywhere` on h1 to h4), so a folder path or an address in
