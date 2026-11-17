@@ -132,6 +132,7 @@ a sentence, and the word always beside the colour and its icon.
 | A newer version with a big change | Check before updating | Warning | "Big change: check first" |
 | No newer version | Up to date | Success | |
 | Never updated | Never updated | Warning | |
+| An app uses a change only after it starts again | Restart needed | Warning | |
 
 A word in this table means one state only. "Running" is an app that answers, never a job in progress, so a job that
 runs is "In progress" or its own word (Downloading, Updating, Backing up). A chip can add a detail after a middle dot

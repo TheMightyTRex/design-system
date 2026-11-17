@@ -9,6 +9,10 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 17 November 2026
 
+- Restart where it is needed (Starboard, DASH-470): a Restart button inside the warning notice that says an app needs
+  a restart, shown only then, with what it does beside it, progress in words in a polite status, focus kept on the
+  button while it works and moved to the result. `LIBRARY.md` has the pattern; `COMPONENTS.md` adds the state word
+  Restart needed (Warning). Made from existing parts, so no new class.
 - `tokens.css`: one theme set `--color-slide-header` twice; the extra line is gone. No change to how anything appears.
   Found by Biome in Starboard's new code checks.
 
