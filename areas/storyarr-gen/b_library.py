@@ -37,7 +37,7 @@ def my_library():
     body = f"""
 {what_changed([
     "<strong>Every book opens the same Summary slide-out</strong> on all four tabs. Today In my libraries opens a panel and the other three tabs jump to the book page.",
-    "<strong>One toolbar (design D) on every tab</strong>: view switch, search, format chips with counts, Library menu, sort. Manage connections and Save view moved from above the toolbar into its More menu; the sort note moved into the summary line.",
+    "<strong>One toolbar (design D) on every tab</strong>: view switch, search, format chips with counts, Library menu, sort. Manage connections and Save view moved from before the toolbar into its More menu; the sort note moved into the summary line.",
     "<strong>Summary facts</strong>: Author first, then Series, then Narrated by, which links to the new narrator page.",
     "<strong>One cover grid</strong> that follows the cover size setting, plus a List view. Add a title is a short dialog, not a form that pushes the grid down.",
 ])}
@@ -193,7 +193,7 @@ def library_review():
     body = f"""
 {what_changed([
     "<strong>Item details open in a wide slide-out, not a modal</strong>, so the queue stays in view. Previous and Next in its header replace the \"Review next item after saving\" checkbox.",
-    "<strong>No nesting</strong>: today the modal holds an open details block, sub-tabs, an embedded search page and an inline preview. Now Where to look is a segmented control, and results and the chosen match sit in the same slide-out.",
+    "<strong>No nesting</strong>: today the modal holds an open details block, sub-tabs, an embedded search page and an inline preview. Now Where to search is a segmented control, and results and the chosen match sit in the same slide-out.",
     "<strong>The section toolbar</strong> replaces the hand-built bar and the \"Most common problems\" links: problem chips with counts, Library menu and sort.",
     "<strong>Rows with real covers</strong> instead of a fourth card style with 9px placeholder text. \"Couldn't read fully\" becomes \"Cannot read file\". Leave unmatched and Delete stay dialogs.",
 ])}
@@ -231,7 +231,7 @@ def library_review():
 <section aria-labelledby="rv-read-h" style="display:grid;gap:var(--space-3)"><h3 id="rv-read-h">What Storyarr read</h3>
 <dl class="facts"><dt>Folder</dt><dd><code>/audiobooks/Mara Ellison/Lanterns Under Ice (2025)</code></dd><dt>Files</dt><dd>14 MP3 files · 9 hr 58 min · 512 MB</dd><dt>Title tag</dt><dd>Lanterns under ice (unabridged)</dd><dt>Author tag</dt><dd>M. Ellison</dd><dt>Narrator tag</dt><dd>Sam Oduya</dd><dt>Library</dt><dd>Fiction audiobooks</dd></dl></section>
 <section aria-labelledby="rv-find-h" style="display:grid;gap:var(--space-3)"><h3 id="rv-find-h">Find the right book</h3>
-<fieldset><legend class="field__label">Where to look</legend><div class="segmented"><label><input type="radio" name="rv-where" checked><span>Hardcover</span></label><label><input type="radio" name="rv-where"><span>Open Library</span></label><label><input type="radio" name="rv-where"><span>Enter details yourself</span></label></div></fieldset>
+<fieldset><legend class="field__label">Where to search</legend><div class="segmented"><label><input type="radio" name="rv-where" checked><span>Hardcover</span></label><label><input type="radio" name="rv-where"><span>Open Library</span></label><label><input type="radio" name="rv-where"><span>Enter details yourself</span></label></div></fieldset>
 <div class="field"><label for="rv-q">Search Hardcover</label><div class="input-group"><input class="input" id="rv-q" type="search" value="Lanterns under ice Ellison"><button class="btn" type="button">{ic("search")}Search</button></div></div>
 <ul class="rows" aria-label="Possible matches">
 <li class="row">{thumb("Lanterns Under Ice", 1)}<div><div class="row__title">Lanterns Under Ice</div><div class="row__meta">Mara Ellison · The Glass Harbour, book 2 · 2025 · audiobook read by Sam Oduya</div></div><div class="row__side"><span class="chip" data-tone="success">Chosen</span></div></li>

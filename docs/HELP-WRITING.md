@@ -1,6 +1,6 @@
 # Help writing guide
 
-Version 1.3, 15 November 2026. How help is written for every help centre (Starboard, Snaglist, the plug-in
+Version 1.4, 17 November 2026. How help is written for every help centre (Starboard, Snaglist, the plug-in
 collection and any later one) and any help shown inside the apps. Section 11 is the help centre standard: the
 layout, the menus, flow charts, the journey, the problem solver and plug-in mode. Every word also follows `CONTENT-DESIGN.md`.
 
@@ -57,7 +57,7 @@ Every topic is exactly one of these. A topic that needs two kinds is two topics.
 | Kind | Use it for | Title starts with |
 |---|---|---|
 | How-to | Doing one task | A verb: "Add an app" |
-| Reference | Facts to look up: settings, limits, lists | The thing: "Display and accessibility settings" |
+| Reference | Facts to check: settings, limits, lists | The thing: "Display and accessibility settings" |
 | Troubleshooting | One problem and its fix | The problem in the reader's words: "Starboard does not open" |
 | Overview | A hub that routes onwards within one area | The area: "Backup and restore" |
 
@@ -72,7 +72,7 @@ no plug-ins".
 
 - **Get started:** before installing, installing, opening it on other devices, moving in.
 - **Use it:** the app's own areas, in the order of its main menu, then settings, backups and updates.
-- **Plug-ins:** adding and looking after plug-ins; in a plug-in collection, every plug-in (section 11.7).
+- **Plug-ins:** adding and managing plug-ins; in a plug-in collection, every plug-in (section 11.7).
 - **Accessibility:** the display settings, ways to use it, how it is tested and its limits.
 - **Fix a problem:** troubleshooting topics, each one flow chart first, and the problem solver.
 - **Developers:** plug-in writing, the API, prompts for AI assistants, security and tests.
@@ -148,10 +148,10 @@ The idea in two or three sentences, with an everyday comparison where one helps.
 2. **Other names once, near the top:** "two-step sign-in, also called 2FA or two-factor authentication".
    Search and screen readers both use them.
 3. **Every child links to its parent,** and each topic links to its nearest neighbours under "Find out more".
-4. **Commands are copied, not typed.** Put each command in its own `bash` block, and say what it does in the
+4. **Commands are copied, not entered by hand.** Put each command in its own `bash` block, and say what it does in the
    sentence before it. Mark anything the reader must change, such as `<your server>`, and say what to put
    there.
-   **Some people type them anyway,** so a command with a symbol that moves between keyboards (`|`, `~`, `\`,
+   **Some people enter them by hand anyway,** so a command with a symbol that moves between keyboards (`|`, `~`, `\`,
    `"`, `@`, `$`, `&`) links to the app's keyboard help (US, UK and Ireland, German, French and Spanish), and a
    one-line command with `|` also shows a version without it. On UK keyboards the `¦` key is not `|`: say so.
 5. **One action per step,** starting with the verb. Start from a page the reader can find, and give the full
@@ -159,25 +159,25 @@ The idea in two or three sentences, with an everyday comparison where one helps.
 6. **Callouts by meaning** (`CONTENT-DESIGN.md` section 7): "Before you begin:", "Limitation:", "Warning:",
    "Tip:", "Example:". Never a callout without its lead word.
 
-### Simplest first, advanced apart
+### Default set-up first, more options apart
 
-Owner, 15 November 2026 (Starboard DASH-439): help shows the simplest set-up first, with additional apps and
-advanced options apart from it.
+Owner, 15 November 2026 (Starboard DASH-439): help shows the default set-up first, with additional apps and
+more options apart from it.
 
 1. **Split by need, not by person.** A guide walks a new person through one path with no choices; a how-to
    assumes some context and does one task; a reference lists every setting; a basics article says why. Do not
    mix them: explanation and lists of options do not belong inside a guide's steps.
-2. **Name sections by what they hold,** never by who the reader is: "The simplest set-up", "Add more apps",
-   "Advanced options", not "For beginners" or "For experts". People misjudge themselves, and the line is blurred.
+2. **Name sections by what they hold,** never by who the reader is: "The default set-up", "Add more apps",
+   "More options", not "For beginners" or "For experts". People misjudge themselves, and the line is blurred.
 3. **Default path first.** The main steps use the defaults as they are. A choice a new person can skip says so in
-   one line ("You can change this later in Advanced options") and links down to it. Additional apps and advanced
+   one line ("You can change this later in More options") and links to it. Additional apps and more
    options come after the main steps under their own headings, or in a disclosure (`details`) when short.
    **The test:** a new person finishes the main task without opening or reading anything after the main steps.
 4. **Signpost at the top:** one line saying what the page covers (such as the default install) and where the rest
    is.
-5. **One plain-language baseline.** Advanced sections follow the same writing rules; they are separate, not harder
+5. **One plain-language baseline.** Sections of more options follow the same writing rules; they are separate, not harder
    to read.
-6. **Navigation:** Get started holds only the simplest path. Advanced and additional topics are found through the
+6. **Navigation:** Get started holds only the default path. More options and additional topics are found through the
    side menu, search and links, and Developers stays its own area.
 
 ## 8. Screenshots
@@ -226,7 +226,7 @@ the words this guide bans. Treat its draft as a first draft that you check.
 
 | Check | How |
 |---|---|
-| Banned words and punctuation | Run the sweep below. Fix every hit, or confirm it is an on-screen label. "See" is the one that slips through most, inside friendly sentences ("so you can see what is left"). |
+| Banned words and punctuation | Run **The sweep**, in this section. Fix every hit, or confirm it is an on-screen label. "See" is the one that slips through most, inside friendly sentences ("so you can see what is left"). |
 | Labels | Open the page in the app and compare every bold label, letter for letter. |
 | Steps | Follow the steps on a test install or a preview, from the starting page the topic names. A step you cannot follow is wrong. |
 | Facts | Every number, limit, default and version matches the code or the release notes. Clear every `[needs checking]`. |
@@ -238,10 +238,14 @@ the words this guide bans. Treat its draft as a first draft that you check.
 
 ```bash
 grep -nE "—|\b(can't|don't|won't|it's|isn't|doesn't|you're|we're|what's|that's|you'll)\b" draft.md
-grep -niE "\b(click|tap|see|sees|look|looks|enable[ds]?|disable[ds]?|toggle|turn (on|off)|screen)\b" draft.md
+grep -niE "\b(click\w*|tap\w*|see[ns]?|seeing|look\w*|enable[ds]?|disable[ds]?|toggle\w*|turn(s|ed)? (on|off)|screen|type[ds]?|typing|please|drives?)\b|\bOn:" draft.md
 grep -niE "\b(simple|simply|easy|just|straightforward|obviously|complex|difficult|advanced)\b" draft.md
 grep -niE "\b(above|below|top right|on the left|on the right|scroll down|click here|read more|learn more)\b|!" draft.md
 ```
+
+The design system runs the same words as a check on its own guides, gallery, boards and terminal frame:
+`python3 tools/check_words.py` stops on a hit, and a genuine exception goes in `tools/words-allowed.txt` with its
+reason.
 
 A tool reporting success is not the check: read the result back, in the file and on the page.
 
@@ -261,7 +265,7 @@ Then tell me: the tier and kind, every [needs checking], labels left as the app 
 
 - [ ] The article is in the right tier, and a topic has exactly one kind
 - [ ] Title in the reader's words; other names given once near the top
-- [ ] The simplest path comes first; additional apps and advanced options are in their own sections (section 7, Simplest first, advanced apart)
+- [ ] The default path comes first; additional apps and more options are in their own sections (section 7, Default set-up first, more options apart)
 - [ ] The answer comes first; empty sections left out
 - [ ] A guide links to topics instead of repeating their steps
 - [ ] Links to the parent and to related articles under "Find out more"
@@ -288,7 +292,7 @@ drawn by hand per build: change the Markdown or the settings, and build again. T
   them on wide screens, inside them on narrow ones.
 - **Area pages:** each of the six areas has a page with a card for each group, listing every article in it.
 - **Home:** the welcome heading with the latest version beside it on the same line, with no date (`.version-badge`,
-  read from the changelog or a version file, never typed); then the journey; then the newest thing
+  read from the changelog or a version file, never entered by hand); then the journey; then the newest thing
   (`.feature-card`); then the problem solver card (`.solver-card`), always under the newest thing.
 
 ### 11.2 The side menu
@@ -300,7 +304,7 @@ as expanded or collapsed; each group shows how many articles it holds. The page 
 area page, and Fix a problem also lists the **Problem solver**. On tablets and phones the menu opens from **Menu**
 over the page, with the area you are in already open and the focus on the page you are on; the page behind cannot
 be reached while it is open; Escape, **Menu** again or choosing a page closes it and the focus goes back to **Menu**.
-With no script, the menu sits above the page.
+With no script, the menu comes before the page.
 
 Each article says where it belongs, on the line after its trail line:
 
@@ -324,7 +328,7 @@ remove). Keep each card to a title and one line.
 ### 11.4 Flow charts
 
 **Every troubleshooting topic starts with a flow chart** (articles are flow chart first), and so does every guide
-(its steps at a glance). A how-to with a real choice in it (which version, which kind of drive) may have one; a
+(its steps at a glance). A how-to with a real choice in it (which version, which kind of disk) may have one; a
 reference topic or a basics article does not need one. Put the chart straight after the opening sentences.
 
 Write the chart in a fenced `flow` block. It is plain to read on GitHub, and the builder draws it as an SVG that
@@ -361,9 +365,9 @@ q2: Does the app open in your browser?
   (`.answer-card`): the number and heading on a grey band, the steps under it. Using `#its-id` keeps the heading's
   words and its address, so links to it from release notes still work.
 - An answer reached from another answer ("Still does not open -> 5") is drawn as the next thing to try.
-- Keep questions short (under eight words), answers to what the reader sees, and a chart to about ten nodes. A
+- Keep questions short (under eight words), answers to what is on the reader's page, and a chart to about ten nodes. A
   chart that will not fit is two articles.
-- Simple Mermaid flowcharts (`flowchart TD` with `A[...] --> B{...}`) are drawn the same way, so older guides need
+- Plain Mermaid flowcharts (`flowchart TD` with `A[...] --> B{...}`) are drawn the same way, so older guides need
   no change; write new charts as `flow` blocks. No chart library is loaded in the browser.
 
 ### 11.5 The problem solver
@@ -390,7 +394,7 @@ plug-in the same eight pages in the same order: **Overview**, **Install**, **Set
 **Updates**, **Accessibility**, **Problems** and **For developers**. Overview is the plug-in's own README; the
 others are `help/plugins/<id>/<page>.md`. A page with nothing to say shows one line saying so (the builder writes
 one when the file is missing). A plug-in's pages start with its band (`.plugin-band`): the logo or initials, the
-name, the version and plug-in API, a status chip and **How to add it**. The logo is the catalogue entry's `logo`, a rounded tile, shown wherever the plug-in is; a plug-in with none shows its icon or initials. When the Plug-ins area also has groups of its own articles, such as Add a plug-in, they stay in the side menu above the plug-in groups. The home and the Plug-ins area show a card
+name, the version and plug-in API, a status chip and **How to add it**. The logo is the catalogue entry's `logo`, a rounded tile, shown wherever the plug-in is; a plug-in with none shows its icon or initials. When the Plug-ins area also has groups of its own articles, such as Add a plug-in, they stay in the side menu before the plug-in groups. The home and the Plug-ins area show a card
 for each plug-in in the grey band design (`.plugin-card`): logo, name and status chip, what it does, and links to
 Install, Settings and Problems. The Problems page starts with a flow chart, as any troubleshooting topic does.
 
@@ -431,7 +435,7 @@ Install, Settings and Problems. The Problems page starts with a flow chart, as a
   on the right).
 - An area can have `link_card` (`title`, `text`, `to`, `button`, optional `icon`): one card at the top of its page leading
   somewhere else, such as Starboard's Plug-ins area to the plug-ins' own help centre.
-- `goatcounter` (optional) turns on visitor counting: the GoatCounter address, such as
+- `goatcounter` (optional) activates visitor counting: the GoatCounter address, such as
   `https://<code>.goatcounter.com/count`. Every page loads its counter, and the footer says that visits are counted
   without cookies or personal data. Leave it out and nothing is counted.
 - `--strict` stops on a page left as a placeholder ("still to be written", TODO, TBD, TBC or lorem ipsum, outside

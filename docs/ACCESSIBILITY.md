@@ -18,7 +18,7 @@ order:
 |---|---|---|
 | Theme | Match device, Light, Dark | Match device |
 | Text size | 100%, 125%, 150%, 175% | 100% |
-| Reduce motion | Match device, On, Off | Match device |
+| Reduce motion | Match device, Active, Inactive | Match device |
 | High contrast | Switch | Inactive |
 | Underline links | Switch | Inactive |
 | Wider text spacing | Switch | Inactive |
@@ -63,14 +63,14 @@ separate low-vision font switch.
 - **Check:** links in body text are distinguishable without colour (underline, or Underline links on).
 
 **Motion**
-- **Check:** with Reduce motion on (or `prefers-reduced-motion` with Match device), slide-ins, fades and the
+- **Check:** with Reduce motion active (or `prefers-reduced-motion` with Match device), slide-ins, fades and the
   loading bar animation stop or become instant.
-- **Check:** with Reduce motion off, everything moves even when the device asks for reduced motion: every
+- **Check:** with Reduce motion inactive, everything moves even when the device asks for reduced motion: every
   `prefers-reduced-motion` query leaves out `:root.pref-motion-off`, and scripts ask `motionStill()`, never the
   media query alone.
 - **Check:** the side menu and header at every text size, with and without wider spacing, and in a window 600
   pixels tall: no word breaks in the middle, nothing runs past an edge, overlaps or is cut off (the app's layout
-  check, as axe's reflow check does not see a menu that cuts off its own items).
+  check, as axe's reflow check does not find a menu that cuts off its own items).
 - **Check:** nothing flashes more than three times a second; anything moving for over five seconds can be
   paused.
 
@@ -98,7 +98,7 @@ separate low-vision font switch.
 | Drawer / side panel | `role="dialog"` or `aside` with a heading; focus moves to the heading; Escape closes |
 | Dialog | `role="dialog"` `aria-modal="true"`, labelled by its title; focus trapped |
 | Tabs / sub-menu | Navigation links with `aria-current="page"`, or real tabs with arrow-key support; never a mix |
-| Filter chips | Toggle buttons with `aria-pressed`; the count is part of the name ("Waiting, 1") |
+| Filter chips | Buttons that are pressed or not (`aria-pressed`); the count is part of the name ("Waiting, 1") |
 | Loading bar | `role="progressbar"` or a live text label; hidden from screen readers when idle |
 | Toast | Read out through hidden regions: errors through `role="alert"`, the rest through `role="status"`; focus never moves to it. Success and info at least 5 seconds (10 with an action), warning 10, error until closed; each waits while the pointer or keyboard focus is on it; Close is named with the message |
 | Saved note | `role="status"` beside the button that saved; stays until the next change |
@@ -106,7 +106,7 @@ separate low-vision font switch.
 
 ## 4. Themes
 
-Tokens live in the web app's theme CSS (see `DESIGN-SYSTEM.md`; the shared values are in `../tokens.css`). Each theme defines the same token
+Tokens live in the web app's theme CSS (read `DESIGN-SYSTEM.md`; the shared values are in `../tokens.css`). Each theme defines the same token
 names. High contrast raises borders, focus rings and muted text, and removes shadows as separators.
 
 ## 5. Known gaps (31 October 2026 audit)
@@ -121,9 +121,9 @@ names. High contrast raises borders, focus rings and muted text, and removes sha
 
 1. Keyboard: unplug the mouse; Tab through the page, open and close every drawer and dialog.
 2. Zoom: browser at 400%, and the Text size setting at 175%.
-3. Themes: Light, Dark, High contrast; check chips, focus rings and disabled controls.
+3. Themes: Light, Dark, High contrast; check chips, focus rings and controls that are not available.
 4. Screen reader: Orca on this computer, or NVDA on Windows; read the page headings list and one task.
-5. Automated: Starboard's `tools/a11y.sh` (axe-core and the checks above), before each release.
+5. Automated: Starboard's `tools/a11y.sh` (axe-core and the checks in this section), before each release.
 
 **The standard accessibility test** (TheMightyTRexUK, 12 November 2026: "needs adding to standard accessibility
 testing"). Whenever an accessibility test is asked for, it is all of these, never a scan alone:
@@ -131,7 +131,7 @@ testing"). Whenever an accessibility test is asked for, it is all of these, neve
 | Part | How (Starboard) | What it checks |
 |---|---|---|
 | Scan | `tools/a11y.sh` | WCAG 2.2 AA by axe-core in Light, Dark and High contrast; structure; target size; reflow; forced colours; reduced motion |
-| Reading order | `ORDER=1 tools/a11y.sh` | what a screen reader reads against what is seen, on every page and in each app-card design; Tab never jumps back up a column; landmarks in order; the h1 first |
+| Reading order | `ORDER=1 tools/a11y.sh` | what a screen reader reads against what is shown, on every page and in each app-card design; Tab never jumps back up a column; landmarks in order; the h1 first |
 | Keyboard walk | `TASKS=1 tools/a11y.sh` | the main tasks by keys alone: sign in, skip link, search, open an item, change a setting, edit in a slide-out, make and revoke a key, Show more |
 | Focus after actions | the walk, and the focus keeper in `common.js` | after a save, delete or redraw, focus stays where the person was, never the top of the page; slide-outs and dialogs give it back, or to a stand-in |
 | What is said | the walk | short spoken summaries only (counts, saved, errors); a whole list or section is never a live region |

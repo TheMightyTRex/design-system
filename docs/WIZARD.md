@@ -26,20 +26,20 @@ wizard", with their own count, and the wizard's progress starts at its own first
 | Review aids, testing only | Beside the step on computers, under it on phones | `.wizard-aside` holding `.wizard-next` (What happens next) and `.wizard-tree` (decision tree) |
 
 **Review aids are for testing, never the finished product (TheMightyTRexUK, 4 November 2026).** What happens next
-and the decision tree help people who review a wizard see where each choice leads. An app shows them only
+and the decision tree help people who review a wizard follow where each choice leads. An app shows them only
 while its testing setting is active (the same setting as its Send feedback button, [Snaglist](https://github.com/TheMightyTRex/snaglist)),
 and mock-ups show them.
 Leave `.wizard-aside` out of the page, or give it `hidden`, and the step takes the whole width.
 
 `.wizard-layout` puts the step on the left and the review aids on the right from 1100px, one under the
-other below that. The step always comes first in the reading order.
+other under that width. The step always comes first in the reading order.
 
 ## 2. The first question
 
 1. **Ask which job first, when there is more than one.** For a set-up, that is "New install", "Restore a
    backup" or "Migrate from other apps". Each answer has its own wizard, with its own steps and count.
    `.wizard-paths` shows each job as a card with its stages and number of steps, the chosen one marked.
-2. **Ask nothing the app can find out.** A migration looks at what is already there and plans from it,
+2. **Ask nothing the app can find out.** A migration checks what is already there and plans from it,
    instead of asking.
 3. **Ask in the order a person would do the job by hand.** Install, sign in, decide what to follow, then
    build each part in the order it depends on the last.
@@ -68,12 +68,12 @@ wizard (`TERMINAL.md`).
    name of a settings section.
 2. **Steps that do not apply are left out**, not shown and skipped. While testing, the decision tree still
    lists them, crossed through, with the reason ("Left out: you follow music only").
-3. **A step with too much in it is split into parts**, each its own screen. `.steps--sub` under the
+3. **A step with too much in it is split into parts**, each its own page. `.steps--sub` under the
    progress bar names the parts, with done ones ticked and the current one outlined. It is as wide as the
    progress bar, the parts share the width equally, and a line joins each part to the next (in the
    accent colour after a done part). The parts are numbered 1, 2, 3 within the step. **Each part is a
    step in the progress bar's total**: when Download apps is steps 6 to 8 of 18, the progress bar says
-   "step 7 of 18" on its second part. On phones the step bar is just the numbers joined by lines, and a
+   "step 7 of 18" on its second part. On phones the step bar is only the numbers joined by lines, and a
    done part's number becomes a tick (the names stay for screen readers). The summary at the end
    shows the parts as one line.
 4. **Choices are option cards** (`.option-cards`, one `.option-card` each), with a title and one line on
@@ -111,16 +111,17 @@ When a step runs a job that takes time (installing, downloading, building, resto
 
 - **One bar per job, drawn once and updated in place.** It never repeats down the page or the window. A redraw
   replaces it; a retry draws the step afresh with one new bar, and the jobs already done listed with a tick.
-- **Words beside the bar:** what is happening, "Please wait, this can take some time...", and which job of how many.
+- **Words beside the bar:** what is happening, named ("Downloading and starting the apps…"), and which job of how
+  many. Never a vague wait message: the timer and the count say that the job is still going.
 - **On the right, after the timer, how far it has got** when the job can tell: "3 min 12 s · 5 of 12 installed"
   while the apps download, then "9 of 12 running" while they start (TheMightyTRexUK, 7 November 2026). Count from
   the thing itself (Docker), not from the job's words, and leave the count out when it cannot be asked. In the
   browser the count is the bar's `aria-valuetext`; in the terminal it follows the timer on the bar line.
-- **Errors go below the bar.** The bar stays where it stopped, marked "did not finish", and the problem is under it
+- **Errors go under the bar.** The bar stays where it stopped, marked "did not finish", and the problem is under it
   in plain words, with the choices: Try again (recommended), Show the details, or Stop. Never write over the bar,
-  and never move the error above it.
+  and never move the error before it.
 - **No wrapping:** a bar line is cut to the width it has, so it never runs onto a second line.
-- In the browser it is `role="progressbar"` with `aria-valuetext` in words; the error is a notice below it, tied
+- In the browser it is `role="progressbar"` with `aria-valuetext` in words; the error is a notice after it, tied
   to it with `aria-describedby`, and focus moves to the error's heading.
 
 ## 6. Review aid: What happens next
@@ -154,7 +155,7 @@ Testing only (section 1).
 - **The links go at the end of the part they explain**, not under the heading: the API key link after the
   API key fields. `.help-links` holds them, one `.help-link` each with the square `help` icon, written as the
   question ("What is a terminal?").
-- **A step's own help goes at the bottom of the step**, above the buttons, in one `.help-links` row: the step's
+- **A step's own help goes at the end of the step**, before the buttons, in one `.help-links` row: the step's
   questions first ("Which one is right for me?"), then "Help with this step", which opens the step's help centre
   article in the slide-out (TheMightyTRexUK, 7 November 2026). Never a fold-out (`details`) for help.
 - A link opens a slide-out (`.side-panel-layer` with `.side-panel`, opened with `data-opens`), because help is
@@ -184,7 +185,7 @@ Testing only (section 1).
 
 - A grid of option cards that fits the width (`.option-cards--row`), at most six of the best known, each with
   its name spelt as on the service's own site and its site under it as a new-tab link with the `external-link`
-  icon. Then one card, "Another one that … supports", which shows a field to type the name.
+  icon. Then one card, "Another one that … supports", which shows a field to enter the name.
 - Nothing is chosen the first time: the service is the person's own. When they come back, their last answer is
   kept. The terminal lists the same services, from the same list file, with no default the first time.
 
@@ -229,7 +230,7 @@ service's own page (OAuth), never ask for the person's password for that service
 
 Every word follows `CONTENT-DESIGN.md`. The ones wizards get wrong most often:
 
-- Questions and jobs as headings, in sentence case, with no question numbers typed in ("STEP 1 OF 9").
+- Questions and jobs as headings, in sentence case, with no question numbers written in ("STEP 1 OF 9").
 - No contractions and no "Let's".
 - "Select", not "click"; "enter", not "type in".
 - Example data is made up: addresses in 192.0.2.x, people called Alex and Sam.
@@ -249,8 +250,8 @@ wrong while they are in it (5 November 2026):
 - The QR code is never the only way: the link is shown as text with a Copy button, and Download keeps the whole
   report.
 - When a step fails, its error message offers **Report this problem**, with the error already in the report.
-- Snaglist's privacy rules hold: nothing typed into the wizard's own fields, no passwords, keys or set-up codes.
-- A wizard in a terminal has the same feedback, drawn differently: see `TERMINAL.md`, section 6.
+- Snaglist's privacy rules hold: nothing entered in the wizard's own fields, no passwords, keys or set-up codes.
+- A wizard in a terminal has the same feedback, drawn differently: read `TERMINAL.md`, section 7.
 
 ## 13. Checks before a wizard ships
 

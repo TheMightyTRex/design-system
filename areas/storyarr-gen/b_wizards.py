@@ -19,7 +19,7 @@ def onboarding():
 {what_changed([
     "<strong>One wizard for setup and upgrades</strong>: the same step list, the same buttons (Continue, Back, Skip this step) and \"Keep the defaults and finish\" at the top. Today the two wizards use different classes, shells and button names.",
     "<strong>One question per step</strong> (\"Connect a library server?\") instead of a whole Settings section with its own Save. Continue saves the answer, so nothing is lost silently.",
-    "<strong>No capitals typed in source</strong> (\"STEP 1 OF 9\"), no contractions (\"Let's set up your library\"). Done steps say \"done\" to screen readers, not only with a tick.",
+    "<strong>No capitals written in source</strong> (\"STEP 1 OF 9\"), no contractions (\"Let's set up your library\"). Done steps say \"done\" to screen readers, not only with a tick.",
     "<strong>Connecting a server stays a dialog</strong>: it is a short task that must finish before the next step.",
 ])}
 <div class="page-head">
@@ -45,7 +45,7 @@ def onboarding():
   <dl class="facts"><dt>Display</dt><dd>Light, text 125% · <a href="#">Change<span class="visually-hidden"> display</span></a></dd><dt>Book details</dt><dd>Hardcover · <a href="#">Change<span class="visually-hidden"> book details</span></a></dd><dt>Library server</dt><dd>Audiobookshelf, 2 libraries</dd><dt>Library folders</dt><dd><code>/data/audiobooks</code>, <code>/data/ebooks</code></dd><dt>Download sources</dt><dd>Skipped · <a href="storyarr-settings-downloads.html">Set up later in Settings</a></dd><dt>Download client</dt><dd>qBittorrent</dd></dl>
   <div class="actions"><a class="btn btn--primary" href="storyarr-discover.html">Start browsing</a><button class="btn" type="button">Back</button></div>
 </section>
-{phone_section([("phone=1", "On phones the step list wraps above the question. It should collapse to \"Step 3 of 7\" (missing component), so Continue stays close.", 760),
+{phone_section([("phone=1", "On phones the step list wraps before the question. It should collapse to \"Step 3 of 7\" (missing component), so Continue stays close.", 760),
                 ("phone=1&dialog=dlg-connect", "The connection dialog nearly fills the width.", 760)], "The wizard on a phone.")}
 """
     dialogs = dialog("dlg-connect", "Connect Audiobookshelf",
@@ -90,7 +90,7 @@ def upgrade():
   <div class="option-cards"><label class="option-card"><input type="radio" name="ns" checked><strong>Yes, link narrators</strong><small>Narrator names open the new narrator page. This is the default.</small></label><label class="option-card"><input type="radio" name="ns"><strong>No, show names only</strong><small>You can turn links on later in Settings, General, Display.</small></label></div>
   <div class="actions" style="padding-top:var(--space-4);border-top:1px solid var(--color-divider)"><button class="btn btn--primary" type="button">Continue</button><button class="btn" type="button">Back</button><button class="btn btn--quiet" type="button">Skip this step</button></div>
 </section>
-{phone_section([("phone=1", "The step list wraps above the step; the buttons wrap under it.", 760)], "The upgrade wizard on a phone.")}
+{phone_section([("phone=1", "The step list wraps before the step; the buttons wrap under it.", 760)], "The upgrade wizard on a phone.")}
 """
     return page("upgrade", "Upgrade to version 1.10.0", "settings", "system", body, None, "", "", tab_title="Upgrade")
 

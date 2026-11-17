@@ -590,13 +590,13 @@ TEMPLATE = """<!doctype html>
     <form class="side-panel__body form-stack" id="help-display-form">
       <fieldset><legend>Theme</legend><div class="segmented"><label><input type="radio" name="theme" value="system"><span>Match device</span></label><label><input type="radio" name="theme" value="light"><span>Light</span></label><label><input type="radio" name="theme" value="dark"><span>Dark</span></label></div></fieldset>
       <fieldset><legend>Text size</legend><div class="segmented"><label><input type="radio" name="text" value="100"><span>100%</span></label><label><input type="radio" name="text" value="125"><span>125%</span></label><label><input type="radio" name="text" value="150"><span>150%</span></label><label><input type="radio" name="text" value="175"><span>175%</span></label></div></fieldset>
-      <fieldset><legend>Reduce motion</legend><div class="segmented"><label><input type="radio" name="motion" value="device"><span>Match device</span></label><label><input type="radio" name="motion" value="on"><span>On</span></label><label><input type="radio" name="motion" value="off"><span>Off</span></label></div></fieldset>
+      <fieldset><legend>Reduce motion</legend><div class="segmented"><label><input type="radio" name="motion" value="device"><span>Match device</span></label><label><input type="radio" name="motion" value="on"><span>Active</span></label><label><input type="radio" name="motion" value="off"><span>Inactive</span></label></div></fieldset>
       <label class="switch" for="help-pref-contrast"><span>High contrast</span><input type="checkbox" role="switch" id="help-pref-contrast" name="contrast"></label>
       <label class="switch" for="help-pref-underline"><span>Underline links</span><input type="checkbox" role="switch" id="help-pref-underline" name="underline"></label>
       <label class="switch" for="help-pref-spacing"><span>Wider text spacing</span><input type="checkbox" role="switch" id="help-pref-spacing" name="spacing"></label>
       <p class="small muted">Choices apply at once and are kept in this browser.</p>
     </form>
-    <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Done</button><button class="btn" type="button" id="help-display-reset">Reset</button></div>
+    <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Close</button><button class="btn" type="button" id="help-display-reset">Reset to defaults</button></div>
   </aside>
 </div>
 <div id="help-announcer" class="visually-hidden" aria-live="polite"></div>
@@ -640,7 +640,7 @@ class Site:
                           f'<div class="panel-header"><h2 class="panel-header__title" id="help-notice-h">{html.escape(NOTICE_LABEL)}</h2>'
                           f'<button class="icon-btn" type="button" data-closes aria-label="Close">{icon("x", root)}</button></div>'
                           f'<div class="side-panel__body help-notice">{FOOTER_NOTE}</div>'
-                          f'<div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Done</button></div>'
+                          f'<div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Close</button></div>'
                           f'</aside></div>') if NOTICE_LABEL else "",
             maker_mark=MAKER_MARK, icon_external=icon("external-link", root, 16),
             banner=(f'<aside class="help-banner" id="help-banner" aria-label="{html.escape(BANNER_LABEL)}">'

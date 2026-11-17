@@ -1,6 +1,6 @@
 # Content design guide
 
-Version 1.4, 5 November 2026. How every word in Storyarr and Starboard is written: page titles, menus,
+Version 1.5, 17 November 2026. How every word in Storyarr and Starboard is written: page titles, menus,
 buttons, settings, messages, release notes, help and the README. It applies to new text and to anything you
 touch. Help articles also follow `HELP-WRITING.md`; changelogs also follow `CHANGELOGS.md`.
 
@@ -58,7 +58,7 @@ To get an AI assistant to write instructions, and to check what it writes, follo
 ## 1. Voice and tone
 
 Both apps are calm and capable. Storyarr is a librarian: it tells you what is happening with your books,
-what it is doing about it, and what you can do next. Starboard looks after the server in the same way: what
+what it is doing about it, and what you can do next. Starboard manages the server in the same way: what
 is running, what needs attention, and what to do about it.
 
 | Always | Never |
@@ -159,7 +159,7 @@ the fact; the children say why, how long and what to do.
 - Oxford comma in lists of three or more. Avoid semicolons: split the sentence.
 - Ellipsis only for something in progress: "Searching…".
 - Ampersand only where space is tight (a chip or a tab), never in sentences.
-- Numbers: one to nine in sentences, numerals for 10 and above. Always numerals in counts, steps,
+- Numbers: one to nine in sentences, numerals for 10 or more. Always numerals in counts, steps,
   percentages, sizes and times: "3 books", "Step 2", "45%", "1.2 GB", "6 hours".
 - Dates: 1 November 2026, or 1 Nov in tight spaces. Never 01/11/26.
 - Times: 24-hour clock in the app, because times sit next to schedules: "Next search 16:31". In prose, write
@@ -218,6 +218,8 @@ One word per thing, everywhere. If a page needs a new term, add it here first.
 
 ## 6. Status vocabulary (Storyarr)
 
+Starboard's words, one word and one tone for each state, are in `COMPONENTS.md` section 6.
+
 These are the only statuses. Every page, cover, row, chip, drawer and notification uses the same word, colour
 and icon. Do not invent synonyms ("Owned", "Available", "Done").
 
@@ -273,15 +275,15 @@ blame.
 what to do: "Disk 3 is 92% full". An error follows the error pattern.
 
 **Confirmation (toast).** Past tense, specific, short, no full stop: "Follow saved", "3 books added to
-Wanted". An optional line of detail: "New books by Ben Aaronovitch come in by themselves". One optional next
+Wanted". An optional line of detail: "New books by Mara Ellison come in by themselves". One optional next
 step: "Undo" or "Open Activity". No celebration for routine actions.
 
 **Confirmation on a settings page (saved note).** No toast: the words appear beside the button that saved,
 "Saved at 16:31", and stay until the next change.
 
-**Destructive dialog.** Title asks the question with the object: "Delete The Hollow Boy?". The body says what
-is removed, what is kept and how to get it back. The button names the action: "Delete book". Type-to-confirm
-(DELETE) only for permanent deletion.
+**Destructive dialog.** Title asks the question with the object: "Delete The Glass Harbour?". The body says what
+is removed, what is kept and how to get it back. The button names the action: "Delete book". Entering DELETE to confirm
+is only for permanent deletion.
 
 **Setting.** Label in sentence case, then one line saying what changes: "Upgrade automatically. Storyarr
 backs up your settings and keeps the defaults for anything new." Defaults are stated when they matter.
@@ -347,7 +349,7 @@ The full checklist is in `ACCESSIBILITY.md`. The content half:
 
 - Every control has a visible text name written as an action. Icon-only buttons have an `aria-label` with
   that name ("Close summary").
-- Alt text says what the image shows: "Cover of The Hollow Boy". Decorative images use `alt=""`. How to
+- Alt text says what the image shows: "Cover of The Glass Harbour". Decorative images use `alt=""`. How to
   write every kind of text description is in `ALT-TEXT.md`.
 - No instruction depends on colour, shape, icon or position alone.
 - Status changes that happen without a page load (a download finishing, a search result) are announced in a

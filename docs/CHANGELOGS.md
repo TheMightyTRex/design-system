@@ -63,7 +63,7 @@ newest first, links Keep a Changelog, and says whether the version numbers follo
 
 2.2 **Rule: an Unreleased section at the top,** `## [Unreleased]`, always present, even when it is empty.
 Add each change there as it is made, not at release time. When you release, rename the heading to the version
-and date, and start a new empty Unreleased section above it.
+and date, and start a new empty Unreleased section before it.
 
 2.3 **Rule: an entry for every version, newest first.** Every version that was tagged or published has a
 section, including test releases people may have installed. Never skip a number without saying why: if
@@ -96,7 +96,7 @@ with nothing in it:
 | Type | What goes in it |
 |---|---|
 | Added | New features, pages, settings and options |
-| Changed | Changes to how something that exists works or looks |
+| Changed | Changes to how something that exists works or appears |
 | Deprecated | Features that still work but will be removed, and what to use instead |
 | Removed | Features taken out in this version |
 | Fixed | Bugs fixed |

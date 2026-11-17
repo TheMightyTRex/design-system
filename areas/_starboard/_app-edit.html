@@ -21,7 +21,7 @@
           <div class="field"><label for="ae-cat">Category</label><span class="hint" id="ae-cat-h">Change the list in Settings, General.</span><select class="select" id="ae-cat" aria-describedby="ae-cat-h"><option>Library managers</option><option>Media</option><option>Downloads</option><option>Tools</option></select></div>
           <div class="field"><label for="ae-icon">Icon</label><span class="hint" id="ae-icon-h">A name from the dashboard icons collection.</span><input class="input" id="ae-icon" aria-describedby="ae-icon-h" value="sonarr"></div>
           <div class="field" data-span="all"><label for="ae-desc">Description</label><input class="input" id="ae-desc" maxlength="200" value="Finds and organises series."></div>
-          <div class="field" data-span="all"><label for="ae-link">Address to open in your browser</label><span class="hint" id="ae-link-h">Leave blank to use the address Starboard uses.</span><input class="input" id="ae-link" inputmode="url" aria-describedby="ae-link-h" value="http://homeserver.local:8989"></div>
+          <div class="field" data-span="all"><label for="ae-link">Address to open in your browser</label><span class="hint" id="ae-link-h">Leave blank to use the address Starboard uses.</span><input class="input" id="ae-link" inputmode="url" aria-describedby="ae-link-h" value="http://homeserver.example:8989"></div>
           <div class="field" data-span="all"><label for="ae-out">Outside address</label><span class="hint" id="ae-out-h">The address that works away from home. Starboard checks it can be reached.</span><input class="input" id="ae-out" inputmode="url" aria-describedby="ae-out-h" value="https://sonarr.example.com"></div>
         </div>
         <div>
@@ -47,7 +47,7 @@
           <div class="field"><label for="ae2-q">Quality profile</label><select class="select" id="ae2-q"><option>HD 1080p</option><option>Any</option><option>Ultra HD</option></select></div>
           <div class="field"><label for="ae2-f">Folder</label><select class="select" id="ae2-f"><option>/data/media/series</option><option>/data/media/kids-series</option></select></div>
         </div>
-        <label class="switch"><span class="check__text"><strong>Search as soon as something is added</strong><span class="check__hint">On: Sonarr looks for every episode straight away.</span></span><input type="checkbox" role="switch" checked></label>
+        <label class="switch"><span class="check__text"><strong>Search as soon as something is added</strong><span class="check__hint">Active: Sonarr searches for every episode straight away.</span></span><input type="checkbox" role="switch" checked></label>
       </section>
     </div>
     <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Save adding options</button><button class="btn btn--quiet" type="button" data-closes>Skip for now</button></div>

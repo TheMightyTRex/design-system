@@ -110,7 +110,7 @@ def book():
   <tr><td data-label="Date">3 Oct 2024</td><td data-label="Event">Downloaded from MyAnonamouse with qBittorrent</td><td data-label="Format">Audiobook</td><td data-label="By">Storyarr</td></tr>
   <tr><td data-label="Date">2 Oct 2024</td><td data-label="Event">Requested</td><td data-label="Format">Audiobook</td><td data-label="By">Alex</td></tr></tbody></table></div>
 
-{phone_section([("phone=1", "The cover sits above the title; the two main actions and the More menu wrap under the facts. The tabs stay in header row 2 and scroll sideways.", 760),
+{phone_section([("phone=1", "The cover comes before the title; the two main actions and the More menu wrap under the facts. The tabs stay in header row 2 and scroll sideways.", 760),
                 ("phone=1&open=panel-release", "Release details fill the width. The former tabs are sections you scroll through.", 760)],
                "The header block stacks and the slide-outs fill the width.")}
 """
@@ -142,7 +142,7 @@ def book():
 <ul class="rows"><li class="row">{thumb("x", 0)}<div><div class="row__title">The Glass Harbour</div><div class="row__meta">Mara Ellison · 2024 · current match</div></div><div class="row__side"><span class="chip" data-tone="success">Chosen</span></div></li>
 <li class="row">{thumb("x", 6)}<div><div class="row__title">Glass Harbours</div><div class="row__meta">Ira Penn · 2011</div></div><div class="row__side"><button class="btn btn--compact" type="button">Use this match<span class="visually-hidden">: Glass Harbours by Ira Penn</span></button></div></li></ul>""",
         '<button class="btn btn--primary" type="button">Save match</button><button class="btn btn--quiet" type="button" data-closes>Cancel</button>', wide=True)
-    dialogs = dialog("dlg-delete-book", "Delete The Glass Harbour?", "<p>Storyarr deletes 2 library copies (962 MB) and forgets the book. Requests and history for it are removed. This cannot be undone.</p><div class=\"field\"><label for=\"del-type\">Type DELETE to confirm</label><input class=\"input\" id=\"del-type\" autocomplete=\"off\"></div>",
+    dialogs = dialog("dlg-delete-book", "Delete The Glass Harbour?", "<p>Storyarr deletes 2 library copies (962 MB) and forgets the book. Requests and history for it are removed. This cannot be undone.</p><div class=\"field\"><label for=\"del-type\">Enter DELETE to confirm</label><input class=\"input\" id=\"del-type\" autocomplete=\"off\"></div>",
                      '<button class="btn btn--danger btn--primary" type="button" data-closes>Delete permanently</button><button class="btn btn--quiet" type="button" data-closes>Cancel</button>') + \
         dialog("dlg-delete-copy", "Delete this copy?", "<p>The M4B file (482 MB) is deleted from the disk. The other copy and the book stay in your library.</p>",
                '<button class="btn btn--danger btn--primary" type="button" data-closes>Delete copy</button><button class="btn btn--quiet" type="button" data-closes>Cancel</button>') + \
@@ -191,7 +191,7 @@ def author():
     {mcard("Harbour Songs", "Stories · 2022", 9, badge=("muted", "Excluded · Collection"))}
   </ul>
 </section>
-{phone_section([("phone=1", "The portrait sits above the name; actions wrap; the toolbar stacks.", 760)], "The item header stacks on phones.")}
+{phone_section([("phone=1", "The portrait comes before the name; actions wrap; the toolbar stacks.", 760)], "The item header stacks on phones.")}
 """
     panels = book_panel() + panel("panel-follow-settings", "Follow settings: Mara Ellison", """<fieldset><legend class="field__label">Formats</legend>
 <label class="check"><input type="checkbox" checked><span class="check__text">Audiobooks</span></label>

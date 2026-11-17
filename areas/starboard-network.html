@@ -198,7 +198,7 @@
 <section class="panel" aria-labelledby="nw-if-h">
   <div class="panel__head"><h2 id="nw-if-h">Network connections</h2><span class="small muted">Since the server started 23 days ago</span></div>
   <ul class="rows">
-    <li class="row"><span class="app-icon" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-network"/></svg></span><div><div class="row__title">Wired, eth0</div><div class="row__meta"><code>homeserver.local</code> · 1 Gb/s · received 4.2 TB · sent 310 GB</div></div><div class="row__side"><span class="chip" data-tone="success">Connected</span></div></li>
+    <li class="row"><span class="app-icon" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-network"/></svg></span><div><div class="row__title">Wired, eth0</div><div class="row__meta"><code>homeserver.example</code> · 1 Gb/s · received 4.2 TB · sent 310 GB</div></div><div class="row__side"><span class="chip" data-tone="success">Connected</span></div></li>
     <li class="row"><span class="app-icon" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-shield-check"/></svg></span><div><div class="row__title">VPN, wg0</div><div class="row__meta">Used by qBittorrent · received 2.9 TB · sent 1.1 TB</div></div><div class="row__side"><span class="chip" data-tone="success">Connected</span></div></li>
   </ul>
 </section>
@@ -255,14 +255,14 @@
       <section style="display:grid;gap:var(--space-3)" aria-labelledby="ad-addr-h">
         <h3 id="ad-addr-h">Addresses</h3>
         <dl class="facts">
-          <dt>Home</dt><dd><code>http://homeserver.local:8989</code> <button class="copy-btn" type="button" data-copy="http://homeserver.local:8989" aria-label="Copy home address for Sonarr"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg></button></dd>
+          <dt>Home</dt><dd><code>http://homeserver.example:8989</code> <button class="copy-btn" type="button" data-copy="http://homeserver.example:8989" aria-label="Copy home address for Sonarr"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg></button></dd>
           <dt>Outside</dt><dd><code>https://sonarr.example.com</code> <button class="copy-btn" type="button" data-copy="https://sonarr.example.com" aria-label="Copy outside address for Sonarr"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg></button><br><span class="chip" data-tone="success">Reachable from outside</span></dd>
         </dl>
       </section>
       <section style="display:grid;gap:var(--space-3)" aria-labelledby="ad-warn-h">
         <h3 id="ad-warn-h">Warnings from Sonarr</h3>
         <ul class="rows">
-          <li class="row row--no-lead"><div><div class="row__title">Indexers unavailable due to failures for more than 6 hours</div><div class="row__meta">First seen today at 08:12</div></div><div class="row__side"><span class="chip" data-tone="warning">Needs attention</span></div></li>
+          <li class="row row--no-lead"><div><div class="row__title">Indexers unavailable due to failures for more than 6 hours</div><div class="row__meta">First reported today at 08:12</div></div><div class="row__side"><span class="chip" data-tone="warning">Needs attention</span></div></li>
         </ul>
       </section>
       <section style="display:grid;gap:var(--space-3)" aria-labelledby="ad-more-h">
@@ -302,7 +302,7 @@
           <div class="field"><label for="ae-cat">Category</label><span class="hint" id="ae-cat-h">Change the list in Settings, General.</span><select class="select" id="ae-cat" aria-describedby="ae-cat-h"><option>Library managers</option><option>Media</option><option>Downloads</option><option>Tools</option></select></div>
           <div class="field"><label for="ae-icon">Icon</label><span class="hint" id="ae-icon-h">A name from the dashboard icons collection.</span><input class="input" id="ae-icon" aria-describedby="ae-icon-h" value="sonarr"></div>
           <div class="field" data-span="all"><label for="ae-desc">Description</label><input class="input" id="ae-desc" maxlength="200" value="Finds and organises series."></div>
-          <div class="field" data-span="all"><label for="ae-link">Address to open in your browser</label><span class="hint" id="ae-link-h">Leave blank to use the address Starboard uses.</span><input class="input" id="ae-link" inputmode="url" aria-describedby="ae-link-h" value="http://homeserver.local:8989"></div>
+          <div class="field" data-span="all"><label for="ae-link">Address to open in your browser</label><span class="hint" id="ae-link-h">Leave blank to use the address Starboard uses.</span><input class="input" id="ae-link" inputmode="url" aria-describedby="ae-link-h" value="http://homeserver.example:8989"></div>
           <div class="field" data-span="all"><label for="ae-out">Outside address</label><span class="hint" id="ae-out-h">The address that works away from home. Starboard checks it can be reached.</span><input class="input" id="ae-out" inputmode="url" aria-describedby="ae-out-h" value="https://sonarr.example.com"></div>
         </div>
         <div>
@@ -328,7 +328,7 @@
           <div class="field"><label for="ae2-q">Quality profile</label><select class="select" id="ae2-q"><option>HD 1080p</option><option>Any</option><option>Ultra HD</option></select></div>
           <div class="field"><label for="ae2-f">Folder</label><select class="select" id="ae2-f"><option>/data/media/series</option><option>/data/media/kids-series</option></select></div>
         </div>
-        <label class="switch"><span class="check__text"><strong>Search as soon as something is added</strong><span class="check__hint">On: Sonarr looks for every episode straight away.</span></span><input type="checkbox" role="switch" checked></label>
+        <label class="switch"><span class="check__text"><strong>Search as soon as something is added</strong><span class="check__hint">Active: Sonarr searches for every episode straight away.</span></span><input type="checkbox" role="switch" checked></label>
       </section>
     </div>
     <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Save adding options</button><button class="btn btn--quiet" type="button" data-closes>Skip for now</button></div>
@@ -353,7 +353,7 @@
       <label class="switch"><span class="check__text"><strong>Wider text spacing</strong></span><input type="checkbox" role="switch" data-display="spacing"></label>
     </div>
   </div>
-  <div class="dialog__foot"><button class="btn btn--primary" type="button" data-closes>Done</button><button class="btn btn--quiet" type="button">Reset</button></div>
+  <div class="dialog__foot"><button class="btn btn--primary" type="button" data-closes>Close</button><button class="btn btn--quiet" type="button">Reset to defaults</button></div>
 </dialog>
 <script src="../components.js"></script>
 </body>

@@ -9,7 +9,7 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 17 November 2026
 
-- `tokens.css`: one theme set `--color-slide-header` twice; the extra line is gone. No change to how anything looks.
+- `tokens.css`: one theme set `--color-slide-header` twice; the extra line is gone. No change to how anything appears.
   Found by Biome in Starboard's new code checks.
 
 ## 16 November 2026
@@ -140,6 +140,16 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 ## [Unreleased]
 
 ### Added
+- **A banned words check** (17 November 2026, design audit): `tools/check_words.py` fails on the words the content
+  design guide bans (`CONTENT-DESIGN.md` sections 1, 2 and 5) in the guides, the gallery, the Boards and
+  resources pages, `components.js`, the help centre script and the terminal frame. Genuine exceptions are in
+  `tools/words-allowed.txt`, each with its reason. `tools/install-hooks.sh` runs it before every commit.
+- **A token check** (17 November 2026): `tools/check_tokens.py` lists every name a style sheet uses that `tokens.css`
+  does not have. `DESIGN-SYSTEM.md` section 2 lists the names that are not tokens and the token to use:
+  `--radius-1`, `--radius-2`, `--radius-3` and `--radius-control` are `--radius`, `--focus-width` is `--focus-w`,
+  `--weight-normal` is `--weight-regular`, and `--text-base` is `--text-md`.
+- **Starboard's status words** (17 November 2026): `COMPONENTS.md` section 6 has one word and one tone for each of
+  Starboard's states, from its page maps, for one map in Starboard's `common.js`.
 - **Card band and a compact app icon** (14 November 2026): `.card-band` puts a grey band across the top of a card (`.has-band`) with the logo, the name as the heading, and a status chip and when it last updated at the right, for Starboard's plug-in cards (DASH-428, design 2); `.app-icon--compact` is the 32px icon it uses, with initials on a tile when there is no logo.
 - **Heading font and side menu colour for styles** (11 November 2026): headings use `--font-heading` and the side menu `--color-rail` when a style sets them; neither is set by default, so headings keep the body's font and the side menu the header's colour.
 - **Update in the side menu** (9 November 2026): `.rail__update`, a dot and the word Update above `.rail__version` when a newer release is out, linking to About and updates.
@@ -232,6 +242,32 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
   for Storyarr and Starboard (2 November 2026).
 
 ### Changed
+- **Wording, from the design audit** (17 November 2026). The guides, the gallery and the boards no longer say "see",
+  "look", "type", "above", "below", "turn on" or "turn off": a cross-reference is "read", a position is the name of
+  the section, and a setting is Active or Inactive. `CONTENT-DESIGN.md` is version 1.5 and `HELP-WRITING.md`
+  version 1.4.
+- **The terminal frame's words** (17 November 2026): "Press b to go back, ? for help, f to send feedback or q to
+  stop."; "Enter a number from 1 to 7, ? for help or q to stop."; long help ends "Enter: show more", with Show more
+  in the menu; a job in plain mode says "Installing (2 of 3)…" in place of "Please wait..."; while a job runs, the
+  menu shows only Ctrl+C Stop; a failed job says "Installing did not finish (error 3)."; plain mode's warning
+  starts "Warning:"; a small window says "This window is too small for the box layout. Make it at least 60 columns
+  wide and 20 lines high." `TERMINAL.md` says the same, with "4 more: press m to show them", and Snaglist's kind
+  Confusing to use (Snaglist 0.5.0).
+- **The wait text** (17 November 2026): `WIZARD.md` asks for the job by name ("Downloading and starting the apps…")
+  beside the timer and count, never "Please wait, this can take some time...".
+- **Display and accessibility** (17 November 2026): Reduce motion is Match device, Active or Inactive; the buttons
+  are Close and Reset to defaults, in the gallery, the site's pages, the boards and the help centre builder.
+- **Default texts in `components.js`** (17 November 2026): the copy button's toast is "Copied to the clipboard"
+  when the button has no `data-copied`; a letter with nothing in the A to Z jump list is "Q, no books" from the noun
+  (`azJump(nav, letters, noun)` or `data-noun`), or "Q, none"; Load more's error is "The next 40 books could not be
+  loaded. Select Show more to try again."; a sortable row at an end is "already first" or "already last".
+- **More options, not Advanced** (17 November 2026): the small settings switch is More settings and a location's
+  path is under More options, in Enter a path. `HELP-WRITING.md` section 7 is "Default set-up first, more options
+  apart", with the sections "The default set-up" and "More options"; its sweep finds more words.
+- **Made-up example data** (17 November 2026): the gallery, `CONTENT-DESIGN.md` and the toast options board use
+  made-up authors, books and radio shows, and the Starboard boards use `homeserver.example`.
+- **Starboard boards** (17 November 2026): First reported, Last reported and Last version found; Enter the new
+  password again; Deactivate network access, with Cancel.
 - **Toolbars on phones** (9 November 2026): `.toolbar__row` may shrink below its chips, so a long row of filter chips scrolls inside the toolbar instead of making the page scroll sideways.
 - **A long job in plain mode is never silent** (9 November 2026): `TERMINAL.md` adds the rule, and `terminal-frame.sh` says "Still working: the job (12 min)" every 2 minutes while a job runs in plain mode, with the job's count when it has one.
 - **Terminal stops** (8 November 2026): a failed job shows its error number and the address of its help in
@@ -253,6 +289,11 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 - **Penpot** (9 November 2026): the Penpot plugin (`penpot/`), its tokens file and `docs/PENPOT.md` are removed, because the Penpot file did not work as expected. The gallery on GitHub Pages stays the way to see every component.
 
 ### Fixed
+- **Sentence case in the help centre** (17 November 2026): side menu group labels (`.side-tree__label`) and journey
+  stage labels (`.journey__label`) are no longer in capitals.
+- **Names that were not tokens** in `components.css` (17 November 2026): `--focus-width` (now `--focus-w`),
+  `--radius-control` (now `--radius`), `--text-base` (now `--text-md`) and `--font-mono` (the monospace font
+  written out). No change for the person: each fell back to the same value.
 - **Terminal frame** (7 November 2026): a long question wraps between words with the answer's line last; plain-mode answers wrap with their indent; with no questions to ask (--yes) a real window still gets the boxed frame, its menu showing only Ctrl+C (`TTY`).
 - **Meter words** (7 November 2026): the timer and count on the right of a meter stay on one line; `.nowrap` added to the utilities.
 - **Segmented switch** (7 November 2026): no gap between its buttons when it is a fieldset, and the buttons keep their width when the choice changes.

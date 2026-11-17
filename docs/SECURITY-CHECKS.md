@@ -94,7 +94,7 @@ Each scanner runs in Docker from a pinned image, so nothing is installed and eve
   (CVEs, the public catalogue of known security problems).
 - What it finds: system packages and libraries (Python, npm) with known problems, and risky settings in the
   Dockerfile, such as running as root.
-- How it works: it reads the version of every package in the image and looks each one up. It never runs the
+- How it works: it reads the version of every package in the image and checks each one against the list of known problems. It never runs the
   app.
 - Run it, for the image and then the Dockerfile:
 
@@ -225,7 +225,7 @@ scanning knows only the providers it has patterns for.
 
 ### 5.1 A code review by a separate agent
 
-- What it is: a reviewer, a person or an AI agent, that did not write the code. It has not seen the other
+- What it is: a reviewer, a person or an AI agent, that did not write the code. It has not read the other
   checks or the reasoning behind the changes.
 - What it finds: what tools cannot: a rule that is right in one place and missing in another, a trust that
   should not be given, a design that leaks by being used as intended.
@@ -292,7 +292,7 @@ Every finding is sorted before a release, by a person or an agent who has read i
 2. Decide whether it is real, with evidence:
    - Real: show it happening, with a request, a test or the exact data that does it.
    - Not real: name the check that stops it, such as the line that validates the path, or the test that
-     proves it. "It looks fine" is not evidence.
+     proves it. "It seems fine" is not evidence.
 3. Give a real finding a severity (critical, high, medium, low or information) from what it lets someone do,
    and who could do it.
 4. Fix a real finding with a test that fails before the fix and passes after it.

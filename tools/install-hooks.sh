@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-# Runs the privacy check before every commit in this clone.
+# Runs the privacy check and the banned words check before every commit in this clone.
 set -euo pipefail
 cd "$(git rev-parse --show-toplevel)"
 cat > .git/hooks/pre-commit <<'HOOK'
 #!/usr/bin/env bash
-exec tools/check-private.sh --staged
+tools/check-private.sh --staged || exit 1
+exec python3 tools/check_words.py
 HOOK
 chmod +x .git/hooks/pre-commit
-echo "Pre-commit privacy check installed."
+echo "Pre-commit privacy and banned words checks installed."

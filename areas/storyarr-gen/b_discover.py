@@ -118,7 +118,7 @@ def calendar():
 {what_changed([
     "<strong>Day details use the shared slide-out</strong>: a backdrop, focus kept inside, Escape to close, and a width that no longer depends on the rail.",
     "<strong>The month is a real table</strong> with weekday column headings, so screen readers hear the week structure; each day's button names its date.",
-    "<strong>One toolbar</strong>: view switch (Month, List), Genres and Show menus that look and save the same way, and the month controls at the end instead of in the heading area.",
+    "<strong>One toolbar</strong>: view switch (Month, List), Genres and Show menus with the same design that save the same way, and the month controls at the end instead of in the heading area.",
     "<strong>List view</strong> is the default on phones, instead of a grid of bare counts.",
 ])}
 <div class="page-head"><div class="page-head__text"><h1>Calendar</h1><p class="page-head__summary">November 2026 · 15 releases from authors and series you follow</p></div></div>

@@ -139,7 +139,7 @@ DISPLAY_DIALOG = f"""
       <label class="switch"><span>Wider text spacing</span><input type="checkbox" role="switch" data-display="spacing"></label>
     </div>
   </div>
-  <div class="dialog__foot"><button class="btn btn--primary" type="button" data-closes>Done</button><button class="btn btn--quiet" type="button">Reset to defaults</button></div>
+  <div class="dialog__foot"><button class="btn btn--primary" type="button" data-closes>Close</button><button class="btn btn--quiet" type="button">Reset to defaults</button></div>
 </dialog>"""
 
 RELEASE_PANEL = None  # filled below (needs panel())

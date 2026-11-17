@@ -14,7 +14,7 @@ merged (tasks UX-02 to UX-11).
 | Semantic aliases | `styles.css:301-304`: `--surface`, `--muted`, `--line`, `--accent` (heavily used), plus per-feature aliases `--request-*`, `--explore-*`, `--review-*`, `--mam-soft` | Partial and scattered |
 | Undefined | `--text`, `--bg`, `--panel`, `--border` used in import-review, library-setup, controls, mounted-folders and entity-details CSS but never defined | Silent fallbacks |
 | Spacing, type, radius | None. Gaps of 4 to 18px; 32 different font sizes; `border-radius: 0` 291 times | No scale |
-| Controls | `--control-*` in `controls.css` and again in `settings.css`, with different heights (30, 38, 28px) | Two definitions; below the 44px target |
+| Controls | `--control-*` in `controls.css` and again in `settings.css`, with different heights (30, 38, 28px) | Two definitions; under the 44px target |
 | Header | `--search-row-height`, `--submenu-height`, `--topbar-height` in `header.css` | Fine |
 | Theme switch | `displayPreferences.ts` `applyDisplay()`: `data-theme` (light, dark, auto) on `<html>`, root font-size %, classes `pref-hc`, `pref-readable`, `pref-calm`, `pref-underline`, `pref-spacing` (rules in `theme.css`); saved in localStorage | Works; move to account (UX-29) |
 | Focus | `:focus-visible` 3px outline in `--accent` (`theme.css`) | Good |
@@ -92,6 +92,52 @@ while Library pages keep page tabs under a header menu (two levels). Sort sits a
 to tabs in Requests, and is missing on Discover. Page headers differ (eyebrow block, hidden h1, wall header).
 
 ## 6. Status words in use today
+
+### Starboard: one word and one tone for each state (17 November 2026)
+
+Starboard kept a map of status words on each page: `STATE_WORDS` in `downloads.js`, `BATCH_WORDS` and `TASK_WORDS`
+in `settings.js`, `STATUS_WORDS` in `system-backup.js`, `CUSTOM_STATE` in `plugins.js` and `STATE_BAND` in
+`dashboard.js`, with more in `app-details.js`, `apps.js` and `system-pool.js`. The same state had several words and
+tones. This table is the one list: Starboard keeps it as one map in `common.js`, and every chip, band, row and
+notice takes its word and tone from there. The rules of `CONTENT-DESIGN.md` section 6 apply: one or two words, never
+a sentence, and the word always beside the colour and its icon.
+
+| State | Word | Tone | Replaces today |
+|---|---|---|---|
+| An app or service answers | Running | Success | "Works" (`CUSTOM_STATE.ok`), "All running" on the dashboard for every app at once |
+| An app or service does not answer | Not responding | Danger | "Not answering" (`CUSTOM_STATE.problem`, plug-ins, download clients), in Warning in `plugins.js` |
+| A plug-in reports that all is well | Healthy | Success | "OK" (`STATE_BAND.ok`) |
+| Something works, but needs a decision or is slow | Needs attention | Warning | "Warning" (`STATE_BAND.warning`), "Slow" (`CUSTOM_STATE.warning`), `importBlocked` |
+| A plug-in reports a problem | Not working | Danger | "Problem" (`STATE_BAND.problem`) |
+| Not checked yet | Not checked | Muted | "Not tested" (`CUSTOM_STATE.unknown`), "Not checked yet" |
+| A setting, plug-in or service is on | Active | Success | "On" |
+| A setting, plug-in or service is off | Inactive | Muted | "Off" (`CUSTOM_STATE.off` already says Inactive) |
+| In a queue, not started | Waiting | Neutral | "Waiting" in Muted (`BATCH_WORDS`, `TASK_WORDS`), "Starting" (`STATUS_WORDS.waiting`), `queued`, `delay` |
+| A job is running, with no more exact word | In progress | Info | "Working" (`TASK_WORDS`), "Running" for a job in Info (`system-pool.js`) |
+| Downloading | Downloading | Info | |
+| Download finished, waiting to be copied in | Waiting to import | Neutral | |
+| Copying into the library | Importing | Info | |
+| Downloaded, not yet in the library | Downloaded | Success | |
+| In the library | In library | Success | |
+| An app or Starboard is being updated | Updating | Info | "Updating" (`BATCH_WORDS.working`, `RX_LIST_STATE`) |
+| A backup is being made | Backing up | Info | "Backing up now" (`STATUS_WORDS.running`) |
+| A job finished | Done | Success | "Complete" (`STATUS_WORDS.done`), "Finished" (`system-pool.js`) |
+| A job or an update did not finish | Failed | Danger | "Did not finish" (`TASK_WORDS`), "Not updated" (`BATCH_WORDS.failed`), "Update failed", "Last run failed" |
+| A job was not started, because an earlier one failed | Not started | Warning | "Not updated" for `BATCH_WORDS.skipped`, "Stopped" for a skipped step in `system-pool.js` |
+| An update was undone | Went back | Warning | |
+| An update was held back on purpose | Held back | Muted | |
+| Paused by the person | Paused | Muted | |
+| Stopped by the person | Stopped | Warning | "Stopped" in Danger |
+| A newer version is out | Update available | Info | |
+| A newer version with a big change | Check before updating | Warning | "Big change: check first" |
+| No newer version | Up to date | Success | |
+| Never updated | Never updated | Warning | |
+
+A word in this table means one state only. "Running" is an app that answers, never a job in progress, so a job that
+runs is "In progress" or its own word (Downloading, Updating, Backing up). A chip can add a detail after a middle dot
+("Downloading · 45%"), never a second word for the state.
+
+### Storyarr
 
 The same state has several names. Target vocabulary: `CONTENT-DESIGN.md` section 6.
 

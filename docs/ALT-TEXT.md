@@ -49,7 +49,7 @@ reviews one.
 |---|---|---|
 | Decorative | Adds nothing to the meaning: a border, a background pattern, an icon beside its own words | Empty: `alt=""`, or `aria-hidden="true"` on an SVG |
 | Informative | Shows something the reader needs, or sets the scene | Says what it shows, in this page's context |
-| Functional | Part of a link or button | Says what happens, not what it looks like |
+| Functional | Part of a link or button | Says what happens, not its appearance |
 | Image of text | Words in a picture: a screenshot, a sign, a banner | Gives the words that matter |
 | Chart or diagram | A chart, diagram, map or infographic | Gives the main point; the full data is on the page |
 
@@ -94,12 +94,12 @@ reviews one.
 
 ## 8. Describing people
 
-- Describe what can be seen and matters to the page: what someone is doing, their expression, what they
+- Describe what the image shows that matters to the page: what someone is doing, their expression, what they
   are holding, the setting.
 - Never assume age, gender, ethnicity, religion, disability or how people are related. Two people at a table
   are "two people at a table", not "a couple".
 - Mention ethnicity, a religious or cultural sign, or a disability only when it matters to the page, and
-  never one that cannot be seen in the image.
+  never one the image does not show.
 - Use the person's name when the page gives it.
 
 ## 9. Captions and text descriptions
@@ -119,7 +119,7 @@ They do different jobs, so never copy one into the other.
 - [ ] A link or button says what happens
 - [ ] Words in the image that matter are in the description
 - [ ] A chart's main point is in the description and its data is on the page
-- [ ] No assumptions about people: only what can be seen and matters
+- [ ] No assumptions about people: only what the image shows and matters
 - [ ] The caption, if any, is not a copy of the description
 - [ ] Read aloud with a screen reader, it makes sense in the page's order
 

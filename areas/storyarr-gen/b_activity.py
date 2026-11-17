@@ -87,21 +87,21 @@ def activity():
           ("30 Oct, 14:13", "Sent to qBittorrent", "Lanterns.Under.Ice.EPUB from MyAnonamouse"),
           ("30 Oct, 20:40", "Download stalled at 62%", "No seeders for 6 hours"),
           ("30 Oct, 20:41", "Release blocked and searched again", "Storyarr will not try this release again"),
-          ("30 Oct, 20:42", "2 releases found, both below your minimum score", "Scores 41 and 37; minimum 50"),
+          ("30 Oct, 20:42", "2 releases found, both under your minimum score", "Scores 41 and 37; minimum 50"),
           ("Now", "Needs attention", "Waiting for you to choose a release or change the request")]
     tli = "".join(f'<li class="row row--no-lead"><div><div class="row__title">{w}</div><div class="row__meta">{m}</div></div><div class="row__side"><span class="small muted numeric">{t}</span></div></li>' for t, w, m in tl)
     panels = panel("panel-request", "Lanterns Under Ice, ebook", f"""
-<div class="notice" data-tone="warning">{ic("triangle-alert")}<div class="notice__body"><span class="notice__title">Needs attention</span><p>The download stalled, and the other releases are below your minimum score. Choose a release, or search again later.</p></div></div>
+<div class="notice" data-tone="warning">{ic("triangle-alert")}<div class="notice__body"><span class="notice__title">Needs attention</span><p>The download stalled, and the other releases are under your minimum score. Choose a release, or search again later.</p></div></div>
 <dl class="facts"><dt>Author</dt><dd><a href="storyarr-author.html">Mara Ellison</a></dd><dt>Series</dt><dd><a href="storyarr-series.html">The Glass Harbour, book 2</a></dd><dt>Requested by</dt><dd>Alex, 30 October 2026</dd><dt>Library</dt><dd>Fiction ebooks</dd><dt>Download client</dt><dd>qBittorrent</dd></dl>
 <section aria-labelledby="tl-h" style="display:grid;gap:var(--space-2)"><h3 id="tl-h">Recovery timeline</h3><ol class="rows" style="padding:0">{tli}</ol></section>
 <section aria-labelledby="pc-h" style="display:grid;gap:var(--space-2)"><h3 id="pc-h">Preferences and limits</h3><dl class="facts"><dt>Formats</dt><dd>EPUB, then AZW3</dd><dt>Minimum score</dt><dd>50</dd><dt>Sources</dt><dd>All 4 sources</dd><dt>Language</dt><dd>English</dd></dl>
 <a href="storyarr-settings-downloads.html">Change download preferences</a></section>""",
         f'<button class="btn btn--primary" type="button" data-opens="panel-sources">Choose a release</button><button class="btn" type="button">{ic("refresh-cw")}Search again</button><button class="btn btn--danger" type="button" data-dialog="dlg-withdraw">Withdraw</button>', wide=True) + \
         panel("panel-sources", "Releases for Lanterns Under Ice, ebook", f"""
-<p class="small muted">Searched 4 sources at 20:42. Releases below your minimum score are shown with a reason.</p>
+<p class="small muted">Searched 4 sources at 20:42. Releases under your minimum score are shown with a reason.</p>
 <div class="table-wrap" data-stack><table class="table"><thead><tr><th scope="col">Release</th><th scope="col">Source</th><th scope="col">Score</th><th scope="col"><span class="visually-hidden">Action</span></th></tr></thead><tbody>
-<tr><td data-label="Release">Lanterns Under Ice EPUB (fan edit)</td><td data-label="Source">AudioBook Bay</td><td data-label="Score" class="numeric">41 · below minimum</td><td><button class="btn btn--compact" type="button" data-dialog="dlg-anyway">Download anyway</button></td></tr>
-<tr><td data-label="Release">lanterns_ice_ellison.azw3</td><td data-label="Source">Prowlarr</td><td data-label="Score" class="numeric">37 · below minimum</td><td><button class="btn btn--compact" type="button" data-dialog="dlg-anyway">Download anyway</button></td></tr>
+<tr><td data-label="Release">Lanterns Under Ice EPUB (fan edit)</td><td data-label="Source">AudioBook Bay</td><td data-label="Score" class="numeric">41 · under minimum</td><td><button class="btn btn--compact" type="button" data-dialog="dlg-anyway">Download anyway</button></td></tr>
+<tr><td data-label="Release">lanterns_ice_ellison.azw3</td><td data-label="Source">Prowlarr</td><td data-label="Score" class="numeric">37 · under minimum</td><td><button class="btn btn--compact" type="button" data-dialog="dlg-anyway">Download anyway</button></td></tr>
 <tr><td data-label="Release">Lanterns.Under.Ice.EPUB</td><td data-label="Source">MyAnonamouse</td><td data-label="Score" class="numeric">88</td><td><span class="chip" data-tone="danger">Blocked</span></td></tr>
 </tbody></table></div>
 <a href="storyarr-book.html">Open the book's Sources tab</a>""", wide=True)
@@ -109,7 +109,7 @@ def activity():
                      '<button class="btn btn--danger btn--primary" type="button" data-closes>Withdraw request</button><button class="btn btn--quiet" type="button" data-closes>Cancel</button>') + \
         dialog("dlg-decline", "Decline 2 requests?", '<p>Robin and Sam are told their requests were declined.</p><div class="field"><label for="dc-why">Reason (optional)</label><input class="input" id="dc-why"></div>',
                '<button class="btn btn--primary" type="button" data-closes>Decline 2 requests</button><button class="btn btn--quiet" type="button" data-closes>Cancel</button>') + \
-        dialog("dlg-anyway", "Download a release below your minimum score?", "<p>This release scored 41 because it is a fan edit. Storyarr downloads it once for this request and does not change your preferences.</p>",
+        dialog("dlg-anyway", "Download a release under your minimum score?", "<p>This release scored 41 because it is a fan edit. Storyarr downloads it once for this request and does not change your preferences.</p>",
                '<button class="btn btn--primary" type="button" data-closes>Download anyway</button><button class="btn btn--quiet" type="button" data-closes>Cancel</button>')
     return page("activity", "Activity", "activity", "queue", body, None, panels, dialogs)
 

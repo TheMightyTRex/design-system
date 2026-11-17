@@ -10,7 +10,7 @@ give an AI tool with its task.
 
 A screenshot is there to carry a step the reader could not follow from the words alone. These rules keep every
 screenshot accurate, safe to publish and readable with a screen reader, and make the pictures in every app's help
-look the same.
+match.
 
 ### Who it is for
 
@@ -28,12 +28,12 @@ and 2.23).
 ## 1. When a screenshot earns its place
 
 - **An app may set a minimum, and Starboard's is 3 in every topic** (tier one, owner, 7 November 2026). Choose them
-  with the test below: the steps a reader could least follow from the words, the page they start on, and what
-  they see when it has worked. Beyond the minimum, test each picture: does it carry a step the reader could not
+  with the test in this section: the steps a reader could least follow from the words, the page they start on, and what
+  appears when it has worked. Beyond the minimum, test each picture: does it carry a step the reader could not
   otherwise follow? If not, leave the step as text.
 - **Worth a picture:** a control with no words on it (a menu of three dots, an icon button), a dialog the reader
-  has not seen before, a page where the control is hard to find.
-- **Rarely worth a picture:** a menu that looks the same on every page, a second table repeating the one above it,
+  has not met before, a page where the control is hard to find.
+- **Rarely worth a picture:** a menu that is the same on every page, a second table repeating the one before it,
   a control the step already names in bold, "Select Save".
 - **Split rather than crowd.** An article that needs ten pictures is two articles; split it where the task has a
   natural break, losing no step.
@@ -48,7 +48,7 @@ and 2.23).
   numbers and messages with made-up values in the page itself, then add a visible note: "Example data". Repeat
   the note in the text description, so a screen-reader user is told too.
 - **Check the mask both ways.** Nothing real is left, and no label of the app was replaced by mistake. Make the
-  list of labels to keep from the app's own text files, not by typing it.
+  list of labels to keep from the app's own text files, not by entering it by hand.
 - **Blur is not a mask.** Blur hides pixels, not the words underneath, and can be undone. Replace the text.
 - **Never fake a screenshot.** If a page cannot be reached (not released yet, needs data that does not exist,
   hidden behind a setting), keep the step as text, say which picture is missing, and add it once the page exists.
@@ -60,11 +60,11 @@ and 2.23).
 - **Light theme,** unless the article is about the dark theme. The same window size for every picture in one
   article. Text size at 100%.
 - **Let the page settle first.** Wait at least 10 seconds after a page loads, and at least 8 seconds after a
-  click, a filter change or a section opening. Look at a small preview before marking it up. Anything still
+  selection, a filter change or a section opening. Check a small preview before marking it up. Anything still
   loading, a menu still opening or a list still moving means wait again.
 - **Open a menu or dialog before marking it up,** and take a settling picture first when an overlay has to be
-  clicked open.
-- **Look at the first picture of each kind of page yourself.** After that, check the rest from the page's own
+  opened.
+- **Check the first picture of each kind of page yourself.** After that, check the rest from the page's own
   structure (section 7) instead of taking extra pictures to check them.
 - **Name files by what they show, with the language:** `apps-add-an-app-en.png`, not `image1.png`.
 

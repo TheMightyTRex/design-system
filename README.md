@@ -2,7 +2,7 @@
 
 The design system for Storyarr and Starboard.
 
-One design system for two self-hosted apps, so they look, read and behave as one family. It holds the
+One design system for two self-hosted apps, so they share one design, one voice and one behaviour. It holds the
 shared component library (tokens, components, behaviour and icons), the design rules, the content design
 guide and the accessibility guide.
 
@@ -32,7 +32,7 @@ change the copies inside the apps.
 | `docs/DESIGN-SYSTEM.md` | Principles, tokens, shell, page templates and consistency rules |
 | `docs/COMPONENTS.md` | Storyarr's interface before the redesign, and the duplicates to merge |
 | `docs/WIZARD.md` | Every job done in steps, in the browser and the terminal: one question per step, buttons, a job's progress, help in a slide-out, outside services, the Check table, feedback with Snaglist |
-| `docs/TERMINAL.md` | How a wizard looks and behaves in a terminal: the frame, questions, the menu line, help boxes, job bars, plain mode for screen readers, and feedback as a QR code |
+| `docs/TERMINAL.md` | How a wizard appears and behaves in a terminal: the frame, questions, the menu line, help boxes, job bars, plain mode for screen readers, and feedback as a QR code |
 | `terminal/` | The terminal frame every app's terminal scripts use (`terminal-frame.sh`) and the QR code encoder for feedback (`qr.py`); `terminal/README.md` says how to use them |
 | `docs/CONTENT-DESIGN.md` | How every word is written: voice, rules, words each app uses, status vocabulary, patterns |
 | `docs/HELP-WRITING.md` | How help is written: tiers, kinds of topic, categories, layouts, screenshots |
@@ -63,9 +63,9 @@ The help centre standard (owner, 14 November 2026) added these components to `co
 | Version badge (`.version-badge`) | The latest version beside a heading, with no date |
 | Plug-in card and band (`.plugin-card`, `.plugin-band`) | A plug-in in the grey band design, in a list and at the top of its pages |
 
-## Look at the gallery
+## Open the gallery
 
-Open `gallery.html` in a browser; it needs no server and no build. The switches at the top change the
+Open `gallery.html` in a browser; it needs no server and no build. Display, in the gallery's header, changes the
 theme (Light, Dark, High contrast), the text size, wider spacing and reduced motion. Menus, slide-outs, the
 phone menu and the dialog all work. The gallery is also published at
 <https://themightytrex.github.io/design-system/gallery.html>.
@@ -96,11 +96,11 @@ its header also has search: change both when the main menu changes.
 ## Change a component and sync it
 
 In short: pull first, change the library here (never the copies in the apps), build the gallery, check
-four themes and 175% text, run `tools/contrast.py` (0 failures), run `tools/check-private.sh`, commit, ask
+four themes and 175% text, run `tools/contrast.py` (0 failures), `tools/check_words.py`, `tools/check_tokens.py` and `tools/check-private.sh`, commit, ask
 before you push, then run `tools/sync.py` and commit in each app. Every step, with its command, is in
 [Make a change](https://themightytrex.github.io/design-system/resources/make-a-change.html).
 
-`tools/install-hooks.sh` adds a pre-commit check that stops private details (home network addresses, email
+`tools/install-hooks.sh` adds a pre-commit check that stops banned words and private details (home network addresses, email
 addresses, keys and the words in your own `.private-words` file) from being committed.
 
 ## Accessibility floor
@@ -111,7 +111,7 @@ Everything here meets **WCAG 2.2 level AA** in every theme. In practice:
 - 44px controls and targets, and a visible 3px focus ring.
 - Status in words plus a shape or an icon, never colour alone.
 - Keyboard first: slide-outs and dialogs are named, keep focus inside, close with Escape and return focus.
-- Everything works at 175% text and with wider spacing; nothing moves when reduced motion is on.
+- Everything works at 175% text and with wider spacing; nothing moves when Reduce motion is active.
 
 `docs/ACCESSIBILITY.md` has the full checklist and how to test each item.
 

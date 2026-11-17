@@ -15,8 +15,10 @@
 <li>Check the gallery. Open <code>gallery.html</code>, select <strong>Display</strong> and check the change in each theme: Light, Dark, High contrast and High contrast dark. Then check it at 175% text and at phone width.</li>
 <li>Check contrast. The report must end with "0 failures".
 <code class="code-block">python3 tools/contrast.py &gt; contrast-report.txt</code></li>
-<li>Check the words against the checklist in the <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/CONTENT-DESIGN.md">content design guide</a>, and the accessibility floor in the <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/ACCESSIBILITY.md">accessibility guide</a>.</li>
-<li>Record the decision. When the change alters how something looks or works, add it to the decisions list in <code>docs/LIBRARY.md</code>.</li>
+<li>Check the words against the checklist in the <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/CONTENT-DESIGN.md">content design guide</a>, and the accessibility floor in the <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/ACCESSIBILITY.md">accessibility guide</a>. Then run the banned words check and the token check; each must pass.
+<code class="code-block">python3 tools/check_words.py</code>
+<code class="code-block">python3 tools/check_tokens.py</code></li>
+<li>Record the decision. When the change alters how something appears or works, add it to the decisions list in <code>docs/LIBRARY.md</code>.</li>
 <li>Run the privacy check, then commit.
 <code class="code-block">tools/check-private.sh</code>
 <code class="code-block">git commit -am "Toasts: an action on warning toasts"</code></li>

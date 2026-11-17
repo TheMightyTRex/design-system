@@ -29,14 +29,22 @@
 <p>Copies <code>tokens.css</code>, <code>components.css</code>, <code>components.js</code> and the icons into Storyarr and Starboard, so both apps use the same components. It does not commit. Add <code>--check</code> to list what would change without writing anything.</p>
 <code class="code-block">python3 tools/sync.py --check</code>
 <code class="code-block">python3 tools/sync.py</code>
-<p>By default it looks for <code>../starboard</code> and <code>../storyarr</code> beside this repository. To use other folders, set <code>STARBOARD_WEB</code> and <code>STORYARR_SHARED</code>, or put them in <code>tools/paths.local.json</code>, which git ignores:</p>
+<p>By default it uses <code>../starboard</code> and <code>../storyarr</code> beside this repository. To use other folders, set <code>STARBOARD_WEB</code> and <code>STORYARR_SHARED</code>, or put them in <code>tools/paths.local.json</code>, which git ignores:</p>
 <code class="code-block">{
   "STARBOARD_WEB": "~/src/starboard/web",
   "STORYARR_SHARED": "~/src/storyarr/apps/web/src/shared"
 }</code>
 
+<h2 id="words">Keep banned words out: check_words.py</h2>
+<p>Checks the guides, the gallery, the Boards and resources pages, and the strings in <code>components.js</code> and the terminal frame for the words the content design guide bans, such as "see", "look", "click", "type" for entering, "above", "below" and "please". It leaves out code and a word quoted on its own. A genuine exception goes in <code>tools/words-allowed.txt</code>, with its reason. It ends with a list of lines to fix, or "none".</p>
+<code class="code-block">python3 tools/check_words.py</code>
+
+<h2 id="tokens">Use only real tokens: check_tokens.py</h2>
+<p>Lists every name a style sheet uses that <code>tokens.css</code> does not have, and the token to use instead. With no files it checks <code>components.css</code>; an app gives its own.</p>
+<code class="code-block">python3 tools/check_tokens.py ../starboard/web/css/*.css</code>
+
 <h2 id="private">Keep private details out: check-private.sh and install-hooks.sh</h2>
-<p><code>check-private.sh</code> stops a commit that would publish home network addresses, email addresses, keys, or the words in your own <code>.private-words</code> file (one word a line; git ignores it). <code>install-hooks.sh</code> runs the check before every commit in your copy. Run it once.</p>
+<p><code>check-private.sh</code> stops a commit that would publish home network addresses, email addresses, keys, or the words in your own <code>.private-words</code> file (one word a line; git ignores it). <code>install-hooks.sh</code> runs this check and the banned words check before every commit in your copy. Run it once.</p>
 <code class="code-block">tools/install-hooks.sh</code>
 <code class="code-block">tools/check-private.sh</code>
 </div>

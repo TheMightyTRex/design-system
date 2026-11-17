@@ -187,7 +187,7 @@
 <section class="panel" data-tone="warning" aria-labelledby="na-h">
   <div class="panel__head"><h2 id="na-h">Needs attention</h2><span class="small muted">Warnings your apps and disks report about themselves</span></div>
   <ul class="rows">
-    <li class="row row--opens"><span class="app-icon" aria-hidden="true">S</span><div><div class="row__title"><button type="button" data-opens="ov-warning">Indexers unavailable for more than 6 hours</button></div><div class="row__meta">Sonarr · first seen today at 08:12</div></div><div class="row__side"><span class="chip" data-tone="warning">Needs attention</span></div></li>
+    <li class="row row--opens"><span class="app-icon" aria-hidden="true">S</span><div><div class="row__title"><button type="button" data-opens="ov-warning">Indexers unavailable for more than 6 hours</button></div><div class="row__meta">Sonarr · first reported today at 08:12</div></div><div class="row__side"><span class="chip" data-tone="warning">Needs attention</span></div></li>
     <li class="row row--opens"><span class="app-icon" aria-hidden="true"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-hard-drive"/></svg></span><div><div class="row__title"><a href="starboard-disk-health.html">Disk 3 has 12 reallocated sectors</a></div><div class="row__meta">Disk health · found at the 03:00 check</div></div><div class="row__side"><span class="chip" data-tone="warning">Needs attention</span></div></li>
   </ul>
 </section>
@@ -267,7 +267,7 @@
       <span class="chip" data-tone="warning" style="justify-self:start">Needs attention</span>
       <h3 style="font-size:var(--text-lg)">Indexers unavailable due to failures for more than 6 hours</h3>
       <p>Sonarr could not reach 2 of its 5 sources: Source A and Source C. Searches still run on the other 3, so fewer releases are found.</p>
-      <dl class="facts"><dt>First seen</dt><dd>Today at 08:12</dd><dt>Last seen</dt><dd>1 minute ago</dd><dt>From</dt><dd>Sonarr's own health check</dd></dl>
+      <dl class="facts"><dt>First reported</dt><dd>Today at 08:12</dd><dt>Last reported</dt><dd>1 minute ago</dd><dt>From</dt><dd>Sonarr's own health check</dd></dl>
       <details class="disclosure"><summary>Technical details</summary><div class="disclosure__body"><code class="code-block">IndexerStatusCheck · Warning
 https://wiki.servarr.com/sonarr/system#indexers-are-unavailable-due-to-failures</code></div></details>
     </div>
@@ -286,7 +286,7 @@ https://wiki.servarr.com/sonarr/system#indexers-are-unavailable-due-to-failures<
       <label class="switch"><span class="check__text"><strong>Wider text spacing</strong></span><input type="checkbox" role="switch" data-display="spacing"></label>
     </div>
   </div>
-  <div class="dialog__foot"><button class="btn btn--primary" type="button" data-closes>Done</button><button class="btn btn--quiet" type="button">Reset</button></div>
+  <div class="dialog__foot"><button class="btn btn--primary" type="button" data-closes>Close</button><button class="btn btn--quiet" type="button">Reset to defaults</button></div>
 </dialog>
 <script src="../components.js"></script>
 </body>

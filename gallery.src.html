@@ -176,7 +176,7 @@
   <h3>Scroll bars</h3>
   <div class="g-demo g-demo--row">
     <ul aria-label="A long list that scrolls" tabindex="0" style="height:160px;width:280px;overflow:auto;margin:0;padding:var(--space-2) var(--space-3);border:1px solid var(--color-divider);background:var(--color-surface);list-style:none">
-      <li>Ben Aaronovitch</li><li>Douglas Adams</li><li>Joe Abercrombie</li><li>Naomi Alderman</li><li>Isaac Asimov</li><li>Margaret Atwood</li><li>Iain M. Banks</li><li>Leigh Bardugo</li><li>Becky Chambers</li><li>Susanna Clarke</li><li>Arthur C. Clarke</li><li>Philip K. Dick</li><li>Steven Erikson</li><li>Neil Gaiman</li><li>Barry J. Hutchison</li><li>Ann Leckie</li><li>Ursula K. Le Guin</li><li>Terry Pratchett</li>
+      <li>Lena Abery</li><li>Owen Adair</li><li>Iris Ancell</li><li>Priya Arden</li><li>Tom Ashby</li><li>Nadia Avery</li><li>Felix Bannon</li><li>Ruth Barlow</li><li>Sam Calder</li><li>Jordan Carrow</li><li>Alex Clayburn</li><li>Hana Dunmore</li><li>Mara Ellison</li><li>Corin Fallow</li><li>Ada Greaves</li><li>Ivo Lennard</li><li>Bea Lyle</li><li>Noor Pemberton</li>
     </ul>
   </div>
   <div class="g-notes">
@@ -267,7 +267,7 @@
   </div>
   <div class="g-notes">
     <div><h4>Use</h4><ul><li>Nothing else goes in the header: page actions live in the page head or the section toolbar.</li><li>Tabs that do not fit show icons only (<code>.is-compact</code>) with the names as tooltips; the 2nd level scrolls sideways.</li><li>A count on a tab says what it counts in hidden text.</li></ul></div>
-    <div><h4>Search button</h4><ul><li>Search is always one button away (TheMightyTRexUK, 4 November 2026): <code>.rail__search</code>, first in the rail under the logo, moves focus to the header's search box.</li><li>On phones, where the box is hidden, <code>.site-header__search-btn</code> in the header opens the same box as a row under the header. Escape or a press outside closes it and returns focus.</li><li>Both buttons have <code>data-search-open</code> and <code>aria-controls</code> naming the search form; <code>components.js</code> does the rest. No single-key shortcut, so nothing fires while typing (WCAG 2.1.4).</li></ul></div>
+    <div><h4>Search button</h4><ul><li>Search is always one button away (TheMightyTRexUK, 4 November 2026): <code>.rail__search</code>, first in the rail under the logo, moves focus to the header's search box.</li><li>On phones, where the box is hidden, <code>.site-header__search-btn</code> in the header opens the same box as a row under the header. Escape or a press outside closes it and returns focus.</li><li>Both buttons have <code>data-search-open</code> and <code>aria-controls</code> naming the search form; <code>components.js</code> does the rest. No single-key shortcut, so nothing fires while someone enters text (WCAG 2.1.4).</li></ul></div>
     <div><h4>Accessibility</h4><ul><li>Each tab row is a <code>nav</code> with its own name; the current tab has <code>aria-current="page"</code> and a 3px bar, not colour alone.</li><li>Search is a plain box with a hidden submit button, so voice control can say "Search". The phone search button says "Search" and reports <code>aria-expanded</code>.</li></ul></div>
     <div><h4>Classes</h4><ul><li><code>.rail</code>, <code>.rail__search</code>, <code>.site-header</code>, <code>.site-header__search-btn</code>, <code>.site-header__bar</code>, <code>.site-header__tabs</code>, <code>.menu-tabs</code>, <code>.menu-tabs__label</code>, <code>.count</code>, <code>.update-dot</code></li></ul></div>
   </div>
@@ -362,13 +362,13 @@
   <div class="g-demo g-demo--row">
     <button class="icon-btn" type="button" aria-label="Close">{{i:x}}</button>
     <button class="icon-btn" type="button">{{i-lg:sun}}<span>Display</span></button>
-    <button class="icon-btn icon-btn--bare" type="button" aria-label="More actions for Dune">{{i:ellipsis}}</button>
-    <span class="address" style="display:inline-flex;gap:8px;align-items:center"><code>http://example.test:8080</code><button class="copy-btn" type="button" data-copy="http://example.test:8080" aria-label="Copy address">{{i:copy}}</button></span>
+    <button class="icon-btn icon-btn--bare" type="button" aria-label="More actions for The Salt Road">{{i:ellipsis}}</button>
+    <span class="address" style="display:inline-flex;gap:8px;align-items:center"><code>http://example.test:8080</code><button class="copy-btn" type="button" data-copy="http://example.test:8080" data-copied="Address copied" aria-label="Copy address">{{i:copy}}</button></span>
     <div class="split-btn"><button type="button">{{i:refresh-cw}}Refresh all</button><button type="button" aria-label="Choose what to refresh">{{i:chevron-down}}</button></div>
   </div>
   <div class="g-notes">
     <div><h4>Variants</h4><ul><li><code>.btn--primary</code>: the one main action.</li><li><code>.btn--quiet</code>: Cancel and secondary links.</li><li><code>.btn--danger</code>: removing; asks first in a dialog.</li><li><code>.btn--compact</code>: 32px, inside dense tables only.</li></ul></div>
-    <div><h4>Accessibility</h4><ul><li>Icon-only buttons have a name that includes the thing: "More actions for Dune".</li><li>Disabled buttons say why nearby, or stay enabled and explain on press.</li></ul></div>
+    <div><h4>Accessibility</h4><ul><li>Icon-only buttons have a name that includes the thing: "More actions for The Salt Road".</li><li>A button that cannot act yet says why beside it, or stays available and explains when pressed.</li></ul></div>
   </div>
 </section>
 
@@ -403,7 +403,7 @@
 
 <!-- INPUTS -->
 <section class="g-section" id="fields" aria-labelledby="fields-h">
-  <header><h2 id="fields-h">Fields</h2><p class="muted">A visible label above every control, a hint under the label when needed, and an error that says how to fix it.</p></header>
+  <header><h2 id="fields-h">Fields</h2><p class="muted">A visible label before every control, a hint under the label when needed, and an error that says how to fix it.</p></header>
   <div class="g-demo">
     <div class="form-grid">
       <div class="field"><label for="g-f1">Server address</label><span class="hint" id="g-f1h">The address this app uses to reach qBittorrent.</span><input class="input" id="g-f1" aria-describedby="g-f1h" value="http://qbittorrent:8080"></div>
@@ -414,7 +414,7 @@
     </div>
   </div>
   <div class="g-notes">
-    <div><h4>Rules</h4><ul><li>No placeholder as a label. Placeholders only show an example.</li><li>Errors appear on leaving the field or on save, never while typing; focus moves to the first error on save.</li><li>Units sit beside the box, not in the label.</li></ul></div>
+    <div><h4>Rules</h4><ul><li>No placeholder as a label. Placeholders only show an example.</li><li>Errors appear on leaving the field or on save, never while the person is still entering text; focus moves to the first error on save.</li><li>Units sit beside the box, not in the label.</li></ul></div>
     <div><h4>Classes</h4><ul><li><code>.field</code>, <code>.hint</code>, <code>.field-error</code>, <code>.input</code>, <code>.select</code>, <code>.textarea</code>, <code>.input-group</code>, <code>.form-grid</code></li></ul></div>
   </div>
 </section>
@@ -452,7 +452,7 @@
 </section>
 
 <section class="g-section" id="filters" aria-labelledby="filters-h">
-  <header><h2 id="filters-h">Filter chips and applied filters</h2><p class="muted">Filter chips are toggle buttons in a toolbar. Applied filters show what is in use, each with a remove button, and a Clear all.</p></header>
+  <header><h2 id="filters-h">Filter chips and applied filters</h2><p class="muted">Filter chips are buttons in a toolbar that are pressed or not (<code>aria-pressed</code>). Applied filters show what is in use, each with a remove button, and a Clear all.</p></header>
   <div class="g-demo">
     <div class="filter-chips" role="group" aria-label="Format">
       <button class="filter-chip" type="button" aria-pressed="true">Audiobooks</button>
@@ -568,7 +568,7 @@
     <div class="notice" data-tone="success" role="status">{{i:circle-check}}<div class="notice__body"><span class="notice__title">Connection saved</span><p>qBittorrent answered in 120 ms.</p></div></div>
     <div class="notice" data-tone="warning">{{i:triangle-alert}}<div class="notice__body"><span class="notice__title">Disk 3 needs attention</span><p>12 sectors were reallocated this week. Back up its data.</p></div><button class="btn btn--compact" type="button">View disk</button></div>
     <div class="notice" data-tone="danger" role="alert">{{i:circle-alert}}<div class="notice__body"><span class="notice__title">Connection saved. Test unsuccessful.</span><p>Check the address and password, then test again.</p></div></div>
-    <div class="empty">{{i-xl:inbox empty__icon}}<h3>Nothing in the queue</h3><p>When you request a book, it shows here while it downloads.</p><a class="btn btn--primary" href="#notices">Discover books</a></div>
+    <div class="empty">{{i-xl:inbox empty__icon}}<h3>No downloads yet</h3><p>When you request a book, it appears in Activity while it downloads.</p><a class="btn btn--primary" href="#notices">Discover books</a></div>
     <div class="cards" aria-busy="true" aria-label="Loading">
       <div class="card"><span class="skeleton" style="width:60%"></span><span class="skeleton" style="width:90%"></span><span class="skeleton" style="width:40%"></span></div>
       <div class="card"><span class="skeleton" style="width:50%"></span><span class="skeleton" style="width:80%"></span><span class="skeleton" style="width:30%"></span></div>
@@ -586,7 +586,7 @@
   <header><h2 id="toasts-h">Toasts and saved notes</h2><p class="muted">A toast is a short message about something that happened: a card in the corner with a coloured edge, a title, an optional line of detail, one optional action and Close. Success, information, warning or error. On settings pages a success is a saved note beside the button instead. An error that belongs to something on the page (a field, a row) also shows there.</p></header>
   <div class="g-demo g-demo--row">
     <button class="btn" type="button" onclick="SharedComponents.toast('Follow saved')">Success</button>
-    <button class="btn" type="button" onclick="SharedComponents.toast('Follow saved', { detail: 'New books by Ben Aaronovitch come in by themselves' })">With detail</button>
+    <button class="btn" type="button" onclick="SharedComponents.toast('Follow saved', { detail: 'New books by Mara Ellison come in by themselves' })">With detail</button>
     <button class="btn" type="button" onclick="SharedComponents.toast('3 books added to Wanted', { action: { label: 'Undo', run: () => SharedComponents.toast('Undone', { tone: 'info' }) } })">With Undo</button>
     <button class="btn" type="button" onclick="SharedComponents.toast('Search started', { tone: 'info', detail: 'Results in about a minute' })">Information</button>
     <button class="btn" type="button" onclick="SharedComponents.toast.warning('Prowlarr is slow to answer', { detail: 'Searches may take longer than usual' })">Warning</button>
@@ -640,12 +640,12 @@
 
 <!-- CONTAINERS -->
 <section class="g-section" id="cards" aria-labelledby="cards-h">
-  <header><h2 id="cards-h">Panels and cards</h2><p class="muted">A panel groups content. A card is one thing that opens its slide-out or page; the whole card is the target, and its other buttons sit above it.</p></header>
+  <header><h2 id="cards-h">Panels and cards</h2><p class="muted">A panel groups content. A card is one thing that opens its slide-out or page; the whole card is the target, and its other buttons sit on top of it.</p></header>
   <div class="g-demo">
     <ul class="cards">
       <li class="card"><div class="card__top"><span class="app-icon" aria-hidden="true">J</span><h3 class="card__title"><button type="button" data-opens="g-panel-app">Jellyfin</button></h3></div><p class="small muted">Films, series and music.</p><div class="card__meta"><span class="chip" data-tone="success">{{i:circle-check}}Running</span><span>Updated 2 days ago</span></div></li>
       <li class="card" data-tone="warning"><div class="card__top"><span class="app-icon" aria-hidden="true">{{i:hard-drive}}</span><h3 class="card__title"><button type="button" data-opens="g-panel-app">Disk 3 · 4 TB</button></h3></div><div class="meter"><div class="meter__label"><span>Used</span><span class="numeric">3.1 of 3.6 TB</span></div><div class="progress"><span style="width:86%"></span></div></div><div class="card__meta"><span class="chip" data-tone="warning">{{i:triangle-alert}}Needs attention</span></div></li>
-      <li class="card"><div class="card__top"><span class="app-icon" aria-hidden="true">S</span><h3 class="card__title"><a href="#cards">Storyarr</a></h3></div><p class="small muted">Books and audiobooks.</p><div class="card__meta card__actions"><button class="copy-btn" type="button" data-copy="http://example.test:8000" aria-label="Copy Storyarr address">{{i:copy}}</button><span>example.test:8000</span></div></li>
+      <li class="card"><div class="card__top"><span class="app-icon" aria-hidden="true">S</span><h3 class="card__title"><a href="#cards">Storyarr</a></h3></div><p class="small muted">Books and audiobooks.</p><div class="card__meta card__actions"><button class="copy-btn" type="button" data-copy="http://example.test:8000" data-copied="Storyarr address copied" aria-label="Copy Storyarr address">{{i:copy}}</button><span>example.test:8000</span></div></li>
     </ul>
     <h3>Card band</h3>
     <p class="small muted">A grey band across the top of a card with the logo, the name as the heading and a status chip at the right (Starboard's plug-in cards, DASH-428), and a lighter grey footer, <code>.card-foot</code>, with when it last updated. Without a logo, the initials on a tile.</p>
@@ -673,18 +673,18 @@
 <section class="g-section" id="az-jump" aria-labelledby="az-jump-h">
   <header><h2 id="az-jump-h">A to Z jump list</h2><p class="muted">Over a long wall of covers: # for titles that start with a number, then A to Z, from the sort title ("The Expanse" is under E, "Émile" under E). Letters with nothing are shown but cannot be chosen, and say so to screen readers. It sticks under the header; the letter in view is marked with a bar. One Tab stop: Arrow keys, Home and End move, Enter jumps and focus moves to the letter's heading. On phones the row scrolls sideways. Classes: <code>.az-jump</code>, <code>.az-jump__letter</code>, <code>[aria-disabled="true"]</code>, <code>.wall-letter</code>. Behaviour: <code>SharedComponents.azLetter(title)</code>, <code>azJump(nav, letters)</code>, <code>azGo(nav, letter)</code> and the <code>az-jump</code> event for a wall that shows 40 at a time.</p></header>
   <div class="g-demo">
-    <nav class="az-jump" aria-label="Jump to letter"><ol><li><a class="az-jump__letter" href="#letter-num">#</a></li><li><a class="az-jump__letter" href="#letter-a" aria-current="location">A</a></li><li><a class="az-jump__letter" href="#letter-b">B</a></li><li><a class="az-jump__letter" href="#letter-c">C</a></li><li><a class="az-jump__letter" href="#letter-d">D</a></li><li><a class="az-jump__letter" href="#letter-e">E</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="F, no titles">F</a></li><li><a class="az-jump__letter" href="#letter-g">G</a></li><li><a class="az-jump__letter" href="#letter-h">H</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="I, no titles">I</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="J, no titles">J</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="K, no titles">K</a></li><li><a class="az-jump__letter" href="#letter-l">L</a></li><li><a class="az-jump__letter" href="#letter-m">M</a></li><li><a class="az-jump__letter" href="#letter-n">N</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="O, no titles">O</a></li><li><a class="az-jump__letter" href="#letter-p">P</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="Q, no titles">Q</a></li><li><a class="az-jump__letter" href="#letter-r">R</a></li><li><a class="az-jump__letter" href="#letter-s">S</a></li><li><a class="az-jump__letter" href="#letter-t">T</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="U, no titles">U</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="V, no titles">V</a></li><li><a class="az-jump__letter" href="#letter-w">W</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="X, no titles">X</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="Y, no titles">Y</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="Z, no titles">Z</a></li></ol></nav>
+    <nav class="az-jump" aria-label="Jump to letter" data-noun="books"><ol><li><a class="az-jump__letter" href="#letter-num">#</a></li><li><a class="az-jump__letter" href="#letter-a" aria-current="location">A</a></li><li><a class="az-jump__letter" href="#letter-b">B</a></li><li><a class="az-jump__letter" href="#letter-c">C</a></li><li><a class="az-jump__letter" href="#letter-d">D</a></li><li><a class="az-jump__letter" href="#letter-e">E</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="F, no books">F</a></li><li><a class="az-jump__letter" href="#letter-g">G</a></li><li><a class="az-jump__letter" href="#letter-h">H</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="I, no books">I</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="J, no books">J</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="K, no books">K</a></li><li><a class="az-jump__letter" href="#letter-l">L</a></li><li><a class="az-jump__letter" href="#letter-m">M</a></li><li><a class="az-jump__letter" href="#letter-n">N</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="O, no books">O</a></li><li><a class="az-jump__letter" href="#letter-p">P</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="Q, no books">Q</a></li><li><a class="az-jump__letter" href="#letter-r">R</a></li><li><a class="az-jump__letter" href="#letter-s">S</a></li><li><a class="az-jump__letter" href="#letter-t">T</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="U, no books">U</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="V, no books">V</a></li><li><a class="az-jump__letter" href="#letter-w">W</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="X, no books">X</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="Y, no books">Y</a></li><li><a class="az-jump__letter" role="link" aria-disabled="true" aria-label="Z, no books">Z</a></li></ol></nav>
     <h3 class="wall-letter" id="letter-num" tabindex="-1">#</h3>
     <ul class="media-grid" data-size="small"><li class="media-card"><div class="cover" style="background:#2b4f6e;color:#fff;font-weight:700;padding:var(--space-2)">24</div><span class="media-card__title">24</span><span class="media-card__meta">2001 to 2010</span></li><li class="media-card"><div class="cover" style="background:#2b4f6e;color:#fff;font-weight:700;padding:var(--space-2)">1917</div><span class="media-card__title">1917</span><span class="media-card__meta">2019</span></li></ul>
     <h3 class="wall-letter" id="letter-a" tabindex="-1">A</h3>
-    <ul class="media-grid" data-size="small"><li class="media-card"><div class="cover" style="background:#2b4f6e;color:#fff;font-weight:700;padding:var(--space-2)">Arrival</div><span class="media-card__title">Arrival</span><span class="media-card__meta">2016</span></li><li class="media-card"><div class="cover" style="background:#2b4f6e;color:#fff;font-weight:700;padding:var(--space-2)">The Archers</div><span class="media-card__title">The Archers</span><span class="media-card__meta">Radio 4</span></li></ul>
+    <ul class="media-grid" data-size="small"><li class="media-card"><div class="cover" style="background:#2b4f6e;color:#fff;font-weight:700;padding:var(--space-2)">The Long Tide</div><span class="media-card__title">The Long Tide</span><span class="media-card__meta">2024</span></li><li class="media-card"><div class="cover" style="background:#2b4f6e;color:#fff;font-weight:700;padding:var(--space-2)">The Night Ferry</div><span class="media-card__title">The Night Ferry</span><span class="media-card__meta">Harbour Radio</span></li></ul>
     <h3 class="wall-letter" id="letter-b" tabindex="-1">B</h3>
     <ul class="media-grid" data-size="small"><li class="media-card"><div class="cover" style="background:#2b4f6e;color:#fff;font-weight:700;padding:var(--space-2)">Blue Planet II</div><span class="media-card__title">Blue Planet II</span><span class="media-card__meta">2017</span></li><li class="media-card"><div class="cover" style="background:#2b4f6e;color:#fff;font-weight:700;padding:var(--space-2)">Bluey</div><span class="media-card__title">Bluey</span><span class="media-card__meta">2018 to now</span></li></ul>
   </div>
 </section>
 
 <section class="g-section" id="load-more" aria-labelledby="load-more-h">
-  <header><h2 id="load-more-h">Load more as you scroll</h2><p class="muted">UX-52. A long list loads its next page as its end comes into view, and keeps a real Show more button for keyboard and screen reader users. While it loads, a line says "Loading the next 40"; then a screen reader hears "40 more shown" and focus stays where it was. After three pages in a row it stops, so the footer stays in reach, and the button carries on. The button is the only way when Reduce motion is on, when the person's setting asks for it, or without script. Pressing it moves focus to the first new item. Classes: <code>.load-more</code>, <code>.load-more__count</code>, <code>.load-more__status</code>. Behaviour: <code>SharedComponents.loadMore(box, { load, items, noun, pageSize, auto, maxAuto })</code>, with <code>reset()</code> after a new search, filter or A to Z jump.</p></header>
+  <header><h2 id="load-more-h">Load more as you scroll</h2><p class="muted">UX-52. A long list loads its next page as its end comes into view, and keeps a real Show more button for keyboard and screen reader users. While it loads, a line says "Loading the next 40"; then a screen reader hears "40 more shown" and focus stays where it was. After three pages in a row it stops, so the footer stays in reach, and the button carries on. The button is the only way when Reduce motion is active, when the person's setting asks for it, or without script. Pressing it moves focus to the first new item. Classes: <code>.load-more</code>, <code>.load-more__count</code>, <code>.load-more__status</code>. Behaviour: <code>SharedComponents.loadMore(box, { load, items, noun, pageSize, auto, maxAuto })</code>, with <code>reset()</code> after a new search, filter or A to Z jump.</p></header>
   <div class="g-demo">
     <ul class="rows" id="g-more-list" aria-label="Example books"></ul>
     <div class="load-more" id="g-more"><span class="load-more__count" id="g-more-count"></span><button class="btn" type="button">Show 5 more</button></div>
@@ -710,10 +710,10 @@
     <p class="muted">Series gaps and calendar day cards. One 44px More button on the corner; its menu says each action in words. The cover opens the Summary.</p>
     <ul class="media-grid" style="--cover-w:96px"><li class="media-card cover-card" data-actions="more"><button class="cover-card__open" type="button" aria-label="The Tide Clock, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#2f5d50"></div><button class="cover-card__more" type="button" aria-haspopup="menu" aria-controls="g-tile-menu-0" aria-label="More for The Tide Clock">{{i:ellipsis}}</button></div><span class="media-card__title">The Tide Clock</span><span class="media-card__meta">Book 2</span><div class="menu" id="g-tile-menu-0" role="menu" aria-label="More for The Tide Clock" data-fixed><button type="button" role="menuitem">{{i:info}}View details</button><button type="button" role="menuitem">{{i:book-open}}Get the ebook</button><button type="button" role="menuitem">{{i:headphones}}Get the audiobook</button><button type="button" role="menuitem">{{i:list-plus}}Add to a list</button><a href="#" role="menuitem">{{i:external-link}}Open the book page</a></div></li><li class="media-card cover-card" data-actions="more"><button class="cover-card__open" type="button" aria-label="Beneath the Weir, a Very Long Title That Wraps, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#5b3f7a"></div><button class="cover-card__more" type="button" aria-haspopup="menu" aria-controls="g-tile-menu-1" aria-label="More for Beneath the Weir, a Very Long Title That Wraps">{{i:ellipsis}}</button></div><span class="media-card__title">Beneath the Weir, a Very Long Title That Wraps</span><span class="media-card__meta">Book 3</span><div class="menu" id="g-tile-menu-1" role="menu" aria-label="More for Beneath the Weir, a Very Long Title That Wraps" data-fixed><button type="button" role="menuitem">{{i:info}}View details</button><button type="button" role="menuitem">{{i:book-open}}Get the ebook</button><button type="button" role="menuitem">{{i:headphones}}Get the audiobook</button><button type="button" role="menuitem">{{i:list-plus}}Add to a list</button><a href="#" role="menuitem">{{i:external-link}}Open the book page</a></div></li><li class="media-card cover-card" data-actions="more"><button class="cover-card__open" type="button" aria-label="North of Quiet, details" data-opens="g-panel-book"></button><div class="cover-card__art"><div class="cover" style="background:#8a5a1f"></div><button class="cover-card__more" type="button" aria-haspopup="menu" aria-controls="g-tile-menu-2" aria-label="More for North of Quiet">{{i:ellipsis}}</button></div><span class="media-card__title">North of Quiet</span><span class="media-card__meta">Book 4</span><div class="menu" id="g-tile-menu-2" role="menu" aria-label="More for North of Quiet" data-fixed><button type="button" role="menuitem">{{i:info}}View details</button><button type="button" role="menuitem">{{i:book-open}}Get the ebook</button><button type="button" role="menuitem">{{i:headphones}}Get the audiobook</button><button type="button" role="menuitem">{{i:list-plus}}Add to a list</button><a href="#" role="menuitem">{{i:external-link}}Open the book page</a></div></li></ul>
     <h3>Square show art in the book shape (FEAT-R, fill 4)</h3>
-    <p class="muted">Radio artwork is square. It sits at the top of the 2:3 shape, never cropped, with the same outline as books; the label below takes the image's main colour (read in the browser) and carries the station and the name as real text. Without a colour the label is neutral; without an image the square shows the name.</p>
-    <ul class="media-grid" style="--cover-w:148px"><li class="media-card"><div class="show-art" role="img" aria-label="The Unbelievable Truth, BBC Radio 4" style="--show-art-bg:rgb(10 75 72);--show-art-fg:#fff"><span class="show-art__img" style="display:grid;place-items:center;background:linear-gradient(160deg,#0f7a74,#123);color:#fff;font-weight:700;padding:8px;text-align:center">The Unbelievable Truth</span><span class="show-art__label" aria-hidden="true"><span class="show-art__station">BBC Radio 4</span><span class="show-art__name">The Unbelievable Truth</span></span></div><span class="media-card__title">The Unbelievable Truth</span><span class="media-card__meta">BBC Radio 4 · 22 series</span></li><li class="media-card"><div class="show-art" role="img" aria-label="ElvenQuest, BBC Radio 4 Extra"><span class="show-art__img" style="display:grid;place-items:center;background:linear-gradient(160deg,#0f7a74,#123);color:#fff;font-weight:700;padding:8px;text-align:center">ElvenQuest</span><span class="show-art__label" aria-hidden="true"><span class="show-art__station">BBC Radio 4 Extra</span><span class="show-art__name">ElvenQuest</span></span></div><span class="media-card__title">ElvenQuest</span><span class="media-card__meta">BBC Radio 4 Extra · 22 series</span></li><li class="media-card"><div class="show-art" role="img" aria-label="Quiet Carriage, BBC Radio 4"><span class="show-art__text" aria-hidden="true">Quiet Carriage</span><span class="show-art__label" aria-hidden="true"><span class="show-art__station">BBC Radio 4</span><span class="show-art__name">Quiet Carriage</span></span></div><span class="media-card__title">Quiet Carriage</span><span class="media-card__meta">BBC Radio 4 · 22 series</span></li></ul>
+    <p class="muted">Radio artwork is square. It sits at the top of the 2:3 shape, never cropped, with the same outline as books; the label under it takes the image's main colour (read in the browser) and carries the station and the name as real text. Without a colour the label is neutral; without an image the square shows the name.</p>
+    <ul class="media-grid" style="--cover-w:148px"><li class="media-card"><div class="show-art" role="img" aria-label="The Night Ferry, Harbour Radio" style="--show-art-bg:rgb(10 75 72);--show-art-fg:#fff"><span class="show-art__img" style="display:grid;place-items:center;background:linear-gradient(160deg,#0f7a74,#123);color:#fff;font-weight:700;padding:8px;text-align:center">The Night Ferry</span><span class="show-art__label" aria-hidden="true"><span class="show-art__station">Harbour Radio</span><span class="show-art__name">The Night Ferry</span></span></div><span class="media-card__title">The Night Ferry</span><span class="media-card__meta">Harbour Radio · 22 series</span></li><li class="media-card"><div class="show-art" role="img" aria-label="Lantern Hill, Harbour Radio Extra"><span class="show-art__img" style="display:grid;place-items:center;background:linear-gradient(160deg,#0f7a74,#123);color:#fff;font-weight:700;padding:8px;text-align:center">Lantern Hill</span><span class="show-art__label" aria-hidden="true"><span class="show-art__station">Harbour Radio Extra</span><span class="show-art__name">Lantern Hill</span></span></div><span class="media-card__title">Lantern Hill</span><span class="media-card__meta">Harbour Radio Extra · 22 series</span></li><li class="media-card"><div class="show-art" role="img" aria-label="Quiet Carriage, Harbour Radio"><span class="show-art__text" aria-hidden="true">Quiet Carriage</span><span class="show-art__label" aria-hidden="true"><span class="show-art__station">Harbour Radio</span><span class="show-art__name">Quiet Carriage</span></span></div><span class="media-card__title">Quiet Carriage</span><span class="media-card__meta">Harbour Radio · 22 series</span></li></ul>
     <h3>Logo tile</h3>
-    <ul class="cards" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))"><li class="card"><span class="logo-tile" aria-hidden="true"><span class="logo-tile__text">BBC Radio 4</span></span><h3 class="card__title"><a href="#cover-actions">BBC Radio 4</a></h3><p class="small muted">5 shows · 3 following</p></li></ul>
+    <ul class="cards" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))"><li class="card"><span class="logo-tile" aria-hidden="true"><span class="logo-tile__text">Harbour Radio</span></span><h3 class="card__title"><a href="#cover-actions">Harbour Radio</a></h3><p class="small muted">5 shows · 3 following</p></li></ul>
   </div>
   <div class="g-notes">
     <div><h4>Behaviour</h4><ul><li>Tab goes to the cover ("The Salt Road, details"), then to each action in order.</li><li>Every icon has a full name ("Get the audiobook of The Salt Road", "Audiobook of The Salt Road in library") and a hover label that also shows on keyboard focus.</li><li>A format in the library is a tick on its icon plus "in library" in its name; the old badges along the bottom of the cover go.</li><li>Progress and errors from getting a format show in a status line under the title.</li><li>Titles always take two lines of space, so covers line up.</li></ul></div>
@@ -722,7 +722,7 @@
 </section>
 
 <section class="g-section" id="series-head" aria-labelledby="series-head-h">
-  <header><h2 id="series-head-h">Series header and logo</h2><p class="muted">UX-43. The top of a series (or radio show) page. A logo with a transparent background is drawn in one solid colour with a CSS mask (<code>.logo-mask</code>), so it follows every theme; each logo uses the text colour or the accent colour. With no logo, the name is set large as a wordmark. The name is always the page's h1. The fan of covers is decoration and is hidden on phones; the books are listed below it. The logo here is made up.</p></header>
+  <header><h2 id="series-head-h">Series header and logo</h2><p class="muted">UX-43. The top of a series (or radio show) page. A logo with a transparent background is drawn in one solid colour with a CSS mask (<code>.logo-mask</code>), so it follows every theme; each logo uses the text colour or the accent colour. With no logo, the name is set large as a wordmark. The name is always the page's h1. The fan of covers is decoration and is hidden on phones; the books are listed after it. The logo here is made up.</p></header>
   <div class="g-demo" style="padding:0">
     <header class="series-head">
       <div class="series-head__text">
@@ -762,7 +762,7 @@
     </div>
   </div>
   <div class="g-notes">
-    <div><h4>Behaviour</h4><ul><li>Each arrow press moves one screen less one cover. With Reduce motion on, the shelf jumps instead of sliding.</li><li>Tabbing to a book scrolls it fully into view, clear of the fade.</li><li>Arrows are named "Earlier books in &lt;shelf&gt;" and "More books in &lt;shelf&gt;". "View all" stays in the heading.</li><li>Shelves that load more as you go keep loading when the arrow reaches the end.</li></ul></div>
+    <div><h4>Behaviour</h4><ul><li>Each arrow press moves one screen less one cover. With Reduce motion active, the shelf jumps instead of sliding.</li><li>Tabbing to a book scrolls it fully into view, clear of the fade.</li><li>Arrows are named "Earlier books in &lt;shelf&gt;" and "More books in &lt;shelf&gt;". "View all" stays in the heading.</li><li>Shelves that load more as you go keep loading when the arrow reaches the end.</li></ul></div>
     <div><h4>Classes</h4><ul><li><code>.shelf-scroller</code>, <code>.shelf-track</code>, <code>.shelf-edge--start</code>, <code>.shelf-edge--end</code>, <code>.shelf-arrow</code></li><li>Set <code>--shelf-cover-w</code> to the cover width and <code>--shelf-fade-bg</code> to the colour behind the shelf.</li></ul></div>
   </div>
 </section>
@@ -802,39 +802,39 @@
   <header><h2 id="settings-patterns-h">Settings patterns</h2><p class="muted">Every Settings page uses only these nine: section, setting rows, choice cards, location, form with Save, status line, empty state, lists that open and the danger zone (DESIGN-SYSTEM.md, section 9).</p></header>
   <div class="g-demo">
     <section class="settings-section" aria-labelledby="g-sp1">
-      <div class="settings-section__head"><div class="title-chip"><h3 id="g-sp1">Download hours</h3><span class="chip" data-tone="success">On</span></div><p class="small muted">When the download apps may run, so the server stays quick in the evening.</p></div>
+      <div class="settings-section__head"><div class="title-chip"><h3 id="g-sp1">Download hours</h3><span class="chip" data-tone="success">Active</span></div><p class="small muted">When the download apps may run, so the server stays quick in the evening.</p></div>
       <ul class="settings-rows">
         <li class="setting"><div class="setting__text"><span class="setting__label">Only at night</span><span class="setting__hint">Downloads run from midnight to 07:00.</span></div><div class="setting__control"><label class="switch"><span class="visually-hidden">Only at night</span><input type="checkbox" role="switch" checked></label><span class="saved-note">{{i:check}}Saved 16:31</span></div></li>
         <li class="setting"><div class="setting__text"><span class="setting__label" id="g-sp-limit">Speed limit</span><span class="setting__hint">0 means no limit.</span></div><div class="setting__control"><span class="input-unit"><input class="input" value="20" inputmode="numeric" aria-labelledby="g-sp-limit"><span class="input-unit__unit">MB/s</span></span></div></li>
       </ul>
       <div class="option-cards" role="radiogroup" aria-label="Quality">
-        <label class="option-card"><input type="radio" name="g-sp-q" checked><strong>HD</strong><small>1080p. Looks sharp on a TV; about 4 GB a film.</small></label>
+        <label class="option-card"><input type="radio" name="g-sp-q" checked><strong>HD</strong><small>1080p. Sharp on a TV; about 4 GB a film.</small></label>
         <label class="option-card"><input type="radio" name="g-sp-q"><strong>4K</strong><small>Sharper on big screens; about 15 GB a film.</small></label>
         <label class="option-card"><input type="radio" name="g-sp-q"><strong>Saver</strong><small>720p. Good on phones; about 1.5 GB a film.</small></label>
       </div>
       <div class="location"><div class="location__now"><span class="location__label">YouTube and Spotify downloads</span><span class="location__words">Media, Downloads, Direct · 812 GB free</span><span class="location__path">/data/downloads/direct</span></div>
         <div class="location__actions"><button class="btn" type="button">{{i:folder-open}}Browse</button><button class="btn btn--quiet" type="button">Set automatically</button></div>
-        <details class="location__type"><summary>Type a path (Advanced)</summary><input class="input" value="/data/downloads/direct" aria-label="Folder"></details></div>
-      <div class="empty"><p><strong>No sites to search yet</strong></p><p>Reelix finds nothing until it has one.</p><button class="btn btn--primary" type="button">Add a site</button></div>
+        <details class="location__type"><summary>More options</summary><label class="field__label" for="g-loc-path">Enter a path</label><input class="input" id="g-loc-path" value="/data/downloads/direct"></details></div>
+      <div class="empty"><p><strong>No sites to search yet</strong></p><p>Add a site, and Reelix searches it for you.</p><button class="btn btn--primary" type="button">Add a site</button></div>
     </section>
     <section class="settings-section settings-section--danger" aria-labelledby="g-sp9">
       <div class="settings-section__head"><h3 id="g-sp9">Remove</h3><p class="small muted">Last on the page, with a dialog that says what happens.</p></div>
       <div class="actions"><button class="btn btn--danger" type="button">{{i:trash-2}}Remove Reelix</button></div>
     </section>
   </div>
-  <div class="g-notes"><div><h4>Rules</h4><ul><li>A saved setting shows the saved note beside its control, never a toast.</li><li>A unit sits beside its number, as part of the control.</li><li>A folder is never a bare text box: Browse, Set automatically, and the typed path under Advanced.</li><li>Things with several settings open a slide-out editor; Add sits at the foot of the list.</li></ul></div></div>
+  <div class="g-notes"><div><h4>Rules</h4><ul><li>A saved setting shows the saved note beside its control, never a toast.</li><li>A unit sits beside its number, as part of the control.</li><li>A folder is never a bare text box: Browse, Set automatically, and and Enter a path under More options.</li><li>Things with several settings open a slide-out editor; Add sits at the foot of the list.</li></ul></div></div>
 </section>
 
 <section class="g-section" id="folder-picker" aria-labelledby="folder-picker-h">
   <header><h2 id="folder-picker-h">Folder picker</h2><p class="muted">Idea A (TheMightyTRexUK, 16 November 2026): places first, then one list of folders with a path bar and Back, each folder with its size and what is in it, and Use this folder. The same on a phone (the slide-out is full width), with a keyboard and a screen reader, and in a terminal (a numbered list with the path at the top).</p></header>
   <div class="g-demo g-demo--row" style="align-items:start">
-    <div class="card g-fp" role="group" aria-label="Example: the places screen">
+    <div class="card g-fp" role="group" aria-label="Example: choosing a place">
       <h3>Choose a place</h3>
       <div class="stack-3">
         <p class="small muted">Where is the folder?</p>
         <ul class="folder-places" aria-label="Places">
           <li><button type="button" class="folder-place"><span class="folder-place__icon" aria-hidden="true">{{i:monitor}}</span><span class="folder-place__text"><span class="folder-place__name">This computer</span><span class="folder-place__detail">Folders under /mnt, /media, /srv, /home</span></span></button></li>
-          <li><button type="button" class="folder-place"><span class="folder-place__icon" aria-hidden="true">{{i:hard-drive}}</span><span class="folder-place__text"><span class="folder-place__name">Drive 2</span><span class="folder-place__detail">/mnt/disk2</span></span></button></li>
+          <li><button type="button" class="folder-place"><span class="folder-place__icon" aria-hidden="true">{{i:hard-drive}}</span><span class="folder-place__text"><span class="folder-place__name">Disk 2</span><span class="folder-place__detail">/mnt/disk2</span></span></button></li>
           <li><button type="button" class="folder-place"><span class="folder-place__icon" aria-hidden="true">{{i:network}}</span><span class="folder-place__text"><span class="folder-place__name">//192.0.2.20/media</span><span class="folder-place__detail">Network share, read only</span></span></button></li>
           <li><button type="button" class="folder-place"><span class="folder-place__icon" aria-hidden="true">{{i:cloud}}</span><span class="folder-place__text"><span class="folder-place__name">OneDrive</span><span class="folder-place__detail">Read only. Sign in to choose a folder</span></span></button></li>
         </ul>
@@ -879,7 +879,7 @@
 </section>
 
 <section class="g-section" id="slide-out" aria-labelledby="slide-out-h">
-  <header><h2 id="slide-out-h">Slide-out</h2><p class="muted">From the right, over a dimmed page. For the details of one thing, and for editing it, without losing your place in the list. Its header wears the page background (<code>--color-slide-header</code>) and its body is the raised surface: white in Light, the dark surface in Dark. The phone menu, which slides from the left, looks the same.</p></header>
+  <header><h2 id="slide-out-h">Slide-out</h2><p class="muted">From the right, over a dimmed page. For the details of one thing, and for editing it, without losing your place in the list. Its header wears the page background (<code>--color-slide-header</code>) and its body is the raised surface: white in Light, the dark surface in Dark. The phone menu, which slides in from the start edge, has the same design.</p></header>
   <div class="g-demo g-demo--row">
     <button class="btn" type="button" data-opens="g-panel-display">{{i:sun}}Display and accessibility</button>
     <button class="btn" type="button" data-opens="g-panel-book">Book summary</button>
@@ -889,7 +889,7 @@
   <div class="g-notes">
     <div><h4>Behaviour</h4><ul><li>Focus moves to Close; Tab stays inside; Escape, Close or a press outside closes it; focus returns to what opened it.</li><li>The page behind does not scroll. Its address can include the open item, so Back closes it.</li><li>Editing: Save and Cancel in a footer that stays put; Remove on the far right, which asks first.</li></ul></div>
     <div><h4>Sizes</h4><ul><li>420px; <code>.side-panel--wide</code> 640px for logs or long forms; full width on phones.</li></ul></div>
-    <div><h4>Colour</h4><ul><li>Header: the page background, so it reads as part of the page. Body and footer: the raised surface. Dialogs keep the plain header, so a slide-out and a dialog look different at a glance.</li><li>High contrast keeps a solid line under the header.</li></ul></div>
+    <div><h4>Colour</h4><ul><li>Header: the page background, so it reads as part of the page. Body and footer: the raised surface. Dialogs keep the plain header, so a slide-out and a dialog are told apart at a glance.</li><li>High contrast keeps a solid line under the header.</li></ul></div>
     <div><h4>Classes</h4><ul><li><code>.side-panel-layer</code>, <code>.side-panel-backdrop</code>, <code>.side-panel</code>, <code>.panel-header</code>, <code>.side-panel__body</code>, <code>.side-panel__foot</code>, <code>.side-panel__lead</code></li></ul></div>
   </div>
 </section>
@@ -972,7 +972,7 @@
     </aside>
   </div>
   <div class="g-notes">
-    <div><h4>Shape</h4><ul><li>Progress bar, then the step bar for a step in parts, then the step. The step bar is as wide as the progress bar, with a line between parts; parts are numbered 1, 2, 3 and each is a step in the count (here steps 6 to 8 of 18). On phones only the numbers show, with ticks for done parts.</li><li>Review aids (What happens next, decision tree) only while testing: beside the step from 1100px, under it below. Without them the step has the whole width.</li><li>The first question asks which job (new install, restore, migration); each has its own wizard (<code>.wizard-paths</code>).</li></ul></div>
+    <div><h4>Shape</h4><ul><li>Progress bar, then the step bar for a step in parts, then the step. The step bar is as wide as the progress bar, with a line between parts; parts are numbered 1, 2, 3 and each is a step in the count (here steps 6 to 8 of 18). On phones only the numbers show, with ticks for done parts.</li><li>Review aids (What happens next, decision tree) only while testing: beside the step from 1100px, under it on narrower screens. Without them the step has the whole width.</li><li>The first question asks which job (new install, restore, migration); each has its own wizard (<code>.wizard-paths</code>).</li></ul></div>
     <div><h4>Steps</h4><ul><li>One question per step; steps that do not apply are left out, and the tree says why.</li><li>Option cards, one marked "(recommended)" with the reason. Never "easiest".</li><li>Continue first, then Back, then Skip this step.</li></ul></div>
     <div><h4>Help</h4><ul><li>"What is…" links at the end of the part they explain, with the square help icon, opening a slide-out about half the screen wide (<code>.side-panel--wide</code>), so the step stays in view beside the help. The step's own help, with Help with this step, sits at the bottom of the step.</li><li>Addresses are links with a copy button; commands have a labelled copy button. Copying works on plain http.</li></ul></div>
     <div><h4>Classes</h4><ul><li><code>.wizard-layout</code>, <code>.wizard-main</code>, <code>.wizard-aside</code>, <code>.wizard-progress</code>, <code>.steps--sub</code>, <code>.wizard-paths</code>, <code>.wizard-next</code>, <code>.wizard-tree</code>, <code>.help-links</code>, <code>.help-link</code>, <code>.address</code>, <code>.copy-btn--label</code>, <code>.side-panel</code>, <code>.wizard-summary</code></li></ul></div>
@@ -987,15 +987,15 @@
       <div class="option-cards option-cards--row">
         <label class="option-card"><input type="radio" name="g-vpn"><strong>Example VPN</strong><small><a href="#" target="_blank" rel="noopener noreferrer">vpn.example.com<span class="visually-hidden"> (Example VPN's site, opens in a new tab)</span>{{i:external-link}}</a></small></label>
         <label class="option-card"><input type="radio" name="g-vpn"><strong>Sample Private Network</strong><small><a href="#" target="_blank" rel="noopener noreferrer">network.example.org<span class="visually-hidden"> (Sample Private Network's site, opens in a new tab)</span>{{i:external-link}}</a></small></label>
-        <label class="option-card"><input type="radio" name="g-vpn"><strong>Another one that Gluetun supports</strong><small>Type its name below</small></label>
+        <label class="option-card"><input type="radio" name="g-vpn"><strong>Another one that Gluetun supports</strong><small>Enter its name</small></label>
       </div>
     </fieldset>
     <div class="form-stack">
-      <div class="field"><span class="field__label">Connection</span><span class="hint">WireGuard is quicker and simpler.</span>
+      <div class="field"><span class="field__label">Connection</span><span class="hint">WireGuard connects faster and needs fewer settings.</span>
         <fieldset class="segmented"><legend class="visually-hidden">Connection</legend><label><input type="radio" name="g-conn" checked><span>WireGuard</span></label><label><input type="radio" name="g-conn"><span>OpenVPN</span></label></fieldset></div>
       <div class="field"><label for="g-wg-key">WireGuard private key<span class="field__required" aria-hidden="true">*</span></label><input class="input" id="g-wg-key" type="password" required></div>
     </div>
-    <div class="meter"><div class="meter__label"><span>Downloading and starting the apps. Please wait, this can take some time…</span><span class="nowrap"><span class="numeric">3 min 12 s</span><span class="numeric"> · 5 of 12 installed</span></span></div>
+    <div class="meter"><div class="meter__label"><span>Downloading and starting the apps…</span><span class="nowrap"><span class="numeric">3 min 12 s</span><span class="numeric"> · 5 of 12 installed</span></span></div>
       <div class="progress" role="progressbar" aria-label="Starting the apps" aria-valuetext="5 of 12 installed"><span style="width:42%"></span></div></div>
     <div class="table-wrap" data-stack><table class="table table--fixed table--middle"><caption class="visually-hidden">What will be set up</caption>
       <colgroup><col class="col-quarter"><col><col class="col-state"></colgroup>
@@ -1082,7 +1082,7 @@
 └──────────────────────────────────────────────────────────────────────────────┘
   ███████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   33%
 
-  Please wait, this can take some time...
+  Installing (2 of 3)…
 
   ✔ Downloading the installer
   ██████████████▓▓▒▒▒▒▓▓▒▒░░░░░░░░░░░░░░ ⠧  Installing (2 of 3) · 1 min 12 s
@@ -1092,7 +1092,7 @@
 
 
 ────────────────────────────────────────────────────────────────────────────────
-  Ctrl+C Stop                                                      Please wait</pre></div>
+  Ctrl+C Stop</pre></div>
     <h3>Help, a box over the step</h3>
     <div class="g-term-wrap" tabindex="0" role="region" aria-label="Help as a box over the step"><pre class="g-term">┌──────────────────────────────────────────────────────────────────────────────┐
 │  App | Your home network                                        step 1 of 4  │
@@ -1112,7 +1112,7 @@
   Enter Back</pre></div>
     <h3>Plain mode, for screen readers</h3>
     <div class="g-term-wrap" tabindex="0" role="region" aria-label="The same question in plain mode"><pre class="g-term">== App | Your home network (step 1 of 4)
-Type b to go back, ? for help, f to send feedback or q to stop.
+Press b to go back, ? for help, f to send feedback or q to stop.
 Can phones and other computers on your home network open App?
   1. Yes, with your password (recommended): Phones, tablets and other computers at home can open it.
   2. No, only this computer: You can change this later in Settings, Security.
@@ -1163,16 +1163,16 @@ Your choice [1]:</pre></div>
   <table class="g-table">
     <thead><tr><th scope="col">Use</th><th scope="col">When</th><th scope="col">Examples</th></tr></thead>
     <tbody>
-      <tr><th scope="row">Slide-out</th><td>Details of one item in a list, or editing it, where seeing the list still helps. Can hold a few actions. Also settings people change while looking at the page.</td><td>Book summary; a request in the queue; a download client, indexer or reading account; a user; a log entry; an app, disk or download on Starboard; a backup run; Release notes; Display and accessibility.</td></tr>
+      <tr><th scope="row">Slide-out</th><td>Details of one item in a list, or editing it, where keeping the list in view helps. Can hold a few actions. Also settings people change while the page stays in view.</td><td>Book summary; a request in the queue; a download client, indexer or reading account; a user; a log entry; an app, disk or download on Starboard; a backup run; Release notes; Display and accessibility.</td></tr>
       <tr><th scope="row">Dialog</th><td>A decision or a short task that must be finished or cancelled before going on. One or two fields at most.</td><td>Remove or reset (confirm); Add list; a password check before a download or restore.</td></tr>
       <tr><th scope="row">Page</th><td>Something people come back to, link to or spend time in; long content with its own sections.</td><td>Book, author and series pages; narrator page; Disk health; Settings sections; Upgrade wizard.</td></tr>
-      <tr><th scope="row">In place</th><td>A small change to a value people are already looking at.</td><td>Switches and selects in settings rows; filter chips; cover size.</td></tr>
+      <tr><th scope="row">In place</th><td>A small change to a value already on the page.</td><td>Switches and selects in settings rows; filter chips; cover size.</td></tr>
     </tbody>
   </table>
 </section>
 
 <section class="g-section" id="which-item" aria-labelledby="which-item-h">
-  <header><h2 id="which-item-h">Which item to use</h2><p class="muted">Pick by what the thing is, not how it should look. The rules are in DESIGN-SYSTEM.md, section 10 (Starboard DASH-309).</p></header>
+  <header><h2 id="which-item-h">Which item to use</h2><p class="muted">Pick by what the thing is, not by its appearance. The rules are in DESIGN-SYSTEM.md, section 10 (Starboard DASH-309).</p></header>
   <table class="g-table">
     <thead><tr><th scope="col">Item</th><th scope="col">Use it for</th><th scope="col">Not for</th></tr></thead>
     <tbody>
@@ -1194,7 +1194,7 @@ Your choice [1]:</pre></div>
   <div class="g-demo">
     <ul class="rows">
       <li class="row row--no-lead"><p><span class="status-icon" data-tone="danger" title="Problem">{{i:circle-x}}<span class="visually-hidden">Problem: </span></span><span class="small muted numeric">2026-11-02 09:15 </span>/dev/sdc: SMART self-test failed</p></li>
-      <li class="row row--no-lead"><p><span class="status-icon" data-tone="warning" title="Worth a look">{{i:triangle-alert}}<span class="visually-hidden">Worth a look: </span></span><span class="small muted numeric">2026-11-01 03:00 </span>/dev/sdb: reallocated sectors 0 to 8</p></li>
+      <li class="row row--no-lead"><p><span class="status-icon" data-tone="warning" title="Warning">{{i:triangle-alert}}<span class="visually-hidden">Warning: </span></span><span class="small muted numeric">2026-11-01 03:00 </span>/dev/sdb: reallocated sectors 0 to 8</p></li>
       <li class="row row--no-lead"><p><span class="status-icon" title="Information">{{i:info}}<span class="visually-hidden">Information: </span></span><span class="small muted numeric">2026-10-31 03:00 </span>/dev/sda: extended self-test completed</p></li>
     </ul>
   </div>
@@ -1217,7 +1217,7 @@ Your choice [1]:</pre></div>
 </section>
 
 <section class="g-section" id="month-nav" aria-labelledby="month-nav-h">
-  <header><h2 id="month-nav-h">Earlier and later</h2><p class="muted">Moving a calendar a month at a time. The buttons name the month they go to; Back to now appears only away from the current window. Above the first month, in the calendar view only.</p></header>
+  <header><h2 id="month-nav-h">Earlier and later</h2><p class="muted">Moving a calendar a month at a time. The buttons name the month they go to; Back to now appears only away from the current window. Before the first month, in the calendar view only.</p></header>
   <div class="g-demo">
     <div class="actions"><button class="btn" type="button">{{i:chevron-left}}Earlier: October</button><button class="btn btn--quiet" type="button">Back to now</button><button class="btn" type="button">Later: December{{i:chevron-right}}</button></div>
   </div>
@@ -1292,7 +1292,7 @@ Your choice [1]:</pre></div>
         <details class="side-tree__group"><summary>Install<span class="side-tree__count"><span class="visually-hidden">, </span>2<span class="visually-hidden"> pages</span></span><svg class="i side-tree__chev" width="16" height="16" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></summary><ul><li><a href="#g-side-tree">Quick start</a></li><li><a href="#g-side-tree">Install with the installer</a></li></ul></details></details>
       <details class="side-tree__area" open><summary><span class="side-tree__tile">{{i:wrench}}</span>Fix a problem<svg class="i side-tree__chev" width="16" height="16" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></summary><ul><li><a href="#g-side-tree">Overview</a></li><li><a href="#g-side-tree">Problem solver</a></li></ul>
         <details class="side-tree__group" open><summary>Apps and media<span class="side-tree__count"><span class="visually-hidden">, </span>2<span class="visually-hidden"> pages</span></span><svg class="i side-tree__chev" width="16" height="16" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></summary><ul><li><a href="#g-side-tree" aria-current="page">An app shows as not responding</a></li><li><a href="#g-side-tree">A Live TV channel will not play</a></li></ul></details>
-        <details class="side-tree__group"><summary>Storage<span class="side-tree__count"><span class="visually-hidden">, </span>1<span class="visually-hidden"> page</span></span><svg class="i side-tree__chev" width="16" height="16" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></summary><ul><li><a href="#g-side-tree">A pool drive has failed</a></li></ul></details></details>
+        <details class="side-tree__group"><summary>Storage<span class="side-tree__count"><span class="visually-hidden">, </span>1<span class="visually-hidden"> page</span></span><svg class="i side-tree__chev" width="16" height="16" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></summary><ul><li><a href="#g-side-tree">A pool disk has failed</a></li></ul></details></details>
       <p class="side-tree__label">For builders</p>
       <details class="side-tree__area"><summary><span class="side-tree__tile">{{i:terminal}}</span>Developers<svg class="i side-tree__chev" width="16" height="16" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></summary><ul><li><a href="#g-side-tree">Overview</a></li></ul></details>
     </nav></div>
@@ -1313,7 +1313,7 @@ Your choice [1]:</pre></div>
   </div>
   <div class="g-item" id="g-feature"><h3>Feature card, solver card and version badge</h3>
     <div class="help-landing__head" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--space-2) var(--space-4)"><p style="margin:0;font-size:var(--text-xl);font-weight:var(--weight-heading)">Welcome to Starboard help</p><a class="version-badge" href="#g-feature"><span class="chip" data-tone="success">Latest version</span><b>0.18.0</b><span class="visually-hidden"> (release notes)</span></a></div>
-    <section class="feature-card" aria-labelledby="g-feature-h"><div class="feature-card__text"><span class="chip" data-tone="info">New in 0.18</span><h4 id="g-feature-h">Update Starboard from its own page</h4><p>Select Update now, or let Starboard update itself in your quiet hours.</p><a class="btn btn--primary" href="#g-feature">Read how it works</a></div><div class="feature-card__pic"><p class="small muted">A small flow chart or a picture goes here.</p></div></section>
+    <section class="feature-card" aria-labelledby="g-feature-h"><div class="feature-card__text"><span class="chip" data-tone="info">New in 0.18</span><h4 id="g-feature-h">Update Starboard from its own page</h4><p>Select Update now, or let Starboard update itself in your quiet hours.</p><a class="btn btn--primary" href="#g-feature">Read <b>Update Starboard</b></a></div><div class="feature-card__pic"><p class="small muted">Flow chart: Update now, then Starboard restarts.</p></div></section>
     <section class="solver-card" aria-labelledby="g-solver-card-h"><span class="side-tree__tile solver-card__tile">{{i-lg:wrench}}</span><div><h4 id="g-solver-card-h">Something not working?</h4><p>The problem solver asks up to four questions and takes you to the right fix.</p></div><a class="btn btn--primary" href="#g-solver">Start the problem solver</a></section>
   </div>
   <div class="g-item" id="g-solver"><h3>Problem solver</h3>
@@ -1444,13 +1444,13 @@ Your choice [1]:</pre></div>
     <form class="side-panel__body" data-display-save="ds-display">
       <fieldset><legend>Theme</legend><div class="segmented"><label><input type="radio" name="g-pd-theme" value="system" data-display="theme" checked><span>Match device</span></label><label><input type="radio" name="g-pd-theme" value="light" data-display="theme"><span>Light</span></label><label><input type="radio" name="g-pd-theme" value="dark" data-display="theme"><span>Dark</span></label></div></fieldset>
       <fieldset><legend>Text size</legend><div class="segmented"><label><input type="radio" name="g-pd-text" value="100" data-display="text" checked><span>100%</span></label><label><input type="radio" name="g-pd-text" value="125" data-display="text"><span>125%</span></label><label><input type="radio" name="g-pd-text" value="150" data-display="text"><span>150%</span></label><label><input type="radio" name="g-pd-text" value="175" data-display="text"><span>175%</span></label></div></fieldset>
-      <fieldset><legend>Reduce motion</legend><div class="segmented"><label><input type="radio" name="g-pd-motion" value="device" data-display="motion" checked><span>Match device</span></label><label><input type="radio" name="g-pd-motion" value="on" data-display="motion"><span>On</span></label><label><input type="radio" name="g-pd-motion" value="off" data-display="motion"><span>Off</span></label></div></fieldset>
+      <fieldset><legend>Reduce motion</legend><div class="segmented"><label><input type="radio" name="g-pd-motion" value="device" data-display="motion" checked><span>Match device</span></label><label><input type="radio" name="g-pd-motion" value="on" data-display="motion"><span>Active</span></label><label><input type="radio" name="g-pd-motion" value="off" data-display="motion"><span>Inactive</span></label></div></fieldset>
       <label class="switch"><span>High contrast</span><input type="checkbox" role="switch" data-display="contrast"></label>
       <label class="switch"><span>Underline links</span><input type="checkbox" role="switch" data-display="underline"></label>
       <label class="switch"><span>Wider text spacing</span><input type="checkbox" role="switch" data-display="spacing"></label>
       <p class="small muted">Choices apply at once and are kept in this browser.</p>
     </form>
-    <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Done</button><button class="btn" type="button" data-display-reset="ds-display">Reset</button></div>
+    <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Close</button><button class="btn" type="button" data-display-reset="ds-display">Reset to defaults</button></div>
   </aside>
 </div>
 

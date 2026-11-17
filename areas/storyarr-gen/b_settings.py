@@ -31,7 +31,7 @@ def opens(label, hint, pid, verb="Edit", extra="", icon="pencil"):
 
 
 def check(on=True):
-    return f'<label class="check"><input type="checkbox" aria-labelledby="{{L}}"{" checked" if on else ""}><span class="check__text">{"On" if on else "Off"}</span></label>'
+    return f'<label class="check"><input type="checkbox" aria-labelledby="{{L}}"{" checked" if on else ""}><span class="check__text">{"Active" if on else "Inactive"}</span></label>'
 
 
 def select(opts, w=240):
@@ -85,7 +85,7 @@ def remove_dialog(did, title, body, button):
 
 
 COMMON_WHAT = ("<strong>Every section uses the settings rows template</strong>: cards with a heading and one line, label and explanation on the left, the control on the right.",
-               "<strong>One save pattern</strong>, modelled on File naming: a save bar that stays in view at the foot of the section, with Save changes, Discard changes and the save state. No more autosave next to explicit saves, or \"Saved\" above the form in one section and below in another.",
+               "<strong>One save pattern</strong>, modelled on File naming: a save bar that stays in view at the foot of the section, with Save changes, Discard changes and the save state. No more autosave next to explicit saves, or \"Saved\" before the form in one section and after it in another.",
                "<strong>Things with several fields open a slide-out</strong> with Save, Cancel, Test and Remove in its footer; removing always asks in a dialog.")
 
 
@@ -102,7 +102,7 @@ PHONE_DEFAULT = [("phone=1", "Rows stack; the save bar wraps and stays at the fo
 
 
 def general():
-    display = section_block(True, "Display", "How Storyarr looks for you. Display and accessibility is saved in this browser; the rest is saved to your account.",
+    display = section_block(True, "Display", "Theme, text size and motion, for you. Display and accessibility is saved in this browser; the rest is saved to your account.",
         card("Display and accessibility", "Saved in this browser only. The Display button in the header opens the same settings.", [
             setting("Theme", "Match device follows your system's light or dark setting.", seg("th", ["Match device", "Light", "Dark"], "Light")),
             setting("Text size", None, select(["100%", "125%", "150%", "175%"], 160)),
@@ -156,8 +156,8 @@ def accounts():
             setting("Plex", f'<span class="chip" data-tone="muted">Not linked</span>', f'<button class="btn" type="button">{ic("link-2")}Link Plex</button>'),
         ]) + card("Sign-in for everyone", "Which sign-in methods are offered on the sign-in page.", [
             opens("Identity provider (OpenID Connect)", 'Household SSO · <span class="chip" data-tone="success">Connected</span>', "panel-oidc"),
-            opens("Plex sign-in", '<span class="chip" data-tone="muted">Off</span>', "panel-oidc", "Set up", icon="plus"),
-            setting("New people see the setup wizard", "Moved here from Users and access.", select(["On first sign-in", "Never"])),
+            opens("Plex sign-in", '<span class="chip" data-tone="muted">Inactive</span>', "panel-oidc", "Set up", icon="plus"),
+            setting("Setup wizard for new people", "Moved here from Users and access.", select(["On first sign-in", "Never"])),
         ], admin=True) + savebar())
     users = section_block(False, "Users and access", "People who can sign in, and what each role can do. Was called \"Users &amp; access\".",
         card("People", "3 people", [
@@ -184,19 +184,19 @@ def accounts():
         panel("panel-oidc", "Identity provider", f"""<div class="field"><label for="o-name">Name on the sign-in page</label><input class="input" id="o-name" value="Household SSO"></div>
 <div class="field"><label for="o-iss">Issuer address</label><input class="input" id="o-iss" value="https://sso.example.test"></div>
 <div class="field"><label for="o-id">Client ID</label><input class="input" id="o-id" value="storyarr"></div>
-<div class="field"><label for="o-sec">Client secret</label><span class="hint" id="o-sech">Saved. Type a new secret to replace it.</span><input class="input" id="o-sec" type="password" aria-describedby="o-sech"></div>
-<details class="disclosure"><summary>Advanced</summary><div class="disclosure__body"><div class="field"><label for="o-sc">Scopes</label><input class="input" id="o-sc" value="openid profile email"></div></div></details>""",
+<div class="field"><label for="o-sec">Client secret</label><span class="hint" id="o-sech">Saved. Enter a new secret to replace it.</span><input class="input" id="o-sec" type="password" aria-describedby="o-sech"></div>
+<details class="disclosure"><summary>More options</summary><div class="disclosure__body"><div class="field"><label for="o-sc">Scopes</label><input class="input" id="o-sc" value="openid profile email"></div></div></details>""",
         edit_foot("Save and test", ("Remove provider", "dlg-del-oidc"))) + \
         panel("panel-password", "Change password", """<div class="field"><label for="p-cur">Current password</label><input class="input" id="p-cur" type="password" autocomplete="current-password"></div>
 <div class="field"><label for="p-new">New password</label><span class="hint" id="p-newh">At least 12 characters.</span><input class="input" id="p-new" type="password" autocomplete="new-password" aria-describedby="p-newh"></div>""",
         '<button class="btn btn--primary" type="button">Change password</button><button class="btn btn--quiet" type="button" data-closes>Cancel</button>')
-    dialogs = dialog("dlg-del-user", "Delete Robin's account?", '<p>Robin can no longer sign in. Their requests and lists are deleted; books in your libraries stay. This cannot be undone.</p><div class="field"><label for="du">Type DELETE to confirm</label><input class="input" id="du" autocomplete="off"></div>',
+    dialogs = dialog("dlg-del-user", "Delete Robin's account?", '<p>Robin can no longer sign in. Their requests and lists are deleted; books in your libraries stay. This cannot be undone.</p><div class="field"><label for="du">Enter DELETE to confirm</label><input class="input" id="du" autocomplete="off"></div>',
                      '<button class="btn btn--danger btn--primary" type="button" data-closes>Delete permanently</button><button class="btn btn--quiet" type="button" data-closes>Cancel</button>') + \
         remove_dialog("dlg-del-role", "Delete the Member role?", "2 people have this role. Choose another role for them before deleting it.", "Delete role") + \
         remove_dialog("dlg-del-oidc", "Remove the identity provider?", "People who sign in only with Household SSO will need a password. 2 people are affected.", "Remove provider")
     return gpage("accounts", "Accounts", ["<strong>No third tab level</strong>: Users and Roles are two cards on one page instead of a tab switch inside the section. One Edit per person, with Account details merged into the person's slide-out.",
                                          "<strong>Identity provider, Plex sign-in and first-run onboarding move to Sign-in</strong>, from the bottom of Users and access. No ampersand in the section name; no em dashes in its text."],
-                 [signin, users], panels, dialogs, [("phone=1", "Sign-in rows stack.", 760), ("phone=1&open=panel-user", "A person's slide-out, full width; Delete account asks with a typed confirmation.", 760)])
+                 [signin, users], panels, dialogs, [("phone=1", "Sign-in rows stack.", 760), ("phone=1&open=panel-user", "A person's slide-out, full width; Delete account asks for an entered confirmation.", 760)])
 
 
 def sources():
@@ -217,7 +217,7 @@ def sources():
             setting("Preferred source", None, select(["Hardcover", "Open Library"])),
             setting("Language", "Books in other languages are hidden from Discover.", select(["English", "Any language"])),
         ], h="h3") + card("Enrichment and matching", None and "" or "How sure Storyarr must be before it matches a file by itself.", [
-            setting("Match automatically above", "Below this, the file goes to Library review.", unit("85", "%")),
+            setting("Match automatically from", "Under this, the file goes to Library review.", unit("85", "%")),
             setting("Fill in missing descriptions", None, check(True)),
             setting("Replace low-resolution covers", None, check(False)),
         ], h="h3") + card("Field overrides", "What happens to details you edited yourself.", [
@@ -240,7 +240,7 @@ def sources():
     dialogs = remove_dialog("dlg-disc", "Disconnect Hardcover?", "Book details stop updating from Hardcover and its shelves stop being read. Books already in your library keep their details.", "Disconnect") + \
         remove_dialog("dlg-rm-list", "Remove Want to read from Storyarr?", "The list stops being checked. Books in your library and your Goodreads shelf are not changed.", "Remove list")
     return gpage("sources", "Sources", ["<strong>One card per reading site</strong> with its status and its tracked lists as rows, instead of three nested details blocks. Connecting, including the StoryGraph steps, happens in a slide-out; list details move from a modal to a slide-out.",
-                                        "<strong>The Hardcover token has one home</strong> (Metadata) and opens the same slide-out from both sections. Catalogue defaults are no longer 70% hidden in an advanced block."],
+                                        "<strong>The Hardcover token has one home</strong> (Metadata) and opens the same slide-out from both sections. Catalogue defaults are no longer 70% hidden in a block of more options."],
                  [reading, meta], panels, dialogs, PHONE_DEFAULT + [("phone=1&open=panel-storygraph", "The StoryGraph steps in a slide-out on a phone.", 760)])
 
 
@@ -311,7 +311,7 @@ def downloads():
             setting("Ebook formats", None, select(["EPUB, then AZW3, then PDF", "AZW3, then EPUB"], 280)),
             setting("Audiobook formats", None, select(["M4B, then MP3", "MP3, then M4B"], 280)),
         ], h="h3") + card("Ranking and sources", None or "How releases are scored.", [
-            setting("Minimum score", "Releases below this wait for you in Activity.", unit("50", "points")),
+            setting("Minimum score", "Releases under this wait for you in Activity.", unit("50", "points")),
             setting("Prefer freeleech", None, check(True)),
         ], h="h3") + card("Narrators", "For audiobooks.", [
             setting("Prefer the narrator of earlier books in a series", None, check(True)),
@@ -331,7 +331,7 @@ def downloads():
     panels = panel("panel-source", "MyAnonamouse", f"""<div class="notice" data-tone="success" role="status">{ic("circle-check")}<div class="notice__body"><span class="notice__title">Connected</span><p>Tested 5 minutes ago. Network check passed: IP address matches the session.</p></div></div>
 <div class="field"><label for="ma-c">Session cookie</label><span class="hint" id="ma-ch">Saved. Paste a new cookie to replace it.</span><input class="input" id="ma-c" type="password" aria-describedby="ma-ch"></div>
 <fieldset><legend class="field__label">Search for</legend><label class="check"><input type="checkbox" checked><span class="check__text">Ebooks</span></label><label class="check"><input type="checkbox" checked><span class="check__text">Audiobooks</span></label></fieldset>
-<details class="disclosure"><summary>Advanced</summary><div class="disclosure__body"><div class="field"><label for="ma-r">Minimum seeders</label><input class="input" id="ma-r" value="1" inputmode="numeric"></div></div></details>""",
+<details class="disclosure"><summary>More options</summary><div class="disclosure__body"><div class="field"><label for="ma-r">Minimum seeders</label><input class="input" id="ma-r" value="1" inputmode="numeric"></div></div></details>""",
         edit_foot("Save and test", ("Remove source", "dlg-rm-src"))) + \
         panel("panel-client", "qBittorrent", f"""<div class="notice" data-tone="success" role="status">{ic("circle-check")}<div class="notice__body"><span class="notice__title">Connected</span><p>Tested 2 minutes ago, version 5.0.3.</p></div></div>
 <section aria-labelledby="cl-1" style="display:grid;gap:var(--space-3)"><h3 id="cl-1">Connection</h3>
@@ -341,14 +341,14 @@ def downloads():
 <section aria-labelledby="cl-2" style="display:grid;gap:var(--space-3)"><h3 id="cl-2">Download folder</h3>
 <div class="field"><label for="cl-c">Category</label><span class="hint" id="cl-ch">Letters, numbers, - and _ only.</span><input class="input" id="cl-c" value="storyarr" aria-describedby="cl-ch"></div>
 <dl class="facts"><dt>Folder</dt><dd><code>/data/torrents/storyarr</code></dd></dl></section>
-<section aria-labelledby="cl-3" style="display:grid;gap:var(--space-3)"><h3 id="cl-3">Folder mappings</h3><p class="small muted">Only needed when qBittorrent sees the folder under a different path.</p>
+<section aria-labelledby="cl-3" style="display:grid;gap:var(--space-3)"><h3 id="cl-3">Folder mappings</h3><p class="small muted">Only needed when qBittorrent uses a different path for the folder.</p>
 <ul class="rows"><li class="row row--no-lead"><div><div class="row__title"><code>/downloads</code> in qBittorrent</div><div class="row__meta">is <code>/data/torrents</code> in Storyarr</div></div><div class="row__side"><button class="icon-btn icon-btn--bare" type="button" aria-label="Remove mapping /downloads">{ic("x")}</button></div></li></ul>
 <button class="btn" type="button" style="justify-self:start">{ic("plus")}Add mapping</button></section>""",
         edit_foot("Save and test", ("Remove client", "dlg-rm-client"))) + \
         panel("panel-blocklist", "Release blocklist", f"""<div class="field"><label for="bl-q">Search blocked releases</label><input class="input" id="bl-q" type="search"></div>
 <ul class="rows"><li class="row row--no-lead"><div><div class="row__title">Lanterns.Under.Ice.EPUB</div><div class="row__meta">MyAnonamouse · stalled at 62% · 30 Oct</div></div><div class="row__side"><button class="btn btn--compact" type="button" onclick="SharedComponents.toast('Lanterns.Under.Ice.EPUB removed from the blocklist. Undo')">Unblock<span class="visually-hidden"> Lanterns.Under.Ice.EPUB</span></button></div></li>
-<li class="row row--no-lead"><div><div class="row__title">Moth.Season.MP3.64kbps</div><div class="row__meta">Prowlarr · below minimum quality · 22 Oct</div></div><div class="row__side"><button class="btn btn--compact" type="button">Unblock<span class="visually-hidden"> Moth.Season.MP3.64kbps</span></button></div></li></ul>
-<p class="small muted">Unblocking shows a confirmation with Undo, so a slip is easy to reverse.</p>""", wide=True)
+<li class="row row--no-lead"><div><div class="row__title">Moth.Season.MP3.64kbps</div><div class="row__meta">Prowlarr · under minimum quality · 22 Oct</div></div><div class="row__side"><button class="btn btn--compact" type="button">Unblock<span class="visually-hidden"> Moth.Season.MP3.64kbps</span></button></div></li></ul>
+<p class="small muted">Unblocking shows a confirmation with Undo, so a mistake can be reversed with Undo.</p>""", wide=True)
     dialogs = remove_dialog("dlg-rm-src", "Remove MyAnonamouse?", "Storyarr stops searching it. Downloads in progress carry on.", "Remove source") + \
         remove_dialog("dlg-rm-client", "Remove qBittorrent?", "Books already downloaded stay where they are. Downloads in progress stop being tracked.", "Remove client")
     return gpage("downloads", "Downloads", ["<strong>Download clients holds clients only</strong>: rows and one Add client menu instead of six Connect buttons, an inline form and cards five levels deep. Add and edit open a slide-out with Connection, Download folder and Folder mappings sections.",
@@ -380,7 +380,7 @@ def system():
         ], h="h3") + savebar())
     up = section_block(False, "Upgrades and backups", "The main setting comes first now, instead of last and collapsed.",
         card("Upgrades", 'Version 1.10.0 · <span class="chip" data-tone="success">Up to date</span>', [
-            setting("Upgrade automatically", "On: Storyarr backs up your settings first and keeps the defaults for anything new.", check(True)),
+            setting("Upgrade automatically", "Active: Storyarr backs up your settings first and keeps the defaults for anything new.", check(True)),
             setting("Release notes", "What changed in each version.", f'<button class="btn" type="button" data-opens="panel-release-notes">{ic("file-text")}Read release notes</button>'),
         ], h="h3") + card("Backups", "Made before every upgrade and every night.", [
             setting("Before upgrade to 1.10.0", "28 October 2026 · 4.2 MB", f'<button class="btn" type="button">{ic("download")}Download<span class="visually-hidden"> backup from 28 October</span></button>'),

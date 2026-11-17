@@ -90,7 +90,7 @@
 <p>Copies <code>tokens.css</code>, <code>components.css</code>, <code>components.js</code> and the icons into Storyarr and Starboard, so both apps use the same components. It does not commit. Add <code>--check</code> to list what would change without writing anything.</p>
 <div class="command"><code class="code-block">python3 tools/sync.py --check</code><button class="copy-btn" type="button" data-copy="python3 tools/sync.py --check" aria-label="Copy command">{{i:copy}}</button></div>
 <div class="command"><code class="code-block">python3 tools/sync.py</code><button class="copy-btn" type="button" data-copy="python3 tools/sync.py" aria-label="Copy command">{{i:copy}}</button></div>
-<p>By default it looks for <code>../starboard</code> and <code>../storyarr</code> beside this repository. To use other folders, set <code>STARBOARD_WEB</code> and <code>STORYARR_SHARED</code>, or put them in <code>tools/paths.local.json</code>, which git ignores:</p>
+<p>By default it uses <code>../starboard</code> and <code>../storyarr</code> beside this repository. To use other folders, set <code>STARBOARD_WEB</code> and <code>STORYARR_SHARED</code>, or put them in <code>tools/paths.local.json</code>, which git ignores:</p>
 <div class="command"><code class="code-block">{
   "STARBOARD_WEB": "~/src/starboard/web",
   "STORYARR_SHARED": "~/src/storyarr/apps/web/src/shared"
@@ -99,8 +99,16 @@
   &quot;STORYARR_SHARED&quot;: &quot;~/src/storyarr/apps/web/src/shared&quot;
 }" aria-label="Copy command">{{i:copy}}</button></div>
 
+<h2 id="words">Keep banned words out: check_words.py</h2>
+<p>Checks the guides, the gallery, the Boards and resources pages, and the strings in <code>components.js</code> and the terminal frame for the words the content design guide bans, such as "see", "look", "click", "type" for entering, "above", "below" and "please". It leaves out code and a word quoted on its own. A genuine exception goes in <code>tools/words-allowed.txt</code>, with its reason. It ends with a list of lines to fix, or "none".</p>
+<div class="command"><code class="code-block">python3 tools/check_words.py</code><button class="copy-btn" type="button" data-copy="python3 tools/check_words.py" aria-label="Copy command">{{i:copy}}</button></div>
+
+<h2 id="tokens">Use only real tokens: check_tokens.py</h2>
+<p>Lists every name a style sheet uses that <code>tokens.css</code> does not have, and the token to use instead. With no files it checks <code>components.css</code>; an app gives its own.</p>
+<div class="command"><code class="code-block">python3 tools/check_tokens.py ../starboard/web/css/*.css</code><button class="copy-btn" type="button" data-copy="python3 tools/check_tokens.py ../starboard/web/css/*.css" aria-label="Copy command">{{i:copy}}</button></div>
+
 <h2 id="private">Keep private details out: check-private.sh and install-hooks.sh</h2>
-<p><code>check-private.sh</code> stops a commit that would publish home network addresses, email addresses, keys, or the words in your own <code>.private-words</code> file (one word a line; git ignores it). <code>install-hooks.sh</code> runs the check before every commit in your copy. Run it once.</p>
+<p><code>check-private.sh</code> stops a commit that would publish home network addresses, email addresses, keys, or the words in your own <code>.private-words</code> file (one word a line; git ignores it). <code>install-hooks.sh</code> runs this check and the banned words check before every commit in your copy. Run it once.</p>
 <div class="command"><code class="code-block">tools/install-hooks.sh</code><button class="copy-btn" type="button" data-copy="tools/install-hooks.sh" aria-label="Copy command">{{i:copy}}</button></div>
 <div class="command"><code class="code-block">tools/check-private.sh</code><button class="copy-btn" type="button" data-copy="tools/check-private.sh" aria-label="Copy command">{{i:copy}}</button></div>
 </div>
@@ -116,13 +124,13 @@
     <form class="side-panel__body" data-display-save="ds-display">
       <fieldset><legend>Theme</legend><div class="segmented"><label><input type="radio" name="g-pd-theme" value="system" data-display="theme" checked><span>Match device</span></label><label><input type="radio" name="g-pd-theme" value="light" data-display="theme"><span>Light</span></label><label><input type="radio" name="g-pd-theme" value="dark" data-display="theme"><span>Dark</span></label></div></fieldset>
       <fieldset><legend>Text size</legend><div class="segmented"><label><input type="radio" name="g-pd-text" value="100" data-display="text" checked><span>100%</span></label><label><input type="radio" name="g-pd-text" value="125" data-display="text"><span>125%</span></label><label><input type="radio" name="g-pd-text" value="150" data-display="text"><span>150%</span></label><label><input type="radio" name="g-pd-text" value="175" data-display="text"><span>175%</span></label></div></fieldset>
-      <fieldset><legend>Reduce motion</legend><div class="segmented"><label><input type="radio" name="g-pd-motion" value="device" data-display="motion" checked><span>Match device</span></label><label><input type="radio" name="g-pd-motion" value="on" data-display="motion"><span>On</span></label><label><input type="radio" name="g-pd-motion" value="off" data-display="motion"><span>Off</span></label></div></fieldset>
+      <fieldset><legend>Reduce motion</legend><div class="segmented"><label><input type="radio" name="g-pd-motion" value="device" data-display="motion" checked><span>Match device</span></label><label><input type="radio" name="g-pd-motion" value="on" data-display="motion"><span>Active</span></label><label><input type="radio" name="g-pd-motion" value="off" data-display="motion"><span>Inactive</span></label></div></fieldset>
       <label class="switch"><span>High contrast</span><input type="checkbox" role="switch" data-display="contrast"></label>
       <label class="switch"><span>Underline links</span><input type="checkbox" role="switch" data-display="underline"></label>
       <label class="switch"><span>Wider text spacing</span><input type="checkbox" role="switch" data-display="spacing"></label>
       <p class="small muted">Choices apply at once and are kept in this browser.</p>
     </form>
-    <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Done</button><button class="btn" type="button" data-display-reset="ds-display">Reset</button></div>
+    <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Close</button><button class="btn" type="button" data-display-reset="ds-display">Reset to defaults</button></div>
   </aside>
 </div>
 <script src="../components.js"></script>

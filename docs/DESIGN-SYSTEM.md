@@ -76,6 +76,20 @@ Line height 1.5 for body, 1.25 for headings. Weights 400 and 600 only. Low-visio
 - Control height `--control-h` 44px. `--control-h-compact` (32px, `.btn--compact`) only inside dense tables, never
   for the only way to act and never beside a 44px control.
 - Radius `--radius` 0; `--radius-round` 50% for avatars and dots.
+- Focus ring width `--focus-w` 3px.
+- **Names that are not tokens** (17 November 2026). An app's CSS uses only the names in `tokens.css`. A name that
+  is not there falls back to whatever the app wrote after it, so the design system no longer decides. Use these
+  instead:
+
+  | Not a token | Use |
+  |---|---|
+  | `--radius-1`, `--radius-2`, `--radius-3`, `--radius-control` | `--radius` (square corners) |
+  | `--focus-width` | `--focus-w` |
+  | `--weight-normal` | `--weight-regular` |
+  | `--text-base` | `--text-md` |
+  | `--font-mono` | `ui-monospace, monospace`, written out |
+
+  `tools/check_tokens.py` lists every name an app's CSS uses that `tokens.css` does not have.
 - Shadow `--shadow-raised` for dialogs and side panels only; none in high contrast (use borders).
 - Motion `--motion-fast` 120ms, `--motion-panel` 200ms ease-out; both 0ms with Reduce motion.
 - Cover sizes: `--cover-s` 96px wide (summary panel), `--cover-m` 128px (compact wall), `--cover-l` 176px
@@ -96,7 +110,7 @@ Line height 1.5 for body, 1.25 for headings. Weights 400 and 600 only. Low-visio
   (each section's sub-menu inside it).
 - **Header (one row, 2 November 2026):** the section's sub-menu on the left; search and Display on the right.
   Nothing else goes in the header. Page actions (the connection warning, the Lists menu on Discover) sit in a
-  `.page-actions` row at the top right of the page body for now, until the section toolbar takes them. Display is always the last item. Below 1100px
+  `.page-actions` row at the top right of the page body for now, until the section toolbar takes them. Display is always the last item. Under 1100px
   the sub-menu drops to a full-width row under search; on phones it lives in the ☰ drawer. Tabs show icons only
   (names as tooltips) when they do not fit.
 - **One control height:** search and every header, toolbar, panel and menu control is `--control-h` (44px;
@@ -105,7 +119,7 @@ Line height 1.5 for body, 1.25 for headings. Weights 400 and 600 only. Low-visio
 - **Page actions in the header are menus, not rows of buttons:** related actions share one menu button (Lists:
   Add list, Refresh all lists, refresh one service). Menus open with focus on the first item, arrow keys move,
   Escape closes and returns focus.
-- **Menu names, renamed (TheMightyTRexUK, 4 November 2026):** *side menu*, *level 1 menu* and *level 2 menu*, in place of main menu, 1st level and 2nd level below.
+- **Menu names, renamed (TheMightyTRexUK, 4 November 2026):** *side menu*, *level 1 menu* and *level 2 menu*, in place of main menu, 1st level and 2nd level.
 - **Menu names (TheMightyTRexUK, 2 November 2026):** *main menu* = the left rail; *1st level* = header row 1 (a
   section's pages: My library, Following...); *2nd level* = header row 2 (a page's own tabs: In my libraries,
   Authors...). Main menu, 1st and 2nd level all have icons. In the ☰ menu only the main menu and 1st level
@@ -117,7 +131,7 @@ Line height 1.5 for body, 1.25 for headings. Weights 400 and 600 only. Low-visio
   private mock-up):
   1. **Heading row:** the section's h1 and a one-line summary with counts on the left; the view switch
      (for example Covers or List, List and detail or List) on the right.
-  2. **Filter row:** search within the section first; then quick-filter chips with counts (toggle buttons,
+  2. **Filter row:** search within the section first; then quick-filter chips with counts (buttons that are pressed or not,
      `aria-pressed`); then dropdown filter chips ("Media", "Library", "Genre"), which turn accent-coloured and
      show their value when set ("Media: Audiobooks"); then, at the far end, Sort ("Sort: Title", with
      Reverse) and Customise.
@@ -146,11 +160,11 @@ Line height 1.5 for body, 1.25 for headings. Weights 400 and 600 only. Low-visio
 | **StatusChip** | Every status badge in `COMPONENTS.md` section 5 | Props: status (vocabulary), detail. Tone from the status tokens; icon plus text |
 | **CoverCard** | `.book-card`, `.cover-wall-book`, discovery cards | Cover, title, author, StatusChip; whole card selects; no action buttons on the cover |
 | **Row** | Request rows, follow rows, review cards | Cover thumbnail, title and secondary line, StatusChip, one primary action, overflow menu |
-| **SidePanel** | BookSummary, `.book-drawer`, `.release-drawer` | Right side, below the header, 360 to 420px; Escape and a click outside close it; focus managed; full screen on phones. **Header (standard, v0.4.8):** `.side-panel-header` from `apps/web/src/side-panel.css`: the panel's name in bold (`.side-panel-title`, 1rem, weight 700) and the close button (X, `aria-label` "Close …"), on a white bar (`--panel-header-bg`; the surface colour in dark) with a grey line under it (`--panel-header-line`), sticky while the panel scrolls, reaching the panel's edges (each panel sets `--panel-pad-top` and `--panel-pad-x`). Used by the My library summary ("Summary"), the bookshelf drawer ("Book") and the calendar day (the date) |
+| **SidePanel** | BookSummary, `.book-drawer`, `.release-drawer` | Right side, under the header, 360 to 420px; Escape, or selecting outside it, closes it; focus managed; full screen on phones. **Header (standard, v0.4.8):** `.side-panel-header` from `apps/web/src/side-panel.css`: the panel's name in bold (`.side-panel-title`, 1rem, weight 700) and the close button (X, `aria-label` "Close …"), on a white bar (`--panel-header-bg`; the surface colour in dark) with a grey line under it (`--panel-header-line`), sticky while the panel scrolls, reaching the panel's edges (each panel sets `--panel-pad-top` and `--panel-pad-x`). Used by the My library summary ("Summary"), the bookshelf drawer ("Book") and the calendar day (the date) |
 | **Dialog** | BookDialog and other `<dialog>`s | **Same header as SidePanel (2 November 2026):** `.side-panel-header` with the title in an h2 `.side-panel-title` (bold, 1rem) and the close X, white bar, grey line. Then body, buttons main-first; danger variant (`.btn--danger`). The Display dialog uses the same header |
 | **Toolbar** | All filter bars | Slots in the order of section 3 |
-| **FilterChips** | `.follow-status-filters`, `.activity-filters`, `.review-chips` | Toggle buttons (`aria-pressed`) with counts; "All" first |
-| **Select** | Native selects and SelectMenu | One look; label always visible |
+| **FilterChips** | `.follow-status-filters`, `.activity-filters`, `.review-chips` | Buttons that are pressed or not (`aria-pressed`), with counts; "All" first |
+| **Select** | Native selects and SelectMenu | One design; label always visible |
 | **SectionNav** | `.page-tabs`, HeaderSubmenu, LibraryTabs | Links with `aria-current`, icon and label |
 | **Tabs** | DetailTabs and BookDetail's copy | Real tabs with arrow keys, for item pages only |
 | **Button** | Assorted | Variants: primary, secondary, quiet, danger (`.btn--danger`). One primary per view |
@@ -169,7 +183,7 @@ One rule for both apps, so a state is always in the same place relative to the t
 | A list of things that each have a state | `.status-icon`: an icon straight after the name, the word in hidden text and a tooltip | Manage apps, What Starboard can access |
 | A row with actions | The chip in `.row__side`, before the actions | Requests, downloads |
 | A card | The chip in `.card__meta` | Apps |
-| A stat tile | The chip under the value | Storage, Drives over 90% full |
+| A stat tile | The chip under the value | Storage, Disks over 90% full |
 | A cover | The chip in the cover's corner | Book walls |
 
 - Never put status on a line of its own under a heading: it pushes the content down and reads as a separate item.
@@ -188,12 +202,12 @@ One rule for both apps, so a state is always in the same place relative to the t
   in a slide-out and Skip this step in a wizard sit apart on the right (LIBRARY.md, Button).
 - **Danger is shown before and after.** A button that opens a danger dialog is `.btn--danger`; delete and remove
   use the `trash-2` icon; the dialog's other button is **Cancel**.
-- **One-of-several filters** are `.segmented`; filter chips are for toggles that can be on together.
+- **One-of-several filters** are `.segmented`; filter chips are for filters that can be active together.
 - **Headings at one level are one size.** Panel and section titles take the library's size for their level; do
   not resize them per page.
 - **Chart text** follows Text size: SVG text uses `--text-xs` or `--text-sm` in a viewBox drawn at the real width,
   or sits in HTML beside the chart.
-- **Slide-outs look like slide-outs** (2 November 2026, TheMightyTRexUK). Every slide-out, including the phone menu, has its
+- **Every slide-out has the same header and body** (2 November 2026, TheMightyTRexUK). Every slide-out, including the phone menu, has its
   header in the page background (`--color-slide-header`, which is `--color-bg` in every theme) and its body and
   foot on the raised surface (white in Light, the dark surface in Dark). Dialogs keep the plain panel header.
   **Display and accessibility** and **Release notes** are slide-outs, not dialogs.
@@ -203,7 +217,7 @@ One rule for both apps, so a state is always in the same place relative to the t
 
 ## 6. Filters and the address
 
-Every filter, sort, view switch and toggle that changes the page's address must start from
+Every filter, sort, view switch and on-and-off button that changes the page's address must start from
 `currentParams()` (`apps/web/src/currentParams.ts`), the address as it is right now. Never build the
 next address from `useSearchParams()`'s copy or from React Router's `setSearchParams(previous => …)`:
 both are the copy from the last render, so a quick second change drops the first (found 1 November 2026).
@@ -212,8 +226,8 @@ Links rendered on the page can use the render-time copy, because they redraw wit
 
 ## 7. Layout rules
 
-- Content max width 1440px; side panel pushes content on wide screens, overlays it below 1100px.
-- Breakpoints: phone below 640px, tablet 640 to 1099px, desktop 1100px and up.
+- Content max width 1440px; side panel pushes content on wide screens, overlays it under 1100px.
+- Breakpoints: phone under 640px, tablet 640 to 1099px, desktop 1100px and up.
 - Covers wall: auto-fill grid with `--cover-m` minimum; titles under covers, two lines maximum.
 - Tables only for real tabular data (Activity history, logs); everything else uses Rows.
 - Numbers in rows right-aligned; dates as in the content guide.
@@ -236,11 +250,11 @@ is the same wizard as the browser one, with the same steps, words, answers and h
   last answer)" when someone comes back; the default in brackets, and Enter takes it.
 - **Help** is a box over the step, titled "Help: " and the question; the step comes back as it was.
 - **A job** has one bar, drawn in place: the job, which job of how many, what it is doing, the timer, then how far
-  it has got ("5 of 12 installed"). Only Ctrl+C works while it runs, and keys typed meanwhile are hidden and
-  dropped. A failure keeps the bar, marked, with the problem and the choices below it.
+  it has got ("5 of 12 installed"). Only Ctrl+C works while it runs, and keys pressed meanwhile are hidden and
+  dropped. A failure keeps the bar, marked, with the problem and the choices after it.
 - **Feedback** is Snaglist's, drawn in the terminal: f from any question, or Report this problem after a failure.
   The report goes to the phone as a QR code that fits the window (`TERMINAL.md`, section 7), or as a link or a
-  file. Nothing typed as an answer is ever in it.
+  file. No answer is ever in it.
 - **Every error has a number** (RF-01, IN-01) that the help centre explains.
 
 ## 9. Settings patterns
@@ -251,11 +265,11 @@ gallery's Settings patterns section shows each one.
 
 | # | Pattern | Use it for | Code |
 |---|---|---|---|
-| 1 | **Section** | Each topic on a page: heading, one line about it, its state chip on the heading's line. Topic tabs above when a page has four sections or more | `.settings-section`, `.settings-section__head`, `.title-chip`, `.topic-tabs` |
+| 1 | **Section** | Each topic on a page: heading, one line about it, its state chip on the heading's line. Topic tabs first when a page has four sections or more | `.settings-section`, `.settings-section__head`, `.title-chip`, `.topic-tabs` |
 | 2 | **Setting rows** | One setting each: label and hint on the left, control on the right. Switches, selects and numbers apply at once and show the saved note beside the control | `.settings-rows > .setting`, `.setting__text`, `.setting__control`, `.saved-note`; a number with a unit uses `.input-unit` |
 | 3 | **Choice cards** | Two to four choices that each need a sentence | `.option-cards > .option-card` (radios) |
-| 4 | **Location** | Every folder: the folder in words with free space, the path small under it, Browse (opens in the right place), Set automatically (the right folder for this setting), and the typed path under Advanced | `.location` |
-| 5 | **Form with Save** | Typed text only (an address, a name, a key). One Save per section, at its foot, with the saved note beside it; Test beside Save when the text can be tested | `.form-stack`, `.actions`, `.saved-note` |
+| 4 | **Location** | Every folder: the folder in words with free space, the path small under it, Browse (opens in the right place), Set automatically (the right folder for this setting), and Enter a path under More options | `.location` |
+| 5 | **Form with Save** | Entered text only (an address, a name, a key). One Save per section, at its foot, with the saved note beside it; Test beside Save when the text can be tested | `.form-stack`, `.actions`, `.saved-note` |
 | 6 | **Status line and messages** | What is wrong or worth knowing: one sentence, then what to do, with at most one button | `.notice[data-tone]`, chip on the section's heading |
 | 7 | **Empty and error states** | A list with nothing in it, or a part that could not load: what is missing and the one thing to do | `.empty` with one primary button |
 | 8 | **Lists that open** | Things with several settings each (apps, sites, people): each row has its state chip and Edit, which opens a slide-out editor; Add at the foot of the list. A long list of apps (Manage apps) shows the state as `.status-icon` after the name instead (section 5, Where status goes) | `.rows > .row`, `.row__side`, slide-out |
@@ -266,25 +280,25 @@ Rules:
 - **No toast for a saved setting.** The saved note beside the control or the Save button says it ("Saved 16:31").
   A toast is for things that happen elsewhere or later.
 - **A unit is part of the control** (`20 | MB/s`), never only in the label or the hint.
-- **A folder is never a bare text box.** Starboard knows where each app sees its folders; Browse shows the
-  computer's folders and gives the app the path as it sees it.
-- **Advanced settings** are hidden until the page's small Advanced settings switch is on (at the right of the
-  heading's line); a location's typed path is always under its own Type a path (Advanced).
+- **A folder is never a bare text box.** Starboard knows the path each app uses for its folders; Browse shows the
+  computer's folders and gives the app the path it uses.
+- **More settings** are hidden until the page's small More settings switch is active (at the end of the
+  heading's line); a location's path is always entered under its own More options, in Enter a path.
 - **Slide-outs use the same patterns** inside; their one Save is the primary button in the foot.
 
 
 ## 10. Repeated items: which one to use
 
 Starboard DASH-309, 12 November 2026. Settings have their nine patterns (section 9); this section does the same for
-the items every other page repeats. Pick by what the thing is, not by how it should look. The classes are in
+the items every other page repeats. Pick by what the thing is, not by its appearance. The classes are in
 `LIBRARY.md`; the gallery shows each one.
 
 | Item | Use it for | Do not use it for | Code |
 |---|---|---|---|
 | **List rows** | A list of things that each have a state or an action: downloads, requests, apps, connections, jobs | Real tabular data (use a table); things people browse by picture (use cards or covers) | `.rows > .row`, `.row__title`, `.row__meta`, `.row__side` |
 | **Row that opens** | A row whose details or settings live in a slide-out | A row with several unrelated buttons | `.row--opens`; the title is the button, the whole row is the target |
-| **Cards** | One thing people pick from a few: an app, a drive, a plug-in in a catalogue. It opens its page or slide-out | A box to group content (use a panel); a list of more than about 24 (use rows) | `.cards > .card`, `.card__title`, `.card__meta`, `.card__actions` |
-| **Panels** | Grouping parts of a page under one heading: Overview's parts, a dashboard area | One clickable thing (use a card) | `.panel`, `.panel__head` |
+| **Cards** | One thing people pick from a few: an app, a disk, a plug-in in a catalogue. It opens its page or slide-out | A box to group content (use a panel); a list of more than about 24 (use rows) | `.cards > .card`, `.card__title`, `.card__meta`, `.card__actions` |
+| **Panels** | Grouping parts of a page under one heading: Overview's parts, a dashboard area | One thing to select (use a card) | `.panel`, `.panel__head` |
 | **Status chips** | A state in words: Running, Needs attention, Not answering | A number, a date or a count (use the meta line or a count badge); more than two in one place (use facts) | `.chip[data-tone]`, beside its title (section 7) |
 | **Status icons** | The state of each thing in a long list of apps or permissions | A single heading's state (use a chip) | `.status-icon[data-tone]` |
 | **Filter chips** | Filters that can be on together: Films, Series, Missing | One choice of several (use a segmented control) | `.filter-chips > .filter-chip[aria-pressed]` |
@@ -310,7 +324,7 @@ Rules:
   shown, such as `24 of 310`.
 - **A notice says what to do.** Its title is the state ("Not answering"), its sentence says why and what to do, and
   its one button does that. Two notices in one place become one.
-- **Feedback goes where people look.** A saved setting: a saved note beside it. An error about a field or a row:
+- **Feedback appears beside what it is about.** A saved setting: a saved note beside it. An error about a field or a row:
   on the field or row, and focus goes there. Only what happens elsewhere or later is a toast.
 - **Dialogs are short.** Up to two fields. Anything longer is a slide-out with its one Save in the foot.
 - **Words for state changes** are Activate and Deactivate, never Turn on, Turn off, Enable or Disable.
@@ -337,7 +351,7 @@ with things after it that people need often. Use Show more alone, or pages.
 - Pressing the button loads the next page and moves focus to the first new item, so reading carries on there.
 - **The footer stays in reach.** It loads only when the end comes into view, and after three pages in a row it
   pauses with "Paused here so you can reach the end of the page". The button starts a new run.
-- **The button alone** when Reduce motion is on, when the person's setting asks for the button (an app offers one,
+- **The button alone** when Reduce motion is active, when the person's setting asks for the button (an app offers one,
   saved per account), and in a browser without IntersectionObserver.
 - **The A to Z list keeps working.** Jumping to a letter not yet shown loads up to it, moves focus to its heading,
   and starts the count of pages again (`reset()`). Back to top is never covered.

@@ -155,7 +155,7 @@ DISPLAY = """<dialog class="dialog" id="display-dialog" aria-labelledby="display
       <label class="switch"><span class="check__text"><strong>Wider text spacing</strong></span><input type="checkbox" role="switch" data-display="spacing"></label>
     </div>
   </div>
-  <div class="dialog__foot"><button class="btn btn--primary" type="button" data-closes>Done</button><button class="btn btn--quiet" type="button">Reset</button></div>
+  <div class="dialog__foot"><button class="btn btn--primary" type="button" data-closes>Close</button><button class="btn btn--quiet" type="button">Reset to defaults</button></div>
 </dialog>"""
 
 

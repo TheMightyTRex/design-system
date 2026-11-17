@@ -1,0 +1,11 @@
+# Genuine exceptions to tools/check_words.py: file<TAB>pattern for the line<TAB>reason.
+components.js	:not\(\[disabled\]\)	A CSS selector for focusable elements: code, not wording
+areas/starboard-menu.src.html	Below the quality wanted	Starboard's own menu label, quoted as it is (brief exception 6)
+docs/CONTENT-DESIGN.md	^2\.6 \*\*Rule: no|^"The results appear below the search", not|^"Find", not "look for"	Rule 2.6 itself, quoting the words it bans
+docs/CONTENT-DESIGN.md	^above", "listed below" or "the table below"	Rule 2.7 itself, quoting the words it bans
+docs/CONTENT-DESIGN.md	^2\.15 \*\*Rule|^straightforward, obviously|not "This is easy"	Rule 2.15 itself, quoting the words it bans
+docs/CONTENT-DESIGN.md	^2\.18 \*\*Rule: "enter" for typing	Rule 2.18 itself, naming what it covers
+docs/CONTENT-DESIGN.md	Never "click here"	Section 4, quoting a link text it bans
+docs/CONTENT-DESIGN.md	^\| disk \| drive, HDD, volume \|	Section 5, the words not to use for a disk
+docs/DESIGN-SYSTEM.md	never Turn on, Turn off, Enable or Disable	The rule itself, quoting the words it bans
+docs/HELP-WRITING.md	"See" is the one that slips through most	Section 9, quoting a sentence the sweep catches

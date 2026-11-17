@@ -2,7 +2,7 @@
 
 5 November 2026. The same jobs as `WIZARD.md`, for a wizard that runs in a terminal: a server with no desktop,
 reached over SSH, with no browser to finish in. Starboard's `./install.sh --terminal` is the first one. Every
-rule in `WIZARD.md` about questions, words and help still applies; this guide says how each looks in a terminal.
+rule in `WIZARD.md` about questions, words and help still applies; this guide says how each appears in a terminal.
 
 ## 1. Two ways to draw it, one set of words
 
@@ -24,20 +24,20 @@ rule in `WIZARD.md` about questions, words and help still applies; this guide sa
   two lines, at all times. Only the lines between them scroll (a scrolling area set between the two). A long list,
   a card or a message never pushes the heading or the menu out of view.
 - **Measure the window at every step,** and again when it changes size (SIGWINCH). Draw the step again to fit: the
-  frame, then the step's last lines, then the question that is waiting, so the person can carry on typing.
+  frame, then the step's last lines, then the question that is waiting, so the person can carry on entering the answer.
 - **A column, centred.** The frame, text and menu sit in a column at most 100 characters wide. In a wider window the
   column is centred, with equal space either side; at 60 to 100 columns it is the whole window. The column is worked
   out again at every step and every change of size, and the waiting question moves with it.
 - **Text wraps between words** at the column's width, and is wrapped again when the window changes size, never cut
   mid-word.
-- **Below 60 columns or 20 lines,** use the plain way (section 1).
-- **A long list in a short window** shows what fits, then "4 more: type m to see them".
+- **Under 60 columns or 20 lines,** use the plain way (section 1).
+- **A long list in a short window** shows what fits, then "4 more: press m to show them".
 
 ## 3. The heading box
 
 - One line in a box: the app's name in bold, a dim `|`, then the step's name, and `step 2 of 5` on the right:
   `Starboard | Your media server`.
-- Below it, a progress bar the width of the box, and the percentage done.
+- Under it, a progress bar the width of the box, and the percentage done.
 - The box and the bar are the column's full width (at most 100 characters), and every line ends at the same column.
 
 ## 4. Questions
@@ -46,28 +46,28 @@ rule in `WIZARD.md` about questions, words and help still applies; this guide sa
   "(recommended)". Colour never carries the meaning on its own.
 - The default is in brackets, and Enter takes it: `› Your choice [1]:`.
 - **Several answers at once:** in the boxed way, a list with `[x]` and `[ ]`: Up and Down move, Space ticks or
-  unticks, Enter carries on, and a line under the list says so. Typing a number ticks that line too. The list is
-  drawn in place, never repeated. In plain mode (screen readers), the numbers are typed with commas: `1,2,7`.
+  unticks, Enter carries on, and a line under the list says so. Entering a number ticks that line too. The list is
+  drawn in place, never repeated. In plain mode (screen readers), the numbers are entered with commas: `1,2,7`.
 - **A job's progress:** one line, drawn in place and cut to the column; on a failure it stays, marked, and the
-  problem and its choices go below it (`WIZARD.md` section 5, A job's progress). The line reads: the job, which
+  problem and its choices go under it (`WIZARD.md` section 5, A job's progress). The line reads: the job, which
   job of how many, what it is doing now, the timer, then how far it has got when it can tell ("· 5 of 12
   installed", then "· 9 of 12 running").
 - **A long job in plain mode is never silent:** a line when it starts, "Still working: the job (12 min)" every 2
   minutes while it runs, with how far it has got when it can tell, and "Done" or "Did not finish" at the end, so a
   screen reader user knows it has not stopped. Never more often than every 2 minutes: each line is read aloud.
-- A long list on a short screen shows what fits, then "4 more: type m to see them".
-- Passwords and keys are typed hidden: say "(nothing shows as you type)". After Back, Enter keeps the one typed
-  before, without showing it.
+- A long list on a short screen shows what fits, then "4 more: press m to show them".
+- Passwords and keys are entered hidden: say "(nothing appears as you enter it)". After Back, Enter keeps the one
+  entered before, without showing it.
 - An answer the app refuses is explained on the next line in the app's own words, and the question is asked
   again. Refused again, the message and the question replace the last ones in place: the step never fills with
   the same two lines.
 - A question with no default (the person's own service, such as their VPN provider) shows "Your choice:" with no
-  brackets, the menu does not say what Enter does, and Enter alone says "Choose one: type a number from 1 to 7".
-- A question longer than the column wraps between words, its first lines above, so the line the answer is typed
-  on fits. An address is never cut: it may run past the edge so it copies whole.
-- Typed keys show only while a question waits. Keys pressed between questions (Enter pressed twice, say) would
-  otherwise move the lines the step writes next. A line typed ahead like that is shown after the next question,
-  as if typed there.
+  brackets, the menu does not say what Enter does, and Enter alone says "Choose one: enter a number from 1 to 7".
+- A question longer than the column wraps between words, its first lines first, so the line the answer is
+  entered on fits. An address is never cut: it may run past the edge so it copies whole.
+- Keys pressed show only while a question waits. Keys pressed between questions (Enter pressed twice, say) would
+  otherwise move the lines the step writes next. A line entered ahead like that is shown after the next question,
+  as if entered there.
 - A password is not a question of choice: run with `--yes` in a real window, the script still asks for it there,
   rather than stopping.
 
@@ -81,14 +81,14 @@ rule in `WIZARD.md` about questions, words and help still applies; this guide sa
 - **? Help** opens help as a box over the step (section 6).
 - **f Feedback** opens the feedback flow (section 7).
 - **q Stop** stops with nothing else changed, and says how to carry on later.
-- In plain mode there is no menu bar: each step's first line says "Type b to go back, ? for help, f to send
+- In plain mode there is no menu bar: each step's first line says "Press b to go back, ? for help, f to send
   feedback or q to stop".
 
 ## 6. Help as a box over the step
 
 - The step behind is dimmed, the box sits in the middle with "Help: " and the question as its title, and the
   bottom line says "Enter Close help".
-- Long help shows a page at a time ("Enter: more below").
+- Long help shows a page at a time ("Enter: show more"; the menu says "Enter Show more").
 - Closing it draws the step again exactly as it was, with the cursor at the question.
 - Plain mode prints the help under the question instead.
 
@@ -96,14 +96,14 @@ rule in `WIZARD.md` about questions, words and help still applies; this guide sa
 
 The terminal version of Snaglist ("Feedback in a wizard" in `WIZARD.md`):
 
-1. The kind, numbered, as Snaglist offers them: Something is broken, Hard to use, Words are wrong, Hard to use
+1. The kind, numbered, as Snaglist offers them: Something is broken, Confusing to use, Words are wrong, Hard to use
    with my tools or needs, A new feature, Make something better, Something else.
 2. One or two questions, the same as Snaglist asks.
 3. The whole report, before anything leaves the machine.
 4. How to send it: **Show as a QR code** (recommended), Show the link, Save to a file, or Cancel.
 
 - The report keeps Snaglist's rules: the step and the app's version, the operating system and processor type,
-  the last error if there was one, and never anything typed as an answer, a password, a key or a set-up code.
+  the last error if there was one, and never any answer, a password, a key or a set-up code.
   Email addresses, network addresses, user names in paths and anything like a key are replaced.
 - **The QR code** holds a short pre-filled new-issue address: the kind, the step, the person's words cut to fit,
   and the version and system on one line. The whole report is saved on the server at the same time, and the
@@ -121,7 +121,7 @@ The terminal version of Snaglist ("Feedback in a wizard" in `WIZARD.md`):
   | 3 | The step, the version and where the whole report is saved | in between |
   | 4 | The title alone | 80 by 24, the usual SSH window (version 5, 2-module edge, about 100 bytes) |
 
-  The line above the code says which ("It holds a short report"); if there is no room there, the link's view
+  The line before the code says which ("It holds a short report"); if there is no room there, the link's view
   says it. The whole report is always saved on the server. If not even the title fits, say "Make the window
   larger, or use Show the link".
 - Draw it dark on light, in forced colours, so it scans on a dark terminal too. Show it on a view of its own:
@@ -189,12 +189,12 @@ Starboard's `run-first.sh` (the "Run first script") is the first one.
 
 - **One command,** shown first in the README and the help: `curl -fsSL …/run-first.sh | bash`. Show the careful
   way too (download, read, run) and a `--check` option that only reports.
-- **Ask about the look first, in plain words, before anything is drawn:** "Press Enter to start, or type a for
-  accessible mode". Software that reads text aloud must be able to read that line. Accessible mode is the plain
+- **Ask about the layout first, in plain words, before anything is drawn:** "Press Enter to start, or press a
+  for accessible mode". Software that reads text aloud must be able to read that line. Accessible mode is the plain
   way (section 1), and it is passed on to everything the script starts (`--plain`), so it holds for the whole
   installation.
 - **The same frame as the wizard it starts:** heading box, progress bar, menu, help over the step. The first step
-  is a welcome with the app's logo (below) and what will happen.
+  is a welcome with the app's logo (The logo in a terminal, in this section) and what will happen.
 - **Check, then ask, then change.** List what is there and what is missing, with a tick or a cross and the word,
   changing nothing. Then show the exact commands and ask once before running them. Install only what is missing,
   and never run as root by itself: sudo asks for the password, and the script never types or keeps it.
@@ -220,7 +220,7 @@ Starboard's `run-first.sh` (the "Run first script") is the first one.
 4. Plain mode: no clearing, no box characters, no QR code; a screen reader (espeakup or Orca) reads every
    question.
 5. A QR code from each step scans with a phone, and the address it opens is the one shown by Show the link.
-6. Nothing typed as an answer, and no secret, appears on screen, in a log or in a report.
+6. No answer, and no secret, appears on screen, in a log or in a report.
 7. A run first script: on a bare system with nothing installed, and again with everything installed, in a
    throwaway virtual machine for each supported system.
 
@@ -230,7 +230,7 @@ Starboard's `run-first.sh` (the "Run first script") is the first one.
 
 1. **Places first:** a numbered list of This computer, each disk, and each network share where the step brings
    things in from them. A cloud service says it needs the browser to sign in.
-2. **Then the folders:** the path at the top (`Where you are: Drive 2 / Video`), then `1. Use this folder`, then
+2. **Then the folders:** the path first (`Where you are: Disk 2 / Video`), then `1. Use this folder`, then
    one line for each folder with its size and what is in it (`2. Films (1.9 TB, 412 films)`), and `b` to go back a
    level (from the top of a place, back to the places). Enter takes Use this folder.
 3. A long list pages as every other list does. The words are the browser's.

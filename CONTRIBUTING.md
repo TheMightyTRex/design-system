@@ -19,6 +19,8 @@ Every word, in the components, the gallery, the guides and commit messages, foll
 - No em dashes and no contractions.
 - Name controls by their label, never by their position.
 
+`python3 tools/check_words.py` finds the banned words in the text people read, and fails on each one.
+
 ## Making a change
 
 Follow [Make a change](https://themightytrex.github.io/design-system/resources/make-a-change.html): pull, change the library here, build, check four themes
