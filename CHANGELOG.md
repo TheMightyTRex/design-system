@@ -7,6 +7,13 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 [Semantic Versioning](https://semver.org/).
 
 
+## 18 November 2026
+
+- Play in another app (Starboard, DASH-480): a link styled as a button that opens a film or episode in the media
+  server's player in a new tab, with the `play` icon first and the new-tab icon last, its full name for screen
+  readers, the 44px size, and what to show when the item or the app's address is not known. `LIBRARY.md` has the
+  pattern. Made from existing parts, so no new class.
+
 ## 17 November 2026
 
 - Restart where it is needed (Starboard, DASH-470): a Restart button inside the warning notice that says an app needs
