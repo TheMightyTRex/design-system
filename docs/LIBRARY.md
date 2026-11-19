@@ -124,7 +124,7 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 | Cover | `.cover`, `.cover--row` (48px in rows), `.cover__badge` | 2:3; square audio covers letterboxed |
 | Facts | `.facts` (`dl`) | Author first, then Series; names are links |
 | Stat | `.stats`, `.stat[data-tone]`, `.stat__value`, `.stat__label` | Edge colour plus words |
-| Progress and meter | `.progress[data-tone]`, `.meter`, `.meter__label` | Value always in words |
+| Progress and meter | `.progress[data-tone]`, `.progress--busy`, `.progress--running`, `.meter`, `.meter__label` | Value always in words. `.progress--busy`: the end is not known, a band moves across. `.progress--running`: a count that is still going (such as 4 of 5), soft stripes move over the filled part; taken off when it ends, and still with less motion asked for |
 | Rows | `.rows`, `.row`, `.row--no-lead`, `.row--opens`, `.row__title`, `.row__meta`, `.row__side` | `.row--opens`: the whole row opens a slide-out |
 | Group heading | `.group-heading` | Sentence case, no capitals |
 | Table | `.table-wrap[data-stack]`, `.table`, `th[aria-sort]`, `.table--middle` | Real tables only; stack into cards on phones. A row's heading (`th scope="row"`) has the same style as its cells, in bold. `.table--middle` puts every cell on the row's middle line, for a summary with a button on each row, such as a wizard's Check step with Change (7 November 2026) |

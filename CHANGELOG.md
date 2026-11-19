@@ -9,6 +9,8 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 19 November 2026
 
+- **`.progress--running`.** A progress bar for a count that is still going, such as 4 of 5 updates: soft stripes move
+  across the filled part until the class comes off. With less motion asked for, the stripes stay still.
 - **Section groups.** `.settings-section--group` holds several settings sections as one topic: its heading sits on
   the page, each section inside is a card with an h3, and topic tabs give the group one tab.
 - **Status chips in list rows show their icon only on a phone.** At 720px wide or less, a chip with an icon inside
