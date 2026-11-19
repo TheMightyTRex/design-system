@@ -9,6 +9,8 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 19 November 2026
 
+- **File picker.** `.file-field` draws every file upload as a button in the site's style, "Choose a file", with the
+  chosen file's name and size beside it, instead of the browser's own picker; the real input stays over the button.
 - **`.progress--running`.** A progress bar for a count that is still going, such as 4 of 5 updates: soft stripes move
   across the filled part until the class comes off. With less motion asked for, the stripes stay still.
 - **Section groups.** `.settings-section--group` holds several settings sections as one topic: its heading sits on
