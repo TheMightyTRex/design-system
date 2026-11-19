@@ -9,6 +9,9 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 19 November 2026
 
+- **Action list.** `.action-list` puts everything that can be done with one thing in its slide-out, each a
+  button with one line under it saying what happens, such as a download that needs attention in Starboard. A file
+  list uses rows with a `.tag.file-kind` (Media, Sample, Archive, Program, Other).
 - **File picker.** `.file-field` draws every file upload as a button in the site's style, "Choose a file", with the
   chosen file's name and size beside it, instead of the browser's own picker; the real input stays over the button.
 - **`.plugin-screen-card` and `.row__image`.** A plug-in's own page in Starboard (plug-in API 1.16) can put each group

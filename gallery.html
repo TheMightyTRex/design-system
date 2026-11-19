@@ -1029,12 +1029,13 @@
     <button class="btn" type="button" data-opens="g-panel-book">Book summary</button>
     <button class="btn" type="button" data-opens="g-panel-edit">Edit a connection</button>
     <button class="btn" type="button" data-opens="g-panel-app">App or disk details</button>
+    <button class="btn" type="button" data-opens="g-panel-attention">Download that needs attention</button>
   </div>
   <div class="g-notes">
     <div><h4>Behaviour</h4><ul><li>Focus moves to Close; Tab stays inside; Escape, Close or a press outside closes it; focus returns to what opened it.</li><li>The page behind does not scroll. Its address can include the open item, so Back closes it.</li><li>Editing: Save and Cancel in a footer that stays put; Remove on the far right, which asks first.</li></ul></div>
     <div><h4>Sizes</h4><ul><li>420px; <code>.side-panel--wide</code> 640px for logs or long forms; full width on phones.</li></ul></div>
     <div><h4>Colour</h4><ul><li>Header: the page background, so it reads as part of the page. Body and footer: the raised surface. Dialogs keep the plain header, so a slide-out and a dialog are told apart at a glance.</li><li>High contrast keeps a solid line under the header.</li></ul></div>
-    <div><h4>Classes</h4><ul><li><code>.side-panel-layer</code>, <code>.side-panel-backdrop</code>, <code>.side-panel</code>, <code>.panel-header</code>, <code>.side-panel__body</code>, <code>.side-panel__foot</code>, <code>.side-panel__lead</code></li></ul></div>
+    <div><h4>Classes</h4><ul><li><code>.side-panel-layer</code>, <code>.side-panel-backdrop</code>, <code>.side-panel</code>, <code>.panel-header</code>, <code>.side-panel__body</code>, <code>.side-panel__foot</code>, <code>.side-panel__lead</code></li><li>Action list: <code>.action-list</code>, <code>.action-list__item</code> (a <code>.btn</code> with <code>aria-describedby</code>), <code>.action-list__hint</code>; files as <code>.rows</code> with a <code>.tag.file-kind</code></li></ul></div>
   </div>
 </section>
 
@@ -1610,6 +1611,31 @@ Your choice [1]:</pre></div>
 Pending sectors: 0</code></div></details>
     </div>
     <div class="side-panel__foot"><button class="btn" type="button"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-refresh-cw"/></svg>Check again</button></div>
+  </aside>
+</div>
+
+<div class="side-panel-layer" id="g-panel-attention" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="g-pn-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="g-pn-h">The Lost Valley S01E04 1080p</h2><button class="icon-btn" type="button" data-closes aria-label="Close The Lost Valley S01E04 1080p"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></div>
+    <div class="side-panel__body">
+      <div class="notice" data-tone="warning"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-triangle-alert"/></svg><div class="notice__body"><span class="notice__title">The episode is inside RAR archives</span><p>Reelix found no video file to import. Unpack the archives, then Reelix imports what is inside.</p></div></div>
+      <section class="stack-2" aria-labelledby="g-pn-files"><h3 id="g-pn-files">In the download folder</h3>
+        <ul class="rows"><li class="row row--no-lead"><div><div class="row__title">lost.valley.s01e04.rar</div><div class="row__meta">Archive</div></div><div class="row__side"><span class="tag file-kind">Archive</span><span class="numeric">48 MB</span></div></li><li class="row row--no-lead"><div><div class="row__title">lost.valley.s01e04.r00 to .r24</div><div class="row__meta">25 parts</div></div><div class="row__side"><span class="tag file-kind">Archive</span><span class="numeric">1.2 GB</span></div></li></ul>
+      </section>
+      <section class="stack-2" aria-labelledby="g-pn-fix"><h3 id="g-pn-fix">Fix it</h3>
+        <ul class="action-list">
+          <li class="action-list__item"><button class="btn btn--primary" type="button" aria-describedby="g-pn-h1"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-archive-restore"/></svg>Unpack the archives, then import</button><p class="action-list__hint" id="g-pn-h1">Unpacks into the same folder and asks Reelix to import the episode.</p></li>
+          <li class="action-list__item"><button class="btn" type="button" aria-describedby="g-pn-h2"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-refresh-cw"/></svg>Try the import again</button><p class="action-list__hint" id="g-pn-h2">Reelix checks the files again and imports them if it can.</p></li>
+        </ul>
+      </section>
+      <section class="stack-2" aria-labelledby="g-pn-rm"><h3 id="g-pn-rm">Take it off the list</h3>
+        <ul class="action-list">
+          <li class="action-list__item"><button class="btn" type="button" aria-describedby="g-pn-h3"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-folder"/></svg>Remove from the list and keep the files</button><p class="action-list__hint" id="g-pn-h3">The files stay in the download folder.</p></li>
+          <li class="action-list__item"><button class="btn btn--danger" type="button" aria-describedby="g-pn-h4"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-trash-2"/></svg>Remove and delete the files</button><p class="action-list__hint" id="g-pn-h4">Deletes 1.2 GB. Asks first.</p></li>
+        </ul>
+      </section>
+    </div>
   </aside>
 </div>
 
