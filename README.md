@@ -20,7 +20,7 @@ change the copies inside the apps.
 
 | Path | What it is |
 |---|---|
-| `palettes/` | Five more colour lists (Indigo, Forest, Plum, Ember, Graphite) for a new design or site: load one after `tokens.css` |
+| `palettes/` | Six more accent colours (Teal, Indigo, Forest, Plum, Ember, Graphite) over Mica's greys: load one after `tokens.css` |
 | `tokens.css` | Every colour, size, space and motion value as role names, for Light, Dark, High contrast and High contrast dark |
 | `components.css` | Every component, in `@layer shared`, using only the tokens |
 | `components.js` | The behaviour every component must have (menus, slide-outs, dialogs, phone menu, filter chips, copy, help, display settings), in plain JavaScript |
@@ -96,18 +96,25 @@ its header also has search: change both when the main menu changes.
 ## Change a component and sync it
 
 In short: pull first, change the library here (never the copies in the apps), build the gallery, check
-four themes and 175% text, run `tools/contrast.py` (0 failures), `tools/check_words.py`, `tools/check_tokens.py` and `tools/check-private.sh`, commit, ask
+four themes and 175% text, run `tools/contrast.py` and `tools/check_accents.py` (0 failures each), `tools/check_words.py`, `tools/check_tokens.py` and `tools/check-private.sh`, commit, ask
 before you push, then run `tools/sync.py` and commit in each app. Every step, with its command, is in
 [Make a change](https://themightytrex.github.io/design-system/resources/make-a-change.html).
 
 `tools/install-hooks.sh` adds a pre-commit check that stops banned words and private details (home network addresses, email
 addresses, keys and the words in your own `.private-words` file) from being committed.
 
+## Mica, the default design
+
+Since 18 November 2026 (DASH-479) the design system's default is Mica: neutral greys, 6px corners, a light lift on
+cards and menus and one accent colour, Blue unless another is chosen. The dashboard card is the model for every
+container. The design before it (teal on blue-grey, square corners) is the Classic style in Starboard's Styles plug-in.
+
 ## Accessibility floor
 
 Everything here meets **WCAG 2.2 level AA** in every theme. In practice:
 
-- 4.5:1 contrast for text and 3:1 for control borders and the focus ring, measured by `tools/contrast.py`.
+- 4.5:1 contrast for text and 3:1 for control borders, card edges, the menu hover edge and the focus ring, with every
+  accent colour, measured by `tools/contrast.py` and `tools/check_accents.py`.
 - 44px controls and targets, and a visible 3px focus ring.
 - Status in words plus a shape or an icon, never colour alone.
 - Keyboard first: slide-outs and dialogs are named, keep focus inside, close with Escape and return focus.

@@ -1,17 +1,15 @@
 #!/usr/bin/env python3
-"""Writes the colour palettes: one CSS file each in palettes/, for building a new design or site.
+"""Writes the accent colours: one CSS file each in palettes/, and every one in app-palettes.css for an app that
+lets people choose (Starboard's own style).
 
-A palette is a different colour list for the same design system. A new project loads tokens.css, then one
-palette file, then components.css: every component looks and behaves the same, only the colours change
-(page tints, surfaces, the accent, focus, the count and the logo, in Light and Dark). Status colours and
-chart series stay the same, so meanings never change. High contrast keeps its own fixed colours, so it
-stays as strong as it can be. Teal, in tokens.css itself, is the default and needs no file.
+Since Mica became the default design (owner, 18 November 2026, DASH-479), a palette is an accent colour over Mica's
+neutral greys: the accent, its soft tint, the words on it, the chosen item, the count and the logo, in Light and
+Dark, and a stronger accent for High contrast and High contrast dark, so the chosen colour stays in every theme.
+Surfaces, text, borders, focus, status colours and chart series stay the same, so meanings never change. Blue,
+in tokens.css itself, is the default and needs no file. palettes.json carries each accent merged with the neutrals,
+so an app can draw a swatch or a small picture from one list.
 
-The neutrals are the default neutrals turned to the palette's hue, so lightness, and therefore contrast,
-stays close to the default. It also writes the gallery's Palettes section. tools/contrast.py checks every
-palette.
-
-Run: python3 tools/palettes.py && python3 tools/build.py && python3 tools/contrast.py
+Run: python3 tools/palettes.py && python3 tools/build.py && python3 tools/check_accents.py
 """
 import colorsys
 import json
@@ -20,34 +18,41 @@ import re
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "palettes"
+TOKENS_CSS = (ROOT / "tokens.css").read_text()
 
-# The default (Teal) neutrals, read off tokens.css.
-NEUTRALS = {
-    "light": {"color-bg": "#f0f5ff", "color-header": "#fcfdff", "color-surface": "#f7faff",
-              "color-surface-raised": "#ffffff", "color-surface-sunken": "#e4ebf7", "color-text": "#141416",
-              "color-text-muted": "#424b5b", "color-border": "#7d879a", "color-divider": "#c2cddf"},
-    "dark": {"color-bg": "#101827", "color-header": "#141e2e", "color-surface": "#1c2738",
-             "color-surface-raised": "#232f42", "color-surface-sunken": "#0c1220", "color-text": "#f3f4f6",
-             "color-text-muted": "#a4aec1", "color-border": "#6f7b91", "color-divider": "#303c51"},
-}
 
-# name: (label, what it suits, neutral hue in degrees, neutral saturation scale, light colours, dark colours)
+def _block(start):
+    i = TOKENS_CSS.index(start)
+    return dict(re.findall(r"--(color-[\w-]+):\s*(#[0-9a-fA-F]{6})", TOKENS_CSS[i:TOKENS_CSS.index("}", i)]))
+
+
+_LIGHT = dict(re.findall(r"--(color-[\w-]+):\s*(#[0-9a-fA-F]{6})", TOKENS_CSS.split("color-scheme: light;")[0]))
+NEUTRAL_KEYS = ("color-bg", "color-header", "color-surface", "color-surface-raised", "color-surface-sunken", "color-text",
+                "color-text-muted", "color-border", "color-divider", "color-panel-header")
+NEUTRALS = {"light": {k: _LIGHT[k] for k in NEUTRAL_KEYS},
+            "dark": {k: {**_LIGHT, **_block(':root[data-theme="dark"] {')}[k] for k in NEUTRAL_KEYS}}
+HC_BG = {"light": "#ffffff", "dark": "#000000"}
+
+# name: (label, what it suits, light colours, dark colours). Teal is the colour before Mica.
 PALETTES = {
-    "indigo": ("Indigo", "Calm and focused: tools, dashboards, reading", 235, 1.0,
+    "teal": ("Teal", "The colour before Mica: calm and clear",
+             dict(accent="#0b5f5a", count="#af4e24", tile="#0b5f5a", star="#af4e24"),
+             dict(accent="#5ed3c6", count="#c0401a", tile="#5ed3c6", star="#ffb38a")),
+    "indigo": ("Indigo", "Calm and focused: tools, dashboards, reading",
                dict(accent="#4338ca", count="#a61e4d", tile="#312e81", star="#c2410c"),
                dict(accent="#a5b4fc", count="#b8336a", tile="#c7d2fe", star="#fdba74")),
-    "forest": ("Forest", "Natural and steady: libraries, gardens, health", 140, 0.7,
+    "forest": ("Forest", "Natural and steady: libraries, gardens, health",
                dict(accent="#2f6b3a", count="#9a3412", tile="#1f4d2b", star="#c2410c"),
                dict(accent="#86d39a", count="#b4461b", tile="#bbf7d0", star="#fdba74")),
-    "plum": ("Plum", "Warm and personal: media, music, journals", 290, 0.8,
+    "plum": ("Plum", "Warm and personal: media, music, journals",
              dict(accent="#7e2a8f", count="#a14400", tile="#4a1d5c", star="#c2410c"),
              dict(accent="#e2a6f0", count="#b4461b", tile="#f0d4fa", star="#fcd34d")),
-    "ember": ("Ember", "Bright and lively: home, food, events", 28, 0.8,
+    "ember": ("Ember", "Bright and lively: home, food, events",
               dict(accent="#a43e12", count="#1d4ed8", tile="#7c2d12", star="#1e40af"),
               dict(accent="#ffb38a", count="#2563eb", tile="#fed7aa", star="#93c5fd")),
-    "graphite": ("Graphite", "Neutral and technical: servers, admin, documents", 220, 0.15,
-                 dict(accent="#1d4ed8", count="#b4461b", tile="#1f2937", star="#c2410c"),
-                 dict(accent="#93c5fd", count="#b4461b", tile="#e5e7eb", star="#fdba74")),
+    "graphite": ("Graphite", "Neutral and technical: servers, admin, documents",
+                 dict(accent="#3d4f6b", count="#b4461b", tile="#1f2937", star="#c2410c"),
+                 dict(accent="#b9c6da", count="#b4461b", tile="#e5e7eb", star="#fdba74")),
 }
 
 
@@ -59,11 +64,6 @@ def hexa(c):
     return "#" + "".join(f"{round(max(0, min(1, x)) * 255):02x}" for x in c)
 
 
-def rehue(h, hue, scale):
-    _, l, s = colorsys.rgb_to_hls(*rgb(h))
-    return hexa(colorsys.hls_to_rgb(hue / 360, l, min(1, s * scale)))
-
-
 def mix(a, b, t):
     return hexa(tuple(x * (1 - t) + y * t for x, y in zip(rgb(a), rgb(b))))
 
@@ -73,25 +73,35 @@ def lum(h):
     return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]
 
 
-def colours(mode, hue, scale, c):
-    v = {k: (h if k == "color-surface-raised" and mode == "light" else rehue(h, hue, scale))
-         for k, h in NEUTRALS[mode].items()}
-    if mode == "light":
-        v["color-header"] = mix(v["color-bg"], "#ffffff", 0.85)
-        v["color-panel-header"] = "#ffffff"
-        v["color-accent-soft"] = mix(c["accent"], "#ffffff", 0.88)
-        v["color-accent-text"] = "#ffffff"
-    else:
-        v["color-panel-header"] = v["color-surface-raised"]
-        v["color-accent-soft"] = mix(c["accent"], v["color-bg"], 0.80)
-        v["color-accent-text"] = v["color-bg"] if lum(c["accent"]) > 0.3 else "#ffffff"
-    v["color-accent"] = c["accent"]
-    v["color-focus"] = c["accent"]
-    v["color-count"] = c["count"]
-    v["color-count-text"] = "#ffffff"
-    v["color-logo-tile"] = c["tile"]
-    v["color-logo-star"] = c["star"]
-    return v
+def ratio(a, b):
+    la, lb = sorted((lum(a), lum(b)), reverse=True)
+    return (la + 0.05) / (lb + 0.05)
+
+
+def stronger(h, bg, need=7.0):
+    """The accent moved in lightness (same hue) until it has `need`:1 on the High contrast page."""
+    hue, l, s = colorsys.rgb_to_hls(*rgb(h))
+    step = -0.01 if lum(bg) > 0.5 else 0.01
+    while ratio(hexa(colorsys.hls_to_rgb(hue, l, s)), bg) < need and 0 < l < 1:
+        l += step
+    return hexa(colorsys.hls_to_rgb(hue, max(0, min(1, l)), s))
+
+
+def accent_set(mode, c):
+    """The accent colours for one theme (light, dark, contrast, contrast-dark)."""
+    base = "dark" if mode in ("dark", "contrast-dark") else "light"
+    if mode.startswith("contrast"):
+        a = stronger(c["accent"], HC_BG[base])
+        soft = mix(a, HC_BG[base], 0.85 if base == "light" else 0.78)
+        return {"color-accent": a, "color-accent-soft": soft, "color-control-active": soft,
+                "color-accent-text": "#ffffff" if base == "light" else "#000000",
+                "color-logo-tile": a, "color-logo-star": "#000000" if base == "light" else "#ffffff"}
+    bg = NEUTRALS[base]["color-bg"]
+    soft = mix(c["accent"], "#ffffff", 0.88) if base == "light" else mix(c["accent"], bg, 0.78)
+    return {"color-accent": c["accent"], "color-accent-soft": soft, "color-control-active": soft,
+            "color-accent-text": "#ffffff" if lum(c["accent"]) < 0.3 else "#000000",
+            "color-count": c["count"], "color-count-text": "#ffffff",
+            "color-logo-tile": c["tile"], "color-logo-star": c["star"]}
 
 
 def rule(sel, v, indent=""):
@@ -100,36 +110,42 @@ def rule(sel, v, indent=""):
 
 
 OUT.mkdir(exist_ok=True)
+for old in OUT.glob("*.css"):  # only the palettes this file still makes
+    if old.stem not in PALETTES and old.name != "app-palettes.css":
+        old.unlink()
 data = {}
-for name, (label, suits, hue, scale, light, dark) in PALETTES.items():
-    lv, dv = colours("light", hue, scale, light), colours("dark", hue, scale, dark)
-    data[name] = {"label": label, "suits": suits, "light": lv, "dark": dv}
-    # :where() keeps each rule as weak as the theme it replaces, and leaves High contrast alone.
-    (OUT / f"{name}.css").write_text("\n".join([
-        f"/* {label} palette for the TRex Design System. {suits}.",
-        "   Load after tokens.css and before components.css. Written by tools/palettes.py: edit that, not this. */",
-        rule(":root:where(:not(.pref-contrast))", lv),
-        "@media (prefers-color-scheme: dark) {",
-        rule(':root:not([data-theme="light"]):where(:not(.pref-contrast))', dv, "  "),
-        "}",
-        rule(':root[data-theme="dark"]:where(:not(.pref-contrast))', dv),
-        "",
-    ]))
-(OUT / "palettes.json").write_text(json.dumps(data, indent=2) + "\n")
+SELECTORS = {  # (theme, selector suffix); :where() keeps the light and dark rules as weak as the theme they replace
+    "light": ":where(:not(.pref-contrast))",
+    "dark": '[data-theme="dark"]:where(:not(.pref-contrast))',
+    "contrast": '.pref-contrast:not([data-theme="dark"]):not(.is-dark)',
+    "contrast-dark": '.pref-contrast:is([data-theme="dark"], .is-dark)',
+}
 
-# Every palette in one file for an app that lets people choose (Starboard's own style, owner, 13 November 2026:
-# "add the design system colour options in the settings page"). The app sets data-palette="forest" on <html>, and
-# tools/sync.py copies this file in. Each rule is :where()-weak against High contrast, so High contrast and the app's
-# own styles win; Teal, the default, is tokens.css with no data-palette.
-app = ["/* Every palette for an app where people choose one: set data-palette on <html>. Load after tokens.css.",
-       "   Written by tools/palettes.py: edit that, not this. Teal, the default, needs no data-palette. */"]
+
+def rules(root, d):
+    # Dark only when chosen (data-theme="dark"): light is the default (owner, 18 November 2026).
+    return [rule(root + SELECTORS["light"], d["accent"]["light"]),
+            rule(root + SELECTORS["dark"], d["accent"]["dark"]),
+            rule(root + SELECTORS["contrast"], d["accent"]["contrast"]),
+            rule(root + SELECTORS["contrast-dark"], d["accent"]["contrast-dark"])]
+
+
+for name, (label, suits, light, dark) in PALETTES.items():
+    acc = {m: accent_set(m, light if m in ("light", "contrast") else dark) for m in ("light", "dark", "contrast", "contrast-dark")}
+    data[name] = {"label": label, "suits": suits, "light": {**NEUTRALS["light"], **acc["light"], "color-focus": _LIGHT["color-focus"]},
+                  "dark": {**NEUTRALS["dark"], **acc["dark"]}, "accent": acc}
+    (OUT / f"{name}.css").write_text("\n".join([
+        f"/* {label} accent for the TRex Design System. {suits}.",
+        "   Load after tokens.css and before components.css. Written by tools/palettes.py: edit that, not this. */",
+        *rules(":root", data[name]), ""]))
+(OUT / "palettes.json").write_text(json.dumps({k: {x: v[x] for x in ("label", "suits", "light", "dark", "accent")} for k, v in data.items()}, indent=2) + "\n")
+
+# Every accent in one file for an app that lets people choose (Starboard's own style): the app sets
+# data-palette="forest" on <html>, and tools/sync.py copies this file in. Blue, the default, is tokens.css.
+app = ["/* Every accent colour for an app where people choose one: set data-palette on <html>. Load after tokens.css.",
+       "   Written by tools/palettes.py: edit that, not this. Blue, the default, needs no data-palette. */"]
 for name, d in data.items():
-    root = f':root[data-palette="{name}"]'
-    app += [rule(f"{root}:where(:not(.pref-contrast))", d["light"]),
-            "@media (prefers-color-scheme: dark) {",
-            rule(f'{root}:not([data-theme="light"]):where(:not(.pref-contrast))', d["dark"], "  "),
-            "}",
-            rule(f'{root}[data-theme="dark"]:where(:not(.pref-contrast))', d["dark"])]
+    app += rules(f':root[data-palette="{name}"]', d)
 (OUT / "app-palettes.css").write_text("\n".join(app) + "\n")
 
 # The gallery section: each palette as swatches and a small sample, in Light and Dark side by side. The sample
@@ -159,13 +175,13 @@ cards = "\n".join(
     for n, d in data.items())
 section = f'''<!--PALETTES-->
 <section class="g-section" id="palettes" aria-labelledby="palettes-h">
-  <header><h2 id="palettes-h">Palettes</h2><p class="muted">Five colour lists for building a new design or site with the same components. Load <code>tokens.css</code>, then one palette file, then <code>components.css</code>. Only colours change: page tints, surfaces, the accent, focus, the count and the logo, in Light and Dark. Status colours, chart series and High contrast stay the same. Teal, the default, is <code>tokens.css</code> itself.</p></header>
+  <header><h2 id="palettes-h">Accent colours</h2><p class="muted">Six accent colours over Mica's neutral greys. Load <code>tokens.css</code>, then one palette file, then <code>components.css</code>. Only the accent changes: links, the main button, the chosen item, the count and the logo, in Light, Dark and both High contrast themes. Surfaces, text, focus, status colours and chart series stay the same. Blue, the default, is <code>tokens.css</code> itself; Teal is the colour before Mica.</p></header>
   <div class="g-pals">
 {cards}
   </div>
   <div class="g-notes">
-    <div><h4>Use one</h4><ul><li><code>&lt;link rel="stylesheet" href="tokens.css"&gt;</code>, then <code>palettes/forest.css</code>, then <code>components.css</code>.</li><li>Pick one palette per product. An app may let people choose one (Starboard, own style): load <code>palettes/app-palettes.css</code> after <code>tokens.css</code> and set <code>data-palette</code> on <code>&lt;html&gt;</code>.</li></ul></div>
-    <div><h4>Change one</h4><ul><li>Edit <code>tools/palettes.py</code>, run it, then <code>tools/build.py</code> and <code>tools/contrast.py</code> (0 failures).</li></ul></div>
+    <div><h4>Use one</h4><ul><li><code>&lt;link rel="stylesheet" href="tokens.css"&gt;</code>, then <code>palettes/forest.css</code>, then <code>components.css</code>.</li><li>Pick one accent per product. An app may let people choose one (Starboard, own style): load <code>palettes/app-palettes.css</code> after <code>tokens.css</code> and set <code>data-palette</code> on <code>&lt;html&gt;</code>.</li></ul></div>
+    <div><h4>Change one</h4><ul><li>Edit <code>tools/palettes.py</code>, run it, then <code>tools/build.py</code> and <code>tools/check_accents.py</code> (0 failures).</li></ul></div>
   </div>
 </section>
 <!--END PALETTES-->'''

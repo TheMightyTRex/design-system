@@ -1,0 +1,33 @@
+Contrast of every token pair, for every accent and theme (WCAG 2.2 AA: 4.5:1 text, 3:1 UI parts)
+154 pairs each in Light and Dark (glass and the page wash included), 134 in High contrast
+
+Blue (default)   Light               lowest text  4.60:1  lowest UI part  3.00:1  pass
+Blue (default)   Dark                lowest text  5.25:1  lowest UI part  3.03:1  pass
+Blue (default)   High contrast       lowest text  8.14:1  lowest UI part  4.89:1  pass
+Blue (default)   High contrast dark  lowest text  6.14:1  lowest UI part  5.32:1  pass
+Teal             Light               lowest text  4.80:1  lowest UI part  3.00:1  pass
+Teal             Dark                lowest text  5.22:1  lowest UI part  3.03:1  pass
+Teal             High contrast       lowest text  5.26:1  lowest UI part  4.89:1  pass
+Teal             High contrast dark  lowest text  6.14:1  lowest UI part  5.32:1  pass
+Indigo           Light               lowest text  4.80:1  lowest UI part  3.00:1  pass
+Indigo           Dark                lowest text  4.73:1  lowest UI part  3.03:1  pass
+Indigo           High contrast       lowest text  5.54:1  lowest UI part  4.89:1  pass
+Indigo           High contrast dark  lowest text  6.14:1  lowest UI part  5.32:1  pass
+Forest           Light               lowest text  4.66:1  lowest UI part  3.00:1  pass
+Forest           Dark                lowest text  5.30:1  lowest UI part  3.03:1  pass
+Forest           High contrast       lowest text  4.94:1  lowest UI part  4.89:1  pass
+Forest           High contrast dark  lowest text  6.14:1  lowest UI part  5.32:1  pass
+Plum             Light               lowest text  4.80:1  lowest UI part  3.00:1  pass
+Plum             Dark                lowest text  4.92:1  lowest UI part  3.03:1  pass
+Plum             High contrast       lowest text  5.63:1  lowest UI part  4.89:1  pass
+Plum             High contrast dark  lowest text  6.14:1  lowest UI part  5.32:1  pass
+Ember            Light               lowest text  4.67:1  lowest UI part  3.00:1  pass
+Ember            Dark                lowest text  5.17:1  lowest UI part  3.03:1  pass
+Ember            High contrast       lowest text  5.10:1  lowest UI part  4.89:1  pass
+Ember            High contrast dark  lowest text  6.14:1  lowest UI part  5.32:1  pass
+Graphite         Light               lowest text  4.80:1  lowest UI part  3.00:1  pass
+Graphite         Dark                lowest text  5.46:1  lowest UI part  3.03:1  pass
+Graphite         High contrast       lowest text  5.83:1  lowest UI part  4.89:1  pass
+Graphite         High contrast dark  lowest text  6.14:1  lowest UI part  5.32:1  pass
+
+0 failures

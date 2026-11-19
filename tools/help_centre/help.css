@@ -16,8 +16,8 @@ body { margin: 0; background: var(--color-bg); color: var(--color-text); font-fa
    the seven items wrap at large text sizes. */
 .help-hub { display: grid; grid-template-columns: 18rem minmax(0, 1fr); max-width: 96rem; margin-inline: auto; min-height: calc(100vh - var(--header-h)); }
 .help-side { position: sticky; top: var(--help-header, var(--header-h)); align-self: start; max-height: calc(100vh - var(--help-header, var(--header-h))); overflow-y: auto; overscroll-behavior: contain;
-  box-sizing: border-box; padding: var(--space-4) var(--space-3) var(--space-6); border-right: 1px solid var(--color-divider); background: var(--color-surface-raised); }
-.help-search { display: flex; margin: 0 var(--space-1) var(--space-3); }
+  box-sizing: border-box; padding: var(--space-4) 0 var(--space-6); border-right: 1px solid var(--color-divider); /* menu items run edge to edge (DASH-479) */ background: var(--color-surface-raised); }
+.help-search { display: flex; margin: 0 var(--space-3) var(--space-3); }
 .help-search .input { flex: 1; min-width: 0; }
 .help-search--page { margin: 0; max-width: 40rem; gap: var(--space-2); }
 .help-main { min-width: 0; padding: var(--space-5) var(--space-6) var(--space-12); box-sizing: border-box; }
@@ -52,11 +52,12 @@ body { margin: 0; background: var(--color-bg); color: var(--color-text); font-fa
 .help-table:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
 .help-article .prose th, .help-article .prose td { border: 1px solid var(--color-divider); padding: var(--space-2) var(--space-3); vertical-align: top; text-align: left; }
 .help-article .prose pre:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
-.help-article .prose pre { max-width: 100%; overflow-x: auto; padding: var(--space-3); background: var(--color-surface-sunken); }
+.help-article .prose pre { max-width: 100%; overflow-x: auto; padding: var(--space-3); border-radius: var(--radius); background: var(--color-surface-sunken); }
 .help-article .prose hr { border: 0; border-top: 1px solid var(--color-divider); margin-block: var(--space-6); }
 .help-source { margin-top: var(--space-8); }
 .help-results { list-style: none; padding: 0; display: grid; gap: var(--space-4); }
-.help-results li { padding: var(--space-3) var(--space-4); border: 1px solid var(--color-divider); background: var(--color-surface); }
+/* Each result is a card, as a dashboard card (Mica, DASH-479). */
+.help-results li { padding: var(--space-3) var(--space-4); border: 1px solid var(--color-divider); border-radius: var(--radius); background: var(--color-surface); box-shadow: var(--shadow-card); }
 .help-results a { font-weight: 700; font-size: var(--text-lg); }
 .help-results .help-meta { font-size: var(--text-sm); color: var(--color-text-muted); margin: var(--space-1) 0; }
 .help-results p { margin: var(--space-1) 0 0; }
@@ -69,11 +70,11 @@ body { margin: 0; background: var(--color-bg); color: var(--color-text); font-fa
 .help-notice p { margin: 0 0 var(--space-3); }
 
 /* A banner at the top of every page (help-centre.json "banner" or "banners"), labelled, that can be hidden. */
-.help-banner { display: flex; align-items: flex-start; gap: var(--space-3); max-width: 96rem; margin: var(--space-3) auto; padding: var(--space-3) var(--space-4); border: 1px solid var(--color-divider); background: var(--color-surface); box-sizing: border-box; }
+.help-banner { display: flex; align-items: flex-start; gap: var(--space-3); max-width: 96rem; margin: var(--space-3) auto; padding: var(--space-3) var(--space-4); border: 1px solid var(--color-divider); border-radius: var(--radius); background: var(--color-surface); box-shadow: var(--shadow-card); box-sizing: border-box; }
 .help-banner__body { flex: 1; min-width: 0; }
 .help-banner__body p { margin: 0; }
 .help-banner__body p + p { margin-top: var(--space-1); font-size: var(--text-sm); color: var(--color-text-muted); }
-.help-banner__label { display: inline-block; margin-right: var(--space-2); padding: 0 var(--space-2); border: 1px solid var(--color-border); font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+.help-banner__label { display: inline-block; margin-right: var(--space-2); padding: 0 var(--space-2); border: 1px solid var(--color-border); border-radius: var(--radius); font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
 .help-banner__body .help-banner__label + p { display: inline; }
 html.help-banner-hidden .help-banner { display: none; }
 /* "banners": one at a time, the next one on each page, chosen before the page draws; with no script, the first. */
@@ -88,9 +89,10 @@ html[data-banner="4"] .help-banner__item[data-banner="4"], html[data-banner="5"]
 .help-toc { position: sticky; top: calc(var(--help-header, var(--header-h)) + var(--space-4)); align-self: start; max-height: calc(100vh - var(--header-h) - var(--space-8)); overflow-y: auto; }
 .help-toc__heading { font-size: var(--text-sm); color: var(--color-text-muted); margin: 0 0 var(--space-2); }
 .help-toc ul, .help-toc-inline ul { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--color-divider); }
-.help-toc a, .help-toc-inline a { display: block; padding: var(--space-1) var(--space-3); margin-left: -2px; border-left: 2px solid transparent; color: var(--color-text-muted); text-decoration: none; font-size: var(--text-sm); }
-.help-toc a:hover, .help-toc-inline a:hover { color: var(--color-text); text-decoration: underline; }
-.help-toc a[aria-current="location"] { border-left-color: var(--color-accent); color: var(--color-text); font-weight: 700; }
+/* On this page is a menu too: 44px items, and the menu hover (a fill and an edge, DASH-479). */
+.help-toc a, .help-toc-inline a { display: flex; align-items: center; min-height: 44px; box-sizing: border-box; border-radius: 0 var(--radius) var(--radius) 0; padding: var(--space-1) var(--space-3); margin-left: -2px; border-left: 2px solid transparent; color: var(--color-text-muted); text-decoration: none; font-size: var(--text-sm); }
+.help-toc a:hover, .help-toc-inline a:hover { color: var(--color-text); text-decoration: underline; background: var(--color-hover); box-shadow: inset 0 0 0 1px var(--color-hover-edge); }
+.help-toc a[aria-current="location"] { border-left-color: var(--color-accent); background: var(--color-control-active); color: var(--color-text); font-weight: 700; }
 .help-toc-inline { display: none; margin-bottom: var(--space-4); }
 html.pref-underline .help-toc a { text-decoration: underline; }
 
