@@ -16,7 +16,7 @@ order:
 
 | Setting | Values | Default |
 |---|---|---|
-| Theme | Match device, Light, Dark | Match device |
+| Theme | Match device, Light, Dark | Light (owner, 18 November 2026) |
 | Text size | 100%, 125%, 150%, 175% | 100% |
 | Reduce motion | Match device, Active, Inactive | Match device |
 | High contrast | Switch | Inactive |
@@ -112,7 +112,7 @@ names. High contrast raises borders, focus rings and muted text, and removes sha
 ## 5. Known gaps (31 October 2026 audit)
 
 - Horizontal scroll shelves on Discover → For you (task UX-30).
-- Theme default is Light; target is Match device.
+- Theme default is Light (owner, 18 November 2026); Match device is a choice.
 - Starboard has an automated check (12 November 2026): `tools/a11y.sh` runs axe-core (WCAG 2.2 AA) on every page in
   Light, Dark and High contrast, with the structure, keyboard, slide-out focus, reflow, forced colours and reduced
   motion checks of section 2. Storyarr has none yet (task A11Y-01).

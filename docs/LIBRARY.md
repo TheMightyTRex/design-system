@@ -20,6 +20,7 @@ spacing). Slide-outs, menus, the phone menu and the dialog all work in the galle
 | `fonts/` | Atkinson Hyperlegible Next (OFL licence) |
 | `gallery.src.html`, `gallery.html` | The gallery (edit the `.src` file, then build) |
 | `contrast-report.txt` | Made by `tools/contrast.py` (not committed): measured contrast for every text and control pair in all four themes; all pass WCAG 2.2 AA |
+| `accent-report.txt` | Made by `tools/check_accents.py --report accent-report.txt`: every token pair the components draw, for every accent colour, in all four themes, including the menu hover fill and its edge; all pass WCAG 2.2 AA |
 | `areas/` | Design boards for every area of both apps, using the library, with slide-outs where they fit |
 | `tools/build.py` | Turns `{{i:name}}` into icons and `<!--ICONS-->` into the sprite for any `*.src.html` |
 | `tools/icons.py` | Rebuilds `icons.svg` from Lucide in Storyarr's `node_modules` |
@@ -32,8 +33,9 @@ spacing). Slide-outs, menus, the phone menu and the dialog all work in the galle
 2. **Accessible is the baseline.** WCAG 2.2 AA in every theme; 44px controls and targets; a visible 3px focus
    ring; status always in words plus a shape or icon, never colour alone; keyboard first; everything works at
    175% text and with wider spacing; nothing moves when Reduce motion is active.
-3. **Square, calm and dense enough.** Square corners, one typeface, thin dividers, one accent colour, one
-   primary button per view.
+3. **Mica, calm and dense enough.** 6px corners, one typeface, card edges and rules in one colour, one accent
+   colour, one primary button per view. The dashboard card is the model for panels, settings sections, tables,
+   slide-outs and dialogs: a grey band on top, the body under it.
 4. **Things open where they make sense.** Slide-out for the details or editing of one item in a list; dialog
    for a decision; page for something people return to. Read "Slide-out, dialog or page" in this guide.
 
@@ -59,7 +61,7 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 | Component | Classes | Notes |
 |---|---|---|
 | Colour roles | `--color-*`, `--status-<tone>-bg/-fg`, `--chart-*`, `--series-1` to `--series-7`, `--series-empty` | Four themes; accent is one token (UX-02 board offers Indigo, Teal, Amber) |
-| Palettes | `palettes/indigo.css`, `forest.css`, `plum.css`, `ember.css`, `graphite.css` (Teal, the default, is `tokens.css`) | For building a new design or site with the same components: load `tokens.css`, one palette, then `components.css`. Light and Dark colours only; status colours, chart series and High contrast stay the same. Written by `tools/palettes.py`. For an app where people choose (Starboard's own style, 13 November 2026), `palettes/app-palettes.css` holds all five under `:root[data-palette="…"]`; `tools/sync.py` copies it to Starboard's `css/palettes.css` with `palettes.json`. High contrast and an app's own styles still win |
+| Accent colours | `palettes/teal.css`, `indigo.css`, `forest.css`, `plum.css`, `ember.css`, `graphite.css` (Blue, the default, is `tokens.css`; Teal is the colour before Mica) | An accent over Mica's neutral greys: load `tokens.css`, one palette, then `components.css`. Each sets the accent, its soft tint, the chosen item, the count and the logo in Light, Dark, High contrast and High contrast dark (a stronger shade, 7:1). Surfaces, text, focus, status colours and chart series stay the same. Written by `tools/palettes.py` and checked by `tools/check_accents.py`. For an app where people choose (Starboard's own style), `palettes/app-palettes.css` holds all six under `:root[data-palette="…"]`; `tools/sync.py` copies it to Starboard's `css/palettes.css` with `palettes.json`. An app's own styles still win |
 | Type | `--text-xs` to `--text-2xl`, `--font` | One typeface; scales with Text size |
 | Space and size | `--space-1` to `--space-12`, `--control-h` (44px), `--control-h-compact` (32px, dense tables only) | |
 | Icons | `icons.svg`, `svg.i`, `.i-lg`, `.i-xl` | Lucide, 2px stroke, decorative beside words |

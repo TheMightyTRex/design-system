@@ -14,12 +14,14 @@
   }
 
   // Display and accessibility: the app's own choices and classes, kept in this browser (localStorage).
-  var DEFAULTS = { theme: "system", text: "100", motion: "device", contrast: false, underline: false, spacing: false };
+  var DEFAULTS = { theme: "light", text: "100", motion: "device", contrast: false, underline: false, spacing: false };
   function readPrefs() {
     try { return Object.assign({}, DEFAULTS, JSON.parse(localStorage.getItem("help-display") || "{}")); } catch (e) { return Object.assign({}, DEFAULTS); }
   }
   function applyPrefs(p) {
-    if (p.theme === "system") html.removeAttribute("data-theme"); else html.dataset.theme = p.theme;
+    // Light unless chosen (owner, 18 November 2026); Match device follows the device (SharedComponents.applyTheme).
+    if (window.SharedComponents && window.SharedComponents.applyTheme) window.SharedComponents.applyTheme(p.theme);
+    else html.dataset.theme = p.theme === "dark" ? "dark" : "light";
     html.classList.remove("pref-text-125", "pref-text-150", "pref-text-175");
     if (p.text !== "100") html.classList.add("pref-text-" + p.text);
     html.classList.toggle("pref-contrast", !!p.contrast);

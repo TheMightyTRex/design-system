@@ -611,7 +611,7 @@ TEMPLATE = """<!doctype html>
 # flashes. Kept in this browser only. "js" lets the phone menu fold away only when script can open it again.
 PREFS_JS = ("document.documentElement.classList.add('js');"
             "try{var p=JSON.parse(localStorage.getItem('help-display')||'{}'),r=document.documentElement;"
-            "if(p.theme&&p.theme!=='system')r.dataset.theme=p.theme;if(p.text&&p.text!=='100')r.classList.add('pref-text-'+p.text);"
+            "r.dataset.theme=p.theme==='dark'||(p.theme==='system'&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';if(p.text&&p.text!=='100')r.classList.add('pref-text-'+p.text);"
             "if(p.contrast)r.classList.add('pref-contrast');if(p.motion==='on')r.classList.add('pref-motion');"
             "if(p.motion==='off')r.classList.add('pref-motion-off');if(p.underline)r.classList.add('pref-underline');"
             "if(p.spacing)r.classList.add('pref-spacing');"

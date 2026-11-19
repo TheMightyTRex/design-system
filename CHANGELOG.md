@@ -9,6 +9,28 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 18 November 2026
 
+- **Mica is the default design (owner, DASH-479).** `tokens.css` takes Mica's neutral greys, 6px corners on every
+  control, card, panel, menu and dialog (`--radius`), a layered lift (`--shadow-card` on cards, panels, settings
+  sections and tables, `--shadow-raised` on menus, slide-outs and dialogs), 600 headings and a neutral focus ring.
+  The design before it is the Classic style in Starboard's Styles plug-in.
+- **Accent colours.** Blue is the default accent; the palettes become six accents over Mica's greys (Teal, the old
+  default, Indigo, Forest, Plum, Ember and Graphite), each with a stronger shade in High contrast and High contrast
+  dark, so the chosen colour stays in every theme.
+- **The dashboard card is the model for every container.** Panels that open with a head, settings sections, tables,
+  slide-outs and dialogs wear the card's grey band across the top; card edges and rules share `--color-divider`,
+  #898989 in light and #747474 in dark, the lightest greys that keep 3:1 on the tinted page and the card.
+- **Menu hover with a clear edge.** Every menu, tab and side menu item shows `--color-hover` with an edge in
+  `--color-hover-edge`, at least 3:1 against the menu behind it in every theme and with every accent; the current
+  item keeps the soft accent fill and the accent bar. Help centre menu items are 44px high.
+- **Glass and the page wash.** The header, side menu, menus, slide-outs and dialogs are frosted layers
+  (`--glass-alpha`, 92% in light and 90% in dark, with `--glass-filter`), over a soft accent wash across the page
+  (`--page-tint`, 3%). The share is the least that keeps secondary text at 4.5:1 with black or white right behind
+  the glass. Solid in High contrast, with Reduce transparency, without backdrop-filter and under an app's own style.
+  Cards carry Mica's layered drop shadow (`--shadow-card`) as well as their border.
+- **Light by default.** Dark applies only when chosen (`data-theme="dark"`); Match device sets the device's choice in
+  script (`SharedComponents.applyTheme`). The gallery, boards, resources and help centres start in Light.
+- **`tools/check_accents.py`:** checks every token pair the components draw (136 pairs) for every accent in all
+  four themes, including the hover fill and its edge, and fails on any that falls short of WCAG 2.2 AA.
 - Play in another app (Starboard, DASH-480): a link styled as a button that opens a film or episode in the media
   server's player in a new tab, with the `play` icon first and the new-tab icon last, its full name for screen
   readers, the 44px size, and what to show when the item or the app's address is not known. `LIBRARY.md` has the

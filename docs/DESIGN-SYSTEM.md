@@ -15,8 +15,12 @@ need is missing, add it here first (and say so to TheMightyTRexUK) instead of in
    every page.
 3. **Status first.** Every book shows its status with the same words, colour and icon wherever it appears.
 4. **Calm by default.** Light theme, plenty of space, covers carry the colour; the interface stays quiet.
-5. **Square corners.** Buttons, chips, cards, inputs, dialogs and covers are square. Avatars, spinners and
-   status dots stay round.
+5. **Mica (owner, 18 November 2026, DASH-479).** Calm neutral greys, 6px corners (`--radius`) on buttons, chips,
+   cards, inputs, menus and dialogs, a light layered lift on cards, and one accent colour (Blue unless another is
+   chosen). The dashboard card is the model for every container: a surface, an edge in `--color-divider` (the same
+   colour as every rule), Mica's corners, a grey band across the top for its name and status, and its body under it.
+   Avatars, spinners and status dots stay round. The design before Mica is the Classic style in Starboard's Styles
+   plug-in.
 6. **Accessible is the baseline.** WCAG 2.2 AA in every theme; 44px controls; keyboard first.
 7. **Inspired, not copied.** Audiobookshelf and Radarr are references for ideas only; no copied code or assets.
 
@@ -75,7 +79,11 @@ Line height 1.5 for body, 1.25 for headings. Weights 400 and 600 only. Low-visio
   `--space-8` 32, `--space-10` 40, `--space-12` 48.
 - Control height `--control-h` 44px. `--control-h-compact` (32px, `.btn--compact`) only inside dense tables, never
   for the only way to act and never beside a 44px control.
-- Radius `--radius` 0; `--radius-round` 50% for avatars and dots.
+- Radius `--radius` 6px (Mica); `--radius-round` 50% for avatars and dots.
+- Hover on menus: `--color-hover` (the text colour at 7%, 9% in dark) with an edge in `--color-hover-edge` (the border colour; the text colour in High contrast), at least 3:1 against the menu behind it. The current item keeps `--color-control-active` (the accent's soft tint) and the accent bar.
+- Glass: `--glass-alpha` (92% light, 90% dark) and `--glass-filter` on the header, side menu, menus, slide-outs and dialogs only; `--page-tint` (3%) for the wash across the page. Solid in High contrast, with Reduce transparency and without backdrop-filter.
+- Theme: Light by default; Dark only when chosen; Match device follows the device through `SharedComponents.applyTheme`.
+- Shadows: `--shadow-card` on cards, panels, settings sections and tables; `--shadow-raised` on menus, slide-outs, dialogs and toasts. None in High contrast.
 - Focus ring width `--focus-w` 3px.
 - **Names that are not tokens** (17 November 2026). An app's CSS uses only the names in `tokens.css`. A name that
   is not there falls back to whatever the app wrote after it, so the design system no longer decides. Use these
@@ -83,7 +91,7 @@ Line height 1.5 for body, 1.25 for headings. Weights 400 and 600 only. Low-visio
 
   | Not a token | Use |
   |---|---|
-  | `--radius-1`, `--radius-2`, `--radius-3`, `--radius-control` | `--radius` (square corners) |
+  | `--radius-1`, `--radius-2`, `--radius-3`, `--radius-control` | `--radius` (6px, Mica) |
   | `--focus-width` | `--focus-w` |
   | `--weight-normal` | `--weight-regular` |
   | `--text-base` | `--text-md` |
