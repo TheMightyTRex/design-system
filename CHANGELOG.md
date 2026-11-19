@@ -9,6 +9,8 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 19 November 2026
 
+- **Section groups.** `.settings-section--group` holds several settings sections as one topic: its heading sits on
+  the page, each section inside is a card with an h3, and topic tabs give the group one tab.
 - **Status chips in list rows show their icon only on a phone.** At 720px wide or less, a chip with an icon inside
   `.rows .row` keeps its icon, colour and border and hides its words from view; screen readers still read them.
   A chip with no icon keeps its words.

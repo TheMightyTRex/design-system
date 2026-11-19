@@ -115,6 +115,7 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 |---|---|---|
 | Settings helpers | `.inline-save`, `.form-stack`, `.setting__cost` | A field and its Save on one line; fields one under another; the muted line saying what a setting costs |
 | Icon on a phone | `.btn--icon-on-phone` on a button with an icon | At 720px wide or less, the icon only, words kept for screen readers; for a repeated action in a list row, such as Watched (19 November 2026) |
+| Section group | `section.settings-section.settings-section--group` holding `section.settings-section` cards with h3 headings | One topic with several cards, such as a plug-in's General (State, Versions, Jobs, What it may do, Remove); topic tabs give the group one tab (19 November 2026) |
 | Status chip | `.chip[data-tone]` | Word, shape and colour: dot, diamond (warning), square (danger), ring (muted). On a phone, a chip with an icon in a list row (`.rows .row`) shows its icon only; screen readers still read the words (19 November 2026) |
 | Title with status | `.title-status`, `.title-status__chips` | A heading's status chips straight after the name, centred on its line; never on a line under it (read "Where status goes") |
 | Status icon | `.status-icon[data-tone]` | In a list of things with a state: an icon after the name, the word in hidden text and a tooltip |
