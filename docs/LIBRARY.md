@@ -114,7 +114,7 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 | Component | Classes | Notes |
 |---|---|---|
 | Settings helpers | `.inline-save`, `.form-stack`, `.setting__cost` | A field and its Save on one line; fields one under another; the muted line saying what a setting costs |
-| Status chip | `.chip[data-tone]` | Word, shape and colour: dot, diamond (warning), square (danger), ring (muted) |
+| Status chip | `.chip[data-tone]` | Word, shape and colour: dot, diamond (warning), square (danger), ring (muted). On a phone, a chip with an icon in a list row (`.rows .row`) shows its icon only; screen readers still read the words (19 November 2026) |
 | Title with status | `.title-status`, `.title-status__chips` | A heading's status chips straight after the name, centred on its line; never on a line under it (read "Where status goes") |
 | Status icon | `.status-icon[data-tone]` | In a list of things with a state: an icon after the name, the word in hidden text and a tooltip |
 | Tag | `.tag` | Format or kind, not status |

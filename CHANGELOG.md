@@ -7,6 +7,12 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 [Semantic Versioning](https://semver.org/).
 
 
+## 19 November 2026
+
+- **Status chips in list rows show their icon only on a phone.** At 720px wide or less, a chip with an icon inside
+  `.rows .row` keeps its icon, colour and border and hides its words from view; screen readers still read them.
+  A chip with no icon keeps its words.
+
 ## 18 November 2026
 
 - **Mica is the default design (owner, DASH-479).** `tokens.css` takes Mica's neutral greys, 6px corners on every
