@@ -12,6 +12,8 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 - **Status chips in list rows show their icon only on a phone.** At 720px wide or less, a chip with an icon inside
   `.rows .row` keeps its icon, colour and border and hides its words from view; screen readers still read them.
   A chip with no icon keeps its words.
+- **`.btn--icon-on-phone`.** A button with an icon shows the icon only at 720px wide or less, keeping its height
+  and its words for screen readers; for a repeated action in a list row, such as Watched on each episode.
 
 ## 18 November 2026
 
