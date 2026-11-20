@@ -9,6 +9,8 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 20 November 2026
 
+- **`.wizard-step__count`.** A step-by-step slide-out puts "Step 3 of 7" and the step's own link, such as Open as a
+  page, on one line, the link on the right; on a narrow slide-out the link wraps under the count.
 - **One way to wait (DASH-493).** Every bar that is working is thicker, with rounded ends and moving stripes.
   `.progress--running` starts with a visible piece, and `creepProgress()` in `components.js` eases it onto each count
   and creeps it towards the next, so it never sits still. `.progress--busy` has a striped band running along it. The

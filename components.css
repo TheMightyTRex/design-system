@@ -5596,6 +5596,9 @@ body:has(.side-panel-layer:not([hidden]), dialog[open]) snag-list { display: non
    the step's title, so the set-up is done there. The page fills what is left of the slide-out and scrolls itself. */
 .wizard-step { display: flex; flex-direction: column; gap: var(--space-4); block-size: 100%; }
 .wizard-step--framed { gap: 0; }
+/* The step count with the step's own link on the right of the same line, such as Open as a page (TheMightyTRexUK,
+   20 November 2026); on a narrow slide-out the link wraps under the count. */
+.wizard-step__count { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-4); }
 .wizard-step--framed .wizard-step__head { padding: var(--space-4); border-block-end: 1px solid var(--color-divider); }
 .side-panel__body:has(> .wizard-step--framed) { padding: 0; display: flex; }
 .side-panel__body > .wizard-step--framed { flex: 1; min-block-size: 0; }
