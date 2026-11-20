@@ -9,6 +9,10 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 20 November 2026
 
+- **Windows Contrast themes.** Switches show on and off, the current page shows in the rail, top tabs and phone
+  menu, progress bars, the loading line, the waiting ring and the update dot all show, and a chosen cover is
+  outlined, all in system colours. Before, each was drawn only by a background or a border colour that the theme
+  takes away.
 - **`.wizard-step__count`.** A step-by-step slide-out puts "Step 3 of 7" and the step's own link, such as Open as a
   page, on one line, the link on the right; on a narrow slide-out the link wraps under the count. A framed step's
   head has half the space over the count.

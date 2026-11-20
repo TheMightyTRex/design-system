@@ -5409,6 +5409,28 @@
     }
   }
 
+  /* Windows Contrast themes (forced colours, assistive technology review, 20 November 2026): every state that was
+     shown only by a background, a gradient or a border colour gets a system colour, so it still shows. */
+  @media (forced-colors: active) {
+    .switch input::after { background: CanvasText; }
+    .switch input:checked { background: Highlight; border-color: Highlight; }
+    .switch input:checked::after { background: HighlightText; }
+    .menu-tabs a[aria-current="page"]::after,
+    .rail a[aria-current="page"]::before,
+    .logo-tabs > button[aria-selected="true"]::after { background: Highlight; }
+    .logo-tabs > button[aria-selected="true"],
+    .phone-menu__section ul a[aria-current="page"] { outline: 2px solid Highlight; outline-offset: -2px; }
+    .progress > span,
+    .progress--busy > span,
+    .progress--running > span { background: Highlight; forced-color-adjust: none; }
+    .loading-bar[data-active]::before,
+    .loading-bar[data-active]::after { background: Highlight; forced-color-adjust: none; }
+    .wait__mark,
+    .btn[aria-busy="true"]::before { border-color: CanvasText; border-top-color: Highlight; forced-color-adjust: none; }
+    .update-dot { background: Mark; border: 1px solid CanvasText; forced-color-adjust: none; }
+    .cover-pick input:checked + img { outline: 4px solid Highlight; outline-offset: 2px; }
+  }
+
   /* 8. Motion ----------------------------------------------------------------------------------- */
   @keyframes slide-in-right {
     from {
