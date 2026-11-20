@@ -9,6 +9,7 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 20 November 2026
 
+- **Words from an app never go into HTML unescaped (CodeQL, 20 November 2026).** The secret field's hidden name, the pagination noun and link, and the error summary's links are now set as text or escaped, so a name with HTML in it shows as words.
 - **Rose in Dark had dark blue text on its dark page.** Its dark blue ink is set for Light only, and the Light rule
   also applies in Dark, so Dark now sets the text back to white. A colour any palette sets in Light only now goes back
   to the dark neutral in Dark, so this cannot happen again (found in Starboard).
