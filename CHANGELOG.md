@@ -7,6 +7,16 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 [Semantic Versioning](https://semver.org/).
 
 
+## 20 November 2026
+
+- **One way to wait (DASH-493).** Every bar that is working is thicker, with rounded ends and moving stripes.
+  `.progress--running` starts with a visible piece, and `creepProgress()` in `components.js` eases it onto each count
+  and creeps it towards the next, so it never sits still. `.progress--busy` has a striped band running along it. The
+  loading line under the header is a striped chase of a long and a short bar, 6px high.
+- **Waiting mark and busy button.** `.wait` with `.wait__mark` is the ring for a short wait, always with words. A
+  button with `aria-busy="true"` draws the same ring before its words and keeps full colour. With less motion asked
+  for, the ring fades instead of turning and the stripes stay still.
+
 ## 19 November 2026
 
 - **Action list.** `.action-list` puts everything that can be done with one thing in its slide-out, each a

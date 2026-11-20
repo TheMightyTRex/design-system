@@ -672,9 +672,11 @@
       <div class="stat"><span class="stat__value">2,418</span><span class="stat__label">Books in library</span></div>
     </div>
     <div class="meter"><div class="meter__label"><span>Installing updates</span><span class="numeric">4 of 5 done</span></div><div class="progress progress--running" role="progressbar" aria-label="Installing updates" aria-valuemin="0" aria-valuemax="5" aria-valuenow="4" aria-valuetext="4 of 5 updates done"><span style="width:80%"></span></div></div>
+    <div class="signin-wait"><div class="signin-wait__words"><span>Waiting for you to finish signing in to Microsoft</span><span class="numeric">0:42</span></div><div class="progress progress--busy" role="progressbar" aria-label="Waiting for the sign-in" aria-valuetext="Waiting"><span></span></div></div>
+    <div class="g-demo--row"><button class="btn btn--primary" type="button" aria-busy="true" aria-disabled="true">Testing</button><button class="btn" type="button" aria-busy="true" aria-disabled="true">Checking</button><span class="wait"><span class="wait__mark" aria-hidden="true"></span><span role="status">Getting the release notes</span></span></div>
     <div class="meter"><div class="meter__label"><span>Media pool</span><span class="numeric">7.2 of 9.1 TB used (79%)</span></div><div class="progress" data-tone="warning" role="img" aria-label="79% used"><span style="width:79%"></span></div></div>
   </div>
-  <div class="g-notes"><div><h4>Rules</h4><ul><li>The value is always in words beside the bar.</li><li>Facts lists put Author first, then Series; names link to their pages.</li></ul></div></div>
+  <div class="g-notes"><div><h4>Rules</h4><ul><li>The value is always in words beside the bar.</li><li>Waiting standard: a count bar starts with a visible piece and creeps between counts (<code>creepProgress()</code>); a wait with no count has the striped band and the time so far; a short wait has the ring and words, never "Loading…" alone; a busy button has <code>aria-busy</code>, <code>aria-disabled</code> and its doing word.</li><li>Facts lists put Author first, then Series; names link to their pages.</li></ul></div></div>
 </section>
 
 <section class="g-section" id="rows" aria-labelledby="rows-h">

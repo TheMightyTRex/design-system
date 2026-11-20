@@ -1747,49 +1747,113 @@
   .progress[data-tone="danger"] > span {
     background: var(--status-danger-fg);
   }
-  /* Busy: a job whose end is not known (WIZARD.md section 5, A job's progress). A band moves across; with less motion
-     asked for, the bar is shown half filled and still, and the words beside it say it is working. */
-  .progress--busy {
+  /* Waiting standard (DASH-493, TheMightyTRexUK, 20 November 2026): every bar that is working is thicker, with
+     rounded ends, and moving stripes. Busy: a job whose end is not known (WIZARD.md section 5, A job's progress); a
+     striped band runs along the bar. Running: a job whose end is known and still going (a count such as 4 of 5); the
+     filled part has moving stripes, starts with a visible piece and creeps towards the next count between counts
+     (creepProgress() in components.js). With less motion asked for, the stripes stay still, the band is shown half
+     filled, and the words beside the bar say it is working. Take the class off when it ends. */
+  .progress--busy,
+  .progress--running {
+    position: relative;
+    height: 14px;
+    border-radius: 7px;
     overflow: hidden;
   }
+  .progress--busy > span,
+  .progress--running > span {
+    border-radius: 7px;
+    background-color: var(--color-accent);
+    background-image: linear-gradient(-45deg, var(--stripe) 25%, transparent 25%, transparent 50%, var(--stripe) 50%,
+      var(--stripe) 75%, transparent 75%, transparent);
+    background-size: 24px 24px;
+    animation: progress-stripes 0.7s linear infinite;
+    --stripe: color-mix(in srgb, var(--color-surface) 40%, transparent);
+  }
+  .progress--running > span {
+    min-width: 4%;
+  }
   .progress--busy > span {
-    width: 30%;
-    animation: progress-busy 1.4s ease-in-out infinite;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 35%;
+    animation: progress-stripes 0.7s linear infinite, progress-busy 1.8s ease-in-out infinite;
+  }
+  @keyframes progress-stripes {
+    from { background-position: 0 0; }
+    to { background-position: 24px 0; }
   }
   @keyframes progress-busy {
-    from { margin-left: -30%; }
-    to { margin-left: 100%; }
+    from { left: -35%; }
+    to { left: 100%; }
+  }
+  /* Kept for apps that still name it. */
+  @keyframes progress-running {
+    from { background-position: 0 0; }
+    to { background-position: 24px 0; }
+  }
+  :root.pref-motion :is(.progress--busy, .progress--running) > span {
+    animation: none;
   }
   :root.pref-motion .progress--busy > span {
     width: 50%;
-    animation: none;
   }
   @media (prefers-reduced-motion: reduce) {
-    :root:not(.pref-motion-off) .progress--busy > span {
-      width: 50%;
+    :root:not(.pref-motion-off) :is(.progress--busy, .progress--running) > span {
       animation: none;
     }
+    :root:not(.pref-motion-off) .progress--busy > span {
+      width: 50%;
+    }
   }
-  /* Running: a job whose end is known and still going (a count such as 4 of 5). The filled part keeps its width and
-     soft stripes move across it, so the bar shows the work is live between counts. With less motion asked for, the
-     stripes stay still; the words beside the bar say it is running either way. Take the class off when it ends. */
-  .progress--running > span {
-    background-image: linear-gradient(-45deg, color-mix(in srgb, var(--color-surface) 28%, transparent) 25%, transparent 25%,
-      transparent 50%, color-mix(in srgb, var(--color-surface) 28%, transparent) 50%, color-mix(in srgb, var(--color-surface) 28%, transparent) 75%,
-      transparent 75%, transparent);
-    background-size: 16px 16px;
-    animation: progress-running 0.9s linear infinite;
+  /* The waiting mark (DASH-493, option A, the ring): one small mark for a short wait, always with words beside it,
+     instead of a plain "Loading…". `.wait` holds `.wait__mark` and the words; give the words role="status" where
+     they change. A busy button (aria-busy="true") draws the same ring before its words, keeps its size and cannot
+     be pressed again (set aria-disabled too, and the doing word, such as "Testing"). With less motion asked for,
+     the ring does not turn; it fades in and out. */
+  .wait {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
   }
-  @keyframes progress-running {
-    from { background-position: 0 0; }
-    to { background-position: 16px 0; }
+  .wait__mark,
+  .btn[aria-busy="true"]::before {
+    display: inline-block;
+    box-sizing: border-box;
+    flex: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--color-divider);
+    border-top-color: var(--color-accent);
+    border-radius: 50%;
+    animation: wait-turn 0.8s linear infinite;
   }
-  :root.pref-motion .progress--running > span {
-    animation: none;
+  .btn[aria-busy="true"] {
+    cursor: progress;
+    opacity: 1;
+  }
+  .btn[aria-busy="true"]::before {
+    content: "";
+    display: inline-block;
+    box-sizing: border-box;
+    border-color: color-mix(in srgb, currentColor 30%, transparent);
+    border-top-color: currentColor;
+  }
+  @keyframes wait-turn {
+    to { transform: rotate(360deg); }
+  }
+  :root.pref-motion .wait__mark,
+  :root.pref-motion .btn[aria-busy="true"]::before {
+    animation: loading-fade 2s ease-in-out infinite;
   }
   @media (prefers-reduced-motion: reduce) {
-    :root:not(.pref-motion-off) .progress--running > span {
-      animation: none;
+    :root:not(.pref-motion-off) .wait__mark,
+    :root:not(.pref-motion-off) .btn[aria-busy="true"]::before {
+      animation: loading-fade 2s ease-in-out infinite;
     }
   }
   .meter {
@@ -2038,11 +2102,11 @@
   }
   .loading-bar {
     position: relative;
-    height: 3px;
+    height: 6px;
     overflow: hidden;
   }
-  /* Chase (TheMightyTRexUK, 12 November 2026): a long bar and a short bar follow each other across until loading
-     ends. Reduce motion shows a still line instead. */
+  /* Chase (TheMightyTRexUK, 12 November 2026; striped, option E, 20 November 2026): a long and a short striped bar
+     follow each other across until loading ends. Reduce motion shows a still line instead. */
   .loading-bar[data-active]::before,
   .loading-bar[data-active]::after {
     content: "";
@@ -2050,14 +2114,18 @@
     top: 0;
     bottom: 0;
     left: 0;
-    background: var(--color-accent);
+    background-color: var(--color-accent);
+    background-image: linear-gradient(-45deg, var(--stripe) 25%, transparent 25%, transparent 50%, var(--stripe) 50%,
+      var(--stripe) 75%, transparent 75%, transparent);
+    background-size: 24px 24px;
+    --stripe: color-mix(in srgb, var(--color-surface) 40%, transparent);
     will-change: left, right;
   }
   .loading-bar[data-active]::before {
-    animation: loading-long 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+    animation: progress-stripes 0.7s linear infinite, loading-long 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
   }
   .loading-bar[data-active]::after {
-    animation: loading-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) 1.15s infinite;
+    animation: progress-stripes 0.7s linear infinite, loading-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) 1.15s infinite;
   }
   /* Toast (option C, TheMightyTRexUK, 3 November 2026): a card in the corner with a status edge, an icon, a title,
      an optional line of detail, one optional action and Close. Tones: success, info, warning and danger

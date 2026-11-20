@@ -1014,7 +1014,27 @@
     setupSideTrees(root);
     setupSolvers(root);
   }
-  window.SharedComponents = { setup, applyTheme, setupHeaderFit, fitHeader, motionStill, setupSideTrees, setupSolvers, setupSearch, setupSearchIcons, setupSortables, openLayer, toast, savedNote, copyText, azLetter, azJump, azGo, loadMore };
+  /* Waiting standard (DASH-493): set a count bar (.progress.progress--running with role="progressbar") to `done` of
+     `total`. It eases onto the count, then creeps towards the next one over `eachMs` (the usual time for one item),
+     never past 90% of the way, so the bar never sits still while an item works. With less motion asked for it only
+     steps. The words beside the bar still carry the count; this changes the bar and its aria-valuenow only. */
+  function creepProgress(bar, done, total, eachMs = 0) {
+    const fill = bar && bar.firstElementChild;
+    if (!fill || !total) return;
+    const start = 4;
+    const pct = (i) => Math.min(100, start + ((100 - start) * i) / total);
+    const still = motionStill();
+    bar.setAttribute("aria-valuenow", String(done));
+    clearTimeout(bar._creep);
+    fill.style.transition = still ? "none" : "width 300ms ease-out";
+    fill.style.width = `${pct(done)}%`;
+    if (still || !eachMs || done >= total) return;
+    bar._creep = setTimeout(() => {
+      fill.style.transition = `width ${eachMs}ms linear`;
+      fill.style.width = `${pct(done) + (pct(done + 1) - pct(done)) * 0.9}%`;
+    }, 320);
+  }
+  window.SharedComponents = { setup, applyTheme, creepProgress, setupHeaderFit, fitHeader, motionStill, setupSideTrees, setupSolvers, setupSearch, setupSearchIcons, setupSortables, openLayer, toast, savedNote, copyText, azLetter, azJump, azGo, loadMore };
   // An app that wires its own behaviour (Starboard's page scripts) loads this file with data-manual, or
   // sets window.SharedComponentsManual = true first, and calls setup() or openLayer() itself.
   const manual = window.SharedComponentsManual || document.currentScript?.hasAttribute("data-manual");
