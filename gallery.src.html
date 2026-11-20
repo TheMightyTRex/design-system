@@ -32,7 +32,7 @@
   .g-fp { display: grid; gap: var(--space-3); padding: var(--space-4); flex: 1 1 300px; max-inline-size: 440px; }
   .g-demo--row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
   .g-notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-3) var(--space-6); font-size: var(--text-sm); }
-  .g-notes h4 { font-size: var(--text-sm); margin-bottom: var(--space-1); }
+  .g-notes h4, .g-notes h3 { font-size: var(--text-sm); margin-bottom: var(--space-1); }
   .g-notes ul { margin: 0; padding-left: var(--space-5); display: grid; gap: 2px; }
   .g-notes code { font-size: var(--text-xs); }
   .g-pals { display: grid; gap: var(--space-6); }
@@ -107,6 +107,9 @@
     <li><a href="#page-head">Page head</a></li>
     <li><a href="#footer">Footer</a></li>
     <li><a href="#display-button">Display button</a></li>
+    <li><a href="#page-banner">Page banner</a></li>
+    <li><a href="#alerts-centre">Popover and alerts centre</a></li>
+    <li><a href="#command-palette">Command palette</a></li>
     <li class="g-group">Actions</li>
     <li><a href="#buttons">Buttons</a></li>
     <li><a href="#menus">Menu button</a></li>
@@ -115,16 +118,26 @@
     <li><a href="#choices">Checkboxes, switches and choices</a></li>
     <li><a href="#sortable">Sortable list</a></li>
     <li><a href="#filters">Filter chips and applied filters</a></li>
+    <li><a href="#combobox">Combobox</a></li>
+    <li><a href="#tag-input">Tag input</a></li>
+    <li><a href="#secret-field">Secret field</a></li>
+    <li><a href="#schedule">Schedule picker</a></li>
+    <li><a href="#error-summary">Error summary</a></li>
     <li class="g-group">Content</li>
     <li><a href="#status">Status, counts and tags</a></li>
+    <li><a href="#tooltip">Tooltip</a></li>
     <li><a href="#facts">Facts, stats and meters</a></li>
+    <li><a href="#sparkline-gauge">Sparkline and gauge</a></li>
     <li><a href="#rows">Rows and tables</a></li>
+    <li><a href="#pagination">Pagination</a></li>
     <li><a href="#notices">Notices, empty and loading</a></li>
     <li><a href="#toasts">Toasts and saved notes</a></li>
     <li><a href="#callouts">Callouts</a></li>
     <li><a href="#disclosure">Disclosure, help and steps</a></li>
+    <li><a href="#log-viewer">Log viewer</a></li>
     <li class="g-group">Containers</li>
     <li><a href="#cards">Panels and cards</a></li>
+    <li><a href="#tabs">Tabs</a></li>
     <li><a href="#media">Covers and media cards</a></li>
     <li><a href="#az-jump">A to Z jump list</a></li>
     <li><a href="#load-more">Load more as you scroll</a></li>
@@ -269,7 +282,7 @@
   <div class="g-notes">
     <div><h4>Use</h4><ul><li>Nothing else goes in the header: page actions live in the page head or the section toolbar.</li><li>Tabs that do not fit show icons only (<code>.is-compact</code>) with the names as tooltips; the 2nd level scrolls sideways.</li><li>A count on a tab says what it counts in hidden text.</li></ul></div>
     <div><h4>Search button</h4><ul><li>Search is always one button away (TheMightyTRexUK, 4 November 2026): <code>.rail__search</code>, first in the rail under the logo, moves focus to the header's search box.</li><li>On phones, where the box is hidden, <code>.site-header__search-btn</code> in the header opens the same box as a row under the header. Escape or a press outside closes it and returns focus.</li><li>Both buttons have <code>data-search-open</code> and <code>aria-controls</code> naming the search form; <code>components.js</code> does the rest. No single-key shortcut, so nothing fires while someone enters text (WCAG 2.1.4).</li></ul></div>
-    <div><h4>Accessibility</h4><ul><li>Each tab row is a <code>nav</code> with its own name; the current tab has <code>aria-current="page"</code> and a 3px bar, not colour alone.</li><li>Search is a plain box with a hidden submit button, so voice control can say "Search". The phone search button says "Search" and reports <code>aria-expanded</code>.</li></ul></div>
+    <div><h3>Accessibility</h3><ul><li>Each tab row is a <code>nav</code> with its own name; the current tab has <code>aria-current="page"</code> and a 3px bar, not colour alone.</li><li>Search is a plain box with a hidden submit button, so voice control can say "Search". The phone search button says "Search" and reports <code>aria-expanded</code>.</li></ul></div>
     <div><h4>Classes</h4><ul><li><code>.rail</code>, <code>.rail__search</code>, <code>.site-header</code>, <code>.site-header__search-btn</code>, <code>.site-header__bar</code>, <code>.site-header__tabs</code>, <code>.menu-tabs</code>, <code>.menu-tabs__label</code>, <code>.count</code>, <code>.update-dot</code></li></ul></div>
   </div>
 </section>
@@ -349,6 +362,70 @@
   </div>
 </section>
 
+<section class="g-section" id="page-banner" aria-labelledby="page-banner-h">
+  <header><h2 id="page-banner-h">Page banner</h2><p class="muted">One message for the whole app, directly under the header, that stays while its state lasts: the connection to the server is lost, a restart is needed, or a restore makes the app read only. It goes when the state ends, not when it is closed.</p></header>
+  <div class="g-demo">
+    <div class="page-banner" data-tone="danger">{{i:circle-alert}}<p class="page-banner__text"><strong>Connection lost.</strong> Starboard is trying again every 10 seconds. Changes you make on this page are kept.</p><div class="page-banner__actions"><button class="btn" type="button">Try again now</button></div></div>
+    <div class="page-banner" data-tone="warning">{{i:triangle-alert}}<p class="page-banner__text"><strong>Restart needed.</strong> Starboard uses the new network settings after it restarts, in about 30 seconds.</p><div class="page-banner__actions"><button class="btn" type="button">Restart Starboard</button></div></div>
+    <div class="page-banner">{{i:info}}<p class="page-banner__text"><strong>Read only while a backup is restored.</strong> Changes can be saved again when it finishes.</p></div>
+    <div class="g-demo--row"><button class="btn" type="button" id="g-banner-show">Show Connection lost under the header</button><button class="btn btn--quiet" type="button" id="g-banner-hide">Take the banner away</button></div>
+  </div>
+  <div class="g-notes">
+    <div><h3>When to use it</h3><ul><li>A state of the whole app that changes what people can do on every page: Connection lost, Restart needed, Read only.</li><li>One at a time; the most serious wins.</li></ul></div>
+    <div><h3>When not to</h3><ul><li>Anything about this page alone: use a notice in the page.</li><li>The result of an action: use a toast.</li><li>A restart of one app inside Starboard: keep the restart notice in its place (DASH-470).</li></ul></div>
+    <div><h3>Accessibility</h3><ul><li><code>pageBanner()</code> says the words once: danger through <code>role="alert"</code>, the rest politely. The banner itself is not a live region, so moving between pages does not repeat it.</li><li>It does not stick to the top, so it never covers what has focus (WCAG 2.4.11).</li><li>Words and an icon say the tone, never colour alone.</li></ul></div>
+    <div><h3>Classes and behaviour</h3><ul><li><code>.page-banner[data-tone]</code>, <code>.page-banner__text</code>, <code>.page-banner__actions</code></li><li><code>SharedComponents.pageBanner(title, {{ text, tone, action }})</code> puts it after <code>.site-header</code> and returns the function that takes it away.</li></ul></div>
+  </div>
+</section>
+
+<section class="g-section" id="alerts-centre" aria-labelledby="alerts-centre-h">
+  <header><h2 id="alerts-centre-h">Popover and alerts centre</h2><p class="muted">A popover is a small layer from a button for something to read and act on, without leaving the page. The alerts centre is built on it: Alerts in the header shows how many are unread, and opens the recent alerts with Mark as read on each and Mark all as read. The menu (<code>.menu</code>) stays for lists of actions only.</p></header>
+  <div class="g-demo" style="padding:0;min-height:480px">
+    <div class="g-frame" style="overflow:visible">
+      <div class="site-header site-header--no-rail" style="position:relative">
+        <div class="site-header__bar">
+          <span class="site-header__brand">{{i-lg:server}}<span>Starboard</span></span>
+          <div class="site-header__actions" style="margin-left:auto">
+            <div class="popover-wrap">
+              <button class="icon-btn" type="button" data-popover aria-controls="g-alerts">{{i-lg:bell}}<span class="label">Alerts</span><span class="count">3<span class="visually-hidden"> unread</span></span></button>
+              <section class="popover" id="g-alerts" role="dialog" aria-labelledby="g-alerts-h" data-alerts hidden>
+                <div class="popover__head"><h3 id="g-alerts-h">Alerts</h3><button class="btn btn--quiet" type="button" data-alerts-read-all>{{i:check}}Mark all as read</button></div>
+                <div class="popover__body popover__body--flush">
+                  <ul class="alerts">
+                    <li class="alerts__item" data-unread data-tone="warning" data-id="a1">{{i:triangle-alert}}<div class="alerts__text"><span class="alerts__title"><span class="alerts__unread visually-hidden">Unread: </span><a href="#alerts-centre">Disk 3 is 92% full</a></span><span class="alerts__time"><time datetime="2026-11-20T09:12">12 minutes ago</time></span></div><button class="icon-btn icon-btn--bare alerts__read" type="button" aria-label="Mark as read: Disk 3 is 92% full" data-tooltip="Mark as read">{{i:check}}</button></li>
+                    <li class="alerts__item" data-unread data-tone="danger" data-id="a2">{{i:circle-alert}}<div class="alerts__text"><span class="alerts__title"><span class="alerts__unread visually-hidden">Unread: </span><a href="#alerts-centre">Prowlarr is not responding</a></span><span class="alerts__time"><time datetime="2026-11-20T08:40">44 minutes ago</time></span></div><button class="icon-btn icon-btn--bare alerts__read" type="button" aria-label="Mark as read: Prowlarr is not responding" data-tooltip="Mark as read">{{i:check}}</button></li>
+                    <li class="alerts__item" data-unread data-tone="success" data-id="a3">{{i:circle-check}}<div class="alerts__text"><span class="alerts__title"><span class="alerts__unread visually-hidden">Unread: </span><a href="#alerts-centre">Backup finished: 2.4 GB</a></span><span class="alerts__time"><time datetime="2026-11-20T03:00">Today at 03:00</time></span></div><button class="icon-btn icon-btn--bare alerts__read" type="button" aria-label="Mark as read: Backup finished" data-tooltip="Mark as read">{{i:check}}</button></li>
+                    <li class="alerts__item" data-tone="info" data-id="a4">{{i:info}}<div class="alerts__text"><span class="alerts__title"><a href="#alerts-centre">Jellyfin 10.11.3 is available</a></span><span class="alerts__time"><time datetime="2026-11-19T18:20">Yesterday at 18:20</time></span></div></li>
+                  </ul>
+                </div>
+                <div class="popover__foot"><a href="#alerts-centre">All alerts</a></div>
+              </section>
+            </div>
+            <button class="icon-btn" type="button">{{i-lg:sun}}<span class="label">Display</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="g-notes">
+    <div><h3>When to use it</h3><ul><li>A popover: a short list or a few facts from a button that people check and come back from, such as recent alerts.</li><li>The alerts centre: the newest 10 or so alerts, with All alerts linking to the page that keeps them.</li></ul></div>
+    <div><h3>When not to</h3><ul><li>Actions alone: use a menu. A task with fields: use a slide-out or a dialog. Help: use help links and a slide-out.</li><li>Anything that must be read before going on: use a dialog.</li></ul></div>
+    <div><h3>Accessibility</h3><ul><li>The button has <code>aria-expanded</code> and <code>aria-controls</code>; the popover is <code>role="dialog"</code>, not modal, named by its heading.</li><li>Focus moves to the heading; Escape returns it to the button; a press outside or Tab out of it closes it.</li><li>The count is part of the button's name ("Alerts 3 unread"). Unread alerts have a dot, bold words and "Unread:" in hidden text. Marking says so politely and keeps focus on the alert.</li></ul></div>
+    <div><h3>Classes and behaviour</h3><ul><li><code>.popover-wrap</code>, <code>.popover[data-align]</code>, <code>__head</code>, <code>__body</code>, <code>__body--flush</code>, <code>__foot</code>; <code>[data-popover]</code> on the button.</li><li><code>.popover[data-alerts]</code>, <code>.alerts</code>, <code>.alerts__item[data-unread][data-tone]</code>, <code>__unread</code>, <code>__title</code>, <code>__time</code>, <code>__read</code>, <code>[data-alerts-read-all]</code>; the <code>alerts-read</code> event.</li></ul></div>
+  </div>
+</section>
+
+<section class="g-section" id="command-palette" aria-labelledby="command-palette-h">
+  <header><h2 id="command-palette-h">Command palette</h2><p class="muted">Find a page or an action by name and go there with Enter. It opens from its button, or with Ctrl and K (Command and K on a Mac). It is the combobox in a dialog. In this gallery it lists every section.</p></header>
+  <div class="g-demo g-demo--row"><button class="btn command-palette-open" type="button" data-command-palette>{{i:search}}Find a page or action<kbd>Ctrl K</kbd></button></div>
+  <div class="g-notes">
+    <div><h3>When to use it</h3><ul><li>An app with many pages and settings, as a quicker way for people who know what they want.</li><li>Next to search, never instead of the menus.</li></ul></div>
+    <div><h3>When not to</h3><ul><li>Searching content (books, films): use search.</li><li>The only way to reach something: everything in it is also in the menus or on a page.</li></ul></div>
+    <div><h3>Accessibility</h3><ul><li>The shortcut uses Ctrl or Command, so no single key starts it (WCAG 2.1.4); <code>data-no-shortcut</code> on <code>&lt;html&gt;</code> takes it away, for an app's setting.</li><li>Focus goes to the box and back to what had it when the dialog closes.</li><li>The number found is said politely, from inside the dialog so it is heard.</li></ul></div>
+    <div><h3>Classes and behaviour</h3><ul><li><code>[data-command-palette]</code> on the button; <code>[data-command]</code> on any button it should list; <code>.command-palette</code>, <code>.command-palette-open</code>.</li><li><code>SharedComponents.commandPalette.items = () => [{{ label, hint, href | run }}]</code> to list an app's own; otherwise it lists the side menu, menu tabs and phone menu links.</li></ul></div>
+  </div>
+</section>
+
 <!-- ACTIONS -->
 <section class="g-section" id="buttons" aria-labelledby="buttons-h">
   <header><h2 id="buttons-h">Buttons</h2><p class="muted">44px high, square, bold 0.875rem. One primary button per view. Words say what happens: "Save connection", not "OK".</p></header>
@@ -369,7 +446,7 @@
   </div>
   <div class="g-notes">
     <div><h4>Variants</h4><ul><li><code>.btn--primary</code>: the one main action.</li><li><code>.btn--quiet</code>: Cancel and secondary links.</li><li><code>.btn--danger</code>: removing; asks first in a dialog.</li><li><code>.btn--compact</code>: 32px, inside dense tables only.</li></ul></div>
-    <div><h4>Accessibility</h4><ul><li>Icon-only buttons have a name that includes the thing: "More actions for The Salt Road".</li><li>A button that cannot act yet says why beside it, or stays available and explains when pressed.</li></ul></div>
+    <div><h3>Accessibility</h3><ul><li>Icon-only buttons have a name that includes the thing: "More actions for The Salt Road".</li><li>A button that cannot act yet says why beside it, or stays available and explains when pressed.</li></ul></div>
   </div>
 </section>
 
@@ -473,6 +550,95 @@
   <div class="g-notes"><div><h4>Rules</h4><ul><li>Every filter and sort starts from the current address, so two changes in a row both stick.</li><li>Filters are in the address, so Back and shared links keep them.</li></ul></div></div>
 </section>
 
+<section class="g-section" id="combobox" aria-labelledby="combobox-h">
+  <header><h2 id="combobox-h">Combobox (searchable select)</h2><p class="muted">A box that narrows a long list as you enter text, then you choose one. The matching part of each name is underlined, and "No languages match" shows when nothing does.</p></header>
+  <div class="g-demo" style="min-height:420px;align-content:start">
+    <div class="field" style="max-width:420px"><label class="field__label" for="g-cb">Subtitle language</label><p class="hint" id="g-cb-hint">Enter part of the name, then choose it from the list.</p>
+      <div class="combobox" data-combobox data-noun="languages" data-noun-one="language">
+        <input class="input combobox__input" id="g-cb" type="text" value="English" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="g-cb-list" aria-describedby="g-cb-hint" autocomplete="off" spellcheck="false">
+        <button class="combobox__toggle" type="button" tabindex="-1" aria-label="Show all languages">{{i:chevron-down}}</button>
+        <div class="combobox__popup" hidden><ul class="combobox__list" id="g-cb-list" role="listbox" aria-label="Languages"><li role="option" data-value="ar">Arabic</li><li role="option" data-value="zh">Chinese</li><li role="option" data-value="da" data-hint="Dansk">Danish</li><li role="option" data-value="nl" data-hint="Nederlands">Dutch</li><li role="option" data-value="en">English</li><li role="option" data-value="fr" data-hint="Français">French</li><li role="option" data-value="de" data-hint="Deutsch">German</li><li role="option" data-value="hi">Hindi</li><li role="option" data-value="ga" data-hint="Gaeilge">Irish</li><li role="option" data-value="it" data-hint="Italiano">Italian</li><li role="option" data-value="ja">Japanese</li><li role="option" data-value="ko">Korean</li><li role="option" data-value="no" data-hint="Norsk">Norwegian</li><li role="option" data-value="pl" data-hint="Polski">Polish</li><li role="option" data-value="pt" data-hint="Português">Portuguese</li><li role="option" data-value="gd" data-hint="Gàidhlig">Scottish Gaelic</li><li role="option" data-value="es" data-hint="Español">Spanish</li><li role="option" data-value="sv" data-hint="Svenska">Swedish</li><li role="option" data-value="tr" data-hint="Türkçe">Turkish</li><li role="option" data-value="uk">Ukrainian</li><li role="option" data-value="cy" data-hint="Cymraeg">Welsh</li></ul><p class="combobox__none" hidden></p></div>
+        <input type="hidden" name="language" value="en">
+      </div>
+    </div>
+  </div>
+  <div class="g-notes">
+    <div><h3>When to use it</h3><ul><li>Choosing one from more than about 15 options, such as a language, a time zone or a folder on a list.</li><li>Where people know the name they want.</li></ul></div>
+    <div><h3>When not to</h3><ul><li>Fewer than about 15 options: use a select or radios.</li><li>More than one choice: use filter chips or checkboxes.</li><li>Free text with suggestions only: use a plain text box.</li></ul></div>
+    <div><h3>Accessibility</h3><ul><li>ARIA 1.2 combobox with a listbox. Focus stays in the box; <code>aria-activedescendant</code> points at the option the arrow keys reach, which has the focus ring.</li><li>Down opens the list, Up and Down move, Enter chooses, Escape closes the list and then clears the box, Tab leaves.</li><li>The number found is said politely after a pause; leaving the box keeps an exact name, or goes back to the last choice.</li></ul></div>
+    <div><h3>Classes and behaviour</h3><ul><li><code>.combobox[data-combobox]</code> with <code>data-noun</code> and <code>data-noun-one</code>; <code>__input</code>, <code>__toggle</code>, <code>__popup</code>, <code>__list</code>, <code>__option</code>, <code>__hint</code>, <code>__none</code>, and a hidden input for the value.</li><li><code>SharedComponents.combobox(box, {{ options, onChoose, always }})</code> returns <code>setOptions</code>; the <code>combobox-change</code> event.</li></ul></div>
+  </div>
+</section>
+
+<section class="g-section" id="tag-input" aria-labelledby="tag-input-h">
+  <header><h2 id="tag-input-h">Tag input</h2><p class="muted">A list of short words entered one at a time: Enter or a comma adds each, and each has its own Remove button. Pasting "cam, ts, hdcam" adds all three.</p></header>
+  <div class="g-demo">
+    <div class="field" style="max-width:560px"><label class="field__label" for="g-tags">Words to leave out</label><p class="hint" id="g-tags-hint">Releases with any of these words in their name are skipped. Press Enter or a comma after each one.</p>
+      <div class="tag-input" data-tag-input><ul class="tag-input__list" aria-label="Words to leave out"><li data-value="cam">cam</li><li data-value="telesync">telesync</li></ul><input class="tag-input__field" id="g-tags" type="text" autocomplete="off" spellcheck="false" aria-describedby="g-tags-hint"><input type="hidden" name="skip-words" value="cam,telesync"></div>
+    </div>
+  </div>
+  <div class="g-notes">
+    <div><h3>When to use it</h3><ul><li>A handful of short free words or names: words to skip, tags, extra addresses.</li><li>When the order does not matter.</li></ul></div>
+    <div><h3>When not to</h3><ul><li>Choosing from a known list: use the combobox or checkboxes.</li><li>Long values or an order that matters: use rows with a sortable list.</li></ul></div>
+    <div><h3>Accessibility</h3><ul><li>A real text box with a label and hint; the words are a list named like the field.</li><li>Each Remove button is named with its word ("Remove cam"). Adding and removing are said politely; a word already in the list says so.</li><li>After a removal, focus moves to the next Remove button or back to the box; Backspace in an empty box moves to the last one.</li></ul></div>
+    <div><h3>Classes and behaviour</h3><ul><li><code>.tag-input[data-tag-input]</code>, <code>__list</code>, <code>__tag</code>, <code>__field</code>, and a hidden input with the words joined by commas.</li><li>The <code>tags-change</code> event with <code>{{ values }}</code>.</li></ul></div>
+  </div>
+</section>
+
+<section class="g-section" id="secret-field" aria-labelledby="secret-field-h">
+  <header><h2 id="secret-field-h">Secret field</h2><p class="muted">An API key, token or password that the app keeps: hidden until Show, with Copy and Replace beside it. Replace empties the box for the new one, with Save and Cancel.</p></header>
+  <div class="g-demo">
+    <div class="field" style="max-width:720px"><label class="field__label" for="g-secret">API key</label><p class="hint" id="g-secret-hint">Starboard uses it to ask Jellyfin what is playing. Replace it when you make a new key in Jellyfin.</p>
+      <div class="secret-field" data-secret data-name="API key"><input class="input secret-field__input" id="g-secret" type="password" readonly autocomplete="off" spellcheck="false" aria-describedby="g-secret-hint"><button class="btn" type="button" data-secret-show aria-controls="g-secret">{{i:eye}}Show<span class="visually-hidden"> API key</span></button><button class="btn" type="button" data-secret-copy>{{i:copy}}Copy<span class="visually-hidden"> API key</span></button><button class="btn" type="button" data-secret-replace>{{i:pencil}}Replace<span class="visually-hidden"> API key</span></button></div>
+    </div>
+  </div>
+  <div class="g-notes">
+    <div><h3>When to use it</h3><ul><li>A key, token or password that is saved and people may need to read, copy or change.</li><li>In a settings section or an app's slide-out.</li></ul></div>
+    <div><h3>When not to</h3><ul><li>Signing in: use a password field with <code>autocomplete="current-password"</code>.</li><li>A key the server must never send back: show "Saved" and Replace only.</li></ul></div>
+    <div><h3>Accessibility</h3><ul><li>Show and Hide are one button with <code>aria-pressed</code>, named with the thing ("Show API key"); the change is said politely.</li><li>Copy confirms in a toast that never holds the value. Replace moves focus into the empty box and says what to do; Enter saves and Escape cancels.</li><li>The value is never in an attribute, a message, the page title or the console.</li></ul></div>
+    <div><h3>Classes and behaviour</h3><ul><li><code>.secret-field[data-secret][data-name]</code>, <code>__input</code>, <code>[data-secret-show]</code>, <code>[data-secret-copy]</code>, <code>[data-secret-replace]</code>.</li><li>The <code>secret-change</code> event with <code>{{ value }}</code> for the app to save; set the value with <code>input.value</code>, never in the markup.</li></ul></div>
+  </div>
+</section>
+
+<section class="g-section" id="schedule" aria-labelledby="schedule-h">
+  <header><h2 id="schedule-h">Schedule picker</h2><p class="muted">How often, on which days and at what time, read back in words and with the next time it runs.</p></header>
+  <div class="g-demo">
+    <fieldset class="schedule" data-schedule>
+      <legend>When to back up the settings</legend>
+      <div class="schedule__row">
+        <div class="field"><label class="field__label" for="g-sch-repeat">Repeat</label><select class="select" id="g-sch-repeat" data-schedule-repeat><option value="day">Every day</option><option value="week" selected>On chosen days</option><option value="hour">Every hour</option></select></div>
+        <div class="field"><label class="field__label" for="g-sch-time">Time</label><input class="input" id="g-sch-time" type="time" value="07:00" data-schedule-time></div>
+        <div class="field" hidden><label class="field__label" for="g-sch-min">Minutes past the hour</label><input class="input" id="g-sch-min" type="number" min="0" max="59" value="0" inputmode="numeric" data-schedule-minute></div>
+      </div>
+      <fieldset><legend>Days</legend><div class="schedule__days" data-schedule-days><label class="schedule__day"><input type="checkbox" value="1" checked><span><span aria-hidden="true">Mon</span><span class="visually-hidden">Monday</span></span></label><label class="schedule__day"><input type="checkbox" value="2" checked><span><span aria-hidden="true">Tue</span><span class="visually-hidden">Tuesday</span></span></label><label class="schedule__day"><input type="checkbox" value="3" checked><span><span aria-hidden="true">Wed</span><span class="visually-hidden">Wednesday</span></span></label><label class="schedule__day"><input type="checkbox" value="4" checked><span><span aria-hidden="true">Thu</span><span class="visually-hidden">Thursday</span></span></label><label class="schedule__day"><input type="checkbox" value="5" checked><span><span aria-hidden="true">Fri</span><span class="visually-hidden">Friday</span></span></label><label class="schedule__day"><input type="checkbox" value="6"><span><span aria-hidden="true">Sat</span><span class="visually-hidden">Saturday</span></span></label><label class="schedule__day"><input type="checkbox" value="0"><span><span aria-hidden="true">Sun</span><span class="visually-hidden">Sunday</span></span></label></div></fieldset>
+      <p class="schedule__words" role="status">{{i:clock}}<span><strong data-schedule-words>Every weekday at 07:00</strong><span class="small" data-schedule-next></span></span></p>
+    </fieldset>
+  </div>
+  <div class="g-notes">
+    <div><h3>When to use it</h3><ul><li>Anything that runs by itself on a timetable: backups, checks, updates, searches.</li><li>Where the times are the same each day or week.</li></ul></div>
+    <div><h3>When not to</h3><ul><li>One date and time: use a date and a time field.</li><li>A timetable people cannot change: say it in words, such as "Every day at 03:00".</li></ul></div>
+    <div><h3>Accessibility</h3><ul><li>Real fields: a select, a time box and checkboxes in a fieldset named Days, each day's full name for screen readers.</li><li>The words and the next time are a polite status, so a change is read back.</li><li>Times use the 24-hour clock (CONTENT-DESIGN.md section 3).</li></ul></div>
+    <div><h3>Classes and behaviour</h3><ul><li><code>.schedule[data-schedule]</code>, <code>__row</code>, <code>__days</code>, <code>__day</code>, <code>__words</code>; <code>[data-schedule-repeat]</code>, <code>-time</code>, <code>-minute</code>, <code>-days</code>, <code>-words</code>, <code>-next</code>.</li><li><code>SharedComponents.scheduleWords(value)</code>, <code>nextRun(value)</code> and the <code>schedule-change</code> event.</li></ul></div>
+  </div>
+</section>
+
+<section class="g-section" id="error-summary" aria-labelledby="error-summary-h">
+  <header><h2 id="error-summary-h">Error summary</h2><p class="muted">After GOV.UK. When a form is sent with mistakes, a summary at the top lists each one as a link to its field, and focus moves to it. Each field still shows its own error. Select Save server with the fields empty, or with a port of 70000.</p></header>
+  <div class="g-demo">
+    <form class="form-stack" id="g-err-form" novalidate>
+      <div class="field"><label class="field__label" for="g-err-name">Server name<span class="field__required" aria-hidden="true">*</span></label><input class="input" id="g-err-name" type="text" required autocomplete="off"></div>
+      <div class="field"><label class="field__label" for="g-err-port">Port<span class="field__required" aria-hidden="true">*</span></label><p class="hint" id="g-err-port-hint">A number from 1 to 65535, such as 8096.</p><input class="input" id="g-err-port" type="text" inputmode="numeric" required aria-describedby="g-err-port-hint"></div>
+      <div class="actions"><button class="btn btn--primary" type="submit">Save server</button></div>
+    </form>
+  </div>
+  <div class="g-notes">
+    <div><h3>When to use it</h3><ul><li>Every form with more than one field that is checked when it is sent.</li><li>With <code>.field-error</code> on each field, never instead of it.</li></ul></div>
+    <div><h3>When not to</h3><ul><li>A single field that checks itself as it saves (<code>.inline-save</code>): its own error is enough.</li><li>Problems that are not about a field: use a danger notice.</li></ul></div>
+    <div><h3>Accessibility</h3><ul><li>Focus moves to the summary, which is read at once; "Error: " goes at the start of the page title.</li><li>Each link names the problem in the field's own error words, and moves focus to the field with its label in view.</li><li>Each field has <code>aria-invalid</code> and its error tied by <code>aria-describedby</code>, with "Error: " in hidden text.</li></ul></div>
+    <div><h3>Classes and behaviour</h3><ul><li><code>.error-summary</code>, <code>__title</code>, <code>__list</code>, with <code>.field-error</code>.</li><li><code>SharedComponents.showErrors(form, [{{ field, message }}])</code>, <code>clearErrors(form)</code> and <code>setFieldError(control, message)</code>.</li></ul></div>
+  </div>
+</section>
+
 <!-- CONTENT -->
 <section class="g-section" id="status" aria-labelledby="status-h">
   <header><h2 id="status-h">Status, counts and tags</h2><p class="muted">A status chip shows a word, a shape and a colour together, so it works without colour. One vocabulary across both apps (guides/CONTENT-DESIGN.md).</p></header>
@@ -502,8 +668,8 @@
   </div>
   <div class="g-demo">
     <ul class="rows" aria-label="Connections">
-      <li class="row row--no-lead"><div><p class="row__title">Sonarr<span class="status-icon" data-tone="success" title="Connected">{{i:circle-check}}<span class="visually-hidden">Connected</span></span></p><p class="row__meta">127.0.0.1:8989</p></div></li>
-      <li class="row row--no-lead"><div><p class="row__title">SABnzbd<span class="status-icon" data-tone="danger" title="Not connected">{{i:circle-x}}<span class="visually-hidden">Not connected</span></span></p><p class="row__meta">127.0.0.1:8085</p></div></li>
+      <li class="row row--no-lead"><div><p class="row__title">Sonarr<span class="status-icon" data-tone="success" tabindex="0" data-tooltip="Connected">{{i:circle-check}}<span class="visually-hidden">Connected</span></span></p><p class="row__meta">127.0.0.1:8989</p></div></li>
+      <li class="row row--no-lead"><div><p class="row__title">SABnzbd<span class="status-icon" data-tone="danger" tabindex="0" data-tooltip="Not connected">{{i:circle-x}}<span class="visually-hidden">Not connected</span></span></p><p class="row__meta">127.0.0.1:8085</p></div></li>
     </ul>
   </div>
   <div class="g-notes">
@@ -515,6 +681,23 @@
       <li><strong>A row with actions:</strong> the chip in <code>.row__side</code>. <strong>A card:</strong> in <code>.card__meta</code>. <strong>A stat tile:</strong> under the value. <strong>A cover:</strong> its corner.</li>
       <li>At most two chips in one place; more belongs in a facts list.</li>
     </ul></div>
+  </div>
+</section>
+
+<section class="g-section" id="tooltip" aria-labelledby="tooltip-h">
+  <header><h2 id="tooltip-h">Tooltip</h2><p class="muted">The name of something that shows only an icon, on hover and on keyboard focus. The pointer can move onto it, Escape closes it, and it stays until the pointer or focus leaves (WCAG 1.4.13). Status icons in lists use it.</p></header>
+  <div class="g-demo g-demo--row">
+    <button class="icon-btn" type="button" aria-label="Check again" data-tooltip="Check again">{{i:refresh-cw}}</button>
+    <button class="icon-btn" type="button" aria-label="Edit Sonarr" data-tooltip="Edit Sonarr">{{i:pencil}}</button>
+    <button class="icon-btn" type="button" aria-label="Download the backup (ZIP)" data-tooltip="Download the backup (ZIP)">{{i:download}}</button>
+    <span>Radarr<span class="status-icon" data-tone="success" tabindex="0" data-tooltip="Connected">{{i:circle-check}}<span class="visually-hidden">Connected</span></span></span>
+    <span>Lidarr<span class="status-icon" data-tone="warning" tabindex="0" data-tooltip="Needs attention">{{i:triangle-alert}}<span class="visually-hidden">Needs attention</span></span></span>
+  </div>
+  <div class="g-notes">
+    <div><h3>When to use it</h3><ul><li>The name of an icon button, and the word of a status icon.</li><li>A short name only: a few words, no full stop.</li></ul></div>
+    <div><h3>When not to</h3><ul><li>Anything needed to act or decide: put it in the page, or in help (<code>.help-links</code>).</li><li>Links, buttons with words, or anything on a phone that has no other way to show it.</li><li>The <code>title</code> attribute: keyboards cannot reach it.</li></ul></div>
+    <div><h3>Accessibility</h3><ul><li>The words are already the thing's name (<code>aria-label</code> or hidden text), so the tooltip is hidden from screen readers and never adds anything new.</li><li>It shows at once on keyboard focus and after 0.3 seconds on hover; Escape closes it without closing a dialog behind it.</li><li>A status icon has <code>tabindex="0"</code> so keyboards reach its tooltip.</li></ul></div>
+    <div><h3>Classes and behaviour</h3><ul><li><code>data-tooltip="…"</code> on the thing; one <code>.tooltip</code> for the page, made the first time one shows.</li><li>The page is listened to only while a tooltip shows.</li></ul></div>
   </div>
 </section>
 
@@ -539,6 +722,28 @@
     <div class="meter"><div class="meter__label"><span>Media pool</span><span class="numeric">7.2 of 9.1 TB used (79%)</span></div><div class="progress" data-tone="warning" role="img" aria-label="79% used"><span style="width:79%"></span></div></div>
   </div>
   <div class="g-notes"><div><h4>Rules</h4><ul><li>The value is always in words beside the bar.</li><li>Waiting standard: a count bar starts with a visible piece and creeps between counts (<code>creepProgress()</code>); a wait with no count has the striped band and the time so far; a short wait has the ring and words, never "Loading…" alone; a busy button has <code>aria-busy</code>, <code>aria-disabled</code> and its doing word.</li><li>Facts lists put Author first, then Series; names link to their pages.</li></ul></div></div>
+</section>
+
+<section class="g-section" id="sparkline-gauge" aria-labelledby="sparkline-gauge-h">
+  <header><h2 id="sparkline-gauge-h">Sparkline and gauge</h2><p class="muted">Two small drawings for stat tiles. A sparkline shows how a number moved; a gauge shows how full something is. Each says its numbers in words beside it, so the drawing is never the only way to read them.</p></header>
+  <div class="g-demo">
+    <div class="stats">
+      <div class="stat"><span class="stat__value">42%</span><span class="stat__label">Processor</span><svg class="sparkline" data-values="18,22,19,25,31,28,35,61,44,38,40,42" data-unit="%" data-period="Last hour" data-min="0" data-max="100"></svg><span class="stat__trend">Last hour: 18% to 42%, lowest 18%, highest 61%</span></div>
+      <div class="stat" data-tone="warning"><span class="stat__value">86%</span><span class="stat__label">Memory</span><span><span class="chip" data-tone="warning">{{i:triangle-alert}}Needs attention</span></span><svg class="sparkline" data-values="61,63,66,70,72,75,79,81,84,85,86,86" data-unit="%" data-period="Last hour" data-min="0" data-max="100"></svg><span class="stat__trend">Last hour: 61% to 86%, lowest 61%, highest 86%</span></div>
+      <div class="stat"><span class="stat__value">3.1 MB/s</span><span class="stat__label">Network in</span><svg class="sparkline" data-values="0.4,0.6,2.8,3.4,3.0,1.2,0.8,2.2,3.6,3.3,2.9,3.1" data-unit=" MB/s" data-period="Last hour" data-min="0"></svg><span class="stat__trend">Last hour: 0.4 MB/s to 3.1 MB/s, lowest 0.4 MB/s, highest 3.6 MB/s</span></div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="gauge" data-value="42" data-warn="80" data-danger="90"><div class="gauge__dial"><svg class="gauge__svg" viewBox="0 0 120 66" aria-hidden="true" focusable="false"><path class="gauge__track" d="M10 60 A50 50 0 0 1 110 60" pathLength="100"/><path class="gauge__fill" d="M10 60 A50 50 0 0 1 110 60" pathLength="100" stroke-dasharray="42 100"/></svg><span class="gauge__value">42%</span></div><span class="gauge__label">Processor</span></div></div>
+      <div class="stat" data-tone="warning"><div class="gauge" data-value="86" data-warn="80" data-danger="90"><div class="gauge__dial"><svg class="gauge__svg" viewBox="0 0 120 66" aria-hidden="true" focusable="false"><path class="gauge__track" d="M10 60 A50 50 0 0 1 110 60" pathLength="100"/><path class="gauge__fill" d="M10 60 A50 50 0 0 1 110 60" pathLength="100" stroke-dasharray="86 100"/></svg><span class="gauge__value">86%</span></div><span class="gauge__label">Memory</span></div><span style="justify-self:center"><span class="chip" data-tone="warning">{{i:triangle-alert}}Needs attention</span></span></div>
+      <div class="stat"><div class="gauge" data-value="47" data-warn="80" data-danger="90" data-max="70" data-unit=" °C" data-warn="55" data-danger="60"><div class="gauge__dial"><svg class="gauge__svg" viewBox="0 0 120 66" aria-hidden="true" focusable="false"><path class="gauge__track" d="M10 60 A50 50 0 0 1 110 60" pathLength="100"/><path class="gauge__fill" d="M10 60 A50 50 0 0 1 110 60" pathLength="100" stroke-dasharray="47 100"/></svg><span class="gauge__value">47 °C</span></div><span class="gauge__label">Disk 3 temperature</span></div></div>
+    </div>
+  </div>
+  <div class="g-notes">
+    <div><h3>When to use it</h3><ul><li>A sparkline: the shape of the last hour or day beside a number, in a stat tile.</li><li>A gauge: one value against a known most, such as a percentage or a safe temperature.</li></ul></div>
+    <div><h3>When not to</h3><ul><li>Reading values off it, or comparing series: use the line chart (<code>.chart</code>) with its table.</li><li>A count with no most: use the number alone. Progress of a job: use the progress bar.</li></ul></div>
+    <div><h3>Accessibility</h3><ul><li>The drawing is hidden from screen readers; <code>.stat__trend</code> and <code>.gauge__value</code> carry the numbers in words.</li><li>A gauge's colour changes at <code>data-warn</code> and <code>data-danger</code>; the tile then has a status chip, so the state is never colour alone.</li><li>Lines are 2px in the chart colours, at least 3:1 against the tile; Windows Contrast draws them in system colours.</li></ul></div>
+    <div><h3>Classes and behaviour</h3><ul><li><code>svg.sparkline[data-values]</code> (<code>data-unit</code>, <code>data-period</code>, <code>data-min</code>, <code>data-max</code>), <code>.stat__trend</code>; <code>.gauge[data-value]</code>, <code>__dial</code>, <code>__svg</code>, <code>__track</code>, <code>__fill</code>, <code>__value</code>, <code>__label</code>.</li><li><code>SharedComponents.sparkline(svg, values, options)</code> and <code>gauge(el, value)</code> to update them.</li></ul></div>
+  </div>
 </section>
 
 <section class="g-section" id="rows" aria-labelledby="rows-h">
@@ -566,6 +771,21 @@
     <div class="table-wrap"><table class="table table--fixed"><caption class="visually-hidden">Settings tasks</caption><colgroup><col class="col-id"><col><col class="col-state"></colgroup>
       <thead><tr><th scope="col">ID</th><th scope="col">Task</th><th scope="col">State</th></tr></thead>
       <tbody><tr><td>SET-12</td><td>A server name of up to 10 characters at the start of the level 1 menu, with a character count in Settings, General</td><td><span class="chip" data-tone="warning">{{i:triangle-alert}}Needs a decision</span></td></tr></tbody></table></div>
+  </div>
+</section>
+
+<section class="g-section" id="pagination" aria-labelledby="pagination-h">
+  <header><h2 id="pagination-h">Pagination</h2><p class="muted">Pages of a long table: where you are in words, Previous and Next, the first and last pages and those either side of this one, and how many rows a page shows.</p></header>
+  <div class="g-demo">
+    <h3 id="g-pg-h" tabindex="-1">Download history</h3>
+    <div class="table-wrap" data-stack><table class="table" aria-labelledby="g-pg-h"><thead><tr><th scope="col">Name</th><th scope="col">Finished</th><th scope="col" class="numeric">Size</th></tr></thead><tbody id="g-pg-rows"></tbody></table></div>
+    <nav class="pagination" id="g-pg" aria-label="Pages of download history"></nav>
+  </div>
+  <div class="g-notes">
+    <div><h3>When to use it</h3><ul><li>Tables people sort, compare or come back to by place: history, logs as a table, search results in a table.</li><li>More than about 50 rows.</li></ul></div>
+    <div><h3>When not to</h3><ul><li>Walls and lists people browse: use load more as you scroll.</li><li>Fewer rows than one page: leave it out.</li></ul></div>
+    <div><h3>Accessibility</h3><ul><li>A <code>nav</code> named for what it pages; the current page has <code>aria-current="page"</code>; Previous and Next say "page" in hidden text; the gaps are hidden from screen readers.</li><li>Links are 44px targets. Changing page in place says the new place politely and moves focus to the table's heading.</li><li>Rows per page is a labelled select that keeps the first row in view.</li></ul></div>
+    <div><h3>Classes and behaviour</h3><ul><li><code>.pagination</code>, <code>__summary</code>, <code>__pages</code>, <code>__link</code>, <code>__gap</code>, <code>__size</code>.</li><li><code>SharedComponents.pagination(nav, {{ page, pageSize, total, noun, sizes, href, onPage, onSize, focus }})</code>, or the same markup from the server with real links.</li></ul></div>
   </div>
 </section>
 
@@ -646,6 +866,38 @@
   </div>
 </section>
 
+<section class="g-section" id="log-viewer" aria-labelledby="log-viewer-h">
+  <header><h2 id="log-viewer-h">Log viewer</h2><p class="muted">An app's log as monospace lines: filter by level, search with the matches marked, follow new lines as they come in, wrap long lines and download the whole log. It keeps the newest 10,000 lines and draws only the newest 1,000 that match, so it stays light on a small server. This example holds 10,000 made-up lines.</p></header>
+  <div class="g-demo">
+    <section class="log-view" data-log-view data-file="jellyfin-example.log" aria-labelledby="g-log-h">
+      <h3 id="g-log-h">Jellyfin log</h3>
+      <div class="log-view__bar">
+        <div class="field log-view__search"><label class="field__label" for="g-log-q">Search the log</label><input class="input" id="g-log-q" type="search" autocomplete="off" data-log-search></div>
+        <div class="filter-chips" role="group" aria-label="Levels to show">
+          <button class="filter-chip" type="button" aria-pressed="true" data-log-level="error">Errors <span class="numeric" data-count>0</span></button>
+          <button class="filter-chip" type="button" aria-pressed="true" data-log-level="warning">Warnings <span class="numeric" data-count>0</span></button>
+          <button class="filter-chip" type="button" aria-pressed="true" data-log-level="info">Info <span class="numeric" data-count>0</span></button>
+          <button class="filter-chip" type="button" aria-pressed="false" data-log-level="debug">Debug <span class="numeric" data-count>0</span></button>
+        </div>
+      </div>
+      <div class="log-view__bar">
+        <button class="filter-chip" type="button" aria-pressed="true" data-log-follow>Follow new lines</button>
+        <button class="filter-chip" type="button" aria-pressed="false" data-log-wrap>Wrap lines</button>
+        <button class="btn" type="button" data-log-download>{{i:download}}Download the log (TXT)</button>
+      </div>
+      <p class="log-view__count" data-log-count></p>
+      <div class="log-view__scroll" role="region" tabindex="0" aria-label="Jellyfin log lines"><ol class="log-view__lines"></ol></div>
+    </section>
+    <div class="g-demo--row"><button class="btn" type="button" id="g-log-add">Add a new error line</button><span class="small muted">While following, a new error is said politely.</span></div>
+  </div>
+  <div class="g-notes">
+    <div><h3>When to use it</h3><ul><li>An app's or a job's log on its own page or in a wide slide-out, where people find out what went wrong.</li><li>Logs that grow while people read them.</li></ul></div>
+    <div><h3>When not to</h3><ul><li>A short history of events: use the timeline or event rows.</li><li>Search across many apps' logs: send people to the log file or a log tool.</li></ul></div>
+    <div><h3>Accessibility</h3><ul><li>The lines are an ordered list in a scrolling region that the keyboard can reach and scroll; levels are words, with an edge on errors and warnings.</li><li>New lines are never read out; only new errors are, politely, and only while following. Scrolling up pauses following, and the count line says so.</li><li>The level buttons are pressed or not, with their counts in their names; the search says how many lines match.</li></ul></div>
+    <div><h3>Classes and behaviour</h3><ul><li><code>.log-view[data-log-view]</code>, <code>__bar</code>, <code>__search</code>, <code>__count</code>, <code>__scroll</code>, <code>__lines</code>, <code>__line[data-level]</code>, <code>__time</code>, <code>__level</code>, <code>__text</code>, <code>__match</code>; <code>[data-log-level]</code>, <code>[data-log-follow]</code>, <code>[data-log-wrap]</code>, <code>[data-log-download]</code>.</li><li><code>SharedComponents.logView(box, {{ lines, maxLines, show, fileName }})</code> returns <code>add(lines)</code> and <code>clear()</code>.</li></ul></div>
+  </div>
+</section>
+
 <!-- CONTAINERS -->
 <section class="g-section" id="cards" aria-labelledby="cards-h">
   <header><h2 id="cards-h">Panels and cards</h2><p class="muted">A panel groups content. A card is one thing that opens its slide-out or page; the whole card is the target, and its other buttons sit on top of it.</p></header>
@@ -662,6 +914,30 @@
       <li class="card has-band"><div class="card-band"><span class="app-icon app-icon--compact" aria-hidden="true">WS</span><h4 class="card-band__title">Watch statistics<span class="card-band__sub"><span class="visually-hidden">, </span>This week</span></h4></div><p><strong>42 hours</strong> watched this week</p><div class="card-foot"><time class="card-band__time" datetime="2026-11-14T20:59:00Z">Updated 1 minute ago</time></div></li>
     </ul>
     <section class="panel" aria-labelledby="g-panel-h"><div class="panel__head"><h3 id="g-panel-h">Network</h3><span class="small muted">Checked 1 minute ago</span></div><dl class="facts"><dt>Outside address</dt><dd>reachable</dd><dt>VPN</dt><dd><span class="chip" data-tone="success">{{i:circle-check}}Connected</span></dd></dl></section>
+  </div>
+</section>
+
+<section class="g-section" id="tabs" aria-labelledby="tabs-h">
+  <header><h2 id="tabs-h">Tabs</h2><p class="muted">Real tabs for the parts of one item's page (DESIGN-SYSTEM.md section 5): one Tab stop for the tabs, then the arrow keys. Choosing a tab shows its part in place; the address does not change.</p></header>
+  <div class="g-demo">
+    <div class="tabs">
+      <div class="tabs__list" role="tablist" aria-label="The Glass Harbour">
+        <button class="tabs__tab" type="button" role="tab" id="g-tab-1" aria-controls="g-tabp-1" aria-selected="true">{{i:book-open}}Summary</button>
+        <button class="tabs__tab" type="button" role="tab" id="g-tab-2" aria-controls="g-tabp-2" aria-selected="false" tabindex="-1">{{i:book-copy}}Editions<span class="count">3<span class="visually-hidden"> editions</span></span></button>
+        <button class="tabs__tab" type="button" role="tab" id="g-tab-3" aria-controls="g-tabp-3" aria-selected="false" tabindex="-1">{{i:folder}}Files</button>
+        <button class="tabs__tab" type="button" role="tab" id="g-tab-4" aria-controls="g-tabp-4" aria-selected="false" tabindex="-1">{{i:history}}History</button>
+      </div>
+      <div class="tabs__panel" role="tabpanel" id="g-tabp-1" aria-labelledby="g-tab-1" tabindex="0"><p>A lighthouse keeper's daughter finds a ship in a bottle that will not stay still. Book 2 of The Glass Harbour, by Mara Ellison, read by Sam Oduya.</p></div>
+      <div class="tabs__panel" role="tabpanel" id="g-tabp-2" aria-labelledby="g-tab-2" tabindex="0"><ul class="rows"><li class="row row--no-lead"><div><p class="row__title">Audiobook, unabridged</p><p class="row__meta">11 hr 42 min</p></div></li><li class="row row--no-lead"><div><p class="row__title">Ebook</p><p class="row__meta">EPUB, 412 pages</p></div></li><li class="row row--no-lead"><div><p class="row__title">Hardback</p><p class="row__meta">21 September 2026</p></div></li></ul></div>
+      <div class="tabs__panel" role="tabpanel" id="g-tabp-3" aria-labelledby="g-tab-3" tabindex="0"><p>2 files, 512 MB, in <code>/media/audiobooks/Mara Ellison/The Glass Harbour 2</code>.</p></div>
+      <div class="tabs__panel" role="tabpanel" id="g-tabp-4" aria-labelledby="g-tab-4" tabindex="0"><p>Requested on 1 November 2026; in library on 2 November 2026.</p></div>
+    </div>
+  </div>
+  <div class="g-notes">
+    <div><h3>When to use it</h3><ul><li>The parts of one item's page (a book, an app, a disk) that people switch between without leaving it.</li><li>Two to six parts with short names.</li></ul></div>
+    <div><h3>When not to</h3><ul><li>Moving between pages: use the level 2 menu (<code>.menu-tabs</code>), which has links and <code>aria-current</code>.</li><li>One of several views of the same list: use a segmented control. Steps in order: use a wizard.</li></ul></div>
+    <div><h3>Accessibility</h3><ul><li>The ARIA tabs pattern: <code>role="tablist"</code>, <code>tab</code> and <code>tabpanel</code>, with <code>aria-selected</code> and <code>aria-controls</code>.</li><li>Left and Right move round, Home and End go to the ends. A tab is chosen as focus reaches it, or with <code>data-activation="manual"</code> by Enter or Space, for parts that take a moment to fill.</li><li>Without script every part shows, one after another. A link to a panel's id opens its tab.</li></ul></div>
+    <div><h3>Classes and behaviour</h3><ul><li><code>.tabs</code> (<code>data-activation="manual"</code>), <code>__list</code>, <code>__tab</code>, <code>__panel</code>; a <code>.count</code> in a tab.</li><li><code>SharedComponents.setupTabs(root)</code> and the <code>tabs-change</code> event. The logo slide-out's <code>.logo-tabs</code> can move to these.</li></ul></div>
   </div>
 </section>
 
@@ -698,8 +974,8 @@
     <div class="load-more" id="g-more"><span class="load-more__count" id="g-more-count"></span><button class="btn" type="button">Show 5 more</button></div>
   </div>
   <div class="g-notes">
-    <div><h4>When to use it</h4><ul><li>Long walls and lists people browse, such as a library or a history, where the order is the point.</li></ul></div>
-    <div><h4>When not to</h4><ul><li>Results people compare or come back to by position, a table to sort, or a page with things after the list that people need: use pages or Show more alone.</li></ul></div>
+    <div><h3>When to use it</h3><ul><li>Long walls and lists people browse, such as a library or a history, where the order is the point.</li></ul></div>
+    <div><h3>When not to</h3><ul><li>Results people compare or come back to by position, a table to sort, or a page with things after the list that people need: use pages or Show more alone.</li></ul></div>
     <div><h4>Keeping the footer in reach</h4><ul><li>It loads only when the end of the list comes into view, never on a timer, and stops after three pages in a row. The A to Z list and Back to top keep working.</li></ul></div>
   </div>
 </section>
@@ -1202,9 +1478,9 @@ Your choice [1]:</pre></div>
   <header><h2 id="events-h">Event list</h2><p class="muted">Things that happened, newest first, each with its time and a status icon (the word is hidden text and a tooltip). Used for disk events on Starboard. For the history of one thing with steps, use the Timeline.</p></header>
   <div class="g-demo">
     <ul class="rows">
-      <li class="row row--no-lead"><p><span class="status-icon" data-tone="danger" title="Problem">{{i:circle-x}}<span class="visually-hidden">Problem: </span></span><span class="small muted numeric">2026-11-02 09:15 </span>/dev/sdc: SMART self-test failed</p></li>
-      <li class="row row--no-lead"><p><span class="status-icon" data-tone="warning" title="Warning">{{i:triangle-alert}}<span class="visually-hidden">Warning: </span></span><span class="small muted numeric">2026-11-01 03:00 </span>/dev/sdb: reallocated sectors 0 to 8</p></li>
-      <li class="row row--no-lead"><p><span class="status-icon" title="Information">{{i:info}}<span class="visually-hidden">Information: </span></span><span class="small muted numeric">2026-10-31 03:00 </span>/dev/sda: extended self-test completed</p></li>
+      <li class="row row--no-lead"><p><span class="status-icon" data-tone="danger" tabindex="0" data-tooltip="Problem">{{i:circle-x}}<span class="visually-hidden">Problem: </span></span><span class="small muted numeric">2026-11-02 09:15 </span>/dev/sdc: SMART self-test failed</p></li>
+      <li class="row row--no-lead"><p><span class="status-icon" data-tone="warning" tabindex="0" data-tooltip="Warning">{{i:triangle-alert}}<span class="visually-hidden">Warning: </span></span><span class="small muted numeric">2026-11-01 03:00 </span>/dev/sdb: reallocated sectors 0 to 8</p></li>
+      <li class="row row--no-lead"><p><span class="status-icon" tabindex="0" data-tooltip="Information">{{i:info}}<span class="visually-hidden">Information: </span></span><span class="small muted numeric">2026-10-31 03:00 </span>/dev/sda: extended self-test completed</p></li>
     </ul>
   </div>
   <div class="g-notes"><div><h4>Classes</h4><ul><li><code>.rows</code>, <code>.row--no-lead</code>, <code>.status-icon[data-tone]</code>, <code>.numeric</code></li></ul></div></div>
@@ -1588,6 +1864,91 @@ Pending sectors: 0</code></div></details>
   addEventListener("load", spy);
   spy();
   for (const t of tones) box.insertAdjacentHTML("beforeend", `<div class="g-swatch"><span style="background:var(--status-${t}-bg);border-color:var(--status-${t}-fg);border-width:3px"></span><span><code>--status-${t}-*</code></span></div>`);
+  // Log viewer: 10,000 made-up lines from one morning, then one more error on request.
+  (() => {
+    const box = document.querySelector("#log-viewer .log-view");
+    const kinds = [
+      ["INFO", "Library scan started for Films"], ["DEBUG", "Probe took 41 ms for The Long Tide (2024).mkv"],
+      ["INFO", "Playback started by Priya on Living room TV: The Night Ferry, episode 2"], ["INFO", "Scanned /media/films: 412 items, 3 new"],
+      ["DEBUG", "Image cache hit for Blue Planet II, poster 1"], ["WARN", "Subtitle file has no language: The Night Ferry S01E02.srt"],
+      ["INFO", "Scheduled task Refresh guide finished in 4 seconds"], ["DEBUG", "Transcode not needed for Bluey S03E14: direct play"],
+      ["INFO", "Sam signed in from 192.0.2.24"], ["WARN", "Metadata provider answered slowly (8.2 seconds)"],
+      ["INFO", "Playback stopped by Priya after 41 minutes"], ["ERROR", "Could not reach the metadata provider: no answer after 30 seconds"],
+    ];
+    const lines = [];
+    const pad = (n) => String(n).padStart(2, "0");
+    for (let i = 0; i < 10000; i++) {
+      const sec = 6 * 3600 + i * 2;
+      const [level, text] = kinds[(i * 7 + (i % 13)) % (i % 97 === 0 ? kinds.length : kinds.length - 1)];
+      lines.push(`2026-11-20 ${pad(Math.floor(sec / 3600) % 24)}:${pad(Math.floor(sec / 60) % 60)}:${pad(sec % 60)} ${level} ${text}`);
+    }
+    const log = SharedComponents.logView(box, { lines });
+    let n = 0;
+    document.getElementById("g-log-add").addEventListener("click", () => {
+      n++;
+      const now = new Date();
+      log.add(`2026-11-20 ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())} ERROR Disk 3 did not answer a health check (example ${n})`);
+    });
+  })();
+
+  // Page banner: the real one, under the gallery's header.
+  (() => {
+    let close = null;
+    document.getElementById("g-banner-show").addEventListener("click", () => {
+      close = SharedComponents.pageBanner("Connection lost.", { tone: "danger", text: "This is an example. Starboard is trying again every 10 seconds. Changes you make on this page are kept.",
+        action: { label: "Try again now", run: () => SharedComponents.toast("Connected again", { tone: "success" }) } });
+    });
+    document.getElementById("g-banner-hide").addEventListener("click", () => close?.());
+  })();
+
+  // Error summary: the made-up server form.
+  (() => {
+    const form = document.getElementById("g-err-form");
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const errors = [];
+      if (!form.querySelector("#g-err-name").value.trim()) errors.push({ field: "g-err-name", message: "Enter a server name" });
+      const port = form.querySelector("#g-err-port").value.trim();
+      if (!port) errors.push({ field: "g-err-port", message: "Enter a port" });
+      else if (!/^\d+$/.test(port) || +port < 1 || +port > 65535) errors.push({ field: "g-err-port", message: "Enter a port from 1 to 65535" });
+      if (errors.length) SharedComponents.showErrors(form, errors);
+      else {
+        SharedComponents.clearErrors(form);
+        SharedComponents.toast("Server saved");
+      }
+    });
+  })();
+
+  // Secret field: a made-up value, set in script so it is not in the page source.
+  document.getElementById("g-secret").value = "example-key-Q7w2-not-real-9F4d";
+
+  // Pagination: 312 made-up downloads, 10 to a page, starting on page 3.
+  (() => {
+    const body = document.getElementById("g-pg-rows");
+    const nav = document.getElementById("g-pg");
+    const names = ["The Long Tide (2024)", "Bluey S03E14", "The Night Ferry S01E02", "Blue Planet II S01E01", "1917 (2019)", "The Glass Harbour (audiobook)"];
+    let size = 10;
+    const show = (page) => {
+      body.replaceChildren(...Array.from({ length: Math.max(0, Math.min(size, 312 - (page - 1) * size)) }, (_, k) => {
+        const i = (page - 1) * size + k;
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td data-label="Name"></td><td data-label="Finished">${(i % 28) + 1} October 2026</td><td data-label="Size" class="numeric">${((i * 37) % 900 / 100 + 0.4).toFixed(1)} GB</td>`;
+        tr.firstChild.textContent = `${i + 1}. ${names[i % names.length]}`;
+        return tr;
+      }));
+    };
+    const options = { page: 3, pageSize: size, total: 312, noun: "downloads", sizes: [10, 20, 50], focus: document.getElementById("g-pg-h"),
+      onPage: (p) => show(p), onSize: (s, p) => { size = s; show(p); } };
+    show(3);
+    SharedComponents.pagination(nav, options);
+  })();
+
+  // Command palette: in the gallery it lists every section and two actions.
+  SharedComponents.commandPalette.items = () => [
+    ...[...document.querySelectorAll(".g-nav ol a")].map((a) => ({ label: a.textContent.trim(), value: a.getAttribute("href"), hint: "Section", href: a.getAttribute("href") })),
+    { label: "Open Display and accessibility", value: "display", hint: "Action", run: () => document.querySelector('.site-header__actions [data-opens="g-panel-display"]').click() },
+    { label: "Show a toast", value: "toast", hint: "Action", run: () => SharedComponents.toast("Follow saved") },
+  ];
   // Load more as you scroll (UX-52): a made-up list of 30 books, 5 at a time.
   (() => {
     const list = document.getElementById("g-more-list");
