@@ -23,14 +23,14 @@ change the copies inside the apps.
 | `palettes/` | Six more accent colours (Teal, Indigo, Forest, Plum, Ember, Graphite) over Mica's greys: load one after `tokens.css` |
 | `tokens.css` | Every colour, size, space and motion value as role names, for Light, Dark, High contrast and High contrast dark |
 | `components.css` | Every component, in `@layer shared`, using only the tokens |
-| `components.js` | The behaviour every component must have (menus, slide-outs, dialogs, phone menu, filter chips, copy, help, display settings), in plain JavaScript |
+| `components.js` | The behaviour every component must have (menus, slide-outs, dialogs, phone menu, filter chips, copy, help, display settings, tabs, combobox, log viewer, popovers, tooltips and the rest), in plain JavaScript |
 | `icons.svg` | Lucide icons as an SVG sprite (`<use href="#i-book-open">`); `tools/icons.txt` lists them |
 | `fonts/` | Atkinson Hyperlegible Next, with its licence |
 | `gallery.src.html`, `gallery.html` | The live gallery of every component (edit the `.src` file, then build) |
 | `areas/` | Design boards for each area of both apps, built from the library. `index.html` is the Boards landing page; `index-starboard.html` and `index-storyarr.html` show each app's boards in the page, chosen from the menu, written by `areas/make_index.py` |
 | `docs/LIBRARY.md` | The component reference: every class, the rule for slide-out, dialog or page, and how each app adopts the library |
 | `docs/DESIGN-SYSTEM.md` | Principles, tokens, shell, page templates and consistency rules |
-| `docs/COMPONENTS.md` | Storyarr's interface before the redesign, and the duplicates to merge |
+| `docs/COMPONENTS.md` | Every component by area, then Storyarr's interface before the redesign as a record (with Starboard's status words) |
 | `docs/WIZARD.md` | Every job done in steps, in the browser and the terminal: one question per step, buttons, a job's progress, help in a slide-out, outside services, the Check table, feedback with Snaglist |
 | `docs/TERMINAL.md` | How a wizard appears and behaves in a terminal: the frame, questions, the menu line, help boxes, job bars, plain mode for screen readers, and feedback as a QR code |
 | `terminal/` | The terminal frame every app's terminal scripts use (`terminal-frame.sh`) and the QR code encoder for feedback (`qr.py`); `terminal/README.md` says how to use them |

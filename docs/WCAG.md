@@ -58,8 +58,8 @@ In each table, "The library" is what `tokens.css`, `components.css` and `compone
 | Reflow to one column at 400% zoom, 320px wide | 1.4.10 | Every component reflows; tables stack into cards on phones | Check each page at 320px with no sideways scrolling |
 | Contrast of 3:1 for controls and focus | 1.4.11 | Control borders and the focus ring are checked by `tools/contrast.py` | Use the library's controls |
 | Wider text spacing | 1.4.12 | The Wider text spacing setting; nothing clips when it is active | Leave room for text to grow |
-| Hover and focus content that can be dismissed | 1.4.13 | Help is a disclosure button, not a hover tooltip; menus close with Escape | No content that appears only on hover |
-| Important messages announced | 1.3.1, 4.1.3 | Toasts and saved notes use `role="status"` or `role="alert"` | Announce changes that happen without a page load |
+| Hover and focus content that can be dismissed | 1.4.13 | Help is a disclosure button; the tooltip (`data-tooltip`) shows on focus as well as hover, stays while the pointer is on it and closes with Escape; menus and popovers close with Escape | No content that appears only on hover; a tooltip only names an icon |
+| Important messages announced | 1.3.1, 4.1.3 | Toasts, saved notes, the page banner, the error summary and the log viewer's new errors use `role="status"` or `role="alert"` | Announce changes that happen without a page load |
 
 ## 3. Operable
 
@@ -89,7 +89,7 @@ In each table, "The library" is what `tokens.css`, `components.css` and `compone
 | A change of language is marked | 3.1.2 | Nothing: the library has no foreign text | Mark a book title or name in another language with `lang`, such as `lang="fr"` |
 | Navigation in the same place every time | 3.2.3 | One header, one main menu and one phone menu in both apps | Use the shell, never a page-specific menu |
 | Help in the same place every time | 3.2.6 (new in 2.2) | Help is in the footer of every page, in an app with a help centre | Keep Help in the footer |
-| Errors identified and explained | 3.3.1, 3.3.3 | `.field-error` beside the field, tied to it by `aria-describedby` | Say what is wrong and how to fix it (`CONTENT-DESIGN.md`, Error) |
+| Errors identified and explained | 3.3.1, 3.3.3 | `.field-error` beside the field, tied to it by `aria-describedby`; the error summary links to each one and takes the focus | Say what is wrong and how to fix it (`CONTENT-DESIGN.md`, Error) |
 | Labels and instructions | 3.3.2 | `.field__label` and `.hint` on every field | Put instructions before the field, not in the placeholder |
 | No entering the same thing twice | 3.3.7 (new in 2.2) | Nothing in the library asks twice | Fill in what someone already gave, or let them choose it, in a wizard or a second form |
 | Signing in without memory tests | 3.3.8 (new in 2.2) | Password fields take `autocomplete="current-password"` and `"new-password"` | Allow pasting and password managers; no puzzles or CAPTCHAs |

@@ -1,4 +1,33 @@
-# Storyarr UI inventory: what exists today
+# Components by area
+
+Updated 20 November 2026. Every component in the shared library, by the area it belongs to, as the gallery
+(`gallery.html`) groups them. `LIBRARY.md` is the reference: each component's classes, behaviour and rules. When you
+add a component, add it here and in `LIBRARY.md`.
+
+| Area | Components |
+|---|---|
+| Foundations | Colour roles and status tones, accent palettes, type, space and size, icons, utilities (`.visually-hidden`, `.stack-*`, `.numeric`) |
+| Shell | Side menu (rail), header and its level 1 and level 2 menus (`.menu-tabs`), phone menu, page and page head, footer, Display button, page banner, popover, alerts centre, command palette |
+| Actions | Button, icon button, split button, menu button and menu, copy button, action row, action list |
+| Inputs | Field, text box, select and text area, search field, input with unit, checkbox and radio, switch, segmented control, option cards, filter chips and applied filters, sortable list, form layout, file picker, folder picker, combobox, tag input, secret field, schedule picker, error summary and field errors, range |
+| Content | Status chip, title with status, status icon, tooltip, count and update dot, tag, avatar and app icon, cover, facts, stat, sparkline and gauge, progress and meter, waiting mark and busy button, rows, table, tables that line up, pagination, notice and callout, empty state, skeleton and loading line, toast, saved note, help, disclosure, releases, steps, command, line chart, log viewer, load more as you scroll, prose, time ago |
+| Containers | Panel, card and card band, media card and grid, A to Z jump list, section toolbar, save bar, settings rows and section group, timeline, list and detail, item header, series header, shelf, calendar month, selection bar, tabs, slide-out, dialog, panel header, back link and breadcrumbs |
+| Patterns | Slide-out, dialog or page; which item to use (`DESIGN-SYSTEM.md` section 10); wizard and its pieces (`WIZARD.md`); signing in to a service; restart where it is needed; terminal (`TERMINAL.md`) |
+| Help centre | Top links, side tree, journey, flow chart, answer card, feature card, solver card and solver, version badge, plug-in card and band (`HELP-WRITING.md` section 11) |
+
+Class names that differ from the component's name: `.disclosure` is the accordion, `.side-panel` the slide-out, `.segmented` the segmented
+control, `.steps` and `.wizard` the step list and wizard, `.shelf` the row that scrolls sideways, `.count`, `.chip` and
+`.tag` the number, status and kind labels, `.range` the slider, `.file-field` the file picker, `.side-tree` the folding
+side menu, `.help` the question button, and `.command` a command to copy (not the command palette).
+
+---
+
+**Historical record.** Everything from here on is Storyarr's interface as it was on 1 November 2026, before the
+redesign, kept as a record. Storyarr was retired on 11 November 2026 and its work continues in Starboard; do not use
+these sections to build anything. The one part still current is section 6's table of Starboard's status words, which
+`CONTENT-DESIGN.md` points to.
+
+## Storyarr UI inventory, 1 November 2026
 
 Taken 1 November 2026 from Storyarr's `apps/web/src` (v0.4.6 on `main`). Paths are relative to
 `apps/web/src/`. This is the "before" picture for the redesign; `DESIGN-SYSTEM.md` is the "after".

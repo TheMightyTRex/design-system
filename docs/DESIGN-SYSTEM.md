@@ -174,7 +174,7 @@ Line height 1.5 for body, 1.25 for headings. Weights 400 and 600 only. Low-visio
 | **FilterChips** | `.follow-status-filters`, `.activity-filters`, `.review-chips` | Buttons that are pressed or not (`aria-pressed`), with counts; "All" first |
 | **Select** | Native selects and SelectMenu | One design; label always visible |
 | **SectionNav** | `.page-tabs`, HeaderSubmenu, LibraryTabs | Links with `aria-current`, icon and label |
-| **Tabs** | DetailTabs and BookDetail's copy | Real tabs with arrow keys, for item pages only |
+| **Tabs** | DetailTabs and BookDetail's copy | Real tabs with arrow keys, for item pages only. Built as `.tabs` (20 November 2026, `LIBRARY.md`) |
 | **Button** | Assorted | Variants: primary, secondary, quiet, danger (`.btn--danger`). One primary per view |
 | **EmptyState, LoadingState, ErrorState** | Notice, Empty, Loading | Words follow the content guide patterns |
 | **Toast** | Assorted inline confirmations | `role="status"`; Undo where possible |

@@ -9,6 +9,36 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 20 November 2026
 
+- **Thirteen components that were missing.** Each has a gallery section (an example, when to use it, when not to,
+  and its accessibility) and an entry in `docs/LIBRARY.md`. All are plain JavaScript in `components.js`, wait until
+  they are on the page, and listen to the page only while open.
+  - **Log viewer** (`.log-view`): monospace lines with a level filter, search that marks each match, follow new
+    lines with pause (scrolling up pauses it), wrap and download. It keeps the newest 10,000 lines and draws only the
+    newest 1,000 that match, adding new lines on their own. New errors are said politely, only while following.
+  - **Tabs** (`.tabs`): in-page tabs by the ARIA tabs pattern, with arrow keys, Home and End, and automatic or
+    manual activation, as `DESIGN-SYSTEM.md` section 5 asks. Every panel shows without script.
+  - **Combobox** (`.combobox`): a searchable select by ARIA 1.2, with the match underlined, "No languages match"
+    and the number found said politely.
+  - **Sparkline and gauge** (`svg.sparkline`, `.gauge`) for stat tiles, from the chart tokens, with the numbers in
+    words beside them.
+  - **Pagination** (`.pagination`): page links, "Showing 21 to 40 of 312" and rows per page.
+  - **Error summary** (`.error-summary`), after GOV.UK: focused after a failed submit, with a link to each field, and
+    `showErrors()` writes each field's `.field-error` too.
+  - **Secret field** (`.secret-field`): Show and Hide, Copy and Replace, each said politely; the value is never put
+    in an attribute, a message or the console.
+  - **Schedule picker** (`.schedule`): repeat, days and time, read back in words ("Every weekday at 07:00") with the
+    next time it runs.
+  - **Tag input** (`.tag-input`): Enter or a comma adds, a Remove button on each, both said politely.
+  - **Popover and alerts centre** (`.popover`, `.alerts`): a small layer from a button that is not a menu, and the
+    header's Alerts with unread alerts, Mark as read and Mark all as read.
+  - **Page banner** (`.page-banner`, `pageBanner()`): one message for the whole app under the header, such as
+    Connection lost or Restart needed.
+  - **Tooltip** (`data-tooltip`): on hover and keyboard focus, closed with Escape, and the pointer can move onto it
+    (WCAG 1.4.13). Status icons now use it, with `tabindex="0"`, instead of a `title` that keyboards cannot reach.
+  - **Command palette** (Ctrl+K, `[data-command-palette]`): find a page or action by name; it reuses the combobox,
+    always has a button, and `data-no-shortcut` takes the shortcut away.
+- **`docs/COMPONENTS.md`** now opens with the current components by area and marks the Storyarr inventory under it
+  as a record from 1 November 2026, kept for the Starboard status words in its section 6.
 - **Four new colour themes, with their own backgrounds.** Dusk (periwinkle on blue slate), Lime (lime on
   blue-black), Rose (fluorescent pink on warm paper, with dark blue ink) and Amber (amber on graphite) replace
   Indigo, Forest, Plum and Ember. They are after the Hallmark themes (MIT, credited in the README). A palette may now

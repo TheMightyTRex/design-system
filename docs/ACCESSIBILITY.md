@@ -103,6 +103,13 @@ separate low-vision font switch.
 | Toast | Read out through hidden regions: errors through `role="alert"`, the rest through `role="status"`; focus never moves to it. Success and info at least 5 seconds (10 with an action), warning 10, error until closed; each waits while the pointer or keyboard focus is on it; Close is named with the message |
 | Saved note | `role="status"` beside the button that saved; stays until the next change |
 | Load more as you scroll | A real Show more button is always there; loading by itself keeps focus where it is, shows "Loading the next 40" and says "40 more shown" through a polite status; it pauses after three pages so the footer stays in reach; the button alone with Reduce motion or when the person's setting asks for it |
+| Tabs | `role="tablist"`, `tab` and `tabpanel`; one Tab stop for the list, arrow keys, Home and End; never mixed with links |
+| Combobox | ARIA 1.2 with a listbox; focus stays in the box with `aria-activedescendant`; the number found and "No … match" said politely from inside the box |
+| Error summary | Focused after a failed submit, read at once; links move focus to each field; "Error: " in the page title and before each field's error |
+| Popover | Not modal, `role="dialog"` named by its heading; focus to the heading, Escape back to the button, closes on a press outside or Tab out |
+| Tooltip | On hover and keyboard focus; the pointer can move onto it; Escape closes it; its words are already the thing's name, so screen readers skip it |
+| Log viewer | A scrolling region the keyboard reaches; levels in words; new lines never read out, new errors said politely and only while following |
+| Page banner | Said once (danger at once, the rest politely); not sticky; words and an icon for the tone |
 
 ## 4. Themes
 
