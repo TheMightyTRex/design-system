@@ -1,0 +1,53 @@
+/* Dusk accent for the TRex Design System. Periwinkle on blue slate: quiet evenings, reading.
+   Load after tokens.css and before components.css. Written by tools/palettes.py: edit that, not this. */
+:root:where(:not(.pref-contrast)) {
+  --color-bg: #eff0f6;
+  --color-header: #eff0f6;
+  --color-surface: #f8f8fc;
+  --color-surface-sunken: #e5e7f0;
+  --color-border: #6c6f80;
+  --color-divider: #7e8196;
+  --color-accent: #4753ab;
+  --color-accent-soft: #e9eaf5;
+  --color-control-active: #e9eaf5;
+  --color-accent-text: #ffffff;
+  --color-count: #a61e4d;
+  --color-count-text: #ffffff;
+  --color-logo-tile: #2e368b;
+  --color-logo-star: #c2410c;
+}
+:root[data-theme="dark"]:where(:not(.pref-contrast)) {
+  --color-bg: #0e1017;
+  --color-header: #0e1017;
+  --color-surface: #151820;
+  --color-surface-raised: #1c202b;
+  --color-surface-sunken: #0a0c11;
+  --color-panel-header: #1c202b;
+  --color-text-muted: #c3c8d8;
+  --color-border: #8d93a8;
+  --color-divider: #6b7186;
+  --color-accent: #acbcff;
+  --color-accent-soft: #31364a;
+  --color-control-active: #31364a;
+  --color-accent-text: #000000;
+  --color-count: #b8336a;
+  --color-count-text: #ffffff;
+  --color-logo-tile: #c7d2fe;
+  --color-logo-star: #fdba74;
+}
+:root.pref-contrast:not([data-theme="dark"]):not(.is-dark) {
+  --color-accent: #4651a7;
+  --color-accent-soft: #e3e5f2;
+  --color-control-active: #e3e5f2;
+  --color-accent-text: #ffffff;
+  --color-logo-tile: #4651a7;
+  --color-logo-star: #000000;
+}
+:root.pref-contrast:is([data-theme="dark"], .is-dark) {
+  --color-accent: #acbcff;
+  --color-accent-soft: #262938;
+  --color-control-active: #262938;
+  --color-accent-text: #000000;
+  --color-logo-tile: #acbcff;
+  --color-logo-star: #ffffff;
+}

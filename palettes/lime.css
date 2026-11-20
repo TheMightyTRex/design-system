@@ -1,0 +1,53 @@
+/* Lime accent for the TRex Design System. Lime on blue-black: sharp and technical.
+   Load after tokens.css and before components.css. Written by tools/palettes.py: edit that, not this. */
+:root:where(:not(.pref-contrast)) {
+  --color-bg: #f1f4f2;
+  --color-header: #f1f4f2;
+  --color-surface: #f9fbfa;
+  --color-surface-sunken: #e5eae7;
+  --color-border: #6a716d;
+  --color-divider: #7d8580;
+  --color-accent: #3a5700;
+  --color-accent-soft: #e7ebe0;
+  --color-control-active: #e7ebe0;
+  --color-accent-text: #ffffff;
+  --color-count: #a61e4d;
+  --color-count-text: #ffffff;
+  --color-logo-tile: #2e4e00;
+  --color-logo-star: #c2410c;
+}
+:root[data-theme="dark"]:where(:not(.pref-contrast)) {
+  --color-bg: #04090c;
+  --color-header: #04090c;
+  --color-surface: #0b1317;
+  --color-surface-raised: #111b20;
+  --color-surface-sunken: #020507;
+  --color-panel-header: #111b20;
+  --color-text-muted: #bfcbd0;
+  --color-border: #86969d;
+  --color-divider: #62737a;
+  --color-accent: #bcf053;
+  --color-accent-soft: #2c3c1c;
+  --color-control-active: #2c3c1c;
+  --color-accent-text: #000000;
+  --color-count: #b8336a;
+  --color-count-text: #ffffff;
+  --color-logo-tile: #d9f99d;
+  --color-logo-star: #fdba74;
+}
+:root.pref-contrast:not([data-theme="dark"]):not(.is-dark) {
+  --color-accent: #3a5700;
+  --color-accent-soft: #e1e6d9;
+  --color-control-active: #e1e6d9;
+  --color-accent-text: #ffffff;
+  --color-logo-tile: #3a5700;
+  --color-logo-star: #000000;
+}
+:root.pref-contrast:is([data-theme="dark"], .is-dark) {
+  --color-accent: #bcf053;
+  --color-accent-soft: #293512;
+  --color-control-active: #293512;
+  --color-accent-text: #000000;
+  --color-logo-tile: #bcf053;
+  --color-logo-star: #ffffff;
+}

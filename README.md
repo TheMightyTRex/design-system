@@ -133,3 +133,5 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md). Every word follows the [content design 
 - Font: Atkinson Hyperlegible Next, [SIL Open Font License 1.1](fonts/LICENSE-OFL.txt).
 - Icons: [Lucide](https://lucide.dev), [ISC licence](licences/LUCIDE-ISC.txt); some Lucide icons come from
   Feather (MIT, in the same file).
+- Colour themes Dusk, Lime, Rose and Amber: after [Hallmark](https://github.com/Nutlope/hallmark) by the Hallmark
+  contributors, [MIT](licences/HALLMARK-MIT.txt). Colours only; no fonts or code are copied.

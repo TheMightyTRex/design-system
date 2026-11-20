@@ -9,6 +9,13 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 20 November 2026
 
+- **Four new colour themes, with their own backgrounds.** Dusk (periwinkle on blue slate), Lime (lime on
+  blue-black), Rose (fluorescent pink on warm paper, with dark blue ink) and Amber (amber on graphite) replace
+  Indigo, Forest, Plum and Ember. They are after the Hallmark themes (MIT, credited in the README). A palette may now
+  tint the page, the cards and the lines in Light and Dark as well as the accent; High contrast keeps pure white or
+  black, and status colours, focus and chart series never change. Lime's light accent is a deeper olive
+  (`#3a5700`, 8.3:1 on white) so it reads clearly. `palettes/renamed.json` maps each old name to its nearest new one,
+  for an app to move saved choices on. Every theme passes `tools/check_accents.py` with 0 failures.
 - **Windows Contrast themes.** Switches show on and off, the current page shows in the rail, top tabs and phone
   menu, progress bars, the loading line, the waiting ring and the update dot all show, and a chosen cover is
   outlined, all in system colours. Before, each was drawn only by a background or a border colour that the theme

@@ -33,27 +33,60 @@ NEUTRALS = {"light": {k: _LIGHT[k] for k in NEUTRAL_KEYS},
             "dark": {k: {**_LIGHT, **_block(':root[data-theme="dark"] {')}[k] for k in NEUTRAL_KEYS}}
 HC_BG = {"light": "#ffffff", "dark": "#000000"}
 
-# name: (label, what it suits, light colours, dark colours). Teal is the colour before Mica.
+# name: (label, what it suits, light colours, dark colours[, surfaces]). Teal is the colour before Mica.
+# Surfaces (owner, 20 November 2026: "allow background changes"): a palette may also tint the page, the cards and
+# the lines in Light and Dark, as the Hallmark themes do (Dusk, Rose, Amber and Lime are after Nutlope/hallmark, MIT).
+# High contrast keeps pure white or black whatever the palette. Text, status colours and chart series never change.
+DUSK_SURFACES = {
+    "light": {"color-bg": "#eff0f6", "color-header": "#eff0f6", "color-surface": "#f8f8fc", "color-surface-sunken": "#e5e7f0",
+              "color-border": "#6c6f80", "color-divider": "#7e8196"},
+    "dark": {"color-bg": "#0e1017", "color-header": "#0e1017", "color-surface": "#151820", "color-surface-raised": "#1c202b",
+             "color-surface-sunken": "#0a0c11", "color-panel-header": "#1c202b", "color-text-muted": "#c3c8d8",
+             "color-border": "#8d93a8", "color-divider": "#6b7186"},
+}
+ROSE_SURFACES = {
+    "light": {"color-bg": "#f8f5ed", "color-header": "#f8f5ed", "color-surface": "#fdfbf6", "color-surface-sunken": "#efe9dc",
+              "color-text": "#17224f"},
+    "dark": {"color-bg": "#191315", "color-header": "#191315", "color-surface": "#21191c", "color-surface-raised": "#2a2024",
+             "color-surface-sunken": "#120d0f", "color-panel-header": "#2a2024", "color-text-muted": "#d4c6cb",
+             "color-border": "#a08f95", "color-divider": "#7a6a70"},
+}
+AMBER_SURFACES = {
+    "light": {"color-bg": "#f4f2ee", "color-header": "#f4f2ee", "color-surface": "#fbfaf7", "color-surface-sunken": "#e9e6df",
+              "color-border": "#706c66", "color-divider": "#83807a"},
+    "dark": {"color-bg": "#0d1013", "color-header": "#0d1013", "color-surface": "#14181c", "color-surface-raised": "#1b2025",
+             "color-surface-sunken": "#090b0d", "color-panel-header": "#1b2025", "color-text-muted": "#c4c8cc",
+             "color-border": "#8e959c", "color-divider": "#6b7279"},
+}
+LIME_SURFACES = {
+    "light": {"color-bg": "#f1f4f2", "color-header": "#f1f4f2", "color-surface": "#f9fbfa", "color-surface-sunken": "#e5eae7",
+              "color-border": "#6a716d", "color-divider": "#7d8580"},
+    "dark": {"color-bg": "#04090c", "color-header": "#04090c", "color-surface": "#0b1317", "color-surface-raised": "#111b20",
+             "color-surface-sunken": "#020507", "color-panel-header": "#111b20", "color-text-muted": "#bfcbd0",
+             "color-border": "#86969d", "color-divider": "#62737a"},
+}
 PALETTES = {
     "teal": ("Teal", "The colour before Mica: calm and clear",
              dict(accent="#0b5f5a", count="#af4e24", tile="#0b5f5a", star="#af4e24"),
              dict(accent="#5ed3c6", count="#c0401a", tile="#5ed3c6", star="#ffb38a")),
-    "indigo": ("Indigo", "Calm and focused: tools, dashboards, reading",
-               dict(accent="#4338ca", count="#a61e4d", tile="#312e81", star="#c2410c"),
-               dict(accent="#a5b4fc", count="#b8336a", tile="#c7d2fe", star="#fdba74")),
-    "forest": ("Forest", "Natural and steady: libraries, gardens, health",
-               dict(accent="#2f6b3a", count="#9a3412", tile="#1f4d2b", star="#c2410c"),
-               dict(accent="#86d39a", count="#b4461b", tile="#bbf7d0", star="#fdba74")),
-    "plum": ("Plum", "Warm and personal: media, music, journals",
-             dict(accent="#7e2a8f", count="#a14400", tile="#4a1d5c", star="#c2410c"),
-             dict(accent="#e2a6f0", count="#b4461b", tile="#f0d4fa", star="#fcd34d")),
-    "ember": ("Ember", "Bright and lively: home, food, events",
-              dict(accent="#a43e12", count="#1d4ed8", tile="#7c2d12", star="#1e40af"),
-              dict(accent="#ffb38a", count="#2563eb", tile="#fed7aa", star="#93c5fd")),
+    "dusk": ("Dusk", "Periwinkle on blue slate: quiet evenings, reading",
+             dict(accent="#4753ab", count="#a61e4d", tile="#2e368b", star="#c2410c"),
+             dict(accent="#acbcff", count="#b8336a", tile="#c7d2fe", star="#fdba74"), DUSK_SURFACES),
+    "lime": ("Lime", "Lime on blue-black: sharp and technical",
+             dict(accent="#3a5700", count="#a61e4d", tile="#2e4e00", star="#c2410c"),
+             dict(accent="#bcf053", count="#b8336a", tile="#d9f99d", star="#fdba74"), LIME_SURFACES),
+    "rose": ("Rose", "Fluorescent pink on warm paper: playful, media",
+             dict(accent="#a62a65", count="#1d4ed8", tile="#880046", star="#c2410c"),
+             dict(accent="#ff99c0", count="#2563eb", tile="#ff99c0", star="#93c5fd"), ROSE_SURFACES),
+    "amber": ("Amber", "Amber on graphite: signals, servers, night",
+              dict(accent="#874e00", count="#1d4ed8", tile="#693200", star="#1e40af"),
+              dict(accent="#f7b83d", count="#2563eb", tile="#fde68a", star="#93c5fd"), AMBER_SURFACES),
     "graphite": ("Graphite", "Neutral and technical: servers, admin, documents",
                  dict(accent="#3d4f6b", count="#b4461b", tile="#1f2937", star="#c2410c"),
                  dict(accent="#b9c6da", count="#b4461b", tile="#e5e7eb", star="#fdba74")),
 }
+# Palettes saved before 20 November 2026, for an app to move people on: the nearest new one.
+RENAMED = {"indigo": "dusk", "plum": "rose", "ember": "amber", "forest": "lime"}
 
 
 def rgb(h):
@@ -87,18 +120,20 @@ def stronger(h, bg, need=7.0):
     return hexa(colorsys.hls_to_rgb(hue, max(0, min(1, l)), s))
 
 
-def accent_set(mode, c):
-    """The accent colours for one theme (light, dark, contrast, contrast-dark)."""
+def accent_set(mode, c, surfaces=None):
+    """The accent colours for one theme (light, dark, contrast, contrast-dark), with the palette's own surfaces in
+    Light and Dark."""
     base = "dark" if mode in ("dark", "contrast-dark") else "light"
+    own = (surfaces or {}).get(base, {}) if not mode.startswith("contrast") else {}
     if mode.startswith("contrast"):
         a = stronger(c["accent"], HC_BG[base])
         soft = mix(a, HC_BG[base], 0.85 if base == "light" else 0.78)
         return {"color-accent": a, "color-accent-soft": soft, "color-control-active": soft,
                 "color-accent-text": "#ffffff" if base == "light" else "#000000",
                 "color-logo-tile": a, "color-logo-star": "#000000" if base == "light" else "#ffffff"}
-    bg = NEUTRALS[base]["color-bg"]
+    bg = own.get("color-bg", NEUTRALS[base]["color-bg"])
     soft = mix(c["accent"], "#ffffff", 0.88) if base == "light" else mix(c["accent"], bg, 0.78)
-    return {"color-accent": c["accent"], "color-accent-soft": soft, "color-control-active": soft,
+    return {**own, "color-accent": c["accent"], "color-accent-soft": soft, "color-control-active": soft,
             "color-accent-text": "#ffffff" if lum(c["accent"]) < 0.3 else "#000000",
             "color-count": c["count"], "color-count-text": "#ffffff",
             "color-logo-tile": c["tile"], "color-logo-star": c["star"]}
@@ -130,8 +165,9 @@ def rules(root, d):
             rule(root + SELECTORS["contrast-dark"], d["accent"]["contrast-dark"])]
 
 
-for name, (label, suits, light, dark) in PALETTES.items():
-    acc = {m: accent_set(m, light if m in ("light", "contrast") else dark) for m in ("light", "dark", "contrast", "contrast-dark")}
+for name, (label, suits, light, dark, *more) in PALETTES.items():
+    surfaces = more[0] if more else None
+    acc = {m: accent_set(m, light if m in ("light", "contrast") else dark, surfaces) for m in ("light", "dark", "contrast", "contrast-dark")}
     data[name] = {"label": label, "suits": suits, "light": {**NEUTRALS["light"], **acc["light"], "color-focus": _LIGHT["color-focus"]},
                   "dark": {**NEUTRALS["dark"], **acc["dark"]}, "accent": acc}
     (OUT / f"{name}.css").write_text("\n".join([
@@ -139,6 +175,7 @@ for name, (label, suits, light, dark) in PALETTES.items():
         "   Load after tokens.css and before components.css. Written by tools/palettes.py: edit that, not this. */",
         *rules(":root", data[name]), ""]))
 (OUT / "palettes.json").write_text(json.dumps({k: {x: v[x] for x in ("label", "suits", "light", "dark", "accent")} for k, v in data.items()}, indent=2) + "\n")
+(OUT / "renamed.json").write_text(json.dumps(RENAMED, indent=2) + "\n")
 
 # Every accent in one file for an app that lets people choose (Starboard's own style): the app sets
 # data-palette="forest" on <html>, and tools/sync.py copies this file in. Blue, the default, is tokens.css.
@@ -175,7 +212,7 @@ cards = "\n".join(
     for n, d in data.items())
 section = f'''<!--PALETTES-->
 <section class="g-section" id="palettes" aria-labelledby="palettes-h">
-  <header><h2 id="palettes-h">Accent colours</h2><p class="muted">Six accent colours over Mica's neutral greys. Load <code>tokens.css</code>, then one palette file, then <code>components.css</code>. Only the accent changes: links, the main button, the chosen item, the count and the logo, in Light, Dark and both High contrast themes. Surfaces, text, focus, status colours and chart series stay the same. Blue, the default, is <code>tokens.css</code> itself; Teal is the colour before Mica.</p></header>
+  <header><h2 id="palettes-h">Accent colours</h2><p class="muted">Six colours. Teal and Graphite are accents over Mica's neutral greys; Dusk, Lime, Rose and Amber also tint the page and cards in Light and Dark, after the Hallmark themes. Load <code>tokens.css</code>, then one palette file, then <code>components.css</code>. The accent changes links, the main button, the chosen item, the count and the logo in every theme. High contrast keeps pure white or black; focus, status colours and chart series never change. Blue, the default, is <code>tokens.css</code> itself; Teal is the colour before Mica.</p></header>
   <div class="g-pals">
 {cards}
   </div>

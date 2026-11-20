@@ -1,0 +1,53 @@
+/* Amber accent for the TRex Design System. Amber on graphite: signals, servers, night.
+   Load after tokens.css and before components.css. Written by tools/palettes.py: edit that, not this. */
+:root:where(:not(.pref-contrast)) {
+  --color-bg: #f4f2ee;
+  --color-header: #f4f2ee;
+  --color-surface: #fbfaf7;
+  --color-surface-sunken: #e9e6df;
+  --color-border: #706c66;
+  --color-divider: #83807a;
+  --color-accent: #874e00;
+  --color-accent-soft: #f1eae0;
+  --color-control-active: #f1eae0;
+  --color-accent-text: #ffffff;
+  --color-count: #1d4ed8;
+  --color-count-text: #ffffff;
+  --color-logo-tile: #693200;
+  --color-logo-star: #1e40af;
+}
+:root[data-theme="dark"]:where(:not(.pref-contrast)) {
+  --color-bg: #0d1013;
+  --color-header: #0d1013;
+  --color-surface: #14181c;
+  --color-surface-raised: #1b2025;
+  --color-surface-sunken: #090b0d;
+  --color-panel-header: #1b2025;
+  --color-text-muted: #c4c8cc;
+  --color-border: #8e959c;
+  --color-divider: #6b7279;
+  --color-accent: #f7b83d;
+  --color-accent-soft: #40351c;
+  --color-control-active: #40351c;
+  --color-accent-text: #000000;
+  --color-count: #2563eb;
+  --color-count-text: #ffffff;
+  --color-logo-tile: #fde68a;
+  --color-logo-star: #93c5fd;
+}
+:root.pref-contrast:not([data-theme="dark"]):not(.is-dark) {
+  --color-accent: #824b00;
+  --color-accent-soft: #ece4d9;
+  --color-control-active: #ece4d9;
+  --color-accent-text: #ffffff;
+  --color-logo-tile: #824b00;
+  --color-logo-star: #000000;
+}
+:root.pref-contrast:is([data-theme="dark"], .is-dark) {
+  --color-accent: #f7b83d;
+  --color-accent-soft: #36280d;
+  --color-control-active: #36280d;
+  --color-accent-text: #000000;
+  --color-logo-tile: #f7b83d;
+  --color-logo-star: #ffffff;
+}
