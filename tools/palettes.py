@@ -124,7 +124,12 @@ def accent_set(mode, c, surfaces=None):
     """The accent colours for one theme (light, dark, contrast, contrast-dark), with the palette's own surfaces in
     Light and Dark."""
     base = "dark" if mode in ("dark", "contrast-dark") else "light"
-    own = (surfaces or {}).get(base, {}) if not mode.startswith("contrast") else {}
+    own = dict((surfaces or {}).get(base, {})) if not mode.startswith("contrast") else {}
+    # A colour the palette sets in Light only goes back to the dark neutral in Dark: the light rule also matches in
+    # Dark, so without this Rose's dark navy text stayed on its dark page (found in Starboard, 20 November 2026).
+    if mode == "dark":
+        for k in (surfaces or {}).get("light", {}):
+            own.setdefault(k, NEUTRALS["dark"][k])
     if mode.startswith("contrast"):
         a = stronger(c["accent"], HC_BG[base])
         soft = mix(a, HC_BG[base], 0.85 if base == "light" else 0.78)

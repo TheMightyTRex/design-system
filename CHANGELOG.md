@@ -9,6 +9,9 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 20 November 2026
 
+- **Rose in Dark had dark blue text on its dark page.** Its dark blue ink is set for Light only, and the Light rule
+  also applies in Dark, so Dark now sets the text back to white. A colour any palette sets in Light only now goes back
+  to the dark neutral in Dark, so this cannot happen again (found in Starboard).
 - **Thirteen components that were missing.** Each has a gallery section (an example, when to use it, when not to,
   and its accessibility) and an entry in `docs/LIBRARY.md`. All are plain JavaScript in `components.js`, wait until
   they are on the page, and listen to the page only while open.
