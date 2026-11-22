@@ -7,6 +7,10 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 [Semantic Versioning](https://semver.org/).
 
 
+## 22 November 2026
+
+- **A Discord support server link in the footer (DASH-526).** An app with a Discord support server links to it after Help, as "Discord support server", opening in a new tab. The footer in the gallery shows it, and the help centre builder adds it to every page when `help-centre.json` names the server in `discord`.
+
 ## 20 November 2026
 
 - **Words from an app never go into HTML unescaped (CodeQL, 20 November 2026).** The secret field's hidden name, the pagination noun and link, and the error summary's links are now set as text or escaped, so a name with HTML in it shows as words.
