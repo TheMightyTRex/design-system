@@ -7,6 +7,18 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 [Semantic Versioning](https://semver.org/).
 
 
+## 22 November 2026
+
+- **Parts: an app can load the large components only on the pages that use them (Starboard DASH-507).** The thirteen
+  components added on 20 November made every page of an app about 22 KB heavier. Twelve of them are now marked as
+  parts in `components.css` and `components.js` (log viewer, tabs, combobox, sparkline and gauge, pagination, error
+  summary, secret field, schedule picker, tag input, popover, alerts centre and command palette). The two files
+  still hold everything, so the gallery, the boards and the help centre are unchanged. `tools/parts.py` makes a core
+  (59 KB compressed, where the whole is 77 KB) and one small file for each part (2 to 5 KB), and `tools/sync.py`
+  writes those into an app that has a `js/parts` folder. The page banner and the tooltip stay in the core, as any
+  page can need them. `SharedComponents.kit` and `SharedComponents.addSetup` are new, for the parts.
+  `docs/LIBRARY.md`, Parts, has the rules.
+
 ## 20 November 2026
 
 - **Words from an app never go into HTML unescaped (CodeQL, 20 November 2026).** The secret field's hidden name, the pagination noun and link, and the error summary's links are now set as text or escaped, so a name with HTML in it shows as words.
