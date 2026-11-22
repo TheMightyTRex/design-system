@@ -1003,7 +1003,14 @@
 
   /* ---- Added on 20 November 2026: log viewer, tabs, combobox, sparkline and gauge, pagination, error summary,
      secret field, schedule picker, tag input, popover and alerts, page banner, tooltip and command palette. Each
-     part waits until it is on the page, and listens only while it is open. LIBRARY.md has the rules. ---- */
+     part waits until it is on the page, and listens only while it is open. LIBRARY.md has the rules.
+
+     Parts (22 November 2026, Starboard DASH-507): a region from "part: name" to "/part" can be left out of this
+     file and loaded as its own file, only on the pages that use it. tools/parts.py makes the two forms from this one
+     source: the core (this file without the parts) and parts/name.js for each. A part reaches the helpers below
+     through SharedComponents.kit, adds its own set-up with SharedComponents.addSetup, and puts what it exports on
+     SharedComponents. A line that ends "// part" belongs to the parts and is left out of the core.
+     LIBRARY.md, Parts, has the rules. ---- */
   const num = (n) => Number(n).toLocaleString("en-GB");
   const fold = (s) => String(s).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   const andList = (list) => (list.length < 2 ? list.join("") : `${list.slice(0, -1).join(", ")} and ${list[list.length - 1]}`);
@@ -1028,6 +1035,7 @@
     };
   }
 
+  /* part: log-view; exports: logView; setup: setupLogViews first */
   /* Log viewer: SharedComponents.logView(box, { lines, maxLines, show, fileName }) returns { add(lines), clear() }.
      Lines are strings ("12:01:03 ERROR Disk 3 did not answer") or { time, level, text }; levels are error, warning,
      info and debug. It keeps the newest maxLines (10,000) and draws only the newest `show` (1,000) that match, with
@@ -1280,7 +1288,9 @@
   function setupLogViews(root = document) {
     root.querySelectorAll(".log-view[data-log-view]").forEach((box) => logView(box));
   }
+  /* /part */
 
+  /* part: tabs; exports: setupTabs; setup: setupTabs */
   /* Tabs (ARIA tabs pattern): .tabs > [role=tablist] > [role=tab][aria-controls], and [role=tabpanel]s. One Tab stop
      for the list; Left and Right move round, Home and End go to the ends. Moving chooses the tab (automatic), or
      with data-activation="manual" Enter or Space chooses it, for panels that take a moment to fill. A link to a
@@ -1328,7 +1338,9 @@
       });
     });
   }
+  /* /part */
 
+  /* part: combobox; exports: combobox; setup: setupComboboxes */
   /* Combobox (ARIA 1.2, a list that filters as you enter text, without choosing by itself): SharedComponents.combobox
      (box, { options, onChoose, always }) or .combobox[data-combobox] with role="option" items in the markup. Focus
      stays in the box: Down and Up move through the list (Down opens it, Alt and Down only opens it), Enter chooses,
@@ -1504,7 +1516,9 @@
   function setupComboboxes(root = document) {
     root.querySelectorAll(".combobox[data-combobox]").forEach((box) => combobox(box));
   }
+  /* /part */
 
+  /* part: charts; exports: sparkline, gauge; setup: setupCharts */
   /* Sparkline: sparkline(svg, values, { period, unit, min, max }) draws a small line in a stat tile and writes the
      numbers in words into the tile's .stat__trend ("Last hour: 18% to 42%, lowest 12%, highest 61%"), which is what
      screen readers read; the drawing is hidden from them. Markup alone works too: data-values="18,22,…" on the svg.
@@ -1560,7 +1574,9 @@
       gauge(el, Number(el.dataset.value));
     });
   }
+  /* /part */
 
+  /* part: pagination; exports: pagination */
   /* Pagination: pagination(nav, { page, pageSize, total, noun, sizes, href, onPage, onSize, focus }) draws the
      links and "Showing 21 to 40 of 312". With href(page) each is a real link; with onPage(page) the page changes in
      place, says the new place politely and moves focus to `focus` (the table or its heading) or the current page. */
@@ -1615,7 +1631,9 @@
     });
     return { page, last, from, to, summary };
   }
+  /* /part */
 
+  /* part: error-summary; exports: showErrors, clearErrors, setFieldError; setup: setupErrorSummaries */
   /* Error summary (after GOV.UK) and field errors. showErrors(form, [{ field: "id", message }]) writes each field's
      .field-error ("Error: " for screen readers), ties it with aria-describedby, sets aria-invalid, fills the form's
      .error-summary with a link to each field, shows it, moves focus to it and puts "Error: " in the page title.
@@ -1696,7 +1714,9 @@
       control.focus({ preventScroll: true });
     });
   }
+  /* /part */
 
+  /* part: secret-field; exports: setupSecrets; setup: setupSecrets; needs: error-summary */
   /* Secret field: .secret-field[data-secret] with the input (type="password", readonly), and buttons with
      data-secret-show, data-secret-copy and data-secret-replace. data-name names it ("API key"). Show and Hide say the
      new state politely; Copy confirms in a toast without the value; Replace empties the box to enter a new one, with
@@ -1790,7 +1810,9 @@
       });
     });
   }
+  /* /part */
 
+  /* part: schedule; exports: scheduleWords, nextRun, setupSchedules; setup: setupSchedules */
   /* Schedule picker: .schedule[data-schedule] with [data-schedule-repeat] (day, week or hour), [data-schedule-time],
      [data-schedule-minute], day checkboxes valued 0 (Sunday) to 6 in [data-schedule-days], and [data-schedule-words]
      and [data-schedule-next] in a polite status. It reads the choice back in words ("Every weekday at 07:00", "Next:
@@ -1862,7 +1884,9 @@
       update(false);
     });
   }
+  /* /part */
 
+  /* part: tag-input; exports: setupTagInputs; setup: setupTagInputs */
   /* Tag input: .tag-input[data-tag-input] > ul.tag-input__list + input.tag-input__field, and a hidden input that
      holds the words joined with commas. Enter or a comma adds what is in the box (several at once when pasted with
      commas); leaving the box adds it too. Each tag has its own Remove button named with the word. Backspace in an
@@ -1942,7 +1966,9 @@
       });
     });
   }
+  /* /part */
 
+  /* part: popover; exports: setupPopovers; setup: setupPopovers */
   /* Popover: a button with data-popover and aria-controls opens a .popover (role="dialog", not modal, named by its
      heading). Focus moves to its heading, or to [data-autofocus]; Escape, a press outside, or Tab out of it closes
      it, and Escape returns focus to the button. It listens to the page only while it is open. Fires popover-open
@@ -1994,6 +2020,8 @@
       pop.closePopover = close;
     });
   }
+  /* /part */
+  /* part: alerts; exports: setupAlerts; setup: setupAlerts; needs: popover */
   /* Alerts centre: a .popover with data-alerts holding ul.alerts > li.alerts__item[data-unread] (each with
      .alerts__unread hidden text, a link in .alerts__title and a .alerts__read button), and a [data-alerts-read-all]
      button. Opening an alert or Mark as read marks it read; the count on the opening button follows. Fires
@@ -2043,6 +2071,7 @@
       update();
     });
   }
+  /* /part */
 
   /* Page banner: pageBanner(title, { text, tone, action: { label, run } }) shows one message for the whole app under
      the header, until it is closed with the function it returns (when the connection is back, or after the
@@ -2159,6 +2188,7 @@
     });
   }
 
+  /* part: command-palette; exports: commandPalette; setup: setupCommandPalette; needs: combobox */
   /* Command palette: a button with data-command-palette opens it, and so do Ctrl+K and Command+K unless the page has
      data-no-shortcut on <html> (WCAG 2.1.4). It is a dialog holding the combobox, always open, listing the page's
      menus (.rail, .menu-tabs and .phone-menu links) and every [data-command] button, or commandPalette.items when an
@@ -2224,9 +2254,16 @@
       commandPalette(document.activeElement);
     });
   }
+  /* /part */
 
+  // Parts loaded as their own files (see the note above) add their set-up here; setup() runs them with the rest.
+  const partSetups = { first: [], last: [] };
+  function addSetup(run, first = false) {
+    partSetups[first ? "first" : "last"].push(run);
+  }
   function setup(root) {
-    setupLogViews(root); // before setupToggles, so its filter chips keep their own state
+    setupLogViews(root); // part
+    partSetups.first.forEach((run) => run(root)); // a part's set-up that must run before setupToggles (the log viewer's chips)
     setupMenus(root);
     setupShelves(root);
     setupLayers(root);
@@ -2241,17 +2278,19 @@
     setupSortables(root);
     setupSideTrees(root);
     setupSolvers(root);
-    setupTabs(root);
-    setupComboboxes(root);
-    setupCharts(root);
-    setupErrorSummaries(root);
-    setupSecrets(root);
-    setupSchedules(root);
-    setupTagInputs(root);
-    setupPopovers(root);
-    setupAlerts(root);
+    setupTabs(root); // part
+    setupComboboxes(root); // part
+    setupCharts(root); // part
+    setupErrorSummaries(root); // part
+    setupSecrets(root); // part
+    setupSchedules(root); // part
+    setupTagInputs(root); // part
+    setupPopovers(root); // part
+    setupAlerts(root); // part
     setupTooltips(root);
-    setupCommandPalette(root);
+    setupCommandPalette(root); // part
+
+    partSetups.last.forEach((run) => run(root));
   }
   /* Waiting standard (DASH-493): set a count bar (.progress.progress--running with role="progressbar") to `done` of
      `total`. It eases onto the count, then creeps towards the next one over `eachMs` (the usual time for one item),
@@ -2273,9 +2312,12 @@
       fill.style.width = `${pct(done) + (pct(done + 1) - pct(done)) * 0.9}%`;
     }, 320);
   }
-  window.SharedComponents = { setup, applyTheme, creepProgress, setupHeaderFit, fitHeader, motionStill, setupSideTrees, setupSolvers, setupSearch, setupSearchIcons, setupSortables, openLayer, toast, savedNote, copyText, azLetter, azJump, azGo, loadMore,
-    logView, setupTabs, combobox, sparkline, gauge, pagination, showErrors, clearErrors, setFieldError, setupSecrets,
-    scheduleWords, nextRun, setupSchedules, setupTagInputs, setupPopovers, setupAlerts, pageBanner, setupTooltips, commandPalette, say };
+  window.SharedComponents = { setup, applyTheme, creepProgress, setupHeaderFit, fitHeader, motionStill,
+    setupSideTrees, setupSolvers, setupSearch, setupSearchIcons, setupSortables, openLayer, toast, savedNote,
+    copyText, azLetter, azJump, azGo, loadMore, pageBanner, setupTooltips, say, addSetup, 
+    kit: { focusable, announcer, toast, copyText, sprite, escapeHtml, num, fold, andList, say, ownStatus } };
+  Object.assign(window.SharedComponents, { logView, setupTabs, combobox, sparkline, gauge, pagination, showErrors, clearErrors, setFieldError, // part
+    setupSecrets, scheduleWords, nextRun, setupSchedules, setupTagInputs, setupPopovers, setupAlerts, commandPalette }); // part
   // An app that wires its own behaviour (Starboard's page scripts) loads this file with data-manual, or
   // sets window.SharedComponentsManual = true first, and calls setup() or openLayer() itself.
   const manual = window.SharedComponentsManual || document.currentScript?.hasAttribute("data-manual");

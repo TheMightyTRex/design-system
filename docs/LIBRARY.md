@@ -194,6 +194,47 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 | Dialog | `.dialog` (`<dialog>`), `.dialog__body`, `.dialog__foot`, `.dialog--scroll`, `data-close-outside` | Decisions and short tasks only. `.dialog--scroll`: only the body scrolls, the header and foot stay in view. `data-close-outside`: a press outside closes it (help only, never a dialog with fields) |
 | Tabs | `.tabs` (`data-activation="manual"`), `.tabs__list` (`role="tablist"`, named), `.tabs__tab` (`role="tab"`, `aria-selected`, `aria-controls`, a `.count` allowed), `.tabs__panel` (`role="tabpanel"`, `aria-labelledby`, `tabindex="0"`); `SharedComponents.setupTabs(root)`; `tabs-change` event | Real tabs for the parts of one item's page, as `DESIGN-SYSTEM.md` section 5 asks (20 November 2026). One Tab stop; Left and Right move round, Home and End go to the ends; a tab is chosen as focus reaches it, or by Enter or Space with manual activation. A link to a panel's id opens it. Without script every panel shows. Moving between pages is the level 2 menu, never tabs. `.logo-tabs` can move to these |
 
+## Parts (22 November 2026)
+
+Some components are large and few pages use them. They are marked as parts in the two source files, so an app that
+counts every byte can load them only where they are used (Starboard, lightweight first, DASH-507). The source files
+still hold every component: the gallery, the boards and the help centre load them whole, and so can any app.
+
+| Part | Compressed size | Needs |
+|---|---|---|
+| `log-view` | 4.6 KB | |
+| `tabs` | 2.1 KB | |
+| `combobox` | 3.7 KB | |
+| `charts` (sparkline and gauge) | 2.6 KB | |
+| `pagination` | 2.5 KB | |
+| `error-summary` (also `setFieldError` and `clearErrors`) | 2.3 KB | |
+| `secret-field` | 2.2 KB | `error-summary` |
+| `schedule` | 2.7 KB | |
+| `tag-input` | 2.4 KB | |
+| `popover` | 2.2 KB | |
+| `alerts` | 2.0 KB | `popover` |
+| `command-palette` | 2.4 KB | `combobox` |
+
+The core is everything else, 59 KB compressed where the whole is 77 KB. The page banner and the tooltip stay in
+the core, as any page can need them.
+
+**For an app.** Make a `js/parts` folder in the app's web folder, then run `tools/sync.py`. It writes the core as
+`css/components.css` and `js/components.js`, and each part as `css/parts/<name>.css` and `js/parts/<name>.js`.
+Without that folder the app gets the whole files, as before. On a page that uses a part, load its styles after
+`components.css` and its script after `components.js` (and after the parts it needs), before the page's own
+scripts. `SharedComponents.setup()` then sets the part up with everything else, and its functions are on
+`SharedComponents` as before (`logView`, `showErrors`, `gauge` and so on).
+
+**Marking a part.** In `components.css`, inside `@layer shared`: `/* part: name */` before the part's rules and
+`/* /part */` after them, with the part's own Windows Contrast and less motion rules inside. In `components.js`:
+`/* part: name; exports: a, b; setup: setupName; needs: other */` before and `/* /part */` after. `exports` are the
+functions put on `SharedComponents`; `setup` is run by `SharedComponents.setup()` (add ` first` when it must run
+before the core's own set-up); `needs` names parts whose exports this part uses. A part may use only its own
+names, the helpers in `SharedComponents.kit` and what it needs; a line outside a part that ends `// part` is left
+out of the core. `python3 tools/parts.py` checks all of this and lists the sizes: run it after any change to a part.
+A component belongs in the core when any page may need it without warning, and in a part when it is large and a
+page knows it will use it.
+
 ## Slide-out, dialog or page
 
 | Use | When | Examples |

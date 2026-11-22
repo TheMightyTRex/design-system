@@ -6,7 +6,8 @@ the gallery (four themes, 175% text) and run tools/contrast.py, then run:  pytho
 Add --check to list what would change without writing anything.
 It writes (folders set in tools/paths.py):
   Starboard  STARBOARD_WEB/css/tokens.css (font path ../fonts/), css/components.css, js/components.js,
-             icons/sprite.svg (library icons plus Starboard's own), css/palettes.css and
+             (the core only, with each part in css/parts/ and js/parts/, once the app has a js/parts folder:
+             tools/parts.py), icons/sprite.svg (library icons plus Starboard's own), css/palettes.css and
              palettes.json (palettes/, for the own style's colours); and, next to the web folder,
              lib/terminal-frame.sh, the copy in run-first.sh and starboard/qr.py (from terminal/)
   Storyarr   STORYARR_SHARED/tokens.css (no @font-face or --font: Storyarr loads the font itself),
@@ -18,6 +19,7 @@ import pathlib
 import re
 import sys
 
+import parts
 from paths import path
 
 HERE = pathlib.Path(__file__).resolve().parent.parent
@@ -51,8 +53,21 @@ note = "\n * Copied by tools/sync.py from github.com/TheMightyTRex/design-system
 
 if STARBOARD.exists():
     write(STARBOARD / "css/tokens.css", tokens.replace('url("fonts/', 'url("../fonts/'))
-    write(STARBOARD / "css/components.css", components)
-    write(STARBOARD / "js/components.js", behaviour)
+    # Parts (DASH-507): an app with a js/parts folder loads the core on every page and a part only where it is used.
+    # Until the app has that folder it gets the whole files, as before, so its pages never lose a component.
+    if (STARBOARD / "js/parts").is_dir():
+        core_css, parts_css = parts.css(components)
+        core_js, parts_js = parts.js(behaviour)
+        write(STARBOARD / "css/components.css", core_css)
+        write(STARBOARD / "js/components.js", core_js)
+        if not CHECK:
+            (STARBOARD / "css/parts").mkdir(exist_ok=True)
+        for name in parts_js:
+            write(STARBOARD / "css/parts" / f"{name}.css", parts_css[name], new=True)
+            write(STARBOARD / "js/parts" / f"{name}.js", parts_js[name], new=True)
+    else:
+        write(STARBOARD / "css/components.css", components)
+        write(STARBOARD / "js/components.js", behaviour)
     # The palettes, for the own style's colours (owner, 13 November 2026): loaded only when one is chosen.
     write(STARBOARD / "css/palettes.css", (HERE / "palettes/app-palettes.css").read_text(), new=True)
     write(STARBOARD / "palettes.json", (HERE / "palettes/palettes.json").read_text(), new=True)

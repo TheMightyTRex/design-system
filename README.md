@@ -24,6 +24,7 @@ change the copies inside the apps.
 | `tokens.css` | Every colour, size, space and motion value as role names, for Light, Dark, High contrast and High contrast dark |
 | `components.css` | Every component, in `@layer shared`, using only the tokens |
 | `components.js` | The behaviour every component must have (menus, slide-outs, dialogs, phone menu, filter chips, copy, help, display settings, tabs, combobox, log viewer, popovers, tooltips and the rest), in plain JavaScript |
+| `tools/parts.py` | Makes the light form for an app: a core, and a file for each large component (a part), loaded only on the pages that use it (`docs/LIBRARY.md`, Parts) |
 | `icons.svg` | Lucide icons as an SVG sprite (`<use href="#i-book-open">`); `tools/icons.txt` lists them |
 | `fonts/` | Atkinson Hyperlegible Next, with its licence |
 | `gallery.src.html`, `gallery.html` | The live gallery of every component (edit the `.src` file, then build) |
