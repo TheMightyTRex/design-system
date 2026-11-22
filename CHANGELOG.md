@@ -9,6 +9,7 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 22 November 2026
 
+- **A Discord support server link in the footer (DASH-526).** An app with a Discord support server links to it after Help, as "Discord support server", opening in a new tab. The footer in the gallery shows it, and the help centre builder adds it to every page footer and to the front page when `help-centre.json` names the server in `discord`.
 - **Parts: an app can load the large components only on the pages that use them (Starboard DASH-507).** The thirteen
   components added on 20 November made every page of an app about 22 KB heavier. Twelve of them are now marked as
   parts in `components.css` and `components.js` (log viewer, tabs, combobox, sparkline and gauge, pagination, error
