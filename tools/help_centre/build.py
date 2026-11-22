@@ -939,6 +939,10 @@ def build(out):
         parts = [f'<div class="help-landing__head"><h1>{html.escape(home.get("title", f"Welcome to {NAME} help"))}</h1>{badge}</div>']
         if home.get("intro"):
             parts.append(f'<p class="help-landing__intro">{html.escape(home["intro"])}</p>')
+        if DISCORD:
+            parts.append(f'<p class="help-landing__support">Stuck, or want to talk to other people who use {html.escape(NAME)}? '
+                         f'<a href="{DISCORD}" target="_blank" rel="noopener noreferrer">Join the Discord support server'
+                         f'<span class="visually-hidden"> (opens in a new tab)</span></a>.</p>')
         if CFG.get("journey"):
             parts.append(journey_html(CFG["journey"], ""))
         if CFG.get("featured"):
