@@ -32,6 +32,7 @@ body { margin: 0; background: var(--color-bg); color: var(--color-text); font-fa
 .help-landing h1 { margin: 0; font-size: var(--text-xl); }
 .help-landing__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-4); }
 .help-landing__intro { margin: calc(-1 * var(--space-3)) 0 0; max-width: 70ch; color: var(--color-text-muted); }
+.help-landing__support { margin: 0; max-width: 70ch; }
 .help-landing__group > h2 { margin: 0 0 var(--space-3); font-size: var(--text-lg); }
 .help-group-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); gap: var(--space-3); margin: 0; padding: 0; list-style: none; }
 .help-group-card h2 { margin: 0; font-size: var(--text-md); }

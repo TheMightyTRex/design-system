@@ -77,10 +77,11 @@ PLACEHOLDERS = [r"still to be written", r"\bto be written\b", r"\bTODO\b", r"\bT
 
 def configure(config_path):
     """Reads help-centre.json: name, repo, site, and optionally help_dir, branch, leave_out, sections, logo_file,
-    footer_starts (text that begins a footer on every page, left out of search), search_example, front_door, and the
+    footer_starts (text that begins a footer on every page, left out of search), search_example, front_door, discord (the
+    address of the app's Discord support server, shown in the footer of every page), and the
     standard's areas, home, version_from or version, journey, featured, solver and plugins."""
     global ROOT, HELP, NAME, TITLE, REPO, BLOB, SITE, LOGO, STOP, EXAMPLE, LEAVE_OUT, SECTIONS, FRONT_DOOR, CFG
-    global FOOTER_NOTE, NOTICE_LABEL, BANNER, BANNER_LABEL, BANNER_COUNT, STRIP, SPONSORED, FAVICON, COUNTER
+    global DISCORD, FOOTER_NOTE, NOTICE_LABEL, BANNER, BANNER_LABEL, BANNER_COUNT, STRIP, SPONSORED, FAVICON, COUNTER
     cfg_file = pathlib.Path(config_path).resolve()
     cfg = json.loads(cfg_file.read_text(encoding="utf-8"))
     CFG = cfg
@@ -96,6 +97,9 @@ def configure(config_path):
     STOP = cfg.get("footer_starts", "")
     EXAMPLE = cfg.get("search_example", "Type what you want to do.")
     FRONT_DOOR = cfg.get("front_door", True)
+    DISCORD = cfg.get("discord", "").strip()
+    if DISCORD and not re.fullmatch(r"https://discord\.gg/[A-Za-z0-9]+", DISCORD):
+        raise SystemExit(f"discord must look like https://discord.gg/<code>, not {DISCORD!r}")
     md = lambda text: markdown.markdown(text, output_format="html") if text else ""
     # The footer notice (DASH-436 follow-up): the footer shows one link, its first bold sentence (or "footer_link"),
     # which opens a slide-out with the whole notice; the footer itself stays like the apps' footers.
@@ -576,6 +580,7 @@ TEMPLATE = """<!doctype html>
     <span class="site-footer__brand">{logo}{name} help</span>
     <nav aria-label="{name} help"><ul class="site-footer__links">
       <li><a href="{root}index.html">Help centre</a></li>
+      {discord_link}
       <li><a href="{repo}" target="_blank" rel="noopener noreferrer">GitHub repository<span class="visually-hidden"> (opens in a new tab)</span></a></li>
       <li><a href="{repo}/issues" target="_blank" rel="noopener noreferrer">Report a problem with this help<span class="visually-hidden"> (opens in a new tab)</span></a></li>
       {notice_link}
@@ -633,6 +638,8 @@ class Site:
             canonical=SITE + out_rel, root=root, logo=LOGO, crumbs=crumbs, content=content, edit=edit, repo=REPO,
             name=html.escape(NAME), band=band, main_class=main_class, counter=COUNTER,
             prefs_js=PREFS_JS.replace("__ROTATE__", ROTATE_JS.replace("__BC__", str(BANNER_COUNT)) if BANNER_COUNT > 1 else ""),
+            discord_link=(f'<li><a href="{DISCORD}" target="_blank" rel="noopener noreferrer">Discord support server'
+                          f'<span class="visually-hidden"> (opens in a new tab)</span></a></li>') if DISCORD else "",
             notice_link=(f'<li><button class="site-footer__link-btn" type="button" data-opens="help-notice" aria-haspopup="dialog" '
                          f'aria-expanded="false">{html.escape(NOTICE_LABEL)}</button></li>') if NOTICE_LABEL else "",
             notice_panel=(f'<div class="side-panel-layer" id="help-notice" hidden><div class="side-panel-backdrop"></div>'
@@ -932,6 +939,10 @@ def build(out):
         parts = [f'<div class="help-landing__head"><h1>{html.escape(home.get("title", f"Welcome to {NAME} help"))}</h1>{badge}</div>']
         if home.get("intro"):
             parts.append(f'<p class="help-landing__intro">{html.escape(home["intro"])}</p>')
+        if DISCORD:
+            parts.append(f'<p class="help-landing__support">Stuck, or want to talk to other people who use {html.escape(NAME)}? '
+                         f'<a href="{DISCORD}" target="_blank" rel="noopener noreferrer">Join the Discord support server'
+                         f'<span class="visually-hidden"> (opens in a new tab)</span></a>.</p>')
         if CFG.get("journey"):
             parts.append(journey_html(CFG["journey"], ""))
         if CFG.get("featured"):
