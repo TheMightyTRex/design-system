@@ -599,6 +599,8 @@ TEMPLATE = """<!doctype html>
       <label class="switch" for="help-pref-contrast"><span>High contrast</span><input type="checkbox" role="switch" id="help-pref-contrast" name="contrast"></label>
       <label class="switch" for="help-pref-underline"><span>Underline links</span><input type="checkbox" role="switch" id="help-pref-underline" name="underline"></label>
       <label class="switch" for="help-pref-spacing"><span>Wider text spacing</span><input type="checkbox" role="switch" id="help-pref-spacing" name="spacing"></label>
+      <label class="switch" for="help-pref-shadows"><span>Remove drop shadows</span><input type="checkbox" role="switch" id="help-pref-shadows" name="shadows" aria-describedby="help-pref-shadows-note"></label>
+      <p class="small muted" id="help-pref-shadows-note">Drop shadows cost a little processor on every scroll; turning them off helps small and older computers.</p>
       <p class="small muted">Choices apply at once and are kept in this browser.</p>
     </form>
     <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Close</button><button class="btn" type="button" id="help-display-reset">Reset to defaults</button></div>
@@ -612,7 +614,8 @@ TEMPLATE = """<!doctype html>
 </html>
 """
 
-# Display and accessibility: the same choices and classes as the app, applied before the page draws so it never
+# Display and accessibility: the same choices and classes as the app (Remove drop shadows follows the app's last answer, kept
+# in the same browser as starboard.shadows, until it is chosen here), applied before the page draws so it never
 # flashes. Kept in this browser only. "js" lets the phone menu fold away only when script can open it again.
 PREFS_JS = ("document.documentElement.classList.add('js');"
             "try{var p=JSON.parse(localStorage.getItem('help-display')||'{}'),r=document.documentElement;"
@@ -620,6 +623,7 @@ PREFS_JS = ("document.documentElement.classList.add('js');"
             "if(p.contrast)r.classList.add('pref-contrast');if(p.motion==='on')r.classList.add('pref-motion');"
             "if(p.motion==='off')r.classList.add('pref-motion-off');if(p.underline)r.classList.add('pref-underline');"
             "if(p.spacing)r.classList.add('pref-spacing');"
+            "if(p.shadows===true||(p.shadows===undefined&&localStorage.getItem('starboard.shadows')==='off'))r.dataset.shadows='off';"
             "if(localStorage.getItem('help-banner')==='hidden')r.classList.add('help-banner-hidden');"
             "__ROTATE__}catch(e){}")
 ROTATE_JS = ("var b=Number(localStorage.getItem('help-banner-next'))||0;localStorage.setItem('help-banner-next',(b+1)%__BC__);"

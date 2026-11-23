@@ -29,6 +29,13 @@
     html.classList.toggle("pref-motion-off", p.motion === "off");
     html.classList.toggle("pref-underline", !!p.underline);
     html.classList.toggle("pref-spacing", !!p.spacing);
+    if (shadowsOff(p)) html.dataset.shadows = "off"; else delete html.dataset.shadows;
+  }
+  // Remove drop shadows: this page's own choice once made, else the app's last answer when this help is served by the app
+  // (same browser storage), else shadows stay.
+  function shadowsOff(p) {
+    if (typeof p.shadows === "boolean") return p.shadows;
+    try { return localStorage.getItem("starboard.shadows") === "off"; } catch (e) { return false; }
   }
   var form = document.getElementById("help-display-form");
   if (form) {
@@ -36,11 +43,15 @@
       var p = readPrefs();
       form.theme.value = p.theme; form.text.value = p.text; form.motion.value = p.motion;
       form.contrast.checked = p.contrast; form.underline.checked = p.underline; form.spacing.checked = p.spacing;
+      form.shadows.checked = shadowsOff(p);
     };
     fill();
-    form.addEventListener("change", function () {
+    form.addEventListener("change", function (e) {
+      var kept = readPrefs();
       var p = { theme: form.theme.value, text: form.text.value, motion: form.motion.value,
                 contrast: form.contrast.checked, underline: form.underline.checked, spacing: form.spacing.checked };
+      // Only a choice made here pins the shadows; until then they follow the app's last answer.
+      if (e.target === form.shadows || typeof kept.shadows === "boolean") p.shadows = form.shadows.checked;
       try { localStorage.setItem("help-display", JSON.stringify(p)); } catch (e) { /* private window: this page only */ }
       applyPrefs(p);
     });
