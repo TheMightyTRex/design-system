@@ -9,6 +9,7 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 23 November 2026
 
+- **The help centre follows Remove drop shadows (Starboard DASH-536).** The help centre builder has the Remove drop shadows switch in its Display and accessibility slide-out, and sets `data-shadows="off"` before the page draws from its own choice or, until one is made, from the app's last answer (`starboard.shadows`, when the help is served beside the app).
 - **Remove drop shadows (Starboard DASH-536).** `data-shadows="off"` on the page (or on any element) sets the shadow tokens to none in one place at the end of `tokens.css`, so cards, covers, menus, slide-outs and dialogs lose their shadow and keep their border. `components.js` handles `data-display="shadows"` in the Display and accessibility slide-out, with the note about processor cost. The gallery has the switch and shows both states.
 - **Covers take the card shading (DASH-535).** Every `.cover` has the card's 1px divider border, the 6px corner and the layered card shadow, and raises its border on hover in a media card or book row. The round cover stays round, the series fan has the 6px corner, the action column sits inside the cover's border and corner, and covers of 24px, 48px and 64px keep the border but not the shadow. High contrast keeps the border and loses the shadow.
 
