@@ -7,6 +7,10 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 [Semantic Versioning](https://semver.org/).
 
 
+## 23 November 2026
+
+- **Covers take the card shading (DASH-535).** Every `.cover` has the card's 1px divider border, the 6px corner and the layered card shadow, and raises its border on hover in a media card or book row. The round cover stays round, the series fan has the 6px corner, the action column sits inside the cover's border and corner, and covers of 24px, 48px and 64px keep the border but not the shadow. High contrast keeps the border and loses the shadow.
+
 ## 22 November 2026
 
 - **A Discord support server link in the footer (DASH-526).** An app with a Discord support server links to it after Help, as "Discord support server", opening in a new tab. The footer in the gallery shows it, and the help centre builder adds it to every page footer and to the front page when `help-centre.json` names the server in `discord`.
