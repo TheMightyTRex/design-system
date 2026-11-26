@@ -11,6 +11,7 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 - **Starboard's own patterns are in the library.** Page topics (`.topic-tabs`, `.settings-sections`), the update list, places and service logos, the dashboard grid and cards, show once, a wizard in a slide-out, and folding sections have classes, gallery entries (App patterns) and a section in `docs/LIBRARY.md`.
 - **Styles-only parts.** `tools/parts.py` and `tools/sync.py` can make a part that has styles and no script; six patterns use it, so an app loads each only on the pages that use it.
+- **The media library is a styles-only part too.** Walls of covers, groups, network and collection cards, episode rows and Discover's shelves are Starboard's `library.css`, word for word, as the `media-library` part.
 - **`service-logos.svg`** holds the Google Drive, OneDrive, Dropbox, Backblaze B2, Amazon S3 and WebDAV marks (CC0 artwork from simpleicons.org), and `tools/sync.py` copies it to Starboard as `icons/services.svg`.
 - **Storyarr's boards are archived.** The 19 boards, their generator and their index page moved to `areas/archive/storyarr/`, and each old address under `areas/` is now a small page that sends visitors there.
 - **Storyarr is no longer synced or named as a live app.** `tools/sync.py` and `tools/paths.py` drop it, the guides, README and gallery examples now speak of Starboard, its plug-ins and Stallboard, and `docs/SECURITY-CHECKS.md` has no Storyarr column.

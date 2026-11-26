@@ -431,10 +431,11 @@ Owner decision, 26 November 2026: every Starboard pattern that other screens or 
 | Dashboard | `.dash-grid`, `.dash-card*`, `.dash-edit*`, `.dash-links`, `.dash-stat`, `.guide-card*`, `.spark-card*` | `dashboard` | Preset sizes; a small card hides the chip's words from sight only |
 | Show once | `.show-once*`, `.recovery-codes` | core | One secret, Copy, Download, a notice |
 | Wizard in a slide-out | `.panel-wizard*`, `.wizard-job*`, `.plain-list` | `slide-out-wizard` (`.plain-list` in core) | Three steps or fewer; same rules as `docs/WIZARD.md` |
+| The media library | `.lib-wall`, `.lib-group*`, `.lib-card*`, `.network-card`, `.collection-card`, `.collection-ring`, `.lib-order`, `.discover-rows`, `.discover-row*`, `.discover-shelf`, `.discover-card*` | `media-library` | Starboard's library.css word for word: walls, groups, networks, collections, episode rows and Discover's shelves. The Library and Discover boards use it. Merging its poster cards with `.media-card` is a later change |
 | Folding sections | `.fold-tools`, `.folds`, `.fold*` | `folds` | A plug-in's tables that fold |
 
 Still in Starboard only, and why:
-- Poster cards (`.lib-card`, `.network-card`, `.collection-card`, `.discover-card`): to be merged with `.media-card` in a later change.
+- The four poster cards are in the library as the `media-library` part, as Starboard has them. Merging them with `.media-card` (and removing the unused `.cover-card` and `.book-row`) is a later change.
 - `.access-change` shows what Starboard can access, with the command to change it. `.job-run` is a server job with Run now. `.release-notes` is the release notes slide-out.
 - The storage charts use `--media-*`, which map to `--series-*`. Bring in (`.bring-*`) is the one screen that uses them.
 - Starboard still has its own copy of each block in the table until it loads the part; delete the copy when it does.

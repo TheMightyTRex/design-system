@@ -1368,6 +1368,12 @@ Snaglist and the plug-in collection use it. Build one here with <code>tools/help
 <td>Three steps or fewer; same rules as <code>docs/WIZARD.md</code></td>
 </tr>
 <tr>
+<td>The media library</td>
+<td><code>.lib-wall</code>, <code>.lib-group*</code>, <code>.lib-card*</code>, <code>.network-card</code>, <code>.collection-card</code>, <code>.collection-ring</code>, <code>.lib-order</code>, <code>.discover-rows</code>, <code>.discover-row*</code>, <code>.discover-shelf</code>, <code>.discover-card*</code></td>
+<td><code>media-library</code></td>
+<td>Starboard's library.css word for word: walls, groups, networks, collections, episode rows and Discover's shelves. The Library and Discover boards use it. Merging its poster cards with <code>.media-card</code> is a later change</td>
+</tr>
+<tr>
 <td>Folding sections</td>
 <td><code>.fold-tools</code>, <code>.folds</code>, <code>.fold*</code></td>
 <td><code>folds</code></td>
@@ -1376,7 +1382,7 @@ Snaglist and the plug-in collection use it. Build one here with <code>tools/help
 </tbody>
 </table></div>
 <p>Still in Starboard only, and why:
-- Poster cards (<code>.lib-card</code>, <code>.network-card</code>, <code>.collection-card</code>, <code>.discover-card</code>): to be merged with <code>.media-card</code> in a later change.
+- The four poster cards are in the library as the <code>media-library</code> part, as Starboard has them. Merging them with <code>.media-card</code> (and removing the unused <code>.cover-card</code> and <code>.book-row</code>) is a later change.
 - <code>.access-change</code> shows what Starboard can access, with the command to change it. <code>.job-run</code> is a server job with Run now. <code>.release-notes</code> is the release notes slide-out.
 - The storage charts use <code>--media-*</code>, which map to <code>--series-*</code>. Bring in (<code>.bring-*</code>) is the one screen that uses them.
 - Starboard still has its own copy of each block in the table until it loads the part; delete the copy when it does.
