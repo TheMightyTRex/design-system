@@ -2121,17 +2121,6 @@
      icon (another icon name), alert (role="alert", for an error that blocks; the default is role="status"), id,
      tabindex, heading ("h3": the title is a heading). */
   const NOTICE_ICONS = { success: "circle-check", info: "info", warning: "triangle-alert", danger: "circle-alert", muted: "info" };
-  function svgIcon(name) {
-    const ns = "http://www.w3.org/2000/svg";
-    const svg = document.createElementNS(ns, "svg");
-    svg.setAttribute("class", "i");
-    svg.setAttribute("aria-hidden", "true");
-    svg.setAttribute("focusable", "false");
-    const use = document.createElementNS(ns, "use");
-    use.setAttribute("href", `${window.SharedComponentsSprite || scriptSprite}#i-${name}`);
-    svg.append(use);
-    return svg;
-  }
   function notice(tone, title, text, options = {}) {
     const box = document.createElement("div");
     box.className = "notice";
@@ -2139,22 +2128,15 @@
     box.setAttribute("role", options.alert ? "alert" : "status");
     if (options.id) box.id = options.id;
     if (options.tabindex != null) box.tabIndex = options.tabindex;
-    const body = document.createElement("div");
-    body.className = "notice__body";
-    if (title) {
-      const head = document.createElement(options.heading || "span");
-      head.className = "notice__title";
-      head.textContent = title;
-      body.append(head);
-    }
+    box.innerHTML = `${sprite(options.icon || NOTICE_ICONS[tone] || "info")}<div class="notice__body"></div>`;
+    const body = box.lastChild;
+    if (title) body.append(Object.assign(document.createElement(options.heading || "span"), { className: "notice__title", textContent: title }));
     if (text) {
-      const p = document.createElement("p");
-      p.append(...[].concat(text).map((x) => (x instanceof Node ? x : document.createTextNode(String(x)))));
-      body.append(p);
+      const p = body.appendChild(document.createElement("p"));
+      p.append(...[].concat(text).map((x) => (x instanceof Node ? x : String(x))));
     }
-    if (options.after) body.append(...[].concat(options.after).filter(Boolean));
-    box.append(svgIcon(options.icon || NOTICE_ICONS[tone] || "info"), body);
-    if (options.actions) box.append(...[].concat(options.actions).filter(Boolean));
+    body.append(...[].concat(options.after || []).filter(Boolean));
+    box.append(...[].concat(options.actions || []).filter(Boolean));
     return box;
   }
 
