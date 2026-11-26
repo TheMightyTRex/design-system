@@ -1,9 +1,11 @@
 # Storyarr design system
 
-Version 0.1 (draft for the redesign), 1 November 2026. The target every page moves towards. What exists today
-is in `COMPONENTS.md`; the redesign plan behind it is kept privately. Words are in `CONTENT-DESIGN.md` and changelogs in `CHANGELOGS.md`;
-accessibility in `ACCESSIBILITY.md`, `WCAG.md` and `ALT-TEXT.md`; security checks and how to report them in `SECURITY-CHECKS.md`; the
-component reference is `LIBRARY.md`.
+Version 0.1 (draft for the redesign), 1 November 2026. The target every page moves towards. `COMPONENTS.md` lists what
+exists today, and the redesign plan behind it is kept privately. Other guides cover other things:
+- words are in `CONTENT-DESIGN.md`, and changelogs are in `CHANGELOGS.md`
+- accessibility is in `ACCESSIBILITY.md`, `WCAG.md` and `ALT-TEXT.md`
+- security checks, and how to report them, are in `SECURITY-CHECKS.md`
+- the component reference is `LIBRARY.md`
 
 **For AI agents:** when you build or touch UI, use these tokens, templates and components. If something you
 need is missing, add it here first (and say so to TheMightyTRexUK) instead of inventing a one-off style.
@@ -15,9 +17,11 @@ need is missing, add it here first (and say so to TheMightyTRexUK) instead of in
    every page.
 3. **Status first.** Every book shows its status with the same words, colour and icon wherever it appears.
 4. **Calm by default.** Light theme, plenty of space, covers carry the colour; the interface stays quiet.
-5. **Mica (owner, 18 November 2026, DASH-479).** Calm neutral greys, 6px corners (`--radius`) on buttons, chips,
-   cards, inputs, menus and dialogs, a light layered lift on cards, and one accent colour (Blue unless another is
-   chosen). The dashboard card is the model for every container: a surface, an edge in `--color-divider` (the same
+5. **Mica (owner, 18 November 2026, DASH-479).** Mica has calm neutral greys and 6px corners (`--radius`) on buttons,
+   chips, cards, inputs, menus and dialogs. Cards have a light layered lift. There is one accent colour, which is Blue
+   unless another is chosen.
+
+   The dashboard card is the model for every container. It has a surface, an edge in `--color-divider` (the same
    colour as every rule), Mica's corners, a grey band across the top for its name and status, and its body under it.
    Avatars, spinners and status dots stay round. The design before Mica is the Classic style in Starboard's Styles
    plug-in.
@@ -54,11 +58,12 @@ Map today's `--c-*` values onto these roles; delete the rest. Define the four un
 
 ### Type
 
-**One typeface everywhere: Atkinson Hyperlegible Next** (decided 1 November 2026, built in v0.4.8). It is set once
-as `--font` on `:root` (`"Atkinson Hyperlegible Next Variable", system-ui, sans-serif`), loaded for everyone from
-`@fontsource-variable/atkinson-hyperlegible-next`, and every `font-family` and `font:` rule uses `var(--font)`. No
-serif headings, no monospace (versions, paths and commands use it too). Form controls inherit it. There is no
-Low-vision font switch any more, because it is always on.
+**One typeface everywhere: Atkinson Hyperlegible Next** (decided 1 November 2026, built in v0.4.8). It is set once as
+`--font` on `:root` (`"Atkinson Hyperlegible Next Variable", system-ui, sans-serif`). It loads for everyone from
+`@fontsource-variable/atkinson-hyperlegible-next`, and every `font-family` and `font:` rule uses `var(--font)`. There
+are no serif headings and no monospace, so versions, paths and commands use it too.
+
+Form controls inherit it. There is no Low-vision font switch any more, because the font is always on.
 
 Base 16px (1rem), scaled by the Text size setting. Six steps only:
 
@@ -80,8 +85,12 @@ Line height 1.5 for body, 1.25 for headings. Weights 400 and 600 only. Low-visio
 - Control height `--control-h` 44px. `--control-h-compact` (32px, `.btn--compact`) only inside dense tables, never
   for the only way to act and never beside a 44px control.
 - Radius `--radius` 6px (Mica); `--radius-round` 50% for avatars and dots.
-- Hover on menus: `--color-hover` (the text colour at 7%, 9% in dark) with an edge in `--color-hover-edge` (the border colour; the text colour in High contrast), at least 3:1 against the menu behind it. The current item keeps `--color-control-active` (the accent's soft tint) and the accent bar.
-- Glass: `--glass-alpha` (92% light, 90% dark) and `--glass-filter` on the header, side menu, menus, slide-outs and dialogs only; `--page-tint` (3%) for the wash across the page. Solid in High contrast, with Reduce transparency and without backdrop-filter.
+- Hover on menus: `--color-hover` (the text colour at 7%, 9% in dark) with an edge in `--color-hover-edge`. The edge
+  is the border colour, or the text colour in High contrast, and is at least 3:1 against the menu behind it. The
+  current item keeps `--color-control-active` (the accent's soft tint) and the accent bar.
+- Glass: `--glass-alpha` (92% light, 90% dark) and `--glass-filter` go on the header, side menu, menus, slide-outs and
+  dialogs only. `--page-tint` (3%) is the wash across the page. Glass is solid in High contrast, with Reduce
+  transparency and without backdrop-filter.
 - Theme: Light by default; Dark only when chosen; Match device follows the device through `SharedComponents.applyTheme`.
 - Shadows: `--shadow-card` on cards, panels, settings sections and tables; `--shadow-raised` on menus, slide-outs, dialogs and toasts. None in High contrast.
 - Focus ring width `--focus-w` 3px.
@@ -116,33 +125,39 @@ Line height 1.5 for body, 1.25 for headings. Weights 400 and 600 only. Low-visio
 
 - **Main menu (5):** Home, Library, Discover, Activity, Settings. Icon rail on desktop, ☰ menu drawer on phones
   (each section's sub-menu inside it).
-- **Header (one row, 2 November 2026):** the section's sub-menu on the left; search and Display on the right.
-  Nothing else goes in the header. Page actions (the connection warning, the Lists menu on Discover) sit in a
-  `.page-actions` row at the top right of the page body for now, until the section toolbar takes them. Display is always the last item. Under 1100px
-  the sub-menu drops to a full-width row under search; on phones it lives in the ☰ drawer. Tabs show icons only
-  (names as tooltips) when they do not fit.
+- **Header (one row, 2 November 2026):** the section's sub-menu is on the left, and search and Display are on the
+  right. Nothing else goes in the header. For now, page actions (the connection warning, the Lists menu on Discover)
+  sit in a `.page-actions` row at the top right of the page body, until the section toolbar takes them. Display is
+  always the last item.
+
+  Under 1100px the sub-menu drops to a full-width row under search. On phones it lives in the ☰ drawer. Tabs show
+  icons only (names as tooltips) when they do not fit.
 - **One control height:** search and every header, toolbar, panel and menu control is `--control-h` (44px;
   Storyarr's `controls.css` still calls it `--control-height-large`). Never type 44px by hand; `--control-h-compact`
   (32px) is the compact size for dense tables only. Split or framed controls give the frame the height.
-- **Page actions in the header are menus, not rows of buttons:** related actions share one menu button (Lists:
-  Add list, Refresh all lists, refresh one service). Menus open with focus on the first item, arrow keys move,
-  Escape closes and returns focus.
-- **Menu names, renamed (TheMightyTRexUK, 4 November 2026):** *side menu*, *level 1 menu* and *level 2 menu*, in place of main menu, 1st level and 2nd level.
-- **Menu names (TheMightyTRexUK, 2 November 2026):** *main menu* = the left rail; *1st level* = header row 1 (a
-  section's pages: My library, Following...); *2nd level* = header row 2 (a page's own tabs: In my libraries,
-  Authors...). Main menu, 1st and 2nd level all have icons. In the ☰ menu only the main menu and 1st level
-  have icons. All icons live in `apps/web/src/navigation.ts`.
+- **Page actions in the header are menus, not rows of buttons.** Related actions share one menu button (Lists: Add
+  list, Refresh all lists, refresh one service). Menus open with focus on the first item, arrow keys move, and Escape
+  closes and returns focus.
+- **Menu names, renamed (TheMightyTRexUK, 4 November 2026):** use *side menu*, *level 1 menu* and *level 2 menu* in
+  place of main menu, 1st level and 2nd level.
+- **Menu names (TheMightyTRexUK, 2 November 2026):**
+  - *main menu* is the left rail.
+  - *1st level* is header row 1, a section's pages: My library, Following...
+  - *2nd level* is header row 2, a page's own tabs: In my libraries, Authors...
+
+  The main menu, 1st level and 2nd level all have icons. In the ☰ menu only the main menu and 1st level have icons.
+  All icons live in `apps/web/src/navigation.ts`.
 - **Section navigation:** level 2, in the header row, in every section. Never page tabs underneath as well.
 - **Page heading:** one visible h1 on every page (no hidden h1s), with an optional one-line summary
   ("12 of 13 in your library · 3 excluded").
 - **Section header and toolbar (level 3), design D, chosen 1 November 2026** (design D, from a
   private mock-up):
-  1. **Heading row:** the section's h1 and a one-line summary with counts on the left; the view switch
-     (for example Covers or List, List and detail or List) on the right.
-  2. **Filter row:** search within the section first; then quick-filter chips with counts (buttons that are pressed or not,
-     `aria-pressed`); then dropdown filter chips ("Media", "Library", "Genre"), which turn accent-coloured and
-     show their value when set ("Media: Audiobooks"); then, at the far end, Sort ("Sort: Title", with
-     Reverse) and Customise.
+  1. **Heading row:** the section's h1 and a one-line summary with counts on the left, and the view switch on the
+     right (for example Covers or List, List and detail or List).
+  2. **Filter row:** search within the section comes first. Then come quick-filter chips with counts, which are
+     buttons that are pressed or not (`aria-pressed`). Then come dropdown filter chips ("Media", "Library", "Genre"),
+     which turn accent-coloured and show their value when set ("Media: Audiobooks"). At the far end are Sort ("Sort:
+     Title", with Reverse) and Customise.
   3. **Applied filters row** (only when something is filtered): "Filtered by", one removable chip per active
      filter, Clear all, and "Showing N" at the end.
   4. Results.
@@ -202,35 +217,37 @@ One rule for both apps, so a state is always in the same place relative to the t
 
 - **One name for one action.** Re-reading status is **Check again**, everywhere (page heads, slide-outs, Updates).
   **Run now** only starts a server job. Name a slower job by what it does (Storage: **Sort by type again**).
-- **One way to save settings.** Choices (option cards, selects, switches, radios) save as soon as they change, with
-  a saved note beside the control (section 9). Text fields save with `.inline-save` (one field) or `.save-bar` (several), and their Save button is
-  secondary. At most one primary button in view. A slide-out or dialog that edits one thing (an app, a
-  connection) keeps one Save as the primary button in its foot.
-- **Buttons start on the left**, the main action first, in every dialog, slide-out and wizard foot; a danger button
-  in a slide-out and Skip this step in a wizard sit apart on the right (LIBRARY.md, Button).
+- **One way to save settings.** Choices (option cards, selects, switches, radios) save as soon as they change, with a
+  saved note beside the control (section 9). Text fields save with `.inline-save` (one field) or `.save-bar`
+  (several), and their Save button is secondary. Show at most one primary button at a time. A slide-out or dialog that
+  edits one thing (an app, a connection) keeps one Save as the primary button in its foot.
+- **Buttons start on the left**, with the main action first, in every dialog, slide-out and wizard foot. A danger
+  button in a slide-out and Skip this step in a wizard sit apart on the right (LIBRARY.md, Button).
 - **Danger is shown before and after.** A button that opens a danger dialog is `.btn--danger`; delete and remove
   use the `trash-2` icon; the dialog's other button is **Cancel**.
 - **One-of-several filters** are `.segmented`; filter chips are for filters that can be active together.
 - **Headings at one level are one size.** Panel and section titles take the library's size for their level; do
   not resize them per page.
-- **Chart text** follows Text size: SVG text uses `--text-xs` or `--text-sm` in a viewBox drawn at the real width,
-  or sits in HTML beside the chart.
-- **Every slide-out has the same header and body** (2 November 2026, TheMightyTRexUK). Every slide-out, including the phone menu, has its
-  header in the page background (`--color-slide-header`, which is `--color-bg` in every theme) and its body and
-  foot on the raised surface (white in Light, the dark surface in Dark). Dialogs keep the plain panel header.
+- **Chart text** follows Text size. SVG text uses `--text-xs` or `--text-sm` in a viewBox drawn at the real width, or
+  sits in HTML beside the chart.
+- **Every slide-out has the same header and body** (2 November 2026, TheMightyTRexUK). Every slide-out, including the
+  phone menu, has its header in the page background (`--color-slide-header`, which is `--color-bg` in every theme).
+  Its body and foot are on the raised surface, which is white in Light and the dark surface in Dark. Dialogs keep the
+  plain panel header.
+
   **Display and accessibility** and **Release notes** are slide-outs, not dialogs.
 - **Deliberate exception:** Starboard's Health first design fills a card that is not responding with the danger
-  background, as well as the edge and chip, so trouble stands out from across the room. Other designs and
-  Storyarr use the plain card.
+  background, as well as the edge and chip. Trouble then stands out from across the room. Other designs and Storyarr
+  use the plain card.
 
 ## 6. Filters and the address
 
 Every filter, sort, view switch and on-and-off button that changes the page's address must start from
-`currentParams()` (`apps/web/src/currentParams.ts`), the address as it is right now. Never build the
-next address from `useSearchParams()`'s copy or from React Router's `setSearchParams(previous => …)`:
-both are the copy from the last render, so a quick second change drops the first (found 1 November 2026).
-Links rendered on the page can use the render-time copy, because they redraw with every change.
-`tests/ui/quick-filter-changes.spec.ts` makes two changes at once and checks both stick.
+`currentParams()` (`apps/web/src/currentParams.ts`), the address as it is right now. Never build the next address from
+`useSearchParams()`'s copy or from React Router's `setSearchParams(previous => …)`. Both are the copy from the last
+render, so a quick second change drops the first (found 1 November 2026). Links rendered on the page can use the
+render-time copy, because they redraw with every change. `tests/ui/quick-filter-changes.spec.ts` makes two changes at
+once and checks both stick.
 
 ## 7. Layout rules
 
@@ -239,27 +256,31 @@ Links rendered on the page can use the render-time copy, because they redraw wit
 - Covers wall: auto-fill grid with `--cover-m` minimum; titles under covers, two lines maximum.
 - Tables only for real tabular data (Activity history, logs); everything else uses Rows.
 - Numbers in rows right-aligned; dates as in the content guide.
-- **A state chip sits on its title's line** (12 November 2026): the title on the left, the chip at the right,
-  centred on the line; never on a line of its own under the title. Section headings, card headings, rows (in
-  `row__side`), slide-out titles and sub-headings all follow it. In code: `.title-chip` around the title and the chip;
-  on a narrow screen the chip wraps under the title, still at the right.
+- **A state chip sits on its title's line** (12 November 2026). The title is on the left and the chip is at the right,
+  centred on the line. Never put the chip on a line of its own under the title. Section headings, card headings, rows
+  (in `row__side`), slide-out titles and sub-headings all follow it.
+
+  In code, put `.title-chip` around the title and the chip. On a narrow screen the chip wraps under the title, still
+  at the right.
 
 ## 8. Terminal
 
-Both apps also run in a terminal: the Run first script, the installer and the terminal set-up. A terminal wizard
-is the same wizard as the browser one, with the same steps, words, answers and help, drawn as text
-(`WIZARD.md`, One wizard, two ways to show it). The full rules are in `TERMINAL.md`; the code is in `terminal/`.
+Both apps also run in a terminal, in the Run first script, the installer and the terminal set-up. A terminal wizard is
+the same wizard as the browser one, with the same steps, words, answers and help, drawn as text (`WIZARD.md`, One
+wizard, two ways to show it). The full rules are in `TERMINAL.md`, and the code is in `terminal/`.
 
-- **Two ways to draw it.** Boxed: a heading box ("App | step", "step 3 of 6"), a progress bar that ends where the
-  box does, the step, and a menu fixed on the bottom two lines (b Back, ? Help, f Feedback, q Stop, and on the
-  right what Enter does). Plain, for screen readers, `--plain`, a window under 60 by 20, `TERM=dumb` or no
-  terminal: numbered lines, never redrawn, no colour, and the first line says which keys work.
-- **Questions:** numbered answers, the recommended one first, marked with a dot and "(recommended)", or "(your
-  last answer)" when someone comes back; the default in brackets, and Enter takes it.
+- **Two ways to draw it.**
+  - Boxed has a heading box ("App | step", "step 3 of 6"), a progress bar that ends where the box does, the step, and
+    a menu fixed on the bottom two lines. The menu has b Back, ? Help, f Feedback, q Stop, and on the right what Enter
+    does.
+  - Plain is for screen readers, `--plain`, a window under 60 by 20, `TERM=dumb` or no terminal. It has numbered
+    lines, never redrawn, with no colour, and the first line says which keys work.
+- **Questions:** numbered answers, with the recommended one first, marked with a dot and "(recommended)". When someone
+  comes back, it says "(your last answer)" instead. The default is in brackets, and Enter takes it.
 - **Help** is a box over the step, titled "Help: " and the question; the step comes back as it was.
-- **A job** has one bar, drawn in place: the job, which job of how many, what it is doing, the timer, then how far
-  it has got ("5 of 12 installed"). Only Ctrl+C works while it runs, and keys pressed meanwhile are hidden and
-  dropped. A failure keeps the bar, marked, with the problem and the choices after it.
+- **A job** has one bar, drawn in place. It shows the job, which job of how many, what it is doing, the timer, then
+  how far it has got ("5 of 12 installed"). Only Ctrl+C works while it runs, and the wizard hides and drops other keys
+  pressed meanwhile. A failure keeps the bar, marked, with the problem and the choices after it.
 - **Feedback** is Snaglist's, drawn in the terminal: f from any question, or Report this problem after a failure.
   The report goes to the phone as a QR code that fits the window (`TERMINAL.md`, section 7), or as a link or a
   file. No answer is ever in it.
@@ -290,8 +311,8 @@ Rules:
 - **A unit is part of the control** (`20 | MB/s`), never only in the label or the hint.
 - **A folder is never a bare text box.** Starboard knows the path each app uses for its folders; Browse shows the
   computer's folders and gives the app the path it uses.
-- **More settings** are hidden until the page's small More settings switch is active (at the end of the
-  heading's line); a location's path is always entered under its own More options, in Enter a path.
+- **More settings** are hidden until the page's small More settings switch is active, at the end of the heading's
+  line. A location's path is always entered under its own More options, in Enter a path.
 - **Slide-outs use the same patterns** inside; their one Save is the primary button in the foot.
 
 
@@ -324,8 +345,8 @@ Rules:
 
 - **One kind per list.** A list is all rows, all cards or one table, never a mix. A list that can be rows or covers
   says so with a segmented control in its toolbar.
-- **The state is next to its name.** In a row it is the first thing in `.row__side`; on a card it is in
-  `.card__meta`; on a heading it is on the heading's line (section 7). Never on a line of its own.
+- **The state is next to its name.** In a row it is the first thing in `.row__side`. On a card it is in `.card__meta`.
+  On a heading it is on the heading's line (section 7). Never put it on a line of its own.
 - **Actions sit after the state.** A row has at most two buttons; more go in its slide-out or a menu button. A card
   has at most one button besides opening it.
 - **A filter shows its count**, such as `Films 12`, and `All` comes first. The toolbar's count says how many are
@@ -344,8 +365,8 @@ without pressing Show more each time. It is built on the Show more button, never
 
 **Use it for** long walls and lists people browse in order: a library wall, a history, a wanted list.
 
-**Do not use it for** results people compare or come back to by position, a table people sort and scan, or a list
-with things after it that people need often. Use Show more alone, or pages.
+**Do not use it for** results people compare or come back to by position, a table people sort and scan, or a list with
+things after it that people need often. Use Show more alone, or pages, for those.
 
 **How it behaves** (`SharedComponents.loadMore`, classes in `LIBRARY.md`):
 
@@ -357,10 +378,10 @@ with things after it that people need often. Use Show more alone, or pages.
   "40 more films shown"). A whole list is never a live region.
 - Focus never moves on its own. A keyboard user who Tabs through the list reaches the new items next.
 - Pressing the button loads the next page and moves focus to the first new item, so reading carries on there.
-- **The footer stays in reach.** It loads only when the end comes into view, and after three pages in a row it
-  pauses with "Paused here so you can reach the end of the page". The button starts a new run.
-- **The button alone** when Reduce motion is active, when the person's setting asks for the button (an app offers one,
-  saved per account), and in a browser without IntersectionObserver.
+- **The footer stays in reach.** It loads only when the end comes into view. After three pages in a row it pauses with
+  "Paused here so you can reach the end of the page". The button starts a new run.
+- **The button alone** is used when Reduce motion is active and when the person's setting asks for the button (an app
+  offers one, saved per account). It is also used in a browser without IntersectionObserver.
 - **The A to Z list keeps working.** Jumping to a letter not yet shown loads up to it, moves focus to its heading,
   and starts the count of pages again (`reset()`). Back to top is never covered.
 - A list of thousands may keep only what is near the screen (Show earlier titles at the top), so memory stays low.

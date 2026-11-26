@@ -1,9 +1,9 @@
 # Accessibility guide
 
-Version 1.2, 4 November 2026. For Storyarr and Starboard. The floor is **WCAG 2.2 level AA** on every page, in
-every theme (Light, Dark, High contrast) and every layout (Storyarr: Classic and Shelf). Content rules are in
-`CONTENT-DESIGN.md` section 8. How each WCAG point is met, and what each app must still do, is in `WCAG.md`;
-how to write text descriptions for images is in `ALT-TEXT.md`.
+Version 1.2, 4 November 2026. For Storyarr and Starboard. The floor is **WCAG 2.2 level AA** on every page, in every
+theme (Light, Dark, High contrast) and every layout (Storyarr: Classic and Shelf). Content rules are in
+`CONTENT-DESIGN.md` section 8. `WCAG.md` says how each WCAG point is met and what each app must still do.
+`ALT-TEXT.md` says how to write text descriptions for images.
 
 **For AI agents:** every item marked **Check** must pass before a UI change is finished. Section 6 says how
 to test each one.
@@ -65,18 +65,18 @@ separate low-vision font switch.
 **Motion**
 - **Check:** with Reduce motion active (or `prefers-reduced-motion` with Match device), slide-ins, fades and the
   loading bar animation stop or become instant.
-- **Check:** with Reduce motion inactive, everything moves even when the device asks for reduced motion: every
-  `prefers-reduced-motion` query leaves out `:root.pref-motion-off`, and scripts ask `motionStill()`, never the
-  media query alone.
-- **Check:** the side menu and header at every text size, with and without wider spacing, and in a window 600
-  pixels tall: no word breaks in the middle, nothing runs past an edge, overlaps or is cut off (the app's layout
-  check, as axe's reflow check does not find a menu that cuts off its own items).
+- **Check:** with Reduce motion inactive, everything moves even when the device asks for reduced motion. Every
+  `prefers-reduced-motion` query leaves out `:root.pref-motion-off`, and scripts ask `motionStill()`, never the media
+  query alone.
+- **Check:** the side menu and header at every text size, with and without wider spacing, and in a window 600 pixels
+  tall. No word breaks in the middle, and nothing runs past an edge, overlaps or is cut off. Use the app's layout
+  check for this, as axe's reflow check does not find a menu that cuts off its own items.
 - **Check:** nothing flashes more than three times a second; anything moving for over five seconds can be
   paused.
 
 **Screen readers**
-- **Check:** icon-only buttons have an `aria-label` that starts with any words they show; covers have the
-  text description "Cover of <title>", or `alt=""` inside a link that already names the book (`ALT-TEXT.md`).
+- **Check:** icon-only buttons have an `aria-label` that starts with any words they show. Covers have the text
+  description "Cover of <title>", or `alt=""` inside a link that already names the book (`ALT-TEXT.md`).
 - **Check:** text in another language is marked with `lang`, such as a French book title (WCAG 3.1.2).
 - **Check:** any video has captions and any recorded speech a transcript (WCAG 1.2).
 - **Check:** status changes without a page load are announced (`aria-live="polite"`), such as downloads
@@ -120,7 +120,7 @@ names. High contrast raises borders, focus rings and muted text, and removes sha
 
 - Horizontal scroll shelves on Discover → For you (task UX-30).
 - Theme default is Light (owner, 18 November 2026); Match device is a choice.
-- Starboard has an automated check (12 November 2026): `tools/a11y.sh` runs axe-core (WCAG 2.2 AA) on every page in
+- Starboard has an automated check (12 November 2026). `tools/a11y.sh` runs axe-core (WCAG 2.2 AA) on every page in
   Light, Dark and High contrast, with the structure, keyboard, slide-out focus, reflow, forced colours and reduced
   motion checks of section 2. Storyarr has none yet (task A11Y-01).
 
@@ -146,7 +146,7 @@ testing"). Whenever an accessibility test is asked for, it is all of these, neve
 
 **Rules found by the reading-order check** (12 November 2026):
 - Nothing opens by itself on a page load; a slide-out opens only when the person asks for it.
-- A form in a slide-out starts in its first field; a confirm box starts on its first field, or on Cancel when the
+- A form in a slide-out starts in its first field. A confirm box starts on its first field, or on Cancel when the
   choice is a danger.
 - A notice goes after the page's heading, never before the h1.
 - Show more moves focus to the first new item and says how many were added.

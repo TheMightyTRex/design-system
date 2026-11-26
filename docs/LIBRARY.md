@@ -4,10 +4,12 @@ Version 1, 2 November 2026. One component library for both apps, so they share o
 It follows `DESIGN-SYSTEM.md` and the guides in this folder (`CONTENT-DESIGN.md`, `HELP-WRITING.md` and `ACCESSIBILITY.md`).
 File names in the tables in this guide are relative to the root of the repository.
 
-**Open `gallery.html` in a browser**: every component in it works as it does in the apps. The gallery uses the same header and menus
-as the apps: the main menu and search in row 1, the component groups in row 2, and Display opens the Display
-and accessibility slide-out (theme, text size, reduced motion, high contrast, underlined links, wider
-spacing). Slide-outs, menus, the phone menu and the dialog all work in the gallery.
+**Open `gallery.html` in a browser**: every component in it works as it does in the apps. The gallery uses the same
+header and menus as the apps. The main menu and search are in row 1, and the component groups are in row 2. Display
+opens the Display and accessibility slide-out, with theme, text size, reduced motion, high contrast, underlined links
+and wider spacing.
+
+Slide-outs, menus, the phone menu and the dialog all work in the gallery.
 
 ## Files
 
@@ -30,9 +32,11 @@ spacing). Slide-outs, menus, the phone menu and the dialog all work in the galle
 
 1. **One design, two apps.** Same tokens, same classes, same behaviour. An app may add its own components
    (charts on Starboard, the bookshelf on Storyarr) but builds them from the tokens.
-2. **Accessible is the baseline.** WCAG 2.2 AA in every theme; 44px controls and targets; a visible 3px focus
-   ring; status always in words plus a shape or icon, never colour alone; keyboard first; everything works at
-   175% text and with wider spacing; nothing moves when Reduce motion is active.
+2. **Accessible is the baseline.** WCAG 2.2 AA in every theme. Controls and targets are 44px, and the focus ring is a
+   visible 3px. Status is always in words plus a shape or icon, never colour alone.
+
+   Keyboard comes first. Everything works at 175% text and with wider spacing, and nothing moves when Reduce motion is
+   active.
 3. **Mica, calm and dense enough.** 6px corners, one typeface, card edges and rules in one colour, one accent
    colour, one primary button per view. The dashboard card is the model for panels, settings sections, tables,
    slide-outs and dialogs: a grey band on top, the body under it.
@@ -50,7 +54,7 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
   Starboard it starts with the server's own name, up to 10 characters, as plain text with no icon.
 - **Level 2 menu:** header row 2, a page's own tabs (Starboard: My library, Series, Authors, Stations), only
   when the page has them.
-- On phones the header shows only the logo on the left, with no names (TheMightyTRexUK, 4 November 2026); the app's
+- On phones the header shows only the logo on the left, with no names (TheMightyTRexUK, 4 November 2026). The app's
   name and the server name stay for screen readers.
 - All three have icons. In the phone menu, only the side menu and the level 1 menu have icons; the level 2
   menu stays under the header on phones.
@@ -196,8 +200,8 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 
 ## Parts (22 November 2026)
 
-Some components are large and few pages use them. They are marked as parts in the two source files, so an app that
-counts every byte can load them only where they are used (Starboard, lightweight first, DASH-507). The source files
+Some components are large and few pages use them. They are marked as parts in the two source files. An app that counts
+every byte can then load them only where they are used (Starboard, lightweight first, DASH-507). The source files
 still hold every component: the gallery, the boards and the help centre load them whole, and so can any app.
 
 | Part | Compressed size | Needs |
@@ -219,21 +223,23 @@ The core is everything else, 59 KB compressed where the whole is 77 KB. The page
 the core, as any page can need them.
 
 **For an app.** Make a `js/parts` folder in the app's web folder, then run `tools/sync.py`. It writes the core as
-`css/components.css` and `js/components.js`, and each part as `css/parts/<name>.css` and `js/parts/<name>.js`.
-Without that folder the app gets the whole files, as before. On a page that uses a part, load its styles after
-`components.css` and its script after `components.js` (and after the parts it needs), before the page's own
-scripts. `SharedComponents.setup()` then sets the part up with everything else, and its functions are on
-`SharedComponents` as before (`logView`, `showErrors`, `gauge` and so on).
+`css/components.css` and `js/components.js`, and each part as `css/parts/<name>.css` and `js/parts/<name>.js`. Without
+that folder the app gets the whole files, as before.
+
+On a page that uses a part, load its styles after `components.css`. Load its script after `components.js` and the
+parts it needs, and before the page's own scripts. `SharedComponents.setup()` then sets the part up with everything
+else. Its functions are on `SharedComponents` as before (`logView`, `showErrors`, `gauge` and so on).
 
 **Marking a part.** In `components.css`, inside `@layer shared`: `/* part: name */` before the part's rules and
 `/* /part */` after them, with the part's own Windows Contrast and less motion rules inside. In `components.js`:
 `/* part: name; exports: a, b; setup: setupName; needs: other */` before and `/* /part */` after. `exports` are the
-functions put on `SharedComponents`; `setup` is run by `SharedComponents.setup()` (add ` first` when it must run
-before the core's own set-up); `needs` names parts whose exports this part uses. A part may use only its own
-names, the helpers in `SharedComponents.kit` and what it needs; a line outside a part that ends `// part` is left
-out of the core. `python3 tools/parts.py` checks all of this and lists the sizes: run it after any change to a part.
-A component belongs in the core when any page may need it without warning, and in a part when it is large and a
-page knows it will use it.
+functions put on `SharedComponents`. `SharedComponents.setup()` runs `setup`, and you add ` first` when it must run
+before the core's own set-up. `needs` names parts whose exports this part uses. A part may use only its own names, the
+helpers in `SharedComponents.kit` and what it needs.
+
+A line outside a part that ends `// part` is left out of the core. `python3 tools/parts.py` checks all of this and
+lists the sizes. Run it after any change to a part. A component belongs in the core when any page may need it without
+warning. It belongs in a part when it is large and a page knows it will use it.
 
 ## Slide-out, dialog or page
 
@@ -244,69 +250,158 @@ page knows it will use it.
 | Page | Something people return to, link to or spend time in | Book, author, series and narrator pages; Disk health; each Settings section; Upgrade wizard |
 | In place | A small change to a value already in view | Switches and selects in settings rows; filter chips; cover size |
 
-**Slide-out widths** (TheMightyTRexUK, 7 November 2026): release notes and help take about half the screen (`.side-panel--wide`, at least 640px); every other slide-out takes about a third (at least 420px, `--panel-w`). On phones both take the whole width.
+**Slide-out widths** (TheMightyTRexUK, 7 November 2026): release notes and help take about half the screen
+(`.side-panel--wide`, at least 640px). Every other slide-out takes about a third (at least 420px, `--panel-w`). On
+phones both take the whole width.
 
-Behaviour that every slide-out, dialog and phone menu must have: focus moves in (to Close), Tab stays inside,
-Escape and Close close it, a press outside closes a slide-out or menu, focus returns to the opener, and the page
-behind does not scroll. A slide-out's open item can be in the address, so Back closes it.
+Every slide-out, dialog and phone menu must behave in these ways:
+- Focus moves in (to Close), and Tab stays inside.
+- Escape and Close close it.
+- A press outside closes a slide-out or menu.
+- Focus returns to the opener, and the page behind does not scroll.
+
+A slide-out's open item can be in the address, so Back closes it.
 
 ## Adopting the library
 
-**Starboard** already uses these names. To adopt: replace `css/tokens.css` with `tokens.css` (adds panel
-header, status edge, compact control and High contrast chart colours; High contrast dark page is now black),
-then move each page's classes to the library's where they differ:
-`.btn-primary` → `.btn--primary`, `.btn-quiet` → `.btn--quiet`, `.btn-danger` → `.btn--danger`,
-`.filter` → `.filter-chip`, `.filters` → `.filter-chips`, `.seg` → `.segmented`, `.design-option` →
-`.option-card`, `.dialog__head` and `.side-panel-header` → `.panel-header`, `.app` → `.card`,
-`.app__icon` → `.app-icon`, `.status-pill` → `.chip`, `.meter-row` → `.meter`, `.switch-row` → `.switch`.
+**Starboard** already uses these names. To adopt them, replace `css/tokens.css` with `tokens.css`. It adds panel
+header, status edge, compact control and High contrast chart colours, and the High contrast dark page is now black.
+Then move each page's classes to the library's where they differ:
+- `.btn-primary` → `.btn--primary`, `.btn-quiet` → `.btn--quiet`, `.btn-danger` → `.btn--danger`
+- `.filter` → `.filter-chip`, `.filters` → `.filter-chips`, `.seg` → `.segmented`
+- `.design-option` → `.option-card`, `.dialog__head` and `.side-panel-header` → `.panel-header`
+- `.app` → `.card`, `.app__icon` → `.app-icon`, `.status-pill` → `.chip`
+- `.meter-row` → `.meter`, `.switch-row` → `.switch`
+
 A private audit lists every duplicate to merge.
 
 **Storyarr** has 1,285 generated `--c-*` colour tokens (492 uses) and a few role names in `styles.css`. To
 adopt, one release at a time:
-1. Add `tokens.css` and alias the old role names to the new ones: `--surface` → `--color-surface`,
-   `--line` → `--color-divider` (or `--color-border` for control borders), `--muted` → `--color-text-muted`,
-   `--accent` → `--color-accent`, `--control-active` → `--color-control-active`,
-   `--control-height-large` → `--control-h`, `--control-height` → `--control-h-compact`,
-   `--panel-header-bg` → `--color-panel-header`, `--panel-header-line` → `--color-divider`.
+1. Add `tokens.css` and alias the old role names to the new ones:
+   - `--surface` → `--color-surface`
+   - `--line` → `--color-divider` (or `--color-border` for control borders)
+   - `--muted` → `--color-text-muted`
+   - `--accent` → `--color-accent`
+   - `--control-active` → `--color-control-active`
+   - `--control-height-large` → `--control-h`, and `--control-height` → `--control-h-compact`
+   - `--panel-header-bg` → `--color-panel-header`, and `--panel-header-line` → `--color-divider`
 2. Add `components.css` in a `shared` layer under the app's own layers, so nothing changes until a page
    moves over.
-3. Rebuild each page on the library's classes (a private audit lists the old classes and the
-   duplicates), then delete the page's old CSS and the `--c-*` tokens it used.
+3. Rebuild each page on the library's classes, then delete the page's old CSS and the `--c-*` tokens it used. A
+   private audit lists the old classes and the duplicates.
 4. React components wrap the classes: `Button`, `IconButton`, `MenuButton`, `Field`, `Switch`,
    `Segmented`, `Chip`, `Notice`, `SidePanel`, `Dialog`, `SectionToolbar`, `SettingsRow`, `Card`, `MediaCard`,
    with the behaviour in `components.js`.
 
 **Adopted (2 November 2026):**
-- **Starboard**, branch `shared-library` (commits 175a0c3 and 2129d68, not pushed). It loads `components.js`
-  with `data-manual` (no automatic set-up, because its page scripts wire their own behaviour) and builds
-  slide-outs, confirm dialogs and More actions menus with helpers in `web/js/common.js`: `sidePanel()`,
-  `confirmDialog()`, `menuButton()` and `renderKeyed()` (rows updated in place so focus stays). Icons come
-  from `web/icons/sprite.svg`.
-- **Storyarr**, branch `covers-and-shelf-only` (commit 1beeb45, not pushed). Copies in
-  `apps/web/src/shared/`: `tokens.css` (without the font, which Storyarr loads itself), `components.css`, and
-  `compat.css`, which keeps the 18 class names both apps use (`.notice`, `.count`, `.empty`, `.panel` and
-  others) unchanged until each page moves over. Delete a rule there when its page moves.
+- **Starboard**, branch `shared-library` (commits 175a0c3 and 2129d68, not pushed). It loads `components.js` with
+  `data-manual`, so there is no automatic set-up, because its page scripts wire their own behaviour. It builds
+  slide-outs, confirm dialogs and More actions menus with helpers in `web/js/common.js`. They are `sidePanel()`,
+  `confirmDialog()`, `menuButton()` and `renderKeyed()`. `renderKeyed()` updates rows in place so focus stays.
+
+  Icons come from `web/icons/sprite.svg`.
+- **Storyarr**, branch `covers-and-shelf-only` (commit 1beeb45, not pushed). Copies in `apps/web/src/shared/` are
+  `tokens.css` (without the font, which Storyarr loads itself), `components.css` and `compat.css`. `compat.css` keeps
+  the 18 class names both apps use (`.notice`, `.count`, `.empty`, `.panel` and others) unchanged until each page
+  moves over. Delete a rule there when its page moves.
 
 **components.js changes:** `openLayer(idOrElement, opener, onClose)` now accepts an element, returns its
 close function, cleans up its listeners and can be reopened safely. Loading the file with `data-manual`
 (or setting `window.SharedComponentsManual = true` first) skips the automatic `setup()`.
 
-**Keeping them in step (TheMightyTRexUK, 2 November 2026: the library is shared by both apps and kept up to date):**
-change the component here first, never in an app, and follow the steps in
-[Make a change](https://themightytrex.github.io/design-system/resources/make-a-change.html). Add the change to the Decisions list in this file, commit it here and
-push, so every checkout picks it up.
+**Keeping them in step** (TheMightyTRexUK, 2 November 2026: the library is shared by both apps and kept up to date).
+Change the component here first, never in an app. Follow the steps in
+[Make a change](https://themightytrex.github.io/design-system/resources/make-a-change.html). Add the change to the
+Decisions list in this file, commit it here and push, so every checkout picks it up.
 
-**Decisions:** Remove drop shadows (TheMightyTRexUK, 23 November 2026, DASH-536: "add a setting to remove the all drop shadows with a note about it helping with performance"): `data-shadows="off"` on `<html>` (or on any element, for its contents) sets `--shadow-card` and `--shadow-raised` to none in one rule at the end of `tokens.css`, so no component can forget it; the cover shading, cards, menus, slide-outs, dialogs, popovers and toasts all use those two tokens. Borders and the inset accent bars and hover edges stay, so nothing loses its edge. The Display and accessibility slide-out has the switch (`data-display="shadows"`, `SharedComponents.setupDisplay` sets and clears the attribute) with the note "Drop shadows cost a little processor on every scroll; turning them off helps small and older computers"; an app applies the attribute before first paint, as it does the theme. The default follows the install (a small, Lite install starts with shadows off, any other with them on) and is the app's to set; the library only provides the switch. The one animated ring on the live indicator (`@keyframes` pulse) is an attention signal, not a shadow, and stays. The help centre builder has the same switch in its own Display slide-out and applies it in its head script, from its own choice or the app's `starboard.shadows`. The gallery shows both states; covers take the card shading (TheMightyTRexUK, 23 November 2026, DASH-535: "Apply that to all covers"): the shared `.cover` rule has the card's 1px `--color-divider` border, the 6px corner and `--shadow-card`, and a cover in a `.media-card` or `.book-row` raises its border to `--color-border` on hover, so every kind of cover inherits it (library walls and rows, Discover, search results, Wanted, item pages, collections, books, plug-ins, the help centre). The round cover keeps its circle, the series fan gets the 6px corner, and the action column sits inside the cover's border and corner. Covers of 24px, 48px and a result's 64px keep the border and corner but no shadow, as the tokens have no lighter size. High contrast keeps the border (the shadow token is none there); dark themes keep the divider visible. A grid that clips its overflow (a shelf that scrolls sideways) needs padding for the shadow, not a smaller shadow; a Discord link in the footer (TheMightyTRexUK, 22 November 2026, DASH-526: "I want a discord link on starboard footer as well as the help center"): an app with a Discord support server links to it after Help, as "Discord support server" with the external-link icon and "(opens in a new tab)" in hidden words; the help centre builder adds it to every page footer and to the front page when `help-centre.json` has `discord`; which item to use (Starboard DASH-309, 12 November 2026): `DESIGN-SYSTEM.md` section 10 picks rows, cards, chips, filters, toolbars, notices, toasts, dialogs or tables by what the thing is; accent teal (UX-02 option B); status chip style B, outline with icon (UX-04); cover actions (UX-42: `.cover-card` with `.cover-actions` on the cover by default, beside it as a per-account setting); shelves without scroll bars (UX-30 option A: `.shelf-scroller`, arrows over an edge fade); covers always line up (`.media-card` titles take two lines); small covers (UX-44: `.book-row` with `.cover-actions--row` in rows, `.cover-card__more` with the actions in words on small tiles); square radio art in the book shape (FEAT-R decision 2, fill 4: `.show-art`, label in the image's colour) and `.logo-tile`; every slide-out has the same header and body (TheMightyTRexUK, 2 November 2026: `--color-slide-header`, the page background, on slide-out and phone menu headers over a raised-surface body; dialogs keep the plain header; Display and accessibility and Release notes are slide-outs). App logos without a tile (TheMightyTRexUK, 2 November 2026: `.app-icon.has-image` is only the image, with no border or background; initials keep the tile). The logo editor on every way to get a logo (TheMightyTRexUK, 2 November 2026: From a cover, Find online and Upload your own all use the box, Shape from lightness or transparency, four cleaning levels, and a small eraser and paintbrush on `.checker[data-tool]`; found files show as plain pictures in `.logo-candidate__art > img`). Nicer scroll bars (TheMightyTRexUK, 2 November 2026): thin and square in every scrolling area, `--color-scrollbar` (the border colour, the text colour in High contrast) on a clear track; they stay visible, and only shelves hide theirs behind arrows. UX notes for testing (TheMightyTRexUK, 2 November 2026): `ux-notes.js` (copied to both apps by sync.py) puts Note an issue in the corner of every page while an app's testing setting is active; select the part (with the pointer, or Tab and Enter), say what is wrong, the kind and how bad; Notes lists them with Copy as text, Download and Mark as fixed. Notes keep the page, the part, a selector and the display settings. An app passes a store to keep them on its server; otherwise they stay in the browser. Styles: `.ux-dock`, `.ux-banner` (at the bottom, clear of the header), `.ux-outline`, `.ux-notes`. Security checks the same in both apps (TheMightyTRexUK, 3 November 2026): `docs/SECURITY-CHECKS.md` sets the checks (tests, live journeys, Trivy, ZAP on a private network, Gitleaks, Bandit and Semgrep, ShellCheck, Hadolint, CodeQL, a separate review, install tests), how to sort findings, a security page in each app with a "Security checks for each release" table, and a Security section in every release's notes (`CONTENT-DESIGN.md`, release notes). Starboard is the worked example; Storyarr has to catch up. Focus not obscured (WCAG 2.2, 4 November 2026): the page keeps the sticky header (and row 2) and an open save bar clear when it scrolls, with `scroll-padding` on `:root`; `WCAG.md` and `ALT-TEXT.md` added after the GOV.UK Service Manual and BBC GEL. Search is always one button away (TheMightyTRexUK, 4 November 2026: "update the design system to ensure there is a search button"): `.rail__search` is first in the rail, under the logo, and moves focus to the header's search box; on phones, where the box is hidden, `.site-header__search-btn` in the header opens the same box as a row under the header, and Escape or a press outside closes it and returns focus to the button that opened it. Both use `data-search-open` and `aria-controls` (`setupSearch()` in `components.js`). No single-key shortcut (WCAG 2.1.4). The `radio` icon is added. Wizard rules (TheMightyTRexUK, 4 November 2026): `docs/WIZARD.md` sets one set of rules for every wizard, from the installer mock-up: the first question asks which job, each with its own wizard; one question per step; steps that do not apply left out; a step in parts has `.steps--sub`, as wide as the progress bar with a line between parts, numbered 1, 2, 3, each part counting in the progress bar's total, and on phones only the numbers, with ticks for done parts; "(recommended)" with a reason, never "easiest"; "What is…" help at the end of the part it explains, in a dialog that scrolls inside and closes on a press outside; addresses as links with copy; a summary of what was set and skipped. What happens next and the decision tree are review aids for testing only, never in the finished product. Copying falls back to a hidden text box on plain http (`copyText()` in `components.js`), and a dialog returns focus to the button that opened it. Step numbers grow with Text size. Changelogs (TheMightyTRexUK, 5 November 2026): `docs/CHANGELOGS.md` sets one way to keep `CHANGELOG.md` in every project, after Keep a Changelog 1.1.0: for people, never a commit log; an Unreleased section at the top; every version newest first, linked, as `## [x.y.z] (day month year)`, with dates as in `CONTENT-DESIGN.md` rather than year, month, day; changes under Added, Changed, Deprecated, Removed, Fixed and Security only; withdrawn releases marked `[Withdrawn]`. In-app release notes use the same six types. Terminal wizards and feedback (TheMightyTRexUK, 5 November 2026): `docs/TERMINAL.md` sets how a wizard appears in a terminal (boxed with a heading box reading "App | step", a progress bar and a menu fixed on the bottom line with b Back, ? Help, f Feedback and q Stop; or plain numbered lines for screen readers, never redrawn), with help as a box over the step and feedback sent as a QR code sized to the window; `docs/WIZARD.md` section 12 puts Snaglist on every wizard step, naming the step, with Show as a QR code for a computer that is not online yet.
+**Decisions:**
+
+- **Remove drop shadows** (TheMightyTRexUK, 23 November 2026, DASH-536: "add a setting to remove the all drop shadows with a note about it helping with performance").
+  - `data-shadows="off"` on `<html>`, or on any element for its contents, sets `--shadow-card` and `--shadow-raised`
+    to none. It does this in one rule at the end of `tokens.css`, so no component can forget it. The cover shading,
+    cards, menus, slide-outs, dialogs, popovers and toasts all use those two tokens.
+  - Borders, the inset accent bars and the hover edges stay, so nothing loses its edge.
+  - The Display and accessibility slide-out has the switch (`data-display="shadows"`). `SharedComponents.setupDisplay` sets and clears the attribute. The note says "Drop shadows cost a little processor on every scroll; turning them off helps small and older computers".
+  - An app applies the attribute before first paint, as it does the theme. The default follows the install: a small, Lite install starts with shadows off, and any other starts with them on. The default is the app's to set, and the library only provides the switch.
+  - The one animated ring on the live indicator (`@keyframes` pulse) is an attention signal, not a shadow, and stays.
+  - The help centre builder has the same switch in its own Display slide-out. It applies the switch in its head script, from its own choice or the app's `starboard.shadows`. The gallery shows both states.
+- **Covers take the card shading** (TheMightyTRexUK, 23 November 2026, DASH-535: "Apply that to all covers").
+  - The shared `.cover` rule has the card's 1px `--color-divider` border, the 6px corner and `--shadow-card`. A cover in a `.media-card` or `.book-row` raises its border to `--color-border` on hover. So every kind of cover inherits it: library walls and rows, Discover, search results, Wanted, item pages, collections, books, plug-ins and the help centre.
+  - The round cover keeps its circle, the series fan gets the 6px corner, and the action column sits inside the cover's border and corner.
+  - Covers of 24px, 48px and a result's 64px keep the border and corner but no shadow, as the tokens have no lighter size.
+  - High contrast keeps the border (the shadow token is none there), and dark themes keep the divider visible.
+  - A grid that clips its overflow (a shelf that scrolls sideways) needs padding for the shadow, not a smaller shadow.
+- **A Discord link in the footer** (TheMightyTRexUK, 22 November 2026, DASH-526: "I want a discord link on starboard footer as well as the help center").
+  - An app with a Discord support server links to it after Help. The link reads "Discord support server", with the
+    external-link icon and "(opens in a new tab)" in hidden words.
+  - The help centre builder adds it to every page footer and to the front page when `help-centre.json` has `discord`.
+- **Which item to use** (Starboard DASH-309, 12 November 2026): `DESIGN-SYSTEM.md` section 10 says what to use by what
+  the thing is: rows, cards, chips, filters, toolbars, notices, toasts, dialogs or tables.
+  - Accent teal (UX-02 option B).
+  - Status chip style B, outline with icon (UX-04).
+  - Cover actions (UX-42): `.cover-card` with `.cover-actions` on the cover by default, or beside it as a per-account setting.
+  - Shelves without scroll bars (UX-30 option A): `.shelf-scroller`, with arrows over an edge fade.
+  - Covers always line up: `.media-card` titles take two lines.
+  - Small covers (UX-44): `.book-row` with `.cover-actions--row` in rows, and `.cover-card__more` with the actions in words on small tiles.
+  - Square radio art in the book shape (FEAT-R decision 2, fill 4): `.show-art`, with the label in the image's colour, and `.logo-tile`.
+- **Every slide-out has the same header and body** (TheMightyTRexUK, 2 November 2026). Slide-out and phone menu
+  headers use `--color-slide-header`, the page background, over a raised-surface body. Dialogs keep the plain header.
+  Display and accessibility and Release notes are slide-outs.
+- **App logos without a tile** (TheMightyTRexUK, 2 November 2026). `.app-icon.has-image` is only the image, with no border or background. Initials keep the tile.
+- **The logo editor on every way to get a logo** (TheMightyTRexUK, 2 November 2026). From a cover, Find online and Upload your own all use the same box. It has Shape from lightness or transparency, four cleaning levels, and a small eraser and paintbrush on `.checker[data-tool]`. Found files show as plain pictures in `.logo-candidate__art > img`.
+- **Nicer scroll bars** (TheMightyTRexUK, 2 November 2026). They are thin and square in every scrolling area, in `--color-scrollbar` (the border colour, or the text colour in High contrast) on a clear track. They stay visible, and only shelves hide theirs behind arrows.
+- **UX notes for testing** (TheMightyTRexUK, 2 November 2026).
+  - `ux-notes.js` (copied to both apps by `sync.py`) puts Note an issue in the corner of every page while an app's testing setting is active.
+  - You select the part, with the pointer or with Tab and Enter, and say what is wrong, the kind and how bad. Notes lists them with Copy as text, Download and Mark as fixed.
+  - Notes keep the page, the part, a selector and the display settings. An app passes a store to keep them on its server. Otherwise they stay in the browser.
+  - Styles: `.ux-dock`, `.ux-banner` (at the bottom, clear of the header), `.ux-outline` and `.ux-notes`.
+- **Security checks the same in both apps** (TheMightyTRexUK, 3 November 2026).
+  - `docs/SECURITY-CHECKS.md` sets the checks. They are tests, live journeys, Trivy, ZAP on a private network,
+    Gitleaks, Bandit and Semgrep, ShellCheck, Hadolint, CodeQL, a separate review and install tests. It also says how
+    to sort findings.
+  - Each app has a security page with a "Security checks for each release" table, and every release's notes have a Security section (`CONTENT-DESIGN.md`, release notes).
+  - Starboard is the worked example, and Storyarr has to catch up.
+- **Focus not obscured** (WCAG 2.2, 4 November 2026). The page keeps the sticky header (and row 2) and an open save
+  bar clear when it scrolls, with `scroll-padding` on `:root`. We added `WCAG.md` and `ALT-TEXT.md` after the GOV.UK
+  Service Manual and BBC GEL.
+- **Search is always one button away** (TheMightyTRexUK, 4 November 2026: "update the design system to ensure there is a search button").
+  - `.rail__search` is first in the rail, under the logo, and moves focus to the header's search box.
+  - On phones, where the box is hidden, `.site-header__search-btn` in the header opens the same box as a row under the header. Escape or a press outside closes it and returns focus to the button that opened it.
+  - Both use `data-search-open` and `aria-controls` (`setupSearch()` in `components.js`). There is no single-key shortcut (WCAG 2.1.4). The `radio` icon is added.
+- **Wizard rules** (TheMightyTRexUK, 4 November 2026). `docs/WIZARD.md` sets one set of rules for every wizard, from the installer mock-up.
+  - The first question asks which job, and each job has its own wizard.
+  - Each step asks one question, and steps that do not apply are left out.
+  - A step in parts has `.steps--sub`. It is as wide as the progress bar and has a line between parts. The parts are numbered 1, 2, 3, and each counts in the progress bar's total. On phones only the numbers show, with ticks for done parts.
+  - "(recommended)" comes with a reason, never "easiest".
+  - "What is…" help comes at the end of the part it explains, in a dialog that scrolls inside and closes on a press outside.
+  - Addresses are links with copy, and a summary says what was set and skipped.
+  - What happens next and the decision tree are review aids for testing only, never in the finished product.
+  - Copying falls back to a hidden text box on plain http (`copyText()` in `components.js`), and a dialog returns focus to the button that opened it. Step numbers grow with Text size.
+- **Changelogs** (TheMightyTRexUK, 5 November 2026). `docs/CHANGELOGS.md` sets one way to keep `CHANGELOG.md` in every project, after Keep a Changelog 1.1.0.
+  - A changelog is for people, never a commit log, and it has an Unreleased section at the top.
+  - Every version is listed newest first and linked, as `## [x.y.z] (day month year)`. Dates are written as in `CONTENT-DESIGN.md`, not year, month, day.
+  - Changes go under Added, Changed, Deprecated, Removed, Fixed and Security only. Withdrawn releases are marked `[Withdrawn]`. In-app release notes use the same six types.
+- **Terminal wizards and feedback** (TheMightyTRexUK, 5 November 2026). `docs/TERMINAL.md` sets how a wizard appears in a terminal.
+  - A wizard is either boxed or plain. The boxed one has a heading box reading "App | step", a progress bar and a menu fixed on the bottom line with b Back, ? Help, f Feedback and q Stop. The plain one has numbered lines for screen readers and is never redrawn.
+  - Help is a box over the step, and feedback is sent as a QR code sized to the window.
+  - `docs/WIZARD.md` section 12 puts Snaglist on every wizard step and names the step. It has Show as a QR code for a
+    computer that is not online yet.
 
 ## Help centre (7 November 2026; the standard since 14 November 2026)
 
 Every app's help is Markdown in its own repository, published as web pages by one builder,
 `tools/help_centre/build.py`, with this library's tokens, components, fonts and icons. Since 14 November 2026 every
-help centre uses the standard the owner chose (Starboard DASH-436): the seven main items as top links, a hub with a
-side menu that folds (areas, groups, every article), the journey, the newest thing and the problem solver card on
-the home page, the latest version beside the heading, articles flow chart first with numbered answer cards, a
-problem solver page, and plug-in mode for a plug-in collection. `docs/HELP-WRITING.md` section 11 is the full
-standard, with the flow chart format and the shape of `help-centre.json`.
+help centre uses the standard the owner chose (Starboard DASH-436):
+- the seven main items as top links
+- a hub with a side menu that folds (areas, groups, every article)
+- the journey, the newest thing and the problem solver card on the home page
+- the latest version beside the heading
+- articles with the flow chart first, then numbered answer cards
+- a problem solver page
+- plug-in mode for a plug-in collection
+
+`docs/HELP-WRITING.md` section 11 is the full standard, with the flow chart format and the shape of
+`help-centre.json`.
 
 **Components** (in `components.css` and `components.js`, shown in the gallery under Help centre):
 
@@ -322,28 +417,40 @@ standard, with the flow chart format and the shape of `help-centre.json`.
 | Version badge | `a.version-badge > .chip + b` | The latest version, no date, linking to the release notes |
 | Plug-in card and band | `ul.plugin-cards > li > article.card.has-band.plugin-card` (with `.card-band`, `.app-icon--compact`, `ul.plugin-card__links`); `.plugin-band`, `.plugin-band__name`, `.plugin-band__sub`, `.plugin-band__side` | The grey band design (DASH-428) for a plug-in in a list and at the top of its own pages. An `.app-icon` holds a sprite icon or the initials |
 
-**Layout only in the help centre** (`tools/help_centre/help.css`): the header bar, the hub grid, the side menu's
-place and its phone overlay, area and landing pages, the article and On this page, the banner, search results and
-the footer. **Behaviour only in the help centre** (`tools/help_centre/help.js`): Menu on tablets and phones (the page
-behind is inert while it is open), Search moving the focus to the search box, Display and accessibility, the banner,
-On this page following the article, and search.
+**Layout only in the help centre** (`tools/help_centre/help.css`) covers:
+- the header bar and the hub grid
+- the side menu's place and its phone overlay
+- area and landing pages, the article and On this page
+- the banner, search results and the footer
 
-**Accessibility:** checked on 14 November 2026 with axe-core 4.14 (WCAG 2.2 AA and best practice) on the home page,
-an article, the problem solver, an area page and plug-in pages of all three help centres, in Light, Dark, High
-contrast, 175% text and at phone width, with a reading order check, a Tab walk through the header, search, side menu
-and disclosures, focus after the menu and Display open and close, and the live regions.
+**Behaviour only in the help centre** (`tools/help_centre/help.js`) covers these:
+- Menu on tablets and phones, where the page behind is inert while it is open
+- Search moving the focus to the search box
+- Display and accessibility
+- the banner
+- On this page following the article
+- search
 
-**For each app:** a `help-centre.json` at its root and a `<!-- help: <area> / <group> -->` line in each article
-(`HELP-WRITING.md` section 11), and a workflow that checks out this repository and runs the builder. Starboard,
+**Accessibility:** we checked on 14 November 2026 with axe-core 4.14 (WCAG 2.2 AA and best practice). The pages were
+the home page, an article, the problem solver, an area page and plug-in pages of all three help centres. We checked
+them in Light, Dark, High contrast, 175% text and at phone width. We also checked the reading order and a Tab walk
+through the header, search, side menu and disclosures.
+
+We checked focus after the menu and Display open and close, and the live regions.
+
+**For each app:** add a `help-centre.json` at its root and a `<!-- help: <area> / <group> -->` line in each article
+(`HELP-WRITING.md` section 11). Also add a workflow that checks out this repository and runs the builder. Starboard,
 Snaglist and the plug-in collection use it. Build one here with `tools/help_centre/build.sh` from the app's folder.
 
 ## App-only patterns (2 November 2026)
 
 Built from the tokens, used by one app, so not in `components.css`:
 
-- **Starboard:** `.access-change` (what Starboard can access, with the command to change it), `.job-run` (a server job
-  with Run now), the storage charts (`--media-*` map to `--series-*`), the release notes slide-out
-  (`.release-notes`, opened from Release notes in the footer).
+- **Starboard:**
+  - `.access-change` shows what Starboard can access, with the command to change it.
+  - `.job-run` is a server job with Run now.
+  - The storage charts use `--media-*`, which map to `--series-*`.
+  - The release notes slide-out is `.release-notes`, opened from Release notes in the footer.
 - **Storyarr:** the bookshelf and series views.
 
 

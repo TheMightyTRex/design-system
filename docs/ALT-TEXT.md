@@ -1,9 +1,11 @@
 # Writing text descriptions (alt text)
 
-Version 1.0, 4 November 2026. How to describe images in Storyarr, Starboard, their help and this design
-system, following the principles in the BBC's
-[How to write text descriptions (alt text)](https://www.bbc.co.uk/gel/how-to-write-text-descriptions-alt-text).
-Every word follows `CONTENT-DESIGN.md`. The examples are made up, as `CONTENT-DESIGN.md` rule 2.23 asks.
+Version 1.0, 4 November 2026. This guide says how to describe images in Storyarr, Starboard, their help and this
+design system. It follows the principles in the BBC's
+[How to write text descriptions (alt text)](https://www.bbc.co.uk/gel/how-to-write-text-descriptions-alt-text). Every
+word follows `CONTENT-DESIGN.md`.
+
+The examples are made up, as `CONTENT-DESIGN.md` rule 2.23 asks.
 
 ## About this guide
 
@@ -78,16 +80,16 @@ reviews one.
 
 - Avoid them: put words in the page as text (WCAG 1.4.5). Logos are the exception.
 - A logo is described by its name: "Storyarr". A wordmark that is real text needs nothing more.
-- A screenshot of a message or a page gives the words that matter: "Screenshot of the sign-in page, with the
-  message 'The password does not match. Try again.'"
+- A screenshot of a message or a page gives the words that matter. For example: "Screenshot of the sign-in page, with
+  the message 'The password does not match. Try again.'"
 - Text that happens to be in a photo, such as a street sign, is left out unless it matters to the page.
 
 ## 7. Charts and diagrams
 
 - The description gives the main point, and the full data is on the page as text, a list or a table.
-- Charts in the library always have a table view in a disclosure (`LIBRARY.md`, Line chart), so the
-  description can be short: "Line chart of disk use over 30 days: Disk 3 rises from 70% to 92%; the others
-  stay level. The table follows."
+- Charts in the library always have a table view in a disclosure (`LIBRARY.md`, Line chart), so the description can be
+  short. For example: "Line chart of disk use over 30 days: Disk 3 rises from 70% to 92%; the others stay level. The
+  table follows."
 - A meter or progress bar carries its value in words: "76% used".
 - A flowchart in help lists the same steps in words (`HELP-WRITING.md`, guide layout).
 - Whoever makes a chart or diagram also writes its suggested description, and sends both together.
@@ -128,6 +130,7 @@ person's view is one view.
 
 ## Sources
 
-- BBC GEL, [How to write text descriptions (alt text)](https://www.bbc.co.uk/gel/how-to-write-text-descriptions-alt-text),
-  May 2024: the principles in sections 1, 2, 8 and 9 come from it, written here in our own words.
+- BBC GEL,
+  [How to write text descriptions (alt text)](https://www.bbc.co.uk/gel/how-to-write-text-descriptions-alt-text), May
+  2024. The principles in sections 1, 2, 8 and 9 come from it, written here in our own words.
 - W3C, [An alt decision tree](https://www.w3.org/WAI/tutorials/images/decision-tree/).

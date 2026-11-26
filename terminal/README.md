@@ -14,18 +14,20 @@ A script sets these, then sources `terminal-frame.sh`:
 
 - `APP_NAME` (shown in the heading box), `APP_VERSION`, and `ISSUES`, the GitHub repository for the feedback link
   (`owner/name`).
-- `IN`, the terminal to read answers from (empty when there is none), `PLAIN` (1 for plain lines), `LOG` (the
-  file the jobs' output goes to), and an `err` function.
+- `IN`, the terminal to read answers from (empty when there is none). - `PLAIN` (1 for plain lines), `LOG` (the file
+  the jobs' output goes to), and an `err` function.
 - `STEPS` and `TITLES` (each step's name), and `FIRST_BACK` when Back should start later than step 1.
-- `app_feedback`, a function, when the app has its own feedback flow; it returns non-zero when it cannot run yet,
-  and the frame then shows the feedback link.
+- `app_feedback`, a function, when the app has its own feedback flow. It returns non-zero when it cannot run yet, and
+  the frame then shows the feedback link.
 
-Then each step calls `header "Title" n`, writes with `para`, `say`, `ok`, `bad` and `note`, and asks with `ask`
-or `choose "Question" default "help" "Answer|about" …` (the answer is in `CHOICE`). A job runs with
-`work "What it does" command n of` (one bar, drawn in place); set `JOB_DETAIL` or `JOB_COUNT` to the name of a
-function that prints what it is doing now or how far it has got. When one fails, `job_failed name why tip code`
-offers Try again, Show the details, Report this problem and Stop. Starboard's `install.sh` wraps `work` in its own
-`job` function, which counts the jobs. `card` and `card_row` draw the end card.
+Then each step calls `header "Title" n`, writes with `para`, `say`, `ok`, `bad` and `note`, and asks with `ask` or
+`choose "Question" default "help" "Answer|about" …` (the answer is in `CHOICE`). A job runs with
+`work "What it does" command n of`, which draws one bar in place. Set `JOB_DETAIL` or `JOB_COUNT` to the name of a
+function that prints what the job is doing now or how far it has got. When a job fails, `job_failed name why tip code`
+offers Try again, Show the details, Report this problem and Stop.
+
+Starboard's `install.sh` wraps `work` in its own `job` function, which counts the jobs. `card` and `card_row` draw the
+end card.
 
 ## The QR code
 

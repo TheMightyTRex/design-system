@@ -96,26 +96,31 @@ its header also has search: change both when the main menu changes.
 
 ## Change a component and sync it
 
-In short: pull first, change the library here (never the copies in the apps), build the gallery, check
-four themes and 175% text, run `tools/contrast.py` and `tools/check_accents.py` (0 failures each), `tools/check_words.py`, `tools/check_tokens.py` and `tools/check-private.sh`, commit, ask
-before you push, then run `tools/sync.py` and commit in each app. Every step, with its command, is in
-[Make a change](https://themightytrex.github.io/design-system/resources/make-a-change.html).
+In short: pull first. Change the library here, never the copies in the apps. Build the gallery and check four themes
+and 175% text. Run `tools/contrast.py` and `tools/check_accents.py` (0 failures each), then `tools/check_words.py`,
+`tools/check_tokens.py` and `tools/check-private.sh`.
 
-`tools/install-hooks.sh` adds a pre-commit check that stops banned words and private details (home network addresses, email
-addresses, keys and the words in your own `.private-words` file) from being committed.
+Commit, and ask before you push. Then run `tools/sync.py` and commit in each app.
+[Make a change](https://themightytrex.github.io/design-system/resources/make-a-change.html) has every step, with its
+command.
+
+`tools/install-hooks.sh` adds a pre-commit check. The check stops banned words and private details from being
+committed. Private details are home network addresses, email addresses, keys and the words in your own
+`.private-words` file.
 
 ## Mica, the default design
 
-Since 18 November 2026 (DASH-479) the design system's default is Mica: neutral greys, 6px corners, a light lift on
-cards and menus and one accent colour, Blue unless another is chosen. The dashboard card is the model for every
-container. The design before it (teal on blue-grey, square corners) is the Classic style in Starboard's Styles plug-in.
+Since 18 November 2026 (DASH-479) the design system's default is Mica. It has neutral greys, 6px corners, a light lift
+on cards and menus, and one accent colour, which is Blue unless you choose another. The dashboard card is the model
+for every container. The design before it (teal on blue-grey, square corners) is the Classic style in Starboard's
+Styles plug-in.
 
 ## Accessibility floor
 
 Everything here meets **WCAG 2.2 level AA** in every theme. In practice:
 
-- 4.5:1 contrast for text and 3:1 for control borders, card edges, the menu hover edge and the focus ring, with every
-  accent colour, measured by `tools/contrast.py` and `tools/check_accents.py`.
+- 4.5:1 contrast for text, and 3:1 for control borders, card edges, the menu hover edge and the focus ring. This holds
+  with every accent colour, and `tools/contrast.py` and `tools/check_accents.py` measure it.
 - 44px controls and targets, and a visible 3px focus ring.
 - Status in words plus a shape or an icon, never colour alone.
 - Keyboard first: slide-outs and dialogs are named, keep focus inside, close with Escape and return focus.

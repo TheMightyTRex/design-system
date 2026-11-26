@@ -28,13 +28,14 @@ and 2.23).
 ## 1. When a screenshot earns its place
 
 - **An app may set a minimum, and Starboard's is 3 in every topic** (tier one, owner, 7 November 2026). Choose them
-  with the test in this section: the steps a reader could least follow from the words, the page they start on, and what
-  appears when it has worked. Beyond the minimum, test each picture: does it carry a step the reader could not
-  otherwise follow? If not, leave the step as text.
-- **Worth a picture:** a control with no words on it (a menu of three dots, an icon button), a dialog the reader
-  has not met before, a page where the control is hard to find.
-- **Rarely worth a picture:** a menu that is the same on every page, a second table repeating the one before it,
-  a control the step already names in bold, "Select Save".
+  with the test in this section. Pick the steps a reader could least follow from the words, the page they start on,
+  and what appears when it has worked. Beyond the minimum, test each picture.
+
+  Does it carry a step the reader could not otherwise follow? If not, leave the step as text.
+- **Worth a picture:** a control with no words on it (a menu of three dots, an icon button), a dialog the reader has
+  not met before, or a page where the control is hard to find.
+- **Rarely worth a picture:** a menu that is the same on every page, a second table repeating the one before it, or a
+  control the step already names in bold, such as "Select Save".
 - **Split rather than crowd.** An article that needs ten pictures is two articles; split it where the task has a
   natural break, losing no step.
 - When you finish, say which steps you left as text on purpose.
@@ -50,9 +51,9 @@ and 2.23).
 - **Check the mask both ways.** Nothing real is left, and no label of the app was replaced by mistake. Make the
   list of labels to keep from the app's own text files, not by entering it by hand.
 - **Blur is not a mask.** Blur hides pixels, not the words underneath, and can be undone. Replace the text.
-- **Never fake a screenshot.** If a page cannot be reached (not released yet, needs data that does not exist,
-  hidden behind a setting), keep the step as text, say which picture is missing, and add it once the page exists.
-  A clearly labelled mock-up is allowed only when the article says it is one.
+- **Never fake a screenshot.** If a page cannot be reached (not released yet, needs data that does not exist, or is
+  hidden behind a setting), keep the step as text and say which picture is missing. Add the picture once the page
+  exists. A clearly labelled mock-up is allowed only when the article says it is one.
 - **Never crop or hide part of a page and present the result as the whole page.**
 
 ## 3. Taking the screenshot
@@ -77,10 +78,10 @@ and 2.23).
 - **At most three outlines in one picture.** A fourth step on the same page is a second picture.
 - **A choice includes its words.** An outline round a radio button or tick box takes in the control, its label and
   the description under it, as one box. One box round the whole group of choices is better than one per choice.
-- **Anchor every outline to the real control on the page**, found from the page's own structure (its text, its
-  role or its CSS class), never placed by eye from a picture. After drawing, check the outline still wraps the
-  control, the arrow head touches it, nothing is off the screen and nothing covers it. Never take the picture if
-  that check fails.
+- **Anchor every outline to the real control on the page.** Find the control from the page's own structure (its text,
+  its role or its CSS class), and never place it by eye from a picture. After drawing, check that the outline still
+  wraps the control, the arrow head touches it, nothing is off the screen and nothing covers it. Never take the
+  picture if that check fails.
 - **Two things cannot be anchored:** anything drawn on a canvas and anything inside a frame from another site.
   Outline nothing inside them; outline the page around them only.
 - Use `tools/annotate.js` in this repository: it draws the outline, arrow and number to this specification and
@@ -88,22 +89,22 @@ and 2.23).
 
 ## 5. Marking up: step numbers
 
-- **Write the step list first, then decide which steps each picture shows.** A step whose control is on the
-  screen is a step the picture shows. If the picture shows a step the list does not have (a section to open, a
-  tab to choose), add the step to the list first.
+- **Write the step list first, then decide which steps each picture shows.** A step whose control is on the screen is
+  a step the picture shows. If the picture shows a step the list does not have, such as a section to open or a tab to
+  choose, add the step to the list first.
 - **Every step the picture shows gets an outline, and every outline gets a number badge carrying that step's
   number in the article.** Steps 2, 3 and 4 are badged 2, 3 and 4, never 1, 2 and 3 by reading order.
 - **An outline that belongs to no numbered step gets no badge.**
-- **A control at the left edge still gets its number:** the badge moves to the top-right corner, then a bottom
-  corner, when the top-left would leave the screen.
+- **A control at the left edge still gets its number.** The badge moves to the top-right corner, then a bottom corner,
+  when the top-left would leave the screen.
 - Before writing the article, read the steps against the picture: each badge points at the control its step
   names.
 
 ## 6. Text descriptions
 
-- **Every screenshot has a text description,** in the article's language, that names the page and what is
-  outlined, quoting labels exactly as the picture shows them: "The Apps page, with Add an app outlined (step 2)".
-  Never "screenshot", "image1" or "the button in the bottom right". `ALT-TEXT.md` has the full rules.
+- **Every screenshot has a text description,** in the article's language. It names the page and what is outlined, and
+  quotes labels exactly as the picture shows them: "The Apps page, with Add an app outlined (step 2)". Never write
+  "screenshot", "image1" or "the button in the bottom right". `ALT-TEXT.md` has the full rules.
 - **Everything the picture shows is also said in the steps** (rule 2.20). The picture helps; it never carries
   information alone.
 - A picture with example data says so in its description: "with example data".

@@ -11,8 +11,8 @@ Section 8 is the checklist.
 
 ## 1. What a changelog is for
 
-A changelog is a file that lists the notable changes in each version of a project, newest first, so the
-people who use it can tell what is different before they upgrade.
+A changelog is a file that lists the notable changes in each version of a project, newest first. People who use the
+project can then tell what is different before they upgrade.
 
 1.1 **Rule: changelogs are for people.** Write for the person who runs the app or uses the library, not for
 the developer who made the change. Say what someone can now do, what works differently and what was fixed.
@@ -69,18 +69,18 @@ and date, and start a new empty Unreleased section before it.
 section, including test releases people may have installed. Never skip a number without saying why: if
 versions were never published, say so in one line under the next version.
 
-2.4 **Rule: the version heading is `## [1.2.3] (4 November 2026)`.** The version in square brackets, so it
-links (rule 2.6), then the release date in brackets. Dates follow `CONTENT-DESIGN.md`: "4 November 2026",
-never "2026-11-04" or "04/11/26". This is where we differ from Keep a Changelog, which uses year, month,
-day: our way matches the dates in both apps and leaves no doubt about the month.
+2.4 **Rule: the version heading is `## [1.2.3] (4 November 2026)`.** Put the version in square brackets, so it links
+(rule 2.6), then the release date in brackets. Dates follow `CONTENT-DESIGN.md`: "4 November 2026", never "2026-11-04"
+or "04/11/26". This is where we differ from Keep a Changelog, which uses year, month, day. Our way matches the dates
+in both apps and leaves no doubt about the month.
 
-2.5 **Rule: a short summary is allowed** under the version heading, in one or two sentences: the theme of
-the release, what to do when upgrading, database changes, and the way back to the version before. Never a
-change of its own: changes go under their types.
+2.5 **Rule: a short summary is allowed** under the version heading, in one or two sentences. It can give the theme of
+the release, what to do when upgrading, database changes, and the way back to the version before. Never make it a
+change of its own. Changes go under their types.
 
-2.6 **Rule: every version links.** Link references go at the end of the file, one per version, in the same
-order as the sections. Each one compares the version with the one before; Unreleased compares the newest
-tag with `HEAD`; the first version links to its tag or release page.
+2.6 **Rule: every version links.** Link references go at the end of the file, one per version, in the same order as
+the sections. Each one compares the version with the one before. Unreleased compares the newest tag with `HEAD`. The
+first version links to its tag or release page.
 
 ```markdown
 [Unreleased]: https://github.com/TheMightyTRex/storyarr/compare/v0.6.0...HEAD
@@ -111,9 +111,9 @@ under one entry (`CONTENT-DESIGN.md`, rule 2.24).
 do instead, so the upgrade that removes it holds no surprise. Breaking changes are never hidden inside
 Changed: say plainly what stops working and what to do.
 
-3.4 **Rule: every security fix goes under Security.** Write each one as `CONTENT-DESIGN.md` says for release
-notes: what could happen, to whom, and what happens now, with nothing that helps someone attack an older
-version. The last entry names the checks the release passed (`SECURITY-CHECKS.md`).
+3.4 **Rule: every security fix goes under Security.** Write each one as `CONTENT-DESIGN.md` says for release notes.
+Say what could happen, to whom, and what happens now, with nothing that helps someone attack an older version. The
+last entry names the checks the release passed (`SECURITY-CHECKS.md`).
 
 ## 4. Entries
 
@@ -136,10 +136,10 @@ that file.
 
 ## 5. Withdrawn releases
 
-5.1 **Rule: mark a withdrawn release.** A release taken back because of a serious bug or a security problem
-keeps its section, with `[Withdrawn]` after the date, and a first line saying why and which version to use
-instead. Keep a Changelog calls this "yanked" and writes it in capitals; we use the plain word in sentence
-case, in square brackets so tools can still find it.
+5.1 **Rule: mark a withdrawn release.** A release taken back because of a serious bug or a security problem keeps its
+section. Put `[Withdrawn]` after the date, and a first line saying why and which version to use instead. Keep a
+Changelog calls this "yanked" and writes it in capitals. We use the plain word in sentence case, in square brackets so
+tools can still find it.
 
 ```markdown
 ## [2.4.0] (3 March 2027) [Withdrawn]
