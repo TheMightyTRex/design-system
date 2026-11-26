@@ -276,3 +276,19 @@ wrong while they are in it (5 November 2026):
 7. Send feedback opens from every step, the report names the step, and the QR code scans with a phone.
 8. An app with a browser and a terminal set-up: walk every job in both, step by step side by side. Both ask the same
    questions in the same order with the same defaults (section 2, One wizard, two ways to show it).
+
+## 14. A wizard in a slide-out (26 November 2026)
+
+Most wizards are pages (section 1). A job of three steps or fewer, started from a screen and finished on it, may be a wizard in a wide slide-out instead: Starboard's media server switch is the model. The rules of this guide still hold, with these changes.
+
+- **When.** Three steps or fewer, no review aids needed, and the person should come back to the screen they started from. Four steps or more, or a job that needs What happens next or a decision tree, is a page wizard.
+- **Frame.** A wide slide-out (`.side-panel--wide`), with `.panel-wizard` in its body. The foot holds Next (primary), Back and Cancel, in that order. Cancel closes the slide-out and nothing has changed.
+- **Progress.** One muted line, "Step 1 of 3", at the start of the body (`.panel-wizard__count`), then the step's heading (an `h3` with `tabindex="-1"`). A job that takes time also shows the bar and the count of section 5 (`.wizard-progress`, `.wizard-job`).
+- **Focus and words.** When the step changes, focus moves to the step's heading and the step's result goes into a polite live region. The last step's button names the action ("Switch to Plex"), not "Finish".
+- **Nothing changes until the last step.** The first step says so, and says what can be undone and for how long ("You can go back for 24 hours afterwards").
+- **What moves.** A `.plain-list` where each item has a state chip in words (Works after the switch, Waits after the switch, Needs pointing at the new media server). The chips come from the status table in `CONTENT-DESIGN.md` section 6, or are added to it.
+- **Help.** A "What is..." link in the step opens in a new slide-out only when the step is not itself in one; inside a slide-out, give the answer in the step.
+- **Feedback.** The Snaglist link of section 12 sits in the foot of the last step.
+
+The components page "Wizard in a slide-out" shows it, and `LIBRARY.md`, App patterns, lists the classes.
+
