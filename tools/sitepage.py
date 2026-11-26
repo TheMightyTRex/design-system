@@ -2,8 +2,9 @@
 footer around a page's body, so every page of the site has the same menu. The logo, Display slide-out and
 footer are copied from gallery.src.html, so they stay the same as the gallery's.
 
-Used by resources/make.py, areas/storyarr-gen/b_index.py and areas/_starboard/index.py. Each writes a
-.src.html file; then run tools/build.py to add the icons."""
+Used by resources/make.py, areas/make_index.py and the boards. Each writes a .src.html file; then run
+tools/build.py to add the icons. Storyarr was retired on 11 November 2026; its boards are archived in
+areas/archive/storyarr/ and are not part of the site's menus."""
 import html, pathlib, re
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -25,7 +26,8 @@ STORYARR_LOGO = ('<svg class="s-logo" viewBox="0 0 64 64" aria-hidden="true" foc
                  '<rect x="25" y="13" width="4" height="10" fill="#fff"/><rect x="30" y="7" width="4" height="16" fill="#fff"/>'
                  '<rect x="35" y="11" width="4" height="12" fill="#fff"/></svg>')
 
-# The two apps whose boards the site shows.
+# The app whose boards the site shows, and the archived app (Storyarr, retired 11 November 2026), whose archive page uses
+# the same layout.
 APPS = {
     "starboard": {
         "name": "Starboard", "logo": STARBOARD_LOGO, "repo": "https://github.com/TheMightyTRex/starboard",
@@ -34,8 +36,8 @@ APPS = {
     },
     "storyarr": {
         "name": "Storyarr", "logo": STORYARR_LOGO, "repo": "https://github.com/TheMightyTRex/storyarr",
-        "about": "Follow authors and series and keep your audiobook library complete. Built with React, which "
-                 "wraps the library's classes in its own components.",
+        "about": "Retired on 11 November 2026. Its boards are kept here as a record: they are not updated, and they "
+                 "use the library as it was.",
     },
 }
 
@@ -53,7 +55,7 @@ MAIN = [
 # components and patterns pages from its own list (PARTS), so the menu always matches the pages.
 SUB = {
     "boards": [("areas/index-starboard.html", STARBOARD_LOGO, "Starboard"),
-               ("areas/index-storyarr.html", STORYARR_LOGO, "Storyarr")],
+               ("areas/archive/storyarr/index-storyarr.html", "archive", "Storyarr archive")],
     "resources": [("resources/index.html", "house", "Overview"),
                   ("resources/tools.html", "wrench", "Tools"),
                   ("resources/outside-tools.html", "globe", "Outside tools"),
@@ -306,7 +308,7 @@ BOARD_SCRIPT = """<script>
 </script>"""
 
 
-def boards_page(app, body, *, date, note):
+def boards_page(app, body, *, date, note, root="../", current=None):
     """An app's boards page. body holds the overview's notice and sections, with links to <app>-<slug>.html."""
     a = APPS[app]
     prefix = f"{app}-"
@@ -333,7 +335,7 @@ def boards_page(app, body, *, date, note):
   <div class="b-bar"><h1 id="b-title" tabindex="-1">Board</h1><div class="actions"><a class="btn btn--compact" href="#">{{{{i:arrow-left}}}}All {a["name"]} boards</a><a class="btn btn--compact" id="b-own" href="#">{{{{i:external-link}}}}Open on its own</a></div></div>
   <iframe class="b-frame" title="Board"></iframe>
 </section>"""
-    out = page(root="../", main="boards", current=f"areas/index-{app}.html", title=f"{a['name']} boards", body=main,
+    out = page(root=root, main="boards", current=current or f"areas/index-{app}.html", title=f"{a['name']} boards", body=main,
                side=side, css=BOARD_CSS, note=note, script=BOARD_SCRIPT)
     return out.replace("<body>", f'<body data-prefix="{prefix}">', 1)
 
@@ -341,11 +343,11 @@ def boards_page(app, body, *, date, note):
 def boards_landing(counts):
     """The Boards landing page: both apps, each with its logo, what it is and how many boards it has."""
     cards = "".join(
-        f'<li class="card b-card"><div class="b-head">{a["logo"]}<h2 class="card__title"><a href="index-{key}.html">{a["name"]}</a></h2></div>'
+        f'<li class="card b-card"><div class="b-head">{a["logo"]}<h2 class="card__title"><a href="{"archive/storyarr/index-storyarr.html" if key == "storyarr" else f"index-{key}.html"}">{a["name"]}{" (archive)" if key == "storyarr" else ""}</a></h2></div>'
         f'<p>{a["about"]}</p><p class="b-facts"><span>{counts[key]} boards</span></p></li>'
         for key, a in APPS.items())
     body = f"""<div class="page" style="max-width:1100px">
-<div class="page-head"><div class="page-head__text"><h1>Boards</h1><p class="page-head__summary">Every area of Starboard and Storyarr as a full page, built only from the shared component library.</p></div></div>
+<div class="page-head"><div class="page-head__text"><h1>Boards</h1><p class="page-head__summary">Every area of Starboard as a full page, built only from the shared component library. The boards of Storyarr, which was retired on 11 November 2026, are kept in an archive.</p></div></div>
 <ul class="b-cards">{cards}</ul>
 <div class="prose">
 <h2>What a board is</h2>

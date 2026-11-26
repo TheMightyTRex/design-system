@@ -1,8 +1,29 @@
 
-  <div class="notice">{{i:info}}<div class="notice__body"><span class="notice__title">How to read the boards</span><p>Each board starts with what changed and why, then the full page at desktop width, then the part that changes on a phone. Select a row, card or button to open its slide-out; Escape closes it. Display in the header switches theme and text size. The audit is <code>audit-starboard.md</code>; components the library still lacks are in <code>starboard-missing-components.md</code>.</p></div></div>
+  <div class="notice">{{i:info}}<div class="notice__body"><span class="notice__title">How to read the boards</span><p>Each board starts with what changed and why, then the full page at desktop width, then the part that changes on a phone. Select a row, card or button to open its slide-out; Escape closes it. Display in the header switches theme and text size. The boards under Current screens are newer than the rest: the rest show the design of 17 November 2026, when the main menu was Apps, Search, Downloads, Coming up, System and Settings.</p></div></div>
+
+  <section class="settings-section" style="max-width:none" aria-labelledby="ix-now-h">
+    <div class="settings-section__head"><h2 id="ix-now-h">Current screens (captured 26 November 2026)</h2></div>
+    <p class="muted">Each of these is the real page of Starboard 0.31 on an example server with made-up data, rebuilt from the shared library only. Home, Library, Discover, Activity, System and Settings are the main menu; the boards under it are older designs.</p>
+    <ul class="rows">
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:layout-dashboard}}</span><div><div class="row__title"><a href="starboard-dashboard.html">Dashboard</a></div><div class="row__meta">The Home page: a grid of cards in preset sizes, with the band, a state chip and Edit dashboard.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:circle-arrow-up}}</span><div><div class="row__title"><a href="starboard-updates.html">Updates</a></div><div class="row__meta">The update list: one table for each category, Check now and Update all, the app cell and the chosen row bar.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:activity}}</span><div><div class="row__title"><a href="starboard-busy-now.html">Busy now</a></div><div class="row__meta">What uses the processor and memory now, read only when the page opens or on Check now.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:download}}</span><div><div class="row__title"><a href="starboard-bring-in.html">Bring in</a></div><div class="row__meta">The wizard that copies media you already have: where it is, what is in each place, the names and the copy.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:archive-restore}}</span><div><div class="row__title"><a href="starboard-backup-places.html">Backup and restore, places</a></div><div class="row__meta">When backups are made, where the copies go (places with service logos) and the full backups in the folder.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:tv}}</span><div><div class="row__title"><a href="starboard-media-server.html">Media server</a></div><div class="row__meta">The tab named for the media server in use, with its choice, Switch with help and going back for 24 hours.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:puzzle}}</span><div><div class="row__title"><a href="starboard-plugins.html">Plug-ins</a></div><div class="row__meta">Manage: each plug-in as a row with its logo, state, the system it needs and its page.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:sliders-horizontal}}</span><div><div class="row__title"><a href="starboard-general-tabs.html">General, Alerts</a></div><div class="row__meta">A General page: page topics as tabs, settings rows and the rule rows for alerts.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:library}}</span><div><div class="row__title"><a href="starboard-library.html">Library</a></div><div class="row__meta">My library for Films: A to Z jump, filters and the poster wall.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:compass}}</span><div><div class="row__title"><a href="starboard-discover.html">Discover</a></div><div class="row__meta">Discover for Films: shelves of poster cards with Add, Wanted or In library.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:list-checks}}</span><div><div class="row__title"><a href="starboard-wanted.html">Wanted</a></div><div class="row__meta">Wanted films: Missing and Quality wanted as tabs, with the rows and bulk actions.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:inbox}}</span><div><div class="row__title"><a href="starboard-requests.html">Requests</a></div><div class="row__meta">Requests and their state, with the actions to approve or decline.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:history}}</span><div><div class="row__title"><a href="starboard-history.html">History</a></div><div class="row__meta">What happened, newest first, with filters.</div></div></li>
+      <li class="row row--opens"><span class="app-icon" aria-hidden="true">{{i:scroll-text}}</span><div><div class="row__title"><a href="starboard-logs.html">Logs</a></div><div class="row__meta">The log viewer: level filter, search, follow, wrap and download.</div></div></li>
+    </ul>
+  </section>
 
   <section class="settings-section" style="max-width:none" aria-labelledby="ix-org-h">
-    <div class="settings-section__head"><h2 id="ix-org-h">The new organisation</h2></div>
+    <div class="settings-section__head"><h2 id="ix-org-h">The organisation of 17 November 2026 (older)</h2></div>
     <dl class="facts">
       <dt>Main menu (header row 1)</dt><dd>Apps · Search · Downloads · Coming up · System · Settings</dd>
       <dt>Apps</dt><dd>Apps · Other services (Updates folded into Apps)</dd>

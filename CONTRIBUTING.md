@@ -1,7 +1,7 @@
 # Contributing
 
-Thank you for helping. This repository is the one source of the design system for Storyarr and Starboard,
-so a change here reaches both apps.
+Thank you for helping. This repository is the one source of the design system for Starboard, its plug-ins and Stallboard,
+so a change here reaches every app.
 
 ## Before you start
 
