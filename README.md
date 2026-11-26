@@ -27,7 +27,8 @@ change the copies inside the apps.
 | `tools/parts.py` | Makes the light form for an app: a core, and a file for each large component (a part), loaded only on the pages that use it (`docs/LIBRARY.md`, Parts) |
 | `icons.svg` | Lucide icons as an SVG sprite (`<use href="#i-book-open">`); `tools/icons.txt` lists them |
 | `fonts/` | Atkinson Hyperlegible Next, with its licence |
-| `gallery.src.html`, `gallery.html` | The live gallery of every component (edit the `.src` file, then build) |
+| `gallery.src.html` | The source of the component pages: every component, live (edit it, then run `python3 tools/site.py`) |
+| `foundations/`, `components/`, `patterns/`, `guides/` | The site, one page for each part, made by `tools/site.py`: colour, type and icons; each group of components; the patterns; and each guide. `index.html` is the home page, `search.html` searches it, and `gallery.html` is the old address, which sends each old link to its new page |
 | `areas/` | Design boards for each area of both apps, built from the library. `index.html` is the Boards landing page; `index-starboard.html` and `index-storyarr.html` show each app's boards in the page, chosen from the menu, written by `areas/make_index.py` |
 | `docs/LIBRARY.md` | The component reference: every class, the rule for slide-out, dialog or page, and how each app adopts the library |
 | `docs/DESIGN-SYSTEM.md` | Principles, tokens, shell, page templates and consistency rules |
@@ -66,10 +67,12 @@ The help centre standard (owner, 14 November 2026) added these components to `co
 
 ## Open the gallery
 
-Open `gallery.html` in a browser; it needs no server and no build. Display, in the gallery's header, changes the
-theme (Light, Dark, High contrast), the text size, wider spacing and reduced motion. Menus, slide-outs, the
-phone menu and the dialog all work. The gallery is also published at
-<https://themightytrex.github.io/design-system/gallery.html>.
+Open `index.html` in a browser; it needs no server and no build. Each part of the design system has its own page:
+Foundations, Components, Patterns, Guides, Boards and Resources, with Previous and Next, a search and a skip link.
+Display, in the header, changes the theme (Light, Dark, High contrast and High contrast dark), the text size, wider
+spacing and reduced motion. Menus, slide-outs, the phone menu and the dialog all work. The site is also published at
+<https://themightytrex.github.io/design-system/>. The old address `gallery.html` still works: it sends each old link,
+such as `gallery.html#buttons`, to the page that now has that section.
 
 The boards open the same way: start at `areas/index.html`, choose an app, then a board in the menu. Each board
 shows in the page; Open on its own shows it in the whole window.

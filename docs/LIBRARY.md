@@ -4,7 +4,7 @@ Version 1, 2 November 2026. One component library for both apps, so they share o
 It follows `DESIGN-SYSTEM.md` and the guides in this folder (`CONTENT-DESIGN.md`, `HELP-WRITING.md` and `ACCESSIBILITY.md`).
 File names in the tables in this guide are relative to the root of the repository.
 
-**Open `gallery.html` in a browser**: every component in it works as it does in the apps. The gallery uses the same
+**Open `components/index.html` in a browser**: every component in it works as it does in the apps. The component pages use the same
 header and menus as the apps. The main menu and search are in row 1, and the component groups are in row 2. Display
 opens the Display and accessibility slide-out, with theme, text size, reduced motion, high contrast, underlined links
 and wider spacing.
@@ -20,7 +20,7 @@ Slide-outs, menus, the phone menu and the dialog all work in the gallery.
 | `components.js` | The behaviour every component must have (menus, slide-outs, dialogs, phone menu, filter chips, copy, help, display settings), in plain JavaScript |
 | `icons.svg` | Lucide icons as an SVG sprite (`<use href="#i-book-open">`); `tools/icons.txt` lists them |
 | `fonts/` | Atkinson Hyperlegible Next (OFL licence) |
-| `gallery.src.html`, `gallery.html` | The gallery (edit the `.src` file, then build) |
+| `gallery.src.html` | The source of the component pages in `components/`, `foundations/` and `patterns/` (edit it, then run `python3 tools/site.py`) |
 | `contrast-report.txt` | Made by `tools/contrast.py` (not committed): measured contrast for every text and control pair in all four themes; all pass WCAG 2.2 AA |
 | `accent-report.txt` | Made by `tools/check_accents.py --report accent-report.txt`: every token pair the components draw, for every accent colour, in all four themes, including the menu hover fill and its edge; all pass WCAG 2.2 AA |
 | `areas/` | Design boards for every area of both apps, using the library, with slide-outs where they fit |

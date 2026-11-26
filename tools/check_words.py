@@ -107,6 +107,9 @@ def default_files():
              root / "terminal" / "terminal-frame.sh", root / "tools" / "help_centre" / "help.js"]
     files += sorted((root / "docs").glob("*.md"))
     files += sorted((root / "areas").glob("*.src.html"))
+    # The site's own words (tools/site.py): the home, search and landing pages, and the pages made from the gallery's sections.
+    files += [root / "search.html"] + [root / a / "index.html" for a in ("foundations", "components", "patterns", "guides")]
+    files += [root / "foundations" / "icons.html", root / "gallery.html"]
     files += sorted((root / "resources" / "content").glob("*.html"))
     return [f for f in files if f.exists()]
 

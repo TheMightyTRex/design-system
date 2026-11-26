@@ -195,10 +195,12 @@ for name, d in data.items():
 TOKENS = (ROOT / "tokens.css").read_text()
 DARK_STATUS = dict(re.findall(r"--(status-[\w-]+):\s*(#[0-9a-fA-F]{6})",
                               TOKENS[TOKENS.index(':root[data-theme="dark"] {'):TOKENS.index("color-scheme: dark;", TOKENS.index(':root[data-theme="dark"] {'))]))
+LIGHT_STATUS = dict(re.findall(r"--(status-[\w-]+):\s*(#[0-9a-fA-F]{6})", TOKENS[:TOKENS.index(':root[data-theme="dark"] {')]))
 
 
 def sample(v, mode):
-    v = {**v, **DARK_STATUS} if mode == "dark" else v
+    # Each sample sets its own status colours, so the sample stays right whichever theme the page is in.
+    v = {**v, **DARK_STATUS} if mode == "dark" else {**LIGHT_STATUS, **v}
     style = ";".join(f"--{k}:{h}" for k, h in v.items()) + f";color-scheme:{mode}"
     sw = "".join(f'<span class="g-pal__sw" style="background:var(--{k})" title="--{k}"></span>'
                  for k in ("color-bg", "color-surface-raised", "color-text", "color-accent", "color-accent-soft",
