@@ -672,7 +672,7 @@ and wider spacing.</p>
 </tr>
 <tr>
 <td>Title with status</td>
-<td><code>.title-status</code>, <code>.title-status__chips</code></td>
+<td><code>.title-chip</code> (the title and one chip: Starboard uses this), <code>.title-status</code>, <code>.title-status__chips</code> (several chips after the name; no app uses it yet)</td>
 <td>A heading's status chips straight after the name, centred on its line; never on a line under it (read "Where status goes")</td>
 </tr>
 <tr>
@@ -919,8 +919,8 @@ and wider spacing.</p>
 </tr>
 <tr>
 <td>Shelf</td>
-<td><code>.shelf</code>, <code>.shelf__head</code>, <code>.shelf__caption</code>, <code>.shelf__end</code>, <code>.shelf__track</code></td>
-<td>Discover shelves: one row that scrolls, arrows on computers</td>
+<td><code>.shelf</code>, <code>.shelf__head</code>, <code>.shelf__caption</code>, <code>.shelf__end</code>, <code>.shelf__track</code>; in use: <code>.shelf-scroller</code>, <code>.shelf-track</code>, <code>.shelf-edge</code>, <code>.shelf-arrow</code></td>
+<td>Discover shelves: one row that scrolls, arrows on computers. Starboard uses the four in-use classes; the <code>.shelf__*</code> ones are for a page that wants its own head and caption. Stallboard calls its two-column layout <code>.shelf</code> too, which clashes: it renames it to <code>.store-layout</code></td>
 </tr>
 <tr>
 <td>Calendar month</td>
