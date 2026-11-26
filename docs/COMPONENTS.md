@@ -1,7 +1,7 @@
 # Components by area
 
-Updated 20 November 2026. Every component in the shared library, by the area it belongs to, as the gallery
-(`gallery.html`) groups them. `LIBRARY.md` is the reference, with each component's classes, behaviour and rules. When
+Updated 20 November 2026. Every component in the shared library, by the area it belongs to, as the component pages
+(`components/index.html`) group them. `LIBRARY.md` is the reference, with each component's classes, behaviour and rules. When
 you add a component, add it here and in `LIBRARY.md`.
 
 | Area | Components |

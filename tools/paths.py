@@ -3,11 +3,13 @@
 Each path comes from, in order: an environment variable, tools/paths.local.json (not committed, so your
 own folders stay out of the repository), or a default that assumes the apps sit next to this repository.
 
-  STARBOARD_WEB    Starboard's web folder        default ../starboard/web
-  STORYARR_SHARED  Storyarr's shared folder      default ../storyarr/apps/web/src/shared
-  LUCIDE_ICONS     Lucide's icon modules         default ../storyarr/apps/web/node_modules/lucide-react/dist/esm/icons
+  STARBOARD_WEB    Starboard's web folder                         default ../starboard/web
+  STALLBOARD_DS    Stallboard's assets/ds folder                  default ../stallboard/assets/ds
+  PLUGINS_DIR      the plug-ins repository (starboard-plugins)    default ../starboard-plugins
+  LUCIDE_ICONS     Lucide's icon modules (lucide-react)           default node_modules/lucide-react/dist/esm/icons here
 
-paths.local.json uses the same names as keys, for example {"STORYARR_SHARED": "/path/to/storyarr/apps/web/src/shared"}.
+paths.local.json uses the same names as keys, for example {"PLUGINS_DIR": "/path/to/starboard-plugins"}.
+Storyarr (retired on 11 November 2026) is no longer synced, so STORYARR_SHARED is gone.
 """
 import json
 import os
@@ -18,8 +20,9 @@ _local = ROOT / "tools" / "paths.local.json"
 _saved = json.loads(_local.read_text()) if _local.exists() else {}
 _defaults = {
     "STARBOARD_WEB": ROOT.parent / "starboard/web",
-    "STORYARR_SHARED": ROOT.parent / "storyarr/apps/web/src/shared",
-    "LUCIDE_ICONS": ROOT.parent / "storyarr/apps/web/node_modules/lucide-react/dist/esm/icons",
+    "STALLBOARD_DS": ROOT.parent / "stallboard/assets/ds",
+    "PLUGINS_DIR": ROOT.parent / "starboard-plugins",
+    "LUCIDE_ICONS": ROOT / "node_modules/lucide-react/dist/esm/icons",
 }
 
 

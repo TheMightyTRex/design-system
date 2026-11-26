@@ -3,7 +3,11 @@
 <div class="prose">
 <div class="notice" role="note">{{i:info}}<div class="notice__body"><span class="notice__title">Before you begin:</span><p>You need Python 3 and a copy of the repository. Run every command from the repository's own folder.</p></div></div>
 
-<h2 id="build">Build the gallery and boards: build.py</h2>
+<h2 id="site">Build the site: site.py</h2>
+<p>Makes one page for each part of the design system: the foundations, each group of components, the patterns and each guide, with the home page, the search and the old <code>gallery.html</code> address. The components come from <code>gallery.src.html</code> and the guides from <code>docs/*.md</code>. Change those, never the pages. Run it, then <code>build.py</code> for the boards and resources pages.</p>
+<code class="code-block">python3 tools/site.py</code>
+
+<h2 id="build">Build the boards and resources pages: build.py</h2>
 <p>Turns each <code>.src.html</code> file into the page people open. It replaces <code>&#123;&#123;i:name&#125;&#125;</code> with an icon and <code>&lt;!--ICONS--&gt;</code> with the icon file. Change the <code>.src.html</code> file, never the page it makes.</p>
 <code class="code-block">python3 tools/build.py</code>
 <p>The pages in <code>resources</code> are made from <code>resources/content</code>. After you change one, run this before <code>build.py</code>:</p>
@@ -30,14 +34,23 @@
 <code class="code-block">python3 tools/icons.py "$(tr '\n' ' ' &lt; tools/icons.txt)"</code>
 
 <h2 id="sync">Copy the library into the apps: sync.py</h2>
-<p>Copies <code>tokens.css</code>, <code>components.css</code>, <code>components.js</code> and the icons into Storyarr and Starboard, so both apps use the same components. It does not commit. Add <code>--check</code> to list what would change without writing anything.</p>
+<p>Copies <code>tokens.css</code>, <code>components.css</code>, <code>components.js</code> and the icons into Starboard, Stallboard and the two plug-ins that keep their own copy (<code>tv-station</code> and <code>outside-services</code>), so every app uses the same components. It does not commit. Storyarr, which was retired on 11 November 2026, is no longer synced. Add <code>--check</code> to list what would change without writing anything.</p>
 <code class="code-block">python3 tools/sync.py --check</code>
 <code class="code-block">python3 tools/sync.py</code>
-<p>By default it uses <code>../starboard</code> and <code>../storyarr</code> beside this repository. To use other folders, set <code>STARBOARD_WEB</code> and <code>STORYARR_SHARED</code>, or put them in <code>tools/paths.local.json</code>, which git ignores:</p>
+<p>By default it uses <code>../starboard</code>, <code>../stallboard</code> and <code>../starboard-plugins</code> beside this repository. To use other folders, set <code>STARBOARD_WEB</code>, <code>STALLBOARD_DS</code> and <code>PLUGINS_DIR</code>, or put them in <code>tools/paths.local.json</code>, which git ignores:</p>
 <code class="code-block">{
   "STARBOARD_WEB": "~/src/starboard/web",
-  "STORYARR_SHARED": "~/src/storyarr/apps/web/src/shared"
+  "STALLBOARD_DS": "~/src/stallboard/assets/ds",
+  "PLUGINS_DIR": "~/src/starboard-plugins"
 }</code>
+
+<h2 id="parts">Make the light form for an app: parts.py</h2>
+<p>Splits the library into a core and one file for each large component (a part), so an app loads a part only on the pages that use it. <code>sync.py</code> runs it for Starboard. <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/LIBRARY.md">The library guide</a> lists the parts.</p>
+<code class="code-block">python3 tools/parts.py</code>
+
+<h2 id="plain">Measure plain English: verbose-check.py</h2>
+<p>Counts long sentences, long paragraphs, filler phrases and pages over their word target. It only measures and never changes a file, and it warns instead of failing. <code>sync.py</code> copies it into Starboard.</p>
+<code class="code-block">python3 tools/verbose-check.py files docs/WIZARD.md</code>
 
 <h2 id="words">Keep banned words out: check_words.py</h2>
 <p>Checks the guides, the gallery, the Boards and resources pages, and the strings in <code>components.js</code> and the terminal frame for the words the content design guide bans, such as "see", "look", "click", "type" for entering, "above", "below" and "please". It leaves out code and a word quoted on its own. A genuine exception goes in <code>tools/words-allowed.txt</code>, with its reason. It ends with a list of lines to fix, or "none".</p>

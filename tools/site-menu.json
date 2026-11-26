@@ -1,0 +1,98 @@
+{
+ "foundations": [
+  [
+   "foundations/colour.html",
+   "sparkles",
+   "Colour"
+  ],
+  [
+   "foundations/accent-colours.html",
+   "sliders-horizontal",
+   "Accent colours"
+  ],
+  [
+   "foundations/type-space-icons.html",
+   "layout-grid",
+   "Type, space and icons"
+  ]
+ ],
+ "components": [
+  [
+   "components/shell.html",
+   "app-window",
+   "Shell"
+  ],
+  [
+   "components/actions.html",
+   "play",
+   "Actions"
+  ],
+  [
+   "components/inputs.html",
+   "pencil",
+   "Inputs"
+  ],
+  [
+   "components/content.html",
+   "file-text",
+   "Content"
+  ],
+  [
+   "components/containers.html",
+   "layout-grid",
+   "Panels, cards and tabs"
+  ],
+  [
+   "components/media.html",
+   "film",
+   "Covers, media and shelves"
+  ],
+  [
+   "components/settings-and-tools.html",
+   "settings",
+   "Settings and toolbars"
+  ],
+  [
+   "components/slide-outs-and-dialogs.html",
+   "panel-right-open",
+   "Slide-outs and dialogs"
+  ],
+  [
+   "components/app-patterns.html",
+   "gauge",
+   "App patterns"
+  ]
+ ],
+ "patterns": [
+  [
+   "patterns/choosing.html",
+   "list-checks",
+   "Choosing"
+  ],
+  [
+   "patterns/wizard.html",
+   "list-ordered",
+   "Wizard"
+  ],
+  [
+   "patterns/terminal.html",
+   "terminal",
+   "Terminal"
+  ],
+  [
+   "patterns/lists-and-changes.html",
+   "history",
+   "Lists and changes"
+  ],
+  [
+   "patterns/help.html",
+   "circle-help",
+   "Help"
+  ],
+  [
+   "patterns/dates.html",
+   "calendar",
+   "Dates"
+  ]
+ ]
+}

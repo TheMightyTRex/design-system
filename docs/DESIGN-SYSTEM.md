@@ -1,6 +1,6 @@
-# Storyarr design system
+# Design system
 
-Version 0.1 (draft for the redesign), 1 November 2026. The target every page moves towards. `COMPONENTS.md` lists what
+Version 0.2, 26 November 2026. The design system of Starboard, its plug-ins and Stallboard (it began in November 2026 as Storyarr's, which was retired on 11 November 2026). The target every page moves towards. `COMPONENTS.md` lists what
 exists today, and the redesign plan behind it is kept privately. Other guides cover other things:
 - words are in `CONTENT-DESIGN.md`, and changelogs are in `CHANGELOGS.md`
 - accessibility is in `ACCESSIBILITY.md`, `WCAG.md` and `ALT-TEXT.md`
@@ -133,7 +133,7 @@ Line height 1.5 for body, 1.25 for headings. Weights 400 and 600 only. Low-visio
   Under 1100px the sub-menu drops to a full-width row under search. On phones it lives in the ☰ drawer. Tabs show
   icons only (names as tooltips) when they do not fit.
 - **One control height:** search and every header, toolbar, panel and menu control is `--control-h` (44px;
-  Storyarr's `controls.css` still calls it `--control-height-large`). Never type 44px by hand; `--control-h-compact`
+  an older name was `--control-height-large`). Never type 44px by hand; `--control-h-compact`
   (32px) is the compact size for dense tables only. Split or framed controls give the frame the height.
 - **Page actions in the header are menus, not rows of buttons.** Related actions share one menu button (Lists: Add
   list, Refresh all lists, refresh one service). Menus open with focus on the first item, arrow keys move, and Escape
@@ -198,7 +198,7 @@ Line height 1.5 for body, 1.25 for headings. Weights 400 and 600 only. Low-visio
 
 ### Where status goes (2 November 2026)
 
-One rule for both apps, so a state is always in the same place relative to the thing it describes:
+One rule for every app, so a state is always in the same place relative to the thing it describes:
 
 | Place | Pattern | Example |
 |---|---|---|
@@ -215,7 +215,7 @@ One rule for both apps, so a state is always in the same place relative to the t
 
 ### Consistency rules (2 November 2026, from the design review)
 
-- **One name for one action.** Re-reading status is **Check again**, everywhere (page heads, slide-outs, Updates).
+- **One name for one action.** Re-reading status is **Check now**, everywhere: page heads, slide-outs, Updates and the actions of a plug-in. It is the same label before and after a first check (owner, 26 November 2026; it was Check again).
   **Run now** only starts a server job. Name a slower job by what it does (Storage: **Sort by type again**).
 - **One way to save settings.** Choices (option cards, selects, switches, radios) save as soon as they change, with a
   saved note beside the control (section 9). Text fields save with `.inline-save` (one field) or `.save-bar`
@@ -237,7 +237,7 @@ One rule for both apps, so a state is always in the same place relative to the t
 
   **Display and accessibility** and **Release notes** are slide-outs, not dialogs.
 - **Deliberate exception:** Starboard's Health first design fills a card that is not responding with the danger
-  background, as well as the edge and chip. Trouble then stands out from across the room. Other designs and Storyarr
+  background, as well as the edge and chip. Trouble then stands out from across the room. Other designs
   use the plain card.
 
 ## 6. Filters and the address
@@ -265,7 +265,7 @@ once and checks both stick.
 
 ## 8. Terminal
 
-Both apps also run in a terminal, in the Run first script, the installer and the terminal set-up. A terminal wizard is
+Every app also runs in a terminal, in the Run first script, the installer and the terminal set-up. A terminal wizard is
 the same wizard as the browser one, with the same steps, words, answers and help, drawn as text (`WIZARD.md`, One
 wizard, two ways to show it). The full rules are in `TERMINAL.md`, and the code is in `terminal/`.
 

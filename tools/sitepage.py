@@ -2,8 +2,9 @@
 footer around a page's body, so every page of the site has the same menu. The logo, Display slide-out and
 footer are copied from gallery.src.html, so they stay the same as the gallery's.
 
-Used by resources/make.py, areas/storyarr-gen/b_index.py and areas/_starboard/index.py. Each writes a
-.src.html file; then run tools/build.py to add the icons."""
+Used by resources/make.py, areas/make_index.py and the boards. Each writes a .src.html file; then run
+tools/build.py to add the icons. Storyarr was retired on 11 November 2026; its boards are archived in
+areas/archive/storyarr/ and are not part of the site's menus."""
 import html, pathlib, re
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -25,7 +26,8 @@ STORYARR_LOGO = ('<svg class="s-logo" viewBox="0 0 64 64" aria-hidden="true" foc
                  '<rect x="25" y="13" width="4" height="10" fill="#fff"/><rect x="30" y="7" width="4" height="16" fill="#fff"/>'
                  '<rect x="35" y="11" width="4" height="12" fill="#fff"/></svg>')
 
-# The two apps whose boards the site shows.
+# The app whose boards the site shows, and the archived app (Storyarr, retired 11 November 2026), whose archive page uses
+# the same layout.
 APPS = {
     "starboard": {
         "name": "Starboard", "logo": STARBOARD_LOGO, "repo": "https://github.com/TheMightyTRex/starboard",
@@ -34,29 +36,38 @@ APPS = {
     },
     "storyarr": {
         "name": "Storyarr", "logo": STORYARR_LOGO, "repo": "https://github.com/TheMightyTRex/storyarr",
-        "about": "Follow authors and series and keep your audiobook library complete. Built with React, which "
-                 "wraps the library's classes in its own components.",
+        "about": "Retired on 11 November 2026. Its boards are kept here as a record: they are not updated, and they "
+                 "use the library as it was.",
     },
 }
 
 # The main menu (header row 1), the same on every page of the site. Paths are from the site's root.
 MAIN = [
-    ("components", "gallery.html", "layout-grid", "Components"),
+    ("foundations", "foundations/index.html", "sliders-horizontal", "Foundations"),
+    ("components", "components/index.html", "layout-grid", "Components"),
+    ("patterns", "patterns/index.html", "list-checks", "Patterns"),
+    ("guides", "guides/index.html", "book-open", "Guides"),
     ("boards", "areas/index.html", "monitor", "Boards"),
-    ("guides", "https://github.com/TheMightyTRex/design-system/tree/main/docs", "file-text", "Guides"),
     ("resources", "resources/index.html", "wrench", "Resources"),
 ]
 
-# Each main menu item's own pages (header row 2), when it has more than one.
+# Each main menu item's own pages (header row 2), when it has more than one. site.py adds the foundations,
+# components and patterns pages from its own list (PARTS), so the menu always matches the pages.
 SUB = {
     "boards": [("areas/index-starboard.html", STARBOARD_LOGO, "Starboard"),
-               ("areas/index-storyarr.html", STORYARR_LOGO, "Storyarr")],
+               ("areas/archive/storyarr/index-storyarr.html", "archive", "Storyarr archive")],
     "resources": [("resources/index.html", "house", "Overview"),
                   ("resources/tools.html", "wrench", "Tools"),
                   ("resources/outside-tools.html", "globe", "Outside tools"),
                   ("resources/make-a-change.html", "file-pen", "Make a change"),
                   ("resources/get-feedback.html", "send", "Get feedback")],
 }
+try:  # The generated list of the component pages, written by tools/site.py.
+    import json as _json
+    for _key, _pages in _json.loads((ROOT / "tools" / "site-menu.json").read_text()).items():
+        SUB[_key] = [tuple(p) for p in _pages]
+except FileNotFoundError:
+    pass
 
 CSS = """
   /* The site's own layout; not part of the library. */
@@ -73,9 +84,31 @@ CSS = """
   .s-nav .s-group { margin-top: var(--space-4); color: var(--color-text-muted); font-size: var(--text-xs); font-weight: 700; padding: 0 var(--space-3); }
   .s-main { min-width: 0; }
   .s-main .page h2 { scroll-margin-top: calc(var(--header-h) + var(--tabs-h) + var(--space-4)); }
+  .s-nav .s-nav-pages { margin-bottom: var(--space-4); }
+  .s-nav a[aria-current] { border-left-color: var(--color-accent); font-weight: 700; }
+  .s-crumbs { padding: var(--space-3) var(--space-8) 0; font-size: var(--text-sm); }
+  .s-pager { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-3); padding: var(--space-6) var(--space-8); border-top: 1px solid var(--color-divider); margin-top: var(--space-8); }
+  .s-pager a { display: grid; gap: 2px; padding: var(--space-3) var(--space-4); border: 1px solid var(--color-border); color: var(--color-text); text-decoration: none; min-width: 12rem; }
+  .s-pager a:hover { background: var(--color-control-active); }
+  .s-pager small { color: var(--color-text-muted); }
+  .s-pager .s-next { margin-inline-start: auto; text-align: end; }
+  .s-landing { display: grid; gap: var(--space-8); padding: var(--space-8); max-width: 1180px; }
+  .s-landing ul.s-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--space-4); }
+  .s-doc { padding: var(--space-8); max-width: 1000px; }
+  .s-doc .prose { max-width: 80ch; }
+  .s-doc table { border-collapse: collapse; width: 100%; font-size: var(--text-sm); }
+  .s-doc th, .s-doc td { text-align: left; vertical-align: top; padding: var(--space-2) var(--space-3); border: 1px solid var(--color-divider); }
+  .s-doc th { background: var(--color-surface-sunken); }
+  .s-doc .s-scroll { overflow-x: auto; max-width: 100%; }
+  .s-doc pre { overflow-x: auto; padding: var(--space-3); background: var(--color-surface-sunken); border: 1px solid var(--color-divider); }
+  .s-doc code { overflow-wrap: anywhere; }
+  .s-icons { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--space-2); }
+  .s-icons li { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2); border: 1px solid var(--color-divider); font-size: var(--text-xs); }
+  .site-header__search { margin-inline-start: auto; }
   @media (max-width: 860px) {
     .s-shell { grid-template-columns: 1fr; }
     .s-nav { display: none; }
+    .s-crumbs, .s-pager, .s-landing, .s-doc { padding-inline: var(--space-4); }
   }
 """
 
@@ -149,6 +182,7 @@ def page(*, root, main, current, title, body, side=None, css="", note="", script
                 f'{{{{i-lg:{icon}}}}}{name}{{{{i:chevron-right phone-menu__chevron}}}}</button><ul id="s-sm-{key}"{"" if here else " hidden"}>{items}</ul></div>')
         else:
             phone.append(f'<div class="phone-menu__section"><a href="{_href(root, path)}"{_current(key == main)}>{{{{i-lg:{icon}}}}}{name}</a></div>')
+    phone.append(f'<div class="phone-menu__section"><a href="{root}search.html">{{{{i-lg:search}}}}Search</a></div>')
     content = f'<main class="s-main" id="main" tabindex="-1">\n{body}\n</main>'
     if side:
         content = f'<div class="s-shell">\n{side}\n{content}\n</div>'
@@ -169,8 +203,9 @@ def page(*, root, main, current, title, body, side=None, css="", note="", script
 <header class="site-header site-header--no-rail">
   <div class="site-header__bar">
     <button class="icon-btn phone-menu-button" type="button" data-opens="s-site-menu" aria-controls="s-site-menu" aria-expanded="false">{{{{i-lg:menu}}}}<span class="visually-hidden">Menu</span></button>
-    <a class="site-header__brand" href="{root}gallery.html">{LOGO.replace('<svg class="g-logo"', '<svg class="g-logo" width="28" height="28"', 1)}<span>TRex Design System</span></a>
+    <a class="site-header__brand" href="{root}index.html">{LOGO.replace('<svg class="g-logo"', '<svg class="g-logo" width="28" height="28"', 1)}<span>TRex Design System</span></a>
     <nav class="menu-tabs" aria-label="Main">{main_tabs}</nav>
+    <form class="site-header__search search-field" role="search" action="{root}search.html"><label class="visually-hidden" for="s-search">Search the design system</label><input class="input" id="s-search" name="q" type="search" placeholder="Search" autocomplete="off"></form>
     <div class="site-header__actions"><button class="icon-btn" type="button" data-opens="g-panel-display" aria-haspopup="dialog" aria-expanded="false">{{{{i-lg:sun}}}}<span class="label">Display</span></button></div>
   </div>{row2}
 </header>
@@ -184,7 +219,7 @@ def page(*, root, main, current, title, body, side=None, css="", note="", script
   </nav>
 </div>
 {content}
-{FOOTER}
+{FOOTER.replace("https://github.com/TheMightyTRex/design-system/tree/main/docs", root + "guides/index.html")}
 {DISPLAY}
 <script src="{root}components.js"></script>
 {SCRIPT}
@@ -273,7 +308,7 @@ BOARD_SCRIPT = """<script>
 </script>"""
 
 
-def boards_page(app, body, *, date, note):
+def boards_page(app, body, *, date, note, root="../", current=None):
     """An app's boards page. body holds the overview's notice and sections, with links to <app>-<slug>.html."""
     a = APPS[app]
     prefix = f"{app}-"
@@ -300,7 +335,7 @@ def boards_page(app, body, *, date, note):
   <div class="b-bar"><h1 id="b-title" tabindex="-1">Board</h1><div class="actions"><a class="btn btn--compact" href="#">{{{{i:arrow-left}}}}All {a["name"]} boards</a><a class="btn btn--compact" id="b-own" href="#">{{{{i:external-link}}}}Open on its own</a></div></div>
   <iframe class="b-frame" title="Board"></iframe>
 </section>"""
-    out = page(root="../", main="boards", current=f"areas/index-{app}.html", title=f"{a['name']} boards", body=main,
+    out = page(root=root, main="boards", current=current or f"areas/index-{app}.html", title=f"{a['name']} boards", body=main,
                side=side, css=BOARD_CSS, note=note, script=BOARD_SCRIPT)
     return out.replace("<body>", f'<body data-prefix="{prefix}">', 1)
 
@@ -308,11 +343,11 @@ def boards_page(app, body, *, date, note):
 def boards_landing(counts):
     """The Boards landing page: both apps, each with its logo, what it is and how many boards it has."""
     cards = "".join(
-        f'<li class="card b-card"><div class="b-head">{a["logo"]}<h2 class="card__title"><a href="index-{key}.html">{a["name"]}</a></h2></div>'
+        f'<li class="card b-card"><div class="b-head">{a["logo"]}<h2 class="card__title"><a href="{"archive/storyarr/index-storyarr.html" if key == "storyarr" else f"index-{key}.html"}">{a["name"]}{" (archive)" if key == "storyarr" else ""}</a></h2></div>'
         f'<p>{a["about"]}</p><p class="b-facts"><span>{counts[key]} boards</span></p></li>'
         for key, a in APPS.items())
     body = f"""<div class="page" style="max-width:1100px">
-<div class="page-head"><div class="page-head__text"><h1>Boards</h1><p class="page-head__summary">Every area of Starboard and Storyarr as a full page, built only from the shared component library.</p></div></div>
+<div class="page-head"><div class="page-head__text"><h1>Boards</h1><p class="page-head__summary">Every area of Starboard as a full page, built only from the shared component library. The boards of Storyarr, which was retired on 11 November 2026, are kept in an archive.</p></div></div>
 <ul class="b-cards">{cards}</ul>
 <div class="prose">
 <h2>What a board is</h2>

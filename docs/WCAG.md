@@ -16,7 +16,7 @@ library already does and what each app must still do on its own pages. The check
 
 ### Who it is for
 
-Anyone who builds, reviews or tests a page of Storyarr or Starboard, or uses the design system for their
+Anyone who builds, reviews or tests a page of Starboard or Stallboard, or uses the design system for their
 own work. No knowledge of WCAG is needed: each point is explained in plain words, with its success
 criterion number for anyone who wants the full text.
 
@@ -71,7 +71,7 @@ In each table, "The library" is what `tokens.css`, `components.css` and `compone
 | Moving content can be paused | 2.2.2 | Reduce motion stops animation; the loading bar stops when idle | Give anything that moves for over 5 seconds a pause control |
 | Nothing flashes | 2.3.1 | Nothing in the library flashes | Never show flashing content |
 | A way to skip to the content | 2.4.1 | `.skip-link`, the first thing on every page | Put the skip link first |
-| Pages and frames have titles | 2.4.2 | The gallery and boards name every page and frame | "Activity · Storyarr": the page, then the app |
+| Pages and frames have titles | 2.4.2 | The gallery and boards name every page and frame | "Updates · Starboard": the page, then the app |
 | A logical focus order | 2.4.3 | Slide-outs and dialogs move focus in and return it to the opener | Keep the order the page reads in |
 | Links that say where they go | 2.4.4 | Link and button patterns in `CONTENT-DESIGN.md` section 4 | Name the destination and any file type |
 | Meaningful headings and labels | 2.4.6 | Every field has a visible label | Follow `CONTENT-DESIGN.md` |
@@ -87,7 +87,7 @@ In each table, "The library" is what `tokens.css`, `components.css` and `compone
 |---|---|---|---|
 | The page's language is set | 3.1.1 | Every page is `lang="en-GB"` | Set `lang` on `html` |
 | A change of language is marked | 3.1.2 | Nothing: the library has no foreign text | Mark a book title or name in another language with `lang`, such as `lang="fr"` |
-| Navigation in the same place every time | 3.2.3 | One header, one main menu and one phone menu in both apps | Use the shell, never a page-specific menu |
+| Navigation in the same place every time | 3.2.3 | One header, one main menu and one phone menu in every app | Use the shell, never a page-specific menu |
 | Help in the same place every time | 3.2.6 (new in 2.2) | Help is in the footer of every page, in an app with a help centre | Keep Help in the footer |
 | Errors identified and explained | 3.3.1, 3.3.3 | `.field-error` beside the field, tied to it by `aria-describedby`; the error summary links to each one and takes the focus | Say what is wrong and how to fix it (`CONTENT-DESIGN.md`, Error) |
 | Labels and instructions | 3.3.2 | `.field__label` and `.hint` on every field | Put instructions before the field, not in the placeholder |
