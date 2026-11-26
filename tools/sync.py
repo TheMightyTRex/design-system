@@ -73,12 +73,16 @@ if STARBOARD.exists():
         for name in parts_js:
             write(STARBOARD / "css/parts" / f"{name}.css", parts_css[name], new=True)
             write(STARBOARD / "js/parts" / f"{name}.js", parts_js[name], new=True)
+        for name in parts.css_only(components):  # styles with no script: a page loads the file and nothing else
+            write(STARBOARD / "css/parts" / f"{name}.css", parts_css[name], new=True)
     else:
         write(STARBOARD / "css/components.css", components)
         write(STARBOARD / "js/components.js", behaviour)
     # The palettes, for the own style's colours (owner, 13 November 2026): loaded only when one is chosen.
     write(STARBOARD / "css/palettes.css", (HERE / "palettes/app-palettes.css").read_text(), new=True)
     write(STARBOARD / "palettes.json", (HERE / "palettes/palettes.json").read_text(), new=True)
+    # The brand logos of the places for backups (Simple Icons, CC0): one small file, loaded only where a page uses them.
+    write(STARBOARD / "icons/services.svg", (HERE / "service-logos.svg").read_text(), new=True)
     sprite = STARBOARD / "icons/sprite.svg"
     own = dict(re.findall(r'<symbol id="i-([^"]+)"[^>]*>(.*?)</symbol>', sprite.read_text(), re.S)) if sprite.exists() else {}
     merged = {**own, **icons}

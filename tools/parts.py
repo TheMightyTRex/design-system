@@ -7,7 +7,7 @@ are marked in the source as parts, from "part: name" to "/part". An app that cou
 lightweight first, DASH-507) loads the core on every page and a part only on the pages that use it:
 
     css/components.css              the core (components.css without the parts)
-    css/parts/<name>.css            one part's styles, in @layer shared
+    css/parts/<name>.css            one part's styles, in @layer shared (a part marked "css-only: yes" has no script)
     js/components.js                the core (components.js without the parts)
     js/parts/<name>.js              one part's behaviour: load it after the core, and after the parts it needs
 
@@ -51,6 +51,12 @@ def _cut(text, name_of_file):
     if now:
         raise ValueError(f"{name_of_file}: part {now} is never closed")
     return "\n".join(core), parts
+
+
+def css_only(text):
+    """The names of the parts in components.css that are marked "css-only: yes": styles with no behaviour."""
+    _, parts = _cut(text, "components.css")
+    return sorted(name for name, p in parts.items() if p.get("css-only") == ["yes"])
 
 
 def css(text):
@@ -122,8 +128,9 @@ def check():
     for word in sorted(moved):
         if re.search(rf"(?<![\w.$]){re.escape(word)}\b", bare(core)):
             problems.append(f"the core uses {word}, which is in a part")
+    only = css_only((HERE / "components.css").read_text())
     for name in parts_css:
-        if name not in parts:
+        if name not in parts and name not in only:
             problems.append(f"part {name} has styles and no behaviour marked in components.js")
     for text, what in ((core_css, "core styles"), *((t, f"part {n} styles") for n, t in parts_css.items())):
         if text.count("{") != text.count("}"):
@@ -135,6 +142,8 @@ def check():
     print(f"core   {size(core_css) + size(core_js):>7,}")
     for name in parts:
         print(f"  {name:<16} {size(parts_css.get(name, '')) + size(parts_js[name]):>6,}")
+    for name in only:
+        print(f"  {name:<16} {size(parts_css[name]):>6,}  (styles only)")
     for line in problems:
         print("PROBLEM", line)
     return 1 if problems else 0

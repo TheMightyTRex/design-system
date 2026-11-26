@@ -11,11 +11,11 @@ root = pathlib.Path(__file__).resolve().parent.parent
 NOT_TOKENS = {
     "--radius-1": "--radius", "--radius-2": "--radius", "--radius-3": "--radius", "--radius-control": "--radius",
     "--focus-width": "--focus-w", "--weight-normal": "--weight-regular", "--text-base": "--text-md",
-    "--font-mono": "ui-monospace, monospace",
 }
 # Set by a style or a page, not by tokens.css: a style's own choices, and values a page sets on one element.
 SET_ELSEWHERE = {"--color-rail", "--font-heading", "--flow-w", "--logo", "--logo-ratio", "--shelf-arrow-top",
-                 "--show-art-bg", "--show-art-fg", "--stages", "--sw-a", "--sw-b", "--type-colour", "--cover-w"}
+                 "--show-art-bg", "--show-art-fg", "--stages", "--sw-a", "--sw-b", "--type-colour", "--cover-w",
+                 "--topic-tabs-h"}  # --topic-tabs-h: the page's script sets the height of the page topic tabs
 
 
 def main(argv):
