@@ -333,7 +333,8 @@ def guides(page_of):
     for g in dict.fromkeys(g for _, _, g in GUIDES):
         rows = "".join(f'<li class="row row--no-lead"><div><span class="row__title"><a href="{p}">{esc(t)}</a></span></div></li>'
                        for t, p, gg in pages_list if gg == g)
-        cards += f'<section class="stack-3" aria-labelledby="g-{abs(hash(g)) % 9999}"><h2 id="g-{abs(hash(g)) % 9999}">{esc(g)}</h2><ul class="rows">{rows}</ul></section>'
+        gid = "g-" + re.sub(r"[^a-z0-9]+", "-", g.lower()).strip("-")  # the same on every run, so a rebuild changes nothing
+        cards += f'<section class="stack-3" aria-labelledby="{gid}"><h2 id="{gid}">{esc(g)}</h2><ul class="rows">{rows}</ul></section>'
     body = (crumbs([("Home", "../index.html"), ("Guides", None)]) +
             f'<div class="s-landing"><div class="page-head"><div class="page-head__text"><h1>Guides</h1><p class="page-head__summary">The written rules: how to build, write and test. Each guide is one page.</p></div></div>{cards}</div>' +
             pager(None, (ordered[0][0], ordered[0][1])))

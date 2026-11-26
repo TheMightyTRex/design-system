@@ -66,10 +66,11 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 |---|---|---|
 | Colour roles | `--color-*`, `--status-<tone>-bg/-fg`, `--chart-*`, `--series-1` to `--series-7`, `--series-empty` | Four themes; accent is one token (UX-02 board offers Indigo, Teal, Amber) |
 | Accent colours | `palettes/teal.css`, `dusk.css`, `lime.css`, `rose.css`, `amber.css`, `graphite.css` (Blue, the default, is `tokens.css`; Teal is the colour before Mica) | An accent over Mica's neutral greys: load `tokens.css`, one palette, then `components.css`. Each sets the accent, its soft tint, the chosen item, the count and the logo in Light, Dark, High contrast and High contrast dark (a stronger shade, 7:1). Surfaces, text, focus, status colours and chart series stay the same. Written by `tools/palettes.py` and checked by `tools/check_accents.py`. For an app where people choose (Starboard's own style), `palettes/app-palettes.css` holds all six under `:root[data-palette="…"]`; `tools/sync.py` copies it to Starboard's `css/palettes.css` with `palettes.json`. An app's own styles still win |
-| Type | `--text-xs` to `--text-2xl`, `--font` | One typeface; scales with Text size |
-| Space and size | `--space-1` to `--space-12`, `--control-h` (44px), `--control-h-compact` (32px, dense tables only) | |
+| Type | `--text-xs` to `--text-2xl`, `--font`, `--font-mono` | One typeface; scales with Text size. `--font-mono` is the system's monospace face, for code, addresses and keys |
+| Space and size | `--space-1` to `--space-12`, `--control-h` (44px), `--control-h-compact` (32px, dense tables only), `--radius` (6px), `--radius-sm` (4px), `--radius-md` (8px) | `--radius-sm` and `--radius-md` are for Starboard's own small and large boxes; they do not follow `--radius` |
+| Status words in text | `--color-success-text`, `--color-danger-text` | The colour of a status word that sits in a line of text, not a chip. Both are the text colour: the word and its icon carry the status. A style may set them to `--status-success-fg` and `--status-danger-fg` |
 | Icons | `icons.svg`, `svg.i`, `.i-lg`, `.i-xl` | Lucide, 2px stroke, decorative beside words |
-| Utilities | `.nowrap`, `.clamp-2`, `.clamp-3`, `.visually-hidden`, `.skip-link`, `.muted`, `.small`, `.numeric`, `code`, `.code-block`, `.stack-1`, `.stack-2`, `.stack-4` | Stacks put children one under another with a 4, 8 or 16px gap |
+| Utilities | `.nowrap`, `.clamp-2`, `.clamp-3`, `.visually-hidden`, `.skip-link`, `.muted`, `.small`, `.numeric`, `code`, `.code-block`, `.stack-1` to `.stack-5` | Stacks put children one under another with a 4, 8, 12, 16 or 20px gap |
 
 ### Shell
 | Component | Classes | Notes |
@@ -438,3 +439,4 @@ Built from the tokens, used by one app, so not in `components.css`. Starboard bu
 - **Plug-ins:** `tv-station` has its own time grid and drag-and-drop palette. Stallboard builds its own header, filters and tiles over the library, and redefines `.shelf`.
 
 - 11 November 2026: `--font-heading` (headings h1 to h4) and `--color-rail` (the side menu) are optional, for Starboard's styles. Unset, nothing changes.
+- 26 November 2026, defined: `--radius-sm`, `--radius-md`, `--font-mono`, `--color-success-text`, `--color-danger-text`, `.stack-3`, `.stack-5`, `.input--narrow`, `.select--compact`, `.field__error` (the same as `.field-error`) and `.btn--secondary` (drawn the same as `.btn`) are defined. The apps used them with no definition, so each took a fallback or nothing (audit of 26 November 2026).

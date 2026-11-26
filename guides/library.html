@@ -379,13 +379,18 @@ and wider spacing.</p>
 </tr>
 <tr>
 <td>Type</td>
-<td><code>--text-xs</code> to <code>--text-2xl</code>, <code>--font</code></td>
-<td>One typeface; scales with Text size</td>
+<td><code>--text-xs</code> to <code>--text-2xl</code>, <code>--font</code>, <code>--font-mono</code></td>
+<td>One typeface; scales with Text size. <code>--font-mono</code> is the system's monospace face, for code, addresses and keys</td>
 </tr>
 <tr>
 <td>Space and size</td>
-<td><code>--space-1</code> to <code>--space-12</code>, <code>--control-h</code> (44px), <code>--control-h-compact</code> (32px, dense tables only)</td>
-<td></td>
+<td><code>--space-1</code> to <code>--space-12</code>, <code>--control-h</code> (44px), <code>--control-h-compact</code> (32px, dense tables only), <code>--radius</code> (6px), <code>--radius-sm</code> (4px), <code>--radius-md</code> (8px)</td>
+<td><code>--radius-sm</code> and <code>--radius-md</code> are for Starboard's own small and large boxes; they do not follow <code>--radius</code></td>
+</tr>
+<tr>
+<td>Status words in text</td>
+<td><code>--color-success-text</code>, <code>--color-danger-text</code></td>
+<td>The colour of a status word that sits in a line of text, not a chip. Both are the text colour: the word and its icon carry the status. A style may set them to <code>--status-success-fg</code> and <code>--status-danger-fg</code></td>
 </tr>
 <tr>
 <td>Icons</td>
@@ -394,8 +399,8 @@ and wider spacing.</p>
 </tr>
 <tr>
 <td>Utilities</td>
-<td><code>.nowrap</code>, <code>.clamp-2</code>, <code>.clamp-3</code>, <code>.visually-hidden</code>, <code>.skip-link</code>, <code>.muted</code>, <code>.small</code>, <code>.numeric</code>, <code>code</code>, <code>.code-block</code>, <code>.stack-1</code>, <code>.stack-2</code>, <code>.stack-4</code></td>
-<td>Stacks put children one under another with a 4, 8 or 16px gap</td>
+<td><code>.nowrap</code>, <code>.clamp-2</code>, <code>.clamp-3</code>, <code>.visually-hidden</code>, <code>.skip-link</code>, <code>.muted</code>, <code>.small</code>, <code>.numeric</code>, <code>code</code>, <code>.code-block</code>, <code>.stack-1</code> to <code>.stack-5</code></td>
+<td>Stacks put children one under another with a 4, 8, 12, 16 or 20px gap</td>
 </tr>
 </tbody>
 </table></div>
@@ -1333,6 +1338,7 @@ Snaglist and the plug-in collection use it. Build one here with <code>tools/help
 <li>
 <p>11 November 2026: <code>--font-heading</code> (headings h1 to h4) and <code>--color-rail</code> (the side menu) are optional, for Starboard's styles. Unset, nothing changes.</p>
 </li>
+<li>26 November 2026, defined: <code>--radius-sm</code>, <code>--radius-md</code>, <code>--font-mono</code>, <code>--color-success-text</code>, <code>--color-danger-text</code>, <code>.stack-3</code>, <code>.stack-5</code>, <code>.input--narrow</code>, <code>.select--compact</code>, <code>.field__error</code> (the same as <code>.field-error</code>) and <code>.btn--secondary</code> (drawn the same as <code>.btn</code>) are defined. The apps used them with no definition, so each took a fallback or nothing (audit of 26 November 2026).</li>
 </ul>
 </div></div><nav class="s-pager" aria-label="Previous and next"><a class="s-prev" href="design-system.html" rel="prev"><small>Previous</small><span>Design system</span></a><a class="s-next" href="components.html" rel="next"><small>Next</small><span>Components by area</span></a></nav>
 </main>
