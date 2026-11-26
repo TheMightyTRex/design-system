@@ -91,7 +91,7 @@ separate low-vision font switch.
 
 ## 3. Components and their accessibility contract
 
-Menu rows (the 2nd level tabs that condense to icons): see [Menu rows: condensing and accessibility](LIBRARY.md#menu-rows-condensing-and-accessibility) and the gallery page Components, Menus and tabs.
+Menu rows (the 2nd level tabs that condense to icons): read [Menu rows: condensing and accessibility](LIBRARY.md#menu-rows-condensing-and-accessibility) and the gallery page Components, Menus and tabs.
 
 | Component | Contract |
 |---|---|
