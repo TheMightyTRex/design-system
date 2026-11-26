@@ -9,6 +9,7 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 26 November 2026
 
+- **Counts and clock times in words (Starboard patterns audit):** `SharedComponents.plural(n, one, many)`, `SharedComponents.clock(date)` and `SharedComponents.num(n)`. Starboard had eight copies of `plural` in four shapes and three of the clock.
 - **A waiting mark builder (Starboard patterns audit):** `SharedComponents.wait(words)` returns the `.wait` line, the ring and the words, so a page does not write a plain "Loading…". Starboard had 21 of them and no use of `.wait`.
 - **A notice builder (Starboard patterns audit):** `SharedComponents.notice(tone, title, text, options)` draws a `.notice` with one icon for each tone and `role="status"` unless the error blocks. Starboard had ten copies of it with nine different bodies.
 - **Four more styles-only parts (Starboard patterns audit):** the styles of components that no page of Starboard, its plug-ins, Stallboard or Snaglist uses (split button, applied filters, timeline, shelf, the logo picker, the wizard review aids and more, 591 lines) are the parts `extras`, `media-extras`, `logo-picker` and `wizard-review`. An app with a parts folder no longer loads them. The gallery and the help centre load them as before. `tools/parts.py` accepts a part that is marked in more than one place.
