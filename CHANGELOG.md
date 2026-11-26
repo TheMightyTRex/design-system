@@ -9,6 +9,8 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 26 November 2026
 
+- **The content guide follows the Plain English Campaign.** Rules 2.12, 2.14 and 2.15 now ask for an average sentence of 15 to 20 words and none over 25, plain words, and an explanation of technical words. New rules 2.25 to 2.27 cover hidden verbs, reading level (grade 6, or 8 for developer pages and changelogs) and word targets as warnings. `docs/CHANGELOGS.md` asks for one sentence per entry.
+- **A Plain English check, warn only.** `tools/verbose-check.py ci` warns about the lines a pull request adds, and `tools/sync.py` copies it into Starboard. It fails on nothing yet; the failing part, for a sentence over 25 words or a paragraph over 4 sentences, waits until a repository has fewer than 100 long sentences.
 - **Plainer wording (DASH-593):** the README, the guides in `docs/` and the resources pages now have shorter sentences, with no change in meaning.
 
 ## 23 November 2026

@@ -45,7 +45,7 @@ change the copies inside the apps.
 | `docs/SECURITY-CHECKS.md` | The security checks both apps run, how to sort what they find, and how to record the results and release notes |
 | `resources/` | The Design resources and tools pages: what you can use, the tools, outside tools, how to make a change and how to get feedback |
 | `tools/help_centre/` | The help centre builder every app's help uses: Markdown and `help-centre.json` in, the standard help centre out (`docs/HELP-WRITING.md` section 11) |
-| `tools/` | Build, contrast, icon, sync and privacy scripts |
+| `tools/` | Build, contrast, icon, sync, privacy and Plain English (`verbose-check.py`, warns only) scripts |
 
 ## Help centre components
 
