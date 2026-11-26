@@ -78,7 +78,7 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 |---|---|---|
 | Side menu (rail) | `.rail`, `.rail__brand` and `.rail__name` (logo with the name underneath), `.rail__logo` (logo only), `.rail__search`, `.rail__end`, `.rail__version`, `.with-rail` | Both apps; hidden on phones. `.rail__search` comes straight after the brand. The app's version, "v0.9.1", sits at the bottom in `.rail__end > .rail__version`, a link to the app's update page. When a newer release is out, an `.update-dot` sits directly before the number inside the link and pulses gently (still when Reduce motion is active), and the link's hidden text and title say "update available" with the version |
 | Header | `.site-header`, `.site-header--no-rail` (pages without a rail: name and logo start row 1), `.site-header__bar`, `.site-header__brand`, `.site-header__search`, `.site-header__search-btn` (phones), `.site-header__server` (the server name, start of the level 1 menu), `.site-header__actions`, `.site-header__tabs` | Row 1: 1st level, search, Help, Display. Row 2: 2nd level, only when the page has tabs. Nothing else. Help opens the help centre article for the page you are on, not the help centre's front page: the article for what the page does, or the help index's section when no one article covers the page. Its hidden text names the article's subject ("Help with checking your disks' health (opens in a new tab)"). Every page with the header has its own link, kept in one list in the app, and the app's build stops if a page has none or an article is missing |
-| Menu tabs (level 1 and level 2 menus) | `.menu-tabs`, `.menu-tabs__label`, `.is-compact` | Icons and names; icons only when they do not fit; current page bar |
+| Menu tabs (level 1 and level 2 menus) | `.menu-tabs`, `.menu-tabs__label`, `.is-compact` | Icons and names; icons only when they do not fit (each tab's name is then its tooltip); `.menu-tabs--scroll` on a 2nd level menu with many tabs that need different icons keeps every tab 44px wide, scrolls the row sideways and shows the name of the current tab and of the tab with focus; current page bar |
 | Count and update dot | `.count`, `.update-dot` | Meaning in hidden text |
 | Phone menu | `.phone-menu-button`, `.phone-menu`, `.phone-menu__section > a` (an item with no 1st level), `.phone-menu__search`, `.phone-menu__section`, `.phone-menu__foot` | Drawer from the left; search, main menu, 1st level; the version and sign out at the foot |
 | Page and page head | `.page`, `.page--narrow` (Sign in, Set up), `.section-head`, `.section-head__control`, `.page-head`, `.page-head__text`, `.page-head__summary` | One visible h1; page actions on the right |
@@ -133,7 +133,7 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 | Section group | `section.settings-section.settings-section--group` holding `section.settings-section` cards with h3 headings | One topic with several cards, such as a plug-in's General (State, Versions, Jobs, What it may do, Remove); topic tabs give the group one tab (19 November 2026) |
 | File picker | `.file-field` > `span.btn.file-field__button` (icon, words, `input[type=file]`) + `.file-field__name` (`.is-chosen` once a file is chosen) | Every file upload: a button in the site's style, "Choose a file", with the file's name and size beside it, then "Choose another file"; the real input lies over the button, so keyboards and screen readers work as usual. The form's button says what happens, such as "Upload and check" (owner, 19 November 2026) |
 | Status chip | `.chip[data-tone]` | Word, shape and colour: dot, diamond (warning), square (danger), ring (muted). On a phone, a chip with an icon in a list row (`.rows .row`) shows its icon only; screen readers still read the words (19 November 2026) |
-| Title with status | `.title-status`, `.title-status__chips` | A heading's status chips straight after the name, centred on its line; never on a line under it (read "Where status goes") |
+| Title with status | `.title-chip` (the title and one chip: Starboard uses this), `.title-status`, `.title-status__chips` (several chips after the name; no app uses it yet) | A heading's status chips straight after the name, centred on its line; never on a line under it (read "Where status goes") |
 | Status icon | `.status-icon[data-tone]` with `tabindex="0"` and `data-tooltip` | In a list of things with a state: an icon after the name, the word in hidden text and the library's tooltip (since 20 November 2026, not `title`, so keyboards reach it) |
 | Tag | `.tag` | Format or kind, not status |
 | Avatar, app icon | `.avatar`, `.app-icon`, `.app-icon--compact` (32px) | Initials on a tile when there is no logo; `.has-image` for a logo |
@@ -184,7 +184,7 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 | Solid-colour logo, wordmark | `.logo-mask` (`--logo`, `--logo-ratio`, `data-colour="accent"`), `.wordmark` | Any transparent logo as one colour through a CSS mask; the name set large when there is none |
 | Logo slide-out (UX-43) | `.logo-saved`, `.logo-saved__row`, `.logo-saved__text`, `.logo-tabs`, `.logo-pane`, `.logo-step`, `.logo-candidates`, `.logo-candidate` (`__art`, `__text`), `.cover-pick`, `.logo-crop` (`__canvas`, `__controls`, `__readout`), `.range`, `.checker`, `.logo-drop`, `.logo-preview` (`__light`, `__dark`), `.inline-form` | From a cover, Find online, Upload your own; the saved copy and Remove |
 | Back link, breadcrumbs | `.back-link`, `.breadcrumbs` | "Back to My library"; folder paths |
-| Shelf | `.shelf`, `.shelf__head`, `.shelf__caption`, `.shelf__end`, `.shelf__track` | Discover shelves: one row that scrolls, arrows on computers |
+| Shelf | `.shelf`, `.shelf__head`, `.shelf__caption`, `.shelf__end`, `.shelf__track`; in use: `.shelf-scroller`, `.shelf-track`, `.shelf-edge`, `.shelf-arrow` | Discover shelves: one row that scrolls, arrows on computers. Starboard uses the four in-use classes; the `.shelf__*` ones are for a page that wants its own head and caption. Stallboard calls its two-column layout `.shelf` too, which clashes: it should be renamed `.store-layout` (open) |
 | Calendar month | `.calendar` (a `table`), `td[data-outside]`, `td[aria-current="date"]`, `.calendar__day` | List view on phones |
 | Selection bar | `.selection-bar`, `.selection-bar__text`, `.row--select`, `.cover--thumb` | Bulk actions (Wanted, series reading order) |
 | Wizard | `.wizard`, `.wizard__foot`, `.steps--collapse`, `.steps__short`, `.wizard-layout`, `.wizard-main`, `.wizard-progress`, `.steps--sub`, `.wizard-paths`, `.wizard-summary` | Every job done in steps (set-up, upgrade, restore, migration). Rules in `docs/WIZARD.md`; steps become "Step 3 of 7" on phones |
@@ -199,6 +199,27 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 | Slide-out | `.side-panel-layer`, `.side-panel-backdrop`, `.side-panel`, `.side-panel--wide`, `.side-panel__body`, `.side-panel__foot`, `.side-panel__lead` | From the right; 420px, 640px wide, full width on phones; header in the page background, body and foot on the raised surface |
 | Dialog | `.dialog` (`<dialog>`), `.dialog__body`, `.dialog__foot`, `.dialog--scroll`, `data-close-outside` | Decisions and short tasks only. `.dialog--scroll`: only the body scrolls, the header and foot stay in view. `data-close-outside`: a press outside closes it (help only, never a dialog with fields) |
 | Tabs | `.tabs` (`data-activation="manual"`), `.tabs__list` (`role="tablist"`, named), `.tabs__tab` (`role="tab"`, `aria-selected`, `aria-controls`, a `.count` allowed), `.tabs__panel` (`role="tabpanel"`, `aria-labelledby`, `tabindex="0"`); `SharedComponents.setupTabs(root)`; `tabs-change` event | Real tabs for the parts of one item's page, as `DESIGN-SYSTEM.md` section 5 asks (20 November 2026). One Tab stop; Left and Right move round, Home and End go to the ends; a tab is chosen as focus reaches it, or by Enter or Space with manual activation. A link to a panel's id opens it. Without script every panel shows. Moving between pages is the level 2 menu, never tabs. `.logo-tabs` can move to these |
+
+## JavaScript: SharedComponents (26 November 2026)
+
+`components.js` puts `window.SharedComponents` on the page. An app that wires its own behaviour loads the file with `data-manual` and calls what it needs. Functions that the component rows already name (`toast`, `pageBanner`, `showErrors`, `combobox` and the rest) are not repeated here.
+
+| Function | What it does |
+|---|---|
+| `setup(root)` | Wires every component under `root` (the page by default). Runs by itself unless the file has `data-manual` |
+| `applyTheme(value)` | Sets the theme on `<html>`: `light`, `dark`, or `system` to follow the device |
+| `motionStill()` | True when the person asked for less movement (Reduce motion On, or Match device and the device asks). Every movement asks this, never the media query alone |
+| `setupHeaderFit(root)`, `fitHeader(header)` | Fold the header's search, compact its actions and then crowd its menu, one step at a time, as the window, text size or a name changes. One resize observer, no timers |
+| `setupSearchIcons(root)` | Adds the Search button inside every `input[type="search"]`, now and for any added later |
+| `setupSortables(root)` | Wires `.sortable` lists: Move up and Move down buttons (`data-move`) and focus that stays on the button that moved |
+| `setupTooltips()` | Shows `data-tooltip` text on hover and focus; Escape closes it, and it never covers what has focus |
+| `setupSideTrees(root)`, `setupSolvers(root)`, `setupSearch(root)` | The help centre side tree, the problem solver and the search box |
+| `creepProgress(bar, done, total, eachMs)` | Eases a progress bar onto the count and creeps towards the next one, never past 90%; only steps with less motion |
+| `openLayer(idOrElement, opener, onClose)` | Opens a slide-out or dialog and returns its close function |
+| `savedNote`, `copyText`, `say(text, urgent)` | The saved note, copy to the clipboard, and a message in the shared polite region (the alert region when urgent). Never put a secret in it |
+| `azLetter`, `azJump`, `azGo`, `loadMore` | The A to Z list and load more |
+| `addSetup(run, first)` | A part adds its own set-up here; `setup()` runs it with the rest |
+| `kit` | What a part may use: `focusable` (the selector for focusable elements), `announcer(id, role)` (a hidden live region), `toast`, `copyText`, `sprite(name)`, `escapeHtml(text)` (words made safe to put in HTML), `num(n)` (a number in British format), `fold(text)` (lower case without accents, to match search), `andList(list)` ("a, b and c"), `say`, `ownStatus(box)` (a part's own polite region, inside it, so a modal dialog still announces it) |
 
 ## Parts (22 November 2026)
 
