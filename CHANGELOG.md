@@ -9,6 +9,7 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 26 November 2026
 
+- **The unused cover card, cover actions and book row are removed.** `.cover-card*`, `.cover-actions*` and `.book-row*` (about 340 lines, built for Storyarr) were used by no app, plug-in, Stallboard or help centre; the Cover actions gallery section is gone and the Shelf demo uses plain media cards.
 - **14 new Starboard boards from the real screens.** Dashboard, Updates, Busy now, Bring in, Backup and restore with places, Media server, Plug-ins, General (Alerts), Library, Discover, Wanted, Requests, History and Logs were captured from Starboard 0.31 on an example server with made-up data and rebuilt from the shared library.
 - **Starboard's own patterns are in the library.** Page topics (`.topic-tabs`, `.settings-sections`), the update list, places and service logos, the dashboard grid and cards, show once, a wizard in a slide-out, and folding sections have classes, gallery entries (App patterns) and a section in `docs/LIBRARY.md`.
 - **Styles-only parts.** `tools/parts.py` and `tools/sync.py` can make a part that has styles and no script; six patterns use it, so an app loads each only on the pages that use it.
