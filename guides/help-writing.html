@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Help writing · TRex Design System</title>
+<!-- Made by tools/site.py from docs/HELP-WRITING.md: change the source, not this file. -->
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  /* The site's own layout; not part of the library. */
+  svg.i { width: var(--icon-md); height: var(--icon-md); }
+  svg.i-lg { width: var(--icon-lg); height: var(--icon-lg); }
+  .g-logo { flex: none; }
+  svg.s-logo { flex: none; width: 20px; height: 20px; }
+  .s-shell { display: grid; grid-template-columns: 240px minmax(0, 1fr); }
+  .s-nav { position: sticky; top: calc(var(--header-h) + var(--tabs-h)); align-self: start; max-height: calc(100vh - var(--header-h) - var(--tabs-h)); overflow-y: auto; padding: var(--space-6) var(--space-4); border-right: 1px solid var(--color-divider); }
+  .s-nav h2 { font-size: var(--text-sm); color: var(--color-text-muted); padding: 0 var(--space-3); margin-bottom: var(--space-2); }
+  .s-nav ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; }
+  .s-nav a { display: block; padding: var(--space-2) var(--space-3); color: var(--color-text); font-size: var(--text-sm); text-decoration: none; border-left: 3px solid transparent; }
+  .s-nav a:hover { background: var(--color-control-active); }
+  .s-nav .s-group { margin-top: var(--space-4); color: var(--color-text-muted); font-size: var(--text-xs); font-weight: 700; padding: 0 var(--space-3); }
+  .s-main { min-width: 0; }
+  .s-main .page h2 { scroll-margin-top: calc(var(--header-h) + var(--tabs-h) + var(--space-4)); }
+  .s-nav .s-nav-pages { margin-bottom: var(--space-4); }
+  .s-nav a[aria-current] { border-left-color: var(--color-accent); font-weight: 700; }
+  .s-crumbs { padding: var(--space-3) var(--space-8) 0; font-size: var(--text-sm); }
+  .s-pager { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-3); padding: var(--space-6) var(--space-8); border-top: 1px solid var(--color-divider); margin-top: var(--space-8); }
+  .s-pager a { display: grid; gap: 2px; padding: var(--space-3) var(--space-4); border: 1px solid var(--color-border); color: var(--color-text); text-decoration: none; min-width: 12rem; }
+  .s-pager a:hover { background: var(--color-control-active); }
+  .s-pager small { color: var(--color-text-muted); }
+  .s-pager .s-next { margin-inline-start: auto; text-align: end; }
+  .s-landing { display: grid; gap: var(--space-8); padding: var(--space-8); max-width: 1180px; }
+  .s-landing ul.s-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--space-4); }
+  .s-doc { padding: var(--space-8); max-width: 1000px; }
+  .s-doc .prose { max-width: 80ch; }
+  .s-doc table { border-collapse: collapse; width: 100%; font-size: var(--text-sm); }
+  .s-doc th, .s-doc td { text-align: left; vertical-align: top; padding: var(--space-2) var(--space-3); border: 1px solid var(--color-divider); }
+  .s-doc th { background: var(--color-surface-sunken); }
+  .s-doc .s-scroll { overflow-x: auto; max-width: 100%; }
+  .s-doc pre { overflow-x: auto; padding: var(--space-3); background: var(--color-surface-sunken); border: 1px solid var(--color-divider); }
+  .s-doc code { overflow-wrap: anywhere; }
+  .s-icons { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--space-2); }
+  .s-icons li { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2); border: 1px solid var(--color-divider); font-size: var(--text-xs); }
+  .site-header__search { margin-inline-start: auto; }
+  @media (max-width: 860px) {
+    .s-shell { grid-template-columns: 1fr; }
+    .s-nav { display: none; }
+    .s-crumbs, .s-pager, .s-landing, .s-doc { padding-inline: var(--space-4); }
+  }
+
+  /* Gallery layout only; not part of the library. */
+  .g-main { padding: var(--space-8); display: grid; gap: var(--space-12); max-width: 1180px; }
+  .g-main > .page-head { margin-bottom: calc(var(--space-12) * -1 + var(--space-4)); }
+  .g-logo { flex: none; }
+  .g-section { display: grid; gap: var(--space-6); scroll-margin-top: calc(var(--header-h) + var(--tabs-h) + var(--space-4)); }
+  .g-section > header { display: grid; gap: var(--space-2); padding-bottom: var(--space-3); border-bottom: 2px solid var(--color-text); }
+  .g-item { display: grid; gap: var(--space-3); scroll-margin-top: calc(var(--header-h) + var(--tabs-h) + var(--space-4)); }
+  .g-item > h3 { font-size: var(--text-lg); }
+  .g-term-wrap { overflow-x: auto; max-width: 100%; }
+  .g-term { display: inline-block; margin: 0; padding: 12px 16px; background: #14182e; color: #e8eaf6; font: 13px/1.22 "DejaVu Sans Mono", ui-monospace, monospace; white-space: pre; }
+  .g-term--qr { background: #fff; color: #000; line-height: 1; }  /* dark on light, as a terminal draws it, so it scans */
+  .g-demo { padding: var(--space-6); border: 1px solid var(--color-divider); background: var(--color-bg); display: grid; gap: var(--space-4); overflow: hidden; }
+  .g-fp { display: grid; gap: var(--space-3); padding: var(--space-4); flex: 1 1 300px; max-inline-size: 440px; }
+  .g-demo--row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+  .g-notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-3) var(--space-6); font-size: var(--text-sm); }
+  .g-notes h4, .g-notes h3 { font-size: var(--text-sm); margin-bottom: var(--space-1); }
+  .g-notes ul { margin: 0; padding-left: var(--space-5); display: grid; gap: 2px; }
+  .g-notes code { font-size: var(--text-xs); }
+  .g-pals { display: grid; gap: var(--space-6); }
+  .g-pal { display: grid; gap: var(--space-2); }
+  .g-pal h3 { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: baseline; font-size: var(--text-lg); }
+  .g-pal__modes { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-3); }
+  .g-pal__mode { border: 1px solid var(--color-divider); background: var(--color-bg); color: var(--color-text); }
+  .g-pal__bar { display: flex; align-items: center; justify-content: space-between; padding: var(--space-2) var(--space-3); background: var(--color-header); border-bottom: 1px solid var(--color-divider); }
+  .g-pal__logo { display: inline-flex; align-items: center; gap: var(--space-2); font-weight: var(--weight-heading); }
+  .g-pal__body { display: grid; gap: var(--space-3); padding: var(--space-3); }
+  .g-pal__body a { color: var(--color-accent); }
+  .g-pal__sws { display: flex; flex-wrap: wrap; gap: var(--space-1); }
+  .g-pal__sw { width: 28px; height: 28px; border: 1px solid var(--color-border); }
+  .g-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: var(--space-2); }
+  .g-swatch { display: grid; grid-template-columns: 40px 1fr; gap: var(--space-2); align-items: center; font-size: var(--text-xs); }
+  .g-swatch span:first-child { height: 40px; border: 1px solid var(--color-border); }
+  .g-frame { border: 1px solid var(--color-border); background: var(--color-bg); position: relative; overflow: hidden; }
+  .g-frame .site-header { position: relative; }
+  .g-frame .rail { position: absolute; }
+  .g-phone { width: 390px; max-width: 100%; }
+  .g-table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+  .g-table th, .g-table td { text-align: left; vertical-align: top; padding: var(--space-2) var(--space-3); border-top: 1px solid var(--color-divider); }
+  .g-table th { background: var(--color-surface-sunken); }
+  svg.i { width: var(--icon-md); height: var(--icon-md); }
+  svg.i-lg { width: var(--icon-lg); height: var(--icon-lg); }
+  svg.i-xl { width: 32px; height: 32px; }
+  }
+
+  .g-notes .g-note-h { font-size: var(--text-sm); font-weight: 700; margin-bottom: var(--space-1); }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+<symbol id="i-book-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v16"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/></symbol>
+<symbol id="i-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/></symbol>
+<symbol id="i-list-checks" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 5h8"/><path d="M13 12h8"/><path d="M13 19h8"/><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/></symbol>
+<symbol id="i-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/></symbol>
+<symbol id="i-activity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/><path d="M20 2v4"/><path d="M22 4h-4"/><circle cx="4" cy="20" r="2"/></symbol>
+<symbol id="i-library" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 6 4 14"/><path d="M12 6v14"/><path d="M8 8v12"/><path d="M4 4v16"/></symbol>
+<symbol id="i-layout-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></symbol>
+<symbol id="i-calendar-days" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M8 13h.01"/><path d="M12 13h.01"/><path d="M16 13h.01"/><path d="M8 17h.01"/><path d="M12 17h.01"/><path d="M16 17h.01"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></symbol>
+<symbol id="i-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></symbol>
+<symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h.01"/><path d="M3 12h.01"/><path d="M3 19h.01"/><path d="M8 5h13"/><path d="M8 12h13"/><path d="M8 19h13"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol>
+<symbol id="i-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+<symbol id="i-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+<symbol id="i-refresh-cw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+<symbol id="i-circle-help" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></symbol>
+<symbol id="i-circle-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol>
+<symbol id="i-circle-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16 9-5.5 5.5L8 12"/></symbol>
+<symbol id="i-triangle-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+<symbol id="i-trash-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
+<symbol id="i-pencil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></symbol>
+<symbol id="i-external-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+<symbol id="i-log-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></symbol>
+<symbol id="i-key-round" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></symbol>
+<symbol id="i-hard-drive-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8"/><path d="m16 6-4 4-4-4"/><rect width="20" height="8" x="2" y="14" rx="2"/><path d="M6 18h.01"/><path d="M10 18h.01"/></symbol>
+<symbol id="i-radar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19.07 4.93A10 10 0 0 0 6.99 3.34"/><path d="M4 6h.01"/><path d="M2.29 9.62A10 10 0 1 0 21.31 8.35"/><path d="M16.24 7.76A6 6 0 1 0 8.23 16.67"/><path d="M12 18h.01"/><path d="M17.99 11.66A6 6 0 0 1 15.77 16.67"/><circle cx="12" cy="12" r="2"/><path d="m13.41 10.59 5.66-5.66"/></symbol>
+<symbol id="i-sliders-horizontal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5H3"/><path d="M12 19H3"/><path d="M14 3v4"/><path d="M16 17v4"/><path d="M21 12h-9"/><path d="M21 19h-5"/><path d="M21 5h-7"/><path d="M8 10v4"/><path d="M8 12H3"/></symbol>
+<symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z"/></symbol>
+<symbol id="i-scroll-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 12h-5"/><path d="M15 8h-5"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/></symbol>
+<symbol id="i-timer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/></symbol>
+<symbol id="i-archive-restore" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h2"/><path d="M20 8v11a2 2 0 0 1-2 2h-2"/><path d="m9 15 3-3 3 3"/><path d="M12 12v9"/></symbol>
+<symbol id="i-archive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></symbol>
+<symbol id="i-book-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7a2 2 0 0 0-2 2v11"/><path d="M5.803 18H5a2 2 0 0 0 0 4h9.5a.5.5 0 0 0 .5-.5V21"/><path d="M9 15V4a2 2 0 0 1 2-2h9.5a.5.5 0 0 1 .5.5v14a.5.5 0 0 1-.5.5H11a2 2 0 0 1 0-4h10"/></symbol>
+<symbol id="i-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></symbol>
+<symbol id="i-hard-drive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 16h.01"/><path d="M2.212 11.577a2 2 0 0 0-.212.896V18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5.527a2 2 0 0 0-.212-.896L18.55 5.11A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><path d="M21.946 12.013H2.054"/><path d="M6 16h.01"/></symbol>
+<symbol id="i-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v2"/><path d="M12 2v2"/><path d="M17 20v2"/><path d="M17 2v2"/><path d="M2 12h2"/><path d="M2 17h2"/><path d="M2 7h2"/><path d="M20 12h2"/><path d="M20 17h2"/><path d="M20 7h2"/><path d="M7 20v2"/><path d="M7 2v2"/><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="8" y="8" width="8" height="8" rx="1"/></symbol>
+<symbol id="i-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></symbol><symbol id="i-network" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></symbol>
+<symbol id="i-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="3" width="5" height="18" rx="1"/><rect x="5" y="3" width="5" height="18" rx="1"/></symbol>
+<symbol id="i-rotate-ccw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></symbol>
+<symbol id="i-filter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z"/></symbol>
+<symbol id="i-arrow-up-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 16-4 4-4-4"/><path d="M17 20V4"/><path d="m3 8 4-4 4 4"/><path d="M7 4v16"/></symbol>
+<symbol id="i-ellipsis" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+<symbol id="i-history" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></symbol>
+<symbol id="i-list-ordered" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5h10"/><path d="M11 12h10"/><path d="M11 19h10"/><path d="M4 4h1v5"/><path d="M4 9h2"/><path d="M6.5 20H3.4c0-1 2.6-1.925 2.6-3.5a1.5 1.5 0 0 0-2.6-1.02"/></symbol>
+<symbol id="i-file-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><circle cx="11.5" cy="14.5" r="2.5"/><path d="M13.3 16.3 15 18"/></symbol>
+<symbol id="i-heart-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/><path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></symbol>
+<symbol id="i-gauge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></symbol>
+<symbol id="i-shield-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+<symbol id="i-inbox" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></symbol>
+<symbol id="i-wifi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01"/><path d="M2 8.82a15 15 0 0 1 20 0"/><path d="M5 12.859a10 10 0 0 1 14 0"/><path d="M8.5 16.429a5 5 0 0 1 7 0"/></symbol>
+<symbol id="i-circle-arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4"/><path d="M12 16V8"/></symbol>
+<symbol id="i-server-cog" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10.852 14.772-.383.923"/><path d="M13.148 14.772a3 3 0 1 0-2.296-5.544l-.383-.923"/><path d="m13.148 9.228.383-.923"/><path d="m13.53 15.696-.382-.924a3 3 0 1 1-2.296-5.544"/><path d="m14.772 10.852.923-.383"/><path d="m14.772 13.148.923.383"/><path d="M4.5 10H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-.5"/><path d="M4.5 14H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-.5"/><path d="M6 18h.01"/><path d="M6 6h.01"/><path d="m9.228 10.852-.923-.383"/><path d="m9.228 13.148-.923.383"/></symbol>
+<symbol id="i-chart-line" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/></symbol>
+<symbol id="i-app-window" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 4v4"/><path d="M2 8h20"/><path d="M6 4v4"/></symbol>
+<symbol id="i-thermometer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+<symbol id="i-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m17 8-5-5-5 5"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/></symbol>
+<symbol id="i-file-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-grip-vertical" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="12" r="1"/><circle cx="9" cy="5" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="19" r="1"/></symbol>
+<symbol id="i-arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
+<symbol id="i-arrow-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></symbol>
+<symbol id="i-panel-right-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M15 3v18"/><path d="m10 15-3-3 3-3"/></symbol>
+<symbol id="i-circle-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></symbol>
+<symbol id="i-house" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+<symbol id="i-film" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18"/><path d="M3 7.5h4"/><path d="M3 12h18"/><path d="M3 16.5h4"/><path d="M17 3v18"/><path d="M17 7.5h4"/><path d="M17 16.5h4"/></symbol>
+<symbol id="i-tv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 2-5 5-5-5"/><rect width="20" height="15" x="2" y="7" rx="2"/></symbol>
+<symbol id="i-music" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></symbol>
+<symbol id="i-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19h8"/><path d="m4 17 6-6-6-6"/></symbol>
+<symbol id="i-monitor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></symbol>
+<symbol id="i-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/></symbol>
+<symbol id="i-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol>
+<symbol id="i-ban" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M4.929 4.929 19.07 19.071"/></symbol>
+<symbol id="i-book-marked" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.751a.25.25 0 00.407.195l2.28-1.834a.5.5 0 01.627 0l2.28 1.834A.25.25 0 0016 9.751V2"/><path d="M4 19.5v-15A2.5 2.5 0 016.5 2H19a1 1 0 011 1v18a1 1 0 01-1 1H6.5a1 1 0 010-5H20"/></symbol>
+<symbol id="i-bookmark-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v6"/><path d="M15 10H9"/><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/></symbol>
+<symbol id="i-book-open-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v16"/><path d="M16 13h2"/><path d="M16 9h2"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/><path d="M6 13h2"/><path d="M6 9h2"/></symbol>
+<symbol id="i-calendar-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 14v2.2l1.6 1"/><path d="M16 2v3"/><path d="M21 7.338V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h2.338"/><path d="M3 9h5.859"/><path d="M8 2v3"/><circle cx="16" cy="16" r="6"/></symbol>
+<symbol id="i-chevron-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></symbol>
+<symbol id="i-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></symbol>
+<symbol id="i-file-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.659 22H18a2 2 0 0 0 2-2V8a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 14 2H6a2 2 0 0 0-2 2v9.34"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10.378 12.622a1 1 0 0 1 3 3.003L8.36 20.637a2 2 0 0 1-.854.506l-2.867.837a.5.5 0 0 1-.62-.62l.836-2.869a2 2 0 0 1 .506-.853z"/></symbol>
+<symbol id="i-file-question" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M12 17h.01"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/></symbol>
+<symbol id="i-file-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="m14.5 12.5-5 5"/><path d="m9.5 12.5 5 5"/></symbol>
+<symbol id="i-folder-input" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-1"/><path d="M2 13h10"/><path d="m9 16 3-3-3-3"/></symbol>
+<symbol id="i-folder-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"/></symbol>
+<symbol id="i-link-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17H7A5 5 0 0 1 7 7h2"/><path d="M15 7h2a5 5 0 1 1 0 10h-2"/><line x1="8" x2="16" y1="12" y2="12"/></symbol>
+<symbol id="i-list-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 5H3"/><path d="M11 12H3"/><path d="M16 19H3"/><path d="M18 9v6"/><path d="M21 12h-6"/></symbol>
+<symbol id="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19v3"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><rect x="9" y="2" width="6" height="13" rx="3"/></symbol>
+<symbol id="i-plug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M15 8V2"/><path d="M17 8a1 1 0 0 1 1 1v4a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1z"/><path d="M9 8V2"/></symbol>
+<symbol id="i-puzzle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.39 4.39a1 1 0 0 0 1.68-.474 2.5 2.5 0 1 1 3.014 3.015 1 1 0 0 0-.474 1.68l1.683 1.682a2.414 2.414 0 0 1 0 3.414L19.61 15.39a1 1 0 0 1-1.68-.474 2.5 2.5 0 1 0-3.014 3.015 1 1 0 0 1 .474 1.68l-1.683 1.682a2.414 2.414 0 0 1-3.414 0L8.61 19.61a1 1 0 0 0-1.68.474 2.5 2.5 0 1 1-3.014-3.015 1 1 0 0 0 .474-1.68l-1.683-1.682a2.414 2.414 0 0 1 0-3.414L4.39 8.61a1 1 0 0 1 1.68.474 2.5 2.5 0 1 0 3.014-3.015 1 1 0 0 1-.474-1.68l1.683-1.682a2.414 2.414 0 0 1 3.414 0z"/></symbol>
+<symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></symbol>
+<symbol id="i-square-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m16 9-5.5 5.5L8 12"/></symbol>
+<symbol id="i-tags" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.172 2a2 2 0 0 1 1.414.586l6.71 6.71a2.4 2.4 0 0 1 0 3.408l-4.592 4.592a2.4 2.4 0 0 1-3.408 0l-6.71-6.71A2 2 0 0 1 6 9.172V3a1 1 0 0 1 1-1z"/><path d="M2 7v6.172a2 2 0 0 0 .586 1.414l6.71 6.71a2.4 2.4 0 0 0 3.191.193"/><circle cx="10.5" cy="6.5" r=".5" fill="currentColor"/></symbol>
+<symbol id="i-undo-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"/></symbol>
+<symbol id="i-user-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></symbol>
+<symbol id="i-user-round" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></symbol>
+<symbol id="i-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></symbol>
+<symbol id="i-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></symbol>
+<symbol id="i-hourglass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></symbol>
+<symbol id="i-octagon-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 9-6 6"/><path d="M2.586 16.726A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2h6.624a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586z"/><path d="m9 9 6 6"/></symbol>
+<symbol id="i-undo-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"/></symbol>
+<symbol id="i-ban" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M4.929 4.929 19.07 19.071"/></symbol>
+<symbol id="i-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/></symbol>
+<symbol id="i-import" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m8 11 4 4 4-4"/><path d="M8 5H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-4"/></symbol>
+<symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+<symbol id="i-circle-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16 9-5.5 5.5L8 12"/></symbol>
+<symbol id="i-circle-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></symbol>
+<symbol id="i-triangle-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+<symbol id="i-headphones" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></symbol>
+<symbol id="i-radio" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.247 7.761a6 6 0 0 1 0 8.478"/><path d="M19.075 4.933a10 10 0 0 1 0 14.134"/><path d="M4.925 19.067a10 10 0 0 1 0-14.134"/><path d="M7.753 16.239a6 6 0 0 1 0-8.478"/><circle cx="12" cy="12" r="2"/></symbol>
+<symbol id="i-help" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3z"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></symbol>
+<symbol id="i-help-new-tab" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3H3v18h18v-8"/><path d="M15 3h6v6"/><path d="M21 3l-5.5 5.5"/><path d="M7.59 11a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M10.5 18h.01"/></symbol>
+</svg>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header site-header--no-rail">
+  <div class="site-header__bar">
+    <button class="icon-btn phone-menu-button" type="button" data-opens="s-site-menu" aria-controls="s-site-menu" aria-expanded="false"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-menu"/></svg><span class="visually-hidden">Menu</span></button>
+    <a class="site-header__brand" href="../index.html"><svg class="g-logo" width="28" height="28" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect x="1" y="1" width="30" height="30" fill="var(--color-logo-tile)"/><path fill="var(--color-bg)" d="M17 6.5h7.5q2.5 0 2.5 2.2V11h-4v.8h2.6v1.6H21v2.2l2.6 1.5-.6 1-2-1.1V20q0 2.2-2.4 2.9l.9 3.8h1.6V28h-4.3l-.9-4.4h-1.6l-.8 3.1h1.4V28h-4.1l1-4.9q-3.6-1-8.7.3 3.4-3.6 8.2-5.2 3.3-1.3 3.9-4.6V8.4q0-1.9 1.4-1.9Z"/><circle cx="20" cy="8.6" r="1" fill="var(--color-logo-star)"/></svg><span>TRex Design System</span></a>
+    <nav class="menu-tabs" aria-label="Main"><a href="../foundations/index.html"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-sliders-horizontal"/></svg><span class="menu-tabs__label">Foundations</span></a><a href="../components/index.html"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-layout-grid"/></svg><span class="menu-tabs__label">Components</span></a><a href="../patterns/index.html"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-list-checks"/></svg><span class="menu-tabs__label">Patterns</span></a><a href="../guides/index.html" aria-current="page"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-book-open"/></svg><span class="menu-tabs__label">Guides</span></a><a href="../areas/index.html"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-monitor"/></svg><span class="menu-tabs__label">Boards</span></a><a href="../resources/index.html"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-wrench"/></svg><span class="menu-tabs__label">Resources</span></a></nav>
+    <form class="site-header__search search-field" role="search" action="../search.html"><label class="visually-hidden" for="s-search">Search the design system</label><input class="input" id="s-search" name="q" type="search" placeholder="Search" autocomplete="off"></form>
+    <div class="site-header__actions"><button class="icon-btn" type="button" data-opens="g-panel-display" aria-haspopup="dialog" aria-expanded="false"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-sun"/></svg><span class="label">Display</span></button></div>
+  </div>
+</header>
+<div class="side-panel-layer" id="s-site-menu" hidden>
+  <div class="side-panel-backdrop"></div>
+  <nav class="phone-menu" aria-label="Menu">
+    <div class="panel-header"><span class="panel-header__brand"><svg class="g-logo" width="24" height="24" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect x="1" y="1" width="30" height="30" fill="var(--color-logo-tile)"/><path fill="var(--color-bg)" d="M17 6.5h7.5q2.5 0 2.5 2.2V11h-4v.8h2.6v1.6H21v2.2l2.6 1.5-.6 1-2-1.1V20q0 2.2-2.4 2.9l.9 3.8h1.6V28h-4.3l-.9-4.4h-1.6l-.8 3.1h1.4V28h-4.1l1-4.9q-3.6-1-8.7.3 3.4-3.6 8.2-5.2 3.3-1.3 3.9-4.6V8.4q0-1.9 1.4-1.9Z"/><circle cx="20" cy="8.6" r="1" fill="var(--color-logo-star)"/></svg>TRex Design System</span><button class="icon-btn" type="button" data-closes aria-label="Close menu"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></div>
+    <div class="phone-menu__sections">
+      <div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="s-sm-foundations"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-sliders-horizontal"/></svg>Foundations<svg class="i phone-menu__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></button><ul id="s-sm-foundations" hidden><li><a href="../foundations/index.html">All foundations</a></li><li><a href="../foundations/colour.html">Colour</a></li><li><a href="../foundations/accent-colours.html">Accent colours</a></li><li><a href="../foundations/type-space-icons.html">Type, space and icons</a></li></ul></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="s-sm-components"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-layout-grid"/></svg>Components<svg class="i phone-menu__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></button><ul id="s-sm-components" hidden><li><a href="../components/index.html">All components</a></li><li><a href="../components/shell.html">Shell</a></li><li><a href="../components/actions.html">Actions</a></li><li><a href="../components/inputs.html">Inputs</a></li><li><a href="../components/content.html">Content</a></li><li><a href="../components/containers.html">Panels, cards and tabs</a></li><li><a href="../components/media.html">Covers, media and shelves</a></li><li><a href="../components/settings-and-tools.html">Settings and toolbars</a></li><li><a href="../components/slide-outs-and-dialogs.html">Slide-outs and dialogs</a></li></ul></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="s-sm-patterns"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-list-checks"/></svg>Patterns<svg class="i phone-menu__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></button><ul id="s-sm-patterns" hidden><li><a href="../patterns/index.html">All patterns</a></li><li><a href="../patterns/choosing.html">Choosing</a></li><li><a href="../patterns/wizard.html">Wizard</a></li><li><a href="../patterns/terminal.html">Terminal</a></li><li><a href="../patterns/lists-and-changes.html">Lists and changes</a></li><li><a href="../patterns/help.html">Help</a></li><li><a href="../patterns/dates.html">Dates</a></li></ul></div><div class="phone-menu__section"><a href="../guides/index.html" aria-current="page"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-book-open"/></svg>Guides</a></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="s-sm-boards"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-monitor"/></svg>Boards<svg class="i phone-menu__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></button><ul id="s-sm-boards" hidden><li><a href="../areas/index.html">All boards</a></li><li><a href="../areas/index-starboard.html">Starboard</a></li><li><a href="../areas/index-storyarr.html">Storyarr</a></li></ul></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="s-sm-resources"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-wrench"/></svg>Resources<svg class="i phone-menu__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></button><ul id="s-sm-resources" hidden><li><a href="../resources/index.html">Overview</a></li><li><a href="../resources/tools.html">Tools</a></li><li><a href="../resources/outside-tools.html">Outside tools</a></li><li><a href="../resources/make-a-change.html">Make a change</a></li><li><a href="../resources/get-feedback.html">Get feedback</a></li></ul></div><div class="phone-menu__section"><a href="../search.html"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>Search</a></div>
+    </div>
+  </nav>
+</div>
+<div class="s-shell">
+<nav class="s-nav" aria-labelledby="s-nav-h"><h2 id="s-nav-h">Guides</h2><ol class="s-nav-pages"><li><a href="index.html">All guides</a></li><li class="s-group">Design</li><li><a href="design-system.html">Design system</a></li><li><a href="library.html">Component library</a></li><li><a href="components.html">Components by area</a></li><li class="s-group">Patterns</li><li><a href="wizard.html">Wizard</a></li><li><a href="terminal.html">Terminal</a></li><li class="s-group">Words</li><li><a href="content-design.html">Content design</a></li><li><a href="help-writing.html" aria-current="page">Help writing</a></li><li><a href="changelogs.html">Changelogs</a></li><li><a href="alt-text.html">Alt text</a></li><li><a href="screenshots.html">Screenshots</a></li><li class="s-group">Accessibility and security</li><li><a href="accessibility.html">Accessibility</a></li><li><a href="wcag.html">WCAG 2.2 AA</a></li><li><a href="security-checks.html">Security checks</a></li></ol><h2 id="s-own-h">On this page</h2><ol><li><a href="#about-this-guide">About this guide</a></li><li><a href="#1-the-three-tiers">1. The three tiers</a></li><li><a href="#2-kinds-of-topic">2. Kinds of topic</a></li><li><a href="#3-areas-and-groups">3. Areas and groups</a></li><li><a href="#4-topic-layout-tier-1">4. Topic layout (tier 1)</a></li><li><a href="#5-guide-layout-tier-2">5. Guide layout (tier 2)</a></li><li><a href="#6-basics-layout-tier-3">6. Basics layout (tier 3)</a></li><li><a href="#7-rules-for-help">7. Rules for help</a></li><li><a href="#8-screenshots">8. Screenshots</a></li><li><a href="#9-getting-ai-to-write-instructions">9. Getting AI to write instructions</a></li><li><a href="#10-checklist-before-a-help-change-is-finished">10. Checklist before a help change is finished</a></li><li><a href="#11-the-help-centre-standard">11. The help centre standard</a></li></ol></nav>
+<main class="s-main" id="main" tabindex="-1">
+<nav class="breadcrumbs s-crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="index.html">Guides</a></li><li aria-current="page">Help writing</li></ol></nav><div class="s-doc"><div class="page-head"><div class="page-head__text"><h1>Help writing guide</h1><p class="page-head__summary">Words guide. <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/HELP-WRITING.md">Edit this guide on GitHub</a>.</p></div></div><div class="prose">
+
+<p>Version 1.4, 17 November 2026. How help is written for every help centre (Starboard, Snaglist, the plug-in
+collection and any later one) and any help shown inside the apps. Section 11 is the help centre standard: the
+layout, the menus, flow charts, the journey, the problem solver and plug-in mode. Every word also follows <code>CONTENT-DESIGN.md</code>.</p>
+<h2 id="about-this-guide">About this guide</h2>
+<h3 id="what-it-is-for">What it is for</h3>
+<p>Help answers the question someone has at the moment they have it. This guide sets out how that help is organised and
+laid out. Every app's help centre then works in the same way, with the same three tiers, kinds of topic, layouts and
+checks. Someone who has used one help centre already knows how the next one is organised.</p>
+<p>Readers may know very little about computers. Write so that someone who has never opened a terminal can
+follow every step, and link to the basics for anything they might not know.</p>
+<h3 id="who-it-is-for">Who it is for</h3>
+<p>Anyone who writes or checks help: the help centre in an app's repository, help shown inside an app, and
+README files that teach. That includes AI assistants: section 9 says what to give one and how to check what
+it writes. It is public, so you may also use it for your own projects under the guide licence (CC BY 4.0).</p>
+<h3 id="how-to-use-it">How to use it</h3>
+<ol>
+<li>Choose the tier (section 1): a topic, a guide or the basics.</li>
+<li>For a topic, choose its one kind (section 2) and the area it belongs to (section 3).</li>
+<li>Copy the layout for that tier (sections 4 to 6) and write to the rules in section 7.</li>
+<li>Add screenshots only where section 8 says they help.</li>
+<li>Before you finish, go through the checklist in section 10 and the one in <code>CONTENT-DESIGN.md</code>.</li>
+</ol>
+<p>Working examples: the <a href="https://github.com/TheMightyTRex/starboard/blob/main/docs/help/README.md">Starboard help centre</a>
+and the <a href="https://github.com/TheMightyTRex/snaglist/blob/main/docs/README.md">Snaglist help centre</a>. The gallery,
+the tools and the other guides are listed in
+<a href="https://themightytrex.github.io/design-system/resources/">Design resources and tools</a>.</p>
+<h2 id="1-the-three-tiers">1. The three tiers</h2>
+<div class="s-scroll" tabindex="0" role="region" aria-label="Table 1"><table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Folder</th>
+<th>What it is</th>
+<th>Answers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>topics/</code></td>
+<td>A topic: one task, one question, one article</td>
+<td>"How do I do this one thing?"</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>guides/</code></td>
+<td>A guide: an ordered journey made of topics</td>
+<td>"How do I get from nothing to this outcome?"</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>basics/</code></td>
+<td>The basics: an idea explained from the start</td>
+<td>"What is this, and why does it matter?"</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li><strong>A topic covers one task.</strong> A second task is a second topic, and the two link to each other.</li>
+<li><strong>A guide is mostly links.</strong> Each step is one or two sentences and a link to the topic that holds the
+  instructions. A guide never repeats a topic's steps, so each instruction is kept in one place. If a step
+  has no topic, write the topic first.</li>
+<li><strong>Basics teach, topics and guides direct.</strong> If a topic needs to explain what Docker is before it can give
+  the steps, link to the basics article instead.</li>
+</ul>
+<h2 id="2-kinds-of-topic">2. Kinds of topic</h2>
+<p>Every topic is exactly one of these. A topic that needs two kinds is two topics.</p>
+<div class="s-scroll" tabindex="0" role="region" aria-label="Table 2"><table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>Use it for</th>
+<th>Title starts with</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>How-to</td>
+<td>Doing one task</td>
+<td>A verb: "Add an app"</td>
+</tr>
+<tr>
+<td>Reference</td>
+<td>Facts to check: settings, limits, lists</td>
+<td>The thing: "Display and accessibility settings"</td>
+</tr>
+<tr>
+<td>Troubleshooting</td>
+<td>One problem and its fix</td>
+<td>The problem in the reader's words: "Starboard does not open"</td>
+</tr>
+<tr>
+<td>Overview</td>
+<td>A hub that routes onwards within one area</td>
+<td>The area: "Backup and restore"</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="3-areas-and-groups">3. Areas and groups</h2>
+<p>Every help centre has the same seven main items. In order, they are <strong>Home</strong>, <strong>Get started</strong>, <strong>Use it</strong>,
+<strong>Plug-ins</strong>, <strong>Accessibility</strong>, <strong>Fix a problem</strong> and <strong>Developers</strong> (section 11). Each of the six areas holds a few
+groups, named in the reader's words. Starboard's Use it has Dashboard, Apps, Library and downloads, Your server,
+Alerts, Security, Backups and Updates.</p>
+<p>Every article sits in exactly one group. An article that fits two groups belongs to the one the reader would try
+first. An area with nothing in it says so in one line, such as "Snaglist has no plug-ins".</p>
+<ul>
+<li><strong>Get started:</strong> before installing, installing, opening it on other devices, moving in.</li>
+<li><strong>Use it:</strong> the app's own areas, in the order of its main menu, then settings, backups and updates.</li>
+<li><strong>Plug-ins:</strong> adding and managing plug-ins; in a plug-in collection, every plug-in (section 11.7).</li>
+<li><strong>Accessibility:</strong> the display settings, ways to use it, how it is tested and its limits.</li>
+<li><strong>Fix a problem:</strong> troubleshooting topics, each one flow chart first, and the problem solver.</li>
+<li><strong>Developers:</strong> plug-in writing, the API, prompts for AI assistants, security and tests.</li>
+</ul>
+<p>The tiers (section 1) still decide the folder and the layout; the area and group decide where an article is listed.</p>
+<h2 id="4-topic-layout-tier-1">4. Topic layout (tier 1)</h2>
+<pre tabindex="0"><code>[Help centre](../README.md) · &lt;Area&gt;
+
+# &lt;The task, in the reader's words&gt;
+
+&lt;Kind: how-to, reference or troubleshooting&gt;
+
+One or two sentences: what this does and what you will have at the end. The answer comes first.
+
+## Before you begin          (omit when there is nothing)
+- What must be true or to hand, each with a link to the topic that sets it up.
+
+## When would you use it     (reference topics only)
+- Real situations, each starting &quot;You want to…&quot; or &quot;You need to…&quot;.
+
+## Steps
+1. One action per step, with the on-screen label in bold: Select **Add an app**.
+2. Commands in a fenced `bash` block of their own, one command per block.
+3. Say what happens after a step when it is not obvious: &quot;Starboard shows the setup code.&quot;
+
+## Things to note            (omit when there is nothing)
+## If it does not work       (omit when there is nothing)
+## Find out more
+- Links to related topics, guides and basics, and to the topic's parent.
+</code></pre>
+<p>Empty sections are left out, never padded. "Find out more" points onwards; it never sums up the topic.</p>
+<h2 id="5-guide-layout-tier-2">5. Guide layout (tier 2)</h2>
+<pre tabindex="0"><code>[Help centre](../README.md) · Guides
+
+# &lt;The outcome, in the reader's words&gt;
+
+Who this is for, what you will have at the end, and about how long it takes.
+
+## Before you begin
+## The steps at a glance       (a numbered list, then a flow chart of the same steps)
+## Step 1: &lt;short name&gt;        (one or two sentences, the link to the topic, and how you know it worked)
+## What next
+</code></pre>
+<p>Name a guide after the goal ("Move from Plex to Jellyfin"), not after a feature. State what each step
+depends on, so the order is clear. The flow chart (section 11.4) is drawn with the same steps written out in words.</p>
+<h2 id="6-basics-layout-tier-3">6. Basics layout (tier 3)</h2>
+<pre tabindex="0"><code>[Help centre](../README.md) · The basics
+
+# &lt;What X is&gt;
+
+The idea in two or three sentences, with an everyday comparison where one helps.
+
+## &lt;A few short sections that build the idea up&gt;
+## What this means for &lt;app&gt;
+## Find out more
+</code></pre>
+<h2 id="7-rules-for-help">7. Rules for help</h2>
+<ol>
+<li><strong>Titles in the reader's words,</strong> with the word they would search for: "Set up two-step sign-in with an
+   authenticator app".</li>
+<li><strong>Other names once, near the top:</strong> "two-step sign-in, also called 2FA or two-factor authentication".
+   Search and screen readers both use them.</li>
+<li><strong>Every child links to its parent,</strong> and each topic links to its nearest neighbours under "Find out more".</li>
+<li><strong>Commands are copied, not entered by hand.</strong> Put each command in its own <code>bash</code> block, and say what it does in the
+   sentence before it. Mark anything the reader must change, such as <code>&lt;your server&gt;</code>, and say what to put there.</li>
+</ol>
+<p><strong>Some people enter them by hand anyway.</strong> A command with a symbol that moves between keyboards (<code>|</code>, <code>~</code>, <code>\</code>,
+   <code>"</code>, <code>@</code>, <code>$</code>, <code>&amp;</code>) links to the app's keyboard help. That help covers US, UK and Ireland, German, French and
+   Spanish keyboards. A one-line command with <code>|</code> also shows a version without it.</p>
+<p>On UK keyboards the <code>¦</code> key is not <code>|</code>, so say so.
+5. <strong>One action per step,</strong> starting with the verb. Start from a page the reader can find, and give the full
+   path the first time (<code>CONTENT-DESIGN.md</code> rule 2.19).
+6. <strong>Callouts by meaning</strong> (<code>CONTENT-DESIGN.md</code> section 7): "Before you begin:", "Limitation:", "Warning:",
+   "Tip:", "Example:". Never a callout without its lead word.</p>
+<h3 id="default-set-up-first-more-options-apart">Default set-up first, more options apart</h3>
+<p>Owner, 15 November 2026 (Starboard DASH-439): help shows the default set-up first, with additional apps and
+more options apart from it.</p>
+<ol>
+<li><strong>Split by need, not by person.</strong> A guide walks a new person through one path with no choices. A how-to assumes
+   some context and does one task. A reference lists every setting.</li>
+</ol>
+<p>A basics article says why. Do not mix them. Explanation and lists of options do not belong inside a guide's steps.
+2. <strong>Name sections by what they hold,</strong> never by who the reader is. Write "The default set-up", "Add more apps" and
+   "More options", not "For beginners" or "For experts". People misjudge themselves, and the line is blurred.
+3. <strong>Default path first.</strong> The main steps use the defaults as they are. A choice a new person can skip says so in one
+   line ("You can change this later in More options") and links to it. Additional apps and more options come after the
+   main steps, under their own headings or, when short, in a disclosure (<code>details</code>). <strong>The test:</strong> a new person
+   finishes the main task without opening or reading anything after the main steps.
+4. <strong>Signpost at the top:</strong> one line saying what the page covers (such as the default install) and where the rest
+   is.
+5. <strong>One plain-language baseline.</strong> Sections of more options follow the same writing rules; they are separate, not harder
+   to read.
+6. <strong>Navigation:</strong> Get started holds only the default path. More options and additional topics are found through the
+   side menu, search and links, and Developers stays its own area.</p>
+<h2 id="8-screenshots">8. Screenshots</h2>
+<p>The full rules, for people and AI tools, are in <code>SCREENSHOTS.md</code>, with a mark-up helper in <code>tools/annotate.js</code>.
+In short:</p>
+<ul>
+<li>Add one only for a step the reader could not follow from the words. There is no quota.</li>
+<li>Everything a screenshot shows is also said in words (rule 2.20). Text descriptions follow <code>ALT-TEXT.md</code>.</li>
+<li>Take them from a preview with made-up data (rule 2.23), never from a real server; never fake one.</li>
+<li><strong>Marking up:</strong> a red outline 5 pixels outside the control, and a curved arrow whose filled head touches it. Use at
+  most three outlines, each with a badge carrying its step's number in the article.</li>
+<li>Alt text names the page and the control by its label: "The Apps page, with Add an app outlined". Never
+  "the button in the bottom right".</li>
+</ul>
+<h2 id="9-getting-ai-to-write-instructions">9. Getting AI to write instructions</h2>
+<p>An AI assistant can draft help, release notes and on-screen words well, but only from facts it is given.
+Left alone it fills gaps with what sounds likely: labels that do not exist, steps in the wrong order, and
+the words this guide bans. Treat its draft as a first draft that you check.</p>
+<h3 id="what-to-give-it">What to give it</h3>
+<ul>
+<li><strong>This guide and <code>CONTENT-DESIGN.md</code>,</strong> to read in full before it writes anything.</li>
+<li><strong>The facts:</strong> the app's code or its running pages, so labels come from the app, not from memory. For a
+  change, the commit or the release notes behind it.</li>
+<li><strong>The reader and the job:</strong> who it is for, which tier (topic, guide or basics) and which kind of topic.</li>
+<li><strong>What already exists:</strong> the help home and the nearest topics. The agent links to them instead of repeating them,
+  and does not write a second topic for the same task.</li>
+</ul>
+<h3 id="what-it-must-do">What it must do</h3>
+<ol>
+<li><strong>Read the rules first,</strong> then say which tier and kind it is writing.</li>
+<li><strong>Copy every on-screen label exactly</strong> from the code or the running app, in bold inside steps.</li>
+<li><strong>Never invent behaviour, labels, limits or permissions.</strong> Where it is unsure, it writes
+   <code>[needs checking: …]</code> in the draft and carries on, rather than guessing.</li>
+<li><strong>Use made-up example data only</strong> (<code>CONTENT-DESIGN.md</code> rule 2.23).</li>
+<li><strong>Link, do not repeat.</strong> A step that has its own topic links to it. A missing topic is reported as a gap,
+   not written inline.</li>
+<li><strong>Change only what was asked.</strong> When editing, keep the article's existing sections and links, and do not
+   rewrite the voice while fixing one fact.</li>
+<li><strong>Report back:</strong> what it wrote and every <code>[needs checking]</code>. Also any label it left as it is because the app shows
+   it that way, and anything wrong it noticed but did not fix.</li>
+</ol>
+<h3 id="how-to-check-its-work">How to check its work</h3>
+<div class="s-scroll" tabindex="0" role="region" aria-label="Table 3"><table>
+<thead>
+<tr>
+<th>Check</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Banned words and punctuation</td>
+<td>Run <strong>The sweep</strong>, in this section. Fix every hit, or confirm it is an on-screen label. "See" is the one that slips through most, inside friendly sentences ("so you can see what is left").</td>
+</tr>
+<tr>
+<td>Labels</td>
+<td>Open the page in the app and compare every bold label, letter for letter.</td>
+</tr>
+<tr>
+<td>Steps</td>
+<td>Follow the steps on a test install or a preview, from the starting page the topic names. A step you cannot follow is wrong.</td>
+</tr>
+<tr>
+<td>Facts</td>
+<td>Every number, limit, default and version matches the code or the release notes. Clear every <code>[needs checking]</code>.</td>
+</tr>
+<tr>
+<td>Links</td>
+<td>Every link opens the right article; the parent and related articles are linked.</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>Right tier, one kind, headings in order, empty sections left out (section 10 checklist).</td>
+</tr>
+<tr>
+<td>Privacy</td>
+<td><code>tools/check-private.sh</code> passes: no real names, addresses, keys or server names.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>The sweep</strong>, run on the draft (it lists lines to read, not lines that are always wrong):</p>
+<pre tabindex="0"><code class="language-bash">grep -nE &quot;—|\b(can't|don't|won't|it's|isn't|doesn't|you're|we're|what's|that's|you'll)\b&quot; draft.md
+grep -niE &quot;\b(click\w*|tap\w*|see[ns]?|seeing|look\w*|enable[ds]?|disable[ds]?|toggle\w*|turn(s|ed)? (on|off)|screen|type[ds]?|typing|please|drives?)\b|\bOn:&quot; draft.md
+grep -niE &quot;\b(simple|simply|easy|just|straightforward|obviously|complex|difficult|advanced)\b&quot; draft.md
+grep -niE &quot;\b(above|below|top right|on the left|on the right|scroll down|click here|read more|learn more)\b|!&quot; draft.md
+</code></pre>
+<p>The design system runs the same words as a check on its own guides, gallery, boards and terminal frame.
+<code>python3 tools/check_words.py</code> stops on a hit. A genuine exception goes in <code>tools/words-allowed.txt</code> with its reason.</p>
+<p>A tool reporting success is not the check: read the result back, in the file and on the page.</p>
+<h3 id="a-prompt-to-start-with">A prompt to start with</h3>
+<pre tabindex="0"><code class="language-text">Write a help topic for &lt;app&gt;: &quot;&lt;task in the reader's words&gt;&quot;.
+First read docs/HELP-WRITING.md and docs/CONTENT-DESIGN.md in the design system, in full.
+Take every on-screen label from &lt;path to the page's code, or the running app&gt;; copy them exactly.
+Never invent behaviour, labels or limits: write [needs checking: ...] instead and carry on.
+Use made-up example data only. Link to existing topics in &lt;help folder&gt; instead of repeating them.
+When you finish, run the sweep in HELP-WRITING.md section 9 on your draft and fix every hit.
+Then tell me: the tier and kind, every [needs checking], labels left as the app shows them, and any gaps.
+</code></pre>
+<h2 id="10-checklist-before-a-help-change-is-finished">10. Checklist before a help change is finished</h2>
+<ul>
+<li>[ ] The article is in the right tier, and a topic has exactly one kind</li>
+<li>[ ] Title in the reader's words; other names given once near the top</li>
+<li>[ ] The default path comes first; additional apps and more options are in their own sections (section 7, Default set-up first, more options apart)</li>
+<li>[ ] The answer comes first; empty sections left out</li>
+<li>[ ] A guide links to topics instead of repeating their steps</li>
+<li>[ ] Links to the parent and to related articles under "Find out more"</li>
+<li>[ ] Screenshots only where needed, described in words, with made-up data, marked up to <code>SCREENSHOTS.md</code></li>
+<li>[ ] The article has its <code>&lt;!-- help: &lt;area&gt; / &lt;group&gt; --&gt;</code> line, and the group is in <code>help-centre.json</code></li>
+<li>[ ] A troubleshooting topic or a guide starts with its flow chart; every numbered answer has its section</li>
+<li>[ ] The help centre builds with no warnings (<code>build.py --strict</code>)</li>
+<li>[ ] Everything in the <code>CONTENT-DESIGN.md</code> checklist</li>
+</ul>
+<h2 id="11-the-help-centre-standard">11. The help centre standard</h2>
+<p>Chosen by the owner on 14 November 2026 (Starboard DASH-436): "I also want this design to become the standard. This is
+to be used in all help centres." The design system's builder, <code>tools/help_centre/build.py</code>, builds every help centre.
+It reads the Markdown in the app's repository and one <code>help-centre.json</code>. Nothing here is drawn by hand for each
+build.</p>
+<p>Change the Markdown or the settings, and build again. The pieces are components in <code>components.css</code> and
+<code>components.js</code>, shown in the gallery, so an app can use them too.</p>
+<h3 id="111-layout">11.1 Layout</h3>
+<ul>
+<li><strong>Top bar:</strong> the help centre's name, then the seven main items as quick links (<code>.top-links</code>), then <strong>Search</strong> and
+  <strong>Display</strong>. The area you are in is marked. On tablets and phones the seven items move into the side menu and the
+  bar keeps <strong>Menu</strong>, <strong>Search</strong> and <strong>Display</strong>.</li>
+<li><strong>A hub on every page:</strong> the side menu on the left, the page on the right. Articles keep <strong>On this page</strong> beside
+  them on wide screens, inside them on narrow ones.</li>
+<li><strong>Area pages:</strong> each of the six areas has a page with a card for each group, listing every article in it.</li>
+<li><strong>Home:</strong> the welcome heading with the latest version beside it on the same line, with no date. The version
+  (<code>.version-badge</code>) is read from the changelog or a version file, never entered by hand. Then come the journey, the
+  newest thing (<code>.feature-card</code>) and the problem solver card (<code>.solver-card</code>), which is always under the newest thing.</li>
+</ul>
+<h3 id="112-the-side-menu">11.2 The side menu</h3>
+<p>A side menu that folds (<code>.side-tree</code>) lists <strong>Home</strong>, then each area, then the groups in it, then every article in
+each group.
+- Areas and groups are <code>details</code> and <code>summary</code>, so they work with no script and a screen reader hears each one as
+  expanded or collapsed. Each group shows how many articles it holds.
+- The page you are on is marked (<code>aria-current="page"</code>), and its area and group are open. The rest are shut.
+- Each area starts with <strong>Overview</strong>, its area page. Fix a problem also lists the <strong>Problem solver</strong>.
+- On tablets and phones the menu opens from <strong>Menu</strong> over the page. The area you are in is already open, and the focus
+  is on the page you are on. The page behind cannot be reached while the menu is open. Escape, <strong>Menu</strong> again or
+  choosing a page closes it, and the focus goes back to <strong>Menu</strong>.
+- With no script, the menu comes before the page.</p>
+<p>Each article says where it belongs, on the line after its trail line:</p>
+<pre tabindex="0"><code class="language-markdown">[Help centre](../README.md) · When something is wrong · troubleshooting
+&lt;!-- help: fix / starboard --&gt;
+</code></pre>
+<p>The area is one of <code>start</code>, <code>use</code>, <code>plugins</code>, <code>a11y</code>, <code>fix</code> and <code>dev</code>; the group is a key from <code>help-centre.json</code>.
+An article with no line, or an unknown group, is listed under <strong>Other</strong> and the build warns; <code>--strict</code> makes that
+an error. Within a group, articles keep the order of the help home's lists, then the order of their titles.</p>
+<h3 id="113-the-journey">11.3 The journey</h3>
+<p>The home page starts with the journey (<code>.journey</code>). It has three to five stages, left to right on a dashed path. Each
+stage has a column of two or three cards under it (<code>.stage-card</code>) that link to the articles for that stage. The first
+card in each column is the one to start with.</p>
+<p>The first stage is the start, and the last is fixing things. On phones the stages stack with the path down the side. A
+plug-in collection's home has its own journey (choose, add, use, update or remove). Keep each card to a title and one
+line.</p>
+<h3 id="114-flow-charts">11.4 Flow charts</h3>
+<p><strong>Every troubleshooting topic starts with a flow chart</strong> (articles are flow chart first), and so does every guide (its
+steps at a glance). A how-to with a real choice in it (which version, which kind of disk) may have one. A reference
+topic or a basics article does not need one. Put the chart straight after the opening sentences.</p>
+<p>Write the chart in a fenced <code>flow</code> block. It is plain to read on GitHub. The builder draws it as an SVG that follows
+Light, Dark and High contrast. It then writes the same paths out in words under the chart (<strong>The chart in words</strong>), as
+the full text equivalent:</p>
+<pre tabindex="0"><code class="language-markdown">```flow
+title: Find your answer
+start: An app's card says Not responding
+step: Open the app's details | Select its name on Apps
+q: What do the details say?
+  Cannot reach the app -&gt; q2
+  Refused the API key -&gt; 3
+  Answered with an error -&gt; 4
+q2: Does the app open in your browser?
+  No -&gt; 1
+  Yes -&gt; 2
+1: Start the app again #start-the-app-again
+2: Check the address Starboard uses #check-the-address-starboard-uses
+3: Copy the API key again #copy-the-api-key-again
+4: Read the app's own messages #read-the-apps-own-messages
+```
+</code></pre>
+<ul>
+<li>One node a line:</li>
+<li><code>start:</code> (exactly one, first)</li>
+<li><code>q:</code> or <code>q&lt;name&gt;:</code> for a question (at least two answers)</li>
+<li><code>step&lt;name&gt;:</code> for something that happens</li>
+<li><code>end&lt;name&gt;:</code> for a good end</li>
+<li><code>warn&lt;name&gt;:</code> for the last thing to try</li>
+<li>a number for a <strong>numbered answer</strong></li>
+</ul>
+<p><code>| words</code> adds a short second line.
+- Answers are indented under the node they leave from: <code>&lt;what the reader sees or chooses&gt; -&gt; &lt;target&gt;</code>. The target
+  is a question, a number, a step or end, or another article (<code>check-disk-health.md</code>). A start or a step with no
+  answers leads to the next line.
+- Each numbered answer is a section of the article. Give its heading with <code>#its-id</code> at the end of the line, or use the
+  heading that starts with the number ("1. Start the app again"). The builder shows each as an answer card
+  (<code>.answer-card</code>), with the number and heading on a grey band and the steps under it.</p>
+<p>Using <code>#its-id</code> keeps the heading's words and its address, so links to it from release notes still work.
+- An answer reached from another answer ("Still does not open -&gt; 5") is drawn as the next thing to try.
+- Keep questions short (under eight words), answers to what is on the reader's page, and a chart to about ten nodes. A
+  chart that will not fit is two articles.
+- Plain Mermaid flowcharts (<code>flowchart TD</code> with <code>A[...] --&gt; B{...}</code>) are drawn the same way, so older guides need
+  no change; write new charts as <code>flow</code> blocks. No chart library is loaded in the browser.</p>
+<h3 id="115-the-problem-solver">11.5 The problem solver</h3>
+<p><code>solver.html</code> asks up to four questions and takes the reader to the article that fixes the problem. It is written in
+<code>help-centre.json</code> under <code>solver</code> as a tree. Each answer has <code>to</code> (an article) or <code>next</code> (the next question). With no
+script, it is the whole tree as lists of links.</p>
+<p>With script, it asks one question at a time, with <strong>Back</strong> and <strong>Start again</strong>. It puts the focus on each new question
+and says it politely. Every Fix a problem article should be reachable from it. Its card (<code>.solver-card</code>) goes on the
+home page under the newest thing, and at the top of Fix a problem.</p>
+<h3 id="116-pages">11.6 Pages</h3>
+<ul>
+<li><strong>Articles:</strong> breadcrumbs (help centre, area, group, title), the kind, the article, <strong>On this page</strong>, and a link to
+  the Markdown on GitHub.</li>
+<li><strong>Search:</strong> every article, searched in the browser; every word must appear, titles count most.</li>
+<li><strong>Display and accessibility:</strong> the same choices as the apps, applied before the page draws.</li>
+</ul>
+<h3 id="117-plug-in-mode">11.7 Plug-in mode</h3>
+<p>A help centre for a plug-in collection adds <code>plugins</code> to <code>help-centre.json</code>. Its Plug-ins area becomes the plug-ins
+themselves. Each group of plug-ins is an area in the side menu, and each plug-in is a folding item in it. Under every
+plug-in are the same eight pages in the same order: <strong>Overview</strong>, <strong>Install</strong>, <strong>Settings</strong>, <strong>Dashboard card</strong>,
+<strong>Updates</strong>, <strong>Accessibility</strong>, <strong>Problems</strong> and <strong>For developers</strong>.</p>
+<p>Overview is the plug-in's own README, and the others are <code>help/plugins/&lt;id&gt;/&lt;page&gt;.md</code>. A page with nothing to say
+shows one line saying so, which the builder writes when the file is missing. A plug-in's pages start with its band
+(<code>.plugin-band</code>). The band has the logo or initials, the name, the version and plug-in API, a status chip and <strong>How to
+add it</strong>.</p>
+<p>The logo is the catalogue entry's <code>logo</code>, a rounded tile, shown wherever the plug-in is. A plug-in with none shows its
+icon or initials. The Plug-ins area may also have groups of its own articles, such as Add a plug-in. They stay in the
+side menu before the plug-in groups.</p>
+<p>The home and the Plug-ins area show a card for each plug-in in the grey band design (<code>.plugin-card</code>). It has the logo,
+name and status chip, what the plug-in does, and links to Install, Settings and Problems. The Problems page starts
+with a flow chart, as any troubleshooting topic does.</p>
+<h3 id="118-help-centrejson">11.8 help-centre.json</h3>
+<pre tabindex="0"><code class="language-json">{
+  &quot;name&quot;: &quot;Starboard&quot;, &quot;repo&quot;: &quot;https://github.com/TheMightyTRex/starboard&quot;,
+  &quot;site&quot;: &quot;https://themightytrex.github.io/starboard/help/&quot;, &quot;help_dir&quot;: &quot;docs/help&quot;,
+  &quot;version_from&quot;: &quot;CHANGELOG.md&quot;,
+  &quot;home&quot;: { &quot;title&quot;: &quot;Welcome to Starboard help&quot;, &quot;intro&quot;: &quot;One sentence.&quot; },
+  &quot;areas&quot;: [
+    { &quot;key&quot;: &quot;fix&quot;, &quot;intro&quot;: &quot;One sentence.&quot;, &quot;groups&quot;: [ { &quot;key&quot;: &quot;starboard&quot;, &quot;label&quot;: &quot;Starboard and set-up&quot; } ] },
+    { &quot;key&quot;: &quot;plugins&quot;, &quot;none&quot;: &quot;Snaglist has no plug-ins: it is one file you add to a page.&quot; }
+  ],
+  &quot;journey&quot;: { &quot;title&quot;: &quot;Your server, step by step&quot;, &quot;stages&quot;: [
+    { &quot;label&quot;: &quot;Set up&quot;, &quot;icon&quot;: &quot;compass&quot;, &quot;tone&quot;: &quot;start&quot;,
+      &quot;cards&quot;: [ { &quot;title&quot;: &quot;Quick start&quot;, &quot;line&quot;: &quot;One command sets up everything&quot;, &quot;to&quot;: &quot;guides/quick-start.md&quot; } ] } ] },
+  &quot;featured&quot;: { &quot;chip&quot;: &quot;New in 0.18&quot;, &quot;title&quot;: &quot;Update Starboard from its own page&quot;, &quot;text&quot;: &quot;Two sentences.&quot;,
+    &quot;to&quot;: &quot;topics/update-starboard.md&quot;, &quot;flow&quot;: &quot;start: Update now\nstep: Back up your settings\n...&quot; },
+  &quot;solver&quot;: { &quot;start&quot;: { &quot;question&quot;: &quot;What is wrong?&quot;, &quot;answers&quot;: [
+    { &quot;label&quot;: &quot;Starboard will not open&quot;, &quot;to&quot;: &quot;topics/starboard-does-not-open.md&quot; },
+    { &quot;label&quot;: &quot;Something is wrong with an app&quot;, &quot;next&quot;: { &quot;question&quot;: &quot;What does the app do?&quot;, &quot;answers&quot;: [] } } ] } },
+  &quot;plugins&quot;: { &quot;catalogue&quot;: &quot;catalogue.json&quot;, &quot;overview&quot;: &quot;{id}/README.md&quot;, &quot;pages&quot;: &quot;help/plugins/{id}/{page}.md&quot;,
+    &quot;groups&quot;: [ { &quot;label&quot;: &quot;Network and safety&quot;, &quot;ids&quot;: [&quot;remote-access&quot;, &quot;vpn-check&quot;] } ],
+    &quot;details&quot;: { &quot;vpn-check&quot;: { &quot;icon&quot;: &quot;shield-check&quot;, &quot;status&quot;: [&quot;Recommended&quot;, &quot;success&quot;] } } }
+}
+</code></pre>
+<ul>
+<li><code>version_from</code> names the changelog or a file holding only the version. It takes the first released version in the
+  changelog, never Unreleased. <code>version</code> gives it outright, and <code>version_link</code> changes where the badge goes.</li>
+<li><code>tone</code> is <code>start</code>, <code>step</code> or <code>fix</code>; <code>icon</code> is any icon in <code>icons.svg</code>. A <code>to</code> is an article (from the help
+  folder), a page of the help centre (<code>solver.html</code>, <code>areas/plugins.html</code>) or a full address.</li>
+<li><code>featured</code> takes <code>flow</code> (a small chart, in the format of 11.4) or <code>image</code> and <code>alt</code>.</li>
+<li>With no <code>areas</code>, the builder keeps the older layout: the side menu is the help home's own lists.</li>
+<li><code>footer_note</code>: its first bold sentence (or <code>footer_link</code>) is the footer's only notice link, which opens a slide-out
+  with the whole note. The footer itself matches the apps' footers, with the help centre's name and links on the left
+  and TheMightyTRexUK on the right.</li>
+<li>An area can have <code>link_card</code> (<code>title</code>, <code>text</code>, <code>to</code>, <code>button</code>, optional <code>icon</code>). This is one card at the top of its
+  page that leads somewhere else, such as Starboard's Plug-ins area to the plug-ins' own help centre.</li>
+<li><code>goatcounter</code> (optional) activates visitor counting: the GoatCounter address, such as
+  <code>https://&lt;code&gt;.goatcounter.com/count</code>. Every page loads its counter, and the footer says that visits are counted
+  without cookies or personal data. Leave it out and nothing is counted.</li>
+<li><code>--strict</code> stops on an article with no group. It also stops on a page left as a placeholder ("still to be written",
+  TODO, TBD, TBC or lorem ipsum, outside code). <code>placeholders</code> gives a help centre its own list of patterns.</li>
+<li>The older settings still work: <code>leave_out</code>, <code>sections</code>, <code>footer_note</code>, <code>banner</code> or <code>banners</code>, <code>sponsored_links</code>,
+  <code>strip_between</code>, <code>search_example</code>, <code>front_door</code>, <code>logo_file</code>, <code>favicon_file</code>.</li>
+</ul>
+</div></div><nav class="s-pager" aria-label="Previous and next"><a class="s-prev" href="content-design.html" rel="prev"><small>Previous</small><span>Content design</span></a><a class="s-next" href="changelogs.html" rel="next"><small>Next</small><span>Changelogs</span></a></nav>
+</main>
+</div>
+<footer class="site-footer"><div class="site-footer__app"><span class="site-footer__brand"><svg class="g-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="1" y="1" width="30" height="30" fill="var(--color-logo-tile)"/><path fill="var(--color-bg)" d="M17 6.5h7.5q2.5 0 2.5 2.2V11h-4v.8h2.6v1.6H21v2.2l2.6 1.5-.6 1-2-1.1V20q0 2.2-2.4 2.9l.9 3.8h1.6V28h-4.3l-.9-4.4h-1.6l-.8 3.1h1.4V28h-4.1l1-4.9q-3.6-1-8.7.3 3.4-3.6 8.2-5.2 3.3-1.3 3.9-4.6V8.4q0-1.9 1.4-1.9Z"/><circle cx="20" cy="8.6" r="1" fill="var(--color-logo-star)"/></svg>TRex Design System</span><span>Version 1</span><nav aria-label="TRex Design System"><ul class="site-footer__links"><li><a href="../guides/index.html">Help</a></li><li><a href="https://github.com/TheMightyTRex/design-system#readme">About</a></li><li><a href="https://github.com/TheMightyTRex/design-system/commits/main">Updates</a></li></ul></nav></div><a class="site-footer__maker" href="https://github.com/TheMightyTRex" rel="me"><svg class="maker-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="1" y="1" width="30" height="30" fill="var(--color-logo-tile)"/><path fill="var(--color-bg)" d="M17 6.5h7.5q2.5 0 2.5 2.2V11h-4v.8h2.6v1.6H21v2.2l2.6 1.5-.6 1-2-1.1V20q0 2.2-2.4 2.9l.9 3.8h1.6V28h-4.3l-.9-4.4h-1.6l-.8 3.1h1.4V28h-4.1l1-4.9q-3.6-1-8.7.3 3.4-3.6 8.2-5.2 3.3-1.3 3.9-4.6V8.4q0-1.9 1.4-1.9Z"/><circle cx="20" cy="8.6" r="1" fill="var(--color-logo-star)"/></svg>TheMightyTRexUK<span class="visually-hidden">, on GitHub</span><svg class="i" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg></a></footer>
+<div class="side-panel-layer" id="g-panel-display" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="g-pd-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="g-pd-h">Display and accessibility</h2><button class="icon-btn" type="button" data-closes aria-label="Close display and accessibility"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></div>
+    <form class="side-panel__body" data-display-save="ds-display">
+      <fieldset><legend>Theme</legend><div class="segmented"><label><input type="radio" name="g-pd-theme" value="system" data-display="theme"><span>Match device</span></label><label><input type="radio" name="g-pd-theme" value="light" data-display="theme" checked><span>Light</span></label><label><input type="radio" name="g-pd-theme" value="dark" data-display="theme"><span>Dark</span></label></div></fieldset>
+      <fieldset><legend>Text size</legend><div class="segmented"><label><input type="radio" name="g-pd-text" value="100" data-display="text" checked><span>100%</span></label><label><input type="radio" name="g-pd-text" value="125" data-display="text"><span>125%</span></label><label><input type="radio" name="g-pd-text" value="150" data-display="text"><span>150%</span></label><label><input type="radio" name="g-pd-text" value="175" data-display="text"><span>175%</span></label></div></fieldset>
+      <fieldset><legend>Reduce motion</legend><div class="segmented"><label><input type="radio" name="g-pd-motion" value="device" data-display="motion" checked><span>Match device</span></label><label><input type="radio" name="g-pd-motion" value="on" data-display="motion"><span>Active</span></label><label><input type="radio" name="g-pd-motion" value="off" data-display="motion"><span>Inactive</span></label></div></fieldset>
+      <label class="switch"><span>High contrast</span><input type="checkbox" role="switch" data-display="contrast"></label>
+      <label class="switch"><span>Underline links</span><input type="checkbox" role="switch" data-display="underline"></label>
+      <label class="switch"><span>Wider text spacing</span><input type="checkbox" role="switch" data-display="spacing"></label>
+      <label class="switch"><span>Remove drop shadows</span><input type="checkbox" role="switch" data-display="shadows" aria-describedby="g-pd-shadows-note"></label>
+      <p class="small muted" id="g-pd-shadows-note">Drop shadows cost a little processor on every scroll; turning them off helps small and older computers.</p>
+      <p class="small muted">Choices apply at once and are kept in this browser.</p>
+    </form>
+    <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Close</button><button class="btn" type="button" data-display-reset="ds-display">Reset to defaults</button></div>
+  </aside>
+</div>
+<script src="../components.js"></script>
+<script>
+  // Main menu: icons only when the names do not fit (.is-compact), as in the gallery and the apps.
+  const bar = document.querySelector(".site-header__bar");
+  const mainTabs = bar.querySelector(".menu-tabs");
+  function fit() {
+    mainTabs.classList.remove("is-compact");
+    if (bar.scrollWidth > bar.clientWidth || mainTabs.scrollWidth > mainTabs.clientWidth) mainTabs.classList.add("is-compact");
+  }
+  addEventListener("resize", fit);
+  fit();
+  document.querySelectorAll("#s-site-menu a").forEach((a) => a.addEventListener("click", () => document.getElementById("s-site-menu").closeLayer?.(false)));
+</script>
+
+</body>
+</html>

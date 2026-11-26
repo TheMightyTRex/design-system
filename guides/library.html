@@ -1,0 +1,1389 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Component library · TRex Design System</title>
+<!-- Made by tools/site.py from docs/LIBRARY.md: change the source, not this file. -->
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../components.css">
+<style>
+  /* The site's own layout; not part of the library. */
+  svg.i { width: var(--icon-md); height: var(--icon-md); }
+  svg.i-lg { width: var(--icon-lg); height: var(--icon-lg); }
+  .g-logo { flex: none; }
+  svg.s-logo { flex: none; width: 20px; height: 20px; }
+  .s-shell { display: grid; grid-template-columns: 240px minmax(0, 1fr); }
+  .s-nav { position: sticky; top: calc(var(--header-h) + var(--tabs-h)); align-self: start; max-height: calc(100vh - var(--header-h) - var(--tabs-h)); overflow-y: auto; padding: var(--space-6) var(--space-4); border-right: 1px solid var(--color-divider); }
+  .s-nav h2 { font-size: var(--text-sm); color: var(--color-text-muted); padding: 0 var(--space-3); margin-bottom: var(--space-2); }
+  .s-nav ol { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; }
+  .s-nav a { display: block; padding: var(--space-2) var(--space-3); color: var(--color-text); font-size: var(--text-sm); text-decoration: none; border-left: 3px solid transparent; }
+  .s-nav a:hover { background: var(--color-control-active); }
+  .s-nav .s-group { margin-top: var(--space-4); color: var(--color-text-muted); font-size: var(--text-xs); font-weight: 700; padding: 0 var(--space-3); }
+  .s-main { min-width: 0; }
+  .s-main .page h2 { scroll-margin-top: calc(var(--header-h) + var(--tabs-h) + var(--space-4)); }
+  .s-nav .s-nav-pages { margin-bottom: var(--space-4); }
+  .s-nav a[aria-current] { border-left-color: var(--color-accent); font-weight: 700; }
+  .s-crumbs { padding: var(--space-3) var(--space-8) 0; font-size: var(--text-sm); }
+  .s-pager { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-3); padding: var(--space-6) var(--space-8); border-top: 1px solid var(--color-divider); margin-top: var(--space-8); }
+  .s-pager a { display: grid; gap: 2px; padding: var(--space-3) var(--space-4); border: 1px solid var(--color-border); color: var(--color-text); text-decoration: none; min-width: 12rem; }
+  .s-pager a:hover { background: var(--color-control-active); }
+  .s-pager small { color: var(--color-text-muted); }
+  .s-pager .s-next { margin-inline-start: auto; text-align: end; }
+  .s-landing { display: grid; gap: var(--space-8); padding: var(--space-8); max-width: 1180px; }
+  .s-landing ul.s-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--space-4); }
+  .s-doc { padding: var(--space-8); max-width: 1000px; }
+  .s-doc .prose { max-width: 80ch; }
+  .s-doc table { border-collapse: collapse; width: 100%; font-size: var(--text-sm); }
+  .s-doc th, .s-doc td { text-align: left; vertical-align: top; padding: var(--space-2) var(--space-3); border: 1px solid var(--color-divider); }
+  .s-doc th { background: var(--color-surface-sunken); }
+  .s-doc .s-scroll { overflow-x: auto; max-width: 100%; }
+  .s-doc pre { overflow-x: auto; padding: var(--space-3); background: var(--color-surface-sunken); border: 1px solid var(--color-divider); }
+  .s-doc code { overflow-wrap: anywhere; }
+  .s-icons { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--space-2); }
+  .s-icons li { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2); border: 1px solid var(--color-divider); font-size: var(--text-xs); }
+  .site-header__search { margin-inline-start: auto; }
+  @media (max-width: 860px) {
+    .s-shell { grid-template-columns: 1fr; }
+    .s-nav { display: none; }
+    .s-crumbs, .s-pager, .s-landing, .s-doc { padding-inline: var(--space-4); }
+  }
+
+  /* Gallery layout only; not part of the library. */
+  .g-main { padding: var(--space-8); display: grid; gap: var(--space-12); max-width: 1180px; }
+  .g-main > .page-head { margin-bottom: calc(var(--space-12) * -1 + var(--space-4)); }
+  .g-logo { flex: none; }
+  .g-section { display: grid; gap: var(--space-6); scroll-margin-top: calc(var(--header-h) + var(--tabs-h) + var(--space-4)); }
+  .g-section > header { display: grid; gap: var(--space-2); padding-bottom: var(--space-3); border-bottom: 2px solid var(--color-text); }
+  .g-item { display: grid; gap: var(--space-3); scroll-margin-top: calc(var(--header-h) + var(--tabs-h) + var(--space-4)); }
+  .g-item > h3 { font-size: var(--text-lg); }
+  .g-term-wrap { overflow-x: auto; max-width: 100%; }
+  .g-term { display: inline-block; margin: 0; padding: 12px 16px; background: #14182e; color: #e8eaf6; font: 13px/1.22 "DejaVu Sans Mono", ui-monospace, monospace; white-space: pre; }
+  .g-term--qr { background: #fff; color: #000; line-height: 1; }  /* dark on light, as a terminal draws it, so it scans */
+  .g-demo { padding: var(--space-6); border: 1px solid var(--color-divider); background: var(--color-bg); display: grid; gap: var(--space-4); overflow: hidden; }
+  .g-fp { display: grid; gap: var(--space-3); padding: var(--space-4); flex: 1 1 300px; max-inline-size: 440px; }
+  .g-demo--row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+  .g-notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-3) var(--space-6); font-size: var(--text-sm); }
+  .g-notes h4, .g-notes h3 { font-size: var(--text-sm); margin-bottom: var(--space-1); }
+  .g-notes ul { margin: 0; padding-left: var(--space-5); display: grid; gap: 2px; }
+  .g-notes code { font-size: var(--text-xs); }
+  .g-pals { display: grid; gap: var(--space-6); }
+  .g-pal { display: grid; gap: var(--space-2); }
+  .g-pal h3 { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: baseline; font-size: var(--text-lg); }
+  .g-pal__modes { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-3); }
+  .g-pal__mode { border: 1px solid var(--color-divider); background: var(--color-bg); color: var(--color-text); }
+  .g-pal__bar { display: flex; align-items: center; justify-content: space-between; padding: var(--space-2) var(--space-3); background: var(--color-header); border-bottom: 1px solid var(--color-divider); }
+  .g-pal__logo { display: inline-flex; align-items: center; gap: var(--space-2); font-weight: var(--weight-heading); }
+  .g-pal__body { display: grid; gap: var(--space-3); padding: var(--space-3); }
+  .g-pal__body a { color: var(--color-accent); }
+  .g-pal__sws { display: flex; flex-wrap: wrap; gap: var(--space-1); }
+  .g-pal__sw { width: 28px; height: 28px; border: 1px solid var(--color-border); }
+  .g-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: var(--space-2); }
+  .g-swatch { display: grid; grid-template-columns: 40px 1fr; gap: var(--space-2); align-items: center; font-size: var(--text-xs); }
+  .g-swatch span:first-child { height: 40px; border: 1px solid var(--color-border); }
+  .g-frame { border: 1px solid var(--color-border); background: var(--color-bg); position: relative; overflow: hidden; }
+  .g-frame .site-header { position: relative; }
+  .g-frame .rail { position: absolute; }
+  .g-phone { width: 390px; max-width: 100%; }
+  .g-table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+  .g-table th, .g-table td { text-align: left; vertical-align: top; padding: var(--space-2) var(--space-3); border-top: 1px solid var(--color-divider); }
+  .g-table th { background: var(--color-surface-sunken); }
+  svg.i { width: var(--icon-md); height: var(--icon-md); }
+  svg.i-lg { width: var(--icon-lg); height: var(--icon-lg); }
+  svg.i-xl { width: 32px; height: 32px; }
+  }
+
+  .g-notes .g-note-h { font-size: var(--text-sm); font-weight: 700; margin-bottom: var(--space-1); }
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+<symbol id="i-book-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v16"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/></symbol>
+<symbol id="i-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/></symbol>
+<symbol id="i-list-checks" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 5h8"/><path d="M13 12h8"/><path d="M13 19h8"/><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/></symbol>
+<symbol id="i-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/></symbol>
+<symbol id="i-activity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/><path d="M20 2v4"/><path d="M22 4h-4"/><circle cx="4" cy="20" r="2"/></symbol>
+<symbol id="i-library" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 6 4 14"/><path d="M12 6v14"/><path d="M8 8v12"/><path d="M4 4v16"/></symbol>
+<symbol id="i-layout-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></symbol>
+<symbol id="i-calendar-days" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M8 13h.01"/><path d="M12 13h.01"/><path d="M16 13h.01"/><path d="M8 17h.01"/><path d="M12 17h.01"/><path d="M16 17h.01"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></symbol>
+<symbol id="i-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></symbol>
+<symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h.01"/><path d="M3 12h.01"/><path d="M3 19h.01"/><path d="M8 5h13"/><path d="M8 12h13"/><path d="M8 19h13"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></symbol>
+<symbol id="i-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+<symbol id="i-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+<symbol id="i-refresh-cw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+<symbol id="i-circle-help" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></symbol>
+<symbol id="i-circle-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol>
+<symbol id="i-circle-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16 9-5.5 5.5L8 12"/></symbol>
+<symbol id="i-triangle-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+<symbol id="i-trash-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
+<symbol id="i-pencil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></symbol>
+<symbol id="i-external-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+<symbol id="i-log-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></symbol>
+<symbol id="i-key-round" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></symbol>
+<symbol id="i-hard-drive-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v8"/><path d="m16 6-4 4-4-4"/><rect width="20" height="8" x="2" y="14" rx="2"/><path d="M6 18h.01"/><path d="M10 18h.01"/></symbol>
+<symbol id="i-radar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19.07 4.93A10 10 0 0 0 6.99 3.34"/><path d="M4 6h.01"/><path d="M2.29 9.62A10 10 0 1 0 21.31 8.35"/><path d="M16.24 7.76A6 6 0 1 0 8.23 16.67"/><path d="M12 18h.01"/><path d="M17.99 11.66A6 6 0 0 1 15.77 16.67"/><circle cx="12" cy="12" r="2"/><path d="m13.41 10.59 5.66-5.66"/></symbol>
+<symbol id="i-sliders-horizontal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5H3"/><path d="M12 19H3"/><path d="M14 3v4"/><path d="M16 17v4"/><path d="M21 12h-9"/><path d="M21 19h-5"/><path d="M21 5h-7"/><path d="M8 10v4"/><path d="M8 12H3"/></symbol>
+<symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z"/></symbol>
+<symbol id="i-scroll-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 12h-5"/><path d="M15 8h-5"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/></symbol>
+<symbol id="i-timer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/></symbol>
+<symbol id="i-archive-restore" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h2"/><path d="M20 8v11a2 2 0 0 1-2 2h-2"/><path d="m9 15 3-3 3 3"/><path d="M12 12v9"/></symbol>
+<symbol id="i-archive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></symbol>
+<symbol id="i-book-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7a2 2 0 0 0-2 2v11"/><path d="M5.803 18H5a2 2 0 0 0 0 4h9.5a.5.5 0 0 0 .5-.5V21"/><path d="M9 15V4a2 2 0 0 1 2-2h9.5a.5.5 0 0 1 .5.5v14a.5.5 0 0 1-.5.5H11a2 2 0 0 1 0-4h10"/></symbol>
+<symbol id="i-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></symbol>
+<symbol id="i-hard-drive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 16h.01"/><path d="M2.212 11.577a2 2 0 0 0-.212.896V18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5.527a2 2 0 0 0-.212-.896L18.55 5.11A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><path d="M21.946 12.013H2.054"/><path d="M6 16h.01"/></symbol>
+<symbol id="i-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v2"/><path d="M12 2v2"/><path d="M17 20v2"/><path d="M17 2v2"/><path d="M2 12h2"/><path d="M2 17h2"/><path d="M2 7h2"/><path d="M20 12h2"/><path d="M20 17h2"/><path d="M20 7h2"/><path d="M7 20v2"/><path d="M7 2v2"/><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="8" y="8" width="8" height="8" rx="1"/></symbol>
+<symbol id="i-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></symbol><symbol id="i-network" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></symbol>
+<symbol id="i-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="3" width="5" height="18" rx="1"/><rect x="5" y="3" width="5" height="18" rx="1"/></symbol>
+<symbol id="i-rotate-ccw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></symbol>
+<symbol id="i-filter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z"/></symbol>
+<symbol id="i-arrow-up-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 16-4 4-4-4"/><path d="M17 20V4"/><path d="m3 8 4-4 4 4"/><path d="M7 4v16"/></symbol>
+<symbol id="i-ellipsis" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+<symbol id="i-history" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></symbol>
+<symbol id="i-list-ordered" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5h10"/><path d="M11 12h10"/><path d="M11 19h10"/><path d="M4 4h1v5"/><path d="M4 9h2"/><path d="M6.5 20H3.4c0-1 2.6-1.925 2.6-3.5a1.5 1.5 0 0 0-2.6-1.02"/></symbol>
+<symbol id="i-file-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><circle cx="11.5" cy="14.5" r="2.5"/><path d="M13.3 16.3 15 18"/></symbol>
+<symbol id="i-heart-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/><path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></symbol>
+<symbol id="i-gauge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></symbol>
+<symbol id="i-shield-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+<symbol id="i-inbox" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></symbol>
+<symbol id="i-wifi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01"/><path d="M2 8.82a15 15 0 0 1 20 0"/><path d="M5 12.859a10 10 0 0 1 14 0"/><path d="M8.5 16.429a5 5 0 0 1 7 0"/></symbol>
+<symbol id="i-circle-arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4"/><path d="M12 16V8"/></symbol>
+<symbol id="i-server-cog" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10.852 14.772-.383.923"/><path d="M13.148 14.772a3 3 0 1 0-2.296-5.544l-.383-.923"/><path d="m13.148 9.228.383-.923"/><path d="m13.53 15.696-.382-.924a3 3 0 1 1-2.296-5.544"/><path d="m14.772 10.852.923-.383"/><path d="m14.772 13.148.923.383"/><path d="M4.5 10H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-.5"/><path d="M4.5 14H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-.5"/><path d="M6 18h.01"/><path d="M6 6h.01"/><path d="m9.228 10.852-.923-.383"/><path d="m9.228 13.148-.923.383"/></symbol>
+<symbol id="i-chart-line" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/></symbol>
+<symbol id="i-app-window" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 4v4"/><path d="M2 8h20"/><path d="M6 4v4"/></symbol>
+<symbol id="i-thermometer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+<symbol id="i-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m17 8-5-5-5 5"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/></symbol>
+<symbol id="i-file-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-grip-vertical" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="12" r="1"/><circle cx="9" cy="5" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="19" r="1"/></symbol>
+<symbol id="i-arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
+<symbol id="i-arrow-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></symbol>
+<symbol id="i-panel-right-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M15 3v18"/><path d="m10 15-3-3 3-3"/></symbol>
+<symbol id="i-circle-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></symbol>
+<symbol id="i-house" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+<symbol id="i-film" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18"/><path d="M3 7.5h4"/><path d="M3 12h18"/><path d="M3 16.5h4"/><path d="M17 3v18"/><path d="M17 7.5h4"/><path d="M17 16.5h4"/></symbol>
+<symbol id="i-tv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 2-5 5-5-5"/><rect width="20" height="15" x="2" y="7" rx="2"/></symbol>
+<symbol id="i-music" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></symbol>
+<symbol id="i-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19h8"/><path d="m4 17 6-6-6-6"/></symbol>
+<symbol id="i-monitor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></symbol>
+<symbol id="i-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/></symbol>
+<symbol id="i-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol>
+<symbol id="i-ban" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M4.929 4.929 19.07 19.071"/></symbol>
+<symbol id="i-book-marked" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.751a.25.25 0 00.407.195l2.28-1.834a.5.5 0 01.627 0l2.28 1.834A.25.25 0 0016 9.751V2"/><path d="M4 19.5v-15A2.5 2.5 0 016.5 2H19a1 1 0 011 1v18a1 1 0 01-1 1H6.5a1 1 0 010-5H20"/></symbol>
+<symbol id="i-bookmark-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v6"/><path d="M15 10H9"/><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/></symbol>
+<symbol id="i-book-open-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v16"/><path d="M16 13h2"/><path d="M16 9h2"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/><path d="M6 13h2"/><path d="M6 9h2"/></symbol>
+<symbol id="i-calendar-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 14v2.2l1.6 1"/><path d="M16 2v3"/><path d="M21 7.338V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h2.338"/><path d="M3 9h5.859"/><path d="M8 2v3"/><circle cx="16" cy="16" r="6"/></symbol>
+<symbol id="i-chevron-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></symbol>
+<symbol id="i-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></symbol>
+<symbol id="i-file-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.659 22H18a2 2 0 0 0 2-2V8a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 14 2H6a2 2 0 0 0-2 2v9.34"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10.378 12.622a1 1 0 0 1 3 3.003L8.36 20.637a2 2 0 0 1-.854.506l-2.867.837a.5.5 0 0 1-.62-.62l.836-2.869a2 2 0 0 1 .506-.853z"/></symbol>
+<symbol id="i-file-question" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M12 17h.01"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/></symbol>
+<symbol id="i-file-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="m14.5 12.5-5 5"/><path d="m9.5 12.5 5 5"/></symbol>
+<symbol id="i-folder-input" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-1"/><path d="M2 13h10"/><path d="m9 16 3-3-3-3"/></symbol>
+<symbol id="i-folder-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"/></symbol>
+<symbol id="i-link-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17H7A5 5 0 0 1 7 7h2"/><path d="M15 7h2a5 5 0 1 1 0 10h-2"/><line x1="8" x2="16" y1="12" y2="12"/></symbol>
+<symbol id="i-list-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 5H3"/><path d="M11 12H3"/><path d="M16 19H3"/><path d="M18 9v6"/><path d="M21 12h-6"/></symbol>
+<symbol id="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19v3"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><rect x="9" y="2" width="6" height="13" rx="3"/></symbol>
+<symbol id="i-plug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M15 8V2"/><path d="M17 8a1 1 0 0 1 1 1v4a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1z"/><path d="M9 8V2"/></symbol>
+<symbol id="i-puzzle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.39 4.39a1 1 0 0 0 1.68-.474 2.5 2.5 0 1 1 3.014 3.015 1 1 0 0 0-.474 1.68l1.683 1.682a2.414 2.414 0 0 1 0 3.414L19.61 15.39a1 1 0 0 1-1.68-.474 2.5 2.5 0 1 0-3.014 3.015 1 1 0 0 1 .474 1.68l-1.683 1.682a2.414 2.414 0 0 1-3.414 0L8.61 19.61a1 1 0 0 0-1.68.474 2.5 2.5 0 1 1-3.014-3.015 1 1 0 0 0 .474-1.68l-1.683-1.682a2.414 2.414 0 0 1 0-3.414L4.39 8.61a1 1 0 0 1 1.68.474 2.5 2.5 0 1 0 3.014-3.015 1 1 0 0 1-.474-1.68l1.683-1.682a2.414 2.414 0 0 1 3.414 0z"/></symbol>
+<symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></symbol>
+<symbol id="i-square-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m16 9-5.5 5.5L8 12"/></symbol>
+<symbol id="i-tags" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.172 2a2 2 0 0 1 1.414.586l6.71 6.71a2.4 2.4 0 0 1 0 3.408l-4.592 4.592a2.4 2.4 0 0 1-3.408 0l-6.71-6.71A2 2 0 0 1 6 9.172V3a1 1 0 0 1 1-1z"/><path d="M2 7v6.172a2 2 0 0 0 .586 1.414l6.71 6.71a2.4 2.4 0 0 0 3.191.193"/><circle cx="10.5" cy="6.5" r=".5" fill="currentColor"/></symbol>
+<symbol id="i-undo-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"/></symbol>
+<symbol id="i-user-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></symbol>
+<symbol id="i-user-round" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></symbol>
+<symbol id="i-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></symbol>
+<symbol id="i-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></symbol>
+<symbol id="i-hourglass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></symbol>
+<symbol id="i-octagon-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 9-6 6"/><path d="M2.586 16.726A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2h6.624a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586z"/><path d="m9 9 6 6"/></symbol>
+<symbol id="i-undo-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"/></symbol>
+<symbol id="i-ban" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M4.929 4.929 19.07 19.071"/></symbol>
+<symbol id="i-bookmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/></symbol>
+<symbol id="i-import" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m8 11 4 4 4-4"/><path d="M8 5H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-4"/></symbol>
+<symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+<symbol id="i-circle-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16 9-5.5 5.5L8 12"/></symbol>
+<symbol id="i-circle-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></symbol>
+<symbol id="i-triangle-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+<symbol id="i-headphones" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></symbol>
+<symbol id="i-radio" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.247 7.761a6 6 0 0 1 0 8.478"/><path d="M19.075 4.933a10 10 0 0 1 0 14.134"/><path d="M4.925 19.067a10 10 0 0 1 0-14.134"/><path d="M7.753 16.239a6 6 0 0 1 0-8.478"/><circle cx="12" cy="12" r="2"/></symbol>
+<symbol id="i-help" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3z"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></symbol>
+<symbol id="i-help-new-tab" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3H3v18h18v-8"/><path d="M15 3h6v6"/><path d="M21 3l-5.5 5.5"/><path d="M7.59 11a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M10.5 18h.01"/></symbol>
+</svg>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header site-header--no-rail">
+  <div class="site-header__bar">
+    <button class="icon-btn phone-menu-button" type="button" data-opens="s-site-menu" aria-controls="s-site-menu" aria-expanded="false"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-menu"/></svg><span class="visually-hidden">Menu</span></button>
+    <a class="site-header__brand" href="../index.html"><svg class="g-logo" width="28" height="28" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect x="1" y="1" width="30" height="30" fill="var(--color-logo-tile)"/><path fill="var(--color-bg)" d="M17 6.5h7.5q2.5 0 2.5 2.2V11h-4v.8h2.6v1.6H21v2.2l2.6 1.5-.6 1-2-1.1V20q0 2.2-2.4 2.9l.9 3.8h1.6V28h-4.3l-.9-4.4h-1.6l-.8 3.1h1.4V28h-4.1l1-4.9q-3.6-1-8.7.3 3.4-3.6 8.2-5.2 3.3-1.3 3.9-4.6V8.4q0-1.9 1.4-1.9Z"/><circle cx="20" cy="8.6" r="1" fill="var(--color-logo-star)"/></svg><span>TRex Design System</span></a>
+    <nav class="menu-tabs" aria-label="Main"><a href="../foundations/index.html"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-sliders-horizontal"/></svg><span class="menu-tabs__label">Foundations</span></a><a href="../components/index.html"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-layout-grid"/></svg><span class="menu-tabs__label">Components</span></a><a href="../patterns/index.html"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-list-checks"/></svg><span class="menu-tabs__label">Patterns</span></a><a href="../guides/index.html" aria-current="page"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-book-open"/></svg><span class="menu-tabs__label">Guides</span></a><a href="../areas/index.html"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-monitor"/></svg><span class="menu-tabs__label">Boards</span></a><a href="../resources/index.html"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-wrench"/></svg><span class="menu-tabs__label">Resources</span></a></nav>
+    <form class="site-header__search search-field" role="search" action="../search.html"><label class="visually-hidden" for="s-search">Search the design system</label><input class="input" id="s-search" name="q" type="search" placeholder="Search" autocomplete="off"></form>
+    <div class="site-header__actions"><button class="icon-btn" type="button" data-opens="g-panel-display" aria-haspopup="dialog" aria-expanded="false"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-sun"/></svg><span class="label">Display</span></button></div>
+  </div>
+</header>
+<div class="side-panel-layer" id="s-site-menu" hidden>
+  <div class="side-panel-backdrop"></div>
+  <nav class="phone-menu" aria-label="Menu">
+    <div class="panel-header"><span class="panel-header__brand"><svg class="g-logo" width="24" height="24" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect x="1" y="1" width="30" height="30" fill="var(--color-logo-tile)"/><path fill="var(--color-bg)" d="M17 6.5h7.5q2.5 0 2.5 2.2V11h-4v.8h2.6v1.6H21v2.2l2.6 1.5-.6 1-2-1.1V20q0 2.2-2.4 2.9l.9 3.8h1.6V28h-4.3l-.9-4.4h-1.6l-.8 3.1h1.4V28h-4.1l1-4.9q-3.6-1-8.7.3 3.4-3.6 8.2-5.2 3.3-1.3 3.9-4.6V8.4q0-1.9 1.4-1.9Z"/><circle cx="20" cy="8.6" r="1" fill="var(--color-logo-star)"/></svg>TRex Design System</span><button class="icon-btn" type="button" data-closes aria-label="Close menu"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></div>
+    <div class="phone-menu__sections">
+      <div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="s-sm-foundations"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-sliders-horizontal"/></svg>Foundations<svg class="i phone-menu__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></button><ul id="s-sm-foundations" hidden><li><a href="../foundations/index.html">All foundations</a></li><li><a href="../foundations/colour.html">Colour</a></li><li><a href="../foundations/accent-colours.html">Accent colours</a></li><li><a href="../foundations/type-space-icons.html">Type, space and icons</a></li></ul></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="s-sm-components"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-layout-grid"/></svg>Components<svg class="i phone-menu__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></button><ul id="s-sm-components" hidden><li><a href="../components/index.html">All components</a></li><li><a href="../components/shell.html">Shell</a></li><li><a href="../components/actions.html">Actions</a></li><li><a href="../components/inputs.html">Inputs</a></li><li><a href="../components/content.html">Content</a></li><li><a href="../components/containers.html">Panels, cards and tabs</a></li><li><a href="../components/media.html">Covers, media and shelves</a></li><li><a href="../components/settings-and-tools.html">Settings and toolbars</a></li><li><a href="../components/slide-outs-and-dialogs.html">Slide-outs and dialogs</a></li></ul></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="s-sm-patterns"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-list-checks"/></svg>Patterns<svg class="i phone-menu__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></button><ul id="s-sm-patterns" hidden><li><a href="../patterns/index.html">All patterns</a></li><li><a href="../patterns/choosing.html">Choosing</a></li><li><a href="../patterns/wizard.html">Wizard</a></li><li><a href="../patterns/terminal.html">Terminal</a></li><li><a href="../patterns/lists-and-changes.html">Lists and changes</a></li><li><a href="../patterns/help.html">Help</a></li><li><a href="../patterns/dates.html">Dates</a></li></ul></div><div class="phone-menu__section"><a href="../guides/index.html" aria-current="page"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-book-open"/></svg>Guides</a></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="s-sm-boards"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-monitor"/></svg>Boards<svg class="i phone-menu__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></button><ul id="s-sm-boards" hidden><li><a href="../areas/index.html">All boards</a></li><li><a href="../areas/index-starboard.html">Starboard</a></li><li><a href="../areas/index-storyarr.html">Storyarr</a></li></ul></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="s-sm-resources"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-wrench"/></svg>Resources<svg class="i phone-menu__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></button><ul id="s-sm-resources" hidden><li><a href="../resources/index.html">Overview</a></li><li><a href="../resources/tools.html">Tools</a></li><li><a href="../resources/outside-tools.html">Outside tools</a></li><li><a href="../resources/make-a-change.html">Make a change</a></li><li><a href="../resources/get-feedback.html">Get feedback</a></li></ul></div><div class="phone-menu__section"><a href="../search.html"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>Search</a></div>
+    </div>
+  </nav>
+</div>
+<div class="s-shell">
+<nav class="s-nav" aria-labelledby="s-nav-h"><h2 id="s-nav-h">Guides</h2><ol class="s-nav-pages"><li><a href="index.html">All guides</a></li><li class="s-group">Design</li><li><a href="design-system.html">Design system</a></li><li><a href="library.html" aria-current="page">Component library</a></li><li><a href="components.html">Components by area</a></li><li class="s-group">Patterns</li><li><a href="wizard.html">Wizard</a></li><li><a href="terminal.html">Terminal</a></li><li class="s-group">Words</li><li><a href="content-design.html">Content design</a></li><li><a href="help-writing.html">Help writing</a></li><li><a href="changelogs.html">Changelogs</a></li><li><a href="alt-text.html">Alt text</a></li><li><a href="screenshots.html">Screenshots</a></li><li class="s-group">Accessibility and security</li><li><a href="accessibility.html">Accessibility</a></li><li><a href="wcag.html">WCAG 2.2 AA</a></li><li><a href="security-checks.html">Security checks</a></li></ol><h2 id="s-own-h">On this page</h2><ol><li><a href="#files">Files</a></li><li><a href="#principles">Principles</a></li><li><a href="#menu-names">Menu names</a></li><li><a href="#components">Components</a></li><li><a href="#parts-22-november-2026">Parts (22 November 2026)</a></li><li><a href="#slide-out-dialog-or-page">Slide-out, dialog or page</a></li><li><a href="#adopting-the-library">Adopting the library</a></li><li><a href="#help-centre-7-november-2026-the-standard-since-14-november-2026">Help centre (7 November 2026; the standard since 14 November 2026)</a></li><li><a href="#app-only-patterns-2-november-2026">App-only patterns (2 November 2026)</a></li></ol></nav>
+<main class="s-main" id="main" tabindex="-1">
+<nav class="breadcrumbs s-crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="index.html">Guides</a></li><li aria-current="page">Component library</li></ol></nav><div class="s-doc"><div class="page-head"><div class="page-head__text"><h1>TRex Design System: the component library</h1><p class="page-head__summary">Design guide. <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/LIBRARY.md">Edit this guide on GitHub</a>.</p></div></div><div class="prose">
+
+<p>Version 1, 2 November 2026. One component library for both apps, so they share one design and one behaviour.
+It follows <code>DESIGN-SYSTEM.md</code> and the guides in this folder (<code>CONTENT-DESIGN.md</code>, <code>HELP-WRITING.md</code> and <code>ACCESSIBILITY.md</code>).
+File names in the tables in this guide are relative to the root of the repository.</p>
+<p><strong>Open <code>components/index.html</code> in a browser</strong>: every component in it works as it does in the apps. The component pages use the same
+header and menus as the apps. The main menu and search are in row 1, and the component groups are in row 2. Display
+opens the Display and accessibility slide-out, with theme, text size, reduced motion, high contrast, underlined links
+and wider spacing.</p>
+<p>Slide-outs, menus, the phone menu and the dialog all work in the gallery.</p>
+<h2 id="files">Files</h2>
+<div class="s-scroll" tabindex="0" role="region" aria-label="Table 1"><table>
+<thead>
+<tr>
+<th>File</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tokens.css</code></td>
+<td>Every colour, size, space and motion value, as role names, for Light, Dark, High contrast and High contrast dark, plus the display preference classes</td>
+</tr>
+<tr>
+<td><code>components.css</code></td>
+<td>Every component, in <code>@layer shared</code>, using only the tokens</td>
+</tr>
+<tr>
+<td><code>components.js</code></td>
+<td>The behaviour every component must have (menus, slide-outs, dialogs, phone menu, filter chips, copy, help, display settings), in plain JavaScript</td>
+</tr>
+<tr>
+<td><code>icons.svg</code></td>
+<td>Lucide icons as an SVG sprite (<code>&lt;use href="#i-book-open"&gt;</code>); <code>tools/icons.txt</code> lists them</td>
+</tr>
+<tr>
+<td><code>fonts/</code></td>
+<td>Atkinson Hyperlegible Next (OFL licence)</td>
+</tr>
+<tr>
+<td><code>gallery.src.html</code></td>
+<td>The source of the component pages in <code>components/</code>, <code>foundations/</code> and <code>patterns/</code> (edit it, then run <code>python3 tools/site.py</code>)</td>
+</tr>
+<tr>
+<td><code>contrast-report.txt</code></td>
+<td>Made by <code>tools/contrast.py</code> (not committed): measured contrast for every text and control pair in all four themes; all pass WCAG 2.2 AA</td>
+</tr>
+<tr>
+<td><code>accent-report.txt</code></td>
+<td>Made by <code>tools/check_accents.py --report accent-report.txt</code>: every token pair the components draw, for every accent colour, in all four themes, including the menu hover fill and its edge; all pass WCAG 2.2 AA</td>
+</tr>
+<tr>
+<td><code>areas/</code></td>
+<td>Design boards for every area of both apps, using the library, with slide-outs where they fit</td>
+</tr>
+<tr>
+<td><code>tools/build.py</code></td>
+<td>Turns <code><svg class="i" aria-hidden="true" focusable="false"><use href="#i-name"/></svg></code> into icons and <code>&lt;!--ICONS--&gt;</code> into the sprite for any <code>*.src.html</code></td>
+</tr>
+<tr>
+<td><code>tools/icons.py</code></td>
+<td>Rebuilds <code>icons.svg</code> from Lucide in Storyarr's <code>node_modules</code></td>
+</tr>
+<tr>
+<td><code>tools/sync.py</code>, <code>tools/paths.py</code></td>
+<td>Copies the library into both apps; <code>paths.py</code> says where the apps are (<code>tools/paths.local.json</code>, not committed)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="principles">Principles</h2>
+<ol>
+<li><strong>One design, two apps.</strong> Same tokens, same classes, same behaviour. An app may add its own components
+   (charts on Starboard, the bookshelf on Storyarr) but builds them from the tokens.</li>
+<li><strong>Accessible is the baseline.</strong> WCAG 2.2 AA in every theme. Controls and targets are 44px, and the focus ring is a
+   visible 3px. Status is always in words plus a shape or icon, never colour alone.</li>
+</ol>
+<p>Keyboard comes first. Everything works at 175% text and with wider spacing, and nothing moves when Reduce motion is
+   active.
+3. <strong>Mica, calm and dense enough.</strong> 6px corners, one typeface, card edges and rules in one colour, one accent
+   colour, one primary button per view. The dashboard card is the model for panels, settings sections, tables,
+   slide-outs and dialogs: a grey band on top, the body under it.
+4. <strong>Things open where they make sense.</strong> Slide-out for the details or editing of one item in a list; dialog
+   for a decision; page for something people return to. Read "Slide-out, dialog or page" in this guide.</p>
+<h2 id="menu-names">Menu names</h2>
+<p>Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Menu"):</p>
+<ul>
+<li><strong>Side menu:</strong> the icon rail on the left, in both apps: the logo with the app's name underneath, Search,
+  then the sections. Starboard moves to the side menu (TheMightyTRexUK, 4 November 2026), with Library, Discover,
+  Activity, System and Settings; read the Starboard menu board, <code>areas/starboard-menu.html</code>.</li>
+<li><strong>Level 1 menu:</strong> header row 1, the section's pages (Starboard: TV, Films, Radio, Books, Audiobooks). In
+  Starboard it starts with the server's own name, up to 10 characters, as plain text with no icon.</li>
+<li><strong>Level 2 menu:</strong> header row 2, a page's own tabs (Starboard: My library, Series, Authors, Stations), only
+  when the page has them.</li>
+<li>On phones the header shows only the logo on the left, with no names (TheMightyTRexUK, 4 November 2026). The app's
+  name and the server name stay for screen readers.</li>
+<li>All three have icons. In the phone menu, only the side menu and the level 1 menu have icons; the level 2
+  menu stays under the header on phones.</li>
+</ul>
+<h2 id="components">Components</h2>
+<h3 id="foundations">Foundations</h3>
+<div class="s-scroll" tabindex="0" role="region" aria-label="Table 2"><table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Classes</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Colour roles</td>
+<td><code>--color-*</code>, <code>--status-&lt;tone&gt;-bg/-fg</code>, <code>--chart-*</code>, <code>--series-1</code> to <code>--series-7</code>, <code>--series-empty</code></td>
+<td>Four themes; accent is one token (UX-02 board offers Indigo, Teal, Amber)</td>
+</tr>
+<tr>
+<td>Accent colours</td>
+<td><code>palettes/teal.css</code>, <code>indigo.css</code>, <code>forest.css</code>, <code>plum.css</code>, <code>ember.css</code>, <code>graphite.css</code> (Blue, the default, is <code>tokens.css</code>; Teal is the colour before Mica)</td>
+<td>An accent over Mica's neutral greys: load <code>tokens.css</code>, one palette, then <code>components.css</code>. Each sets the accent, its soft tint, the chosen item, the count and the logo in Light, Dark, High contrast and High contrast dark (a stronger shade, 7:1). Surfaces, text, focus, status colours and chart series stay the same. Written by <code>tools/palettes.py</code> and checked by <code>tools/check_accents.py</code>. For an app where people choose (Starboard's own style), <code>palettes/app-palettes.css</code> holds all six under <code>:root[data-palette="…"]</code>; <code>tools/sync.py</code> copies it to Starboard's <code>css/palettes.css</code> with <code>palettes.json</code>. An app's own styles still win</td>
+</tr>
+<tr>
+<td>Type</td>
+<td><code>--text-xs</code> to <code>--text-2xl</code>, <code>--font</code></td>
+<td>One typeface; scales with Text size</td>
+</tr>
+<tr>
+<td>Space and size</td>
+<td><code>--space-1</code> to <code>--space-12</code>, <code>--control-h</code> (44px), <code>--control-h-compact</code> (32px, dense tables only)</td>
+<td></td>
+</tr>
+<tr>
+<td>Icons</td>
+<td><code>icons.svg</code>, <code>svg.i</code>, <code>.i-lg</code>, <code>.i-xl</code></td>
+<td>Lucide, 2px stroke, decorative beside words</td>
+</tr>
+<tr>
+<td>Utilities</td>
+<td><code>.nowrap</code>, <code>.clamp-2</code>, <code>.clamp-3</code>, <code>.visually-hidden</code>, <code>.skip-link</code>, <code>.muted</code>, <code>.small</code>, <code>.numeric</code>, <code>code</code>, <code>.code-block</code>, <code>.stack-1</code>, <code>.stack-2</code>, <code>.stack-4</code></td>
+<td>Stacks put children one under another with a 4, 8 or 16px gap</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="shell">Shell</h3>
+<div class="s-scroll" tabindex="0" role="region" aria-label="Table 3"><table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Classes</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Side menu (rail)</td>
+<td><code>.rail</code>, <code>.rail__brand</code> and <code>.rail__name</code> (logo with the name underneath), <code>.rail__logo</code> (logo only), <code>.rail__search</code>, <code>.rail__end</code>, <code>.rail__version</code>, <code>.with-rail</code></td>
+<td>Both apps; hidden on phones. <code>.rail__search</code> comes straight after the brand. The app's version, "v0.9.1", sits at the bottom in <code>.rail__end &gt; .rail__version</code>, a link to the app's update page. When a newer release is out, an <code>.update-dot</code> sits directly before the number inside the link and pulses gently (still when Reduce motion is active), and the link's hidden text and title say "update available" with the version</td>
+</tr>
+<tr>
+<td>Header</td>
+<td><code>.site-header</code>, <code>.site-header--no-rail</code> (pages without a rail: name and logo start row 1), <code>.site-header__bar</code>, <code>.site-header__brand</code>, <code>.site-header__search</code>, <code>.site-header__search-btn</code> (phones), <code>.site-header__server</code> (the server name, start of the level 1 menu), <code>.site-header__actions</code>, <code>.site-header__tabs</code></td>
+<td>Row 1: 1st level, search, Help, Display. Row 2: 2nd level, only when the page has tabs. Nothing else. Help opens the help centre article for the page you are on, not the help centre's front page: the article for what the page does, or the help index's section when no one article covers the page. Its hidden text names the article's subject ("Help with checking your disks' health (opens in a new tab)"). Every page with the header has its own link, kept in one list in the app, and the app's build stops if a page has none or an article is missing</td>
+</tr>
+<tr>
+<td>Menu tabs (level 1 and level 2 menus)</td>
+<td><code>.menu-tabs</code>, <code>.menu-tabs__label</code>, <code>.is-compact</code></td>
+<td>Icons and names; icons only when they do not fit; current page bar</td>
+</tr>
+<tr>
+<td>Count and update dot</td>
+<td><code>.count</code>, <code>.update-dot</code></td>
+<td>Meaning in hidden text</td>
+</tr>
+<tr>
+<td>Phone menu</td>
+<td><code>.phone-menu-button</code>, <code>.phone-menu</code>, <code>.phone-menu__section &gt; a</code> (an item with no 1st level), <code>.phone-menu__search</code>, <code>.phone-menu__section</code>, <code>.phone-menu__foot</code></td>
+<td>Drawer from the left; search, main menu, 1st level; the version and sign out at the foot</td>
+</tr>
+<tr>
+<td>Page and page head</td>
+<td><code>.page</code>, <code>.page--narrow</code> (Sign in, Set up), <code>.section-head</code>, <code>.section-head__control</code>, <code>.page-head</code>, <code>.page-head__text</code>, <code>.page-head__summary</code></td>
+<td>One visible h1; page actions on the right</td>
+</tr>
+<tr>
+<td>Settings: Updates</td>
+<td>the 2nd level menu</td>
+<td>Settings, Updates has three pages: Update settings (the version, how to update, what the app can access, About), Releases (the Releases accordion) and Restore (a Restore your settings accordion with the saved copies and Restore from a file, then Go back to an earlier version)</td>
+</tr>
+<tr>
+<td>Sign out</td>
+<td><code>.btn</code> with the <code>log-out</code> icon in <code>.page-head .actions</code></td>
+<td>On every Settings page, beside the page title, so it is always one step away on a computer. Not in the Settings menu: with it there the menu falls back to icons only. Phones keep Sign out at the foot of the phone menu as well</td>
+</tr>
+<tr>
+<td>Footer</td>
+<td><code>.site-footer</code>, <code>.site-footer__app</code>, <code>.site-footer__brand</code>, <code>.site-footer__links</code>, <code>.site-footer__maker</code>, <code>.maker-mark</code></td>
+<td>On every page but Sign in and Set up. Left: app icon and name, then Help (only when the app has a help centre), Discord support server (only when the app has one: opens in a new tab, with the external-link icon and the hidden words "(opens in a new tab)"), Release notes (opens the release notes slide-out), the app's GitHub repository, and About and updates, with "Upgrade available" when a newer release is out. The version is not in the footer: it is at the bottom of the side menu and the phone menu. Right: the dinosaur mark and TheMightyTRexUK, one link to the GitHub profile (copy the markup from the gallery)</td>
+</tr>
+<tr>
+<td>Display button</td>
+<td><code>.icon-btn</code> (sun icon, <code>.label</code> Display), <code>aria-haspopup="dialog"</code>, opening a <code>.side-panel</code> titled Display and accessibility; inputs with <code>data-display</code>, <code>data-display-save</code>, <code>data-display-reset</code></td>
+<td>Last item in the header on every page. The choices and their order are in <code>ACCESSIBILITY.md</code> section 1</td>
+</tr>
+<tr>
+<td>Page banner</td>
+<td><code>.page-banner[data-tone]</code>, <code>.page-banner__text</code>, <code>.page-banner__actions</code>; <code>SharedComponents.pageBanner(title, { text, tone, action })</code> returns the function that takes it away</td>
+<td>One message for the whole app that stays while its state lasts (Connection lost, Restart needed, Read only), directly after <code>.site-header</code>, before the page (20 November 2026). Not for one page (<code>.notice</code>) or a result (a toast); a restart of one app stays in its place (DASH-470). One at a time. It does not stick, so it never covers focus. <code>pageBanner()</code> says it once: danger through the alert region, the rest politely</td>
+</tr>
+<tr>
+<td>Popover</td>
+<td><code>.popover-wrap</code>, <code>.popover[data-align="start"]</code> (<code>role="dialog"</code>, not modal, <code>aria-labelledby</code> its heading), <code>.popover__head</code>, <code>__body</code>, <code>__body--flush</code>, <code>__foot</code>; <code>[data-popover][aria-controls]</code> on the button; <code>popover-open</code> and <code>popover-close</code> events</td>
+<td>A small layer from a button to read and act on without leaving the page (20 November 2026). Focus moves to its heading (or <code>[data-autofocus]</code>); Escape returns it to the button; a press outside or Tab out closes it. Full width under the header on phones. Not for actions alone (<code>.menu</code>), a task (slide-out or dialog) or help (help links)</td>
+</tr>
+<tr>
+<td>Alerts centre</td>
+<td><code>.popover[data-alerts]</code>, <code>ul.alerts</code>, <code>li.alerts__item[data-unread][data-tone][data-id]</code>, <code>.alerts__unread</code> (hidden "Unread: "), <code>.alerts__title</code> (a link), <code>.alerts__time</code>, <code>.alerts__read</code> (icon button "Mark as read: <alert>"), <code>[data-alerts-read-all]</code>; the button holds <code>.count</code> with hidden " unread"; <code>alerts-read</code> event with <code>{ ids }</code></td>
+<td>Header button "Alerts" (Starboard's word, <code>CONTENT-DESIGN.md</code> section 5) opening the newest alerts, with All alerts in the foot (20 November 2026). Unread: a dot, bold words and hidden text. Opening one or Mark as read marks it; focus stays on the alert; Mark all as read keeps focus and says so</td>
+</tr>
+<tr>
+<td>Command palette</td>
+<td><code>[data-command-palette]</code> on its button (<code>.btn.command-palette-open</code> with <code>kbd</code> Ctrl K), <code>[data-command]</code> on buttons it should list, <code>.command-palette</code>; <code>SharedComponents.commandPalette.items = () =&gt; [{ label, hint, keywords, href \| run }]</code></td>
+<td>Find a page or action by name and go with Enter (20 November 2026). Ctrl+K or Command+K opens it as well as the button; <code>data-no-shortcut</code> on <code>&lt;html&gt;</code> takes the shortcut away (an app's setting, WCAG 2.1.4). A dialog holding the combobox, always open; it lists the side menu, menu tabs and phone menu links unless the app gives its own. Never the only way to anything</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="actions">Actions</h3>
+<div class="s-scroll" tabindex="0" role="region" aria-label="Table 4"><table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Classes</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Button</td>
+<td><code>.btn</code>, <code>.btn--primary</code>, <code>.btn--quiet</code>, <code>.btn--danger</code>, <code>.btn--compact</code></td>
+<td>One primary per view; words say what happens. <strong>Where buttons sit</strong> (TheMightyTRexUK, 7 November 2026): in every dialog, slide-out and wizard foot the buttons start on the left, the main action first, then Cancel or Back. A slide-out's danger button (Remove app) and a wizard's Skip this step sit on their own on the right. On phones a dialog's buttons take the full width, the main action on top. Never right-aligned with the main action last</td>
+</tr>
+<tr>
+<td>Icon button</td>
+<td><code>.icon-btn</code>, <code>.icon-btn--bare</code></td>
+<td>Always named, including the thing it acts on</td>
+</tr>
+<tr>
+<td>Split button</td>
+<td><code>.split-btn</code></td>
+<td>Main action plus a menu of related ones</td>
+</tr>
+<tr>
+<td>Menu button and menu</td>
+<td><code>.menu-wrap</code>, <code>.menu</code>, <code>.menu__label</code>, <code>role="menu"</code> items</td>
+<td>Related actions in one button (the Lists menu); sort as <code>menuitemradio</code>. Something to read and act on is a popover instead</td>
+</tr>
+<tr>
+<td>Copy button</td>
+<td><code>.copy-btn</code>, <code>data-copy</code></td>
+<td>Confirms in a status message</td>
+</tr>
+<tr>
+<td>Action row</td>
+<td><code>.actions</code></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="inputs">Inputs</h3>
+<div class="s-scroll" tabindex="0" role="region" aria-label="Table 5"><table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Classes</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Links that open a new tab</td>
+<td><code>a[target="_blank"]</code> with the <code>external-link</code> icon last</td>
+<td>Every link that opens a new tab shows the <code>external-link</code> icon after its words and says "(opens in a new tab)" for screen readers, such as a provider's site in a list (TheMightyTRexUK, 7 November 2026). Help that opens in a new tab uses <code>help-new-tab</code> in front instead</td>
+</tr>
+<tr>
+<td>Play in another app (Starboard, DASH-480)</td>
+<td><code>a.btn</code> (<code>.btn--primary</code> when it is the page's main action) with the <code>play</code> icon first and the <code>external-link</code> icon last</td>
+<td>A link that opens a film or episode in the media server's own player, in a new tab, styled as a button. Visible word "Play"; screen readers hear the item and the app as well: "Play The Lost Valley in Jellyfin (opens in a new tab)". Always the full 44px button, never <code>.btn--compact</code>, as it can be the only way to play. Only where the app has the item and an address a browser can open is known: the app's address for browsers, or, when its only address is local to the server (127.0.0.1), the host the page was opened with and the app's port, as other Open links do; never an address only the server can reach, such as a container's name. Not in the app yet: no link, and words where it would be ("Not in Jellyfin yet"). No address can be made: one info notice that names where to add it, with a link to that setting, in place of links that would fail</td>
+</tr>
+<tr>
+<td>Field</td>
+<td><code>.field</code>, <code>.field__label</code>, <code>.hint</code>, <code>.field-error</code>, <code>.field__required</code>, <code>.required-key</code></td>
+<td>Label first, then hint, then error that says how to fix it. <strong>Required fields</strong> (TheMightyTRexUK, 7 November 2026): a required field's label ends with <code>&lt;span class="field__required" aria-hidden="true"&gt;*&lt;/span&gt;</code> and its control has <code>required</code> (or <code>aria-required="true"</code> for a group of choices); the key, "* = Required" (<code>.required-key</code>), is not in the form: it goes at the bottom of the help slide-out opened from a form or step that has a required field, because most people know the star and the help is where it is explained (TheMightyTRexUK, 7 November 2026). Optional fields are not marked</td>
+</tr>
+<tr>
+<td>Text, select, text area</td>
+<td><code>.input</code>, <code>.select</code>, <code>.textarea</code></td>
+<td>44px; <code>aria-invalid</code> shows the error border. <code>readonly</code> (TheMightyTRexUK, 10 November 2026): a sunken box with a dashed edge for a value the app filled in and uses itself, such as the setup code from the installer's link; its hint says so</td>
+</tr>
+<tr>
+<td>Search field</td>
+<td><code>.search-field</code></td>
+<td>A box with a Search icon button inside it at the right (the default for every <code>input type="search"</code>, added by components.js; opt out with <code>data-no-search-icon</code>)</td>
+</tr>
+<tr>
+<td>Input with unit</td>
+<td><code>.input-group</code>, <code>.input-group__unit</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Checkbox and radio</td>
+<td><code>.check</code>, <code>.check__text</code>, <code>.check__hint</code></td>
+<td>22px box, 44px row</td>
+</tr>
+<tr>
+<td>Switch</td>
+<td><code>.switch</code> with <code>role="switch"</code></td>
+<td>For settings that apply at once</td>
+</tr>
+<tr>
+<td>Segmented control</td>
+<td><code>.segmented</code></td>
+<td>Two to five short options (theme, text size, view, cover size)</td>
+</tr>
+<tr>
+<td>Option cards</td>
+<td><code>.option-cards</code>, <code>.option-cards--row</code> (side by side), <code>.option-card</code></td>
+<td>Choices that need a line of explanation; text stays at the top of each card</td>
+</tr>
+<tr>
+<td>Filter chips</td>
+<td><code>.filter-chips</code>, <code>.filter-chip</code> with <code>aria-pressed</code></td>
+<td>In toolbars</td>
+</tr>
+<tr>
+<td>Sortable list</td>
+<td><code>.sortable</code>, <code>.sortable__row</code>, <code>.sortable__handle</code>, <code>.sortable__label</code>, <code>.sortable__meta</code>, <code>.sortable__moves</code> with <code>[data-move="up"]</code> and <code>[data-move="down"]</code>; <code>.sortable__row--marker</code>, <code>.sortable__row--off</code></td>
+<td>Rows in an order the person sets, such as Reelix's qualities best first (UX-51, TheMightyTRexUK, 10 November 2026). Move up and Move down on every row are the keyboard, screen reader and phone way; the handle drags with a mouse or finger. Each button's label names its row ("Move 1080p web up"). Buttons are always available: at an end the status says so. A marker row (Stop upgrading here) moves like any row. Each move announces the new place and fires <code>sortable-change</code> with <code>detail.order</code> (each row's <code>data-value</code>)</td>
+</tr>
+<tr>
+<td>Applied filters</td>
+<td><code>.applied</code>, <code>.applied__item</code></td>
+<td>Each removable, plus Clear all</td>
+</tr>
+<tr>
+<td>Form layout</td>
+<td><code>.form-grid</code>, <code>[data-span="all"]</code>, <code>fieldset</code></td>
+<td></td>
+</tr>
+<tr>
+<td>Folder picker</td>
+<td><code>.folder-field</code>, <code>.folder-places</code> with <code>.folder-place</code> (<code>__icon</code>, <code>__text</code>, <code>__name</code>, <code>__detail</code>), <code>.folder-pathbar</code>, <code>.folder-crumbs</code>, <code>.folder-list</code> (<code>role="listbox"</code>) with <code>.folder-row</code> (<code>__name</code>, <code>__meta</code>)</td>
+<td>Idea A (TheMightyTRexUK, 16 November 2026): a slide-out that opens on places (This computer, each disk, and each network share and cloud service where the page brings things in from them), then one list of folders with a path bar (Back, then where you are) and each folder's size and what is in it, counted after the list shows ("Counting…" until then). Use this folder (primary) chooses the folder you are in. Back goes up, and from the top of a place to the places. Up and Down move, Enter or Right opens, Left or Backspace goes up, letters jump. Places are buttons, one Tab stop each. Every page that picks a folder uses this one. A terminal draws it as a numbered list with the path at the top (<code>TERMINAL.md</code>)</td>
+</tr>
+<tr>
+<td>Combobox (searchable select)</td>
+<td><code>.combobox[data-combobox][data-noun][data-noun-one]</code>, <code>.combobox__input</code> (<code>role="combobox"</code>, <code>aria-autocomplete="list"</code>, <code>aria-expanded</code>, <code>aria-controls</code>), <code>__toggle</code> (<code>tabindex="-1"</code>, "Show all <noun>"), <code>__popup</code>, <code>__list</code> (<code>role="listbox"</code>), <code>__option</code> (<code>role="option"</code>, <code>data-value</code>, <code>data-hint</code>, <code>data-keywords</code>), <code>__hint</code>, <code>__none</code>, a hidden input; <code>SharedComponents.combobox(box, { options, onChoose, always })</code>; <code>combobox-change</code> event</td>
+<td>ARIA 1.2 list autocomplete without automatic choice (20 November 2026). Focus stays in the box; <code>aria-activedescendant</code> and the focus ring mark the option the arrows reach. Down opens, Up and Down move, Enter chooses, Escape closes and then clears, Tab leaves; an exact name is kept on leaving, anything else goes back. The match is underlined, "No <noun> match" shows, and the number found is said politely after a pause, from a status inside the box. For more than about 15 options; fewer is a select or radios</td>
+</tr>
+<tr>
+<td>Tag input</td>
+<td><code>.tag-input[data-tag-input]</code>, <code>.tag-input__list</code> (named like the field), <code>__tag</code>, <code>__field</code>, a hidden input with the words joined by commas; <code>tags-change</code> event</td>
+<td>Short free words (words to skip, tags), 20 November 2026. Enter or a comma adds (pasted commas add several); leaving the box adds what is in it; a word already there says so. Each tag's Remove button is named "Remove <word>"; focus goes to the next one, or the box. Backspace in an empty box moves to the last Remove. Changes said politely</td>
+</tr>
+<tr>
+<td>Secret field</td>
+<td><code>.secret-field[data-secret][data-name]</code>, <code>.secret-field__input</code> (<code>type="password"</code>, <code>readonly</code>), <code>[data-secret-show]</code> (<code>aria-pressed</code>), <code>[data-secret-copy]</code>, <code>[data-secret-replace]</code>; <code>secret-change</code> event with <code>{ value }</code></td>
+<td>An API key, token or password the app keeps (20 November 2026). Show and Hide named with the thing ("Show API key"), said politely. Copy confirms in a toast without the value. Replace empties the box with Save and Cancel (Enter and Escape); an empty Save shows the field's error. Set the value with <code>input.value</code>, never in markup; it is never in an attribute, a message, the title or the console. A key the server must not send back shows "Saved" and Replace only</td>
+</tr>
+<tr>
+<td>Schedule picker</td>
+<td><code>fieldset.schedule[data-schedule]</code>, <code>.schedule__row</code>, <code>.schedule__days</code> (a fieldset named Days), <code>.schedule__day</code> (checkbox valued 0 to 6, short name shown, full name for screen readers), <code>.schedule__words</code> (<code>role="status"</code>); <code>[data-schedule-repeat]</code> (day, week, hour), <code>-time</code>, <code>-minute</code>, <code>-days</code>, <code>-words</code>, <code>-next</code>; <code>scheduleWords()</code>, <code>nextRun()</code>, <code>schedule-change</code> event</td>
+<td>How often, which days and what time, read back in words ("Every weekday at 07:00", "Every hour at 15 minutes past") with the next run ("Next: tomorrow at 07:00"), 20 November 2026. 24-hour times. Days show only for On chosen days; the minute only for Every hour. Chosen days have a tick, not colour alone</td>
+</tr>
+<tr>
+<td>Error summary</td>
+<td><code>.error-summary</code> (<code>role="alert"</code>, <code>tabindex="-1"</code>), <code>.error-summary__title</code>, <code>.error-summary__list</code>; <code>SharedComponents.showErrors(form, [{ field, message }])</code>, <code>clearErrors(form)</code>, <code>setFieldError(control, message)</code></td>
+<td>After GOV.UK (20 November 2026): at the top of a form after a failed submit, titled "There is a problem", focused, with "Error: " at the start of the page title. Each link uses the field's own error words and moves focus to the field with its label (or legend) in view. <code>showErrors()</code> also writes each <code>.field-error</code> (with hidden "Error: "), <code>aria-invalid</code> and <code>aria-describedby</code>. For forms of more than one field; a single inline-save field keeps its own error</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="content">Content</h3>
+<div class="s-scroll" tabindex="0" role="region" aria-label="Table 6"><table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Classes</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Settings helpers</td>
+<td><code>.inline-save</code>, <code>.form-stack</code>, <code>.setting__cost</code></td>
+<td>A field and its Save on one line; fields one under another; the muted line saying what a setting costs</td>
+</tr>
+<tr>
+<td>Icon on a phone</td>
+<td><code>.btn--icon-on-phone</code> on a button with an icon</td>
+<td>At 720px wide or less, the icon only, words kept for screen readers; for a repeated action in a list row, such as Watched (19 November 2026)</td>
+</tr>
+<tr>
+<td>Section group</td>
+<td><code>section.settings-section.settings-section--group</code> holding <code>section.settings-section</code> cards with h3 headings</td>
+<td>One topic with several cards, such as a plug-in's General (State, Versions, Jobs, What it may do, Remove); topic tabs give the group one tab (19 November 2026)</td>
+</tr>
+<tr>
+<td>File picker</td>
+<td><code>.file-field</code> &gt; <code>span.btn.file-field__button</code> (icon, words, <code>input[type=file]</code>) + <code>.file-field__name</code> (<code>.is-chosen</code> once a file is chosen)</td>
+<td>Every file upload: a button in the site's style, "Choose a file", with the file's name and size beside it, then "Choose another file"; the real input lies over the button, so keyboards and screen readers work as usual. The form's button says what happens, such as "Upload and check" (owner, 19 November 2026)</td>
+</tr>
+<tr>
+<td>Status chip</td>
+<td><code>.chip[data-tone]</code></td>
+<td>Word, shape and colour: dot, diamond (warning), square (danger), ring (muted). On a phone, a chip with an icon in a list row (<code>.rows .row</code>) shows its icon only; screen readers still read the words (19 November 2026)</td>
+</tr>
+<tr>
+<td>Title with status</td>
+<td><code>.title-status</code>, <code>.title-status__chips</code></td>
+<td>A heading's status chips straight after the name, centred on its line; never on a line under it (read "Where status goes")</td>
+</tr>
+<tr>
+<td>Status icon</td>
+<td><code>.status-icon[data-tone]</code> with <code>tabindex="0"</code> and <code>data-tooltip</code></td>
+<td>In a list of things with a state: an icon after the name, the word in hidden text and the library's tooltip (since 20 November 2026, not <code>title</code>, so keyboards reach it)</td>
+</tr>
+<tr>
+<td>Tag</td>
+<td><code>.tag</code></td>
+<td>Format or kind, not status</td>
+</tr>
+<tr>
+<td>Avatar, app icon</td>
+<td><code>.avatar</code>, <code>.app-icon</code>, <code>.app-icon--compact</code> (32px)</td>
+<td>Initials on a tile when there is no logo; <code>.has-image</code> for a logo</td>
+</tr>
+<tr>
+<td>Cover</td>
+<td><code>.cover</code>, <code>.cover--row</code> (48px in rows), <code>.cover__badge</code></td>
+<td>2:3; square audio covers letterboxed; the card's border, 6px corner and shadow on every cover (23 November 2026)</td>
+</tr>
+<tr>
+<td>Facts</td>
+<td><code>.facts</code> (<code>dl</code>)</td>
+<td>Author first, then Series; names are links</td>
+</tr>
+<tr>
+<td>Stat</td>
+<td><code>.stats</code>, <code>.stat[data-tone]</code>, <code>.stat__value</code>, <code>.stat__label</code></td>
+<td>Edge colour plus words</td>
+</tr>
+<tr>
+<td>Progress and meter</td>
+<td><code>.progress[data-tone]</code>, <code>.progress--busy</code>, <code>.progress--running</code>, <code>.meter</code>, <code>.meter__label</code>, <code>creepProgress()</code></td>
+<td>Value always in words. Waiting standard (DASH-493, TheMightyTRexUK, 20 November 2026): a bar that is working is 14px with rounded ends and moving stripes. <code>.progress--busy</code>: the end is not known, a striped band runs along. <code>.progress--running</code>: a count that is still going (such as 4 of 5); it starts with a visible piece and <code>creepProgress(bar, done, total, eachMs)</code> eases onto each count and creeps towards the next. Taken off when it ends; still with less motion asked for</td>
+</tr>
+<tr>
+<td>Waiting mark and busy button</td>
+<td><code>.wait</code>, <code>.wait__mark</code>, <code>.btn[aria-busy="true"]</code></td>
+<td>Waiting standard, option A, the ring: a short wait shows the ring with words, never a plain "Loading…". A busy button draws the ring before its doing word ("Testing"), keeps its size and has <code>aria-disabled</code>. After 0.3 seconds the place the answer goes shows its waiting state; the end replaces it with the result, and focus moves to an error. With less motion the ring fades instead of turning</td>
+</tr>
+<tr>
+<td>Rows</td>
+<td><code>.rows</code>, <code>.row</code>, <code>.row--no-lead</code>, <code>.row--opens</code>, <code>.row__title</code>, <code>.row__meta</code>, <code>.row__side</code></td>
+<td><code>.row--opens</code>: the whole row opens a slide-out</td>
+</tr>
+<tr>
+<td>Group heading</td>
+<td><code>.group-heading</code></td>
+<td>Sentence case, no capitals</td>
+</tr>
+<tr>
+<td>Table</td>
+<td><code>.table-wrap[data-stack]</code>, <code>.table</code>, <code>th[aria-sort]</code>, <code>.table--middle</code></td>
+<td>Real tables only; stack into cards on phones. A row's heading (<code>th scope="row"</code>) has the same style as its cells, in bold. <code>.table--middle</code> puts every cell on the row's middle line, for a summary with a button on each row, such as a wizard's Check step with Change (7 November 2026)</td>
+</tr>
+<tr>
+<td>Tables that line up</td>
+<td><code>.table.table--fixed</code> with the same <code>&lt;colgroup&gt;</code> in each; <code>col.col-id</code>, <code>.col-date</code>, <code>.col-state</code>, <code>.col-number</code>, <code>.col-quarter</code>, <code>.col-third</code>, and no class on the column that takes the rest</td>
+<td>Several tables one after another, such as tasks by category or a menu by section, keep their columns in line (4 November 2026)</td>
+</tr>
+<tr>
+<td>Notice and callout</td>
+<td><code>.notice[data-tone]</code> (<code>success</code>, <code>warning</code>, <code>danger</code>, <code>muted</code>; none is info), <code>.notice__title</code>, <code>.notice__body</code></td>
+<td>Icon and words; <code>role="status"</code> or <code>role="alert"</code>. As a callout in long text, the title is the lead word: Before you begin (info), Limitation (warning), Warning (danger, cannot be undone), Tip (success), Example (muted)</td>
+</tr>
+<tr>
+<td>Prose</td>
+<td><code>.prose</code>, <code>.prose__lead</code>, <code>.prose__kind</code></td>
+<td>Help topics, guides and release notes shown in an app (<code>HELP-WRITING.md</code>)</td>
+</tr>
+<tr>
+<td>Time ago</td>
+<td><code>&lt;time datetime&gt;</code> with <code>.visually-hidden</code> exact time</td>
+<td>"Updated 10 seconds ago" on screen, the exact time for screen readers</td>
+</tr>
+<tr>
+<td>Empty state</td>
+<td><code>.empty</code>, <code>.empty__icon</code></td>
+<td>What, why, one next step</td>
+</tr>
+<tr>
+<td>Loading</td>
+<td><code>.skeleton</code>, <code>.loading-bar[data-active]</code>, <code>aria-busy</code></td>
+<td>Skeletons in the shape of the content. The loading line (TheMightyTRexUK, 12 November 2026): on the header's lower edge, shown while something takes longer than a moment, until it has loaded. Chase: a long and a short bar follow each other across; since 20 November 2026 (option E) 6px with moving stripes. With Reduce motion it does not slide; it fades in and out across its width, so it still shows that something is happening</td>
+</tr>
+<tr>
+<td>Toast (option C)</td>
+<td><code>.toasts</code>, <code>.toast[data-tone="success"\|"info"\|"warning"\|"danger"]</code>, <code>.toast__text</code>, <code>.toast__title</code>, <code>.toast__detail</code>, <code>.toast__action</code>, <code>.toast__close</code>; <code>SharedComponents.toast(title, { detail, tone, action })</code>, <code>toast.error(...)</code>, <code>toast.warning(...)</code></td>
+<td>Card in the corner (full width on phones), status edge and icon, up to three stacked; a new one never pushes out an error. Success and info 5 seconds (10 with an action), warning 10, error until closed; waits under the pointer or focus. Errors read out at once</td>
+</tr>
+<tr>
+<td>Saved note (option D)</td>
+<td><code>.saved-note</code>; <code>SharedComponents.savedNote(element)</code></td>
+<td>Settings pages: "Saved at 16:31" beside the button that saved, instead of a toast; goes at the next change</td>
+</tr>
+<tr>
+<td>Icons in built parts</td>
+<td><code>data-sprite</code> on the <code>components.js</code> script tag, or <code>window.SharedComponentsSprite</code></td>
+<td>The toast and saved note draw icons as <code>&lt;use href="#i-name"&gt;</code>. An app whose icons are in a separate file names it (Starboard: <code>/icons/sprite.svg</code>), or the icons and Close button are blank</td>
+</tr>
+<tr>
+<td>Help</td>
+<td><code>.help</code>, <code>.help__text</code></td>
+<td>A disclosure button, not a hover tooltip. A tooltip (<code>data-tooltip</code>) only names an icon; anything that explains is help</td>
+</tr>
+<tr>
+<td>Disclosure</td>
+<td><code>.disclosure</code> (<code>details</code>), <code>.disclosure__body</code>, <code>.disclosure__meta</code></td>
+<td>SMART report, More settings, Restore your settings</td>
+</tr>
+<tr>
+<td>Releases</td>
+<td><code>.disclosure.release</code>, <code>.release__date</code>, <code>.release__counts</code>, <code>.release__type[data-type="added|changed|deprecated|removed|fixed|security|settings"]</code>, <code>.releases-head</code></td>
+<td>Each release in its own accordion, newest first, the installed one open, with Open all. Summary: "Version 0.9.1" as a heading, an Installed chip, the date, and a count chip for each type of change (added success, changed info, fixed warning, security danger, deprecated and removed muted). Body: each type with a bar in its colour, every change as a bold title and one sentence, then Your settings and the way back on a sunken background, and a link to the release on GitHub. On the app's Releases page (Settings, Updates); the footer's Release notes slide-out shows the same notes</td>
+</tr>
+<tr>
+<td>Steps</td>
+<td><code>.steps</code>, <code>aria-current="step"</code>, <code>[data-done]</code></td>
+<td>Onboarding and upgrade wizard</td>
+</tr>
+<tr>
+<td>Command</td>
+<td><code>.command</code> with <code>.code-block</code> and <code>.copy-btn</code> (<code>.copy-btn--label</code> shows the word Copy)</td>
+<td>Commands to copy (How to upgrade); wizards use the labelled button</td>
+</tr>
+<tr>
+<td>Line chart</td>
+<td><code>.chart</code>, <code>.chart__svg</code>, <code>.chart__grid</code>, <code>.chart__axis</code>, <code>.chart__line--1/--2</code>, <code>.chart__legend</code>, <code>.chart__swatch</code></td>
+<td>Second series dashed; always with a table view in a disclosure</td>
+</tr>
+<tr>
+<td>Load more as you scroll (UX-52)</td>
+<td><code>.load-more</code>, <code>.load-more__count</code>, <code>.load-more__status</code>; <code>SharedComponents.loadMore(box, { load, items, noun, pageSize, auto, maxAuto, said })</code>, then <code>reset()</code> after a new search, filter or A to Z jump</td>
+<td>A long list ends with a count and a real Show more button. One IntersectionObserver per list loads the next page as the end comes within 600px of the screen; no scroll handlers, no timers. While loading, "Loading the next 40" shows; then a polite status says "40 more shown" and focus stays where it was. After three pages in a row it pauses ("Paused here so you can reach the end of the page") until the button is pressed, so the footer stays in reach. The button alone with Reduce motion, when the app's setting asks for it, without IntersectionObserver or without script; pressing it moves focus to the first new item. <code>DESIGN-SYSTEM.md</code> section 11 says when to use it</td>
+</tr>
+<tr>
+<td>Log viewer</td>
+<td><code>.log-view[data-log-view][data-file]</code>, <code>__bar</code>, <code>__search</code>, <code>__count</code>, <code>__scroll</code> (<code>role="region"</code>, <code>tabindex="0"</code>, named), <code>__lines</code> (<code>ol</code>), <code>__line[data-level="error\|warning\|info\|debug"]</code>, <code>__time</code>, <code>__level</code>, <code>__text</code>, <code>__match</code>, <code>__earlier</code>, <code>[data-wrap]</code>; <code>.filter-chip</code>s with <code>[data-log-level]</code> and a <code>[data-count]</code>, <code>[data-log-follow]</code>, <code>[data-log-wrap]</code>, <code>[data-log-download]</code>; <code>SharedComponents.logView(box, { lines, maxLines, show, fileName })</code> returns <code>add(lines)</code> and <code>clear()</code></td>
+<td>An app's or job's log (20 November 2026). Lines are strings ("12:01:03 ERROR …") or <code>{ time, level, text }</code>. Keeps the newest 10,000, draws only the newest 1,000 that match with Show earlier lines, and adds new lines on their own (never redrawing the list). Search marks each match and says how many; the level buttons carry their counts. Following keeps the newest line in view; scrolling up pauses it and the count line says so. New lines are never read out; new errors are, politely and only while following, gathered over 1.5 seconds. Download gives every line held, as text</td>
+</tr>
+<tr>
+<td>Sparkline</td>
+<td><code>svg.sparkline[data-values][data-unit][data-period][data-min][data-max]</code> with <code>.sparkline__area</code> and <code>.sparkline__line</code>, <code>.stat__trend</code>; <code>SharedComponents.sparkline(svg, values, options)</code></td>
+<td>The shape of the last hour or day under a stat's value (20 November 2026), in <code>--chart-1</code>. Hidden from screen readers; <code>.stat__trend</code> says "Last hour: 18% to 42%, lowest 18%, highest 61%". For reading values or comparing, the line chart with its table</td>
+</tr>
+<tr>
+<td>Gauge</td>
+<td><code>.gauge[data-value][data-max][data-unit][data-warn][data-danger]</code>, <code>.gauge__dial</code>, <code>__svg</code> (<code>aria-hidden</code>), <code>__track</code>, <code>__fill</code> (<code>pathLength="100"</code>, <code>stroke-dasharray</code>), <code>__value</code>, <code>__label</code>; <code>SharedComponents.gauge(el, value)</code></td>
+<td>One value against a known most, in a stat tile (20 November 2026). The value is in words in the middle; the arc's colour turns warning or danger at <code>data-warn</code> and <code>data-danger</code>, and the tile then carries a status chip, so the state is never colour alone</td>
+</tr>
+<tr>
+<td>Pagination</td>
+<td><code>nav.pagination</code> (named for what it pages), <code>__summary</code>, <code>__pages</code>, <code>__link</code> (<code>aria-current="page"</code>, <code>rel="prev"</code>, <code>rel="next"</code>), <code>__gap</code> (<code>aria-hidden</code>), <code>__size</code> (Rows per page); <code>SharedComponents.pagination(nav, { page, pageSize, total, noun, sizes, href, onPage, onSize, focus })</code></td>
+<td>Tables people sort, compare or come back to by place (20 November 2026): "Showing 21 to 40 of 312", Previous and Next (with hidden "page"), the first, last and either side of this page, and rows per page. Links are 44px. In place, it says the new place politely and moves focus to the table's heading; from the server, real links. Walls and lists people browse use load more instead</td>
+</tr>
+<tr>
+<td>Tooltip</td>
+<td><code>data-tooltip="…"</code> on the thing; one <code>.tooltip</code> (<code>aria-hidden</code>) for the page</td>
+<td>The name of something that shows only an icon (20 November 2026): an icon button, or a <code>.status-icon</code> with <code>tabindex="0"</code>. On hover after 0.3 seconds and at once on keyboard focus; the pointer can move onto it; Escape closes it without closing a dialog behind it (WCAG 1.4.13). Its words are already the thing's name, so it is hidden from screen readers and never holds anything needed to act. Replaces <code>title</code>. Help that explains stays in help links</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="containers">Containers</h3>
+<div class="s-scroll" tabindex="0" role="region" aria-label="Table 7"><table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Classes</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Panel</td>
+<td><code>.panel[data-tone]</code>, <code>.panel__head</code></td>
+<td>Groups content</td>
+</tr>
+<tr>
+<td>Card</td>
+<td><code>.cards</code>, <code>.card[data-tone]</code>, <code>.card__top</code>, <code>.card__title</code>, <code>.card__meta</code>, <code>.card__actions</code></td>
+<td>One thing; whole card is the target; opens its slide-out or page</td>
+</tr>
+<tr>
+<td>Card band (DASH-428)</td>
+<td><code>.has-band</code> on the card, <code>.card-band</code>, <code>.card-band__title</code> (the heading), <code>.card-band__sub</code>, <code>.card-band__side</code>, <code>.card-band__time</code>, <code>.card-foot</code></td>
+<td>A grey band across the top: the logo (<code>.app-icon--compact</code>), the name as the heading, the status chip at the right, and <code>.card-foot</code>, a lighter grey strip at the foot of the card, with when it last updated, so the band stays on one line (16 November 2026); Starboard's plug-in cards (design 2, "band with status", TheMightyTRexUK, 14 November 2026). The chip starts with hidden "Status: " and the time with hidden "Updated ", so each makes sense alone. The heading keeps its own line: when the side does not fit beside it, the side moves under it rather than squeezing it onto two lines (DASH-443)</td>
+</tr>
+<tr>
+<td>Media card and grid</td>
+<td><code>.media-grid[data-size]</code>, <code>.media-card</code>, <code>.media-card__title</code>, <code>.media-card__meta</code>, <code>.media-row</code></td>
+<td>Books and films; Small, Medium, Large</td>
+</tr>
+<tr>
+<td>A to Z jump list</td>
+<td><code>nav.az-jump &gt; ol &gt; li &gt; a.az-jump__letter</code>, <code>[aria-disabled="true"]</code>, <code>[aria-current="location"]</code>, <code>.wall-letter</code> headings (<code>#letter-a</code>, <code>#letter-num</code>)</td>
+<td>Over a long wall: # then A to Z from the sort title, accents folded; letters with nothing shown but not choosable ("Q, no books" from the noun given to <code>azJump(nav, letters, noun)</code> or <code>data-noun</code>, or "Q, none"); sticky under the header; 44px targets; one Tab stop with Arrow keys, Home and End; focus moves to the heading after a jump; sideways scrolling on phones. <code>SharedComponents.azLetter</code>, <code>azJump</code>, <code>azGo</code> and the <code>az-jump</code> event</td>
+</tr>
+<tr>
+<td>Section toolbar (design D)</td>
+<td><code>.toolbar</code>, <code>.toolbar__row</code>, <code>.toolbar__search</code>, <code>.toolbar__end</code>, <code>.toolbar__count</code></td>
+<td>Same on every list</td>
+</tr>
+<tr>
+<td>Save bar</td>
+<td><code>.save-bar</code>, <code>.save-bar__text</code></td>
+<td>The one way to save a settings section: sticks to the bottom while there are unsaved changes</td>
+</tr>
+<tr>
+<td>Timeline</td>
+<td><code>.timeline</code>, <code>.timeline__item[data-tone]</code>, <code>.timeline__title</code>, <code>.timeline__meta</code></td>
+<td>A request's history, a backup run; newest first</td>
+</tr>
+<tr>
+<td>List and detail</td>
+<td><code>.list-detail</code>, <code>.list-detail__list</code>, <code>.row[aria-current]</code></td>
+<td>Following: authors on the left, the chosen one on the right; list alone on phones</td>
+</tr>
+<tr>
+<td>Item header</td>
+<td><code>.item-header</code>, <code>.item-header__art</code> (<code>--round</code> for people), <code>.item-header__text</code>, <code>.item-header__byline</code>, <code>.item-header__chips</code></td>
+<td>Book, author, series and narrator pages</td>
+</tr>
+<tr>
+<td>Series header (UX-43)</td>
+<td><code>.series-head</code>, <code>.series-head__text</code>, <code>__name</code> (<code>.wordmark</code> with no logo), <code>__meta</code>, <code>__desc</code>, <code>__progress</code>, <code>__actions</code>, <code>.cover-fan</code></td>
+<td>Series and radio show pages; the name stays the h1; the fan is hidden on phones</td>
+</tr>
+<tr>
+<td>Solid-colour logo, wordmark</td>
+<td><code>.logo-mask</code> (<code>--logo</code>, <code>--logo-ratio</code>, <code>data-colour="accent"</code>), <code>.wordmark</code></td>
+<td>Any transparent logo as one colour through a CSS mask; the name set large when there is none</td>
+</tr>
+<tr>
+<td>Logo slide-out (UX-43)</td>
+<td><code>.logo-saved</code>, <code>.logo-saved__row</code>, <code>.logo-saved__text</code>, <code>.logo-tabs</code>, <code>.logo-pane</code>, <code>.logo-step</code>, <code>.logo-candidates</code>, <code>.logo-candidate</code> (<code>__art</code>, <code>__text</code>), <code>.cover-pick</code>, <code>.logo-crop</code> (<code>__canvas</code>, <code>__controls</code>, <code>__readout</code>), <code>.range</code>, <code>.checker</code>, <code>.logo-drop</code>, <code>.logo-preview</code> (<code>__light</code>, <code>__dark</code>), <code>.inline-form</code></td>
+<td>From a cover, Find online, Upload your own; the saved copy and Remove</td>
+</tr>
+<tr>
+<td>Back link, breadcrumbs</td>
+<td><code>.back-link</code>, <code>.breadcrumbs</code></td>
+<td>"Back to My library"; folder paths</td>
+</tr>
+<tr>
+<td>Shelf</td>
+<td><code>.shelf</code>, <code>.shelf__head</code>, <code>.shelf__caption</code>, <code>.shelf__end</code>, <code>.shelf__track</code></td>
+<td>Discover shelves: one row that scrolls, arrows on computers</td>
+</tr>
+<tr>
+<td>Calendar month</td>
+<td><code>.calendar</code> (a <code>table</code>), <code>td[data-outside]</code>, <code>td[aria-current="date"]</code>, <code>.calendar__day</code></td>
+<td>List view on phones</td>
+</tr>
+<tr>
+<td>Selection bar</td>
+<td><code>.selection-bar</code>, <code>.selection-bar__text</code>, <code>.row--select</code>, <code>.cover--thumb</code></td>
+<td>Bulk actions (Wanted, series reading order)</td>
+</tr>
+<tr>
+<td>Wizard</td>
+<td><code>.wizard</code>, <code>.wizard__foot</code>, <code>.steps--collapse</code>, <code>.steps__short</code>, <code>.wizard-layout</code>, <code>.wizard-main</code>, <code>.wizard-progress</code>, <code>.steps--sub</code>, <code>.wizard-paths</code>, <code>.wizard-summary</code></td>
+<td>Every job done in steps (set-up, upgrade, restore, migration). Rules in <code>docs/WIZARD.md</code>; steps become "Step 3 of 7" on phones</td>
+</tr>
+<tr>
+<td>Wizard review aids</td>
+<td><code>.wizard-aside</code>, <code>.wizard-next</code>, <code>.wizard-tree</code>, <code>.wizard-tree-toggle</code></td>
+<td>What happens next and the decision tree: for testing only, shown while the app's testing setting is active, never in the finished product</td>
+</tr>
+<tr>
+<td>Help links</td>
+<td><code>.help-links</code>, <code>.help-link</code> (a button), opening a slide-out (<code>.side-panel</code>) titled with the link's question</td>
+<td>"What is…" and "Which one is right for me?" at the end of the part of a page they explain. Every piece of in-page help works this way: never a fold-out (<code>details</code>), never a dialog. Help that is an article in the help centre is shown in the slide-out too, with "Read it in the help centre" in its foot. <strong>Two help icons, both square</strong> (TheMightyTRexUK, 7 November 2026): <code>help</code> (a question mark in a square) for help that opens in the page, in a slide-out; <code>help-new-tab</code> (the square opening at the top right, with the new-tab arrow) for help that opens in a new tab: the header's Help and "Read it in the help centre". Never <code>circle-help</code> for help. A link that opens a new tab also says "(opens in a new tab)" for screen readers</td>
+</tr>
+<tr>
+<td>Address</td>
+<td><code>.address</code> with <code>.copy-btn</code> (<code>data-copied="Address copied"</code>)</td>
+<td>A server address as a link that opens in a new tab, with a copy button</td>
+</tr>
+<tr>
+<td>Signing in to a service (DASH-452)</td>
+<td><code>.signin-card</code>, <code>.signin-steps</code>, <code>.signin-example</code>, <code>.signin-way</code>, <code>.qr-card</code> (<code>__code</code>, <code>__text</code>), <code>.device-code</code> (<code>__value</code>), <code>.signin-wait</code> (<code>__words</code>, with <code>.progress--busy</code>), <code>.test-checks</code> (<code>li[data-state="done|failed|waiting"]</code>, <code>__state</code>), <code>.tested[data-tone]</code></td>
+<td>A wizard step that signs in on a service's own page: on the phone (QR code dark on white, the page and code written out with Copy, waiting by itself in a polite live region) or in this browser (the link, then the address it ends on pasted back); a test's checks; Test connection's result beside a place. Rules: <code>WIZARD.md</code> section 9</td>
+</tr>
+<tr>
+<td>Restart where it is needed (Starboard, DASH-470)</td>
+<td><code>.notice[data-tone="warning"]</code> holding a <code>.btn--primary</code> "Restart <app>", a <code>.small</code> line that says what restarting does (<code>aria-describedby</code>), <code>.progress--busy</code> and a <code>.small[role="status"]</code></td>
+<td>Shown only while the app says Restart needed, in the place that says so, never as a standing button. It asks first (a careful confirm, starting on Cancel), then follows the app until it answers again, in words in the polite status ("Jellyfin is restarting", "Still waiting: 40 seconds so far", "Jellyfin restarted and answers again"); the button keeps focus while it works (<code>aria-disabled</code>, as Show more) and focus moves to the result. A failure is an inline error beside the button, which works again. The notice becomes a success notice, "<app> restarted". It asks one small request every few seconds, only after the button is pressed, for at most 3 minutes</td>
+</tr>
+<tr>
+<td>Settings rows</td>
+<td><code>.settings-section</code>, <code>.settings-section__head</code>, <code>.settings-rows</code>, <code>.setting</code>, <code>.setting--opens</code>, <code>.setting__text</code>, <code>.setting__label</code>, <code>.setting__hint</code>, <code>.setting__control</code>, <code>.settings-section__head--action</code></td>
+<td>Things with several fields open a slide-out</td>
+</tr>
+<tr>
+<td>Panel header</td>
+<td><code>.panel-header</code>, <code>.panel-header__title</code>, <code>.panel-header__brand</code>, <code>.panel-header__actions</code> (Previous, Next)</td>
+<td>The same bar on slide-outs, dialogs and the phone menu; on slide-outs and the phone menu it wears the page background (<code>--color-slide-header</code>)</td>
+</tr>
+<tr>
+<td>Action list (Starboard, 19 November 2026)</td>
+<td><code>.action-list</code>, <code>.action-list__item</code>, <code>.action-list__hint</code>, <code>.file-kind</code></td>
+<td>Everything that can be done with one thing, in its slide-out, such as a download that needs attention: each action a button (with its icon) and one line under it that says what happens, tied to the button with <code>aria-describedby</code>. The actions that fix it first, under a heading such as Fix it; the ones that take it away or delete files in a second list under their own heading, the deleting ones <code>.btn--danger</code>, each asking first and naming what is deleted and how much space it frees. Only the actions that fit are shown; one primary. A result is said in the live region, and focus stays on the button, or goes back to the item's name when the slide-out closes. A file list is <code>.rows</code> with a <code>.tag.file-kind</code> (Media, Sample, Archive, Program, Other) and the size</td>
+</tr>
+<tr>
+<td>Slide-out</td>
+<td><code>.side-panel-layer</code>, <code>.side-panel-backdrop</code>, <code>.side-panel</code>, <code>.side-panel--wide</code>, <code>.side-panel__body</code>, <code>.side-panel__foot</code>, <code>.side-panel__lead</code></td>
+<td>From the right; 420px, 640px wide, full width on phones; header in the page background, body and foot on the raised surface</td>
+</tr>
+<tr>
+<td>Dialog</td>
+<td><code>.dialog</code> (<code>&lt;dialog&gt;</code>), <code>.dialog__body</code>, <code>.dialog__foot</code>, <code>.dialog--scroll</code>, <code>data-close-outside</code></td>
+<td>Decisions and short tasks only. <code>.dialog--scroll</code>: only the body scrolls, the header and foot stay in view. <code>data-close-outside</code>: a press outside closes it (help only, never a dialog with fields)</td>
+</tr>
+<tr>
+<td>Tabs</td>
+<td><code>.tabs</code> (<code>data-activation="manual"</code>), <code>.tabs__list</code> (<code>role="tablist"</code>, named), <code>.tabs__tab</code> (<code>role="tab"</code>, <code>aria-selected</code>, <code>aria-controls</code>, a <code>.count</code> allowed), <code>.tabs__panel</code> (<code>role="tabpanel"</code>, <code>aria-labelledby</code>, <code>tabindex="0"</code>); <code>SharedComponents.setupTabs(root)</code>; <code>tabs-change</code> event</td>
+<td>Real tabs for the parts of one item's page, as <code>DESIGN-SYSTEM.md</code> section 5 asks (20 November 2026). One Tab stop; Left and Right move round, Home and End go to the ends; a tab is chosen as focus reaches it, or by Enter or Space with manual activation. A link to a panel's id opens it. Without script every panel shows. Moving between pages is the level 2 menu, never tabs. <code>.logo-tabs</code> can move to these</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="parts-22-november-2026">Parts (22 November 2026)</h2>
+<p>Some components are large and few pages use them. They are marked as parts in the two source files. An app that counts
+every byte can then load them only where they are used (Starboard, lightweight first, DASH-507). The source files
+still hold every component: the gallery, the boards and the help centre load them whole, and so can any app.</p>
+<div class="s-scroll" tabindex="0" role="region" aria-label="Table 8"><table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Compressed size</th>
+<th>Needs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>log-view</code></td>
+<td>4.6 KB</td>
+<td></td>
+</tr>
+<tr>
+<td><code>tabs</code></td>
+<td>2.1 KB</td>
+<td></td>
+</tr>
+<tr>
+<td><code>combobox</code></td>
+<td>3.7 KB</td>
+<td></td>
+</tr>
+<tr>
+<td><code>charts</code> (sparkline and gauge)</td>
+<td>2.6 KB</td>
+<td></td>
+</tr>
+<tr>
+<td><code>pagination</code></td>
+<td>2.5 KB</td>
+<td></td>
+</tr>
+<tr>
+<td><code>error-summary</code> (also <code>setFieldError</code> and <code>clearErrors</code>)</td>
+<td>2.3 KB</td>
+<td></td>
+</tr>
+<tr>
+<td><code>secret-field</code></td>
+<td>2.2 KB</td>
+<td><code>error-summary</code></td>
+</tr>
+<tr>
+<td><code>schedule</code></td>
+<td>2.7 KB</td>
+<td></td>
+</tr>
+<tr>
+<td><code>tag-input</code></td>
+<td>2.4 KB</td>
+<td></td>
+</tr>
+<tr>
+<td><code>popover</code></td>
+<td>2.2 KB</td>
+<td></td>
+</tr>
+<tr>
+<td><code>alerts</code></td>
+<td>2.0 KB</td>
+<td><code>popover</code></td>
+</tr>
+<tr>
+<td><code>command-palette</code></td>
+<td>2.4 KB</td>
+<td><code>combobox</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>The core is everything else, 59 KB compressed where the whole is 77 KB. The page banner and the tooltip stay in
+the core, as any page can need them.</p>
+<p><strong>For an app.</strong> Make a <code>js/parts</code> folder in the app's web folder, then run <code>tools/sync.py</code>. It writes the core as
+<code>css/components.css</code> and <code>js/components.js</code>, and each part as <code>css/parts/&lt;name&gt;.css</code> and <code>js/parts/&lt;name&gt;.js</code>. Without
+that folder the app gets the whole files, as before.</p>
+<p>On a page that uses a part, load its styles after <code>components.css</code>. Load its script after <code>components.js</code> and the
+parts it needs, and before the page's own scripts. <code>SharedComponents.setup()</code> then sets the part up with everything
+else. Its functions are on <code>SharedComponents</code> as before (<code>logView</code>, <code>showErrors</code>, <code>gauge</code> and so on).</p>
+<p><strong>Marking a part.</strong> In <code>components.css</code>, inside <code>@layer shared</code>: <code>/* part: name */</code> before the part's rules and
+<code>/* /part */</code> after them, with the part's own Windows Contrast and less motion rules inside. In <code>components.js</code>:
+<code>/* part: name; exports: a, b; setup: setupName; needs: other */</code> before and <code>/* /part */</code> after. <code>exports</code> are the
+functions put on <code>SharedComponents</code>. <code>SharedComponents.setup()</code> runs <code>setup</code>, and you add <code>first</code> when it must run
+before the core's own set-up. <code>needs</code> names parts whose exports this part uses. A part may use only its own names, the
+helpers in <code>SharedComponents.kit</code> and what it needs.</p>
+<p>A line outside a part that ends <code>// part</code> is left out of the core. <code>python3 tools/parts.py</code> checks all of this and
+lists the sizes. Run it after any change to a part. A component belongs in the core when any page may need it without
+warning. It belongs in a part when it is large and a page knows it will use it.</p>
+<h2 id="slide-out-dialog-or-page">Slide-out, dialog or page</h2>
+<div class="s-scroll" tabindex="0" role="region" aria-label="Table 9"><table>
+<thead>
+<tr>
+<th>Use</th>
+<th>When</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Slide-out</td>
+<td>Details of one item in a list, or editing it, where keeping the list in view helps; longer reading beside the page</td>
+<td>Book summary; a request; a download client, indexer, reading account or user; a log entry; an app, disk, download or backup run on Starboard; release notes; Display and accessibility; a wizard's "What is…" help</td>
+</tr>
+<tr>
+<td>Dialog</td>
+<td>A decision or short task that must finish before going on; one or two fields</td>
+<td>Confirm remove or reset; Add list; a password check before a download or restore</td>
+</tr>
+<tr>
+<td>Page</td>
+<td>Something people return to, link to or spend time in</td>
+<td>Book, author, series and narrator pages; Disk health; each Settings section; Upgrade wizard</td>
+</tr>
+<tr>
+<td>In place</td>
+<td>A small change to a value already in view</td>
+<td>Switches and selects in settings rows; filter chips; cover size</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Slide-out widths</strong> (TheMightyTRexUK, 7 November 2026): release notes and help take about half the screen
+(<code>.side-panel--wide</code>, at least 640px). Every other slide-out takes about a third (at least 420px, <code>--panel-w</code>). On
+phones both take the whole width.</p>
+<p>Every slide-out, dialog and phone menu must behave in these ways:
+- Focus moves in (to Close), and Tab stays inside.
+- Escape and Close close it.
+- A press outside closes a slide-out or menu.
+- Focus returns to the opener, and the page behind does not scroll.</p>
+<p>A slide-out's open item can be in the address, so Back closes it.</p>
+<h2 id="adopting-the-library">Adopting the library</h2>
+<p><strong>Starboard</strong> already uses these names. To adopt them, replace <code>css/tokens.css</code> with <code>tokens.css</code>. It adds panel
+header, status edge, compact control and High contrast chart colours, and the High contrast dark page is now black.
+Then move each page's classes to the library's where they differ:
+- <code>.btn-primary</code> → <code>.btn--primary</code>, <code>.btn-quiet</code> → <code>.btn--quiet</code>, <code>.btn-danger</code> → <code>.btn--danger</code>
+- <code>.filter</code> → <code>.filter-chip</code>, <code>.filters</code> → <code>.filter-chips</code>, <code>.seg</code> → <code>.segmented</code>
+- <code>.design-option</code> → <code>.option-card</code>, <code>.dialog__head</code> and <code>.side-panel-header</code> → <code>.panel-header</code>
+- <code>.app</code> → <code>.card</code>, <code>.app__icon</code> → <code>.app-icon</code>, <code>.status-pill</code> → <code>.chip</code>
+- <code>.meter-row</code> → <code>.meter</code>, <code>.switch-row</code> → <code>.switch</code></p>
+<p>A private audit lists every duplicate to merge.</p>
+<p><strong>Storyarr</strong> has 1,285 generated <code>--c-*</code> colour tokens (492 uses) and a few role names in <code>styles.css</code>. To
+adopt, one release at a time:
+1. Add <code>tokens.css</code> and alias the old role names to the new ones:
+   - <code>--surface</code> → <code>--color-surface</code>
+   - <code>--line</code> → <code>--color-divider</code> (or <code>--color-border</code> for control borders)
+   - <code>--muted</code> → <code>--color-text-muted</code>
+   - <code>--accent</code> → <code>--color-accent</code>
+   - <code>--control-active</code> → <code>--color-control-active</code>
+   - <code>--control-height-large</code> → <code>--control-h</code>, and <code>--control-height</code> → <code>--control-h-compact</code>
+   - <code>--panel-header-bg</code> → <code>--color-panel-header</code>, and <code>--panel-header-line</code> → <code>--color-divider</code>
+2. Add <code>components.css</code> in a <code>shared</code> layer under the app's own layers, so nothing changes until a page
+   moves over.
+3. Rebuild each page on the library's classes, then delete the page's old CSS and the <code>--c-*</code> tokens it used. A
+   private audit lists the old classes and the duplicates.
+4. React components wrap the classes: <code>Button</code>, <code>IconButton</code>, <code>MenuButton</code>, <code>Field</code>, <code>Switch</code>,
+   <code>Segmented</code>, <code>Chip</code>, <code>Notice</code>, <code>SidePanel</code>, <code>Dialog</code>, <code>SectionToolbar</code>, <code>SettingsRow</code>, <code>Card</code>, <code>MediaCard</code>,
+   with the behaviour in <code>components.js</code>.</p>
+<p><strong>Adopted (2 November 2026):</strong>
+- <strong>Starboard</strong>, branch <code>shared-library</code> (commits 175a0c3 and 2129d68, not pushed). It loads <code>components.js</code> with
+  <code>data-manual</code>, so there is no automatic set-up, because its page scripts wire their own behaviour. It builds
+  slide-outs, confirm dialogs and More actions menus with helpers in <code>web/js/common.js</code>. They are <code>sidePanel()</code>,
+  <code>confirmDialog()</code>, <code>menuButton()</code> and <code>renderKeyed()</code>. <code>renderKeyed()</code> updates rows in place so focus stays.</p>
+<p>Icons come from <code>web/icons/sprite.svg</code>.
+- <strong>Storyarr</strong>, branch <code>covers-and-shelf-only</code> (commit 1beeb45, not pushed). Copies in <code>apps/web/src/shared/</code> are
+  <code>tokens.css</code> (without the font, which Storyarr loads itself), <code>components.css</code> and <code>compat.css</code>. <code>compat.css</code> keeps
+  the 18 class names both apps use (<code>.notice</code>, <code>.count</code>, <code>.empty</code>, <code>.panel</code> and others) unchanged until each page
+  moves over. Delete a rule there when its page moves.</p>
+<p><strong>components.js changes:</strong> <code>openLayer(idOrElement, opener, onClose)</code> now accepts an element, returns its
+close function, cleans up its listeners and can be reopened safely. Loading the file with <code>data-manual</code>
+(or setting <code>window.SharedComponentsManual = true</code> first) skips the automatic <code>setup()</code>.</p>
+<p><strong>Keeping them in step</strong> (TheMightyTRexUK, 2 November 2026: the library is shared by both apps and kept up to date).
+Change the component here first, never in an app. Follow the steps in
+<a href="https://themightytrex.github.io/design-system/resources/make-a-change.html">Make a change</a>. Add the change to the
+Decisions list in this file, commit it here and push, so every checkout picks it up.</p>
+<p><strong>Decisions:</strong></p>
+<ul>
+<li><strong>Remove drop shadows</strong> (TheMightyTRexUK, 23 November 2026, DASH-536: "add a setting to remove the all drop shadows with a note about it helping with performance").</li>
+<li><code>data-shadows="off"</code> on <code>&lt;html&gt;</code>, or on any element for its contents, sets <code>--shadow-card</code> and <code>--shadow-raised</code>
+    to none. It does this in one rule at the end of <code>tokens.css</code>, so no component can forget it. The cover shading,
+    cards, menus, slide-outs, dialogs, popovers and toasts all use those two tokens.</li>
+<li>Borders, the inset accent bars and the hover edges stay, so nothing loses its edge.</li>
+<li>The Display and accessibility slide-out has the switch (<code>data-display="shadows"</code>). <code>SharedComponents.setupDisplay</code> sets and clears the attribute. The note says "Drop shadows cost a little processor on every scroll; turning them off helps small and older computers".</li>
+<li>An app applies the attribute before first paint, as it does the theme. The default follows the install: a small, Lite install starts with shadows off, and any other starts with them on. The default is the app's to set, and the library only provides the switch.</li>
+<li>The one animated ring on the live indicator (<code>@keyframes</code> pulse) is an attention signal, not a shadow, and stays.</li>
+<li>The help centre builder has the same switch in its own Display slide-out. It applies the switch in its head script, from its own choice or the app's <code>starboard.shadows</code>. The gallery shows both states.</li>
+<li><strong>Covers take the card shading</strong> (TheMightyTRexUK, 23 November 2026, DASH-535: "Apply that to all covers").</li>
+<li>The shared <code>.cover</code> rule has the card's 1px <code>--color-divider</code> border, the 6px corner and <code>--shadow-card</code>. A cover in a <code>.media-card</code> or <code>.book-row</code> raises its border to <code>--color-border</code> on hover. So every kind of cover inherits it: library walls and rows, Discover, search results, Wanted, item pages, collections, books, plug-ins and the help centre.</li>
+<li>The round cover keeps its circle, the series fan gets the 6px corner, and the action column sits inside the cover's border and corner.</li>
+<li>Covers of 24px, 48px and a result's 64px keep the border and corner but no shadow, as the tokens have no lighter size.</li>
+<li>High contrast keeps the border (the shadow token is none there), and dark themes keep the divider visible.</li>
+<li>A grid that clips its overflow (a shelf that scrolls sideways) needs padding for the shadow, not a smaller shadow.</li>
+<li><strong>A Discord link in the footer</strong> (TheMightyTRexUK, 22 November 2026, DASH-526: "I want a discord link on starboard footer as well as the help center").</li>
+<li>An app with a Discord support server links to it after Help. The link reads "Discord support server", with the
+    external-link icon and "(opens in a new tab)" in hidden words.</li>
+<li>The help centre builder adds it to every page footer and to the front page when <code>help-centre.json</code> has <code>discord</code>.</li>
+<li><strong>Which item to use</strong> (Starboard DASH-309, 12 November 2026): <code>DESIGN-SYSTEM.md</code> section 10 says what to use by what
+  the thing is: rows, cards, chips, filters, toolbars, notices, toasts, dialogs or tables.</li>
+<li>Accent teal (UX-02 option B).</li>
+<li>Status chip style B, outline with icon (UX-04).</li>
+<li>Cover actions (UX-42): <code>.cover-card</code> with <code>.cover-actions</code> on the cover by default, or beside it as a per-account setting.</li>
+<li>Shelves without scroll bars (UX-30 option A): <code>.shelf-scroller</code>, with arrows over an edge fade.</li>
+<li>Covers always line up: <code>.media-card</code> titles take two lines.</li>
+<li>Small covers (UX-44): <code>.book-row</code> with <code>.cover-actions--row</code> in rows, and <code>.cover-card__more</code> with the actions in words on small tiles.</li>
+<li>Square radio art in the book shape (FEAT-R decision 2, fill 4): <code>.show-art</code>, with the label in the image's colour, and <code>.logo-tile</code>.</li>
+<li><strong>Every slide-out has the same header and body</strong> (TheMightyTRexUK, 2 November 2026). Slide-out and phone menu
+  headers use <code>--color-slide-header</code>, the page background, over a raised-surface body. Dialogs keep the plain header.
+  Display and accessibility and Release notes are slide-outs.</li>
+<li><strong>App logos without a tile</strong> (TheMightyTRexUK, 2 November 2026). <code>.app-icon.has-image</code> is only the image, with no border or background. Initials keep the tile.</li>
+<li><strong>The logo editor on every way to get a logo</strong> (TheMightyTRexUK, 2 November 2026). From a cover, Find online and Upload your own all use the same box. It has Shape from lightness or transparency, four cleaning levels, and a small eraser and paintbrush on <code>.checker[data-tool]</code>. Found files show as plain pictures in <code>.logo-candidate__art &gt; img</code>.</li>
+<li><strong>Nicer scroll bars</strong> (TheMightyTRexUK, 2 November 2026). They are thin and square in every scrolling area, in <code>--color-scrollbar</code> (the border colour, or the text colour in High contrast) on a clear track. They stay visible, and only shelves hide theirs behind arrows.</li>
+<li><strong>UX notes for testing</strong> (TheMightyTRexUK, 2 November 2026).</li>
+<li><code>ux-notes.js</code> (copied to both apps by <code>sync.py</code>) puts Note an issue in the corner of every page while an app's testing setting is active.</li>
+<li>You select the part, with the pointer or with Tab and Enter, and say what is wrong, the kind and how bad. Notes lists them with Copy as text, Download and Mark as fixed.</li>
+<li>Notes keep the page, the part, a selector and the display settings. An app passes a store to keep them on its server. Otherwise they stay in the browser.</li>
+<li>Styles: <code>.ux-dock</code>, <code>.ux-banner</code> (at the bottom, clear of the header), <code>.ux-outline</code> and <code>.ux-notes</code>.</li>
+<li><strong>Security checks the same in both apps</strong> (TheMightyTRexUK, 3 November 2026).</li>
+<li><code>docs/SECURITY-CHECKS.md</code> sets the checks. They are tests, live journeys, Trivy, ZAP on a private network,
+    Gitleaks, Bandit and Semgrep, ShellCheck, Hadolint, CodeQL, a separate review and install tests. It also says how
+    to sort findings.</li>
+<li>Each app has a security page with a "Security checks for each release" table, and every release's notes have a Security section (<code>CONTENT-DESIGN.md</code>, release notes).</li>
+<li>Starboard is the worked example, and Storyarr has to catch up.</li>
+<li><strong>Focus not obscured</strong> (WCAG 2.2, 4 November 2026). The page keeps the sticky header (and row 2) and an open save
+  bar clear when it scrolls, with <code>scroll-padding</code> on <code>:root</code>. We added <code>WCAG.md</code> and <code>ALT-TEXT.md</code> after the GOV.UK
+  Service Manual and BBC GEL.</li>
+<li><strong>Search is always one button away</strong> (TheMightyTRexUK, 4 November 2026: "update the design system to ensure there is a search button").</li>
+<li><code>.rail__search</code> is first in the rail, under the logo, and moves focus to the header's search box.</li>
+<li>On phones, where the box is hidden, <code>.site-header__search-btn</code> in the header opens the same box as a row under the header. Escape or a press outside closes it and returns focus to the button that opened it.</li>
+<li>Both use <code>data-search-open</code> and <code>aria-controls</code> (<code>setupSearch()</code> in <code>components.js</code>). There is no single-key shortcut (WCAG 2.1.4). The <code>radio</code> icon is added.</li>
+<li><strong>Wizard rules</strong> (TheMightyTRexUK, 4 November 2026). <code>docs/WIZARD.md</code> sets one set of rules for every wizard, from the installer mock-up.</li>
+<li>The first question asks which job, and each job has its own wizard.</li>
+<li>Each step asks one question, and steps that do not apply are left out.</li>
+<li>A step in parts has <code>.steps--sub</code>. It is as wide as the progress bar and has a line between parts. The parts are numbered 1, 2, 3, and each counts in the progress bar's total. On phones only the numbers show, with ticks for done parts.</li>
+<li>"(recommended)" comes with a reason, never "easiest".</li>
+<li>"What is…" help comes at the end of the part it explains, in a dialog that scrolls inside and closes on a press outside.</li>
+<li>Addresses are links with copy, and a summary says what was set and skipped.</li>
+<li>What happens next and the decision tree are review aids for testing only, never in the finished product.</li>
+<li>Copying falls back to a hidden text box on plain http (<code>copyText()</code> in <code>components.js</code>), and a dialog returns focus to the button that opened it. Step numbers grow with Text size.</li>
+<li><strong>Changelogs</strong> (TheMightyTRexUK, 5 November 2026). <code>docs/CHANGELOGS.md</code> sets one way to keep <code>CHANGELOG.md</code> in every project, after Keep a Changelog 1.1.0.</li>
+<li>A changelog is for people, never a commit log, and it has an Unreleased section at the top.</li>
+<li>Every version is listed newest first and linked, as <code>## [x.y.z] (day month year)</code>. Dates are written as in <code>CONTENT-DESIGN.md</code>, not year, month, day.</li>
+<li>Changes go under Added, Changed, Deprecated, Removed, Fixed and Security only. Withdrawn releases are marked <code>[Withdrawn]</code>. In-app release notes use the same six types.</li>
+<li><strong>Terminal wizards and feedback</strong> (TheMightyTRexUK, 5 November 2026). <code>docs/TERMINAL.md</code> sets how a wizard appears in a terminal.</li>
+<li>A wizard is either boxed or plain. The boxed one has a heading box reading "App | step", a progress bar and a menu fixed on the bottom line with b Back, ? Help, f Feedback and q Stop. The plain one has numbered lines for screen readers and is never redrawn.</li>
+<li>Help is a box over the step, and feedback is sent as a QR code sized to the window.</li>
+<li><code>docs/WIZARD.md</code> section 12 puts Snaglist on every wizard step and names the step. It has Show as a QR code for a
+    computer that is not online yet.</li>
+</ul>
+<h2 id="help-centre-7-november-2026-the-standard-since-14-november-2026">Help centre (7 November 2026; the standard since 14 November 2026)</h2>
+<p>Every app's help is Markdown in its own repository, published as web pages by one builder,
+<code>tools/help_centre/build.py</code>, with this library's tokens, components, fonts and icons. Since 14 November 2026 every
+help centre uses the standard the owner chose (Starboard DASH-436):
+- the seven main items as top links
+- a hub with a side menu that folds (areas, groups, every article)
+- the journey, the newest thing and the problem solver card on the home page
+- the latest version beside the heading
+- articles with the flow chart first, then numbered answer cards
+- a problem solver page
+- plug-in mode for a plug-in collection</p>
+<p><code>docs/HELP-WRITING.md</code> section 11 is the full standard, with the flow chart format and the shape of
+<code>help-centre.json</code>.</p>
+<p><strong>Components</strong> (in <code>components.css</code> and <code>components.js</code>, shown in the gallery under Help centre):</p>
+<div class="s-scroll" tabindex="0" role="region" aria-label="Table 10"><table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Classes</th>
+<th>Rules</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Top links</td>
+<td><code>nav.top-links &gt; ul &gt; li &gt; a</code></td>
+<td>The seven main items, the current area with <code>aria-current="page"</code>. Hidden on tablets and phones, where the side menu carries them</td>
+</tr>
+<tr>
+<td>Side tree</td>
+<td><code>.side-tree</code>, <code>.side-tree__home</code>, <code>.side-tree__label</code>, <code>details.side-tree__area</code>, <code>details.side-tree__group</code>, <code>.side-tree__tile</code>, <code>.side-tree__count</code>, <code>.side-tree__chev</code></td>
+<td>A side menu that folds three levels deep, built from <code>details</code> and <code>summary</code>, so it works with no script. The page you are on has <code>aria-current="page"</code> and its area and group are open. <code>setupSideTrees()</code> opens them if a page forgets and scrolls the link into view inside a menu marked <code>data-side-scroll</code>. Any app may use it for a long side menu</td>
+</tr>
+<tr>
+<td>Journey</td>
+<td><code>section.journey</code>, <code>ol.journey__stages</code> (<code>--stages</code>), <code>li.journey__stage[data-tone="start|step|fix"]</code>, <code>.journey__marker</code>, <code>.journey__dot</code>, <code>.journey__n</code>, <code>h3.journey__label</code>, <code>ul.journey__cards</code>, <code>a.stage-card</code>, <code>.is-lead</code></td>
+<td>An ordered list, so a screen reader meets each stage and then its cards. The marker is decoration (<code>aria-hidden</code>); the label carries the number and the name. Stacks on phones with the path down the side</td>
+</tr>
+<tr>
+<td>Flow chart</td>
+<td><code>figure.flow-chart</code>, <code>.flow-chart__scroll</code> (<code>role="region"</code>, <code>tabindex="0"</code>), <code>svg.flow-chart__svg</code> (<code>--flow-w</code>), <code>details.flow-chart__words</code> and the drawing classes <code>.flow-chart__start</code>, <code>__question</code>, <code>__answer</code>, <code>__next</code>, <code>__step</code>, <code>__link</code>, <code>__line</code>, <code>__head</code>, <code>__text</code>, <code>__sub</code>, <code>__label</code>, <code>__pill</code>, <code>__n</code></td>
+<td>Drawn by <code>tools/help_centre/flowchart.py</code>. The SVG has <code>role="img"</code> and a short name; the words under it are the full text equivalent. It grows with Text size and scrolls inside its own region when narrow</td>
+</tr>
+<tr>
+<td>Answer card</td>
+<td><code>section.answer-card</code>, <code>.answer-card__band</code>, <code>.answer-card__n</code>, <code>.answer-card__body</code></td>
+<td>A numbered answer: the number and the heading (which keeps its id) on a grey band</td>
+</tr>
+<tr>
+<td>Feature card</td>
+<td><code>section.feature-card</code>, <code>.feature-card__text</code>, <code>.feature-card__pic</code></td>
+<td>The newest thing, with a chip saying which version it is new in and a small chart or picture</td>
+</tr>
+<tr>
+<td>Solver card and solver</td>
+<td><code>section.solver-card</code>, <code>.solver-card__tile</code>; <code>.solver[data-solver]</code>, <code>.solver__node</code>, <code>.solver__question</code>, <code>.solver__answers</code>, <code>.solver__choice</code>, <code>.solver__step</code>, <code>.solver__options</code>, <code>.solver__nav</code>, <code>.solver__progress</code></td>
+<td>With no script the solver is nested lists of links; <code>setupSolvers()</code> asks one question at a time, puts the focus on the new question, says it in a polite status, and offers Back (focus returns to the answer chosen) and Start again</td>
+</tr>
+<tr>
+<td>Version badge</td>
+<td><code>a.version-badge &gt; .chip + b</code></td>
+<td>The latest version, no date, linking to the release notes</td>
+</tr>
+<tr>
+<td>Plug-in card and band</td>
+<td><code>ul.plugin-cards &gt; li &gt; article.card.has-band.plugin-card</code> (with <code>.card-band</code>, <code>.app-icon--compact</code>, <code>ul.plugin-card__links</code>); <code>.plugin-band</code>, <code>.plugin-band__name</code>, <code>.plugin-band__sub</code>, <code>.plugin-band__side</code></td>
+<td>The grey band design (DASH-428) for a plug-in in a list and at the top of its own pages. An <code>.app-icon</code> holds a sprite icon or the initials</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Layout only in the help centre</strong> (<code>tools/help_centre/help.css</code>) covers:
+- the header bar and the hub grid
+- the side menu's place and its phone overlay
+- area and landing pages, the article and On this page
+- the banner, search results and the footer</p>
+<p><strong>Behaviour only in the help centre</strong> (<code>tools/help_centre/help.js</code>) covers these:
+- Menu on tablets and phones, where the page behind is inert while it is open
+- Search moving the focus to the search box
+- Display and accessibility
+- the banner
+- On this page following the article
+- search</p>
+<p><strong>Accessibility:</strong> we checked on 14 November 2026 with axe-core 4.14 (WCAG 2.2 AA and best practice). The pages were
+the home page, an article, the problem solver, an area page and plug-in pages of all three help centres. We checked
+them in Light, Dark, High contrast, 175% text and at phone width. We also checked the reading order and a Tab walk
+through the header, search, side menu and disclosures.</p>
+<p>We checked focus after the menu and Display open and close, and the live regions.</p>
+<p><strong>For each app:</strong> add a <code>help-centre.json</code> at its root and a <code>&lt;!-- help: &lt;area&gt; / &lt;group&gt; --&gt;</code> line in each article
+(<code>HELP-WRITING.md</code> section 11). Also add a workflow that checks out this repository and runs the builder. Starboard,
+Snaglist and the plug-in collection use it. Build one here with <code>tools/help_centre/build.sh</code> from the app's folder.</p>
+<h2 id="app-only-patterns-2-november-2026">App-only patterns (2 November 2026)</h2>
+<p>Built from the tokens, used by one app, so not in <code>components.css</code>:</p>
+<ul>
+<li><strong>Starboard:</strong></li>
+<li><code>.access-change</code> shows what Starboard can access, with the command to change it.</li>
+<li><code>.job-run</code> is a server job with Run now.</li>
+<li>The storage charts use <code>--media-*</code>, which map to <code>--series-*</code>.</li>
+<li>The release notes slide-out is <code>.release-notes</code>, opened from Release notes in the footer.</li>
+<li>
+<p><strong>Storyarr:</strong> the bookshelf and series views.</p>
+</li>
+<li>
+<p>11 November 2026: <code>--font-heading</code> (headings h1 to h4) and <code>--color-rail</code> (the side menu) are optional, for Starboard's styles. Unset, nothing changes.</p>
+</li>
+</ul>
+</div></div><nav class="s-pager" aria-label="Previous and next"><a class="s-prev" href="design-system.html" rel="prev"><small>Previous</small><span>Design system</span></a><a class="s-next" href="components.html" rel="next"><small>Next</small><span>Components by area</span></a></nav>
+</main>
+</div>
+<footer class="site-footer"><div class="site-footer__app"><span class="site-footer__brand"><svg class="g-logo" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="1" y="1" width="30" height="30" fill="var(--color-logo-tile)"/><path fill="var(--color-bg)" d="M17 6.5h7.5q2.5 0 2.5 2.2V11h-4v.8h2.6v1.6H21v2.2l2.6 1.5-.6 1-2-1.1V20q0 2.2-2.4 2.9l.9 3.8h1.6V28h-4.3l-.9-4.4h-1.6l-.8 3.1h1.4V28h-4.1l1-4.9q-3.6-1-8.7.3 3.4-3.6 8.2-5.2 3.3-1.3 3.9-4.6V8.4q0-1.9 1.4-1.9Z"/><circle cx="20" cy="8.6" r="1" fill="var(--color-logo-star)"/></svg>TRex Design System</span><span>Version 1</span><nav aria-label="TRex Design System"><ul class="site-footer__links"><li><a href="../guides/index.html">Help</a></li><li><a href="https://github.com/TheMightyTRex/design-system#readme">About</a></li><li><a href="https://github.com/TheMightyTRex/design-system/commits/main">Updates</a></li></ul></nav></div><a class="site-footer__maker" href="https://github.com/TheMightyTRex" rel="me"><svg class="maker-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="1" y="1" width="30" height="30" fill="var(--color-logo-tile)"/><path fill="var(--color-bg)" d="M17 6.5h7.5q2.5 0 2.5 2.2V11h-4v.8h2.6v1.6H21v2.2l2.6 1.5-.6 1-2-1.1V20q0 2.2-2.4 2.9l.9 3.8h1.6V28h-4.3l-.9-4.4h-1.6l-.8 3.1h1.4V28h-4.1l1-4.9q-3.6-1-8.7.3 3.4-3.6 8.2-5.2 3.3-1.3 3.9-4.6V8.4q0-1.9 1.4-1.9Z"/><circle cx="20" cy="8.6" r="1" fill="var(--color-logo-star)"/></svg>TheMightyTRexUK<span class="visually-hidden">, on GitHub</span><svg class="i" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg></a></footer>
+<div class="side-panel-layer" id="g-panel-display" hidden>
+  <div class="side-panel-backdrop"></div>
+  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="g-pd-h">
+    <div class="panel-header"><h2 class="panel-header__title" id="g-pd-h">Display and accessibility</h2><button class="icon-btn" type="button" data-closes aria-label="Close display and accessibility"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></div>
+    <form class="side-panel__body" data-display-save="ds-display">
+      <fieldset><legend>Theme</legend><div class="segmented"><label><input type="radio" name="g-pd-theme" value="system" data-display="theme"><span>Match device</span></label><label><input type="radio" name="g-pd-theme" value="light" data-display="theme" checked><span>Light</span></label><label><input type="radio" name="g-pd-theme" value="dark" data-display="theme"><span>Dark</span></label></div></fieldset>
+      <fieldset><legend>Text size</legend><div class="segmented"><label><input type="radio" name="g-pd-text" value="100" data-display="text" checked><span>100%</span></label><label><input type="radio" name="g-pd-text" value="125" data-display="text"><span>125%</span></label><label><input type="radio" name="g-pd-text" value="150" data-display="text"><span>150%</span></label><label><input type="radio" name="g-pd-text" value="175" data-display="text"><span>175%</span></label></div></fieldset>
+      <fieldset><legend>Reduce motion</legend><div class="segmented"><label><input type="radio" name="g-pd-motion" value="device" data-display="motion" checked><span>Match device</span></label><label><input type="radio" name="g-pd-motion" value="on" data-display="motion"><span>Active</span></label><label><input type="radio" name="g-pd-motion" value="off" data-display="motion"><span>Inactive</span></label></div></fieldset>
+      <label class="switch"><span>High contrast</span><input type="checkbox" role="switch" data-display="contrast"></label>
+      <label class="switch"><span>Underline links</span><input type="checkbox" role="switch" data-display="underline"></label>
+      <label class="switch"><span>Wider text spacing</span><input type="checkbox" role="switch" data-display="spacing"></label>
+      <label class="switch"><span>Remove drop shadows</span><input type="checkbox" role="switch" data-display="shadows" aria-describedby="g-pd-shadows-note"></label>
+      <p class="small muted" id="g-pd-shadows-note">Drop shadows cost a little processor on every scroll; turning them off helps small and older computers.</p>
+      <p class="small muted">Choices apply at once and are kept in this browser.</p>
+    </form>
+    <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Close</button><button class="btn" type="button" data-display-reset="ds-display">Reset to defaults</button></div>
+  </aside>
+</div>
+<script src="../components.js"></script>
+<script>
+  // Main menu: icons only when the names do not fit (.is-compact), as in the gallery and the apps.
+  const bar = document.querySelector(".site-header__bar");
+  const mainTabs = bar.querySelector(".menu-tabs");
+  function fit() {
+    mainTabs.classList.remove("is-compact");
+    if (bar.scrollWidth > bar.clientWidth || mainTabs.scrollWidth > mainTabs.clientWidth) mainTabs.classList.add("is-compact");
+  }
+  addEventListener("resize", fit);
+  fit();
+  document.querySelectorAll("#s-site-menu a").forEach((a) => a.addEventListener("click", () => document.getElementById("s-site-menu").closeLayer?.(false)));
+</script>
+
+</body>
+</html>

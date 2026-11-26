@@ -10,9 +10,10 @@
 <li>Pull first, so you start from the latest version.
 <code class="code-block">git pull</code></li>
 <li>Change the library here: <code>tokens.css</code>, <code>components.css</code>, <code>components.js</code>, <code>icons.svg</code> or a guide in <code>docs</code>. Never change the copies inside the apps: the next sync replaces them. To add an icon, read <a href="tools.html#icons">Add an icon</a>.</li>
-<li>Build the gallery and boards. If you changed these pages, run <code>python3 resources/make.py</code> first.
+<li>Build the site, then the boards and resources pages. If you changed the resources pages, run <code>python3 resources/make.py</code> before <code>build.py</code>.
+<code class="code-block">python3 tools/site.py</code>
 <code class="code-block">python3 tools/build.py</code></li>
-<li>Check the gallery. Open <code>gallery.html</code>, select <strong>Display</strong> and check the change in each theme: Light, Dark, High contrast and High contrast dark. Then check it at 175% text and at phone width.</li>
+<li>Check the components. Run <code>python3 tools/site.py</code>, open <code>components/index.html</code>, select <strong>Display</strong> and check the change in each theme: Light, Dark, High contrast and High contrast dark. Then check it at 175% text and at phone width.</li>
 <li>Check contrast. The report must end with "0 failures".
 <code class="code-block">python3 tools/contrast.py &gt; contrast-report.txt</code></li>
 <li>Check the words against the checklist in the <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/CONTENT-DESIGN.md">content design guide</a>, and the accessibility floor in the <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/ACCESSIBILITY.md">accessibility guide</a>. Then run the banned words check and the token check; each must pass.
@@ -33,7 +34,7 @@
 
 <h2 id="done">How you know it worked</h2>
 <ul>
-<li>The gallery shows the change in all four themes and at 175% text.</li>
+<li>The component pages show the change in all four themes and at 175% text.</li>
 <li><code>contrast-report.txt</code> ends with "0 failures".</li>
 <li><code>python3 tools/sync.py --check</code> lists no changes, and each app shows the change after its rebuild.</li>
 </ul>
