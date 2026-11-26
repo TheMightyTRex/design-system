@@ -130,9 +130,12 @@ full path ("Settings, then Apps"), and copy on-screen labels exactly.
 wrong, correct it, and say so in the entry ("Corrected 5 November 2026: the limit is 10 books, not 20."). A changelog may be rewritten
 to add a missing version or to note a breaking change that was missed.
 
-4.4 Task and issue numbers (DASH-79, storyarr#1) may follow an entry in brackets, for people who track them.
+4.4 Task and issue numbers (DASH-79) belong in the commit message and the pull request, not in an entry.
 Commit hashes, branch names and file paths do not belong in an entry, unless the reader has to run or edit
 that file.
+
+4.5 **Rule: keep only recent notes in full.** The changelog keeps the full one-sentence entries for Unreleased and
+the last 3 releases. Older releases may be shortened to one line each, with a link to the release on GitHub.
 
 ## 5. Withdrawn releases
 

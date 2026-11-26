@@ -256,7 +256,7 @@
   </nav>
 </div>
 <div class="s-shell">
-<nav class="s-nav" aria-labelledby="s-nav-h"><h2 id="s-nav-h">Guides</h2><ol class="s-nav-pages"><li><a href="index.html">All guides</a></li><li class="s-group">Design</li><li><a href="design-system.html">Design system</a></li><li><a href="library.html" aria-current="page">Component library</a></li><li><a href="components.html">Components by area</a></li><li class="s-group">Patterns</li><li><a href="wizard.html">Wizard</a></li><li><a href="terminal.html">Terminal</a></li><li class="s-group">Words</li><li><a href="content-design.html">Content design</a></li><li><a href="help-writing.html">Help writing</a></li><li><a href="changelogs.html">Changelogs</a></li><li><a href="alt-text.html">Alt text</a></li><li><a href="screenshots.html">Screenshots</a></li><li class="s-group">Accessibility and security</li><li><a href="accessibility.html">Accessibility</a></li><li><a href="wcag.html">WCAG 2.2 AA</a></li><li><a href="security-checks.html">Security checks</a></li></ol><h2 id="s-own-h">On this page</h2><ol><li><a href="#files">Files</a></li><li><a href="#principles">Principles</a></li><li><a href="#menu-names">Menu names</a></li><li><a href="#components">Components</a></li><li><a href="#parts-22-november-2026">Parts (22 November 2026)</a></li><li><a href="#slide-out-dialog-or-page">Slide-out, dialog or page</a></li><li><a href="#adopting-the-library">Adopting the library</a></li><li><a href="#help-centre-7-november-2026-the-standard-since-14-november-2026">Help centre (7 November 2026; the standard since 14 November 2026)</a></li><li><a href="#app-only-patterns-2-november-2026">App-only patterns (2 November 2026)</a></li></ol></nav>
+<nav class="s-nav" aria-labelledby="s-nav-h"><h2 id="s-nav-h">Guides</h2><ol class="s-nav-pages"><li><a href="index.html">All guides</a></li><li class="s-group">Design</li><li><a href="design-system.html">Design system</a></li><li><a href="library.html" aria-current="page">Component library</a></li><li><a href="components.html">Components by area</a></li><li class="s-group">Patterns</li><li><a href="wizard.html">Wizard</a></li><li><a href="terminal.html">Terminal</a></li><li class="s-group">Words</li><li><a href="content-design.html">Content design</a></li><li><a href="help-writing.html">Help writing</a></li><li><a href="changelogs.html">Changelogs</a></li><li><a href="alt-text.html">Alt text</a></li><li><a href="screenshots.html">Screenshots</a></li><li class="s-group">Accessibility and security</li><li><a href="accessibility.html">Accessibility</a></li><li><a href="wcag.html">WCAG 2.2 AA</a></li><li><a href="security-checks.html">Security checks</a></li></ol><h2 id="s-own-h">On this page</h2><ol><li><a href="#files">Files</a></li><li><a href="#principles">Principles</a></li><li><a href="#menu-names">Menu names</a></li><li><a href="#components">Components</a></li><li><a href="#parts-22-november-2026">Parts (22 November 2026)</a></li><li><a href="#slide-out-dialog-or-page">Slide-out, dialog or page</a></li><li><a href="#adopting-the-library">Adopting the library</a></li><li><a href="#help-centre-7-november-2026-the-standard-since-14-november-2026">Help centre (7 November 2026; the standard since 14 November 2026)</a></li><li><a href="#app-only-patterns-updated-26-november-2026">App-only patterns (updated 26 November 2026)</a></li></ol></nav>
 <main class="s-main" id="main" tabindex="-1">
 <nav class="breadcrumbs s-crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="index.html">Guides</a></li><li aria-current="page">Component library</li></ol></nav><div class="s-doc"><div class="page-head"><div class="page-head__text"><h1>TRex Design System: the component library</h1><p class="page-head__summary">Design guide. <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/LIBRARY.md">Edit this guide on GitHub</a>.</p></div></div><div class="prose">
 
@@ -374,7 +374,7 @@ and wider spacing.</p>
 </tr>
 <tr>
 <td>Accent colours</td>
-<td><code>palettes/teal.css</code>, <code>indigo.css</code>, <code>forest.css</code>, <code>plum.css</code>, <code>ember.css</code>, <code>graphite.css</code> (Blue, the default, is <code>tokens.css</code>; Teal is the colour before Mica)</td>
+<td><code>palettes/teal.css</code>, <code>dusk.css</code>, <code>lime.css</code>, <code>rose.css</code>, <code>amber.css</code>, <code>graphite.css</code> (Blue, the default, is <code>tokens.css</code>; Teal is the colour before Mica)</td>
 <td>An accent over Mica's neutral greys: load <code>tokens.css</code>, one palette, then <code>components.css</code>. Each sets the accent, its soft tint, the chosen item, the count and the logo in Light, Dark, High contrast and High contrast dark (a stronger shade, 7:1). Surfaces, text, focus, status colours and chart series stay the same. Written by <code>tools/palettes.py</code> and checked by <code>tools/check_accents.py</code>. For an app where people choose (Starboard's own style), <code>palettes/app-palettes.css</code> holds all six under <code>:root[data-palette="…"]</code>; <code>tools/sync.py</code> copies it to Starboard's <code>css/palettes.css</code> with <code>palettes.json</code>. An app's own styles still win</td>
 </tr>
 <tr>
@@ -1207,11 +1207,7 @@ Decisions list in this file, commit it here and push, so every checkout picks it
 <li><strong>App logos without a tile</strong> (TheMightyTRexUK, 2 November 2026). <code>.app-icon.has-image</code> is only the image, with no border or background. Initials keep the tile.</li>
 <li><strong>The logo editor on every way to get a logo</strong> (TheMightyTRexUK, 2 November 2026). From a cover, Find online and Upload your own all use the same box. It has Shape from lightness or transparency, four cleaning levels, and a small eraser and paintbrush on <code>.checker[data-tool]</code>. Found files show as plain pictures in <code>.logo-candidate__art &gt; img</code>.</li>
 <li><strong>Nicer scroll bars</strong> (TheMightyTRexUK, 2 November 2026). They are thin and square in every scrolling area, in <code>--color-scrollbar</code> (the border colour, or the text colour in High contrast) on a clear track. They stay visible, and only shelves hide theirs behind arrows.</li>
-<li><strong>UX notes for testing</strong> (TheMightyTRexUK, 2 November 2026).</li>
-<li><code>ux-notes.js</code> (copied to both apps by <code>sync.py</code>) puts Note an issue in the corner of every page while an app's testing setting is active.</li>
-<li>You select the part, with the pointer or with Tab and Enter, and say what is wrong, the kind and how bad. Notes lists them with Copy as text, Download and Mark as fixed.</li>
-<li>Notes keep the page, the part, a selector and the display settings. An app passes a store to keep them on its server. Otherwise they stay in the browser.</li>
-<li>Styles: <code>.ux-dock</code>, <code>.ux-banner</code> (at the bottom, clear of the header), <code>.ux-outline</code> and <code>.ux-notes</code>.</li>
+<li><strong>UX notes for testing</strong> (TheMightyTRexUK, 2 November 2026). Retired on 13 November 2026: <code>ux-notes.js</code> is no longer in the library, and each app copies in <a href="https://github.com/TheMightyTRex/snaglist">Snaglist</a> instead. <code>sync.py</code> lists a leftover copy as retired.</li>
 <li><strong>Security checks the same in both apps</strong> (TheMightyTRexUK, 3 November 2026).</li>
 <li><code>docs/SECURITY-CHECKS.md</code> sets the checks. They are tests, live journeys, Trivy, ZAP on a private network,
     Gitleaks, Bandit and Semgrep, ShellCheck, Hadolint, CodeQL, a separate review and install tests. It also says how
@@ -1334,16 +1330,25 @@ through the header, search, side menu and disclosures.</p>
 <p><strong>For each app:</strong> add a <code>help-centre.json</code> at its root and a <code>&lt;!-- help: &lt;area&gt; / &lt;group&gt; --&gt;</code> line in each article
 (<code>HELP-WRITING.md</code> section 11). Also add a workflow that checks out this repository and runs the builder. Starboard,
 Snaglist and the plug-in collection use it. Build one here with <code>tools/help_centre/build.sh</code> from the app's folder.</p>
-<h2 id="app-only-patterns-2-november-2026">App-only patterns (2 November 2026)</h2>
-<p>Built from the tokens, used by one app, so not in <code>components.css</code>:</p>
+<h2 id="app-only-patterns-updated-26-november-2026">App-only patterns (updated 26 November 2026)</h2>
+<p>Built from the tokens, used by one app, so not in <code>components.css</code>. Starboard builds about 420 classes of its own in <code>web/css/app.css</code>, <code>apps.css</code>, <code>settings.css</code>, <code>system.css</code>, <code>dashboard.css</code>, <code>library.css</code>, <code>media.css</code> and <code>designs.css</code>. These are the ones other pages are likely to need, so each is a candidate to move into the library, with a gallery entry and a board, when a second page needs it:</p>
 <ul>
 <li><strong>Starboard:</strong></li>
+<li>Settings tabs and sections: <code>.settings-sections</code>, <code>.page--settings</code>, and the General tabs (General, Alerts, Performance, Pictures).</li>
+<li>The update list: <code>.updates-table</code> with its Check now button.</li>
+<li>Where backups go: <code>.place</code>, <code>.place-logo</code>, <code>.place-add</code>, a list of places with a service logo.</li>
+<li>Dashboard cards: <code>.dash-grid</code>, <code>.dash-card</code>, <code>.guide-card</code>, <code>.spark-card</code>, <code>.dash-edit</code>. Starboard draws its own sparkline because the library one cannot show gaps.</li>
+<li>Slide-out wizards (the media server switch, backup places, cloud connect): a slide-out with its own "Step 1 of 3". <code>docs/WIZARD.md</code> describes the page wizard only.</li>
+<li>Showing a secret once (a first password, an API key, recovery codes, a backup key): each is built on its own.</li>
+<li>Folding table sections: <code>.fold</code>.</li>
+<li>Poster cards: <code>.lib-card</code>, <code>.network-card</code>, <code>.collection-card</code> and <code>.discover-card</code> do what <code>.media-card</code> and <code>.cover-card</code> do in the library.</li>
 <li><code>.access-change</code> shows what Starboard can access, with the command to change it.</li>
 <li><code>.job-run</code> is a server job with Run now.</li>
 <li>The storage charts use <code>--media-*</code>, which map to <code>--series-*</code>.</li>
 <li>The release notes slide-out is <code>.release-notes</code>, opened from Release notes in the footer.</li>
+<li><strong>Storyarr</strong> (retired on 11 November 2026): the bookshelf and series views, and the library classes only it used (for example <code>.book-row</code>, <code>.cover-card</code>, <code>.item-header</code>, <code>.list-detail</code> and the logo slide-out).</li>
 <li>
-<p><strong>Storyarr:</strong> the bookshelf and series views.</p>
+<p><strong>Plug-ins:</strong> <code>tv-station</code> has its own time grid and drag-and-drop palette. Stallboard builds its own header, filters and tiles over the library, and redefines <code>.shelf</code>.</p>
 </li>
 <li>
 <p>11 November 2026: <code>--font-heading</code> (headings h1 to h4) and <code>--color-rail</code> (the side menu) are optional, for Starboard's styles. Unset, nothing changes.</p>

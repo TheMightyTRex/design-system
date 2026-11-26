@@ -1,6 +1,6 @@
-# Storyarr design system
+# Design system
 
-Version 0.1 (draft for the redesign), 1 November 2026. The target every page moves towards. `COMPONENTS.md` lists what
+Version 0.1 (draft), 1 November 2026, written for Storyarr and now used by Starboard, its plug-ins and Stallboard. Storyarr was retired on 11 November 2026, so some of its examples remain as a record. The target every page moves towards. `COMPONENTS.md` lists what
 exists today, and the redesign plan behind it is kept privately. Other guides cover other things:
 - words are in `CONTENT-DESIGN.md`, and changelogs are in `CHANGELOGS.md`
 - accessibility is in `ACCESSIBILITY.md`, `WCAG.md` and `ALT-TEXT.md`

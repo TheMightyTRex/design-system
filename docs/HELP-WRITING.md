@@ -188,7 +188,7 @@ more options apart from it.
 The full rules, for people and AI tools, are in `SCREENSHOTS.md`, with a mark-up helper in `tools/annotate.js`.
 In short:
 
-- Add one only for a step the reader could not follow from the words. There is no quota.
+- Every tier one topic has at least 3 marked-up screenshots. Add more for any other step the reader could not follow from the words. A topic with fewer than 3 is unfinished.
 - Everything a screenshot shows is also said in words (rule 2.20). Text descriptions follow `ALT-TEXT.md`.
 - Take them from a preview with made-up data (rule 2.23), never from a real server; never fake one.
 - **Marking up:** a red outline 5 pixels outside the control, and a curved arrow whose filled head touches it. Use at
@@ -271,7 +271,7 @@ Then tell me: the tier and kind, every [needs checking], labels left as the app 
 - [ ] The answer comes first; empty sections left out
 - [ ] A guide links to topics instead of repeating their steps
 - [ ] Links to the parent and to related articles under "Find out more"
-- [ ] Screenshots only where needed, described in words, with made-up data, marked up to `SCREENSHOTS.md`
+- [ ] A tier one topic has at least 3 screenshots, each described in words, with made-up data, marked up to `SCREENSHOTS.md`
 - [ ] The article has its `<!-- help: <area> / <group> -->` line, and the group is in `help-centre.json`
 - [ ] A troubleshooting topic or a guide starts with its flow chart; every numbered answer has its section
 - [ ] The help centre builds with no warnings (`build.py --strict`)
