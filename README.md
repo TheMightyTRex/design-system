@@ -1,17 +1,17 @@
 # TRex Design System
 
-The design system for Storyarr and Starboard.
+The design system for Starboard, its plug-ins and Stallboard.
 
-One design system for two self-hosted apps, so they share one design, one voice and one behaviour. It holds the
+One design system for the self-hosted apps, so they share one design, one voice and one behaviour. It holds the
 shared component library (tokens, components, behaviour and icons), the design rules, the content design
 guide and the accessibility guide.
 
-## The two apps that use it
+## The apps that use it
 
-- **[Storyarr](https://github.com/TheMightyTRex/storyarr):** follow authors and series and keep your
-  audiobook library complete. Built with React; it wraps the library's classes in its own components.
 - **[Starboard](https://github.com/TheMightyTRex/starboard):** an accessible dashboard for a home media
   server. Plain HTML and JavaScript; it uses the library as it is.
+- **[Stallboard](https://github.com/TheMightyTRex/stallboard):** the store for Starboard plug-ins. It uses byte-for-byte copies of the library files.
+- **Storyarr** (retired on 11 November 2026, archived): it used the library through its own React components. Its boards and examples stay as a record.
 
 Each app keeps a copy of the library files, made by `tools/sync.py`, including the terminal frame and QR encoder. This repository is the source: never
 change the copies inside the apps.
@@ -20,7 +20,7 @@ change the copies inside the apps.
 
 | Path | What it is |
 |---|---|
-| `palettes/` | Six more accent colours (Teal, Indigo, Forest, Plum, Ember, Graphite) over Mica's greys: load one after `tokens.css` |
+| `palettes/` | Six more accent colours (Teal, Dusk, Lime, Rose, Amber, Graphite) over Mica's greys: load one after `tokens.css` |
 | `tokens.css` | Every colour, size, space and motion value as role names, for Light, Dark, High contrast and High contrast dark |
 | `components.css` | Every component, in `@layer shared`, using only the tokens |
 | `components.js` | The behaviour every component must have (menus, slide-outs, dialogs, phone menu, filter chips, copy, help, display settings, tabs, combobox, log viewer, popovers, tooltips and the rest), in plain JavaScript |

@@ -387,9 +387,11 @@ full path ("Settings, then Apps"), and copy on-screen labels exactly.</p>
 <p>4.3 <strong>Rule: true when written, and kept true.</strong> An entry describes what the version shipped. If an entry is
 wrong, correct it, and say so in the entry ("Corrected 5 November 2026: the limit is 10 books, not 20."). A changelog may be rewritten
 to add a missing version or to note a breaking change that was missed.</p>
-<p>4.4 Task and issue numbers (DASH-79, storyarr#1) may follow an entry in brackets, for people who track them.
+<p>4.4 Task and issue numbers (DASH-79) belong in the commit message and the pull request, not in an entry.
 Commit hashes, branch names and file paths do not belong in an entry, unless the reader has to run or edit
 that file.</p>
+<p>4.5 <strong>Rule: keep only recent notes in full.</strong> The changelog keeps the full one-sentence entries for Unreleased and
+the last 3 releases. Older releases may be shortened to one line each, with a link to the release on GitHub.</p>
 <h2 id="5-withdrawn-releases">5. Withdrawn releases</h2>
 <p>5.1 <strong>Rule: mark a withdrawn release.</strong> A release taken back because of a serious bug or a security problem keeps its
 section. Put <code>[Withdrawn]</code> after the date, and a first line saying why and which version to use instead. Keep a

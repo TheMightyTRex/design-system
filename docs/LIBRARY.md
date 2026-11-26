@@ -65,7 +65,7 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 | Component | Classes | Notes |
 |---|---|---|
 | Colour roles | `--color-*`, `--status-<tone>-bg/-fg`, `--chart-*`, `--series-1` to `--series-7`, `--series-empty` | Four themes; accent is one token (UX-02 board offers Indigo, Teal, Amber) |
-| Accent colours | `palettes/teal.css`, `indigo.css`, `forest.css`, `plum.css`, `ember.css`, `graphite.css` (Blue, the default, is `tokens.css`; Teal is the colour before Mica) | An accent over Mica's neutral greys: load `tokens.css`, one palette, then `components.css`. Each sets the accent, its soft tint, the chosen item, the count and the logo in Light, Dark, High contrast and High contrast dark (a stronger shade, 7:1). Surfaces, text, focus, status colours and chart series stay the same. Written by `tools/palettes.py` and checked by `tools/check_accents.py`. For an app where people choose (Starboard's own style), `palettes/app-palettes.css` holds all six under `:root[data-palette="…"]`; `tools/sync.py` copies it to Starboard's `css/palettes.css` with `palettes.json`. An app's own styles still win |
+| Accent colours | `palettes/teal.css`, `dusk.css`, `lime.css`, `rose.css`, `amber.css`, `graphite.css` (Blue, the default, is `tokens.css`; Teal is the colour before Mica) | An accent over Mica's neutral greys: load `tokens.css`, one palette, then `components.css`. Each sets the accent, its soft tint, the chosen item, the count and the logo in Light, Dark, High contrast and High contrast dark (a stronger shade, 7:1). Surfaces, text, focus, status colours and chart series stay the same. Written by `tools/palettes.py` and checked by `tools/check_accents.py`. For an app where people choose (Starboard's own style), `palettes/app-palettes.css` holds all six under `:root[data-palette="…"]`; `tools/sync.py` copies it to Starboard's `css/palettes.css` with `palettes.json`. An app's own styles still win |
 | Type | `--text-xs` to `--text-2xl`, `--font` | One typeface; scales with Text size |
 | Space and size | `--space-1` to `--space-12`, `--control-h` (44px), `--control-h-compact` (32px, dense tables only) | |
 | Icons | `icons.svg`, `svg.i`, `.i-lg`, `.i-xl` | Lucide, 2px stroke, decorative beside words |
@@ -350,11 +350,7 @@ Decisions list in this file, commit it here and push, so every checkout picks it
 - **App logos without a tile** (TheMightyTRexUK, 2 November 2026). `.app-icon.has-image` is only the image, with no border or background. Initials keep the tile.
 - **The logo editor on every way to get a logo** (TheMightyTRexUK, 2 November 2026). From a cover, Find online and Upload your own all use the same box. It has Shape from lightness or transparency, four cleaning levels, and a small eraser and paintbrush on `.checker[data-tool]`. Found files show as plain pictures in `.logo-candidate__art > img`.
 - **Nicer scroll bars** (TheMightyTRexUK, 2 November 2026). They are thin and square in every scrolling area, in `--color-scrollbar` (the border colour, or the text colour in High contrast) on a clear track. They stay visible, and only shelves hide theirs behind arrows.
-- **UX notes for testing** (TheMightyTRexUK, 2 November 2026).
-  - `ux-notes.js` (copied to both apps by `sync.py`) puts Note an issue in the corner of every page while an app's testing setting is active.
-  - You select the part, with the pointer or with Tab and Enter, and say what is wrong, the kind and how bad. Notes lists them with Copy as text, Download and Mark as fixed.
-  - Notes keep the page, the part, a selector and the display settings. An app passes a store to keep them on its server. Otherwise they stay in the browser.
-  - Styles: `.ux-dock`, `.ux-banner` (at the bottom, clear of the header), `.ux-outline` and `.ux-notes`.
+- **UX notes for testing** (TheMightyTRexUK, 2 November 2026). Retired on 13 November 2026: `ux-notes.js` is no longer in the library, and each app copies in [Snaglist](https://github.com/TheMightyTRex/snaglist) instead. `sync.py` lists a leftover copy as retired.
 - **Security checks the same in both apps** (TheMightyTRexUK, 3 November 2026).
   - `docs/SECURITY-CHECKS.md` sets the checks. They are tests, live journeys, Trivy, ZAP on a private network,
     Gitleaks, Bandit and Semgrep, ShellCheck, Hadolint, CodeQL, a separate review and install tests. It also says how
@@ -442,16 +438,24 @@ We checked focus after the menu and Display open and close, and the live regions
 (`HELP-WRITING.md` section 11). Also add a workflow that checks out this repository and runs the builder. Starboard,
 Snaglist and the plug-in collection use it. Build one here with `tools/help_centre/build.sh` from the app's folder.
 
-## App-only patterns (2 November 2026)
+## App-only patterns (updated 26 November 2026)
 
-Built from the tokens, used by one app, so not in `components.css`:
+Built from the tokens, used by one app, so not in `components.css`. Starboard builds about 420 classes of its own in `web/css/app.css`, `apps.css`, `settings.css`, `system.css`, `dashboard.css`, `library.css`, `media.css` and `designs.css`. These are the ones other pages are likely to need, so each is a candidate to move into the library, with a gallery entry and a board, when a second page needs it:
 
 - **Starboard:**
+  - Settings tabs and sections: `.settings-sections`, `.page--settings`, and the General tabs (General, Alerts, Performance, Pictures).
+  - The update list: `.updates-table` with its Check now button.
+  - Where backups go: `.place`, `.place-logo`, `.place-add`, a list of places with a service logo.
+  - Dashboard cards: `.dash-grid`, `.dash-card`, `.guide-card`, `.spark-card`, `.dash-edit`. Starboard draws its own sparkline because the library one cannot show gaps.
+  - Slide-out wizards (the media server switch, backup places, cloud connect): a slide-out with its own "Step 1 of 3". `docs/WIZARD.md` describes the page wizard only.
+  - Showing a secret once (a first password, an API key, recovery codes, a backup key): each is built on its own.
+  - Folding table sections: `.fold`.
+  - Poster cards: `.lib-card`, `.network-card`, `.collection-card` and `.discover-card` do what `.media-card` and `.cover-card` do in the library.
   - `.access-change` shows what Starboard can access, with the command to change it.
   - `.job-run` is a server job with Run now.
   - The storage charts use `--media-*`, which map to `--series-*`.
   - The release notes slide-out is `.release-notes`, opened from Release notes in the footer.
-- **Storyarr:** the bookshelf and series views.
-
+- **Storyarr** (retired on 11 November 2026): the bookshelf and series views, and the library classes only it used (for example `.book-row`, `.cover-card`, `.item-header`, `.list-detail` and the logo slide-out).
+- **Plug-ins:** `tv-station` has its own time grid and drag-and-drop palette. Stallboard builds its own header, filters and tiles over the library, and redefines `.shelf`.
 
 - 11 November 2026: `--font-heading` (headings h1 to h4) and `--color-rail` (the side menu) are optional, for Starboard's styles. Unset, nothing changes.
