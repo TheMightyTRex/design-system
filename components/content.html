@@ -427,6 +427,7 @@
   <div class="g-notes">
     <div><p class="g-note-h">Rules</p><ul><li>Errors say what happened and what to do, in the page, not only in a toast.</li><li>Empty states say what is missing, why, and the one next step.</li><li>Skeletons have the shape of the content; never a spinner on its own for a whole page.</li></ul></div>
     <div><p class="g-note-h">Roles</p><ul><li>Success and info: <code>role="status"</code>. Errors that block: <code>role="alert"</code>.</li></ul></div>
+    <div><p class="g-note-h">In script</p><ul><li><code>SharedComponents.notice("warning", "Disk 3 needs attention", "12 sectors were reallocated this week.", { actions: button })</code> draws a notice with its icon and role. Pass <code>alert: true</code> for an error that blocks.</li></ul></div>
   </div>
 </section>
 
