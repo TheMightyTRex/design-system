@@ -4,7 +4,7 @@
 <div class="notice" role="note">{{i:info}}<div class="notice__body"><span class="notice__title">Before you begin:</span><p>You need Python 3 and a copy of the repository. Run every command from the repository's own folder.</p></div></div>
 
 <h2 id="site">Build the site: site.py</h2>
-<p>Makes one page for each part of the design system: the foundations, each group of components, the patterns and each guide, with the home page, the search and the old <code>gallery.html</code> address. The components come from <code>gallery.src.html</code> and the guides from <code>docs/*.md</code>. Change those, never the pages. Run it, then <code>build.py</code> for the boards and resources pages.</p>
+<p>Makes one page for each part of the design system: the foundations, each group of components, the patterns and each guide, with the home page, the search and the old <code>gallery.html</code> address. The components come from <code>gallery.src.html</code> and the guides from <code>docs/*.md</code>. It also makes the Tokens page from <code>tokens.css</code> and the Icons page from <code>icons.svg</code>. <code>sitepage.py</code> holds the header, menus and footer every page shares. Change those, never the pages. Run it, then <code>build.py</code> for the boards and resources pages.</p>
 <code class="code-block">python3 tools/site.py</code>
 
 <h2 id="build">Build the boards and resources pages: build.py</h2>
@@ -37,7 +37,7 @@
 <p>Copies <code>tokens.css</code>, <code>components.css</code>, <code>components.js</code> and the icons into Starboard, Stallboard and the two plug-ins that keep their own copy (<code>tv-station</code> and <code>outside-services</code>), so every app uses the same components. It does not commit. Storyarr, which was retired on 11 November 2026, is no longer synced. Add <code>--check</code> to list what would change without writing anything.</p>
 <code class="code-block">python3 tools/sync.py --check</code>
 <code class="code-block">python3 tools/sync.py</code>
-<p>By default it uses <code>../starboard</code>, <code>../stallboard</code> and <code>../starboard-plugins</code> beside this repository. To use other folders, set <code>STARBOARD_WEB</code>, <code>STALLBOARD_DS</code> and <code>PLUGINS_DIR</code>, or put them in <code>tools/paths.local.json</code>, which git ignores:</p>
+<p><code>paths.py</code> says where each app is. By default it uses <code>../starboard</code>, <code>../stallboard</code> and <code>../starboard-plugins</code> beside this repository. To use other folders, set <code>STARBOARD_WEB</code>, <code>STALLBOARD_DS</code> and <code>PLUGINS_DIR</code>, or put them in <code>tools/paths.local.json</code>, which git ignores:</p>
 <code class="code-block">{
   "STARBOARD_WEB": "~/src/starboard/web",
   "STALLBOARD_DS": "~/src/stallboard/assets/ds",
@@ -60,10 +60,16 @@
 <p>Lists every name a style sheet uses that <code>tokens.css</code> does not have, and the token to use instead. With no files it checks <code>components.css</code>; an app gives its own.</p>
 <code class="code-block">python3 tools/check_tokens.py ../starboard/web/css/*.css</code>
 
+<h2 id="demos">Check the demos do not overlap: check_demos.mjs</h2>
+<p>Opens every foundations, components and patterns page at 375, 800 and 1280 px wide in the four themes. It fails when anything in a demo is fixed or sticks to the window, reaches up into the site's header, or overlaps another part of its demo. It needs Playwright. In the apps the topic tabs and the A to Z list stick under the header, so the site's styles keep them still inside a demo.</p>
+<code class="code-block">node tools/check_demos.mjs</code>
+
 <h2 id="private">Keep private details out: check-private.sh and install-hooks.sh</h2>
 <p><code>check-private.sh</code> stops a commit that would publish home network addresses, email addresses, keys, or the words in your own <code>.private-words</code> file (one word a line; git ignores it). <code>install-hooks.sh</code> runs this check and the banned words check before every commit in your copy. Run it once.</p>
 <code class="code-block">tools/install-hooks.sh</code>
 <code class="code-block">tools/check-private.sh</code>
+<p><code>test-check-private.sh</code> tests the check itself, with made-up details it must catch.</p>
+<code class="code-block">tools/test-check-private.sh</code>
 </div>
 
 <nav class="r-next" aria-label="More resources"><a class="btn" href="outside-tools.html">Outside tools for accessibility and testing</a><a class="btn" href="make-a-change.html">Make a change</a></nav>
