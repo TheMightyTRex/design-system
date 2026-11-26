@@ -1,8 +1,8 @@
 # Components by area
 
 Updated 20 November 2026. Every component in the shared library, by the area it belongs to, as the gallery
-(`gallery.html`) groups them. `LIBRARY.md` is the reference: each component's classes, behaviour and rules. When you
-add a component, add it here and in `LIBRARY.md`.
+(`gallery.html`) groups them. `LIBRARY.md` is the reference, with each component's classes, behaviour and rules. When
+you add a component, add it here and in `LIBRARY.md`.
 
 | Area | Components |
 |---|---|
@@ -15,10 +15,11 @@ add a component, add it here and in `LIBRARY.md`.
 | Patterns | Slide-out, dialog or page; which item to use (`DESIGN-SYSTEM.md` section 10); wizard and its pieces (`WIZARD.md`); signing in to a service; restart where it is needed; terminal (`TERMINAL.md`) |
 | Help centre | Top links, side tree, journey, flow chart, answer card, feature card, solver card and solver, version badge, plug-in card and band (`HELP-WRITING.md` section 11) |
 
-Class names that differ from the component's name: `.disclosure` is the accordion, `.side-panel` the slide-out, `.segmented` the segmented
-control, `.steps` and `.wizard` the step list and wizard, `.shelf` the row that scrolls sideways, `.count`, `.chip` and
-`.tag` the number, status and kind labels, `.range` the slider, `.file-field` the file picker, `.side-tree` the folding
-side menu, `.help` the question button, and `.command` a command to copy (not the command palette).
+Some class names differ from the component's name: - `.disclosure` is the accordion, `.side-panel` the slide-out and
+`.segmented` the segmented control. - `.steps` and `.wizard` are the step list and wizard, and `.shelf` is the row
+that scrolls sideways. - `.count`, `.chip` and `.tag` are the number, status and kind labels. - `.range` is the
+slider, `.file-field` the file picker and `.side-tree` the folding side menu. - `.help` is the question button, and
+`.command` is a command to copy (not the command palette).
 
 ---
 
@@ -116,20 +117,22 @@ merged (tasks UX-02 to UX-11).
 | Dialog | BookDialog, DisplayPanel and ReleaseCalendar `<dialog>`s, feature `*-dialog` classes | Dialog | UX-10 |
 | Control size | `--control-*` in `controls.css` and `settings.css` | One control scale | UX-02 |
 
-**Inconsistencies to fix:** in Shelf layout, Discover, Requests and Settings put their tabs in the header,
-while Library pages keep page tabs under a header menu (two levels). Sort sits among filters in Library, next
-to tabs in Requests, and is missing on Discover. Page headers differ (eyebrow block, hidden h1, wall header).
+**Inconsistencies to fix:** in Shelf layout, Discover, Requests and Settings put their tabs in the header. Library
+pages keep page tabs under a header menu (two levels). Sort sits among filters in Library, next to tabs in Requests,
+and is missing on Discover. Page headers differ (eyebrow block, hidden h1, wall header).
 
 ## 6. Status words in use today
 
 ### Starboard: one word and one tone for each state (17 November 2026)
 
-Starboard kept a map of status words on each page: `STATE_WORDS` in `downloads.js`, `BATCH_WORDS` and `TASK_WORDS`
-in `settings.js`, `STATUS_WORDS` in `system-backup.js`, `CUSTOM_STATE` in `plugins.js` and `STATE_BAND` in
+Starboard kept a map of status words on each page: `STATE_WORDS` in `downloads.js`, `BATCH_WORDS` and `TASK_WORDS` in
+`settings.js`, `STATUS_WORDS` in `system-backup.js`, `CUSTOM_STATE` in `plugins.js` and `STATE_BAND` in
 `dashboard.js`, with more in `app-details.js`, `apps.js` and `system-pool.js`. The same state had several words and
-tones. This table is the one list: Starboard keeps it as one map in `common.js`, and every chip, band, row and
-notice takes its word and tone from there. The rules of `CONTENT-DESIGN.md` section 6 apply: one or two words, never
-a sentence, and the word always beside the colour and its icon.
+tones. This table is the one list. Starboard keeps it as one map in `common.js`, and every chip, band, row and notice
+takes its word and tone from there.
+
+The rules of `CONTENT-DESIGN.md` section 6 apply. Use one or two words, never a sentence, and always put the word
+beside the colour and its icon.
 
 | State | Word | Tone | Replaces today |
 |---|---|---|---|
@@ -163,8 +166,8 @@ a sentence, and the word always beside the colour and its icon.
 | Never updated | Never updated | Warning | |
 | An app uses a change only after it starts again | Restart needed | Warning | |
 
-A word in this table means one state only. "Running" is an app that answers, never a job in progress, so a job that
-runs is "In progress" or its own word (Downloading, Updating, Backing up). A chip can add a detail after a middle dot
+A word in this table means one state only. "Running" is an app that answers, never a job in progress. A job that runs
+is "In progress" or has its own word (Downloading, Updating, Backing up). A chip can add a detail after a middle dot
 ("Downloading · 45%"), never a second word for the state.
 
 ### Storyarr

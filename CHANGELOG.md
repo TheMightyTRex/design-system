@@ -7,24 +7,20 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 [Semantic Versioning](https://semver.org/).
 
 
+## 26 November 2026
+
+- **Plainer wording (DASH-593):** the README, the guides in `docs/` and the resources pages now have shorter sentences, with no change in meaning.
+
 ## 23 November 2026
 
-- **The help centre follows Remove drop shadows (Starboard DASH-536).** The help centre builder has the Remove drop shadows switch in its Display and accessibility slide-out, and sets `data-shadows="off"` before the page draws from its own choice or, until one is made, from the app's last answer (`starboard.shadows`, when the help is served beside the app).
-- **Remove drop shadows (Starboard DASH-536).** `data-shadows="off"` on the page (or on any element) sets the shadow tokens to none in one place at the end of `tokens.css`, so cards, covers, menus, slide-outs and dialogs lose their shadow and keep their border. `components.js` handles `data-display="shadows"` in the Display and accessibility slide-out, with the note about processor cost. The gallery has the switch and shows both states.
-- **Covers take the card shading (DASH-535).** Every `.cover` has the card's 1px divider border, the 6px corner and the layered card shadow, and raises its border on hover in a media card or book row. The round cover stays round, the series fan has the 6px corner, the action column sits inside the cover's border and corner, and covers of 24px, 48px and 64px keep the border but not the shadow. High contrast keeps the border and loses the shadow.
+- **The help centre follows Remove drop shadows (Starboard DASH-536):** the help centre builder now has the Remove drop shadows switch.
+- **Remove drop shadows (Starboard DASH-536):** `data-shadows="off"` sets the shadow tokens to none, so cards, covers, menus, slide-outs and dialogs lose their shadow but keep their border.
+- **Covers take the card shading (DASH-535):** every `.cover` now has the card's 1px border, 6px corner and layered shadow.
 
 ## 22 November 2026
 
-- **A Discord support server link in the footer (DASH-526).** An app with a Discord support server links to it after Help, as "Discord support server", opening in a new tab. The footer in the gallery shows it, and the help centre builder adds it to every page footer and to the front page when `help-centre.json` names the server in `discord`.
-- **Parts: an app can load the large components only on the pages that use them (Starboard DASH-507).** The thirteen
-  components added on 20 November made every page of an app about 22 KB heavier. Twelve of them are now marked as
-  parts in `components.css` and `components.js` (log viewer, tabs, combobox, sparkline and gauge, pagination, error
-  summary, secret field, schedule picker, tag input, popover, alerts centre and command palette). The two files
-  still hold everything, so the gallery, the boards and the help centre are unchanged. `tools/parts.py` makes a core
-  (59 KB compressed, where the whole is 77 KB) and one small file for each part (2 to 5 KB), and `tools/sync.py`
-  writes those into an app that has a `js/parts` folder. The page banner and the tooltip stay in the core, as any
-  page can need them. `SharedComponents.kit` and `SharedComponents.addSetup` are new, for the parts.
-  `docs/LIBRARY.md`, Parts, has the rules.
+- **A Discord support server link in the footer (DASH-526):** an app with a Discord support server links to it after Help, and the help centre builder adds it to every page footer when `help-centre.json` names the server in `discord`.
+- **Parts (Starboard DASH-507):** an app can load twelve of the large components only on the pages that use them, which saves about 22 KB a page, and `docs/LIBRARY.md`, Parts, has the rules.
 
 ## 20 November 2026
 

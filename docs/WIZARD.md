@@ -1,20 +1,23 @@
 # Wizard: the rules
 
-4 November 2026. One set of rules for every wizard in every app that uses the library: first-run set-up,
-upgrades, restores, migrations and any other job done in steps. The classes are in `components.css`, the
-behaviour in `components.js`, and a live example is in the gallery, section Wizard. A wizard in a terminal follows
-`TERMINAL.md` as well.
+4 November 2026. One set of rules for every wizard in every app that uses the library. That covers first-run set-up,
+upgrades, restores, migrations and any other job done in steps. The classes are in `components.css` and the behaviour
+is in `components.js`.
 
-A wizard is a page, not a dialog: people link to it, come back to it and spend time in it ("Slide-out,
-dialog or page" in `LIBRARY.md`).
+A live example is in the gallery, section Wizard. A wizard in a terminal follows `TERMINAL.md` as well.
+
+A wizard is a page, not a dialog. People link to it, come back to it and spend time in it ("Slide-out, dialog or page"
+in `LIBRARY.md`).
 
 ## 1. Shape
 
-**Only what the app can show.** A wizard runs inside the app, so it starts once the app is installed and
-running. Anything needed before that (Docker, a folder, running the installer) belongs on the help page and in
-the installer, which checks it and stops with what to do. Never ask in the wizard about something the wizard
-could not run without (4 November 2026). A mock-up that shows those earlier steps marks them off as "Before the
-wizard", with their own count, and the wizard's progress starts at its own first step.
+**Only what the app can show.** A wizard runs inside the app, so it starts once the app is installed and running.
+Anything needed before that (Docker, a folder, running the installer) belongs on the help page and in the installer.
+The installer checks it and stops with what to do.
+
+Never ask in the wizard about something the wizard could not run without (4 November 2026). A mock-up that shows those
+earlier steps marks them off as "Before the wizard", with their own count. The wizard's progress starts at its own
+first step.
 
 
 | Part | Where | Classes |
@@ -36,30 +39,30 @@ other under that width. The step always comes first in the reading order.
 
 ## 2. The first question
 
-1. **Ask which job first, when there is more than one.** For a set-up, that is "New install", "Restore a
-   backup" or "Migrate from other apps". Each answer has its own wizard, with its own steps and count.
-   `.wizard-paths` shows each job as a card with its stages and number of steps, the chosen one marked.
+1. **Ask which job first, when there is more than one.** For a set-up, the jobs are "New install", "Restore a backup"
+   and "Migrate from other apps". Each answer has its own wizard, with its own steps and count. `.wizard-paths` shows
+   each job as a card with its stages and number of steps, and marks the chosen one.
 2. **Ask nothing the app can find out.** A migration checks what is already there and plans from it,
    instead of asking.
 3. **Ask in the order a person would do the job by hand.** Install, sign in, decide what to follow, then
    build each part in the order it depends on the last.
 
-4. **The same first question in the browser and the terminal.** An app with both kinds of set-up asks "How do
-   you want to start?" in both, with the same answers, plus "Already installed" when the app finds itself there.
-   The recommended answer comes from what was found, never from a guess.
+4. **The same first question in the browser and the terminal.** An app with both kinds of set-up asks "How do you want
+   to start?" in both, with the same answers. It adds "Already installed" when the app finds itself there. The
+   recommended answer comes from what was found, never from a guess.
 
 ### One wizard, two ways to show it
 
-An app that can be set up in a browser and in a terminal has **one set of questions**: the same steps, in the
+An app that can be set up in a browser and in a terminal has **one set of questions**. The steps are the same, in the
 same order, with the same answers, defaults, words and help. The terminal is a different drawing, not a different
 wizard (`TERMINAL.md`).
 
-- **Change both together.** A step, question, answer, default or help text added to one is added to the other in
-  the same change. If one way truly cannot do something yet, the other says so in words and points to it, and the
-  gap is a task, not an accident.
+- **Change both together.** When you add a step, question, answer, default or help text to one, add it to the other in
+  the same change. If one way truly cannot do something yet, the other says so in words and points to it. The gap is
+  then a task, not an accident.
 - **One source for the words** where the code allows it (a shared list of steps and help), so they cannot drift.
-- **A run first script hands over, it does not decide.** It finds what is on the computer (an existing install,
-  apps already running, the memory) and passes it on, so both set-ups recommend the same answers.
+- **A run first script hands over, it does not decide.** It finds what is on the computer, such as an existing
+  install, apps already running and the memory. It passes that on, so both set-ups recommend the same answers.
 - **Check it before every release:** walk each job in both and compare the steps side by side (section 13).
 
 ## 3. Steps
@@ -68,14 +71,16 @@ wizard (`TERMINAL.md`).
    name of a settings section.
 2. **Steps that do not apply are left out**, not shown and skipped. While testing, the decision tree still
    lists them, crossed through, with the reason ("Left out: you follow music only").
-3. **A step with too much in it is split into parts**, each its own page. `.steps--sub` under the
-   progress bar names the parts, with done ones ticked and the current one outlined. It is as wide as the
-   progress bar, the parts share the width equally, and a line joins each part to the next (in the
-   accent colour after a done part). The parts are numbered 1, 2, 3 within the step. **Each part is a
-   step in the progress bar's total**: when Download apps is steps 6 to 8 of 18, the progress bar says
-   "step 7 of 18" on its second part. On phones the step bar is only the numbers joined by lines, and a
-   done part's number becomes a tick (the names stay for screen readers). The summary at the end
-   shows the parts as one line.
+3. **A step with too much in it is split into parts**, each its own page. `.steps--sub` under the progress bar names
+   the parts, with done ones ticked and the current one outlined. It is as wide as the progress bar, the parts share
+   the width equally, and a line joins each part to the next (in the accent colour after a done part). The parts are
+   numbered 1, 2, 3 within the step.
+
+   **Each part is a step in the progress bar's total.** When Download apps is steps 6 to 8 of 18, the progress bar
+   says "step 7 of 18" on its second part. On phones the step bar is only the numbers joined by lines. A done part's
+   number becomes a tick, and the names stay for screen readers.
+
+   The summary at the end shows the parts as one line.
 4. **Choices are option cards** (`.option-cards`, one `.option-card` each), with a title and one line on
    what it means for the person.
 5. **Mark one choice "(recommended)"** where one suits most people, in the title, with the reason in its
@@ -98,8 +103,8 @@ wizard (`TERMINAL.md`).
 
 ## 5. Progress bar
 
-- Words first, bar under them: "New install · step 7 of 18 · Build your media server" on the left, "11 to
-  go" on the right, and "Last step" on the last.
+- Words first, bar under them. "New install · step 7 of 18 · Build your media server" is on the left, and "11 to go"
+  is on the right. The last step says "Last step".
 - The bar is `role="progressbar"` with `aria-valuenow`, `aria-valuemax` and `aria-valuetext` ("Step 7 of
   18: Usenet").
 - The count is for the chosen job only, and changes when a choice leaves steps out.
@@ -113,23 +118,25 @@ When a step runs a job that takes time (installing, downloading, building, resto
   replaces it; a retry draws the step afresh with one new bar, and the jobs already done listed with a tick.
 - **Words beside the bar:** what is happening, named ("Downloading and starting the apps…"), and which job of how
   many. Never a vague wait message: the timer and the count say that the job is still going.
-- **On the right, after the timer, how far it has got** when the job can tell: "3 min 12 s · 5 of 12 installed"
-  while the apps download, then "9 of 12 running" while they start (TheMightyTRexUK, 7 November 2026). Count from
-  the thing itself (Docker), not from the job's words, and leave the count out when it cannot be asked. In the
-  browser the count is the bar's `aria-valuetext`; in the terminal it follows the timer on the bar line.
-- **Errors go under the bar.** The bar stays where it stopped, marked "did not finish", and the problem is under it
-  in plain words, with the choices: Try again (recommended), Show the details, or Stop. Never write over the bar,
-  and never move the error before it.
+- **On the right, after the timer, how far it has got** when the job can tell. It reads "3 min 12 s · 5 of 12
+  installed" while the apps download, then "9 of 12 running" while they start (TheMightyTRexUK, 7 November 2026).
+  Count from the thing itself (Docker), not from the job's words, and leave the count out when it cannot be asked. In
+  the browser the count is the bar's `aria-valuetext`.
+
+  In the terminal it follows the timer on the bar line.
+- **Errors go under the bar.** The bar stays where it stopped, marked "did not finish". The problem is under it in
+  plain words, with the choices Try again (recommended), Show the details, or Stop. Never write over the bar, and
+  never move the error before it.
 - **No wrapping:** a bar line is cut to the width it has, so it never runs onto a second line.
-- In the browser it is `role="progressbar"` with `aria-valuetext` in words; the error is a notice after it, tied
+- In the browser the bar is `role="progressbar"` with `aria-valuetext` in words. The error is a notice after it, tied
   to it with `aria-describedby`, and focus moves to the error's heading.
 
 ## 6. Review aid: What happens next
 
 Testing only (section 1).
 
-- Beside every step: one item for each choice on this step, saying what follows from it ("If: Install and
-  set it up for me" then what the app will do).
+- Beside every step, one item for each choice on this step says what follows from it. For example, "If: Install and
+  set it up for me" is followed by what the app will do.
 - The current choice comes first, outlined, with "Your choice".
 - Skip this step, where there is one, is the last item, saying where to do it later.
 - Long words such as folder paths wrap, so they never make the page wider.
@@ -138,8 +145,8 @@ Testing only (section 1).
 
 Testing only (section 1).
 
-- An ordered list of the chosen job's stages and steps, under a heading that says which wizard and how many
-  steps ("New install wizard, 18 steps").
+- An ordered list of the chosen job's stages and steps. The heading says which wizard and how many steps ("New install
+  wizard, 18 steps").
 - Each step has a mark: its number to do, a tick when done, a dash when skipped, an outline when current.
   A decision is a diamond, so it does not rest on colour. A left-out step is dashed and crossed through.
 - Each step says its state in words ("You are here", "Done", "Skipped", "Left out: …").
@@ -152,40 +159,41 @@ Testing only (section 1).
 
 - Every step has help for each thing a newcomer may not know: the app, the term, the folder, the command.
   Check this for every step before a wizard ships.
-- **The links go at the end of the part they explain**, not under the heading: the API key link after the
-  API key fields. `.help-links` holds them, one `.help-link` each with the square `help` icon, written as the
-  question ("What is a terminal?").
-- **A step's own help goes at the end of the step**, before the buttons, in one `.help-links` row: the step's
-  questions first ("Which one is right for me?"), then "Help with this step", which opens the step's help centre
-  article in the slide-out (TheMightyTRexUK, 7 November 2026). Never a fold-out (`details`) for help.
-- A link opens a slide-out (`.side-panel-layer` with `.side-panel`, opened with `data-opens`), because help is
-  longer reading beside the step ("Slide-out, dialog or page" in `LIBRARY.md`; 4 November 2026). The step stays
-  in view beside it on computers; on phones the slide-out is full width.
-- The help slide-out is the wide one, about half the screen (`.side-panel--wide`). Its header (the question,
-  or "Help: " and the step's question, and Close) and its foot stay in view, and only `.side-panel__body` scrolls.
-  The foot has "Back to set-up" (a secondary button) first, then, when the help is a help centre article, "Read
-  it in the help centre" with the `help-new-tab` icon.
+- **The links go at the end of the part they explain**, not under the heading. The API key link goes after the API key
+  fields. `.help-links` holds them, one `.help-link` each with the square `help` icon, written as the question ("What
+  is a terminal?").
+- **A step's own help goes at the end of the step**, before the buttons, in one `.help-links` row. The step's
+  questions come first ("Which one is right for me?"). Then comes "Help with this step", which opens the step's help
+  centre article in the slide-out (TheMightyTRexUK, 7 November 2026). Never use a fold-out (`details`) for help.
+- A link opens a slide-out (`.side-panel-layer` with `.side-panel`, opened with `data-opens`), because help is longer
+  reading beside the step ("Slide-out, dialog or page" in `LIBRARY.md`; 4 November 2026). The step stays in view
+  beside it on computers. On phones the slide-out is full width.
+- The help slide-out is the wide one, about half the screen (`.side-panel--wide`). Its header (the question, or "Help:
+  " and the step's question, and Close) and its foot stay in view. Only `.side-panel__body` scrolls. The foot has
+  "Back to set-up" (a secondary button) first.
+
+  When the help is a help centre article, it then has "Read it in the help centre" with the `help-new-tab` icon.
 - When the step has a required field, the help ends with the key "* = Required" (`.required-key`); the form
   itself only has the stars (`LIBRARY.md`, Field).
-- It follows every slide-out's behaviour: focus moves to Close, Tab stays inside, Escape, Close and a press
-  outside close it, focus returns to the link, and the page behind does not scroll.
+- It follows every slide-out's behaviour. Focus moves to Close and Tab stays inside. Escape, Close and a press outside
+  close it. Focus returns to the link, and the page behind does not scroll.
 - Help follows `HELP-WRITING.md`: the basics first, then what it means for this step. Pictures are
   figures made from real text, with a caption that says what they show.
 
 ## 9. Addresses and commands
 
-- A server address is a link that opens in a new tab ("(opens in a new tab)" for screen readers), with a
-  copy button beside it: `.address`, with `.copy-btn`.
-- A command to run is a `.command` with a labelled copy button (`.copy-btn.copy-btn--label`, the word
-  Copy beside the icon), because newcomers may not know the icon.
+- A server address is a link that opens in a new tab ("(opens in a new tab)" for screen readers), with a copy button
+  beside it. Use `.address` with `.copy-btn`.
+- A command to run is a `.command` with a labelled copy button (`.copy-btn.copy-btn--label`, the word Copy beside the
+  icon), because newcomers may not know the icon.
 - Copying works on plain http too: when the browser refuses the clipboard, `components.js` copies from a
   hidden text box. The toast says what was copied (`data-copied`, such as "Address copied").
 
 ### Choosing an outside service (a VPN provider, a Usenet provider)
 
-- A grid of option cards that fits the width (`.option-cards--row`), at most six of the best known, each with
-  its name spelt as on the service's own site and its site under it as a new-tab link with the `external-link`
-  icon. Then one card, "Another one that … supports", which shows a field to enter the name.
+- A grid of option cards that fits the width (`.option-cards--row`), with at most six of the best known. Each has its
+  name spelt as on the service's own site, and its site under it as a new-tab link with the `external-link` icon. Then
+  comes one card, "Another one that … supports", which shows a field to enter the name.
 - Nothing is chosen the first time: the service is the person's own. When they come back, their last answer is
   kept. The terminal lists the same services, from the same list file, with no default the first time.
 
@@ -195,35 +203,39 @@ TheMightyTRexUK, 16 November 2026 (Starboard's Connect a cloud service). When a 
 service's own page (OAuth), never ask for the person's password for that service.
 
 - **Two ways to finish, the same weight**, as option cards: "Complete on the phone" and "Complete in this browser".
-  Offer the phone only where the service has a device flow (a short code entered on its own page, the wizard
-  waiting by itself); elsewhere offer the browser alone, with no empty choice. Remember the last way chosen.
-- **On the phone:** `.qr-card` with the QR code of the service's own page, dark on white in every theme. The QR code
-  is never the only way: the page is written out as an `.address` with Copy, and the code as a `.device-code` with
-  a labelled Copy button, its label spelling it out a character at a time. Under it, `.signin-wait`: the words and the
-  time left in a polite live region, said only when they change, and a busy bar. When the approval arrives the
-  wizard moves on by itself and says so; at the time limit it says so with Try again.
-- **In this browser:** `.signin-card` with `.signin-steps`: open the sign-in page (a new-tab link as a secondary
-  button: the step's primary button is Continue, after the address is pasted), what the browser shows after (a made-up example of the address in `.signin-example`), then the field for
-  the whole address. Say why in one plain sentence. The app checks what is pasted before it uses it.
+  Offer the phone only where the service has a device flow, which is a short code entered on its own page while the
+  wizard waits by itself. Elsewhere offer the browser alone, with no empty choice. Remember the last way chosen.
+- **On the phone:** `.qr-card` has the QR code of the service's own page, dark on white in every theme. The QR code is
+  never the only way. The page is written out as an `.address` with Copy, and the code is a `.device-code` with a
+  labelled Copy button, whose label spells it out a character at a time. Under it, `.signin-wait` shows the words and
+  the time left in a polite live region, said only when they change, and a busy bar.
+
+  When the approval arrives, the wizard moves on by itself and says so. At the time limit it says so, with Try again.
+- **In this browser:** `.signin-card` with `.signin-steps` has three parts. First, open the sign-in page, as a new-tab
+  link styled as a secondary button, because the step's primary button is Continue, after the address is pasted.
+  Second, what the browser shows after (a made-up example of the address in `.signin-example`). Third, the field for
+  the whole address.
+
+  Say why in one plain sentence. The app checks what is pasted before it uses it.
 - **Keys or a password instead:** a service that signs in with keys asks for them on the step, each field with where
   to find it.
 - **Then test before saving:** `.test-checks`, one line for each check (reach, write, read back, remove), each with
   its state in an icon and in words. A failed check says what to do; a sign-in the service no longer accepts says
   "Sign in again", which goes back to the sign-in step.
 - **Closing part way** ends the sign-in and keeps nothing; focus goes back to the button that opened the slide-out.
-- Anything set up this way gets **Test connection** beside it afterwards, with the result in `.tested` (an icon, the
-  word, and when it was tested), kept so it shows when the page is opened again.
+- Anything set up this way gets **Test connection** beside it afterwards. The result is in `.tested` (an icon, the
+  word, and when it was tested), and it is kept so it shows when the page is opened again.
 
 ### Check before writing
 
-- The step before anything is written is a table (`.table.table--fixed.table--middle` in `.table-wrap[data-stack]`):
-  What, Your answer and a Change button on each row that goes back to that step. Settings shown in full are a
+- The step before anything is written is a table (`.table.table--fixed.table--middle` in `.table-wrap[data-stack]`).
+  It has What, Your answer and a Change button on each row that goes back to that step. Settings shown in full are a
   table too, never a list of terms (TheMightyTRexUK, 7 November 2026).
 
 ## 10. The end
 
-- `.wizard-summary`: one line for each step, what was set (with a tick) or skipped (with a warning edge and
-  where to set it later), each linking to its settings page.
+- `.wizard-summary` has one line for each step. It shows what was set (with a tick) or skipped (with a warning edge
+  and where to set it later), and each line links to its settings page.
 - Then the one next thing, as the primary button.
 
 ## 11. Words
@@ -242,11 +254,11 @@ Every word follows `CONTENT-DESIGN.md`. The ones wizards get wrong most often:
 Every wizard carries [Snaglist](https://github.com/TheMightyTRex/snaglist), so people can say where it went
 wrong while they are in it (5 November 2026):
 
-- The **Send feedback** button is always there, and each report says which step it came from (the step's
-  id as Snaglist's page or part), so a report can be followed back to the exact question.
-- Reports go to the app's GitHub issues by default. A wizard often runs on a computer that is not online yet,
-  so offer Snaglist's **Show as a QR code** too: the phone scans it and opens the same pre-filled issue. When
-  the browser says it is offline, that choice comes first, with the reason.
+- The **Send feedback** button is always there. Each report says which step it came from (the step's id as Snaglist's
+  page or part), so you can follow a report back to the exact question.
+- Reports go to the app's GitHub issues by default. A wizard often runs on a computer that is not online yet, so offer
+  Snaglist's **Show as a QR code** too. The phone scans it and opens the same pre-filled issue. When the browser says
+  it is offline, that choice comes first, with the reason.
 - The QR code is never the only way: the link is shown as text with a Copy button, and Download keeps the whole
   report.
 - When a step fails, its error message offers **Report this problem**, with the error already in the report.
@@ -262,5 +274,5 @@ wrong while they are in it (5 November 2026):
 5. Keyboard only: every choice, link, dialog and Back works, and focus moves to each new step's heading.
 6. A screen reader hears the progress, the step's state and the chosen choice.
 7. Send feedback opens from every step, the report names the step, and the QR code scans with a phone.
-8. An app with a browser and a terminal set-up: every job walked in both, step by step side by side, asks the
-   same questions in the same order with the same defaults (section 2, One wizard, two ways to show it).
+8. An app with a browser and a terminal set-up: walk every job in both, step by step side by side. Both ask the same
+   questions in the same order with the same defaults (section 2, One wizard, two ways to show it).

@@ -23,10 +23,10 @@ Every word, in the components, the gallery, the guides and commit messages, foll
 
 ## Making a change
 
-Follow [Make a change](https://themightytrex.github.io/design-system/resources/make-a-change.html): pull, change the library here, build, check four themes
-and 175% text, check contrast, record the decision in `docs/LIBRARY.md`, run the privacy check and commit.
-Ask the owner before you push, or open a pull request. To test a change with people, read
-[Get feedback](https://themightytrex.github.io/design-system/resources/get-feedback.html).
+Follow [Make a change](https://themightytrex.github.io/design-system/resources/make-a-change.html). Pull, change the
+library here, build, check four themes and 175% text, check contrast, record the decision in `docs/LIBRARY.md`, run
+the privacy check and commit. Ask the owner before you push, or open a pull request. To test a change with people,
+read [Get feedback](https://themightytrex.github.io/design-system/resources/get-feedback.html).
 
 ## Licences
 

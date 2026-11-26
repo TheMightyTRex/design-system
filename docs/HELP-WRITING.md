@@ -8,10 +8,9 @@ layout, the menus, flow charts, the journey, the problem solver and plug-in mode
 
 ### What it is for
 
-Help answers the question someone has at the moment they have it. This guide sets out how that help is
-organised and laid out, so every app's help centre works in the same way: the same three tiers, the same
-kinds of topic, the same layouts and the same checks. Someone who has used one help centre already
-knows how the next one is organised.
+Help answers the question someone has at the moment they have it. This guide sets out how that help is organised and
+laid out. Every app's help centre then works in the same way, with the same three tiers, kinds of topic, layouts and
+checks. Someone who has used one help centre already knows how the next one is organised.
 
 Readers may know very little about computers. Write so that someone who has never opened a terminal can
 follow every step, and link to the basics for anything they might not know.
@@ -63,12 +62,13 @@ Every topic is exactly one of these. A topic that needs two kinds is two topics.
 
 ## 3. Areas and groups
 
-Every help centre has the same seven main items, in this order: **Home**, **Get started**, **Use it**,
-**Plug-ins**, **Accessibility**, **Fix a problem** and **Developers** (section 11). Each of the six areas holds a
-few groups, named in the reader's words (Starboard's Use it: Dashboard, Apps, Library and downloads, Your server,
-Alerts, Security, Backups, Updates), and every article sits in exactly one group. An article that fits two groups
-belongs to the one the reader would try first. An area with nothing in it says so in one line, such as "Snaglist has
-no plug-ins".
+Every help centre has the same seven main items. In order, they are **Home**, **Get started**, **Use it**,
+**Plug-ins**, **Accessibility**, **Fix a problem** and **Developers** (section 11). Each of the six areas holds a few
+groups, named in the reader's words. Starboard's Use it has Dashboard, Apps, Library and downloads, Your server,
+Alerts, Security, Backups and Updates.
+
+Every article sits in exactly one group. An article that fits two groups belongs to the one the reader would try
+first. An area with nothing in it says so in one line, such as "Snaglist has no plug-ins".
 
 - **Get started:** before installing, installing, opening it on other devices, moving in.
 - **Use it:** the app's own areas, in the order of its main menu, then settings, backups and updates.
@@ -149,11 +149,13 @@ The idea in two or three sentences, with an everyday comparison where one helps.
    Search and screen readers both use them.
 3. **Every child links to its parent,** and each topic links to its nearest neighbours under "Find out more".
 4. **Commands are copied, not entered by hand.** Put each command in its own `bash` block, and say what it does in the
-   sentence before it. Mark anything the reader must change, such as `<your server>`, and say what to put
-   there.
-   **Some people enter them by hand anyway,** so a command with a symbol that moves between keyboards (`|`, `~`, `\`,
-   `"`, `@`, `$`, `&`) links to the app's keyboard help (US, UK and Ireland, German, French and Spanish), and a
-   one-line command with `|` also shows a version without it. On UK keyboards the `¦` key is not `|`: say so.
+   sentence before it. Mark anything the reader must change, such as `<your server>`, and say what to put there.
+
+   **Some people enter them by hand anyway.** A command with a symbol that moves between keyboards (`|`, `~`, `\`,
+   `"`, `@`, `$`, `&`) links to the app's keyboard help. That help covers US, UK and Ireland, German, French and
+   Spanish keyboards. A one-line command with `|` also shows a version without it.
+
+   On UK keyboards the `¦` key is not `|`, so say so.
 5. **One action per step,** starting with the verb. Start from a page the reader can find, and give the full
    path the first time (`CONTENT-DESIGN.md` rule 2.19).
 6. **Callouts by meaning** (`CONTENT-DESIGN.md` section 7): "Before you begin:", "Limitation:", "Warning:",
@@ -164,15 +166,16 @@ The idea in two or three sentences, with an everyday comparison where one helps.
 Owner, 15 November 2026 (Starboard DASH-439): help shows the default set-up first, with additional apps and
 more options apart from it.
 
-1. **Split by need, not by person.** A guide walks a new person through one path with no choices; a how-to
-   assumes some context and does one task; a reference lists every setting; a basics article says why. Do not
-   mix them: explanation and lists of options do not belong inside a guide's steps.
-2. **Name sections by what they hold,** never by who the reader is: "The default set-up", "Add more apps",
+1. **Split by need, not by person.** A guide walks a new person through one path with no choices. A how-to assumes
+   some context and does one task. A reference lists every setting.
+
+   A basics article says why. Do not mix them. Explanation and lists of options do not belong inside a guide's steps.
+2. **Name sections by what they hold,** never by who the reader is. Write "The default set-up", "Add more apps" and
    "More options", not "For beginners" or "For experts". People misjudge themselves, and the line is blurred.
-3. **Default path first.** The main steps use the defaults as they are. A choice a new person can skip says so in
-   one line ("You can change this later in More options") and links to it. Additional apps and more
-   options come after the main steps under their own headings, or in a disclosure (`details`) when short.
-   **The test:** a new person finishes the main task without opening or reading anything after the main steps.
+3. **Default path first.** The main steps use the defaults as they are. A choice a new person can skip says so in one
+   line ("You can change this later in More options") and links to it. Additional apps and more options come after the
+   main steps, under their own headings or, when short, in a disclosure (`details`). **The test:** a new person
+   finishes the main task without opening or reading anything after the main steps.
 4. **Signpost at the top:** one line saying what the page covers (such as the default install) and where the rest
    is.
 5. **One plain-language baseline.** Sections of more options follow the same writing rules; they are separate, not harder
@@ -188,7 +191,7 @@ In short:
 - Add one only for a step the reader could not follow from the words. There is no quota.
 - Everything a screenshot shows is also said in words (rule 2.20). Text descriptions follow `ALT-TEXT.md`.
 - Take them from a preview with made-up data (rule 2.23), never from a real server; never fake one.
-- **Marking up:** a red outline 5 pixels outside the control, a curved arrow whose filled head touches it, at
+- **Marking up:** a red outline 5 pixels outside the control, and a curved arrow whose filled head touches it. Use at
   most three outlines, each with a badge carrying its step's number in the article.
 - Alt text names the page and the control by its label: "The Apps page, with Add an app outlined". Never
   "the button in the bottom right".
@@ -205,8 +208,8 @@ the words this guide bans. Treat its draft as a first draft that you check.
 - **The facts:** the app's code or its running pages, so labels come from the app, not from memory. For a
   change, the commit or the release notes behind it.
 - **The reader and the job:** who it is for, which tier (topic, guide or basics) and which kind of topic.
-- **What already exists:** the help home and the nearest topics, so it links to them instead of repeating
-  them, and does not write a second topic for the same task.
+- **What already exists:** the help home and the nearest topics. The agent links to them instead of repeating them,
+  and does not write a second topic for the same task.
 
 ### What it must do
 
@@ -219,8 +222,8 @@ the words this guide bans. Treat its draft as a first draft that you check.
    not written inline.
 6. **Change only what was asked.** When editing, keep the article's existing sections and links, and do not
    rewrite the voice while fixing one fact.
-7. **Report back:** what it wrote, every `[needs checking]`, any label it left as it is because the app
-   shows it that way, and anything wrong it noticed but did not fix.
+7. **Report back:** what it wrote and every `[needs checking]`. Also any label it left as it is because the app shows
+   it that way, and anything wrong it noticed but did not fix.
 
 ### How to check its work
 
@@ -243,9 +246,8 @@ grep -niE "\b(simple|simply|easy|just|straightforward|obviously|complex|difficul
 grep -niE "\b(above|below|top right|on the left|on the right|scroll down|click here|read more|learn more)\b|!" draft.md
 ```
 
-The design system runs the same words as a check on its own guides, gallery, boards and terminal frame:
-`python3 tools/check_words.py` stops on a hit, and a genuine exception goes in `tools/words-allowed.txt` with its
-reason.
+The design system runs the same words as a check on its own guides, gallery, boards and terminal frame.
+`python3 tools/check_words.py` stops on a hit. A genuine exception goes in `tools/words-allowed.txt` with its reason.
 
 A tool reporting success is not the check: read the result back, in the file and on the page.
 
@@ -277,11 +279,13 @@ Then tell me: the tier and kind, every [needs checking], labels left as the app 
 
 ## 11. The help centre standard
 
-Chosen by the owner on 14 November 2026 (Starboard DASH-436): "I also want this design to become the standard.
-This is to be used in all help centres." Every help centre is built by the design system's builder,
-`tools/help_centre/build.py`, from the Markdown in the app's repository and one `help-centre.json`. Nothing here is
-drawn by hand per build: change the Markdown or the settings, and build again. The pieces are components in
-`components.css` and `components.js`, shown in the gallery, so an app can use them too.
+Chosen by the owner on 14 November 2026 (Starboard DASH-436): "I also want this design to become the standard. This is
+to be used in all help centres." The design system's builder, `tools/help_centre/build.py`, builds every help centre.
+It reads the Markdown in the app's repository and one `help-centre.json`. Nothing here is drawn by hand for each
+build.
+
+Change the Markdown or the settings, and build again. The pieces are components in `components.css` and
+`components.js`, shown in the gallery, so an app can use them too.
 
 ### 11.1 Layout
 
@@ -291,20 +295,22 @@ drawn by hand per build: change the Markdown or the settings, and build again. T
 - **A hub on every page:** the side menu on the left, the page on the right. Articles keep **On this page** beside
   them on wide screens, inside them on narrow ones.
 - **Area pages:** each of the six areas has a page with a card for each group, listing every article in it.
-- **Home:** the welcome heading with the latest version beside it on the same line, with no date (`.version-badge`,
-  read from the changelog or a version file, never entered by hand); then the journey; then the newest thing
-  (`.feature-card`); then the problem solver card (`.solver-card`), always under the newest thing.
+- **Home:** the welcome heading with the latest version beside it on the same line, with no date. The version
+  (`.version-badge`) is read from the changelog or a version file, never entered by hand. Then come the journey, the
+  newest thing (`.feature-card`) and the problem solver card (`.solver-card`), which is always under the newest thing.
 
 ### 11.2 The side menu
 
-A side menu that folds (`.side-tree`): **Home**, then each area, then the groups in it, then every article in each
-group. Areas and groups are `details` and `summary`, so they work with no script and a screen reader hears each one
-as expanded or collapsed; each group shows how many articles it holds. The page you are on is marked
-(`aria-current="page"`) and its area and group are open; the rest are shut. Each area starts with **Overview**, its
-area page, and Fix a problem also lists the **Problem solver**. On tablets and phones the menu opens from **Menu**
-over the page, with the area you are in already open and the focus on the page you are on; the page behind cannot
-be reached while it is open; Escape, **Menu** again or choosing a page closes it and the focus goes back to **Menu**.
-With no script, the menu comes before the page.
+A side menu that folds (`.side-tree`) lists **Home**, then each area, then the groups in it, then every article in
+each group.
+- Areas and groups are `details` and `summary`, so they work with no script and a screen reader hears each one as
+  expanded or collapsed. Each group shows how many articles it holds.
+- The page you are on is marked (`aria-current="page"`), and its area and group are open. The rest are shut.
+- Each area starts with **Overview**, its area page. Fix a problem also lists the **Problem solver**.
+- On tablets and phones the menu opens from **Menu** over the page. The area you are in is already open, and the focus
+  is on the page you are on. The page behind cannot be reached while the menu is open. Escape, **Menu** again or
+  choosing a page closes it, and the focus goes back to **Menu**.
+- With no script, the menu comes before the page.
 
 Each article says where it belongs, on the line after its trail line:
 
@@ -319,21 +325,23 @@ an error. Within a group, articles keep the order of the help home's lists, then
 
 ### 11.3 The journey
 
-The home page starts with the journey (`.journey`): three to five stages, left to right on a dashed path, each with
-a column of two or three cards under it (`.stage-card`) that link to the articles for that stage. The first card in
-each column is the one to start with. The first stage is the start, the last is fixing things; on phones the stages
-stack with the path down the side. A plug-in collection's home has its own journey (choose, add, use, update or
-remove). Keep each card to a title and one line.
+The home page starts with the journey (`.journey`). It has three to five stages, left to right on a dashed path. Each
+stage has a column of two or three cards under it (`.stage-card`) that link to the articles for that stage. The first
+card in each column is the one to start with.
+
+The first stage is the start, and the last is fixing things. On phones the stages stack with the path down the side. A
+plug-in collection's home has its own journey (choose, add, use, update or remove). Keep each card to a title and one
+line.
 
 ### 11.4 Flow charts
 
-**Every troubleshooting topic starts with a flow chart** (articles are flow chart first), and so does every guide
-(its steps at a glance). A how-to with a real choice in it (which version, which kind of disk) may have one; a
-reference topic or a basics article does not need one. Put the chart straight after the opening sentences.
+**Every troubleshooting topic starts with a flow chart** (articles are flow chart first), and so does every guide (its
+steps at a glance). A how-to with a real choice in it (which version, which kind of disk) may have one. A reference
+topic or a basics article does not need one. Put the chart straight after the opening sentences.
 
-Write the chart in a fenced `flow` block. It is plain to read on GitHub, and the builder draws it as an SVG that
-follows Light, Dark and High contrast, then writes the same paths out in words under it (**The chart in words**), the
-full text equivalent:
+Write the chart in a fenced `flow` block. It is plain to read on GitHub. The builder draws it as an SVG that follows
+Light, Dark and High contrast. It then writes the same paths out in words under the chart (**The chart in words**), as
+the full text equivalent:
 
 ````markdown
 ```flow
@@ -354,16 +362,23 @@ q2: Does the app open in your browser?
 ```
 ````
 
-- One node a line: `start:` (exactly one, first), `q:` or `q<name>:` for a question (at least two answers),
-  `step<name>:` for something that happens, `end<name>:` for a good end, `warn<name>:` for the last thing to try,
-  and a number for a **numbered answer**. `| words` adds a short second line.
+- One node a line:
+  - `start:` (exactly one, first)
+  - `q:` or `q<name>:` for a question (at least two answers)
+  - `step<name>:` for something that happens
+  - `end<name>:` for a good end
+  - `warn<name>:` for the last thing to try
+  - a number for a **numbered answer**
+
+  `| words` adds a short second line.
 - Answers are indented under the node they leave from: `<what the reader sees or chooses> -> <target>`. The target
   is a question, a number, a step or end, or another article (`check-disk-health.md`). A start or a step with no
   answers leads to the next line.
-- Each numbered answer is a section of the article: the heading given with `#its-id` at the end of the line, or the
+- Each numbered answer is a section of the article. Give its heading with `#its-id` at the end of the line, or use the
   heading that starts with the number ("1. Start the app again"). The builder shows each as an answer card
-  (`.answer-card`): the number and heading on a grey band, the steps under it. Using `#its-id` keeps the heading's
-  words and its address, so links to it from release notes still work.
+  (`.answer-card`), with the number and heading on a grey band and the steps under it.
+
+  Using `#its-id` keeps the heading's words and its address, so links to it from release notes still work.
 - An answer reached from another answer ("Still does not open -> 5") is drawn as the next thing to try.
 - Keep questions short (under eight words), answers to what is on the reader's page, and a chart to about ten nodes. A
   chart that will not fit is two articles.
@@ -373,11 +388,12 @@ q2: Does the app open in your browser?
 ### 11.5 The problem solver
 
 `solver.html` asks up to four questions and takes the reader to the article that fixes the problem. It is written in
-`help-centre.json` under `solver` as a tree: each answer has `to` (an article) or `next` (the next question). With
-no script it is the whole tree as lists of links; with script it asks one question at a time, with **Back** and
-**Start again**, puts the focus on each new question and says it politely. Every Fix a problem article should be
-reachable from it. Its card (`.solver-card`) goes on the home page under the newest thing, and at the top of Fix a
-problem.
+`help-centre.json` under `solver` as a tree. Each answer has `to` (an article) or `next` (the next question). With no
+script, it is the whole tree as lists of links.
+
+With script, it asks one question at a time, with **Back** and **Start again**. It puts the focus on each new question
+and says it politely. Every Fix a problem article should be reachable from it. Its card (`.solver-card`) goes on the
+home page under the newest thing, and at the top of Fix a problem.
 
 ### 11.6 Pages
 
@@ -389,14 +405,22 @@ problem.
 ### 11.7 Plug-in mode
 
 A help centre for a plug-in collection adds `plugins` to `help-centre.json`. Its Plug-ins area becomes the plug-ins
-themselves: each group of plug-ins is an area in the side menu, each plug-in a folding item in it, and under every
-plug-in the same eight pages in the same order: **Overview**, **Install**, **Settings**, **Dashboard card**,
-**Updates**, **Accessibility**, **Problems** and **For developers**. Overview is the plug-in's own README; the
-others are `help/plugins/<id>/<page>.md`. A page with nothing to say shows one line saying so (the builder writes
-one when the file is missing). A plug-in's pages start with its band (`.plugin-band`): the logo or initials, the
-name, the version and plug-in API, a status chip and **How to add it**. The logo is the catalogue entry's `logo`, a rounded tile, shown wherever the plug-in is; a plug-in with none shows its icon or initials. When the Plug-ins area also has groups of its own articles, such as Add a plug-in, they stay in the side menu before the plug-in groups. The home and the Plug-ins area show a card
-for each plug-in in the grey band design (`.plugin-card`): logo, name and status chip, what it does, and links to
-Install, Settings and Problems. The Problems page starts with a flow chart, as any troubleshooting topic does.
+themselves. Each group of plug-ins is an area in the side menu, and each plug-in is a folding item in it. Under every
+plug-in are the same eight pages in the same order: **Overview**, **Install**, **Settings**, **Dashboard card**,
+**Updates**, **Accessibility**, **Problems** and **For developers**.
+
+Overview is the plug-in's own README, and the others are `help/plugins/<id>/<page>.md`. A page with nothing to say
+shows one line saying so, which the builder writes when the file is missing. A plug-in's pages start with its band
+(`.plugin-band`). The band has the logo or initials, the name, the version and plug-in API, a status chip and **How to
+add it**.
+
+The logo is the catalogue entry's `logo`, a rounded tile, shown wherever the plug-in is. A plug-in with none shows its
+icon or initials. The Plug-ins area may also have groups of its own articles, such as Add a plug-in. They stay in the
+side menu before the plug-in groups.
+
+The home and the Plug-ins area show a card for each plug-in in the grey band design (`.plugin-card`). It has the logo,
+name and status chip, what the plug-in does, and links to Install, Settings and Problems. The Problems page starts
+with a flow chart, as any troubleshooting topic does.
 
 ### 11.8 help-centre.json
 
@@ -424,21 +448,21 @@ Install, Settings and Problems. The Problems page starts with a flow chart, as a
 }
 ```
 
-- `version_from` names the changelog (the first released version in it, never Unreleased) or a file holding only
-  the version; `version` gives it outright; `version_link` changes where the badge goes.
+- `version_from` names the changelog or a file holding only the version. It takes the first released version in the
+  changelog, never Unreleased. `version` gives it outright, and `version_link` changes where the badge goes.
 - `tone` is `start`, `step` or `fix`; `icon` is any icon in `icons.svg`. A `to` is an article (from the help
   folder), a page of the help centre (`solver.html`, `areas/plugins.html`) or a full address.
 - `featured` takes `flow` (a small chart, in the format of 11.4) or `image` and `alt`.
 - With no `areas`, the builder keeps the older layout: the side menu is the help home's own lists.
-- `footer_note`: its first bold sentence (or `footer_link`) is the footer's only notice link, which opens a slide-out with the
-  whole note; the footer itself matches the apps' footers (the help centre's name and links on the left, TheMightyTRexUK
-  on the right).
-- An area can have `link_card` (`title`, `text`, `to`, `button`, optional `icon`): one card at the top of its page leading
-  somewhere else, such as Starboard's Plug-ins area to the plug-ins' own help centre.
+- `footer_note`: its first bold sentence (or `footer_link`) is the footer's only notice link, which opens a slide-out
+  with the whole note. The footer itself matches the apps' footers, with the help centre's name and links on the left
+  and TheMightyTRexUK on the right.
+- An area can have `link_card` (`title`, `text`, `to`, `button`, optional `icon`). This is one card at the top of its
+  page that leads somewhere else, such as Starboard's Plug-ins area to the plug-ins' own help centre.
 - `goatcounter` (optional) activates visitor counting: the GoatCounter address, such as
   `https://<code>.goatcounter.com/count`. Every page loads its counter, and the footer says that visits are counted
   without cookies or personal data. Leave it out and nothing is counted.
-- `--strict` stops on a page left as a placeholder ("still to be written", TODO, TBD, TBC or lorem ipsum, outside
-  code) as well as on an article with no group; `placeholders` gives a help centre its own list of patterns.
+- `--strict` stops on an article with no group. It also stops on a page left as a placeholder ("still to be written",
+  TODO, TBD, TBC or lorem ipsum, outside code). `placeholders` gives a help centre its own list of patterns.
 - The older settings still work: `leave_out`, `sections`, `footer_note`, `banner` or `banners`, `sponsored_links`,
   `strip_between`, `search_example`, `front_door`, `logo_file`, `favicon_file`.

@@ -71,15 +71,15 @@
 <div class="command"><code class="code-block">python3 resources/make.py</code><button class="copy-btn" type="button" data-copy="python3 resources/make.py" aria-label="Copy command">{{i:copy}}</button></div>
 
 <h2 id="contrast">Check contrast: contrast.py</h2>
-<p>Measures every text and control colour pair against WCAG 2.2 AA (Web Content Accessibility Guidelines): in all four themes, and in Light and Dark for every palette. Text needs 4.5:1, and control borders and the focus ring need 3:1. The report must end with "0 failures".</p>
+<p>Measures every text and control colour pair against WCAG 2.2 AA (Web Content Accessibility Guidelines). It does this in all four themes, and in Light and Dark for every palette. Text needs 4.5:1, and control borders and the focus ring need 3:1. The report must end with "0 failures".</p>
 <div class="command"><code class="code-block">python3 tools/contrast.py &gt; contrast-report.txt</code><button class="copy-btn" type="button" data-copy="python3 tools/contrast.py &gt; contrast-report.txt" aria-label="Copy command">{{i:copy}}</button></div>
 
 <h2 id="accents">Check every accent: check_accents.py</h2>
-<p>Measures every token pair the components draw, for every accent colour, in Light, Dark, High contrast and High contrast dark, including the menu hover fill and its edge worked out over each surface. Text needs 4.5:1; control edges, card edges and rules, the hover edge, the current-item bar and the focus ring need 3:1. It fails on any pair that falls short of the rule.</p>
+<p>Measures every token pair the components draw, for every accent colour, in Light, Dark, High contrast and High contrast dark. That includes the menu hover fill and its edge, worked out over each surface. Text needs 4.5:1; control edges, card edges and rules, the hover edge, the current-item bar and the focus ring need 3:1. It fails on any pair that falls short of the rule.</p>
 <div class="command"><code class="code-block">python3 tools/check_accents.py --report accent-report.txt</code><button class="copy-btn" type="button" data-copy="python3 tools/check_accents.py --report accent-report.txt" aria-label="Copy command">{{i:copy}}</button></div>
 
 <h2 id="annotate">Mark up a help screenshot: annotate.js</h2>
-<p>Draws the outline, curved arrow and step-number badge that <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/SCREENSHOTS.md">Screenshots in help</a> sets out, anchored to the page's own elements, then checks that each outline still wraps its control, nothing is off the screen or covered, and the badges match the article's steps. Paste it into the browser's console on a preview with made-up data, mark, check, then take the screenshot.</p>
+<p>Draws the outline, curved arrow and step-number badge that <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/SCREENSHOTS.md">Screenshots in help</a> sets out, anchored to the page's own elements. It then checks three things. Each outline still wraps its control, nothing is off the screen or covered, and the badges match the article's steps. Paste it into the browser's console on a preview with made-up data, mark, check, then take the screenshot.</p>
 <div class="command"><code class="code-block">Annotate.mark("Add an app", { step: 2 }); Annotate.verify({ steps: [2] })</code><button class="copy-btn" type="button" data-copy="Annotate.mark(&quot;Add an app&quot;, { step: 2 }); Annotate.verify({ steps: [2] })" aria-label="Copy command">{{i:copy}}</button></div>
 
 <h2 id="palettes">Make the palettes: palettes.py</h2>

@@ -1,7 +1,7 @@
 # Meeting WCAG 2.2
 
-Version 1.0, 4 November 2026. How the TRex Design System meets WCAG 2.2 level AA (the Web Content
-Accessibility Guidelines), point by point, following the GOV.UK Service Manual's
+Version 1.0, 4 November 2026. This page shows how the TRex Design System meets WCAG 2.2 level AA (the Web Content
+Accessibility Guidelines), point by point. It follows the GOV.UK Service Manual's
 [Understanding WCAG 2.2](https://www.gov.uk/service-manual/helping-people-to-use-your-service/understanding-wcag).
 Every word follows `CONTENT-DESIGN.md`.
 
