@@ -69,7 +69,7 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 | Type | `--text-xs` to `--text-2xl`, `--font` | One typeface; scales with Text size |
 | Space and size | `--space-1` to `--space-12`, `--control-h` (44px), `--control-h-compact` (32px, dense tables only) | |
 | Icons | `icons.svg`, `svg.i`, `.i-lg`, `.i-xl` | Lucide, 2px stroke, decorative beside words |
-| Utilities | `.nowrap`, `.clamp-2`, `.clamp-3`, `.visually-hidden`, `.skip-link`, `.muted`, `.small`, `.numeric`, `code`, `.code-block`, `.stack-1`, `.stack-2`, `.stack-4` | Stacks put children one under another with a 4, 8 or 16px gap |
+| Utilities | `.nowrap`, `.clamp-2`, `.clamp-3`, `.visually-hidden`, `.skip-link`, `.muted`, `.small`, `.numeric`, `code`, `.code-block`, `.stack-1`, `.stack-2`, `.stack-3`, `.stack-4`, `.stack-5`, `.input--narrow` | Stacks put children one under another with a 4, 8, 12, 16 or 20px gap; `.input--narrow` is a field about seven characters wide, for a short value such as a number of copies to keep |
 
 ### Shell
 | Component | Classes | Notes |
