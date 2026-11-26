@@ -9,7 +9,8 @@ It writes (folders set in tools/paths.py):
              (the core only, with each part in css/parts/ and js/parts/, once the app has a js/parts folder:
              tools/parts.py), icons/sprite.svg (library icons plus Starboard's own), css/palettes.css and
              palettes.json (palettes/, for the own style's colours); and, next to the web folder,
-             lib/terminal-frame.sh, the copy in run-first.sh and starboard/qr.py (from terminal/)
+             lib/terminal-frame.sh, the copy in run-first.sh, starboard/qr.py (from terminal/) and
+             tools/verbose-check.py, the Plain English check (warns only)
   Storyarr   STORYARR_SHARED/tokens.css (no @font-face or --font: Storyarr loads the font itself),
              components.css
 It does not commit. A file the library no longer has (RETIRED) is listed as "retired" while an app still has a
@@ -84,6 +85,8 @@ if STARBOARD.exists():
     frame = (HERE / "terminal/terminal-frame.sh").read_text()
     write(app / "lib/terminal-frame.sh", frame)
     write(app / "starboard/qr.py", (HERE / "terminal/qr.py").read_text())
+    # The Plain English check (26 November 2026): warns about the lines a pull request adds, never fails (tools/verbose-check.py ci).
+    write(app / "tools/verbose-check.py", (HERE / "tools/verbose-check.py").read_text(), new=True)
     first = app / "run-first.sh"
     if first.exists():
         text = first.read_text()

@@ -1,6 +1,6 @@
 # Changelogs
 
-Version 1.0, 5 November 2026. How every project that uses this design system keeps its changelog: Storyarr,
+Version 1.1, 26 November 2026. How every project that uses this design system keeps its changelog: Storyarr,
 Starboard, Snaglist and the design system itself. It follows the principles of
 [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/), written in our own words, with dates and
 wording from `CONTENT-DESIGN.md`. Release notes shown in an app follow the same change types
@@ -117,9 +117,11 @@ version. The last entry names the checks the release passed (`SECURITY-CHECKS.md
 
 ## 4. Entries
 
-4.1 **Rule: one entry is one change,** as a bullet: a bold headline that says what the person can now do, then
-one or two sentences on what changed and who it helps. Add "Find out more in **<help topic>**" when a topic
-exists.
+4.1 **Rule: one entry is one change, written as one plain sentence,** as a bullet. The sentence says what the
+person can now do or what works differently, in about 15 to 20 words and never over 25. Add a second short
+sentence only for a real warning or a number people need. The long detail belongs in the task list and the help,
+not in the changelog. Do not quote the owner or a requester, and keep ticket numbers out of the sentence. Add
+"Find out more in **<help topic>**" when a topic exists.
 
 4.2 **Rule: write each entry so it reads alone.** Expand abbreviations in every entry, name the page with its
 full path ("Settings, then Apps"), and copy on-screen labels exactly.
@@ -165,7 +167,7 @@ Changes made only in the fork go in a section of their own, or in a separate fil
 - [ ] `CHANGELOG.md` has an `## [Unreleased]` section at the top, empty after the release
 - [ ] The new version has a section, `## [x.y.z] (day month year)`, newest first
 - [ ] Every change is under Added, Changed, Deprecated, Removed, Fixed or Security, in that order
-- [ ] Nothing is a copy of a commit message; every entry says what changed for the reader
+- [ ] Nothing is a copy of a commit message; every entry is one plain sentence that says what changed for the reader
 - [ ] Every security fix is under Security, and the last entry names the checks
 - [ ] A link reference for the new version, and Unreleased compares from the new tag
 - [ ] A withdrawn release is marked `[Withdrawn]` with the reason
