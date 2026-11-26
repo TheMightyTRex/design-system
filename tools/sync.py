@@ -125,12 +125,12 @@ if STALLBOARD.exists():
 PLUGIN_HEAD = ("/* The TRex Design System's {what}, copied by tools/sync.py (github.com/TheMightyTRex/design-system).\n"
                "   Do not change this copy: change the design system and run sync.py again. */\n")
 if PLUGINS.exists():
-    plugin_font = 'url("font.woff2")'
-    t = tokens.replace('url("fonts/atkinson-hyperlegible-next.woff2")', plugin_font)
+    # tv-station serves the font as font.woff2; outside-services serves it from fonts/, as the library does.
+    tv_tokens = tokens.replace('url("fonts/atkinson-hyperlegible-next.woff2")', 'url("font.woff2")')
     if (PLUGINS / "tv-station").is_dir():
-        write(PLUGINS / "tv-station/ds-tokens.css", PLUGIN_HEAD.format(what="tokens.css") + t)
+        write(PLUGINS / "tv-station/ds-tokens.css", PLUGIN_HEAD.format(what="tokens.css") + tv_tokens)
     if (PLUGINS / "outside-services").is_dir():
-        write(PLUGINS / "outside-services/ds.css", PLUGIN_HEAD.format(what="tokens.css and components.css") + t + "\n" + components)
+        write(PLUGINS / "outside-services/ds.css", PLUGIN_HEAD.format(what="tokens.css and components.css") + tokens + "\n" + components)
         font = HERE / "fonts/atkinson-hyperlegible-next.woff2"
         target = PLUGINS / "outside-services/font.woff2"
         if target.exists() and target.read_bytes() == font.read_bytes():
