@@ -379,6 +379,13 @@ step: "Undo" or "Open Activity". No celebration for routine actions.
 **Confirmation on a settings page (saved note).** No toast: the words appear beside the button that saved,
 "Saved at 16:31", and stay until the next change.
 
+**Find all wanted.** A button that asks a download app to search for everything wanted on a list, in four steps (owner, 26 November 2026). The same words on every Library tab, every Wanted page and every show or series.
+- Count first, on the button: "Find all wanted (23)". With nothing wanted, the button is inactive and says "Nothing is wanted".
+- Question: the title says how many ("Find 19 wanted episodes?"). The body says what happens in a sentence ("Reelix searches its sites for each wanted episode, a few at a time, and sends the best match it finds to your download app.") and three short lines: how many are wanted and how many were left out because they were searched in the last day; how fast ("Starboard asks for 10 at a time, with one minute between groups. This takes about 12 minutes."); and that you can stop at any time and leave the page. The main button repeats the number ("Find 19 wanted episodes"). Cancel is second.
+- Progress: a panel under the page heading with words and a progress bar that has its own label ("Searched 8 of 19 wanted episodes. The next group starts in 40 seconds."), and **Stop**. The words change after each group, never more often, so a screen reader hears one update a minute. While Download hours pause downloads it says so and waits.
+- Summary: a notice that stays until it is closed, not a toast ("Searched 19 wanted episodes. Reelix sends what it finds to your download app, and keeps searching while you follow them. 12 are still wanted."), with **Open Downloads**. A stopped run says "Stopped after 8 of 19" and how many were not searched. A failed run says what happened and "Nothing else changed".
+- Limits, so a list cannot flood the sites: 10 searches in a group, one group a minute, at most 100 in a run (the question says how many wait for the next), nothing searched in the last 24 hours, one run at a time, 15 minutes between runs. A show, series or artist page uses the same verb for its own wanted items: "Find wanted episodes (7)".
+
 **Destructive dialog.** Title asks the question with the object: "Delete The Glass Harbour?". The body says what
 is removed, what is kept and how to get it back. The button names the action: "Delete book". Entering DELETE to confirm
 is only for permanent deletion.
