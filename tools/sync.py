@@ -63,8 +63,9 @@ if STARBOARD.exists():
         write(STARBOARD / "js/components.js", core_js)
         if not CHECK:
             (STARBOARD / "css/parts").mkdir(exist_ok=True)
-        for name in parts_js:
+        for name in parts_css:
             write(STARBOARD / "css/parts" / f"{name}.css", parts_css[name], new=True)
+        for name in parts_js:
             write(STARBOARD / "js/parts" / f"{name}.js", parts_js[name], new=True)
     else:
         write(STARBOARD / "css/components.css", components)
