@@ -746,6 +746,11 @@ and wider spacing.</p>
 <td>Help topics, guides and release notes shown in an app (<code>HELP-WRITING.md</code>)</td>
 </tr>
 <tr>
+<td>Counts and clock times</td>
+<td><code>SharedComponents.plural(n, one, many)</code> ("3 disks"; <code>many</code> is <code>one</code> and an s unless given; an array <code>[one, many]</code> works too; thousands separator), <code>SharedComponents.clock(date)</code> ("14:05"), <code>SharedComponents.num(n)</code></td>
+<td>One way to write a count and a time of day, so an app has no copy of its own</td>
+</tr>
+<tr>
 <td>Time ago</td>
 <td><code>&lt;time datetime&gt;</code> with <code>.visually-hidden</code> exact time</td>
 <td>"Updated 10 seconds ago" on screen, the exact time for screen readers</td>
