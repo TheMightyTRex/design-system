@@ -394,8 +394,8 @@ and wider spacing.</p>
 </tr>
 <tr>
 <td>Utilities</td>
-<td><code>.nowrap</code>, <code>.clamp-2</code>, <code>.clamp-3</code>, <code>.visually-hidden</code>, <code>.skip-link</code>, <code>.muted</code>, <code>.small</code>, <code>.numeric</code>, <code>code</code>, <code>.code-block</code>, <code>.stack-1</code>, <code>.stack-2</code>, <code>.stack-4</code></td>
-<td>Stacks put children one under another with a 4, 8 or 16px gap</td>
+<td><code>.nowrap</code>, <code>.clamp-2</code>, <code>.clamp-3</code>, <code>.visually-hidden</code>, <code>.skip-link</code>, <code>.muted</code>, <code>.small</code>, <code>.numeric</code>, <code>code</code>, <code>.code-block</code>, <code>.stack-1</code>, <code>.stack-2</code>, <code>.stack-3</code>, <code>.stack-4</code>, <code>.stack-5</code>, <code>.input--narrow</code></td>
+<td>Stacks put children one under another with a 4, 8, 12, 16 or 20px gap; <code>.input--narrow</code> is a field about seven characters wide, for a short value such as a number of copies to keep</td>
 </tr>
 </tbody>
 </table></div>
@@ -707,12 +707,12 @@ and wider spacing.</p>
 </tr>
 <tr>
 <td>Progress and meter</td>
-<td><code>.progress[data-tone]</code>, <code>.progress--busy</code>, <code>.progress--running</code>, <code>.meter</code>, <code>.meter__label</code>, <code>creepProgress()</code></td>
+<td><code>.progress[data-tone]</code>, <code>.progress--busy</code>, <code>.progress--running</code>, <code>.meter</code>, <code>.meter__label</code>, <code>creepProgress()</code>; <code>SharedComponents.progress({ label, value, max, tone, busy, valuetext, decorative, img, labelledby, id })</code> and <code>setProgress(bar, value, valuetext)</code></td>
 <td>Value always in words. Waiting standard (DASH-493, TheMightyTRexUK, 20 November 2026): a bar that is working is 14px with rounded ends and moving stripes. <code>.progress--busy</code>: the end is not known, a striped band runs along. <code>.progress--running</code>: a count that is still going (such as 4 of 5); it starts with a visible piece and <code>creepProgress(bar, done, total, eachMs)</code> eases onto each count and creeps towards the next. Taken off when it ends; still with less motion asked for</td>
 </tr>
 <tr>
 <td>Waiting mark and busy button</td>
-<td><code>.wait</code>, <code>.wait__mark</code>, <code>.btn[aria-busy="true"]</code></td>
+<td><code>.wait</code>, <code>.wait__mark</code>, <code>.btn[aria-busy="true"]</code>; <code>SharedComponents.wait(words, { status, id })</code> returns the line</td>
 <td>Waiting standard, option A, the ring: a short wait shows the ring with words, never a plain "Loading…". A busy button draws the ring before its doing word ("Testing"), keeps its size and has <code>aria-disabled</code>. After 0.3 seconds the place the answer goes shows its waiting state; the end replaces it with the result, and focus moves to an error. With less motion the ring fades instead of turning</td>
 </tr>
 <tr>
@@ -738,12 +738,17 @@ and wider spacing.</p>
 <tr>
 <td>Notice and callout</td>
 <td><code>.notice[data-tone]</code> (<code>success</code>, <code>warning</code>, <code>danger</code>, <code>muted</code>; none is info), <code>.notice__title</code>, <code>.notice__body</code></td>
-<td>Icon and words; <code>role="status"</code> or <code>role="alert"</code>. As a callout in long text, the title is the lead word: Before you begin (info), Limitation (warning), Warning (danger, cannot be undone), Tip (success), Example (muted)</td>
+<td>Icon and words; <code>role="status"</code> or <code>role="alert"</code>. A page that draws one in script calls <code>SharedComponents.notice(tone, title, text, { actions, after, icon, alert, id, tabindex, heading })</code>: one icon for each tone (<code>circle-check</code>, <code>info</code>, <code>triangle-alert</code>, <code>circle-alert</code>), <code>role="status"</code> unless <code>alert: true</code> (an error that blocks), no <code>data-tone</code> for info, and never a copy of it in the app. As a callout in long text, the title is the lead word: Before you begin (info), Limitation (warning), Warning (danger, cannot be undone), Tip (success), Example (muted)</td>
 </tr>
 <tr>
 <td>Prose</td>
 <td><code>.prose</code>, <code>.prose__lead</code>, <code>.prose__kind</code></td>
 <td>Help topics, guides and release notes shown in an app (<code>HELP-WRITING.md</code>)</td>
+</tr>
+<tr>
+<td>Counts and clock times</td>
+<td><code>SharedComponents.plural(n, one, many)</code> ("3 disks"; <code>many</code> is <code>one</code> and an s unless given; an array <code>[one, many]</code> works too; thousands separator), <code>SharedComponents.clock(date)</code> ("14:05"), <code>SharedComponents.num(n)</code></td>
+<td>One way to write a count and a time of day, so an app has no copy of its own</td>
 </tr>
 <tr>
 <td>Time ago</td>
