@@ -34,6 +34,7 @@ PARTS = [
     ("palettes", "foundations", "accent-colours", "Accent colours", "sliders-horizontal", "The accent colours and the rules they keep in every theme."),
     ("type", "foundations", "type-space-icons", "Type, space and icons", "layout-grid", "One typeface, the size and space scales and the icon sizes."),
     ("header", "components", "shell", "Shell", "app-window", "The header and menus, the phone menu, page head, footer, Display, banners, alerts and the command palette."),
+    ("menu-rows", "components", "menus-and-tabs", "Menus and tabs", "list", "How a 2nd level menu row condenses to icons with the current tab in full, with live examples and its accessibility."),
     ("buttons", "components", "actions", "Actions", "play", "Buttons and menu buttons."),
     ("fields", "components", "inputs", "Inputs", "pencil", "Fields, choices, filters, combobox, tag input, secret field, schedule and the error summary."),
     ("status", "components", "content", "Content", "file-text", "Status, tooltips, facts, charts, rows, tables, notices, toasts, callouts, disclosure and the log viewer."),
