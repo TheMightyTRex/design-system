@@ -295,6 +295,24 @@ Tones: **success** (all is well), **info** (something is happening or is on offe
 | Ends soon | Warning | Starts or ends within the hour |
 | Not published | Muted | A plug-in's own page that is not shown |
 
+### Library
+
+The Library (films, TV, music, radio, books and audiobooks) uses these nine words and no others for what you have and what you want. They are the same on every tab, in every chip, filter, count, row and button (owner decisions, 26 November 2026). "Missing" is never used for a thing you want: "File missing" is only for a file gone from a disk.
+
+| Word | Tone | Means | Replaces |
+|---|---|---|---|
+| In library | Success | The file is in your library | Have it, Has episodes, Complete |
+| Partly in library | Info | A set (a series, a collection, an artist) with some of its parts | Episodes not in library, Tracks not in library (as a state) |
+| Wanted | Neutral | Followed and released, not in your library yet. Reelix searches for it | Not in library, Missing, Episodes not in library, Tracks not in library |
+| Downloading | Info | A download app has it now | no change |
+| Below quality | Warning | In your library, but under the quality you chose. Reelix searches for a better one | The old label for this state |
+| Not followed | Muted | Reelix has it and does not search for it | Not wanted, Not requested |
+| Not added | Muted | A collection or series lists it, and Reelix does not have it | Not in your library (on a collection row) |
+| Not released | Muted | The release date is in the future | no change |
+| File missing | Danger | A file has gone from the disk | no change |
+
+"In your library" and "Not in your library" stay as places, not states: they say where a Search result comes from. The action for a wanted thing is **Find** (Find it, Find wanted episodes, Find all wanted) (the Library patterns say how).
+
 ### Disks, network and plug-ins
 
 | Word | Tone | Means |
