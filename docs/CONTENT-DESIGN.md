@@ -203,28 +203,6 @@ check, and only on a line a change adds. That part is not switched on yet.
 
 One word per thing, everywhere. If a page needs a new term, add it here first.
 
-### Storyarr
-
-| Use | Not | Meaning |
-|---|---|---|
-| book | title, work, item | One book, whatever its formats |
-| audiobook, ebook | audio book, e-book, eBook | The two formats. "Format" is the general word |
-| edition | version | A specific publication of a book (narrator, length, publisher) |
-| My library | Library (for the page), collection | The books you have |
-| follow, Following | watch, monitor, track | Keeping up with an author or series automatically |
-| series | saga, collection | A numbered run of books. Write "Book 3", not "#3" |
-| author | writer | |
-| narrator | reader, voice | |
-| request | order, grab | Asking Storyarr to get a book |
-| release | torrent, NZB, result | One downloadable file set found by a source |
-| source | indexer, provider, tracker | Where Storyarr searches (Prowlarr, MyAnonamouse, AudioBook Bay, archive.org) |
-| download client | downloader | qBittorrent, SABnzbd |
-| import | copy, move (as nouns) | Bringing a finished download into the library |
-| Activity | Queue (for the page) | Requests, downloads and review together |
-| Discover | Browse (for the page) | Finding new books |
-| Exclude, Excluded | ignore, hide, skip | A book a follow should not get |
-| Delete | remove (for files) | "Remove" is fine for taking something off a list |
-
 ### Starboard
 
 | Use | Not | Meaning |
@@ -236,35 +214,116 @@ One word per thing, everywhere. If a page needs a new term, add it here first.
 | backup | snapshot, archive | A saved copy of settings or of the server |
 | alert | notification, warning (as a noun) | A message Starboard sends when something needs attention |
 | update | upgrade (as a noun) | A newer version of an app or of Starboard |
+| plug-in | add-on, extension, module | Something added to Starboard that has its own settings, cards or pages |
+| media server | player, streamer | Jellyfin, Plex or Emby: the app that plays your library |
+| place (for backups) | target, destination, remote | A disk, a network share or a cloud service where backups go |
+| Check now | Refresh, Check again, Re-scan | The one name for asking an app, a disk or a service again. Same label before and after a first check |
+| library | collection (for the whole), catalogue | The films, shows, music, books and audiobooks you have |
+| wanted | missing, monitored | Something you asked for that is not here yet |
+| request | order, ticket | Something a person asked to have added |
 
-## 6. Status vocabulary (Storyarr)
+## 6. Status vocabulary (Starboard)
 
-Starboard's words, one word and one tone for each state, are in `COMPONENTS.md` section 6.
+One word and one tone for each state, in every page, chip, row, card and alert. The words come from one map in `common.js` (`STATUS`), plus the words a screen needs for its own kind of state, all listed here. Do not invent a synonym ("Online", "OK", "Offline", "Done" for Installed). A status chip is one to three words. Never a sentence. Never colour alone: every chip has its word and an icon, and the icon differs by tone (a tick, an information mark, a warning triangle, a cross, a dash, a clock).
 
-These are the only statuses. Every page, cover, row, chip, drawer and notification uses the same word, colour
-and icon. Do not invent synonyms ("Owned", "Available", "Done").
+Tones: **success** (all is well), **info** (something is happening or is on offer), **warning** (needs checking, nothing is broken), **danger** (broken or at risk), **muted** (off, not used, no state to report), **neutral** (waiting, no judgement).
 
-| Status | Meaning | Tone | Extra detail allowed |
-|---|---|---|---|
-| In library | The book is in your library | Success | Format: "In library · Audiobook" |
-| Downloading | A download client is fetching it | Info | Percentage: "Downloading 45%" |
-| Importing | The download finished and is being copied in | Info | |
-| Searching | A search is running now | Info | |
-| Waiting | No release yet; Storyarr searches again later | Neutral | Next search: "Waiting · 16:31" |
-| Not released | Publication date is in the future | Neutral | Date: "Not released · 3 Mar 2027" |
-| Needs attention | Storyarr is stuck and needs a decision | Warning | Short reason in the drawer, not the chip |
-| Wanted | Requested, nothing found or chosen yet | Neutral | |
-| Excluded | A follow will not get this book | Muted | Reason: "Excluded · Play" |
-| Not requested | Known, but nobody asked for it | Muted | |
+### Apps and services
 
-A status chip is one or two words plus its detail. Never a sentence. Never rely on colour alone: every
-chip has its text, and its icon where one exists.
+| Word | Tone | Means |
+|---|---|---|
+| Running | Success | The app answers |
+| Healthy | Success | The app and what it needs are fine |
+| Not responding | Danger | The app does not answer; the slide-out says since when |
+| Needs attention | Warning | Starboard found a problem the person can fix |
+| Not working | Danger | The app is up but cannot do its job |
+| Not checked | Muted | Starboard has not asked yet |
+| Not read yet | Warning | A reading that has not come back |
+| Active / Inactive | Success / Muted | A setting or a switch is on or off (never "Enabled") |
+| Stopped | Warning | The app was stopped on purpose |
+| Paused | Muted | Paused by a person; it resumes when they say |
+| Restart needed | Warning | A change needs the app to restart |
+| No container found | Muted | The app is listed but nothing runs for it |
+| Cannot start | Danger | Starboard tried and the app would not start |
+| Cannot check | Muted | The check cannot run here |
+| Check skipped | Warning | The check was left out, with the reason beside it |
+| Checking | Neutral | A check is running now |
+| Checked | Success | A check finished and found nothing wrong |
+| Check failed | Danger | The check itself broke |
+| Error | Danger | Something failed; the words under it say what |
 
-**Request outcomes** (Activity history only, never on a book): Pending (waiting for approval, Neutral),
-Declined (Muted), Withdrawn (Muted), Failed (Danger).
+### Updates and backups
 
-**Files, not books:** a library file that has gone from the disk is "File missing", never "Missing", so it is
-not confused with a book that is Wanted.
+| Word | Tone | Means |
+|---|---|---|
+| Update available | Info | A newer version exists (a plug-in row says Update) |
+| Up to date | Success | Nothing newer |
+| Updated | Success | The update finished |
+| Updating | Info | An update is running |
+| Check before updating | Warning | Read the release notes first |
+| Never updated | Warning | No update has ever run |
+| Held back | Muted | A person held this version back (Held is the short form inside a table) |
+| Went back | Warning | Starboard went back to the older version after a failure |
+| Updates by itself | Muted | The app updates itself, so Starboard leaves it |
+| Backing up | Info | A backup is running |
+| Done | Success | The job finished |
+| Failed | Danger | The job failed |
+| Failed last time | Warning | The last run failed; the next may be fine |
+| Not started | Warning | The job never started |
+| In progress | Info | A long job is running |
+| Sent | Success | A message or alert was sent |
+| Not accepted | Warning | The service refused what Starboard sent |
+
+### Downloads and the library
+
+| Word | Tone | Means |
+|---|---|---|
+| Waiting | Neutral | Queued; with the time when it is known |
+| Waiting to import | Neutral | Downloaded, not yet copied in |
+| Downloading | Info | A client is fetching it |
+| Downloaded | Success | The files are here |
+| Importing | Info | Being copied into the library |
+| In library | Success | It is in your library |
+| Not in library | Muted | It is known but not in your library |
+| Wanted | Neutral | Asked for; nothing found or chosen yet |
+| Waiting for a match | Muted | Starboard is still trying to match a name |
+| Matched / All matched | Success | A name was matched to the right item |
+| In Starboard | Success | A thing Starboard also lists itself |
+| Added already | Info | Already in the library, so it is not added again |
+| Direct play | Success | A media server plays the file as it is |
+| Converting | Warning | A media server has to convert it as it plays |
+| Ends soon | Warning | Starts or ends within the hour |
+| Not published | Muted | A plug-in's own page that is not shown |
+
+### Disks, network and plug-ins
+
+| Word | Tone | Means |
+|---|---|---|
+| Mounted / Not mounted | Success / Muted (Danger when it is needed) | The disk is, or is not, attached |
+| In use | Success | A disk or folder is used for something |
+| Not used yet | Muted | Available and unused |
+| Full | Danger | No room left |
+| Nearly full | Warning | Over the warning level |
+| Erases the disk | Danger | Tells the person before they choose it |
+| Resting | Warning | A disk is spun down; Starboard does not wake it to read it |
+| Windows file system: slower on Linux | Warning | A disk format that works but is slower |
+| Connected / Not connected | Success / Muted | A link to another service |
+| Reachable / Not reachable | Success / Danger | Starboard can or cannot reach an address |
+| Reachable from outside / Not reachable from outside | Success / Warning | An address works from the internet |
+| Checking from outside | Neutral | The outside check is running |
+| Certificate runs out soon | Warning | The address's certificate needs renewing |
+| Installed / Not added | Success / Muted | A plug-in or app is, or is not, on this server |
+| Needs you / Waits for you | Warning | A step only the person can do |
+| Suggested / Recommended | Info | Starboard offers it; it is not chosen |
+| Built-in choice / Always here | Muted | Part of Starboard, so it cannot be removed |
+| Read only | Neutral | Starboard can read but not change |
+| Needs Reelix / Jellyfin only / Plex or Emby | Muted (Warning when it is not here) | A plug-in's requirement (a tag, not a state) |
+
+**Rules.**
+- One state, one word: where the table gives a short form, use it only inside a table cell or a card too small for the long one.
+- A request outcome (Pending, Declined, Withdrawn, Failed) appears only in History. A library file that has gone from the disk is "File missing", never "Missing", so it is not mistaken for something Wanted.
+- A word that is not in this table goes in it first, with its tone, in the same change.
+- Never say "Online", "Offline", "OK", "Good" or "Bad". A status in a line of text, not a chip, still uses the same word.
 
 ## 7. Patterns
 
