@@ -241,6 +241,10 @@ still hold every component: the gallery, the boards and the help centre load the
 | `popover` | 2.2 KB | |
 | `alerts` | 2.0 KB | `popover` |
 | `command-palette` | 2.4 KB | `combobox` |
+| `extras` (styles only: split button, applied filters, timeline, shelf, the old help text) | 1.0 KB | |
+| `media-extras` (styles only: show art, item header) | 0.6 KB | |
+| `logo-picker` (styles only: choose, crop and save a logo) | 1.3 KB | |
+| `wizard-review` (styles only: what happens next, the decision tree, the summary) | 1.3 KB | |
 
 The core is everything else, 59 KB compressed where the whole is 77 KB. The page banner and the tooltip stay in
 the core, as any page can need them.
@@ -252,6 +256,8 @@ that folder the app gets the whole files, as before.
 On a page that uses a part, load its styles after `components.css`. Load its script after `components.js` and the
 parts it needs, and before the page's own scripts. `SharedComponents.setup()` then sets the part up with everything
 else. Its functions are on `SharedComponents` as before (`logView`, `showErrors`, `gauge` and so on).
+
+**Parts no page loads.** `extras`, `media-extras`, `logo-picker` and `wizard-review` are styles-only parts for components that no page of Starboard, its plug-ins, Stallboard or Snaglist uses (found by searching each class, 26 November 2026). The gallery and the help centre still load them. An app that wants one later loads `css/parts/<name>.css`. A part may be marked more than once: the pieces are put together in order.
 
 **Marking a part.** In `components.css`, inside `@layer shared`: `/* part: name */` before the part's rules and
 `/* /part */` after them, with the part's own Windows Contrast and less motion rules inside. In `components.js`:
