@@ -1,6 +1,6 @@
 # Writing text descriptions (alt text)
 
-Version 1.0, 4 November 2026. This guide says how to describe images in Storyarr, Starboard, their help and this
+Version 1.0, 4 November 2026. This guide says how to describe images in Starboard, Stallboard, their help and this
 design system. It follows the principles in the BBC's
 [How to write text descriptions (alt text)](https://www.bbc.co.uk/gel/how-to-write-text-descriptions-alt-text). Every
 word follows `CONTENT-DESIGN.md`.
@@ -73,13 +73,13 @@ reviews one.
 
 - Say the action, not the shape: "Play", not "Triangle"; "Close summary", not "Cross".
 - An icon-only button is named in `aria-label`, starting with any words it shows (`WCAG.md`, 2.5.3).
-- A logo that links home is named by where it goes: "Storyarr, My library".
+- A logo that links home is named by where it goes: "Starboard, Home".
 - A linked image with text in the same link needs no description of its own: `alt=""`.
 
 ## 6. Images of text
 
 - Avoid them: put words in the page as text (WCAG 1.4.5). Logos are the exception.
-- A logo is described by its name: "Storyarr". A wordmark that is real text needs nothing more.
+- A logo is described by its name: "Starboard". A wordmark that is real text needs nothing more.
 - A screenshot of a message or a page gives the words that matter. For example: "Screenshot of the sign-in page, with
   the message 'The password does not match. Try again.'"
 - Text that happens to be in a photo, such as a street sign, is left out unless it matters to the page.

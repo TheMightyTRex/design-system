@@ -40,6 +40,7 @@ PARTS = [
     ("media", "components", "media", "Covers, media and shelves", "film", "Covers and media cards, the A to Z list, load more, cover actions, series header and shelf."),
     ("toolbar", "components", "settings-and-tools", "Settings and toolbars", "settings", "The section toolbar, settings rows, the save bar, settings patterns, the folder picker, timeline and calendar."),
     ("slide-out", "components", "slide-outs-and-dialogs", "Slide-outs and dialogs", "panel-right-open", "The slide-out and the dialog."),
+    ("page-topics", "components", "app-patterns", "App patterns", "gauge", "Starboard's own patterns: page topics, the update list, places and service logos, the dashboard, show once, a wizard in a slide-out and folding sections."),
     ("which", "patterns", "choosing", "Choosing", "list-checks", "Slide-out, dialog or page, and which item to use."),
     ("wizard", "patterns", "wizard", "Wizard", "list-ordered", "Every job done in steps: the pieces, and signing in to a service."),
     ("terminal", "patterns", "terminal", "Terminal", "terminal", "How a wizard appears and behaves in a terminal."),
@@ -333,7 +334,8 @@ def guides(page_of):
     for g in dict.fromkeys(g for _, _, g in GUIDES):
         rows = "".join(f'<li class="row row--no-lead"><div><span class="row__title"><a href="{p}">{esc(t)}</a></span></div></li>'
                        for t, p, gg in pages_list if gg == g)
-        cards += f'<section class="stack-3" aria-labelledby="g-{abs(hash(g)) % 9999}"><h2 id="g-{abs(hash(g)) % 9999}">{esc(g)}</h2><ul class="rows">{rows}</ul></section>'
+        gid = "g-" + re.sub(r"[^a-z0-9]+", "-", g.lower()).strip("-")  # the same on every run, so a rebuild changes nothing
+        cards += f'<section class="stack-3" aria-labelledby="{gid}"><h2 id="{gid}">{esc(g)}</h2><ul class="rows">{rows}</ul></section>'
     body = (crumbs([("Home", "../index.html"), ("Guides", None)]) +
             f'<div class="s-landing"><div class="page-head"><div class="page-head__text"><h1>Guides</h1><p class="page-head__summary">The written rules: how to build, write and test. Each guide is one page.</p></div></div>{cards}</div>' +
             pager(None, (ordered[0][0], ordered[0][1])))
@@ -362,7 +364,7 @@ def landings(by_start):
              ("Components", "components/index.html", "Every component, live, with its markup and rules."),
              ("Patterns", "patterns/index.html", "Choosing, the wizard, the terminal, help and dates."),
              ("Guides", "guides/index.html", "Content design, help writing, accessibility, security and more, one page each."),
-             ("Boards", "areas/index.html", "Whole pages of Starboard (and the retired Storyarr), built from the library."),
+             ("Boards", "areas/index.html", "Whole pages of Starboard, built from the library, and an archive of the retired Storyarr's boards."),
              ("Resources", "resources/index.html", "Tools, outside tools, how to make a change and how to get feedback.")]
     cards = "".join(f'<li class="card"><h2 class="card__title"><a href="{h}">{t}</a></h2><p>{s}</p></li>' for t, h, s in tiles)
     body = (f'<div class="s-landing"><div class="page-head"><div class="page-head__text"><h1>TRex design system</h1>'

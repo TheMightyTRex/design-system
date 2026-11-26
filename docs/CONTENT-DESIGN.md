@@ -1,6 +1,6 @@
 # Content design guide
 
-Version 1.6, 26 November 2026. How every word in Storyarr and Starboard is written: page titles, menus,
+Version 1.6, 26 November 2026. How every word in Starboard, its plug-ins and Stallboard is written: page titles, menus,
 buttons, settings, messages, release notes, help and the README. It applies to new text and to anything you
 touch. Help articles also follow `HELP-WRITING.md`; changelogs also follow `CHANGELOGS.md`.
 
@@ -18,14 +18,14 @@ than added at the end. It has four layers:
 
 | Layer | What it covers | Where |
 |---|---|---|
-| Voice | How both apps sound | Section 1 |
+| Voice | How every app sound | Section 1 |
 | Rules | Plain English, word choices, punctuation, links and statuses | Sections 2 to 6 |
 | Patterns | Ready-made words for common moments | Section 7 |
 | Checks | Accessibility in content, and the checklist | Sections 8 and 9 |
 
 ### Who it is for
 
-Anyone who puts words in front of the people who use Storyarr or Starboard: developers writing a button or
+Anyone who puts words in front of the people who use Starboard or Stallboard: developers writing a button or
 an error, designers making a board, people writing help or release notes, and AI assistants doing any of
 these. It is public, so you may also use it in your own projects under the guide licence (CC BY 4.0).
 
@@ -57,9 +57,8 @@ To get an AI assistant to write instructions, and to check what it writes, follo
 
 ## 1. Voice and tone
 
-Both apps are calm and capable. Storyarr is a librarian: it tells you what is happening with your books,
-what it is doing about it, and what you can do next. Starboard manages the server in the same way: what
-is running, what needs attention, and what to do about it.
+Every app is calm and capable. Starboard cares for the server like a good caretaker: it tells you what is
+running, what needs attention, what it is doing about it, and what you can do next.
 
 | Always | Never |
 |---|---|
@@ -82,7 +81,7 @@ This includes headings: "What is new", not "What's new".
 favourite, behaviour, travelled, enquiry, programme.
 
 2.4 **Rule: sentence case everywhere,** including menus, tabs, chips, buttons, headings and page titles:
-"My library", "Add missing books", "Install apps". Product and service names keep their capitals: Storyarr,
+"Manage apps", "Add missing books", "Install apps". Product and service names keep their capitals:
 Starboard, Audiobookshelf, Jellyfin, Docker, Hardcover, Prowlarr, qBittorrent, SABnzbd, MyAnonamouse, Audible.
 
 2.5 **Rule: "select", not "click" or "tap".** "Select Save." For navigation: "Go to Settings, then Sources."
@@ -100,7 +99,7 @@ user.
 
 2.9 **Rule: "activate" and "deactivate".** "Activate **Upgrade automatically**", "Deactivate alerts". A
 setting's state is "active" or "inactive". Never "enable", "disable", "turn on", "turn off" or "toggle".
-State the result: "Active: Storyarr backs up your settings and keeps the defaults."
+State the result: "Active: Starboard backs up your settings and keeps the defaults."
 
 2.10 **Rule: no exclamation marks and no emoji.**
 
@@ -113,7 +112,7 @@ type. If a label breaks a rule, fix the label in the app rather than misquoting 
 longer than 25. Paragraphs have two to four sentences. Use the active voice and the present tense, and name who
 does the action: "Starboard keeps the file", not "The file is kept". Address the reader as "you". The
 organisation behind the app may say "we" ("We could not reach Hardcover", "We update the list each week"), and
-the app may also name itself ("Storyarr searches again in 6 hours"). Use one of the two in a given text, not
+the app may also name itself ("Starboard searches again in 6 hours"). Use one of the two in a given text, not
 both. A passive is allowed when the doer is unknown or does not matter. Aim for about 80 to 90% active. The
 standard is the Plain English Campaign (plainenglish.co.uk); this guide applies it and never copies its text.
 
@@ -147,7 +146,7 @@ cannot. Never describe the reader by what they cannot do. Nothing said twice in 
 screen readers and for search.
 
 2.21 **Rule: never point at our own gaps.** No apology for a missing help topic, an old screenshot or a
-feature that is not built yet. Name a limitation as a fact: "Storyarr does not import ebooks from Calibre."
+feature that is not built yet. Name a limitation as a fact: "Starboard does not import ebooks from Calibre."
 
 2.22 **Rule: no promises about timing.** Do not say when something will arrive, and do not mention plans.
 
@@ -230,7 +229,7 @@ One word per thing, everywhere. If a page needs a new term, add it here first.
 
 | Use | Not | Meaning |
 |---|---|---|
-| app | container, service (for an app with a page) | Something Starboard installs, opens and watches: Jellyfin, Sonarr, Storyarr |
+| app | container, service (for an app with a page) | Something Starboard installs, opens and watches: Jellyfin, Sonarr, Reelix |
 | background service | daemon, container | A service with no page of its own |
 | server | box, machine, host | The computer Starboard runs on |
 | disk | drive, HDD, volume | One physical disk. "Storage" is all of them together |
@@ -272,11 +271,11 @@ not confused with a book that is Wanted.
 Use the pattern, then adapt the words. Do not invent a new layout.
 
 **Page title and heading.** One main heading (h1) per page, matching the menu item and the browser tab:
-"Activity", tab "Activity · Storyarr". Headings go h1, h2, h3 in order without skipping.
+"Updates", tab "Updates · Starboard". Headings go h1, h2, h3 in order without skipping.
 
 **Empty state.** Heading names what will appear, one sentence says how it gets there, one button starts it.
 - Heading: "No followed authors yet"
-- Body: "Follow an author and Storyarr gets each new book as it comes out."
+- Body: "Add an author and Starboard gets each new book as it comes out."
 - Button: "Find an author"
 Never "No data", "Nothing here" or "This page is empty".
 
@@ -307,7 +306,7 @@ step: "Undo" or "Open Activity". No celebration for routine actions.
 is removed, what is kept and how to get it back. The button names the action: "Delete book". Entering DELETE to confirm
 is only for permanent deletion.
 
-**Setting.** Label in sentence case, then one line saying what changes: "Upgrade automatically. Storyarr
+**Setting.** Label in sentence case, then one line saying what changes: "Upgrade automatically. Starboard
 backs up your settings and keeps the defaults for anything new." Defaults are stated when they matter.
 
 **Help text and tooltips.** One sentence. Not a duplicate of the label.
