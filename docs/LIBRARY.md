@@ -465,3 +465,22 @@ Still in Starboard only, and why:
 
 - 11 November 2026: `--font-heading` (headings h1 to h4) and `--color-rail` (the side menu) are optional, for Starboard's styles. Unset, nothing changes.
 - 26 November 2026, defined: `--radius-sm`, `--radius-md`, `--font-mono`, `--color-success-text`, `--color-danger-text`, `.stack-3`, `.stack-5`, `.input--narrow`, `.select--compact`, `.field__error` (the same as `.field-error`) and `.btn--secondary` (drawn the same as `.btn`) are defined. The apps used them with no definition, so each took a fallback or nothing (audit of 26 November 2026).
+
+
+## Menu rows: condensing and accessibility
+
+Live examples in every case, with a width control (320, 375, 430, 768), are on the gallery page Components, Menus and tabs. The rules, in plain words:
+
+- **When it condenses.** A 2nd level row (`.site-header__tabs .menu-tabs`) is measured with its names showing by `SharedComponents.fitHeader` (one ResizeObserver). If it is too wide it shows icons only (`.is-compact`). Large text, wider spacing and translations are handled because nothing is decided from the screen width.
+- **What stays.** Every tab 44px wide. The current tab and the tab with focus keep their name. The other tabs have `data-tooltip` (hover and focus). The current tab is scrolled into view when the row changes size. If icons only still does not fit the row scrolls, with a fade (`.can-scroll-start`, `.can-scroll-end`) on the edge that has more.
+- **How many.** 6 or 7 tabs is the guide. 9 tabs always scroll on a phone. Join pages with in-page links before you add tabs. More than about 14: use a labelled `.select` at phone width.
+- **Do.** Short noun names in sentence case. A text name on every tab. The same order everywhere. Icons that stand for the thing.
+- **Do not.** Two tabs with the same icon or name in one row. Hide the name of the current tab. Use colour or an icon alone for the current tab. Use this row for panels inside a page (that is `.tabs`). Change the 1st level row or the side menu this way: they are not condensed like this.
+
+### Accessibility of menu rows
+
+- **Semantics.** A `nav` with an accessible name, links, and `aria-current="page"` on the current one. Not `role="tablist"`: each item is a link to a page (WAI-ARIA Authoring Practices, Tabs; WCAG 1.3.1, 4.1.2). The icon is `aria-hidden`; the name is always text in the page, clipped when only the icon shows (2.5.3).
+- **Keyboard.** Tab reaches every link (2.1.1, 2.4.3). Left, Right, Home and End move between links. Enter opens. The focus ring is 3px at 3:1 (2.4.7, 1.4.11), the focused tab shows its name, is scrolled clear of the fade, and is not hidden by a sticky header (2.4.11). Focus stays on the link when the row condenses, because only classes change. No trap.
+- **Touch, zoom, colour, motion.** 44px targets (2.5.8). No hover-only information. 175% text, wider spacing, 400% zoom and 320px: the row scrolls and keeps the current tab in view (1.4.4, 1.4.10, 1.4.12). Forced colours: `Highlight` bar and outline. The scroll into view is a jump, not an animation.
+- **Announcements.** Run: the browser accessibility tree (role, name, current page, landmark) in Chromium. Expected, not run: NVDA, JAWS, VoiceOver and TalkBack say the landmark name, then "General, link, current page".
+- **Tests.** axe in Light, Dark, High contrast and High contrast dark, at 100% and 175% text (clean on the gallery page, 26 November 2026); Tab and arrow walk on a row of 9; minimum tab size at 320, 375, 430 and 768px; first, middle and last current. Not covered: a full pass with each screen reader.

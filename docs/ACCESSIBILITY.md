@@ -91,6 +91,8 @@ separate low-vision font switch.
 
 ## 3. Components and their accessibility contract
 
+Menu rows (the 2nd level tabs that condense to icons): see [Menu rows: condensing and accessibility](LIBRARY.md#menu-rows-condensing-and-accessibility) and the gallery page Components, Menus and tabs.
+
 | Component | Contract |
 |---|---|
 | Status chip | Text always present; icon `aria-hidden`; colour from the status tone tokens |
