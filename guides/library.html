@@ -750,7 +750,7 @@ and wider spacing.</p>
 <tr>
 <td>Notice and callout</td>
 <td><code>.notice[data-tone]</code> (<code>success</code>, <code>warning</code>, <code>danger</code>, <code>muted</code>; none is info), <code>.notice__title</code>, <code>.notice__body</code></td>
-<td>Icon and words; <code>role="status"</code> or <code>role="alert"</code>. As a callout in long text, the title is the lead word: Before you begin (info), Limitation (warning), Warning (danger, cannot be undone), Tip (success), Example (muted)</td>
+<td>Icon and words; <code>role="status"</code> or <code>role="alert"</code>. A page that draws one in script calls <code>SharedComponents.notice(tone, title, text, { actions, after, icon, alert, id, tabindex, heading })</code>: one icon for each tone (<code>circle-check</code>, <code>info</code>, <code>triangle-alert</code>, <code>circle-alert</code>), <code>role="status"</code> unless <code>alert: true</code> (an error that blocks), no <code>data-tone</code> for info, and never a copy of it in the app. As a callout in long text, the title is the lead word: Before you begin (info), Limitation (warning), Warning (danger, cannot be undone), Tip (success), Example (muted)</td>
 </tr>
 <tr>
 <td>Prose</td>

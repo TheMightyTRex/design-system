@@ -9,6 +9,7 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 26 November 2026
 
+- **A notice builder (Starboard patterns audit):** `SharedComponents.notice(tone, title, text, options)` draws a `.notice` with one icon for each tone and `role="status"` unless the error blocks. Starboard had ten copies of it with nine different bodies.
 - **Four more styles-only parts (Starboard patterns audit):** the styles of components that no page of Starboard, its plug-ins, Stallboard or Snaglist uses (split button, applied filters, timeline, shelf, the logo picker, the wizard review aids and more, 591 lines) are the parts `extras`, `media-extras`, `logo-picker` and `wizard-review`. An app with a parts folder no longer loads them. The gallery and the help centre load them as before. `tools/parts.py` accepts a part that is marked in more than one place.
 - **A 2nd level menu can scroll with a 44px tab for each icon.** `.menu-tabs--scroll` keeps every icons-only tab 44px wide and shows the name of the current tab and the tab with focus, `components.js` gives icons-only tabs their name as a tooltip, and `icons.svg` has two new icons, `image` and `palette`.
 - **Demos no longer stick over the site's header.** The topic tabs, the A to Z list, the save bar and table heads stick under the app's header in the apps, but inside a component page's demo they now stay still; `tools/check_demos.mjs` checks every page at 375, 800 and 1280 px in four themes for sticky or fixed parts and overlaps.
