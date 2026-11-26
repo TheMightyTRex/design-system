@@ -340,6 +340,7 @@
   }
   /* When the names do not fit, icons only; the names stay as tooltips and for screen readers. */
   .menu-tabs.is-compact a {
+    flex: none;
     min-width: var(--control-h);
     justify-content: center;
     padding: 0 var(--space-3);
