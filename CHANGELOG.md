@@ -9,6 +9,10 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 26 November 2026
 
+- **A Tokens page, made from `tokens.css`.** It lists every token with its value in Light, Dark, High contrast and High contrast dark, so it cannot drift from the file.
+- **`docs/COMPONENTS.md` describes Starboard as it is.** It keeps the components by area and replaces the old Storyarr inventory with a table of Starboard's screens and the library parts each uses.
+- **One table of status words.** `docs/CONTENT-DESIGN.md` section 6 now lists the 100 or so chip words Starboard uses, with tone and meaning, in place of Storyarr's ten, and section 5 has the new terms (plug-in, media server, place, Check now).
+- **`docs/WIZARD.md` has a section for a wizard in a slide-out.** `docs/LIBRARY.md` documents the 17 `SharedComponents` functions that had no entry.
 - **Storyarr's boards are archived.** The 19 boards, their generator and their index page moved to `areas/archive/storyarr/`, and each old address under `areas/` is now a small page that sends visitors there.
 - **Storyarr is no longer synced or named as a live app.** `tools/sync.py` and `tools/paths.py` drop it, the guides, README and gallery examples now speak of Starboard, its plug-ins and Stallboard, and `docs/SECURITY-CHECKS.md` has no Storyarr column.
 - **`tools/sync.py` also copies the library into Stallboard and the two plug-ins that keep their own copy.** It covers `tv-station/ds-tokens.css` and `outside-services/ds.css`, and `--check` now exits with 1 when a copy differs.

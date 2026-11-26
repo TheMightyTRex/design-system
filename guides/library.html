@@ -256,7 +256,7 @@
   </nav>
 </div>
 <div class="s-shell">
-<nav class="s-nav" aria-labelledby="s-nav-h"><h2 id="s-nav-h">Guides</h2><ol class="s-nav-pages"><li><a href="index.html">All guides</a></li><li class="s-group">Design</li><li><a href="design-system.html">Design system</a></li><li><a href="library.html" aria-current="page">Component library</a></li><li><a href="components.html">Components by area</a></li><li class="s-group">Patterns</li><li><a href="wizard.html">Wizard</a></li><li><a href="terminal.html">Terminal</a></li><li class="s-group">Words</li><li><a href="content-design.html">Content design</a></li><li><a href="help-writing.html">Help writing</a></li><li><a href="changelogs.html">Changelogs</a></li><li><a href="alt-text.html">Alt text</a></li><li><a href="screenshots.html">Screenshots</a></li><li class="s-group">Accessibility and security</li><li><a href="accessibility.html">Accessibility</a></li><li><a href="wcag.html">WCAG 2.2 AA</a></li><li><a href="security-checks.html">Security checks</a></li></ol><h2 id="s-own-h">On this page</h2><ol><li><a href="#files">Files</a></li><li><a href="#principles">Principles</a></li><li><a href="#menu-names">Menu names</a></li><li><a href="#components">Components</a></li><li><a href="#parts-22-november-2026">Parts (22 November 2026)</a></li><li><a href="#slide-out-dialog-or-page">Slide-out, dialog or page</a></li><li><a href="#adopting-the-library">Adopting the library</a></li><li><a href="#help-centre-7-november-2026-the-standard-since-14-november-2026">Help centre (7 November 2026; the standard since 14 November 2026)</a></li><li><a href="#app-only-patterns-updated-26-november-2026">App-only patterns (updated 26 November 2026)</a></li></ol></nav>
+<nav class="s-nav" aria-labelledby="s-nav-h"><h2 id="s-nav-h">Guides</h2><ol class="s-nav-pages"><li><a href="index.html">All guides</a></li><li class="s-group">Design</li><li><a href="design-system.html">Design system</a></li><li><a href="library.html" aria-current="page">Component library</a></li><li><a href="components.html">Components by area</a></li><li class="s-group">Patterns</li><li><a href="wizard.html">Wizard</a></li><li><a href="terminal.html">Terminal</a></li><li class="s-group">Words</li><li><a href="content-design.html">Content design</a></li><li><a href="help-writing.html">Help writing</a></li><li><a href="changelogs.html">Changelogs</a></li><li><a href="alt-text.html">Alt text</a></li><li><a href="screenshots.html">Screenshots</a></li><li class="s-group">Accessibility and security</li><li><a href="accessibility.html">Accessibility</a></li><li><a href="wcag.html">WCAG 2.2 AA</a></li><li><a href="security-checks.html">Security checks</a></li></ol><h2 id="s-own-h">On this page</h2><ol><li><a href="#files">Files</a></li><li><a href="#principles">Principles</a></li><li><a href="#menu-names">Menu names</a></li><li><a href="#components">Components</a></li><li><a href="#javascript-sharedcomponents-26-november-2026">JavaScript: SharedComponents (26 November 2026)</a></li><li><a href="#parts-22-november-2026">Parts (22 November 2026)</a></li><li><a href="#slide-out-dialog-or-page">Slide-out, dialog or page</a></li><li><a href="#adopting-the-library">Adopting the library</a></li><li><a href="#help-centre-7-november-2026-the-standard-since-14-november-2026">Help centre (7 November 2026; the standard since 14 November 2026)</a></li><li><a href="#app-only-patterns-updated-26-november-2026">App-only patterns (updated 26 November 2026)</a></li></ol></nav>
 <main class="s-main" id="main" tabindex="-1">
 <nav class="breadcrumbs s-crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="index.html">Guides</a></li><li aria-current="page">Component library</li></ol></nav><div class="s-doc"><div class="page-head"><div class="page-head__text"><h1>TRex Design System: the component library</h1><p class="page-head__summary">Design guide. <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/LIBRARY.md">Edit this guide on GitHub</a>.</p></div></div><div class="prose">
 
@@ -994,11 +994,79 @@ and wider spacing.</p>
 </tr>
 </tbody>
 </table></div>
+<h2 id="javascript-sharedcomponents-26-november-2026">JavaScript: SharedComponents (26 November 2026)</h2>
+<p><code>components.js</code> puts <code>window.SharedComponents</code> on the page. An app that wires its own behaviour loads the file with <code>data-manual</code> and calls what it needs. Functions that the component rows already name (<code>toast</code>, <code>pageBanner</code>, <code>showErrors</code>, <code>combobox</code> and the rest) are not repeated here.</p>
+<div class="s-scroll" tabindex="0" role="region" aria-label="Table 8"><table>
+<thead>
+<tr>
+<th>Function</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>setup(root)</code></td>
+<td>Wires every component under <code>root</code> (the page by default). Runs by itself unless the file has <code>data-manual</code></td>
+</tr>
+<tr>
+<td><code>applyTheme(value)</code></td>
+<td>Sets the theme on <code>&lt;html&gt;</code>: <code>light</code>, <code>dark</code>, or <code>system</code> to follow the device</td>
+</tr>
+<tr>
+<td><code>motionStill()</code></td>
+<td>True when the person asked for less movement (Reduce motion On, or Match device and the device asks). Every movement asks this, never the media query alone</td>
+</tr>
+<tr>
+<td><code>setupHeaderFit(root)</code>, <code>fitHeader(header)</code></td>
+<td>Fold the header's search, compact its actions and then crowd its menu, one step at a time, as the window, text size or a name changes. One resize observer, no timers</td>
+</tr>
+<tr>
+<td><code>setupSearchIcons(root)</code></td>
+<td>Adds the Search button inside every <code>input[type="search"]</code>, now and for any added later</td>
+</tr>
+<tr>
+<td><code>setupSortables(root)</code></td>
+<td>Wires <code>.sortable</code> lists: Move up and Move down buttons (<code>data-move</code>) and focus that stays on the button that moved</td>
+</tr>
+<tr>
+<td><code>setupTooltips()</code></td>
+<td>Shows <code>data-tooltip</code> text on hover and focus; Escape closes it, and it never covers what has focus</td>
+</tr>
+<tr>
+<td><code>setupSideTrees(root)</code>, <code>setupSolvers(root)</code>, <code>setupSearch(root)</code></td>
+<td>The help centre side tree, the problem solver and the search box</td>
+</tr>
+<tr>
+<td><code>creepProgress(bar, done, total, eachMs)</code></td>
+<td>Eases a progress bar onto the count and creeps towards the next one, never past 90%; only steps with less motion</td>
+</tr>
+<tr>
+<td><code>openLayer(idOrElement, opener, onClose)</code></td>
+<td>Opens a slide-out or dialog and returns its close function</td>
+</tr>
+<tr>
+<td><code>savedNote</code>, <code>copyText</code>, <code>say(text, urgent)</code></td>
+<td>The saved note, copy to the clipboard, and a message in the shared polite region (the alert region when urgent). Never put a secret in it</td>
+</tr>
+<tr>
+<td><code>azLetter</code>, <code>azJump</code>, <code>azGo</code>, <code>loadMore</code></td>
+<td>The A to Z list and load more</td>
+</tr>
+<tr>
+<td><code>addSetup(run, first)</code></td>
+<td>A part adds its own set-up here; <code>setup()</code> runs it with the rest</td>
+</tr>
+<tr>
+<td><code>kit</code></td>
+<td>What a part may use: <code>focusable</code> (the selector for focusable elements), <code>announcer(id, role)</code> (a hidden live region), <code>toast</code>, <code>copyText</code>, <code>sprite(name)</code>, <code>escapeHtml(text)</code> (words made safe to put in HTML), <code>num(n)</code> (a number in British format), <code>fold(text)</code> (lower case without accents, to match search), <code>andList(list)</code> ("a, b and c"), <code>say</code>, <code>ownStatus(box)</code> (a part's own polite region, inside it, so a modal dialog still announces it)</td>
+</tr>
+</tbody>
+</table></div>
 <h2 id="parts-22-november-2026">Parts (22 November 2026)</h2>
 <p>Some components are large and few pages use them. They are marked as parts in the two source files. An app that counts
 every byte can then load them only where they are used (Starboard, lightweight first, DASH-507). The source files
 still hold every component: the gallery, the boards and the help centre load them whole, and so can any app.</p>
-<div class="s-scroll" tabindex="0" role="region" aria-label="Table 8"><table>
+<div class="s-scroll" tabindex="0" role="region" aria-label="Table 9"><table>
 <thead>
 <tr>
 <th>Part</th>
@@ -1087,7 +1155,7 @@ helpers in <code>SharedComponents.kit</code> and what it needs.</p>
 lists the sizes. Run it after any change to a part. A component belongs in the core when any page may need it without
 warning. It belongs in a part when it is large and a page knows it will use it.</p>
 <h2 id="slide-out-dialog-or-page">Slide-out, dialog or page</h2>
-<div class="s-scroll" tabindex="0" role="region" aria-label="Table 9"><table>
+<div class="s-scroll" tabindex="0" role="region" aria-label="Table 10"><table>
 <thead>
 <tr>
 <th>Use</th>
@@ -1234,7 +1302,7 @@ help centre uses the standard the owner chose (Starboard DASH-436):
 <p><code>docs/HELP-WRITING.md</code> section 11 is the full standard, with the flow chart format and the shape of
 <code>help-centre.json</code>.</p>
 <p><strong>Components</strong> (in <code>components.css</code> and <code>components.js</code>, shown in the gallery under Help centre):</p>
-<div class="s-scroll" tabindex="0" role="region" aria-label="Table 10"><table>
+<div class="s-scroll" tabindex="0" role="region" aria-label="Table 11"><table>
 <thead>
 <tr>
 <th>Component</th>

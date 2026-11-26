@@ -198,6 +198,27 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 | Dialog | `.dialog` (`<dialog>`), `.dialog__body`, `.dialog__foot`, `.dialog--scroll`, `data-close-outside` | Decisions and short tasks only. `.dialog--scroll`: only the body scrolls, the header and foot stay in view. `data-close-outside`: a press outside closes it (help only, never a dialog with fields) |
 | Tabs | `.tabs` (`data-activation="manual"`), `.tabs__list` (`role="tablist"`, named), `.tabs__tab` (`role="tab"`, `aria-selected`, `aria-controls`, a `.count` allowed), `.tabs__panel` (`role="tabpanel"`, `aria-labelledby`, `tabindex="0"`); `SharedComponents.setupTabs(root)`; `tabs-change` event | Real tabs for the parts of one item's page, as `DESIGN-SYSTEM.md` section 5 asks (20 November 2026). One Tab stop; Left and Right move round, Home and End go to the ends; a tab is chosen as focus reaches it, or by Enter or Space with manual activation. A link to a panel's id opens it. Without script every panel shows. Moving between pages is the level 2 menu, never tabs. `.logo-tabs` can move to these |
 
+## JavaScript: SharedComponents (26 November 2026)
+
+`components.js` puts `window.SharedComponents` on the page. An app that wires its own behaviour loads the file with `data-manual` and calls what it needs. Functions that the component rows already name (`toast`, `pageBanner`, `showErrors`, `combobox` and the rest) are not repeated here.
+
+| Function | What it does |
+|---|---|
+| `setup(root)` | Wires every component under `root` (the page by default). Runs by itself unless the file has `data-manual` |
+| `applyTheme(value)` | Sets the theme on `<html>`: `light`, `dark`, or `system` to follow the device |
+| `motionStill()` | True when the person asked for less movement (Reduce motion On, or Match device and the device asks). Every movement asks this, never the media query alone |
+| `setupHeaderFit(root)`, `fitHeader(header)` | Fold the header's search, compact its actions and then crowd its menu, one step at a time, as the window, text size or a name changes. One resize observer, no timers |
+| `setupSearchIcons(root)` | Adds the Search button inside every `input[type="search"]`, now and for any added later |
+| `setupSortables(root)` | Wires `.sortable` lists: Move up and Move down buttons (`data-move`) and focus that stays on the button that moved |
+| `setupTooltips()` | Shows `data-tooltip` text on hover and focus; Escape closes it, and it never covers what has focus |
+| `setupSideTrees(root)`, `setupSolvers(root)`, `setupSearch(root)` | The help centre side tree, the problem solver and the search box |
+| `creepProgress(bar, done, total, eachMs)` | Eases a progress bar onto the count and creeps towards the next one, never past 90%; only steps with less motion |
+| `openLayer(idOrElement, opener, onClose)` | Opens a slide-out or dialog and returns its close function |
+| `savedNote`, `copyText`, `say(text, urgent)` | The saved note, copy to the clipboard, and a message in the shared polite region (the alert region when urgent). Never put a secret in it |
+| `azLetter`, `azJump`, `azGo`, `loadMore` | The A to Z list and load more |
+| `addSetup(run, first)` | A part adds its own set-up here; `setup()` runs it with the rest |
+| `kit` | What a part may use: `focusable` (the selector for focusable elements), `announcer(id, role)` (a hidden live region), `toast`, `copyText`, `sprite(name)`, `escapeHtml(text)` (words made safe to put in HTML), `num(n)` (a number in British format), `fold(text)` (lower case without accents, to match search), `andList(list)` ("a, b and c"), `say`, `ownStatus(box)` (a part's own polite region, inside it, so a modal dialog still announces it) |
+
 ## Parts (22 November 2026)
 
 Some components are large and few pages use them. They are marked as parts in the two source files. An app that counts
