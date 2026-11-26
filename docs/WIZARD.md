@@ -96,7 +96,7 @@ wizard (`TERMINAL.md`).
 
 - `.wizard__foot`: Continue (primary) first, then Back, then Skip this step on the right.
 - Continue names the next thing when that helps ("Continue to Usenet"). The last step's button says what
-  it does ("Open Storyarr", "Go to the dashboard").
+  it does ("Open Starboard", "Go to the dashboard").
 - Back returns to the step before, including the part before in a step in parts. Nothing is lost by going
   back.
 - Continue saves the answer. Nothing is lost silently.

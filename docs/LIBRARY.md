@@ -1,6 +1,6 @@
 # TRex Design System: the component library
 
-Version 1, 2 November 2026. One component library for both apps, so they share one design and one behaviour.
+Version 1, 2 November 2026. One component library for every app, so they share one design and one behaviour.
 It follows `DESIGN-SYSTEM.md` and the guides in this folder (`CONTENT-DESIGN.md`, `HELP-WRITING.md` and `ACCESSIBILITY.md`).
 File names in the tables in this guide are relative to the root of the repository.
 
@@ -23,15 +23,16 @@ Slide-outs, menus, the phone menu and the dialog all work in the gallery.
 | `gallery.src.html` | The source of the component pages in `components/`, `foundations/` and `patterns/` (edit it, then run `python3 tools/site.py`) |
 | `contrast-report.txt` | Made by `tools/contrast.py` (not committed): measured contrast for every text and control pair in all four themes; all pass WCAG 2.2 AA |
 | `accent-report.txt` | Made by `tools/check_accents.py --report accent-report.txt`: every token pair the components draw, for every accent colour, in all four themes, including the menu hover fill and its edge; all pass WCAG 2.2 AA |
-| `areas/` | Design boards for every area of both apps, using the library, with slide-outs where they fit |
-| `tools/build.py` | Turns `{{i:name}}` into icons and `<!--ICONS-->` into the sprite for any `*.src.html` |
-| `tools/icons.py` | Rebuilds `icons.svg` from Lucide in Storyarr's `node_modules` |
-| `tools/sync.py`, `tools/paths.py` | Copies the library into both apps; `paths.py` says where the apps are (`tools/paths.local.json`, not committed) |
+| `areas/` | Design boards for Starboard's screens, using the library, with slide-outs where they fit |
+| `tools/build.py` | Turns an icon name written in double braces, as in i, a colon and the name, into the icon, and `<!--ICONS-->` into the sprite for any `*.src.html` |
+| `tools/icons.py` | Rebuilds `icons.svg` from Lucide (the `lucide-react` package; set its folder in `tools/paths.local.json`) |
+| `service-logos.svg` | The brand logos for places (Google Drive, OneDrive, Dropbox, Backblaze B2, Amazon S3, WebDAV): artwork from simpleicons.org, CC0; each stays its owner's trademark, shown to identify that service only |
+| `tools/sync.py`, `tools/paths.py` | Copies the library into Starboard, Stallboard and the two plug-ins that carry a copy; `paths.py` says where the apps are (`tools/paths.local.json`, not committed) |
 
 ## Principles
 
-1. **One design, two apps.** Same tokens, same classes, same behaviour. An app may add its own components
-   (charts on Starboard, the bookshelf on Storyarr) but builds them from the tokens.
+1. **One design for every app.** Same tokens, same classes, same behaviour. An app may add its own components
+   (the charts on Starboard) but builds them from the tokens.
 2. **Accessible is the baseline.** WCAG 2.2 AA in every theme. Controls and targets are 44px, and the focus ring is a
    visible 3px. Status is always in words plus a shape or icon, never colour alone.
 
@@ -47,7 +48,7 @@ Slide-outs, menus, the phone menu and the dialog all work in the gallery.
 
 Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Menu"):
 
-- **Side menu:** the icon rail on the left, in both apps: the logo with the app's name underneath, Search,
+- **Side menu:** the icon rail on the left, in every app: the logo with the app's name underneath, Search,
   then the sections. Starboard moves to the side menu (TheMightyTRexUK, 4 November 2026), with Library, Discover,
   Activity, System and Settings; read the Starboard menu board, `areas/starboard-menu.html`.
 - **Level 1 menu:** header row 1, the section's pages (Starboard: TV, Films, Radio, Books, Audiobooks). In
@@ -66,10 +67,11 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 |---|---|---|
 | Colour roles | `--color-*`, `--status-<tone>-bg/-fg`, `--chart-*`, `--series-1` to `--series-7`, `--series-empty` | Four themes; accent is one token (UX-02 board offers Indigo, Teal, Amber) |
 | Accent colours | `palettes/teal.css`, `dusk.css`, `lime.css`, `rose.css`, `amber.css`, `graphite.css` (Blue, the default, is `tokens.css`; Teal is the colour before Mica) | An accent over Mica's neutral greys: load `tokens.css`, one palette, then `components.css`. Each sets the accent, its soft tint, the chosen item, the count and the logo in Light, Dark, High contrast and High contrast dark (a stronger shade, 7:1). Surfaces, text, focus, status colours and chart series stay the same. Written by `tools/palettes.py` and checked by `tools/check_accents.py`. For an app where people choose (Starboard's own style), `palettes/app-palettes.css` holds all six under `:root[data-palette="…"]`; `tools/sync.py` copies it to Starboard's `css/palettes.css` with `palettes.json`. An app's own styles still win |
-| Type | `--text-xs` to `--text-2xl`, `--font` | One typeface; scales with Text size |
-| Space and size | `--space-1` to `--space-12`, `--control-h` (44px), `--control-h-compact` (32px, dense tables only) | |
+| Type | `--text-xs` to `--text-2xl`, `--font`, `--font-mono` | One typeface; scales with Text size. `--font-mono` is the system's monospace face, for code, addresses and keys |
+| Space and size | `--space-1` to `--space-12`, `--control-h` (44px), `--control-h-compact` (32px, dense tables only), `--radius` (6px), `--radius-sm` (4px), `--radius-md` (8px) | `--radius-sm` and `--radius-md` are for Starboard's own small and large boxes; they do not follow `--radius` |
+| Status words in text | `--color-success-text`, `--color-danger-text` | The colour of a status word that sits in a line of text, not a chip. Both are the text colour: the word and its icon carry the status. A style may set them to `--status-success-fg` and `--status-danger-fg` |
 | Icons | `icons.svg`, `svg.i`, `.i-lg`, `.i-xl` | Lucide, 2px stroke, decorative beside words |
-| Utilities | `.nowrap`, `.clamp-2`, `.clamp-3`, `.visually-hidden`, `.skip-link`, `.muted`, `.small`, `.numeric`, `code`, `.code-block`, `.stack-1`, `.stack-2`, `.stack-4` | Stacks put children one under another with a 4, 8 or 16px gap |
+| Utilities | `.nowrap`, `.clamp-2`, `.clamp-3`, `.visually-hidden`, `.skip-link`, `.muted`, `.small`, `.numeric`, `code`, `.code-block`, `.stack-1` to `.stack-5` | Stacks put children one under another with a 4, 8, 12, 16 or 20px gap |
 
 ### Shell
 | Component | Classes | Notes |
@@ -139,12 +141,12 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 | Facts | `.facts` (`dl`) | Author first, then Series; names are links |
 | Stat | `.stats`, `.stat[data-tone]`, `.stat__value`, `.stat__label` | Edge colour plus words |
 | Progress and meter | `.progress[data-tone]`, `.progress--busy`, `.progress--running`, `.meter`, `.meter__label`, `creepProgress()` | Value always in words. Waiting standard (DASH-493, TheMightyTRexUK, 20 November 2026): a bar that is working is 14px with rounded ends and moving stripes. `.progress--busy`: the end is not known, a striped band runs along. `.progress--running`: a count that is still going (such as 4 of 5); it starts with a visible piece and `creepProgress(bar, done, total, eachMs)` eases onto each count and creeps towards the next. Taken off when it ends; still with less motion asked for |
-| Waiting mark and busy button | `.wait`, `.wait__mark`, `.btn[aria-busy="true"]` | Waiting standard, option A, the ring: a short wait shows the ring with words, never a plain "Loading…". A busy button draws the ring before its doing word ("Testing"), keeps its size and has `aria-disabled`. After 0.3 seconds the place the answer goes shows its waiting state; the end replaces it with the result, and focus moves to an error. With less motion the ring fades instead of turning |
+| Waiting mark and busy button | `.wait`, `.wait__mark`, `.btn[aria-busy="true"]`; `SharedComponents.wait(words, { status, id })` returns the line | Waiting standard, option A, the ring: a short wait shows the ring with words, never a plain "Loading…". A busy button draws the ring before its doing word ("Testing"), keeps its size and has `aria-disabled`. After 0.3 seconds the place the answer goes shows its waiting state; the end replaces it with the result, and focus moves to an error. With less motion the ring fades instead of turning |
 | Rows | `.rows`, `.row`, `.row--no-lead`, `.row--opens`, `.row__title`, `.row__meta`, `.row__side` | `.row--opens`: the whole row opens a slide-out |
 | Group heading | `.group-heading` | Sentence case, no capitals |
 | Table | `.table-wrap[data-stack]`, `.table`, `th[aria-sort]`, `.table--middle` | Real tables only; stack into cards on phones. A row's heading (`th scope="row"`) has the same style as its cells, in bold. `.table--middle` puts every cell on the row's middle line, for a summary with a button on each row, such as a wizard's Check step with Change (7 November 2026) |
 | Tables that line up | `.table.table--fixed` with the same `<colgroup>` in each; `col.col-id`, `.col-date`, `.col-state`, `.col-number`, `.col-quarter`, `.col-third`, and no class on the column that takes the rest | Several tables one after another, such as tasks by category or a menu by section, keep their columns in line (4 November 2026) |
-| Notice and callout | `.notice[data-tone]` (`success`, `warning`, `danger`, `muted`; none is info), `.notice__title`, `.notice__body` | Icon and words; `role="status"` or `role="alert"`. As a callout in long text, the title is the lead word: Before you begin (info), Limitation (warning), Warning (danger, cannot be undone), Tip (success), Example (muted) |
+| Notice and callout | `.notice[data-tone]` (`success`, `warning`, `danger`, `muted`; none is info), `.notice__title`, `.notice__body` | Icon and words; `role="status"` or `role="alert"`. A page that draws one in script calls `SharedComponents.notice(tone, title, text, { actions, after, icon, alert, id, tabindex, heading })`: one icon for each tone (`circle-check`, `info`, `triangle-alert`, `circle-alert`), `role="status"` unless `alert: true` (an error that blocks), no `data-tone` for info, and never a copy of it in the app. As a callout in long text, the title is the lead word: Before you begin (info), Limitation (warning), Warning (danger, cannot be undone), Tip (success), Example (muted) |
 | Prose | `.prose`, `.prose__lead`, `.prose__kind` | Help topics, guides and release notes shown in an app (`HELP-WRITING.md`) |
 | Counts and clock times | `SharedComponents.plural(n, one, many)` ("3 disks"; `many` is `one` and an s unless given; an array `[one, many]` works too; thousands separator), `SharedComponents.clock(date)` ("14:05"), `SharedComponents.num(n)` | One way to write a count and a time of day, so an app has no copy of its own |
 | Time ago | `<time datetime>` with `.visually-hidden` exact time | "Updated 10 seconds ago" on screen, the exact time for screen readers |
@@ -219,6 +221,10 @@ still hold every component: the gallery, the boards and the help centre load the
 | `popover` | 2.2 KB | |
 | `alerts` | 2.0 KB | `popover` |
 | `command-palette` | 2.4 KB | `combobox` |
+| `extras` (styles only: split button, applied filters, timeline, shelf, the old help text) | 1.0 KB | |
+| `media-extras` (styles only: show art, item header) | 0.6 KB | |
+| `logo-picker` (styles only: choose, crop and save a logo) | 1.3 KB | |
+| `wizard-review` (styles only: what happens next, the decision tree, the summary) | 1.3 KB | |
 
 The core is everything else, 59 KB compressed where the whole is 77 KB. The page banner and the tooltip stay in
 the core, as any page can need them.
@@ -230,6 +236,8 @@ that folder the app gets the whole files, as before.
 On a page that uses a part, load its styles after `components.css`. Load its script after `components.js` and the
 parts it needs, and before the page's own scripts. `SharedComponents.setup()` then sets the part up with everything
 else. Its functions are on `SharedComponents` as before (`logView`, `showErrors`, `gauge` and so on).
+
+**Parts no page loads.** `extras`, `media-extras`, `logo-picker` and `wizard-review` are styles-only parts for components that no page of Starboard, its plug-ins, Stallboard or Snaglist uses (found by searching each class, 26 November 2026). The gallery and the help centre still load them. An app that wants one later loads `css/parts/<name>.css`. A part may be marked more than once: the pieces are put together in order.
 
 **Marking a part.** In `components.css`, inside `@layer shared`: `/* part: name */` before the part's rules and
 `/* /part */` after them, with the part's own Windows Contrast and less motion rules inside. In `components.js`:
@@ -276,23 +284,7 @@ Then move each page's classes to the library's where they differ:
 
 A private audit lists every duplicate to merge.
 
-**Storyarr** has 1,285 generated `--c-*` colour tokens (492 uses) and a few role names in `styles.css`. To
-adopt, one release at a time:
-1. Add `tokens.css` and alias the old role names to the new ones:
-   - `--surface` → `--color-surface`
-   - `--line` → `--color-divider` (or `--color-border` for control borders)
-   - `--muted` → `--color-text-muted`
-   - `--accent` → `--color-accent`
-   - `--control-active` → `--color-control-active`
-   - `--control-height-large` → `--control-h`, and `--control-height` → `--control-h-compact`
-   - `--panel-header-bg` → `--color-panel-header`, and `--panel-header-line` → `--color-divider`
-2. Add `components.css` in a `shared` layer under the app's own layers, so nothing changes until a page
-   moves over.
-3. Rebuild each page on the library's classes, then delete the page's old CSS and the `--c-*` tokens it used. A
-   private audit lists the old classes and the duplicates.
-4. React components wrap the classes: `Button`, `IconButton`, `MenuButton`, `Field`, `Switch`,
-   `Segmented`, `Chip`, `Notice`, `SidePanel`, `Dialog`, `SectionToolbar`, `SettingsRow`, `Card`, `MediaCard`,
-   with the behaviour in `components.js`.
+**Storyarr** (retired on 11 November 2026) adopted the library in steps, with aliases from its old role names. Its boards are archived in `areas/archive/storyarr/`; none of this applies to a new app.
 
 **Adopted (2 November 2026):**
 - **Starboard**, branch `shared-library` (commits 175a0c3 and 2129d68, not pushed). It loads `components.js` with
@@ -301,16 +293,11 @@ adopt, one release at a time:
   `confirmDialog()`, `menuButton()` and `renderKeyed()`. `renderKeyed()` updates rows in place so focus stays.
 
   Icons come from `web/icons/sprite.svg`.
-- **Storyarr**, branch `covers-and-shelf-only` (commit 1beeb45, not pushed). Copies in `apps/web/src/shared/` are
-  `tokens.css` (without the font, which Storyarr loads itself), `components.css` and `compat.css`. `compat.css` keeps
-  the 18 class names both apps use (`.notice`, `.count`, `.empty`, `.panel` and others) unchanged until each page
-  moves over. Delete a rule there when its page moves.
-
 **components.js changes:** `openLayer(idOrElement, opener, onClose)` now accepts an element, returns its
 close function, cleans up its listeners and can be reopened safely. Loading the file with `data-manual`
 (or setting `window.SharedComponentsManual = true` first) skips the automatic `setup()`.
 
-**Keeping them in step** (TheMightyTRexUK, 2 November 2026: the library is shared by both apps and kept up to date).
+**Keeping them in step** (TheMightyTRexUK, 2 November 2026: the library is shared by every app and kept up to date).
 Change the component here first, never in an app. Follow the steps in
 [Make a change](https://themightytrex.github.io/design-system/resources/make-a-change.html). Add the change to the
 Decisions list in this file, commit it here and push, so every checkout picks it up.
@@ -352,12 +339,12 @@ Decisions list in this file, commit it here and push, so every checkout picks it
 - **The logo editor on every way to get a logo** (TheMightyTRexUK, 2 November 2026). From a cover, Find online and Upload your own all use the same box. It has Shape from lightness or transparency, four cleaning levels, and a small eraser and paintbrush on `.checker[data-tool]`. Found files show as plain pictures in `.logo-candidate__art > img`.
 - **Nicer scroll bars** (TheMightyTRexUK, 2 November 2026). They are thin and square in every scrolling area, in `--color-scrollbar` (the border colour, or the text colour in High contrast) on a clear track. They stay visible, and only shelves hide theirs behind arrows.
 - **UX notes for testing** (TheMightyTRexUK, 2 November 2026). Retired on 13 November 2026: `ux-notes.js` is no longer in the library, and each app copies in [Snaglist](https://github.com/TheMightyTRex/snaglist) instead. `sync.py` lists a leftover copy as retired.
-- **Security checks the same in both apps** (TheMightyTRexUK, 3 November 2026).
+- **Security checks the same in every app** (TheMightyTRexUK, 3 November 2026).
   - `docs/SECURITY-CHECKS.md` sets the checks. They are tests, live journeys, Trivy, ZAP on a private network,
     Gitleaks, Bandit and Semgrep, ShellCheck, Hadolint, CodeQL, a separate review and install tests. It also says how
     to sort findings.
   - Each app has a security page with a "Security checks for each release" table, and every release's notes have a Security section (`CONTENT-DESIGN.md`, release notes).
-  - Starboard is the worked example, and Storyarr has to catch up.
+  - Starboard is the worked example.
 - **Focus not obscured** (WCAG 2.2, 4 November 2026). The page keeps the sticky header (and row 2) and an open save
   bar clear when it scrolls, with `scroll-padding` on `:root`. We added `WCAG.md` and `ALT-TEXT.md` after the GOV.UK
   Service Manual and BBC GEL.
@@ -439,24 +426,28 @@ We checked focus after the menu and Display open and close, and the live regions
 (`HELP-WRITING.md` section 11). Also add a workflow that checks out this repository and runs the builder. Starboard,
 Snaglist and the plug-in collection use it. Build one here with `tools/help_centre/build.sh` from the app's folder.
 
-## App-only patterns (updated 26 November 2026)
+## App patterns (moved into the library on 26 November 2026)
 
-Built from the tokens, used by one app, so not in `components.css`. Starboard builds about 420 classes of its own in `web/css/app.css`, `apps.css`, `settings.css`, `system.css`, `dashboard.css`, `library.css`, `media.css` and `designs.css`. These are the ones other pages are likely to need, so each is a candidate to move into the library, with a gallery entry and a board, when a second page needs it:
+Owner decision, 26 November 2026: every Starboard pattern that other screens or plug-ins could reuse lives in the library. Each was built in Starboard first, so the values are Starboard's and an app that adopts one is drawn as before. The components pages show each one (App patterns). The larger ones are styles-only parts (`css/parts/<name>.css`; no script): an app loads one only on the pages that use it.
 
-- **Starboard:**
-  - Settings tabs and sections: `.settings-sections`, `.page--settings`, and the General tabs (General, Alerts, Performance, Pictures).
-  - The update list: `.updates-table` with its Check now button.
-  - Where backups go: `.place`, `.place-logo`, `.place-add`, a list of places with a service logo.
-  - Dashboard cards: `.dash-grid`, `.dash-card`, `.guide-card`, `.spark-card`, `.dash-edit`. Starboard draws its own sparkline because the library one cannot show gaps.
-  - Slide-out wizards (the media server switch, backup places, cloud connect): a slide-out with its own "Step 1 of 3". `docs/WIZARD.md` describes the page wizard only.
-  - Showing a secret once (a first password, an API key, recovery codes, a backup key): each is built on its own.
-  - Folding table sections: `.fold`.
-  - Poster cards: `.lib-card`, `.network-card`, `.collection-card` and `.discover-card` do what `.media-card` and `.cover-card` do in the library.
-  - `.access-change` shows what Starboard can access, with the command to change it.
-  - `.job-run` is a server job with Run now.
-  - The storage charts use `--media-*`, which map to `--series-*`.
-  - The release notes slide-out is `.release-notes`, opened from Release notes in the footer.
+| Pattern | Classes | Part | Notes |
+|---|---|---|---|
+| Page topics | `.topic-tabs`, `.topic-tabs__tab`, `.topic-off`, `.settings-sections`, `.page--settings` | `page-topics` | A long page cut into topics, one at a time. Not `.tabs` (parts of one thing). The page's script builds the tablist; Starboard's is `topicTabs()` in `settings-core.js` |
+| Update list | `.updates-table`, `.updates-app` | `updates-table` | One table for each category, equal column widths. The button is **Check now** |
+| Places and service logos | `.places`, `.place*`, `.place-state`, `.tested`, `.place-adds`, `.place-add*` | `places` | Logos from `service-logos.svg`, one colour, always beside the name |
+| Dashboard | `.dash-grid`, `.dash-card*`, `.dash-edit*`, `.dash-links`, `.dash-stat`, `.guide-card*`, `.spark-card*` | `dashboard` | Preset sizes; a small card hides the chip's words from sight only |
+| Show once | `.show-once*`, `.recovery-codes` | core | One secret, Copy, Download, a notice |
+| Wizard in a slide-out | `.panel-wizard*`, `.wizard-job*`, `.plain-list` | `slide-out-wizard` (`.plain-list` in core) | Three steps or fewer; same rules as `docs/WIZARD.md` |
+| The media library | `.lib-wall`, `.lib-group*`, `.lib-card*`, `.network-card`, `.collection-card`, `.collection-ring`, `.lib-order`, `.discover-rows`, `.discover-row*`, `.discover-shelf`, `.discover-card*` | `media-library` | Starboard's library.css word for word: walls, groups, networks, collections, episode rows and Discover's shelves. The Library and Discover boards use it. Merging its poster cards with `.media-card` is a later change |
+| Folding sections | `.fold-tools`, `.folds`, `.fold*` | `folds` | A plug-in's tables that fold |
+
+Still in Starboard only, and why:
+- The four poster cards are in the library as the `media-library` part, as Starboard has them. Merging them with `.media-card` (and removing the unused `.cover-card` and `.book-row`) is a later change.
+- `.access-change` shows what Starboard can access, with the command to change it. `.job-run` is a server job with Run now. `.release-notes` is the release notes slide-out.
+- The storage charts use `--media-*`, which map to `--series-*`. Bring in (`.bring-*`) is the one screen that uses them.
+- Starboard still has its own copy of each block in the table until it loads the part; delete the copy when it does.
 - **Storyarr** (retired on 11 November 2026): the bookshelf and series views, and the library classes only it used (for example `.book-row`, `.cover-card`, `.item-header`, `.list-detail` and the logo slide-out).
 - **Plug-ins:** `tv-station` has its own time grid and drag-and-drop palette. Stallboard builds its own header, filters and tiles over the library, and redefines `.shelf`.
 
 - 11 November 2026: `--font-heading` (headings h1 to h4) and `--color-rail` (the side menu) are optional, for Starboard's styles. Unset, nothing changes.
+- 26 November 2026, defined: `--radius-sm`, `--radius-md`, `--font-mono`, `--color-success-text`, `--color-danger-text`, `.stack-3`, `.stack-5`, `.input--narrow`, `.select--compact`, `.field__error` (the same as `.field-error`) and `.btn--secondary` (drawn the same as `.btn`) are defined. The apps used them with no definition, so each took a fallback or nothing (audit of 26 November 2026).

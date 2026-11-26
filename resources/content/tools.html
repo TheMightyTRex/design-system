@@ -34,13 +34,14 @@
 <code class="code-block">python3 tools/icons.py "$(tr '\n' ' ' &lt; tools/icons.txt)"</code>
 
 <h2 id="sync">Copy the library into the apps: sync.py</h2>
-<p>Copies <code>tokens.css</code>, <code>components.css</code>, <code>components.js</code> and the icons into Storyarr and Starboard, so both apps use the same components. It does not commit. Add <code>--check</code> to list what would change without writing anything.</p>
+<p>Copies <code>tokens.css</code>, <code>components.css</code>, <code>components.js</code> and the icons into Starboard, Stallboard and the two plug-ins that keep their own copy (<code>tv-station</code> and <code>outside-services</code>), so every app uses the same components. It does not commit. Storyarr, which was retired on 11 November 2026, is no longer synced. Add <code>--check</code> to list what would change without writing anything.</p>
 <code class="code-block">python3 tools/sync.py --check</code>
 <code class="code-block">python3 tools/sync.py</code>
-<p>By default it uses <code>../starboard</code> and <code>../storyarr</code> beside this repository. To use other folders, set <code>STARBOARD_WEB</code> and <code>STORYARR_SHARED</code>, or put them in <code>tools/paths.local.json</code>, which git ignores:</p>
+<p>By default it uses <code>../starboard</code>, <code>../stallboard</code> and <code>../starboard-plugins</code> beside this repository. To use other folders, set <code>STARBOARD_WEB</code>, <code>STALLBOARD_DS</code> and <code>PLUGINS_DIR</code>, or put them in <code>tools/paths.local.json</code>, which git ignores:</p>
 <code class="code-block">{
   "STARBOARD_WEB": "~/src/starboard/web",
-  "STORYARR_SHARED": "~/src/storyarr/apps/web/src/shared"
+  "STALLBOARD_DS": "~/src/stallboard/assets/ds",
+  "PLUGINS_DIR": "~/src/starboard-plugins"
 }</code>
 
 <h2 id="parts">Make the light form for an app: parts.py</h2>

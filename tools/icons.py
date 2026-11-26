@@ -1,4 +1,4 @@
-"""Rebuild icons.svg from Lucide (Storyarr's node_modules, set in tools/paths.py). Run with every icon name the library needs:
+"""Rebuild icons.svg from Lucide (the lucide-react package, set in tools/paths.py). Run with every icon name the library needs:
 python3 tools/icons.py "book-open bookmark ..." (the current list is in icons.txt)."""
 import re, sys, pathlib
 from paths import path
