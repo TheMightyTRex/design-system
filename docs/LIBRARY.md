@@ -100,6 +100,7 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 | Menu button and menu | `.menu-wrap`, `.menu`, `.menu__label`, `role="menu"` items | Related actions in one button (the Lists menu); sort as `menuitemradio`. Something to read and act on is a popover instead |
 | Copy button | `.copy-btn`, `data-copy` | Confirms in a status message |
 | Action row | `.actions` | |
+| Library action row (owner, 26 November 2026) | `.series-head__actions` (an item page) or `#lib-actions` in the page head (a tab), with `.series-head__follow` for Following | One row, the same on every type. Every control is the `--control-h` height and wraps on a phone, with the main action first. **Order on an item page:** the main action (Play, Find it, Find wanted episodes (n) or Listen), Follow or Following, Keep, Watched, Choose a download, Quality and folder, Open in Reelix, Change match, Delete (danger, last). **On a tab:** Find all wanted (n) first (primary), then Bring in media, Select several, Save this view as default. One primary button in the row. The words are the Library vocabulary in `CONTENT-DESIGN.md` section 6 and the Find all wanted pattern in section 7 |
 
 ### Inputs
 | Component | Classes | Notes |
