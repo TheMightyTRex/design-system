@@ -56,6 +56,11 @@
    "components/slide-outs-and-dialogs.html",
    "panel-right-open",
    "Slide-outs and dialogs"
+  ],
+  [
+   "components/app-patterns.html",
+   "gauge",
+   "App patterns"
   ]
  ],
  "patterns": [

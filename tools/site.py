@@ -40,6 +40,7 @@ PARTS = [
     ("media", "components", "media", "Covers, media and shelves", "film", "Covers and media cards, the A to Z list, load more, cover actions, series header and shelf."),
     ("toolbar", "components", "settings-and-tools", "Settings and toolbars", "settings", "The section toolbar, settings rows, the save bar, settings patterns, the folder picker, timeline and calendar."),
     ("slide-out", "components", "slide-outs-and-dialogs", "Slide-outs and dialogs", "panel-right-open", "The slide-out and the dialog."),
+    ("page-topics", "components", "app-patterns", "App patterns", "gauge", "Starboard's own patterns: page topics, the update list, places and service logos, the dashboard, show once, a wizard in a slide-out and folding sections."),
     ("which", "patterns", "choosing", "Choosing", "list-checks", "Slide-out, dialog or page, and which item to use."),
     ("wizard", "patterns", "wizard", "Wizard", "list-ordered", "Every job done in steps: the pieces, and signing in to a service."),
     ("terminal", "patterns", "terminal", "Terminal", "terminal", "How a wizard appears and behaves in a terminal."),

@@ -7088,6 +7088,590 @@ body:has(.side-panel-layer:not([hidden]), dialog[open]) snag-list { display: non
   }
   /* /part */
 
+  /* 10. Starboard patterns, promoted into the library (26 November 2026, owner decision 2 of the design system audit).
+     Each was built inside Starboard first. The values are Starboard's own, so an app that adopts a pattern looks as it did.
+     The larger ones are styles-only parts (tools/parts.py): an app loads the file only on the pages that use it.
+     LIBRARY.md, App patterns, has the markup and the rules; the components pages show each one. */
+
+  /* Plain list: a short list of plain lines inside a slide-out or a card (what moves, what cannot). */
+  .plain-list {
+    margin: 0;
+    padding-inline-start: 1.2em;
+  }
+
+  /* Show once: a secret that is shown one time (a first sign-in, an API key, recovery codes, a backup key). The value
+     is selectable in one go, Copy and Download sit under it, and a notice says it will not appear again. Markup:
+     .show-once > .show-once__label + .show-once__value (code) + .show-once__actions (buttons) + .notice. Recovery codes
+     are the same pattern with .recovery-codes in place of the one value. */
+  .show-once {
+    display: grid;
+    gap: var(--space-3);
+    min-width: 0;
+    padding: var(--space-4);
+    border: 1px solid var(--color-divider);
+    border-radius: var(--radius-md);
+    background: var(--color-surface-sunken);
+  }
+  .show-once__label {
+    margin: 0;
+    font-weight: var(--weight-strong);
+  }
+  .show-once__value {
+    display: block;
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    font-family: var(--font-mono);
+    font-size: 1.05em;
+    overflow-wrap: anywhere;
+    user-select: all;
+  }
+  .show-once__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  .recovery-codes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: var(--space-2);
+  }
+  .recovery-codes li {
+    margin: 0;
+  }
+  .recovery-codes code {
+    display: block;
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--color-divider);
+    border-radius: var(--radius-sm);
+    font-size: 1.05em;
+    letter-spacing: 0.04em;
+    user-select: all;
+  }
+
+  /* A wizard inside a slide-out (the media server switch): the same rules as a page wizard (WIZARD.md), in a wide slide-out.
+     "Step n of m" is the progress, one small muted line above the step's heading; a wizard with a bar uses .wizard-progress.
+     Markup: .side-panel.side-panel--wide > .side-panel__body.panel-wizard > p.panel-wizard__count + h3 + the step's fields,
+     then .side-panel__foot with Back, Next (primary) and Cancel. */
+  /* part: slide-out-wizard; css-only: yes */
+  .panel-wizard {
+    display: grid;
+    align-content: start;
+    gap: var(--space-4);
+    min-width: 0;
+  }
+  .panel-wizard__count {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+  }
+  .panel-wizard h3 {
+    font-size: var(--text-lg);
+  }
+  /* A job's progress in a wizard: the words and the count on one line, the bar under them. */
+  .wizard-job__head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-1) var(--space-3);
+  }
+  .wizard-job__words {
+    margin: 0;
+    min-inline-size: 0;
+  }
+  .wizard-job__count {
+    font-size: var(--text-sm);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  @media (max-width: 560px) {
+    .wizard-job__count {
+      white-space: normal;
+    }
+  }
+  /* /part */
+
+  /* Page topics: a long page of settings, cut into topics, one shown at a time. nav.topic-tabs > [role=tablist] >
+     button.topic-tabs__tab[role=tab] (aria-selected, aria-controls the section); the sections are section.settings-section in
+     .settings-sections, and a hidden one has .topic-off. It differs from .tabs, which is for the parts of one thing in
+     one panel. Left and Right move between tabs, Home and End go to the first and last. The tabs wrap onto a second
+     line, never scroll. They stay under the header from 768px wide and 640px tall, and the page keeps their height
+     clear (--topic-tabs-h, set by the page's script as they wrap) so a focused field is never under them. */
+  /* part: page-topics; css-only: yes */
+  .settings-sections {
+    display: grid;
+    gap: var(--space-8);
+  }
+  .page--settings > * {
+    width: 100%;
+  }
+  .page--settings .page-head__summary,
+  .page--settings .field .hint {
+    max-width: 75ch;
+  }
+  .page--settings > .page-head {
+    margin-bottom: var(--space-2);
+  }
+  .page--settings .settings-sections {
+    gap: var(--space-10);
+  }
+  .topic-tabs {
+    margin-block: 0 var(--space-6);
+    border-bottom: 1px solid var(--color-divider);
+  }
+  .topic-tabs [role="tablist"] {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+  }
+  .topic-tabs__tab {
+    min-height: var(--control-h);
+    padding: var(--space-2) var(--space-3);
+    border: 0;
+    border-bottom: 3px solid transparent;
+    border-radius: var(--radius) var(--radius) 0 0;
+    background: none;
+    color: var(--color-text-muted);
+    font: inherit;
+    font-weight: var(--weight-strong);
+    cursor: pointer;
+  }
+  .topic-tabs__tab:hover {
+    background: var(--color-hover);
+    box-shadow: inset 0 0 0 1px var(--color-hover-edge);
+    color: var(--color-text);
+  }
+  .topic-tabs__tab[aria-selected="true"] {
+    background: var(--color-control-active);
+    border-bottom-color: var(--color-accent);
+    color: var(--color-text);
+  }
+  .topic-off {
+    display: none !important;
+  }
+  @media (min-width: 768px) and (min-height: 640px) {
+    .topic-tabs {
+      position: sticky;
+      top: calc(var(--header-h) + 1px);
+      z-index: 2;
+      background: var(--color-bg);
+    }
+    :root:has(.site-header__tabs) .topic-tabs {
+      top: calc(var(--header-h) + var(--tabs-h) + 1px);
+    }
+    :root:has(#topic-tabs) {
+      scroll-padding-top: calc(var(--header-h) + var(--topic-tabs-h, 48px) + var(--space-4));
+    }
+    :root:has(.site-header__tabs):has(#topic-tabs) {
+      scroll-padding-top: calc(var(--header-h) + var(--tabs-h) + var(--topic-tabs-h, 48px) + var(--space-4));
+    }
+  }
+  /* /part */
+
+  /* Folding sections with a table in each (a plug-in's screen): .fold-tools (search and filters) above .folds, each
+     .fold a button that opens .fold__panel. The switch on the right of a head turns the whole section on or off. */
+  /* part: folds; css-only: yes */
+  .fold-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+  }
+  .fold-tools .search-field {
+    flex: 1 1 260px;
+  }
+  .fold-tools .search-field .input {
+    width: 100%;
+  }
+  .folds {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2);
+    min-width: 0;
+  }
+  .fold {
+    border: 1px solid var(--color-divider);
+    background: var(--color-surface);
+  }
+  .fold__head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding-right: var(--space-4);
+  }
+  .fold__title {
+    margin: 0;
+    flex: 1;
+    font-size: var(--text-md);
+  }
+  .fold__toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    width: 100%;
+    min-height: var(--control-h);
+    padding: var(--space-2) var(--space-4);
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+  .fold__toggle:hover {
+    background: var(--color-hover);
+    box-shadow: inset 0 0 0 1px var(--color-hover-edge);
+  }
+  .fold__name {
+    flex: 1;
+    font-weight: var(--weight-strong);
+  }
+  .fold__switch {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+  .fold__panel {
+    padding: 0 var(--space-4) var(--space-4);
+  }
+  .fold .table td.num {
+    font-variant-numeric: tabular-nums;
+  }
+  .fold .table tr.is-off td {
+    color: var(--color-text-muted);
+  }
+  /* /part */
+
+  /* The update list: one table for each category, each with the same column widths so the columns line up down the page.
+     Below 721px the library stacks each row, so the widths apply only above that. Markup: .table-wrap > table.table.updates-table
+     with a colgroup (col.updates-table__app, __image, __installed, __latest, __status, __actions), a first cell .updates-app
+     (a tick, .app-icon.updates-app__icon, the name and the container line), and a Check now button in the page head. */
+  /* part: updates-table; css-only: yes */
+  .updates-table code {
+    overflow-wrap: anywhere;
+  }
+  .updates-app {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+  .updates-app__icon {
+    width: auto;
+    height: 2.6rem;
+    aspect-ratio: 1;
+  }
+  .updates-table :is(th, td) {
+    vertical-align: middle;
+  }
+  @media (min-width: 721px) {
+    .updates-table {
+      table-layout: fixed;
+    }
+    .updates-table__app {
+      width: 20%;
+    }
+    .updates-table__image {
+      width: 28%;
+    }
+    .updates-table__installed,
+    .updates-table__latest {
+      width: 13%;
+    }
+    .updates-table__status {
+      width: 14%;
+    }
+    .updates-table__actions {
+      width: 12%;
+    }
+  }
+  /* /part */
+
+  /* Places: where something goes (several places for backups). Each .place is a box with a logo, the name, a switch and the
+     last copy; .place-adds is a grid of .place-add buttons, one for each kind of place that can be added. The logo is one colour
+     (the text colour), so it reads in every theme, and the name always sits beside it. A brand's logo comes from
+     service-logos.svg (svg.place-logo__img > use href="icons/services.svg#s-drive"; Drive, OneDrive, Dropbox, Backblaze B2,
+     Amazon S3 and WebDAV) and is decorative; a place on this network uses a plain icon. The state of the last copy is
+     .place-state with data-tone, an icon and a bold word, never colour alone. */
+  /* part: places; css-only: yes */
+  .places,
+  .place-adds {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-3);
+  }
+  .place-adds {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  }
+  .place {
+    display: grid;
+    gap: var(--space-2);
+    max-inline-size: 100%;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--color-divider);
+    border-radius: var(--radius-md);
+  }
+  .place__head {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+  .place__text {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .place__title {
+    margin: 0;
+    font-size: var(--text-md);
+  }
+  .place__switch {
+    flex: none;
+  }
+  .place-logo {
+    flex: none;
+    display: inline-grid;
+    place-items: center;
+    inline-size: 36px;
+    block-size: 36px;
+    color: var(--color-text);
+  }
+  .place-logo__img {
+    fill: currentColor;
+  }
+  .place-state,
+  .tested {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    margin: 0;
+  }
+  .place-state[data-tone="success"],
+  .tested[data-tone="success"] {
+    color: var(--color-success-text);
+  }
+  .place-state[data-tone="danger"],
+  .tested[data-tone="danger"] {
+    color: var(--color-danger-text);
+  }
+  .place-add {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    inline-size: 100%;
+    padding: var(--space-3);
+    border: 1px solid var(--color-divider);
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--color-text);
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+  }
+  .place-add:hover {
+    background: var(--color-surface-sunken);
+  }
+  .place-add:focus-visible {
+    outline: 3px solid var(--color-focus, currentColor);
+    outline-offset: 2px;
+  }
+  .place-add:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  .place-add__text {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+  }
+  .place-add__text small {
+    color: inherit;
+    opacity: 0.85;
+  }
+  .place,
+  .place__text,
+  .place-add__text,
+  .place-state,
+  .tested {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  /* /part */
+
+  /* Dashboard: a 12-column grid of cards in preset sizes (small 3, medium 4, half 6, wide 8, full 12 columns; two columns
+     on a phone, one for the rest). A .dash-card is a card with a head (.dash-card__head: the title and, in edit mode,
+     .dash-card__tools with a select.select--compact for the size and move buttons), then its content. Add .has-band for the
+     card band across the top. .dash-edit is the Edit dashboard bar. A plug-in's card types are .dash-stat (one large number
+     and its label), .guide-card (a numbered list with a thin bar: .guide-card__item, __num) and .spark-card (a small line in
+     the accent colour with its latest, lowest and highest in words: __item, __line, __words). */
+  /* part: dashboard; css-only: yes */
+  .dash-grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--space-4);
+    align-items: start;
+  }
+  .dash-card {
+    grid-column: span 6;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    min-width: 0;
+    padding: var(--space-4);
+    border: 1px solid var(--color-divider);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-card);
+  }
+  .dash-card--small {
+    grid-column: span 3;
+  }
+  .dash-card--medium {
+    grid-column: span 4;
+  }
+  .dash-card--half {
+    grid-column: span 6;
+  }
+  .dash-card--wide {
+    grid-column: span 8;
+  }
+  .dash-card--full {
+    grid-column: span 12;
+  }
+  .dash-card__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+  }
+  .dash-card__title {
+    margin: 0;
+    font-size: var(--text-md);
+  }
+  .dash-card__tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-1);
+  }
+  .dash-card .rows .row {
+    padding-block: var(--space-2);
+  }
+  .dash-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  .dash-edit {
+    margin-bottom: var(--space-4);
+    padding: var(--space-4);
+    border: 1px dashed var(--color-divider);
+    border-radius: var(--radius);
+  }
+  .dash-edit__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+  @media (max-width: 1100px) {
+    .dash-card--small {
+      grid-column: span 6;
+    }
+    .dash-card--medium,
+    .dash-card--half,
+    .dash-card--wide {
+      grid-column: span 12;
+    }
+  }
+  @media (max-width: 767px) {
+    .dash-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .dash-card,
+    .dash-card--medium,
+    .dash-card--half,
+    .dash-card--wide,
+    .dash-card--full {
+      grid-column: span 2;
+    }
+    .dash-card--small {
+      grid-column: span 1;
+    }
+  }
+  .dash-stat {
+    margin: 0;
+  }
+  .dash-stat strong {
+    font-size: var(--text-2xl);
+    line-height: var(--leading-tight);
+  }
+  .guide-card__item {
+    display: grid;
+    gap: var(--space-1);
+    width: 100%;
+  }
+  .guide-card__num {
+    color: var(--color-text-muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .guide-card .progress {
+    height: 4px;
+  }
+  .spark-card__item {
+    display: grid;
+    gap: var(--space-1);
+    width: 100%;
+    min-width: 0;
+  }
+  .spark-card__line {
+    display: block;
+    width: 100%;
+    height: 28px;
+    color: var(--color-accent);
+    overflow: visible;
+  }
+  .spark-card__words {
+    font-variant-numeric: tabular-nums;
+  }
+  @media (forced-colors: active) {
+    .spark-card__line {
+      color: CanvasText;
+    }
+  }
+  /* A dashboard card with the band: the band runs edge to edge, so the card keeps its padding for the body only. */
+  .dash-card.has-band {
+    padding-top: 0;
+  }
+  .card-band__side:empty {
+    display: none;
+  }
+  /* A small card has room for the icon only: the chip's words stay for screen readers. */
+  .dash-card--small .card-band__side .chip {
+    gap: 0;
+    justify-content: center;
+    min-width: 24px;
+    padding-inline: var(--space-1);
+  }
+  .dash-card--small .card-band__side .chip__words {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  /* /part */
+
   /* Windows Contrast themes for the page banner and the tooltip. */
   @media (forced-colors: active) {
     .page-banner { border-bottom-color: CanvasText; }

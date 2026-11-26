@@ -24,8 +24,9 @@ Slide-outs, menus, the phone menu and the dialog all work in the gallery.
 | `contrast-report.txt` | Made by `tools/contrast.py` (not committed): measured contrast for every text and control pair in all four themes; all pass WCAG 2.2 AA |
 | `accent-report.txt` | Made by `tools/check_accents.py --report accent-report.txt`: every token pair the components draw, for every accent colour, in all four themes, including the menu hover fill and its edge; all pass WCAG 2.2 AA |
 | `areas/` | Design boards for Starboard's screens, using the library, with slide-outs where they fit |
-| `tools/build.py` | Turns `{{i:name}}` into icons and `<!--ICONS-->` into the sprite for any `*.src.html` |
+| `tools/build.py` | Turns an icon name written in double braces, as in i, a colon and the name, into the icon, and `<!--ICONS-->` into the sprite for any `*.src.html` |
 | `tools/icons.py` | Rebuilds `icons.svg` from Lucide (the `lucide-react` package; set its folder in `tools/paths.local.json`) |
+| `service-logos.svg` | The brand logos for places (Google Drive, OneDrive, Dropbox, Backblaze B2, Amazon S3, WebDAV): artwork from simpleicons.org, CC0; each stays its owner's trademark, shown to identify that service only |
 | `tools/sync.py`, `tools/paths.py` | Copies the library into Starboard, Stallboard and the two plug-ins that carry a copy; `paths.py` says where the apps are (`tools/paths.local.json`, not committed) |
 
 ## Principles
@@ -418,23 +419,25 @@ We checked focus after the menu and Display open and close, and the live regions
 (`HELP-WRITING.md` section 11). Also add a workflow that checks out this repository and runs the builder. Starboard,
 Snaglist and the plug-in collection use it. Build one here with `tools/help_centre/build.sh` from the app's folder.
 
-## App-only patterns (updated 26 November 2026)
+## App patterns (moved into the library on 26 November 2026)
 
-Built from the tokens, used by one app, so not in `components.css`. Starboard builds about 420 classes of its own in `web/css/app.css`, `apps.css`, `settings.css`, `system.css`, `dashboard.css`, `library.css`, `media.css` and `designs.css`. These are the ones other pages are likely to need, so each is a candidate to move into the library, with a gallery entry and a board, when a second page needs it:
+Owner decision, 26 November 2026: every Starboard pattern that other screens or plug-ins could reuse lives in the library. Each was built in Starboard first, so the values are Starboard's and an app that adopts one is drawn as before. The components pages show each one (App patterns). The larger ones are styles-only parts (`css/parts/<name>.css`; no script): an app loads one only on the pages that use it.
 
-- **Starboard:**
-  - Settings tabs and sections: `.settings-sections`, `.page--settings`, and the General tabs (General, Alerts, Performance, Pictures).
-  - The update list: `.updates-table` with its Check now button.
-  - Where backups go: `.place`, `.place-logo`, `.place-add`, a list of places with a service logo.
-  - Dashboard cards: `.dash-grid`, `.dash-card`, `.guide-card`, `.spark-card`, `.dash-edit`. Starboard draws its own sparkline because the library one cannot show gaps.
-  - Slide-out wizards (the media server switch, backup places, cloud connect): a slide-out with its own "Step 1 of 3". `docs/WIZARD.md` describes the page wizard only.
-  - Showing a secret once (a first password, an API key, recovery codes, a backup key): each is built on its own.
-  - Folding table sections: `.fold`.
-  - Poster cards: `.lib-card`, `.network-card`, `.collection-card` and `.discover-card` do what `.media-card` and `.cover-card` do in the library.
-  - `.access-change` shows what Starboard can access, with the command to change it.
-  - `.job-run` is a server job with Run now.
-  - The storage charts use `--media-*`, which map to `--series-*`.
-  - The release notes slide-out is `.release-notes`, opened from Release notes in the footer.
+| Pattern | Classes | Part | Notes |
+|---|---|---|---|
+| Page topics | `.topic-tabs`, `.topic-tabs__tab`, `.topic-off`, `.settings-sections`, `.page--settings` | `page-topics` | A long page cut into topics, one at a time. Not `.tabs` (parts of one thing). The page's script builds the tablist; Starboard's is `topicTabs()` in `settings-core.js` |
+| Update list | `.updates-table`, `.updates-app` | `updates-table` | One table for each category, equal column widths. The button is **Check now** |
+| Places and service logos | `.places`, `.place*`, `.place-state`, `.tested`, `.place-adds`, `.place-add*` | `places` | Logos from `service-logos.svg`, one colour, always beside the name |
+| Dashboard | `.dash-grid`, `.dash-card*`, `.dash-edit*`, `.dash-links`, `.dash-stat`, `.guide-card*`, `.spark-card*` | `dashboard` | Preset sizes; a small card hides the chip's words from sight only |
+| Show once | `.show-once*`, `.recovery-codes` | core | One secret, Copy, Download, a notice |
+| Wizard in a slide-out | `.panel-wizard*`, `.wizard-job*`, `.plain-list` | `slide-out-wizard` (`.plain-list` in core) | Three steps or fewer; same rules as `docs/WIZARD.md` |
+| Folding sections | `.fold-tools`, `.folds`, `.fold*` | `folds` | A plug-in's tables that fold |
+
+Still in Starboard only, and why:
+- Poster cards (`.lib-card`, `.network-card`, `.collection-card`, `.discover-card`): to be merged with `.media-card` in a later change.
+- `.access-change` shows what Starboard can access, with the command to change it. `.job-run` is a server job with Run now. `.release-notes` is the release notes slide-out.
+- The storage charts use `--media-*`, which map to `--series-*`. Bring in (`.bring-*`) is the one screen that uses them.
+- Starboard still has its own copy of each block in the table until it loads the part; delete the copy when it does.
 - **Storyarr** (retired on 11 November 2026): the bookshelf and series views, and the library classes only it used (for example `.book-row`, `.cover-card`, `.item-header`, `.list-detail` and the logo slide-out).
 - **Plug-ins:** `tv-station` has its own time grid and drag-and-drop palette. Stallboard builds its own header, filters and tiles over the library, and redefines `.shelf`.
 
