@@ -819,6 +819,7 @@
     border: 1px solid var(--color-border);
     overflow: hidden;
   }
+  /* part: extras; css-only: yes */
   .split-btn > button {
     display: inline-flex;
     align-items: center;
@@ -838,6 +839,7 @@
   .split-btn > button:hover {
     background: var(--color-control-active);
   }
+  /* /part */
   .actions {
     display: flex;
     flex-wrap: wrap;
@@ -1333,6 +1335,7 @@
     gap: var(--space-2);
     font-size: var(--text-sm);
   }
+  /* part: extras; css-only: yes */
   .applied__item {
     display: inline-flex;
     align-items: center;
@@ -1350,6 +1353,7 @@
     border: 0;
     background: transparent;
   }
+  /* /part */
 
   /* 5. Content -------------------------------------------------------------------------------- */
 
@@ -2291,6 +2295,7 @@
     background: transparent;
     color: var(--color-text-muted);
   }
+  /* part: extras; css-only: yes */
   .help__text {
     position: absolute;
     left: 0;
@@ -2303,6 +2308,7 @@
     box-shadow: var(--shadow-raised);
     font-size: var(--text-sm);
   }
+  /* /part */
   /* Disclosure (accordion): a <details> with a 44px summary and a chevron that turns. */
   .disclosure {
     border: 1px solid var(--color-divider);
@@ -3198,6 +3204,7 @@
     background: var(--show-art-bg, var(--color-surface-sunken));
     color: var(--show-art-fg, var(--color-text));
   }
+  /* part: media-extras; css-only: yes */
   .show-art__img,
   .show-art__text {
     display: block;
@@ -3246,6 +3253,7 @@
     line-height: var(--leading-tight);
     overflow-wrap: anywhere;
   }
+  /* /part */
   /* Small show art (under 120px wide): the name alone in the label. */
   @container (max-width: 120px) {
     .show-art__station {
@@ -3749,6 +3757,7 @@
     padding: 0;
     list-style: none;
   }
+  /* part: extras; css-only: yes */
   .timeline__item {
     position: relative;
     display: grid;
@@ -3796,6 +3805,7 @@
     color: var(--color-text-muted);
     font-size: var(--text-sm);
   }
+  /* /part */
 
   /* Icons from the sprite: three sizes. */
   svg.i {
@@ -4024,6 +4034,7 @@
     aspect-ratio: 1;
     border-radius: var(--radius-round);
   }
+  /* part: media-extras; css-only: yes */
   .item-header__text {
     display: grid;
     gap: var(--space-3);
@@ -4037,6 +4048,7 @@
     flex-wrap: wrap;
     gap: var(--space-2);
   }
+  /* /part */
   /* Solid-colour logo (UX-43, 2 November 2026): any logo image with a transparent background, drawn
      as one solid colour through a CSS mask, so it follows the theme and High contrast. Set --logo to
      url("…") and --logo-ratio to the image's width / height. Text colour by default;
@@ -4173,6 +4185,7 @@
     border: 1px solid var(--color-divider);
     background: var(--color-surface);
   }
+  /* part: logo-picker; css-only: yes */
   .logo-saved h3 {
     display: flex;
     align-items: center;
@@ -4261,6 +4274,7 @@
     font-size: var(--text-md);
     font-weight: var(--weight-heading);
   }
+  /* /part */
   /* Find online: a form on one line, then the results with their licence and any warning. */
   .inline-form {
     display: flex;
@@ -4271,6 +4285,7 @@
     flex: 1 1 200px;
     min-width: 0;
   }
+  /* part: logo-picker; css-only: yes */
   .logo-candidates {
     display: grid;
     gap: var(--space-2);
@@ -4297,12 +4312,14 @@
     padding: var(--space-2);
     background: var(--color-surface-sunken);
   }
+  /* /part */
   /* A found file's own picture (another site's image cannot be a mask). */
   .logo-candidate__art > img {
     max-width: 112px;
     max-height: 48px;
     object-fit: contain;
   }
+  /* part: logo-picker; css-only: yes */
   .logo-candidate__art > .logo-mask {
     width: 112px;
     height: 48px;
@@ -4323,6 +4340,7 @@
   .logo-candidate__text b {
     overflow-wrap: anywhere;
   }
+  /* /part */
   .logo-candidate .chip {
     height: auto;
     min-height: 0;
@@ -4367,6 +4385,7 @@
     outline: var(--focus-w) solid var(--color-focus);
     outline-offset: 2px;
   }
+  /* part: logo-picker; css-only: yes */
   .logo-crop {
     display: grid;
     grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
@@ -4396,6 +4415,7 @@
     font-size: var(--text-sm);
     font-variant-numeric: tabular-nums;
   }
+  /* /part */
   /* A slider (input type=range), 44px tall. */
   .range {
     width: 100%;
@@ -4442,6 +4462,7 @@
     padding: var(--space-4);
     border: 2px dashed var(--color-border);
   }
+  /* part: logo-picker; css-only: yes */
   .logo-drop input {
     width: 100%;
     max-width: 100%;
@@ -4462,12 +4483,14 @@
   .logo-drop input::file-selector-button:hover {
     background: var(--color-surface-sunken);
   }
+  /* /part */
   /* The logo on the Light and Dark themes' surfaces, whatever theme is on. */
   .logo-preview {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-2);
   }
+  /* part: logo-picker; css-only: yes */
   .logo-preview > * {
     display: grid;
     gap: var(--space-2);
@@ -4493,6 +4516,7 @@
   .logo-preview small {
     font-size: var(--text-xs);
   }
+  /* /part */
   @media (max-width: 720px) {
     .series-head {
       grid-template-columns: minmax(0, 1fr);
@@ -4553,6 +4577,7 @@
     display: grid;
     gap: var(--space-3);
   }
+  /* part: extras; css-only: yes */
   .shelf__head {
     display: flex;
     flex-wrap: wrap;
@@ -4582,6 +4607,7 @@
   .shelf__track > * {
     scroll-snap-align: start;
   }
+  /* /part */
 
   /* Calendar month: a real table, so screen readers read day by day. */
   .calendar {
@@ -4785,6 +4811,7 @@
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
     gap: var(--space-3);
   }
+  /* part: wizard-review; css-only: yes */
   .wizard-paths__path {
     display: grid;
     align-content: start;
@@ -4808,6 +4835,7 @@
     padding-left: var(--space-5);
     font-size: var(--text-sm);
   }
+  /* /part */
 
   /* Review aid. What happens next: one item for each choice on this step, the current choice first. */
   .wizard-next {
@@ -4817,6 +4845,7 @@
     padding: 0;
     list-style: none;
   }
+  /* part: wizard-review; css-only: yes */
   .wizard-next li {
     min-width: 0;
     padding: var(--space-3);
@@ -4842,6 +4871,7 @@
     font-size: var(--text-xs);
     font-weight: var(--weight-heading);
   }
+  /* /part */
 
   /* Review aid. Decision tree: the chosen job's stages and steps, and the choices that branch from them. */
   .wizard-tree-toggle > summary {
@@ -4851,6 +4881,7 @@
     cursor: pointer;
     list-style-position: inside;
   }
+  /* part: wizard-review; css-only: yes */
   .wizard-tree-toggle > summary h2 {
     display: inline;
   }
@@ -4883,6 +4914,7 @@
     position: relative;
     padding: 0 0 var(--space-3) calc(var(--mark) + var(--space-3));
   }
+  /* /part */
   /* The line that joins one step to the next. */
   .wizard-tree__step::before {
     content: "";
@@ -4892,6 +4924,7 @@
     bottom: 0;
     border-left: 2px solid var(--color-divider);
   }
+  /* part: wizard-review; css-only: yes */
   .wizard-tree__step:last-child::before {
     display: none;
   }
@@ -4913,10 +4946,12 @@
     width: 60%;
     height: 60%;
   }
+  /* /part */
   /* A decision is a diamond, so it does not rest on colour. */
   .wizard-tree__step[data-kind="decision"] .wizard-tree__mark {
     transform: rotate(45deg) scale(0.8);
   }
+  /* part: wizard-review; css-only: yes */
   .wizard-tree__step[data-kind="decision"] .wizard-tree__mark > * {
     transform: rotate(-45deg);
   }
@@ -4997,6 +5032,7 @@
     padding: 0 var(--space-2) var(--space-2) calc(var(--space-4) + 16px);
     color: var(--color-text-muted);
   }
+  /* /part */
 
   /* "What is…" links at the end of the part of a step they explain; each opens a dialog. */
   .help-links {
@@ -5056,6 +5092,7 @@
     padding: 0;
     list-style: none;
   }
+  /* part: wizard-review; css-only: yes */
   .wizard-summary li {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -5073,6 +5110,7 @@
   .wizard-summary li[data-tone="warning"] {
     border-left: var(--status-edge-w) solid var(--status-warning-fg);
   }
+  /* /part */
   .wizard-summary .small {
     display: block;
   }

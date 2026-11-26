@@ -1076,6 +1076,26 @@ still hold every component: the gallery, the boards and the help centre load the
 <td>2.4 KB</td>
 <td><code>combobox</code></td>
 </tr>
+<tr>
+<td><code>extras</code> (styles only: split button, applied filters, timeline, shelf, the old help text)</td>
+<td>1.0 KB</td>
+<td></td>
+</tr>
+<tr>
+<td><code>media-extras</code> (styles only: show art, item header)</td>
+<td>0.6 KB</td>
+<td></td>
+</tr>
+<tr>
+<td><code>logo-picker</code> (styles only: choose, crop and save a logo)</td>
+<td>1.3 KB</td>
+<td></td>
+</tr>
+<tr>
+<td><code>wizard-review</code> (styles only: what happens next, the decision tree, the summary)</td>
+<td>1.3 KB</td>
+<td></td>
+</tr>
 </tbody>
 </table></div>
 <p>The core is everything else, 59 KB compressed where the whole is 77 KB. The page banner and the tooltip stay in
@@ -1086,6 +1106,7 @@ that folder the app gets the whole files, as before.</p>
 <p>On a page that uses a part, load its styles after <code>components.css</code>. Load its script after <code>components.js</code> and the
 parts it needs, and before the page's own scripts. <code>SharedComponents.setup()</code> then sets the part up with everything
 else. Its functions are on <code>SharedComponents</code> as before (<code>logView</code>, <code>showErrors</code>, <code>gauge</code> and so on).</p>
+<p><strong>Parts no page loads.</strong> <code>extras</code>, <code>media-extras</code>, <code>logo-picker</code> and <code>wizard-review</code> are styles-only parts for components that no page of Starboard, its plug-ins, Stallboard or Snaglist uses (found by searching each class, 26 November 2026). The gallery and the help centre still load them. An app that wants one later loads <code>css/parts/&lt;name&gt;.css</code>. A part may be marked more than once: the pieces are put together in order.</p>
 <p><strong>Marking a part.</strong> In <code>components.css</code>, inside <code>@layer shared</code>: <code>/* part: name */</code> before the part's rules and
 <code>/* /part */</code> after them, with the part's own Windows Contrast and less motion rules inside. In <code>components.js</code>:
 <code>/* part: name; exports: a, b; setup: setupName; needs: other */</code> before and <code>/* /part */</code> after. <code>exports</code> are the
