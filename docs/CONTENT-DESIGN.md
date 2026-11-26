@@ -241,6 +241,7 @@ Tones: **success** (all is well), **info** (something is happening or is on offe
 | Not read yet | Warning | A reading that has not come back |
 | Active / Inactive | Success / Muted | A setting or a switch is on or off (never "Enabled") |
 | Stopped | Warning | The app was stopped on purpose |
+| Needs an update | Warning | A plug-in cannot run on this Starboard (its API range leaves this one out, or it uses something that is gone). Starboard has stopped it and kept its settings and data; the reason is beside the chip and the button is Check for an update. Always with its warning shape, never colour alone (DASH-603) |
 | Paused | Muted | Paused by a person; it resumes when they say |
 | Restart needed | Warning | A change needs the app to restart |
 | No container found | Muted | The app is listed but nothing runs for it |
