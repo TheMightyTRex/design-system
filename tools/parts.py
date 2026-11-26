@@ -35,8 +35,8 @@ def _cut(text, name_of_file):
             if now:
                 raise ValueError(f"{name_of_file}:{n}: part {opened.group(1)} starts inside part {now}")
             now = opened.group(1)
-            if now in parts:
-                raise ValueError(f"{name_of_file}:{n}: part {now} is marked twice")
+            if now in parts:  # marked again: its next piece goes on the end of the same part (styles that sit apart in the file)
+                continue
             said = dict(bit.split(": ", 1) for bit in (opened.group(2) or "").split("; ") if bit)
             parts[now] = {"lines": [], **{k: [x.strip() for x in v.replace(" first", "").split(",")] for k, v in said.items()},
                           "first": " first" in said.get("setup", "")}

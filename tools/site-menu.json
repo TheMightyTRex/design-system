@@ -23,6 +23,11 @@
    "Shell"
   ],
   [
+   "components/menus-and-tabs.html",
+   "list",
+   "Menus and tabs"
+  ],
+  [
    "components/actions.html",
    "play",
    "Actions"
