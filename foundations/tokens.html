@@ -91,13 +91,15 @@
   svg.i { width: var(--icon-md); height: var(--icon-md); }
   svg.i-lg { width: var(--icon-lg); height: var(--icon-lg); }
   svg.i-xl { width: 32px; height: 32px; }
-  }
+
+  .g-demo :is(.topic-tabs, .az-jump, .save-bar, .table th, .table thead th) { position: static; }
 
   .g-notes .g-note-h { font-size: var(--text-sm); font-weight: 700; margin-bottom: var(--space-1); }
 
   .s-swatch { display: inline-block; width: 1em; height: 1em; margin-right: var(--space-2); border: 1px solid var(--color-border); vertical-align: -0.15em; }
   .g-main .table td, .g-main .table th { vertical-align: top; }
   .g-main .s-scroll { overflow-x: auto; max-width: 100%; }
+  .g-main .table th { position: static; }
   .g-main .s-scroll .table { min-width: 44rem; }
   .g-main code { overflow-wrap: anywhere; }
 </style>

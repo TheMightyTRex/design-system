@@ -71,7 +71,11 @@ SITE_CSS = re.search(r"<style>(.*?)</style>", GALLERY, re.S).group(1)
 # The page-shell rules of the old gallery are replaced by sitepage's; the demo rules stay.
 SITE_CSS = re.sub(r"^\s*\.g-(shell|nav)[^\n]*\n", "", SITE_CSS, flags=re.M)
 SITE_CSS = re.sub(r"@media \(max-width: 860px\) \{[^}]*(\{[^}]*\}[^}]*)*\}\s*", "", SITE_CSS)
+SITE_CSS = re.sub(r"\n\s*\}\s*$", "\n", SITE_CSS)  # the cut above can leave the media block's closing brace behind, which hid every rule after it
 
+# Nothing in a demo may stick to the window: in the apps the topic tabs, the A to Z list, the save bar and a table head stick
+# under the app's header, but in a demo they would cover the demo's own text and the site's header as the page scrolls.
+SITE_CSS += "\n  .g-demo :is(.topic-tabs, .az-jump, .save-bar, .table th, .table thead th) { position: static; }\n"
 SITE_CSS += "\n  .g-notes .g-note-h { font-size: var(--text-sm); font-weight: 700; margin-bottom: var(--space-1); }\n"
 
 pages = []  # every page written: dicts for the search index and the stub
@@ -326,6 +330,7 @@ def tokens_page():
   .s-swatch { display: inline-block; width: 1em; height: 1em; margin-right: var(--space-2); border: 1px solid var(--color-border); vertical-align: -0.15em; }
   .g-main .table td, .g-main .table th { vertical-align: top; }
   .g-main .s-scroll { overflow-x: auto; max-width: 100%; }
+  .g-main .table th { position: static; }
   .g-main .s-scroll .table { min-width: 44rem; }
   .g-main code { overflow-wrap: anywhere; }
 """

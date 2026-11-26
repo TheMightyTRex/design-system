@@ -9,6 +9,7 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 26 November 2026
 
+- **Demos no longer stick over the site's header.** The topic tabs, the A to Z list, the save bar and table heads stick under the app's header in the apps, but inside a component page's demo they now stay still; `tools/check_demos.mjs` checks every page at 375, 800 and 1280 px in four themes for sticky or fixed parts and overlaps.
 - **A Tokens page, made from `tokens.css`.** It lists every token with its value in Light, Dark, High contrast and High contrast dark, so it cannot drift from the file.
 - **`docs/COMPONENTS.md` describes Starboard as it is.** It keeps the components by area and replaces the old Storyarr inventory with a table of Starboard's screens and the library parts each uses.
 - **One table of status words.** `docs/CONTENT-DESIGN.md` section 6 now lists the 100 or so chip words Starboard uses, with tone and meaning, in place of Storyarr's ten, and section 5 has the new terms (plug-in, media server, place, Check now).

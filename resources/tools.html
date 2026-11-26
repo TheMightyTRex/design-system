@@ -286,6 +286,10 @@
 <p>Lists every name a style sheet uses that <code>tokens.css</code> does not have, and the token to use instead. With no files it checks <code>components.css</code>; an app gives its own.</p>
 <div class="command"><code class="code-block">python3 tools/check_tokens.py ../starboard/web/css/*.css</code><button class="copy-btn" type="button" data-copy="python3 tools/check_tokens.py ../starboard/web/css/*.css" aria-label="Copy command"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg></button></div>
 
+<h2 id="demos">Check the demos do not overlap: check_demos.mjs</h2>
+<p>Opens every foundations, components and patterns page at 375, 800 and 1280 px wide in the four themes. It fails when anything in a demo is fixed or sticks to the window, reaches up into the site's header, or overlaps another part of its demo. It needs Playwright. In the apps the topic tabs and the A to Z list stick under the header, so the site's styles keep them still inside a demo.</p>
+<div class="command"><code class="code-block">node tools/check_demos.mjs</code><button class="copy-btn" type="button" data-copy="node tools/check_demos.mjs" aria-label="Copy command"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg></button></div>
+
 <h2 id="private">Keep private details out: check-private.sh and install-hooks.sh</h2>
 <p><code>check-private.sh</code> stops a commit that would publish home network addresses, email addresses, keys, or the words in your own <code>.private-words</code> file (one word a line; git ignores it). <code>install-hooks.sh</code> runs this check and the banned words check before every commit in your copy. Run it once.</p>
 <div class="command"><code class="code-block">tools/install-hooks.sh</code><button class="copy-btn" type="button" data-copy="tools/install-hooks.sh" aria-label="Copy command"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-copy"/></svg></button></div>
