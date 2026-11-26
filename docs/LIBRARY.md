@@ -219,8 +219,12 @@ still hold every component: the gallery, the boards and the help centre load the
 | `popover` | 2.2 KB | |
 | `alerts` | 2.0 KB | `popover` |
 | `command-palette` | 2.4 KB | `combobox` |
+| `extras` (styles only: split button, applied filters, timeline, shelf, the old help text) | 1.0 KB | |
+| `covers` (styles only: cover cards and actions, book rows, show art, item header) | 1.4 KB | |
+| `logo-picker` (styles only: choose, crop and save a logo) | 1.3 KB | |
+| `wizard-review` (styles only: what happens next, the decision tree, the summary) | 1.3 KB | |
 
-The core is everything else, 59 KB compressed where the whole is 77 KB. The page banner and the tooltip stay in
+The core is everything else, 57 KB compressed where the whole is 78 KB. The page banner and the tooltip stay in
 the core, as any page can need them.
 
 **For an app.** Make a `js/parts` folder in the app's web folder, then run `tools/sync.py`. It writes the core as
@@ -230,6 +234,8 @@ that folder the app gets the whole files, as before.
 On a page that uses a part, load its styles after `components.css`. Load its script after `components.js` and the
 parts it needs, and before the page's own scripts. `SharedComponents.setup()` then sets the part up with everything
 else. Its functions are on `SharedComponents` as before (`logView`, `showErrors`, `gauge` and so on).
+
+**Styles-only parts.** A part marked in `components.css` and not in `components.js` is styles only: a component that no page of the app loads today (found by searching Starboard, its plug-ins, Stallboard and Snaglist for each class, 26 November 2026). The gallery and the help centre still load every one. An app that wants one later loads `css/parts/<name>.css`. A part may be marked more than once: the pieces are put together in order.
 
 **Marking a part.** In `components.css`, inside `@layer shared`: `/* part: name */` before the part's rules and
 `/* /part */` after them, with the part's own Windows Contrast and less motion rules inside. In `components.js`:
