@@ -324,6 +324,9 @@ def tokens_page():
     css = SITE_CSS + """
   .s-swatch { display: inline-block; width: 1em; height: 1em; margin-right: var(--space-2); border: 1px solid var(--color-border); vertical-align: -0.15em; }
   .g-main .table td, .g-main .table th { vertical-align: top; }
+  .g-main .s-scroll { overflow-x: auto; max-width: 100%; }
+  .g-main .s-scroll .table { min-width: 44rem; }
+  .g-main code { overflow-wrap: anywhere; }
 """
     body = (f'<div class="g-main"><div class="page-head"><div class="page-head__text"><h1>Tokens</h1>'
             f'<p class="page-head__summary">{len(tokens)} tokens, made from <code>tokens.css</code> each time the site is built. Components use these names and nothing else, so a theme is a change of values. '
