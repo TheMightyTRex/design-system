@@ -9,6 +9,11 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 26 November 2026
 
+- **Storyarr's boards are archived.** The 19 boards, their generator and their index page moved to `areas/archive/storyarr/`, and each old address under `areas/` is now a small page that sends visitors there.
+- **Storyarr is no longer synced or named as a live app.** `tools/sync.py` and `tools/paths.py` drop it, the guides, README and gallery examples now speak of Starboard, its plug-ins and Stallboard, and `docs/SECURITY-CHECKS.md` has no Storyarr column.
+- **`tools/sync.py` also copies the library into Stallboard and the two plug-ins that keep their own copy.** It covers `tv-station/ds-tokens.css` and `outside-services/ds.css`, and `--check` now exits with 1 when a copy differs.
+- **The standard word is Check now (owner, 26 November 2026).** The guides, gallery and Starboard boards say Check now, with no Check again before or after a first check.
+
 - **The content guide follows the Plain English Campaign.** Rules 2.12, 2.14 and 2.15 now ask for an average sentence of 15 to 20 words and none over 25, plain words, and an explanation of technical words. New rules 2.25 to 2.27 cover hidden verbs, reading level (grade 6, or 8 for developer pages and changelogs) and word targets as warnings. `docs/CHANGELOGS.md` asks for one sentence per entry.
 - **A Plain English check, warn only.** `tools/verbose-check.py ci` warns about the lines a pull request adds, and `tools/sync.py` copies it into Starboard. It fails on nothing yet; the failing part, for a sentence over 25 words or a paragraph over 4 sentences, waits until a repository has fewer than 100 long sentences.
 - **Plainer wording (DASH-593):** the README, the guides in `docs/` and the resources pages now have shorter sentences, with no change in meaning.

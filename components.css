@@ -1,9 +1,8 @@
 /*
- * Shared components for Storyarr and Starboard (version 1, 2 November 2026).
+ * Shared components for Starboard, its plug-ins and Stallboard (version 1, 2 November 2026).
  *
  * Uses only tokens.css. Everything is in the "shared" layer, so an app's own styles win without
- * !important. Class names are plain and match Starboard's; Storyarr maps its older classes to these
- * as each page is rebuilt (README.md has the map).
+ * !important. Class names are plain and match Starboard's.
  *
  * Rules that hold everywhere: square corners; 44px controls; one typeface; a visible 3px focus ring;
  * status is never colour alone; nothing moves when reduced motion is on.

@@ -29,10 +29,10 @@ change the copies inside the apps.
 | `fonts/` | Atkinson Hyperlegible Next, with its licence |
 | `gallery.src.html` | The source of the component pages: every component, live (edit it, then run `python3 tools/site.py`) |
 | `foundations/`, `components/`, `patterns/`, `guides/` | The site, one page for each part, made by `tools/site.py`: colour, type and icons; each group of components; the patterns; and each guide. `index.html` is the home page, `search.html` searches it, and `gallery.html` is the old address, which sends each old link to its new page |
-| `areas/` | Design boards for each area of both apps, built from the library. `index.html` is the Boards landing page; `index-starboard.html` and `index-storyarr.html` show each app's boards in the page, chosen from the menu, written by `areas/make_index.py` |
+| `areas/` | Design boards for each area of every app, built from the library. `index.html` is the Boards landing page; `index-starboard.html` shows Starboard's boards in the page, chosen from the menu, written by `areas/make_index.py` |
 | `docs/LIBRARY.md` | The component reference: every class, the rule for slide-out, dialog or page, and how each app adopts the library |
 | `docs/DESIGN-SYSTEM.md` | Principles, tokens, shell, page templates and consistency rules |
-| `docs/COMPONENTS.md` | Every component by area, then Storyarr's interface before the redesign as a record (with Starboard's status words) |
+| `docs/COMPONENTS.md` | Every part of Starboard by area, and the library classes each uses |
 | `docs/WIZARD.md` | Every job done in steps, in the browser and the terminal: one question per step, buttons, a job's progress, help in a slide-out, outside services, the Check table, feedback with Snaglist |
 | `docs/TERMINAL.md` | How a wizard appears and behaves in a terminal: the frame, questions, the menu line, help boxes, job bars, plain mode for screen readers, and feedback as a QR code |
 | `terminal/` | The terminal frame every app's terminal scripts use (`terminal-frame.sh`) and the QR code encoder for feedback (`qr.py`); `terminal/README.md` says how to use them |
@@ -43,7 +43,7 @@ change the copies inside the apps.
 | `docs/WCAG.md` | How the design system meets each point of WCAG 2.2 AA, after the GOV.UK Service Manual, and what each app must still do |
 | `docs/ALT-TEXT.md` | How to write text descriptions (alt text) for every kind of image, after the BBC's guidance |
 | `docs/SCREENSHOTS.md` | Screenshots in help: when one earns its place, made-up data only, the outline, arrow and step-number mark-up, and a short version for AI tools; `tools/annotate.js` draws and checks the mark-up |
-| `docs/SECURITY-CHECKS.md` | The security checks both apps run, how to sort what they find, and how to record the results and release notes |
+| `docs/SECURITY-CHECKS.md` | The security checks every app run, how to sort what they find, and how to record the results and release notes |
 | `resources/` | The Design resources and tools pages: what you can use, the tools, outside tools, how to make a change and how to get feedback |
 | `tools/help_centre/` | The help centre builder every app's help uses: Markdown and `help-centre.json` in, the standard help centre out (`docs/HELP-WRITING.md` section 11) |
 | `tools/` | Build, contrast, icon, sync, privacy and Plain English (`verbose-check.py`, warns only) scripts |
@@ -86,7 +86,7 @@ shows in the page; Open on its own shows it in the whole window.
 - [Tools in this repository](https://themightytrex.github.io/design-system/resources/tools.html): what each script does and the command that runs it.
 - [Outside tools for accessibility and testing](https://themightytrex.github.io/design-system/resources/outside-tools.html): contrast checkers, automatic
   checks, screen readers, magnifiers and voice control.
-- [Make a change](https://themightytrex.github.io/design-system/resources/make-a-change.html): the 10 steps from `git pull` to the change in both apps.
+- [Make a change](https://themightytrex.github.io/design-system/resources/make-a-change.html): the 10 steps from `git pull` to the change in every app.
 - [Get feedback](https://themightytrex.github.io/design-system/resources/get-feedback.html): testing with real people, automatic checks, and feedback in the
   product with [Snaglist](https://github.com/TheMightyTRex/snaglist).
 

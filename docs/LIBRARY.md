@@ -1,6 +1,6 @@
 # TRex Design System: the component library
 
-Version 1, 2 November 2026. One component library for both apps, so they share one design and one behaviour.
+Version 1, 2 November 2026. One component library for every app, so they share one design and one behaviour.
 It follows `DESIGN-SYSTEM.md` and the guides in this folder (`CONTENT-DESIGN.md`, `HELP-WRITING.md` and `ACCESSIBILITY.md`).
 File names in the tables in this guide are relative to the root of the repository.
 
@@ -23,15 +23,15 @@ Slide-outs, menus, the phone menu and the dialog all work in the gallery.
 | `gallery.src.html` | The source of the component pages in `components/`, `foundations/` and `patterns/` (edit it, then run `python3 tools/site.py`) |
 | `contrast-report.txt` | Made by `tools/contrast.py` (not committed): measured contrast for every text and control pair in all four themes; all pass WCAG 2.2 AA |
 | `accent-report.txt` | Made by `tools/check_accents.py --report accent-report.txt`: every token pair the components draw, for every accent colour, in all four themes, including the menu hover fill and its edge; all pass WCAG 2.2 AA |
-| `areas/` | Design boards for every area of both apps, using the library, with slide-outs where they fit |
+| `areas/` | Design boards for Starboard's screens, using the library, with slide-outs where they fit |
 | `tools/build.py` | Turns `{{i:name}}` into icons and `<!--ICONS-->` into the sprite for any `*.src.html` |
-| `tools/icons.py` | Rebuilds `icons.svg` from Lucide in Storyarr's `node_modules` |
-| `tools/sync.py`, `tools/paths.py` | Copies the library into both apps; `paths.py` says where the apps are (`tools/paths.local.json`, not committed) |
+| `tools/icons.py` | Rebuilds `icons.svg` from Lucide (the `lucide-react` package; set its folder in `tools/paths.local.json`) |
+| `tools/sync.py`, `tools/paths.py` | Copies the library into Starboard, Stallboard and the two plug-ins that carry a copy; `paths.py` says where the apps are (`tools/paths.local.json`, not committed) |
 
 ## Principles
 
-1. **One design, two apps.** Same tokens, same classes, same behaviour. An app may add its own components
-   (charts on Starboard, the bookshelf on Storyarr) but builds them from the tokens.
+1. **One design for every app.** Same tokens, same classes, same behaviour. An app may add its own components
+   (the charts on Starboard) but builds them from the tokens.
 2. **Accessible is the baseline.** WCAG 2.2 AA in every theme. Controls and targets are 44px, and the focus ring is a
    visible 3px. Status is always in words plus a shape or icon, never colour alone.
 
@@ -47,7 +47,7 @@ Slide-outs, menus, the phone menu and the dialog all work in the gallery.
 
 Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Menu"):
 
-- **Side menu:** the icon rail on the left, in both apps: the logo with the app's name underneath, Search,
+- **Side menu:** the icon rail on the left, in every app: the logo with the app's name underneath, Search,
   then the sections. Starboard moves to the side menu (TheMightyTRexUK, 4 November 2026), with Library, Discover,
   Activity, System and Settings; read the Starboard menu board, `areas/starboard-menu.html`.
 - **Level 1 menu:** header row 1, the section's pages (Starboard: TV, Films, Radio, Books, Audiobooks). In
@@ -275,23 +275,7 @@ Then move each page's classes to the library's where they differ:
 
 A private audit lists every duplicate to merge.
 
-**Storyarr** has 1,285 generated `--c-*` colour tokens (492 uses) and a few role names in `styles.css`. To
-adopt, one release at a time:
-1. Add `tokens.css` and alias the old role names to the new ones:
-   - `--surface` → `--color-surface`
-   - `--line` → `--color-divider` (or `--color-border` for control borders)
-   - `--muted` → `--color-text-muted`
-   - `--accent` → `--color-accent`
-   - `--control-active` → `--color-control-active`
-   - `--control-height-large` → `--control-h`, and `--control-height` → `--control-h-compact`
-   - `--panel-header-bg` → `--color-panel-header`, and `--panel-header-line` → `--color-divider`
-2. Add `components.css` in a `shared` layer under the app's own layers, so nothing changes until a page
-   moves over.
-3. Rebuild each page on the library's classes, then delete the page's old CSS and the `--c-*` tokens it used. A
-   private audit lists the old classes and the duplicates.
-4. React components wrap the classes: `Button`, `IconButton`, `MenuButton`, `Field`, `Switch`,
-   `Segmented`, `Chip`, `Notice`, `SidePanel`, `Dialog`, `SectionToolbar`, `SettingsRow`, `Card`, `MediaCard`,
-   with the behaviour in `components.js`.
+**Storyarr** (retired on 11 November 2026) adopted the library in steps, with aliases from its old role names. Its boards are archived in `areas/archive/storyarr/`; none of this applies to a new app.
 
 **Adopted (2 November 2026):**
 - **Starboard**, branch `shared-library` (commits 175a0c3 and 2129d68, not pushed). It loads `components.js` with
@@ -300,16 +284,11 @@ adopt, one release at a time:
   `confirmDialog()`, `menuButton()` and `renderKeyed()`. `renderKeyed()` updates rows in place so focus stays.
 
   Icons come from `web/icons/sprite.svg`.
-- **Storyarr**, branch `covers-and-shelf-only` (commit 1beeb45, not pushed). Copies in `apps/web/src/shared/` are
-  `tokens.css` (without the font, which Storyarr loads itself), `components.css` and `compat.css`. `compat.css` keeps
-  the 18 class names both apps use (`.notice`, `.count`, `.empty`, `.panel` and others) unchanged until each page
-  moves over. Delete a rule there when its page moves.
-
 **components.js changes:** `openLayer(idOrElement, opener, onClose)` now accepts an element, returns its
 close function, cleans up its listeners and can be reopened safely. Loading the file with `data-manual`
 (or setting `window.SharedComponentsManual = true` first) skips the automatic `setup()`.
 
-**Keeping them in step** (TheMightyTRexUK, 2 November 2026: the library is shared by both apps and kept up to date).
+**Keeping them in step** (TheMightyTRexUK, 2 November 2026: the library is shared by every app and kept up to date).
 Change the component here first, never in an app. Follow the steps in
 [Make a change](https://themightytrex.github.io/design-system/resources/make-a-change.html). Add the change to the
 Decisions list in this file, commit it here and push, so every checkout picks it up.
@@ -351,12 +330,12 @@ Decisions list in this file, commit it here and push, so every checkout picks it
 - **The logo editor on every way to get a logo** (TheMightyTRexUK, 2 November 2026). From a cover, Find online and Upload your own all use the same box. It has Shape from lightness or transparency, four cleaning levels, and a small eraser and paintbrush on `.checker[data-tool]`. Found files show as plain pictures in `.logo-candidate__art > img`.
 - **Nicer scroll bars** (TheMightyTRexUK, 2 November 2026). They are thin and square in every scrolling area, in `--color-scrollbar` (the border colour, or the text colour in High contrast) on a clear track. They stay visible, and only shelves hide theirs behind arrows.
 - **UX notes for testing** (TheMightyTRexUK, 2 November 2026). Retired on 13 November 2026: `ux-notes.js` is no longer in the library, and each app copies in [Snaglist](https://github.com/TheMightyTRex/snaglist) instead. `sync.py` lists a leftover copy as retired.
-- **Security checks the same in both apps** (TheMightyTRexUK, 3 November 2026).
+- **Security checks the same in every app** (TheMightyTRexUK, 3 November 2026).
   - `docs/SECURITY-CHECKS.md` sets the checks. They are tests, live journeys, Trivy, ZAP on a private network,
     Gitleaks, Bandit and Semgrep, ShellCheck, Hadolint, CodeQL, a separate review and install tests. It also says how
     to sort findings.
   - Each app has a security page with a "Security checks for each release" table, and every release's notes have a Security section (`CONTENT-DESIGN.md`, release notes).
-  - Starboard is the worked example, and Storyarr has to catch up.
+  - Starboard is the worked example.
 - **Focus not obscured** (WCAG 2.2, 4 November 2026). The page keeps the sticky header (and row 2) and an open save
   bar clear when it scrolls, with `scroll-padding` on `:root`. We added `WCAG.md` and `ALT-TEXT.md` after the GOV.UK
   Service Manual and BBC GEL.

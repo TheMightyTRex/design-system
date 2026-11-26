@@ -362,7 +362,7 @@ def landings(by_start):
              ("Components", "components/index.html", "Every component, live, with its markup and rules."),
              ("Patterns", "patterns/index.html", "Choosing, the wizard, the terminal, help and dates."),
              ("Guides", "guides/index.html", "Content design, help writing, accessibility, security and more, one page each."),
-             ("Boards", "areas/index.html", "Whole pages of Starboard (and the retired Storyarr), built from the library."),
+             ("Boards", "areas/index.html", "Whole pages of Starboard, built from the library, and an archive of the retired Storyarr's boards."),
              ("Resources", "resources/index.html", "Tools, outside tools, how to make a change and how to get feedback.")]
     cards = "".join(f'<li class="card"><h2 class="card__title"><a href="{h}">{t}</a></h2><p>{s}</p></li>' for t, h, s in tiles)
     body = (f'<div class="s-landing"><div class="page-head"><div class="page-head__text"><h1>TRex design system</h1>'

@@ -1,20 +1,23 @@
 #!/usr/bin/env python3
-"""Copies the shared library into both apps, so Storyarr and Starboard always use the same components.
+"""Copies the shared library into the apps that carry a copy, so they always use the same components.
 
 This repository is the source. Change tokens.css, components.css, components.js or icons.svg here, check
 the gallery (four themes, 175% text) and run tools/contrast.py, then run:  python3 tools/sync.py
-Add --check to list what would change without writing anything.
+Add --check to list what would change without writing anything (it exits with 1 when a copy differs).
 It writes (folders set in tools/paths.py):
-  Starboard  STARBOARD_WEB/css/tokens.css (font path ../fonts/), css/components.css, js/components.js,
-             (the core only, with each part in css/parts/ and js/parts/, once the app has a js/parts folder:
-             tools/parts.py), icons/sprite.svg (library icons plus Starboard's own), css/palettes.css and
-             palettes.json (palettes/, for the own style's colours); and, next to the web folder,
-             lib/terminal-frame.sh, the copy in run-first.sh, starboard/qr.py (from terminal/) and
-             tools/verbose-check.py, the Plain English check (warns only)
-  Storyarr   STORYARR_SHARED/tokens.css (no @font-face or --font: Storyarr loads the font itself),
-             components.css
+  Starboard    STARBOARD_WEB/css/tokens.css (font path ../fonts/), css/components.css, js/components.js,
+               (the core only, with each part in css/parts/ and js/parts/, once the app has a js/parts folder:
+               tools/parts.py), icons/sprite.svg (library icons plus Starboard's own), css/palettes.css and
+               palettes.json (palettes/, for the own style's colours); and, next to the web folder,
+               lib/terminal-frame.sh, the copy in run-first.sh, starboard/qr.py (from terminal/) and
+               tools/verbose-check.py, the Plain English check (warns only)
+  Stallboard   STALLBOARD_DS/tokens.css, components.css, components.js and fonts/ (the store's assets/ds folder)
+  Plug-ins     PLUGINS_DIR/tv-station/ds-tokens.css (the tokens, for the schedule grid pages) and
+               PLUGINS_DIR/outside-services/ds.css (tokens and components) with font.woff2, for the status page.
+               A plug-in whose copy changes needs a patch version bump and a changelog line in the plug-ins repository.
 It does not commit. A file the library no longer has (RETIRED) is listed as "retired" while an app still has a
 copy, for the app to remove with git rm; sync.py never deletes anything. Commit in each repo, then rebuild and test each app.
+Storyarr (retired on 11 November 2026) is no longer synced.
 """
 import pathlib
 import re
@@ -25,8 +28,10 @@ from paths import path
 
 HERE = pathlib.Path(__file__).resolve().parent.parent
 STARBOARD = path("STARBOARD_WEB")
-STORYARR = path("STORYARR_SHARED")
+STALLBOARD = path("STALLBOARD_DS")
+PLUGINS = path("PLUGINS_DIR")
 CHECK = "--check" in sys.argv
+DIFFERS = []  # every copy that differs or is absent, for the exit code of --check
 
 
 def write(path, text, new=False):
@@ -36,8 +41,10 @@ def write(path, text, new=False):
         print("same   ", path)
     elif CHECK and new and old is None:
         print("absent ", path)
+        DIFFERS.append(path)
     elif CHECK:
         print("differs", path)
+        DIFFERS.append(path)
     else:
         path.write_text(text)
         print("updated", path)
@@ -48,7 +55,7 @@ components = (HERE / "components.css").read_text()
 behaviour = (HERE / "components.js").read_text()
 # No longer in the library: ux-notes.js, the UX notes tester, replaced by Snaglist (DEV-05, 13 November 2026:
 # github.com/TheMightyTRex/snaglist, which each app copies in itself).
-RETIRED = {"Starboard": ["js/ux-notes.js"], "Storyarr": ["ux-notes.js"]}
+RETIRED = {"Starboard": ["js/ux-notes.js"]}
 icons = dict(re.findall(r'<symbol id="i-([^"]+)"[^>]*>(.*?)</symbol>', (HERE / "icons.svg").read_text(), re.S))
 note = "\n * Copied by tools/sync.py from github.com/TheMightyTRex/design-system: change it there, not here."
 
@@ -94,20 +101,53 @@ if STARBOARD.exists():
         b = text.index("# terminal-frame: end")
         write(first, text[:a] + frame + text[b:])
 
-if STORYARR.exists():
-    t = re.sub(r"@font-face \{.*?\}\n\n", "", tokens, count=1, flags=re.S)
-    t = re.sub(r"  --font: [^\n]*\n", "", t, count=1)
-    t = t.replace(" * Shared design tokens for Storyarr and Starboard (version 1, 2 November 2026).",
-                  " * Shared design tokens for Storyarr and Starboard (version 1, 2 November 2026)." + note +
-                  "\n * Storyarr's copy leaves out the font (styles.css loads Atkinson Hyperlegible Next and sets --font).", 1)
-    write(STORYARR / "tokens.css", t)
-    write(STORYARR / "components.css", components.replace(
-        " * Shared components for Storyarr and Starboard (version 1, 2 November 2026).",
-        " * Shared components for Storyarr and Starboard (version 1, 2 November 2026)." + note, 1))
+# Stallboard, the store (STALLBOARD_DS is its assets/ds folder): byte-for-byte copies, and the font beside them.
+if STALLBOARD.exists():
+    write(STALLBOARD / "tokens.css", tokens)
+    write(STALLBOARD / "components.css", components)
+    write(STALLBOARD / "components.js", behaviour)
+    for name in ("atkinson-hyperlegible-next.woff2", "LICENSE-OFL.txt"):
+        font = HERE / "fonts" / name
+        target = STALLBOARD / "fonts" / name
+        same = target.exists() and target.read_bytes() == font.read_bytes()
+        if same:
+            print("same   ", target)
+        elif CHECK:
+            print("differs", target)
+            DIFFERS.append(target)
+        else:
+            target.parent.mkdir(exist_ok=True)
+            target.write_bytes(font.read_bytes())
+            print("updated", target)
 
-for name, folder in (("Starboard", STARBOARD), ("Storyarr", STORYARR)):
-    for old in RETIRED[name] if folder.exists() else []:
+# The two plug-ins that carry their own pinned copy (the other plug-ins are drawn by Starboard itself). The header
+# names no commit, so --check can tell a real difference from a new commit that changed nothing here.
+PLUGIN_HEAD = ("/* The TRex Design System's {what}, copied by tools/sync.py (github.com/TheMightyTRex/design-system).\n"
+               "   Do not change this copy: change the design system and run sync.py again. */\n")
+if PLUGINS.exists():
+    plugin_font = 'url("font.woff2")'
+    t = tokens.replace('url("fonts/atkinson-hyperlegible-next.woff2")', plugin_font)
+    if (PLUGINS / "tv-station").is_dir():
+        write(PLUGINS / "tv-station/ds-tokens.css", PLUGIN_HEAD.format(what="tokens.css") + t)
+    if (PLUGINS / "outside-services").is_dir():
+        write(PLUGINS / "outside-services/ds.css", PLUGIN_HEAD.format(what="tokens.css and components.css") + t + "\n" + components)
+        font = HERE / "fonts/atkinson-hyperlegible-next.woff2"
+        target = PLUGINS / "outside-services/font.woff2"
+        if target.exists() and target.read_bytes() == font.read_bytes():
+            print("same   ", target)
+        elif CHECK:
+            print("differs", target)
+            DIFFERS.append(target)
+        else:
+            target.write_bytes(font.read_bytes())
+            print("updated", target)
+
+for name, folder in (("Starboard", STARBOARD), ("Stallboard", STALLBOARD), ("the plug-ins", PLUGINS)):
+    for old in RETIRED.get(name, []) if folder.exists() else []:
         if (folder / old).exists():
             print("retired", folder / old, "(no longer in the library: remove it from the app with git rm)")
     if not folder.exists():
         print("missing", name, folder, "(set it in tools/paths.local.json)")
+if CHECK and DIFFERS:
+    print(f"{len(DIFFERS)} copies differ: run python3 tools/sync.py")
+    sys.exit(1)

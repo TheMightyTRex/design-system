@@ -1,7 +1,7 @@
 # Changelogs
 
-Version 1.1, 26 November 2026. How every project that uses this design system keeps its changelog: Storyarr,
-Starboard, Snaglist and the design system itself. It follows the principles of
+Version 1.1, 26 November 2026. How every project that uses this design system keeps its changelog: Starboard,
+Stallboard, Snaglist and the design system itself. It follows the principles of
 [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/), written in our own words, with dates and
 wording from `CONTENT-DESIGN.md`. Release notes shown in an app follow the same change types
 (`CONTENT-DESIGN.md`, section 7).
@@ -72,7 +72,7 @@ versions were never published, say so in one line under the next version.
 2.4 **Rule: the version heading is `## [1.2.3] (4 November 2026)`.** Put the version in square brackets, so it links
 (rule 2.6), then the release date in brackets. Dates follow `CONTENT-DESIGN.md`: "4 November 2026", never "2026-11-04"
 or "04/11/26". This is where we differ from Keep a Changelog, which uses year, month, day. Our way matches the dates
-in both apps and leaves no doubt about the month.
+in every app and leaves no doubt about the month.
 
 2.5 **Rule: a short summary is allowed** under the version heading, in one or two sentences. It can give the theme of
 the release, what to do when upgrading, database changes, and the way back to the version before. Never make it a
@@ -83,8 +83,8 @@ the sections. Each one compares the version with the one before. Unreleased comp
 first version links to its tag or release page.
 
 ```markdown
-[Unreleased]: https://github.com/TheMightyTRex/storyarr/compare/v0.6.0...HEAD
-[0.6.0]: https://github.com/TheMightyTRex/storyarr/compare/v0.5.9...v0.6.0
+[Unreleased]: https://github.com/TheMightyTRex/starboard/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/TheMightyTRex/starboard/compare/v0.5.9...v0.6.0
 [0.1.0]: https://github.com/TheMightyTRex/snaglist/releases/tag/v0.1.0
 ```
 
