@@ -712,7 +712,7 @@ and wider spacing.</p>
 </tr>
 <tr>
 <td>Waiting mark and busy button</td>
-<td><code>.wait</code>, <code>.wait__mark</code>, <code>.btn[aria-busy="true"]</code></td>
+<td><code>.wait</code>, <code>.wait__mark</code>, <code>.btn[aria-busy="true"]</code>; <code>SharedComponents.wait(words, { status, id })</code> returns the line</td>
 <td>Waiting standard, option A, the ring: a short wait shows the ring with words, never a plain "Loading…". A busy button draws the ring before its doing word ("Testing"), keeps its size and has <code>aria-disabled</code>. After 0.3 seconds the place the answer goes shows its waiting state; the end replaces it with the result, and focus moves to an error. With less motion the ring fades instead of turning</td>
 </tr>
 <tr>
