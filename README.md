@@ -43,6 +43,7 @@ change the copies inside the apps.
 | `docs/WCAG.md` | How the design system meets each point of WCAG 2.2 AA, after the GOV.UK Service Manual, and what each app must still do |
 | `docs/ALT-TEXT.md` | How to write text descriptions (alt text) for every kind of image, after the BBC's guidance |
 | `docs/SCREENSHOTS.md` | Screenshots in help: when one earns its place, made-up data only, the outline, arrow and step-number mark-up, and a short version for AI tools; `tools/annotate.js` draws and checks the mark-up |
+| `docs/AI-CHECKS.md` | AI-triggered checks and the first one, the Accessibility check: trigger phrases, steps for every assistive technology, a prompt to copy and a checklist; `resources/accessibility-check-report-template.md` is its report |
 | `docs/SECURITY-CHECKS.md` | The security checks every app run, how to sort what they find, and how to record the results and release notes |
 | `resources/` | The Design resources and tools pages: what you can use, the tools, outside tools, how to make a change and how to get feedback |
 | `tools/help_centre/` | The help centre builder every app's help uses: Markdown and `help-centre.json` in, the standard help centre out (`docs/HELP-WRITING.md` section 11) |
