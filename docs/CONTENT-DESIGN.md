@@ -1,6 +1,6 @@
 # Content design guide
 
-Version 1.5, 17 November 2026. How every word in Storyarr and Starboard is written: page titles, menus,
+Version 1.6, 26 November 2026. How every word in Storyarr and Starboard is written: page titles, menus,
 buttons, settings, messages, release notes, help and the README. It applies to new text and to anything you
 touch. Help articles also follow `HELP-WRITING.md`; changelogs also follow `CHANGELOGS.md`.
 
@@ -109,19 +109,28 @@ put it in bold inside steps: "Select **Add missing books**." Outside a step, put
 quotation marks: "the 'Upgrade automatically' setting". Double quotation marks are for words people say or
 type. If a label breaks a rule, fix the label in the app rather than misquoting it.
 
-2.12 **Rule: sentences under 25 words, paragraphs of two to four sentences.** Active voice, present tense.
-Address the reader as "you". The app refers to itself by name ("Storyarr searches again in 6 hours"), not
-"we", except in error messages where the system is at fault ("We could not reach Hardcover").
+2.12 **Rule: short sentences, one idea each.** The average sentence is 15 to 20 words, and no sentence is
+longer than 25. Paragraphs have two to four sentences. Use the active voice and the present tense, and name who
+does the action: "Starboard keeps the file", not "The file is kept". Address the reader as "you". The
+organisation behind the app may say "we" ("We could not reach Hardcover", "We update the list each week"), and
+the app may also name itself ("Storyarr searches again in 6 hours"). Use one of the two in a given text, not
+both. A passive is allowed when the doer is unknown or does not matter. Aim for about 80 to 90% active. The
+standard is the Plain English Campaign (plainenglish.co.uk); this guide applies it and never copies its text.
 
 2.13 **Rule: lead with the answer.** The first sentence says what this is or what happened.
 
-2.14 **Rule: expand an abbreviation the first time on each page:** "NZB (Usenet download file)". Common ones
-need no expansion: ebook, URL, API. In release notes, expand it in every item, because each item is read
-alone.
+2.14 **Rule: avoid jargon, and explain a technical word the first time on each page.** Prefer the everyday
+word. When a technical word is the right one, add a short plain meaning: "NZB (Usenet download file)",
+"a daemon (a program that runs in the background)". Common ones need no explanation: ebook, URL, API. In
+release notes, explain it in every item, because each item is read alone.
 
 2.15 **Rule: never say how difficult something is,** in either direction. Not simple, simply, easy, just,
 straightforward, obviously, complex, hard, difficult or advanced. Give the fact the word stood in for: a step
-count, a time, or what you need first. "This takes 3 steps", not "This is easy".
+count, a time, or what you need first. "This takes 3 steps", not "This is easy". Cut other filler words too:
+actually, basically, really, quite, very, absolutely, "in order to" (write "to"), "note that", "at this
+moment in time" (write "now") and "in the end". Prefer the plainer word: "use", not "utilise"; "start", not
+"commence"; "about", not "approximately"; "help", not "assist"; "buy", not "purchase". Where a word is also a
+label or a term in section 5 (select, enter, delete, request), the label wins.
 
 2.16 **Rule: the specific word, never a figure of speech.** No metaphors. Write "layout", "order",
 "template" or "type", not "shape". One word per thing, and never the same word for two things (section 5).
@@ -151,6 +160,19 @@ will find on their own network.
 
 2.24 **Rule: nest related points.** When bullets explain one point, nest them under it. The parent states
 the fact; the children say why, how long and what to do.
+
+2.25 **Rule: use the verb, not a hidden verb.** "Select", not "make a selection"; "install", not "carry out an
+installation"; "when you finish", not "on completion of"; "remove", not "the removal of". A verb turned into a
+noun adds words and hides who does what.
+
+2.26 **Rule: reading level.** Aim for a Flesch-Kincaid grade of 6 or lower for text people read in the app,
+the help and the README. Developer pages and changelogs may reach grade 8. The grade is a guide that cannot
+detect jargon, so read the text as well as measuring it.
+
+2.27 **Rule: word targets are warnings.** `tools/verbose-check.py` compares a page with a target length for its
+kind. A page over its target gets a warning, never a failure, because the answer may be to move content, not to
+cut it. A long sentence, or a paragraph of more than four sentences, is the only measure that can fail a
+check, and only on a line a change adds. That part is not switched on yet.
 
 ## 3. Punctuation, numbers and dates
 
@@ -368,8 +390,10 @@ The full checklist is in `ACCESSIBILITY.md`. The content half:
 - [ ] One h1, headings in order, browser tab title matches
 - [ ] Buttons start with a verb and name the object; links name the destination and the file type
 - [ ] Empty, loading and error states follow section 7; errors say what is safe
-- [ ] Sentences under 25 words; the answer comes first
+- [ ] Average sentence 15 to 20 words and none over 25; active voice; no hidden verbs, filler or jargon; the answer comes first
 - [ ] Icon-only controls have labels; alt text written; screenshots described in words
 - [ ] Example data is made up and follows rule 2.23
 
-The rest of this list is checked by reading, until a content linter is added (task CD-02 in `TASKS.md`).
+`tools/check_words.py` checks the banned words. `tools/verbose-check.py` checks the sentence length, the
+paragraph length, the passive voice, hidden verbs, filler, jargon, reading level and word targets, and warns only
+(it fails on nothing yet). The rest of this list is checked by reading.
