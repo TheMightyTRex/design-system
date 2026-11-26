@@ -64,6 +64,7 @@ GUIDES = [
     ("ALT-TEXT", "Alt text", "Words"), ("SCREENSHOTS", "Screenshots", "Words"),
     ("ACCESSIBILITY", "Accessibility", "Accessibility and security"), ("WCAG", "WCAG 2.2 AA", "Accessibility and security"),
     ("SECURITY-CHECKS", "Security checks", "Accessibility and security"),
+    ("AI-CHECKS", "AI-triggered checks", "Accessibility and security"),
 ]
 GUIDE_SLUG = {n: n.lower() for n, _, _ in GUIDES}
 
@@ -404,6 +405,10 @@ def guides(page_of):
                                  note=f"Made by tools/site.py from docs/{n}.md"))
         plain = html.unescape(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", out)))
         pages.append({"title": title, "area": "Guides", "url": rel, "summary": f"{group} guide", "text": plain[:2500]})
+        if n == "AI-CHECKS":  # each check is found by its own name, not only through the guide
+            pages.append({"title": "Accessibility check (AI-triggered)", "area": "Guides", "url": f"{rel}#5-the-accessibility-check",
+                          "summary": "The standard check an AI assistant runs when asked: trigger phrases, steps for every assistive technology, report and prompt",
+                          "text": "Accessibility check a11y check accessibility test screen reader NVDA Orca JAWS VoiceOver TalkBack Narrator keyboard switch voice control magnifier logical order needless repeats report template AI assistant prompt DASH-606"})
     # The guides landing page.
     cards = ""
     for g in dict.fromkeys(g for _, _, g in GUIDES):
