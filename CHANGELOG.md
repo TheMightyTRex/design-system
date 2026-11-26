@@ -9,7 +9,7 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 26 November 2026
 
-- **A 2nd level menu with icons only still names the tab you are on and the tab with focus.** `.menu-tabs.is-compact` tabs are now at least 44px wide, `components.js` gives each one its name as a tooltip, and `icons.svg` has two new icons, `image` and `palette`.
+- **A 2nd level menu can scroll with a 44px tab for each icon.** `.menu-tabs--scroll` keeps every icons-only tab 44px wide and shows the name of the current tab and the tab with focus, `components.js` gives icons-only tabs their name as a tooltip, and `icons.svg` has two new icons, `image` and `palette`.
 - **The content guide follows the Plain English Campaign.** Rules 2.12, 2.14 and 2.15 now ask for an average sentence of 15 to 20 words and none over 25, plain words, and an explanation of technical words. New rules 2.25 to 2.27 cover hidden verbs, reading level (grade 6, or 8 for developer pages and changelogs) and word targets as warnings. `docs/CHANGELOGS.md` asks for one sentence per entry.
 - **A Plain English check, warn only.** `tools/verbose-check.py ci` warns about the lines a pull request adds, and `tools/sync.py` copies it into Starboard. It fails on nothing yet; the failing part, for a sentence over 25 words or a paragraph over 4 sentences, waits until a repository has fewer than 100 long sentences.
 - **Plainer wording (DASH-593):** the README, the guides in `docs/` and the resources pages now have shorter sentences, with no change in meaning.
