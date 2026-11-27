@@ -7,6 +7,10 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 [Semantic Versioning](https://semver.org/).
 
 
+## 27 November 2026
+
+- **The hover outline of a page topic tab meets the rule under the tabs (Starboard issue #366).** The outline was an inset box-shadow, which stops at the padding box, so its lower edge sat 3px above the line under the tabs. It is now a 1px border on a pseudo-element over the whole tab, in the four themes; the tab keeps its size, the selected tab keeps its underline, and the focus ring is unchanged.
+
 ## 26 November 2026
 
 - **The unused cover card, cover actions and book row are removed.** `.cover-card*`, `.cover-actions*` and `.book-row*` (about 340 lines, built for Storyarr) were used by no app, plug-in, Stallboard or help centre; the Cover actions gallery section is gone and the Shelf demo uses plain media cards.
