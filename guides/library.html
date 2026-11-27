@@ -1283,7 +1283,7 @@ Decisions list in this file, commit it here and push, so every checkout picks it
 <li>The one animated ring on the live indicator (<code>@keyframes</code> pulse) is an attention signal, not a shadow, and stays.</li>
 <li>The help centre builder has the same switch in its own Display slide-out. It applies the switch in its head script, from its own choice or the app's <code>starboard.shadows</code>. The gallery shows both states.</li>
 <li><strong>Covers take the card shading</strong> (TheMightyTRexUK, 23 November 2026, DASH-535: "Apply that to all covers").</li>
-<li>The shared <code>.cover</code> rule has the card's 1px <code>--color-divider</code> border, the 6px corner and <code>--shadow-card</code>. A cover in a <code>.media-card</code> or <code>.book-row</code> raises its border to <code>--color-border</code> on hover. So every kind of cover inherits it: library walls and rows, Discover, search results, Wanted, item pages, collections, books, plug-ins and the help centre.</li>
+<li>The shared <code>.cover</code> rule has the card's 1px <code>--color-divider</code> border, the 6px corner and <code>--shadow-card</code>. A cover in a <code>.media-card</code> raises its border to <code>--color-border</code> on hover. So every kind of cover inherits it: library walls and rows, Discover, search results, Wanted, item pages, collections, books, plug-ins and the help centre.</li>
 <li>The round cover keeps its circle, the series fan gets the 6px corner, and the action column sits inside the cover's border and corner.</li>
 <li>Covers of 24px, 48px and a result's 64px keep the border and corner but no shadow, as the tokens have no lighter size.</li>
 <li>High contrast keeps the border (the shadow token is none there), and dark themes keep the divider visible.</li>
@@ -1296,10 +1296,8 @@ Decisions list in this file, commit it here and push, so every checkout picks it
   the thing is: rows, cards, chips, filters, toolbars, notices, toasts, dialogs or tables.</li>
 <li>Accent teal (UX-02 option B).</li>
 <li>Status chip style B, outline with icon (UX-04).</li>
-<li>Cover actions (UX-42): <code>.cover-card</code> with <code>.cover-actions</code> on the cover by default, or beside it as a per-account setting.</li>
 <li>Shelves without scroll bars (UX-30 option A): <code>.shelf-scroller</code>, with arrows over an edge fade.</li>
 <li>Covers always line up: <code>.media-card</code> titles take two lines.</li>
-<li>Small covers (UX-44): <code>.book-row</code> with <code>.cover-actions--row</code> in rows, and <code>.cover-card__more</code> with the actions in words on small tiles.</li>
 <li>Square radio art in the book shape (FEAT-R decision 2, fill 4): <code>.show-art</code>, with the label in the image's colour, and <code>.logo-tile</code>.</li>
 <li><strong>Every slide-out has the same header and body</strong> (TheMightyTRexUK, 2 November 2026). Slide-out and phone menu
   headers use <code>--color-slide-header</code>, the page background, over a raised-surface body. Dialogs keep the plain header.
@@ -1493,11 +1491,11 @@ Snaglist and the plug-in collection use it. Build one here with <code>tools/help
 </tbody>
 </table></div>
 <p>Still in Starboard only, and why:
-- The four poster cards are in the library as the <code>media-library</code> part, as Starboard has them. Merging them with <code>.media-card</code> (and removing the unused <code>.cover-card</code> and <code>.book-row</code>) is a later change.
+- The four poster cards are in the library as the <code>media-library</code> part, as Starboard has them. Merging them with <code>.media-card</code> is a later change. The unused <code>.cover-card</code>, <code>.cover-actions</code> and <code>.book-row</code> were removed on 26 November 2026.
 - <code>.access-change</code> shows what Starboard can access, with the command to change it. <code>.job-run</code> is a server job with Run now. <code>.release-notes</code> is the release notes slide-out.
 - The storage charts use <code>--media-*</code>, which map to <code>--series-*</code>. Bring in (<code>.bring-*</code>) is the one screen that uses them.
 - Starboard still has its own copy of each block in the table until it loads the part; delete the copy when it does.
-- <strong>Storyarr</strong> (retired on 11 November 2026): the bookshelf and series views, and the library classes only it used (for example <code>.book-row</code>, <code>.cover-card</code>, <code>.item-header</code>, <code>.list-detail</code> and the logo slide-out).
+- <strong>Storyarr</strong> (retired on 11 November 2026): the bookshelf and series views, and the library classes only it used (for example <code>.item-header</code>, <code>.list-detail</code> and the logo slide-out).
 - <strong>Plug-ins:</strong> <code>tv-station</code> has its own time grid and drag-and-drop palette. Stallboard builds its own header, filters and tiles over the library, and redefines <code>.shelf</code>.</p>
 <ul>
 <li>11 November 2026: <code>--font-heading</code> (headings h1 to h4) and <code>--color-rail</code> (the side menu) are optional, for Starboard's styles. Unset, nothing changes.</li>
