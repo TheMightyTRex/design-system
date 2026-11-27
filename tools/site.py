@@ -39,7 +39,7 @@ PARTS = [
     ("fields", "components", "inputs", "Inputs", "pencil", "Fields, choices, filters, combobox, tag input, secret field, schedule and the error summary."),
     ("status", "components", "content", "Content", "file-text", "Status, tooltips, facts, charts, rows, tables, notices, toasts, callouts, disclosure and the log viewer."),
     ("cards", "components", "containers", "Panels, cards and tabs", "layout-grid", "Panels and cards, and tabs."),
-    ("media", "components", "media", "Covers, media and shelves", "film", "Covers and media cards, the A to Z list, load more, cover actions, series header and shelf."),
+    ("media", "components", "media", "Covers, media and shelves", "film", "Covers and media cards, the A to Z list, load more, series header and shelf."),
     ("toolbar", "components", "settings-and-tools", "Settings and toolbars", "settings", "The section toolbar, settings rows, the save bar, settings patterns, the folder picker, timeline and calendar."),
     ("slide-out", "components", "slide-outs-and-dialogs", "Slide-outs and dialogs", "panel-right-open", "The slide-out and the dialog."),
     ("page-topics", "components", "app-patterns", "App patterns", "gauge", "Starboard's own patterns: page topics, the update list, places and service logos, the dashboard, show once, a wizard in a slide-out and folding sections."),

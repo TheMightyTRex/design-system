@@ -141,7 +141,7 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 | Cover | `.cover`, `.cover--row` (48px in rows), `.cover__badge` | 2:3; square audio covers letterboxed; the card's border, 6px corner and shadow on every cover (23 November 2026) |
 | Facts | `.facts` (`dl`) | Author first, then Series; names are links |
 | Stat | `.stats`, `.stat[data-tone]`, `.stat__value`, `.stat__label` | Edge colour plus words |
-| Progress and meter | `.progress[data-tone]`, `.progress--busy`, `.progress--running`, `.meter`, `.meter__label`, `creepProgress()` | Value always in words. Waiting standard (DASH-493, TheMightyTRexUK, 20 November 2026): a bar that is working is 14px with rounded ends and moving stripes. `.progress--busy`: the end is not known, a striped band runs along. `.progress--running`: a count that is still going (such as 4 of 5); it starts with a visible piece and `creepProgress(bar, done, total, eachMs)` eases onto each count and creeps towards the next. Taken off when it ends; still with less motion asked for |
+| Progress and meter | `.progress[data-tone]`, `.progress--busy`, `.progress--running`, `.meter`, `.meter__label`, `creepProgress()`; `SharedComponents.progress({ label, value, max, tone, busy, valuetext, decorative, img, labelledby, id })` and `setProgress(bar, value, valuetext)` | Value always in words. Waiting standard (DASH-493, TheMightyTRexUK, 20 November 2026): a bar that is working is 14px with rounded ends and moving stripes. `.progress--busy`: the end is not known, a striped band runs along. `.progress--running`: a count that is still going (such as 4 of 5); it starts with a visible piece and `creepProgress(bar, done, total, eachMs)` eases onto each count and creeps towards the next. Taken off when it ends; still with less motion asked for |
 | Waiting mark and busy button | `.wait`, `.wait__mark`, `.btn[aria-busy="true"]`; `SharedComponents.wait(words, { status, id })` returns the line | Waiting standard, option A, the ring: a short wait shows the ring with words, never a plain "Loading…". A busy button draws the ring before its doing word ("Testing"), keeps its size and has `aria-disabled`. After 0.3 seconds the place the answer goes shows its waiting state; the end replaces it with the result, and focus moves to an error. With less motion the ring fades instead of turning |
 | Rows | `.rows`, `.row`, `.row--no-lead`, `.row--opens`, `.row__title`, `.row__meta`, `.row__side` | `.row--opens`: the whole row opens a slide-out |
 | Group heading | `.group-heading` | Sentence case, no capitals |
@@ -336,7 +336,7 @@ Decisions list in this file, commit it here and push, so every checkout picks it
   - The one animated ring on the live indicator (`@keyframes` pulse) is an attention signal, not a shadow, and stays.
   - The help centre builder has the same switch in its own Display slide-out. It applies the switch in its head script, from its own choice or the app's `starboard.shadows`. The gallery shows both states.
 - **Covers take the card shading** (TheMightyTRexUK, 23 November 2026, DASH-535: "Apply that to all covers").
-  - The shared `.cover` rule has the card's 1px `--color-divider` border, the 6px corner and `--shadow-card`. A cover in a `.media-card` or `.book-row` raises its border to `--color-border` on hover. So every kind of cover inherits it: library walls and rows, Discover, search results, Wanted, item pages, collections, books, plug-ins and the help centre.
+  - The shared `.cover` rule has the card's 1px `--color-divider` border, the 6px corner and `--shadow-card`. A cover in a `.media-card` raises its border to `--color-border` on hover. So every kind of cover inherits it: library walls and rows, Discover, search results, Wanted, item pages, collections, books, plug-ins and the help centre.
   - The round cover keeps its circle, the series fan gets the 6px corner, and the action column sits inside the cover's border and corner.
   - Covers of 24px, 48px and a result's 64px keep the border and corner but no shadow, as the tokens have no lighter size.
   - High contrast keeps the border (the shadow token is none there), and dark themes keep the divider visible.
@@ -349,10 +349,8 @@ Decisions list in this file, commit it here and push, so every checkout picks it
   the thing is: rows, cards, chips, filters, toolbars, notices, toasts, dialogs or tables.
   - Accent teal (UX-02 option B).
   - Status chip style B, outline with icon (UX-04).
-  - Cover actions (UX-42): `.cover-card` with `.cover-actions` on the cover by default, or beside it as a per-account setting.
   - Shelves without scroll bars (UX-30 option A): `.shelf-scroller`, with arrows over an edge fade.
   - Covers always line up: `.media-card` titles take two lines.
-  - Small covers (UX-44): `.book-row` with `.cover-actions--row` in rows, and `.cover-card__more` with the actions in words on small tiles.
   - Square radio art in the book shape (FEAT-R decision 2, fill 4): `.show-art`, with the label in the image's colour, and `.logo-tile`.
 - **Every slide-out has the same header and body** (TheMightyTRexUK, 2 November 2026). Slide-out and phone menu
   headers use `--color-slide-header`, the page background, over a raised-surface body. Dialogs keep the plain header.
@@ -464,11 +462,11 @@ Owner decision, 26 November 2026: every Starboard pattern that other screens or 
 | Folding sections | `.fold-tools`, `.folds`, `.fold*` | `folds` | A plug-in's tables that fold |
 
 Still in Starboard only, and why:
-- The four poster cards are in the library as the `media-library` part, as Starboard has them. Merging them with `.media-card` (and removing the unused `.cover-card` and `.book-row`) is a later change.
+- The four poster cards are in the library as the `media-library` part, as Starboard has them. Merging them with `.media-card` is a later change. The unused `.cover-card`, `.cover-actions` and `.book-row` were removed on 26 November 2026.
 - `.access-change` shows what Starboard can access, with the command to change it. `.job-run` is a server job with Run now. `.release-notes` is the release notes slide-out.
 - The storage charts use `--media-*`, which map to `--series-*`. Bring in (`.bring-*`) is the one screen that uses them.
 - Starboard still has its own copy of each block in the table until it loads the part; delete the copy when it does.
-- **Storyarr** (retired on 11 November 2026): the bookshelf and series views, and the library classes only it used (for example `.book-row`, `.cover-card`, `.item-header`, `.list-detail` and the logo slide-out).
+- **Storyarr** (retired on 11 November 2026): the bookshelf and series views, and the library classes only it used (for example `.item-header`, `.list-detail` and the logo slide-out).
 - **Plug-ins:** `tv-station` has its own time grid and drag-and-drop palette. Stallboard builds its own header, filters and tiles over the library, and redefines `.shelf`.
 
 - 11 November 2026: `--font-heading` (headings h1 to h4) and `--color-rail` (the side menu) are optional, for Starboard's styles. Unset, nothing changes.
