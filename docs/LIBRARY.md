@@ -253,7 +253,9 @@ the core, as any page can need them.
 
 **For an app.** Make a `js/parts` folder in the app's web folder, then run `tools/sync.py`. It writes the core as
 `css/components.css` and `js/components.js`, and each part as `css/parts/<name>.css` and `js/parts/<name>.js`. Without
-that folder the app gets the whole files, as before.
+that folder the app gets the whole files, as before. An app that loads only some parts can list them in
+`parts-used.json` in its web folder (`{"use": ["tabs", "log-view"]}`): the sync then writes only those, so a part the app
+does not load is not copied back after the app removes it (Starboard, 27 November 2026).
 
 On a page that uses a part, load its styles after `components.css`. Load its script after `components.js` and the
 parts it needs, and before the page's own scripts. `SharedComponents.setup()` then sets the part up with everything

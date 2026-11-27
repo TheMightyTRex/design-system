@@ -389,10 +389,10 @@ needed."</p>
 <li>Say the scope: which pages, plug-in or part of the design system.</li>
 <li>Make your own worktree and copy with sample data (section 3).</li>
 <li>Note the date and the commit you test.</li>
-<li>Read <code>ACCESSIBILITY.md</code>, <code>WCAG.md</code> and <code>ALT-TEXT.md</code> for the rules the pages must meet.</li>
+<li>Read <code>ACCESSIBILITY.md</code> (the one accessibility guide), then <code>WCAG.md</code> and <code>ALT-TEXT.md</code> for the detail of the rules the pages must meet.</li>
 </ul>
 <h3 id="53-the-steps">5.3 The steps</h3>
-<p><strong>Step 1: the automatic base.</strong> All five parts of the standard test in <code>ACCESSIBILITY.md</code> section 6:</p>
+<p><strong>Step 1: the automatic base.</strong> The parts of the standard test in <code>ACCESSIBILITY.md</code> section 26.1 (the sixth, a person with a reader, is in step 2):</p>
 <div class="s-scroll" tabindex="0" role="region" aria-label="Table 2"><table>
 <thead>
 <tr>
@@ -558,10 +558,10 @@ point and check the vendor's guide for the version in use.</p>
 <td>Partly. An AI checks the structure by script; a person confirms with a real switch.</td>
 </tr>
 <tr>
-<td><strong>Voice control</strong> (Voice Control on Apple devices, Voice Access on Windows 11 and Android, Dragon)</td>
-<td>Switch it on and say "show numbers" or "show names". Say each control's visible name, such as "Save changes".</td>
-<td>Every control answers to the words shown on it. The accessible name contains the visible text (WCAG 2.5.3 Label in Name).</td>
-<td>Partly. An AI compares each accessible name with its visible text by script. A person speaks the commands.</td>
+<td><strong>Voice control</strong> (Voice Control on Apple devices, Voice Access on Windows 11, Dragon)</td>
+<td>Switch it on. Windows Voice Access: say <code>click Save</code>, <code>show numbers</code>, <code>click 12</code>. Dragon: say <code>click Save</code>, then <code>show numbers</code> and the number. macOS and iOS Voice Control: say <code>click Save</code> (iOS: <code>tap Save</code>), <code>show numbers</code> or <code>show names</code>, then the number. Exact steps: <code>ACCESSIBILITY.md</code> section 22.</td>
+<td>Every control answers to the words shown on it. The accessible name contains the visible text at the start (WCAG 2.5.3 Label in Name). A control that needs <code>show numbers</code> because its name does not match is a finding, and the report names it.</td>
+<td>Partly. An AI can compare each accessible name with its visible text by script (an automated Label in Name check is in progress in Starboard). It cannot speak to the software. A person runs the steps, and until then the result is Expected.</td>
 </tr>
 </tbody>
 </table></div>
@@ -620,10 +620,10 @@ point and check the vendor's guide for the version in use.</p>
 </thead>
 <tbody>
 <tr>
-<td><strong>Touch on a phone</strong></td>
-<td>Use a real phone or a 375 px emulation with touch.</td>
-<td>Targets are at least 44 px (WCAG 2.5.8 sets 24 px as the floor). No action needs a gesture with more than one finger or a drag with no button. The page works upright and sideways.</td>
-<td>Yes for size and layout. A person confirms touch comfort.</td>
+<td><strong>Touch on a phone and target size</strong></td>
+<td>Use a real phone or a 375 px emulation with touch. Measure each control.</td>
+<td>Targets are at least 44 px, apart from dense table rows at 32 px (WCAG 2.5.8 sets 24 px as the floor, and nothing is smaller). No action needs a gesture with more than one finger or a drag with no button. The page works upright and sideways.</td>
+<td>Yes for size and layout: the scan checks target size today, and a per-control confirmation is in progress in Starboard. A person confirms touch comfort.</td>
 </tr>
 <tr>
 <td><strong>Reading and cognitive needs</strong></td>
