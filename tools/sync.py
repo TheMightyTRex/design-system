@@ -19,6 +19,7 @@ It does not commit. A file the library no longer has (RETIRED) is listed as "ret
 copy, for the app to remove with git rm; sync.py never deletes anything. Commit in each repo, then rebuild and test each app.
 Storyarr (retired on 11 November 2026) is no longer synced.
 """
+import json
 import pathlib
 import re
 import sys
@@ -70,11 +71,18 @@ if STARBOARD.exists():
         write(STARBOARD / "js/components.js", core_js)
         if not CHECK:
             (STARBOARD / "css/parts").mkdir(exist_ok=True)
+        # An app may list the parts it loads in parts-used.json ({"use": [names]}); only those are written, so a part no
+        # page loads is not copied again after the app has removed it (Starboard, DASH-596, 27 November 2026). Without
+        # the file every part is written, as before.
+        listed = STARBOARD / "parts-used.json"
+        wanted = set(json.loads(listed.read_text())["use"]) if listed.exists() else None
         for name in parts_js:
-            write(STARBOARD / "css/parts" / f"{name}.css", parts_css[name], new=True)
-            write(STARBOARD / "js/parts" / f"{name}.js", parts_js[name], new=True)
+            if wanted is None or name in wanted:
+                write(STARBOARD / "css/parts" / f"{name}.css", parts_css[name], new=True)
+                write(STARBOARD / "js/parts" / f"{name}.js", parts_js[name], new=True)
         for name in parts.css_only(components):  # styles with no script: a page loads the file and nothing else
-            write(STARBOARD / "css/parts" / f"{name}.css", parts_css[name], new=True)
+            if wanted is None or name in wanted:
+                write(STARBOARD / "css/parts" / f"{name}.css", parts_css[name], new=True)
     else:
         write(STARBOARD / "css/components.css", components)
         write(STARBOARD / "js/components.js", behaviour)

@@ -1193,7 +1193,9 @@ still hold every component: the gallery, the boards and the help centre load the
 the core, as any page can need them.</p>
 <p><strong>For an app.</strong> Make a <code>js/parts</code> folder in the app's web folder, then run <code>tools/sync.py</code>. It writes the core as
 <code>css/components.css</code> and <code>js/components.js</code>, and each part as <code>css/parts/&lt;name&gt;.css</code> and <code>js/parts/&lt;name&gt;.js</code>. Without
-that folder the app gets the whole files, as before.</p>
+that folder the app gets the whole files, as before. An app that loads only some parts can list them in
+<code>parts-used.json</code> in its web folder (<code>{"use": ["tabs", "log-view"]}</code>): the sync then writes only those, so a part the app
+does not load is not copied back after the app removes it (Starboard, 27 November 2026).</p>
 <p>On a page that uses a part, load its styles after <code>components.css</code>. Load its script after <code>components.js</code> and the
 parts it needs, and before the page's own scripts. <code>SharedComponents.setup()</code> then sets the part up with everything
 else. Its functions are on <code>SharedComponents</code> as before (<code>logView</code>, <code>showErrors</code>, <code>gauge</code> and so on).</p>
