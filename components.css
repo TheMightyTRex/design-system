@@ -3806,6 +3806,62 @@
     align-items: center;
     gap: var(--space-2);
   }
+  /* The Following choice in an action row (owner, 26 November 2026): the word and its list in one frame with the same height
+     token, border, corner, text size and weight as a button, and no frame of its own on the list inside, so the row has one
+     height. It takes the whole line on a phone. Markup: label.series-head__follow > span.field__label + select.select
+     (the select keeps its aria-label). */
+  .series-head__follow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    min-width: 0;
+    max-width: 100%;
+    min-height: var(--control-h);
+    padding-left: var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface-raised);
+  }
+  .series-head__follow:hover {
+    background: color-mix(in srgb, var(--color-text) 6%, var(--color-surface-raised));
+  }
+  .series-head__follow:focus-within {
+    outline: var(--focus-w, 3px) solid var(--color-focus);
+    outline-offset: 2px;
+  }
+  .series-head__follow .field__label {
+    margin: 0;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-strong);
+    white-space: nowrap;
+  }
+  .series-head__follow .select {
+    inline-size: auto;
+    min-width: 0;
+    align-self: stretch;
+    min-height: 0;
+    border: 0;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    background-color: transparent;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-strong);
+    text-overflow: ellipsis;
+  }
+  .series-head__follow .select:focus-visible {
+    outline: none;
+  }
+  @media (max-width: 560px) {
+    .series-head__follow {
+      flex: 1 1 100%;
+    }
+    .series-head__follow .select {
+      flex: 1 1 0;
+      inline-size: 0;
+    }
+    .series-head__text {
+      min-width: 0;
+    }
+  }
   /* Fan of covers: the first four covers of a series, overlapping and turned a little. Decoration
      only (aria-hidden): the books themselves are listed below. */
   .cover-fan {
