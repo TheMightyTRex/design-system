@@ -9,6 +9,7 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 26 November 2026
 
+- **A progress bar builder (Starboard patterns audit):** `SharedComponents.progress(options)` and `setProgress(bar, value)` draw a `.progress` with the right role: `progressbar` with a value, the busy band with `aria-valuetext`, `img` for how full something is, or hidden when words beside it say the same. Starboard had 24 hand-built bars in four accessibility shapes.
 - **An AI-triggered Accessibility check (DASH-606).** `docs/AI-CHECKS.md` is a new guide that says what an AI-triggered check is and sets out the Accessibility check in full, with a report template to download and a prompt to copy; it appears in the guides and in site search.
 - **Every 2nd level menu row condenses like the plug-in tabs.** When the names do not fit (measured, so large text, spacing and translations count), `.site-header__tabs .menu-tabs.is-compact` shows icons only at 44px each, keeps the name of the current tab and the tab with focus, gives the others a `data-tooltip` (it replaces the `title`), moves between tabs with the arrow keys, Home and End, scrolls the current tab into view and fades the edge with more tabs. `.menu-tabs--scroll` goes: its rule is now the rule of every row. The 1st level row is unchanged.
 - **Counts and clock times in words (Starboard patterns audit):** `SharedComponents.plural(n, one, many)`, `SharedComponents.clock(date)` and `SharedComponents.num(n)`. Starboard had eight copies of `plural` in four shapes and three of the clock.

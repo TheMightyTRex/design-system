@@ -733,7 +733,7 @@ and wider spacing.</p>
 </tr>
 <tr>
 <td>Progress and meter</td>
-<td><code>.progress[data-tone]</code>, <code>.progress--busy</code>, <code>.progress--running</code>, <code>.meter</code>, <code>.meter__label</code>, <code>creepProgress()</code></td>
+<td><code>.progress[data-tone]</code>, <code>.progress--busy</code>, <code>.progress--running</code>, <code>.meter</code>, <code>.meter__label</code>, <code>creepProgress()</code>; <code>SharedComponents.progress({ label, value, max, tone, busy, valuetext, decorative, img, labelledby, id })</code> and <code>setProgress(bar, value, valuetext)</code></td>
 <td>Value always in words. Waiting standard (DASH-493, TheMightyTRexUK, 20 November 2026): a bar that is working is 14px with rounded ends and moving stripes. <code>.progress--busy</code>: the end is not known, a striped band runs along. <code>.progress--running</code>: a count that is still going (such as 4 of 5); it starts with a visible piece and <code>creepProgress(bar, done, total, eachMs)</code> eases onto each count and creeps towards the next. Taken off when it ends; still with less motion asked for</td>
 </tr>
 <tr>
