@@ -1,7 +1,7 @@
 # Security checks guide
 
-Version 1.0, 3 November 2026. How Storyarr and Starboard check their security, sort what the checks find, and
-report the results. Both apps run the same checks and record them in the same way, so a person can compare
+Version 1.0, 3 November 2026. How Starboard and the other apps that use this design system check their security, sort what the checks find, and
+report the results. Every app runs the same checks and record them in the same way, so a person can compare
 them and trust what each one says. Every word follows `CONTENT-DESIGN.md`.
 
 ## About this guide
@@ -13,7 +13,7 @@ checks, says what each one finds and misses, and sets the rules for sorting find
 
 ### Who it is for
 
-Anyone who builds or releases Storyarr or Starboard, including AI agents, and anyone who wants to know how
+Anyone who builds or releases Starboard or another app of the design system, including AI agents, and anyone who wants to know how
 far to trust them. No security background is needed: each check is explained from the start.
 
 ### How to use it
@@ -60,7 +60,7 @@ finding as not real without the evidence that section 8 asks for.
   knowing.
 - How it works: each test sends one request, or calls one function, and checks the answer. For example, it
   sends a change without the app's own header and checks that the answer is a refusal.
-- Run it: Starboard `python3 -m unittest discover -s tests`. Storyarr `uv run pytest`.
+- Run it: Starboard `python3 -m unittest discover -s tests`.
 - Pass: every test passes.
 - Limits: a test checks only the rule someone thought to write. It finds nothing new.
 
@@ -79,8 +79,7 @@ rule an ID (`SEC-01`, `SEC-02`) that the test prints beside its result and the s
   - sign-in redirects: after signing in, the `next` address cannot send someone to another site.
 - How it works: the journeys run against a copy of the app with made-up data, in the Playwright browser
   image, and fail when a page breaks a rule.
-- Run it: Starboard `tools/journeys.sh`. Storyarr `python3 scripts/check.py ui --full` (mocked), then the
-  live journeys against a local copy with its own database.
+- Run it: Starboard `tools/journeys.sh`.
 - Pass: every journey passes.
 - Limits: a journey checks only the pages and data it is given.
 
@@ -123,7 +122,7 @@ Each scanner runs in Docker from a pinned image, so nothing is installed and eve
     finds. It changes data, so it runs only against a throwaway copy, never the live app. It takes about 45
     minutes.
 - Where it runs: the throwaway copy and ZAP share a private Docker network made with `--internal`, which has
-  no way out. The reason: ZAP's crawler treats every port on one address as one site. Both apps link to other
+  no way out. The reason: ZAP's crawler treats every port on one address as one site. The apps link to other
   apps on the same computer, so a scan of `localhost:8095` would follow a link to `localhost:8096` and attack
   that app too. On the private network, the copy is the only thing ZAP can reach, and nothing reaches the
   internet.
@@ -240,8 +239,7 @@ scanning knows only the providers it has patterns for.
 - What it is: a fresh install on throwaway systems, from the same instructions people follow.
 - What it finds: security settings that only exist after a real install: file permissions, the user the app
   runs as, ports it opens, and options that should stay inactive until someone activates them.
-- Run it: Starboard `tools/vm/vm.sh test <system>` on Ubuntu, Debian, Fedora and 64-bit ARM. Storyarr: the
-  `compose.yaml` install on a clean Linux system, then `scripts/smoke_image.sh`.
+- Run it: Starboard `tools/vm/vm.sh test <system>` on Ubuntu, Debian, Fedora and 64-bit ARM.
 - Pass: every install check passes on every system.
 - Limits: only the systems tested.
 
@@ -267,22 +265,17 @@ Limits: each lists findings for a person to judge. Many suggestions do not suit 
 images, against a throwaway copy, never the live app. It prints PASS or FAIL for each scanner and ends with a
 failure when any scanner fails.
 
-| Check | Starboard | Storyarr |
-|---|---|---|
-| Unit and API tests | `python3 -m unittest discover -s tests` | `uv run pytest` (unit, contract and integration tests in CI) |
-| Browser journeys | `tools/journeys.sh` | `python3 scripts/check.py ui --full`, and the live journeys before every push |
-| Trivy, ZAP, Gitleaks, Bandit, ShellCheck, Hadolint | `tools/security-scan.sh` (`--full` for the active ZAP scan) | Not yet: a `tools/security-scan.sh` to add |
-| Semgrep for TypeScript and JavaScript | Not yet (CodeQL covers the JavaScript) | Not yet: `apps/web/src` |
-| Secret scanning and push protection on GitHub | Active | Inactive. A Gitleaks workflow scans the current files on every push; the whole history is not scanned yet |
-| CodeQL | Python, JavaScript and workflows | Inactive |
-| Install tests | `tools/vm/vm.sh test <system>` on 5 systems | `scripts/smoke_image.sh` on the built image |
+| Check | Starboard |
+|---|---|
+| Unit and API tests | `python3 -m unittest discover -s tests` |
+| Browser journeys | `tools/journeys.sh` |
+| Trivy, ZAP, Gitleaks, Bandit, ShellCheck, Hadolint | `tools/security-scan.sh` (`--full` for the active ZAP scan) |
+| Semgrep for TypeScript and JavaScript | Not yet (CodeQL covers the JavaScript) |
+| Secret scanning and push protection on GitHub | Active |
+| CodeQL | Python, JavaScript and workflows |
+| Install tests | `tools/vm/vm.sh test <system>` on 5 systems |
 
-What changes for Storyarr's script:
-- The throwaway copy needs its database: start `postgres` and Storyarr from `compose.yaml` on the private
-  network, with made-up settings.
-- Bandit reads `services/`, Semgrep reads `apps/web/src`, ShellCheck reads `scripts/*.sh`, and Trivy also
-  scans `apps/web/package-lock.json`.
-- Gitleaks scans the whole history with `git`, not only the current files.
+Storyarr, which was retired on 11 November 2026, ran the same checks with its own scripts. They are in its archived repository.
 
 ## 8. Sort what the checks find
 

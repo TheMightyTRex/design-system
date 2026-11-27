@@ -1,6 +1,6 @@
 # Content design guide
 
-Version 1.6, 26 November 2026. How every word in Storyarr and Starboard is written: page titles, menus,
+Version 1.6, 26 November 2026. How every word in Starboard, its plug-ins and Stallboard is written: page titles, menus,
 buttons, settings, messages, release notes, help and the README. It applies to new text and to anything you
 touch. Help articles also follow `HELP-WRITING.md`; changelogs also follow `CHANGELOGS.md`.
 
@@ -18,14 +18,14 @@ than added at the end. It has four layers:
 
 | Layer | What it covers | Where |
 |---|---|---|
-| Voice | How both apps sound | Section 1 |
+| Voice | How every app sound | Section 1 |
 | Rules | Plain English, word choices, punctuation, links and statuses | Sections 2 to 6 |
 | Patterns | Ready-made words for common moments | Section 7 |
 | Checks | Accessibility in content, and the checklist | Sections 8 and 9 |
 
 ### Who it is for
 
-Anyone who puts words in front of the people who use Storyarr or Starboard: developers writing a button or
+Anyone who puts words in front of the people who use Starboard or Stallboard: developers writing a button or
 an error, designers making a board, people writing help or release notes, and AI assistants doing any of
 these. It is public, so you may also use it in your own projects under the guide licence (CC BY 4.0).
 
@@ -57,9 +57,8 @@ To get an AI assistant to write instructions, and to check what it writes, follo
 
 ## 1. Voice and tone
 
-Both apps are calm and capable. Storyarr is a librarian: it tells you what is happening with your books,
-what it is doing about it, and what you can do next. Starboard manages the server in the same way: what
-is running, what needs attention, and what to do about it.
+Every app is calm and capable. Starboard cares for the server like a good caretaker: it tells you what is
+running, what needs attention, what it is doing about it, and what you can do next.
 
 | Always | Never |
 |---|---|
@@ -82,7 +81,7 @@ This includes headings: "What is new", not "What's new".
 favourite, behaviour, travelled, enquiry, programme.
 
 2.4 **Rule: sentence case everywhere,** including menus, tabs, chips, buttons, headings and page titles:
-"My library", "Add missing books", "Install apps". Product and service names keep their capitals: Storyarr,
+"Manage apps", "Add missing books", "Install apps". Product and service names keep their capitals:
 Starboard, Audiobookshelf, Jellyfin, Docker, Hardcover, Prowlarr, qBittorrent, SABnzbd, MyAnonamouse, Audible.
 
 2.5 **Rule: "select", not "click" or "tap".** "Select Save." For navigation: "Go to Settings, then Sources."
@@ -100,7 +99,7 @@ user.
 
 2.9 **Rule: "activate" and "deactivate".** "Activate **Upgrade automatically**", "Deactivate alerts". A
 setting's state is "active" or "inactive". Never "enable", "disable", "turn on", "turn off" or "toggle".
-State the result: "Active: Storyarr backs up your settings and keeps the defaults."
+State the result: "Active: Starboard backs up your settings and keeps the defaults."
 
 2.10 **Rule: no exclamation marks and no emoji.**
 
@@ -113,7 +112,7 @@ type. If a label breaks a rule, fix the label in the app rather than misquoting 
 longer than 25. Paragraphs have two to four sentences. Use the active voice and the present tense, and name who
 does the action: "Starboard keeps the file", not "The file is kept". Address the reader as "you". The
 organisation behind the app may say "we" ("We could not reach Hardcover", "We update the list each week"), and
-the app may also name itself ("Storyarr searches again in 6 hours"). Use one of the two in a given text, not
+the app may also name itself ("Starboard searches again in 6 hours"). Use one of the two in a given text, not
 both. A passive is allowed when the doer is unknown or does not matter. Aim for about 80 to 90% active. The
 standard is the Plain English Campaign (plainenglish.co.uk); this guide applies it and never copies its text.
 
@@ -147,7 +146,7 @@ cannot. Never describe the reader by what they cannot do. Nothing said twice in 
 screen readers and for search.
 
 2.21 **Rule: never point at our own gaps.** No apology for a missing help topic, an old screenshot or a
-feature that is not built yet. Name a limitation as a fact: "Storyarr does not import ebooks from Calibre."
+feature that is not built yet. Name a limitation as a fact: "Starboard does not import ebooks from Calibre."
 
 2.22 **Rule: no promises about timing.** Do not say when something will arrive, and do not mention plans.
 
@@ -204,79 +203,157 @@ check, and only on a line a change adds. That part is not switched on yet.
 
 One word per thing, everywhere. If a page needs a new term, add it here first.
 
-### Storyarr
-
-| Use | Not | Meaning |
-|---|---|---|
-| book | title, work, item | One book, whatever its formats |
-| audiobook, ebook | audio book, e-book, eBook | The two formats. "Format" is the general word |
-| edition | version | A specific publication of a book (narrator, length, publisher) |
-| My library | Library (for the page), collection | The books you have |
-| follow, Following | watch, monitor, track | Keeping up with an author or series automatically |
-| series | saga, collection | A numbered run of books. Write "Book 3", not "#3" |
-| author | writer | |
-| narrator | reader, voice | |
-| request | order, grab | Asking Storyarr to get a book |
-| release | torrent, NZB, result | One downloadable file set found by a source |
-| source | indexer, provider, tracker | Where Storyarr searches (Prowlarr, MyAnonamouse, AudioBook Bay, archive.org) |
-| download client | downloader | qBittorrent, SABnzbd |
-| import | copy, move (as nouns) | Bringing a finished download into the library |
-| Activity | Queue (for the page) | Requests, downloads and review together |
-| Discover | Browse (for the page) | Finding new books |
-| Exclude, Excluded | ignore, hide, skip | A book a follow should not get |
-| Delete | remove (for files) | "Remove" is fine for taking something off a list |
-
 ### Starboard
 
 | Use | Not | Meaning |
 |---|---|---|
-| app | container, service (for an app with a page) | Something Starboard installs, opens and watches: Jellyfin, Sonarr, Storyarr |
+| app | container, service (for an app with a page) | Something Starboard installs, opens and watches: Jellyfin, Sonarr, Reelix |
 | background service | daemon, container | A service with no page of its own |
 | server | box, machine, host | The computer Starboard runs on |
 | disk | drive, HDD, volume | One physical disk. "Storage" is all of them together |
 | backup | snapshot, archive | A saved copy of settings or of the server |
 | alert | notification, warning (as a noun) | A message Starboard sends when something needs attention |
 | update | upgrade (as a noun) | A newer version of an app or of Starboard |
+| plug-in | add-on, extension, module | Something added to Starboard that has its own settings, cards or pages |
+| media server | player, streamer | Jellyfin, Plex or Emby: the app that plays your library |
+| place (for backups) | target, destination, remote | A disk, a network share or a cloud service where backups go |
+| Check now | Refresh, Check again, Re-scan | The one name for asking an app, a disk or a service again. Same label before and after a first check |
+| library | collection (for the whole), catalogue | The films, shows, music, books and audiobooks you have |
+| wanted | missing, monitored | Something you asked for that is not here yet |
+| request | order, ticket | Something a person asked to have added |
 
-## 6. Status vocabulary (Storyarr)
+## 6. Status vocabulary (Starboard)
 
-Starboard's words, one word and one tone for each state, are in `COMPONENTS.md` section 6.
+One word and one tone for each state, in every page, chip, row, card and alert. The words come from one map in `common.js` (`STATUS`), plus the words a screen needs for its own kind of state, all listed here. Do not invent a synonym ("Online", "OK", "Offline", "Done" for Installed). A status chip is one to three words. Never a sentence. Never colour alone: every chip has its word and an icon, and the icon differs by tone (a tick, an information mark, a warning triangle, a cross, a dash, a clock).
 
-These are the only statuses. Every page, cover, row, chip, drawer and notification uses the same word, colour
-and icon. Do not invent synonyms ("Owned", "Available", "Done").
+Tones: **success** (all is well), **info** (something is happening or is on offer), **warning** (needs checking, nothing is broken), **danger** (broken or at risk), **muted** (off, not used, no state to report), **neutral** (waiting, no judgement).
 
-| Status | Meaning | Tone | Extra detail allowed |
+### Apps and services
+
+| Word | Tone | Means |
+|---|---|---|
+| Running | Success | The app answers |
+| Healthy | Success | The app and what it needs are fine |
+| Not responding | Danger | The app does not answer; the slide-out says since when |
+| Needs attention | Warning | Starboard found a problem the person can fix |
+| Not working | Danger | The app is up but cannot do its job |
+| Not checked | Muted | Starboard has not asked yet |
+| Not read yet | Warning | A reading that has not come back |
+| Active / Inactive | Success / Muted | A setting or a switch is on or off (never "Enabled") |
+| Stopped | Warning | The app was stopped on purpose |
+| Needs an update | Warning | A plug-in cannot run on this Starboard (its API range leaves this one out, or it uses something that is gone). Starboard has stopped it and kept its settings and data; the reason is beside the chip and the button is Check for an update. Always with its warning shape, never colour alone (DASH-603) |
+| Paused | Muted | Paused by a person; it resumes when they say |
+| Restart needed | Warning | A change needs the app to restart |
+| No container found | Muted | The app is listed but nothing runs for it |
+| Cannot start | Danger | Starboard tried and the app would not start |
+| Cannot check | Muted | The check cannot run here |
+| Check skipped | Warning | The check was left out, with the reason beside it |
+| Checking | Neutral | A check is running now |
+| Checked | Success | A check finished and found nothing wrong |
+| Check failed | Danger | The check itself broke |
+| Error | Danger | Something failed; the words under it say what |
+
+### Updates and backups
+
+| Word | Tone | Means |
+|---|---|---|
+| Update available | Info | A newer version exists (a plug-in row says Update) |
+| Up to date | Success | Nothing newer |
+| Updated | Success | The update finished |
+| Updating | Info | An update is running |
+| Check before updating | Warning | Read the release notes first |
+| Never updated | Warning | No update has ever run |
+| Held back | Muted | A person held this version back (Held is the short form inside a table) |
+| Went back | Warning | Starboard went back to the older version after a failure |
+| Updates by itself | Muted | The app updates itself, so Starboard leaves it |
+| Backing up | Info | A backup is running |
+| Done | Success | The job finished |
+| Failed | Danger | The job failed |
+| Failed last time | Warning | The last run failed; the next may be fine |
+| Not started | Warning | The job never started |
+| In progress | Info | A long job is running |
+| Sent | Success | A message or alert was sent |
+| Not accepted | Warning | The service refused what Starboard sent |
+
+### Downloads and the library
+
+| Word | Tone | Means |
+|---|---|---|
+| Waiting | Neutral | Queued; with the time when it is known |
+| Waiting to import | Neutral | Downloaded, not yet copied in |
+| Downloading | Info | A client is fetching it |
+| Downloaded | Success | The files are here |
+| Importing | Info | Being copied into the library |
+| In library | Success | It is in your library |
+| Not in library | Muted | It is known but not in your library |
+| Wanted | Neutral | Asked for; nothing found or chosen yet |
+| Waiting for a match | Muted | Starboard is still trying to match a name |
+| Matched / All matched | Success | A name was matched to the right item |
+| In Starboard | Success | A thing Starboard also lists itself |
+| Added already | Info | Already in the library, so it is not added again |
+| Direct play | Success | A media server plays the file as it is |
+| Converting | Warning | A media server has to convert it as it plays |
+| Ends soon | Warning | Starts or ends within the hour |
+| Not published | Muted | A plug-in's own page that is not shown |
+
+### Library
+
+The Library (films, TV, music, radio, books and audiobooks) uses these nine words and no others for what you have and what you want. They are the same on every tab, in every chip, filter, count, row and button (owner decisions, 26 November 2026). "Missing" is never used for a thing you want: "File missing" is only for a file gone from a disk.
+
+| Word | Tone | Means | Replaces |
 |---|---|---|---|
-| In library | The book is in your library | Success | Format: "In library · Audiobook" |
-| Downloading | A download client is fetching it | Info | Percentage: "Downloading 45%" |
-| Importing | The download finished and is being copied in | Info | |
-| Searching | A search is running now | Info | |
-| Waiting | No release yet; Storyarr searches again later | Neutral | Next search: "Waiting · 16:31" |
-| Not released | Publication date is in the future | Neutral | Date: "Not released · 3 Mar 2027" |
-| Needs attention | Storyarr is stuck and needs a decision | Warning | Short reason in the drawer, not the chip |
-| Wanted | Requested, nothing found or chosen yet | Neutral | |
-| Excluded | A follow will not get this book | Muted | Reason: "Excluded · Play" |
-| Not requested | Known, but nobody asked for it | Muted | |
+| In library | Success | The file is in your library | Have it, Has episodes, Complete |
+| Partly in library | Info | A set (a series, a collection, an artist) with some of its parts | Episodes not in library, Tracks not in library (as a state) |
+| Wanted | Neutral | Followed and released, not in your library yet. Reelix searches for it | Not in library, Missing, Episodes not in library, Tracks not in library |
+| Downloading | Info | A download app has it now | no change |
+| Below quality | Warning | In your library, but under the quality you chose. Reelix searches for a better one | The old label for this state |
+| Not followed | Muted | Reelix has it and does not search for it | Not wanted, Not requested |
+| Not added | Muted | A collection or series lists it, and Reelix does not have it | Not in your library (on a collection row) |
+| Not released | Muted | The release date is in the future | no change |
+| File missing | Danger | A file has gone from the disk | no change |
 
-A status chip is one or two words plus its detail. Never a sentence. Never rely on colour alone: every
-chip has its text, and its icon where one exists.
+"In your library" and "Not in your library" stay as places, not states: they say where a Search result comes from. The action for a wanted thing is **Find** (Find it, Find wanted episodes, Find all wanted) (the Library patterns say how).
 
-**Request outcomes** (Activity history only, never on a book): Pending (waiting for approval, Neutral),
-Declined (Muted), Withdrawn (Muted), Failed (Danger).
+### Disks, network and plug-ins
 
-**Files, not books:** a library file that has gone from the disk is "File missing", never "Missing", so it is
-not confused with a book that is Wanted.
+| Word | Tone | Means |
+|---|---|---|
+| Mounted / Not mounted | Success / Muted (Danger when it is needed) | The disk is, or is not, attached |
+| In use | Success | A disk or folder is used for something |
+| Not used yet | Muted | Available and unused |
+| Full | Danger | No room left |
+| Nearly full | Warning | Over the warning level |
+| Erases the disk | Danger | Tells the person before they choose it |
+| Resting | Warning | A disk is spun down; Starboard does not wake it to read it |
+| Windows file system: slower on Linux | Warning | A disk format that works but is slower |
+| Connected / Not connected | Success / Muted | A link to another service |
+| Reachable / Not reachable | Success / Danger | Starboard can or cannot reach an address |
+| Reachable from outside / Not reachable from outside | Success / Warning | An address works from the internet |
+| Checking from outside | Neutral | The outside check is running |
+| Certificate runs out soon | Warning | The address's certificate needs renewing |
+| Installed / Not added | Success / Muted | A plug-in or app is, or is not, on this server |
+| Needs you / Waits for you | Warning | A step only the person can do |
+| Suggested / Recommended | Info | Starboard offers it; it is not chosen |
+| Built-in choice / Always here | Muted | Part of Starboard, so it cannot be removed |
+| Read only | Neutral | Starboard can read but not change |
+| Needs Reelix / Jellyfin only / Plex or Emby | Muted (Warning when it is not here) | A plug-in's requirement (a tag, not a state) |
+
+**Rules.**
+- One state, one word: where the table gives a short form, use it only inside a table cell or a card too small for the long one.
+- A request outcome (Pending, Declined, Withdrawn, Failed) appears only in History. A library file that has gone from the disk is "File missing", never "Missing", so it is not mistaken for something Wanted.
+- A word that is not in this table goes in it first, with its tone, in the same change.
+- Never say "Online", "Offline", "OK", "Good" or "Bad". A status in a line of text, not a chip, still uses the same word.
 
 ## 7. Patterns
 
 Use the pattern, then adapt the words. Do not invent a new layout.
 
 **Page title and heading.** One main heading (h1) per page, matching the menu item and the browser tab:
-"Activity", tab "Activity · Storyarr". Headings go h1, h2, h3 in order without skipping.
+"Updates", tab "Updates · Starboard". Headings go h1, h2, h3 in order without skipping.
 
 **Empty state.** Heading names what will appear, one sentence says how it gets there, one button starts it.
 - Heading: "No followed authors yet"
-- Body: "Follow an author and Storyarr gets each new book as it comes out."
+- Body: "Add an author and Starboard gets each new book as it comes out."
 - Button: "Find an author"
 Never "No data", "Nothing here" or "This page is empty".
 
@@ -303,11 +380,18 @@ step: "Undo" or "Open Activity". No celebration for routine actions.
 **Confirmation on a settings page (saved note).** No toast: the words appear beside the button that saved,
 "Saved at 16:31", and stay until the next change.
 
+**Find all wanted.** A button that asks a download app to search for everything wanted on a list, in four steps (owner, 26 November 2026). The same words on every Library tab, every Wanted page and every show or series.
+- Count first, on the button: "Find all wanted (23)". With nothing wanted, the button is inactive and says "Nothing is wanted".
+- Question: the title says how many ("Find 19 wanted episodes?"). The body says what happens in a sentence ("Reelix searches its sites for each wanted episode, a few at a time, and sends the best match it finds to your download app.") and three short lines: how many are wanted and how many were left out because they were searched in the last day; how fast ("Starboard asks for 10 at a time, with one minute between groups. This takes about 12 minutes."); and that you can stop at any time and leave the page. The main button repeats the number ("Find 19 wanted episodes"). Cancel is second.
+- Progress: a panel under the page heading with words and a progress bar that has its own label ("Searched 8 of 19 wanted episodes. The next group starts in 40 seconds."), and **Stop**. The words change after each group, never more often, so a screen reader hears one update a minute. While Download hours pause downloads it says so and waits.
+- Summary: a notice that stays until it is closed, not a toast ("Searched 19 wanted episodes. Reelix sends what it finds to your download app, and keeps searching while you follow them. 12 are still wanted."), with **Open Downloads**. A stopped run says "Stopped after 8 of 19" and how many were not searched. A failed run says what happened and "Nothing else changed".
+- Limits, so a list cannot flood the sites: 10 searches in a group, one group a minute, at most 100 in a run (the question says how many wait for the next), nothing searched in the last 24 hours, one run at a time, 15 minutes between runs. A show, series or artist page uses the same verb for its own wanted items: "Find wanted episodes (7)".
+
 **Destructive dialog.** Title asks the question with the object: "Delete The Glass Harbour?". The body says what
 is removed, what is kept and how to get it back. The button names the action: "Delete book". Entering DELETE to confirm
 is only for permanent deletion.
 
-**Setting.** Label in sentence case, then one line saying what changes: "Upgrade automatically. Storyarr
+**Setting.** Label in sentence case, then one line saying what changes: "Upgrade automatically. Starboard
 backs up your settings and keeps the defaults for anything new." Defaults are stated when they matter.
 
 **Help text and tooltips.** One sentence. Not a duplicate of the label.

@@ -5,6 +5,7 @@
   gallery.src.html (80 sections)   foundations/*.html, components/*.html, patterns/*.html (PARTS below)
   docs/*.md                        guides/*.html (GUIDES below), with a left menu, contents and Previous and Next
   icons.svg                        foundations/icons.html
+  tokens.css                       foundations/tokens.html (every token, by theme)
   (all of them)                    index.html (the landing page), search.html and search-index.js
   (the old address)                gallery.html: a stub that sends each old #section address to its new page
 
@@ -33,6 +34,7 @@ PARTS = [
     ("palettes", "foundations", "accent-colours", "Accent colours", "sliders-horizontal", "The accent colours and the rules they keep in every theme."),
     ("type", "foundations", "type-space-icons", "Type, space and icons", "layout-grid", "One typeface, the size and space scales and the icon sizes."),
     ("header", "components", "shell", "Shell", "app-window", "The header and menus, the phone menu, page head, footer, Display, banners, alerts and the command palette."),
+    ("menu-rows", "components", "menus-and-tabs", "Menus and tabs", "list", "How a 2nd level menu row condenses to icons with the current tab in full, with live examples and its accessibility."),
     ("buttons", "components", "actions", "Actions", "play", "Buttons and menu buttons."),
     ("fields", "components", "inputs", "Inputs", "pencil", "Fields, choices, filters, combobox, tag input, secret field, schedule and the error summary."),
     ("status", "components", "content", "Content", "file-text", "Status, tooltips, facts, charts, rows, tables, notices, toasts, callouts, disclosure and the log viewer."),
@@ -40,6 +42,7 @@ PARTS = [
     ("media", "components", "media", "Covers, media and shelves", "film", "Covers and media cards, the A to Z list, load more, cover actions, series header and shelf."),
     ("toolbar", "components", "settings-and-tools", "Settings and toolbars", "settings", "The section toolbar, settings rows, the save bar, settings patterns, the folder picker, timeline and calendar."),
     ("slide-out", "components", "slide-outs-and-dialogs", "Slide-outs and dialogs", "panel-right-open", "The slide-out and the dialog."),
+    ("page-topics", "components", "app-patterns", "App patterns", "gauge", "Starboard's own patterns: page topics, the update list, places and service logos, the dashboard, show once, a wizard in a slide-out and folding sections."),
     ("which", "patterns", "choosing", "Choosing", "list-checks", "Slide-out, dialog or page, and which item to use."),
     ("wizard", "patterns", "wizard", "Wizard", "list-ordered", "Every job done in steps: the pieces, and signing in to a service."),
     ("terminal", "patterns", "terminal", "Terminal", "terminal", "How a wizard appears and behaves in a terminal."),
@@ -61,6 +64,7 @@ GUIDES = [
     ("ALT-TEXT", "Alt text", "Words"), ("SCREENSHOTS", "Screenshots", "Words"),
     ("ACCESSIBILITY", "Accessibility", "Accessibility and security"), ("WCAG", "WCAG 2.2 AA", "Accessibility and security"),
     ("SECURITY-CHECKS", "Security checks", "Accessibility and security"),
+    ("AI-CHECKS", "AI-triggered checks", "Accessibility and security"),
 ]
 GUIDE_SLUG = {n: n.lower() for n, _, _ in GUIDES}
 
@@ -69,7 +73,11 @@ SITE_CSS = re.search(r"<style>(.*?)</style>", GALLERY, re.S).group(1)
 # The page-shell rules of the old gallery are replaced by sitepage's; the demo rules stay.
 SITE_CSS = re.sub(r"^\s*\.g-(shell|nav)[^\n]*\n", "", SITE_CSS, flags=re.M)
 SITE_CSS = re.sub(r"@media \(max-width: 860px\) \{[^}]*(\{[^}]*\}[^}]*)*\}\s*", "", SITE_CSS)
+SITE_CSS = re.sub(r"\n\s*\}\s*$", "\n", SITE_CSS)  # the cut above can leave the media block's closing brace behind, which hid every rule after it
 
+# Nothing in a demo may stick to the window: in the apps the topic tabs, the A to Z list, the save bar and a table head stick
+# under the app's header, but in a demo they would cover the demo's own text and the site's header as the page scrolls.
+SITE_CSS += "\n  .g-demo :is(.topic-tabs, .az-jump, .save-bar, .table th, .table thead th) { position: static; }\n"
 SITE_CSS += "\n  .g-notes .g-note-h { font-size: var(--text-sm); font-weight: 700; margin-bottom: var(--space-1); }\n"
 
 pages = []  # every page written: dicts for the search index and the stub
@@ -241,6 +249,7 @@ def main():
                       "text": html.unescape(" ".join(re.sub(r"<[^>]+>", "", h) for h in heads)) + " " + html.unescape(text_only)[:1200]})
 
     foundations_extras()
+    tokens_page()
     guides(page_of)
     landings(by_start)
     write_search_and_stub(page_of)
@@ -264,14 +273,82 @@ def foundations_extras():
             f'<ul class="s-icons">{items}</ul></section></div>')
     rel = "foundations/icons.html"
     PARTS_F = [p for p in PARTS if p[1] == "foundations"]
-    sibs = [(p[3], f"{p[2]}.html") for p in PARTS_F] + [("Icons", "icons.html")]
+    sibs = [(p[3], f"{p[2]}.html") for p in PARTS_F] + [("Tokens", "tokens.html"), ("Icons", "icons.html")]
     nav = left_nav("Foundations", sibs, "icons.html", "", [])
     last = PARTS_F[-1]
     body = (crumbs([("Home", "../index.html"), ("Foundations", "../foundations/index.html"), ("Icons", None)]) + body +
-            pager((last[3], f"{last[2]}.html"), ("Shell", "../components/shell.html")))
+            pager(("Tokens", "tokens.html"), ("Shell", "../components/shell.html")))
     write(rel, sitepage.page(root="../", main="foundations", current=rel, title="Icons", body=body, side=nav, css=SITE_CSS,
                              note="Made by tools/site.py from icons.svg"))
     pages.append({"title": "Icons", "area": "Foundations", "url": rel, "summary": "Every icon in the sprite.", "text": " ".join(names)})
+
+
+THEME_SELECTORS = [("Light", re.compile(r"^:root$")), ("Dark", re.compile(r'^:root\[data-theme="dark"\]$')),
+                   ("High contrast", re.compile(r"^:root\.pref-contrast$")),
+                   ("High contrast dark", re.compile(r'^:root\.pref-contrast\[data-theme="dark"\]'))]
+TOKEN_GROUPS = [("Colour roles", ("--color-",)), ("Status tones", ("--status-",)), ("Charts and series", ("--chart-", "--series-", "--media-")),
+                ("Type", ("--text-", "--font", "--weight-", "--leading-")), ("Space", ("--space-",)),
+                ("Size, corners and layers", ("--control-", "--icon-", "--radius", "--header-", "--tabs-", "--rail-", "--focus-", "--z-")),
+                ("Shadows and glass", ("--shadow-", "--glass-"))]
+
+
+def read_tokens():
+    """{name: {theme: value}} from tokens.css: the value each theme's block gives, in file order."""
+    text = re.sub(r"/\*.*?\*/", "", (ROOT / "tokens.css").read_text(), flags=re.S)
+    out = {}
+    for sel, body in re.findall(r"([^{}@]+)\{([^{}]*)\}", text):
+        sel = " ".join(sel.split())
+        for theme, pattern in THEME_SELECTORS:
+            if any(pattern.match(part.strip()) for part in sel.split(",")):
+                for name, value in re.findall(r"(--[\w-]+)\s*:\s*([^;]+);", body):
+                    out.setdefault(name, {})[theme] = " ".join(value.split())
+    return out
+
+
+def tokens_page():
+    """The tokens page: every custom property in tokens.css, with its value in each theme, made from the file itself."""
+    tokens = read_tokens()
+    themes = [t for t, _ in THEME_SELECTORS]
+    used, sections = set(), []
+    def cell(name, theme):
+        v = tokens[name].get(theme)
+        if v is None:
+            return '<td class="muted">same as Light</td>' if theme != "Light" else "<td></td>"
+        sw = ""
+        if re.match(r"^(#[0-9a-fA-F]{3,8}|rgba?\(|hsla?\()", v):
+            sw = f'<span class="s-swatch" style="background:{v}" aria-hidden="true"></span>'
+        return f"<td>{sw}<code>{esc(v)}</code></td>"
+    for title, prefixes in TOKEN_GROUPS + [("Other tokens", ())]:
+        names = [n for n in tokens if n not in used and (not prefixes or n.startswith(prefixes))]
+        if not names:
+            continue
+        used.update(names)
+        rows = "".join(f"<tr><th scope=\"row\"><code>{n}</code></th>{''.join(cell(n, t) for t in themes)}</tr>" for n in names)
+        sid = re.sub(r"[^a-z]+", "-", title.lower()).strip("-")
+        sections.append((sid, title, f'<section class="g-section" id="{sid}" aria-labelledby="{sid}-h"><header><h2 id="{sid}-h">{esc(title)}</h2></header>'
+                         f'<div class="s-scroll" tabindex="0" role="region" aria-label="{esc(title)} tokens"><table class="table"><thead><tr><th scope="col">Token</th>'
+                         + "".join(f'<th scope="col">{t}</th>' for t in themes) + f'</tr></thead><tbody>{rows}</tbody></table></div></section>'))
+    css = SITE_CSS + """
+  .s-swatch { display: inline-block; width: 1em; height: 1em; margin-right: var(--space-2); border: 1px solid var(--color-border); vertical-align: -0.15em; }
+  .g-main .table td, .g-main .table th { vertical-align: top; }
+  .g-main .s-scroll { overflow-x: auto; max-width: 100%; }
+  .g-main .table th { position: static; }
+  .g-main .s-scroll .table { min-width: 44rem; }
+  .g-main code { overflow-wrap: anywhere; }
+"""
+    body = (f'<div class="g-main"><div class="page-head"><div class="page-head__text"><h1>Tokens</h1>'
+            f'<p class="page-head__summary">{len(tokens)} tokens, made from <code>tokens.css</code> each time the site is built. Components use these names and nothing else, so a theme is a change of values. '
+            'A value written "same as Light" is not set again in that theme. Palettes change only the accent roles.</p></div></div>'
+            + "".join(sec for _, _, sec in sections) + "</div>")
+    rel = "foundations/tokens.html"
+    PARTS_F = [p for p in PARTS if p[1] == "foundations"]
+    sibs = [(p[3], f"{p[2]}.html") for p in PARTS_F] + [("Tokens", "tokens.html"), ("Icons", "icons.html")]
+    nav = left_nav("Foundations", sibs, "tokens.html", "On this page", [(f"#{i}", t) for i, t, _ in sections])
+    body = (crumbs([("Home", "../index.html"), ("Foundations", "../foundations/index.html"), ("Tokens", None)]) + body +
+            pager((PARTS_F[-1][3], f"{PARTS_F[-1][2]}.html"), ("Icons", "icons.html")))
+    write(rel, sitepage.page(root="../", main="foundations", current=rel, title="Tokens", body=body, side=nav, css=css,
+                             note="Made by tools/site.py from tokens.css"))
+    pages.append({"title": "Tokens", "area": "Foundations", "url": rel, "summary": "Every token, by theme.", "text": " ".join(tokens)})
 
 
 def md_page(name):
@@ -328,12 +405,17 @@ def guides(page_of):
                                  note=f"Made by tools/site.py from docs/{n}.md"))
         plain = html.unescape(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", out)))
         pages.append({"title": title, "area": "Guides", "url": rel, "summary": f"{group} guide", "text": plain[:2500]})
+        if n == "AI-CHECKS":  # each check is found by its own name, not only through the guide
+            pages.append({"title": "Accessibility check (AI-triggered)", "area": "Guides", "url": f"{rel}#5-the-accessibility-check",
+                          "summary": "The standard check an AI assistant runs when asked: trigger phrases, steps for every assistive technology, report and prompt",
+                          "text": "Accessibility check a11y check accessibility test screen reader NVDA Orca JAWS VoiceOver TalkBack Narrator keyboard switch voice control magnifier logical order needless repeats report template AI assistant prompt DASH-606"})
     # The guides landing page.
     cards = ""
     for g in dict.fromkeys(g for _, _, g in GUIDES):
         rows = "".join(f'<li class="row row--no-lead"><div><span class="row__title"><a href="{p}">{esc(t)}</a></span></div></li>'
                        for t, p, gg in pages_list if gg == g)
-        cards += f'<section class="stack-3" aria-labelledby="g-{abs(hash(g)) % 9999}"><h2 id="g-{abs(hash(g)) % 9999}">{esc(g)}</h2><ul class="rows">{rows}</ul></section>'
+        gid = "g-" + re.sub(r"[^a-z0-9]+", "-", g.lower()).strip("-")  # the same on every run, so a rebuild changes nothing
+        cards += f'<section class="stack-3" aria-labelledby="{gid}"><h2 id="{gid}">{esc(g)}</h2><ul class="rows">{rows}</ul></section>'
     body = (crumbs([("Home", "../index.html"), ("Guides", None)]) +
             f'<div class="s-landing"><div class="page-head"><div class="page-head__text"><h1>Guides</h1><p class="page-head__summary">The written rules: how to build, write and test. Each guide is one page.</p></div></div>{cards}</div>' +
             pager(None, (ordered[0][0], ordered[0][1])))
@@ -346,7 +428,7 @@ def guides(page_of):
 def landings(by_start):
     for area, (name, about) in AREAS.items():
         group = [p for p in PARTS if p[1] == area]
-        extra = [("Icons", "icons.html", "Every icon in the sprite.")] if area == "foundations" else []
+        extra = [("Tokens", "tokens.html", "Every token, with its value in each theme."), ("Icons", "icons.html", "Every icon in the sprite.")] if area == "foundations" else []
         cards = "".join(
             f'<li class="card"><h2 class="card__title"><a href="{p[2]}.html">{esc(p[3])}</a></h2><p>{esc(p[5])}</p>'
             f'<p class="small muted">{len(by_start[p[0]])} section{"s" if len(by_start[p[0]]) != 1 else ""}</p></li>' for p in group)
@@ -362,7 +444,7 @@ def landings(by_start):
              ("Components", "components/index.html", "Every component, live, with its markup and rules."),
              ("Patterns", "patterns/index.html", "Choosing, the wizard, the terminal, help and dates."),
              ("Guides", "guides/index.html", "Content design, help writing, accessibility, security and more, one page each."),
-             ("Boards", "areas/index.html", "Whole pages of Starboard (and the retired Storyarr), built from the library."),
+             ("Boards", "areas/index.html", "Whole pages of Starboard, built from the library, and an archive of the retired Storyarr's boards."),
              ("Resources", "resources/index.html", "Tools, outside tools, how to make a change and how to get feedback.")]
     cards = "".join(f'<li class="card"><h2 class="card__title"><a href="{h}">{t}</a></h2><p>{s}</p></li>' for t, h, s in tiles)
     body = (f'<div class="s-landing"><div class="page-head"><div class="page-head__text"><h1>TRex design system</h1>'

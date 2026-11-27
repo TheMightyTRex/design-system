@@ -44,7 +44,7 @@
   .s-icons li { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2); border: 1px solid var(--color-divider); font-size: var(--text-xs); }
   .site-header__search { margin-inline-start: auto; }
   @media (max-width: 860px) {
-    .s-shell { grid-template-columns: 1fr; }
+    .s-shell { grid-template-columns: minmax(0, 1fr); }
     .s-nav { display: none; }
     .s-crumbs, .s-pager, .s-landing, .s-doc { padding-inline: var(--space-4); }
   }
@@ -62,6 +62,15 @@
   .g-term--qr { background: #fff; color: #000; line-height: 1; }  /* dark on light, as a terminal draws it, so it scans */
   .g-demo { padding: var(--space-6); border: 1px solid var(--color-divider); background: var(--color-bg); display: grid; gap: var(--space-4); overflow: hidden; }
   .g-fp { display: grid; gap: var(--space-3); padding: var(--space-4); flex: 1 1 300px; max-inline-size: 440px; }
+
+  .g-menu-wrap { display: grid; gap: var(--space-5); }
+  .g-menu-demo { margin: 0; display: grid; gap: var(--space-2); max-width: 100%; }
+  .g-menu-demo .g-frame { width: min(100%, var(--g-menu-w, 375px)); }
+  .g-menu-wrap[data-w="320"] { --g-menu-w: 320px; } .g-menu-wrap[data-w="375"] { --g-menu-w: 375px; }
+  .g-menu-wrap[data-w="430"] { --g-menu-w: 430px; } .g-menu-wrap[data-w="768"] { --g-menu-w: 768px; }
+  .g-t175 { --text-scale: 1.75; --text-xs: calc(.75rem * 1.75); --text-sm: calc(.875rem * 1.75); --text-md: calc(1rem * 1.75); }
+  .site-header__tabs .menu-tabs.is-compact a.g-focused { outline: var(--focus-w) solid var(--color-focus); outline-offset: calc(-1 * var(--focus-w)); padding-inline: var(--space-4); }
+  .site-header__tabs .menu-tabs.is-compact a.g-focused .menu-tabs__label { position: static; width: auto; height: auto; overflow: hidden; clip-path: none; max-width: min(14rem, calc(100vw - 7rem)); text-overflow: ellipsis; }
   .g-demo--row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
   .g-notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-3) var(--space-6); font-size: var(--text-sm); }
   .g-notes h4, .g-notes h3 { font-size: var(--text-sm); margin-bottom: var(--space-1); }
@@ -91,7 +100,8 @@
   svg.i { width: var(--icon-md); height: var(--icon-md); }
   svg.i-lg { width: var(--icon-lg); height: var(--icon-lg); }
   svg.i-xl { width: 32px; height: 32px; }
-  }
+
+  .g-demo :is(.topic-tabs, .az-jump, .save-bar, .table th, .table thead th) { position: static; }
 
   .g-notes .g-note-h { font-size: var(--text-sm); font-weight: 700; margin-bottom: var(--space-1); }
 </style>
@@ -233,6 +243,8 @@
 <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
 <symbol id="i-headphones" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></symbol>
 <symbol id="i-radio" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.247 7.761a6 6 0 0 1 0 8.478"/><path d="M19.075 4.933a10 10 0 0 1 0 14.134"/><path d="M4.925 19.067a10 10 0 0 1 0-14.134"/><path d="M7.753 16.239a6 6 0 0 1 0-8.478"/><circle cx="12" cy="12" r="2"/></symbol>
+<symbol id="i-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></symbol>
+<symbol id="i-palette" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"/><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/></symbol>
 <symbol id="i-help" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3z"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></symbol>
 <symbol id="i-help-new-tab" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3H3v18h18v-8"/><path d="M15 3h6v6"/><path d="M21 3l-5.5 5.5"/><path d="M7.59 11a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M10.5 18h.01"/></symbol>
 </svg>
@@ -251,16 +263,16 @@
   <nav class="phone-menu" aria-label="Menu">
     <div class="panel-header"><span class="panel-header__brand"><svg class="g-logo" width="24" height="24" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><rect x="1" y="1" width="30" height="30" fill="var(--color-logo-tile)"/><path fill="var(--color-bg)" d="M17 6.5h7.5q2.5 0 2.5 2.2V11h-4v.8h2.6v1.6H21v2.2l2.6 1.5-.6 1-2-1.1V20q0 2.2-2.4 2.9l.9 3.8h1.6V28h-4.3l-.9-4.4h-1.6l-.8 3.1h1.4V28h-4.1l1-4.9q-3.6-1-8.7.3 3.4-3.6 8.2-5.2 3.3-1.3 3.9-4.6V8.4q0-1.9 1.4-1.9Z"/><circle cx="20" cy="8.6" r="1" fill="var(--color-logo-star)"/></svg>TRex Design System</span><button class="icon-btn" type="button" data-closes aria-label="Close menu"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></div>
     <div class="phone-menu__sections">
-      <div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="s-sm-foundations"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-sliders-horizontal"/></svg>Foundations<svg class="i phone-menu__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></button><ul id="s-sm-foundations" hidden><li><a href="../foundations/index.html">All foundations</a></li><li><a href="../foundations/colour.html">Colour</a></li><li><a href="../foundations/accent-colours.html">Accent colours</a></li><li><a href="../foundations/type-space-icons.html">Type, space and icons</a></li></ul></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="s-sm-components"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-layout-grid"/></svg>Components<svg class="i phone-menu__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></button><ul id="s-sm-components" hidden><li><a href="../components/index.html">All components</a></li><li><a href="../components/shell.html">Shell</a></li><li><a href="../components/actions.html">Actions</a></li><li><a href="../components/inputs.html">Inputs</a></li><li><a href="../components/content.html">Content</a></li><li><a href="../components/containers.html">Panels, cards and tabs</a></li><li><a href="../components/media.html">Covers, media and shelves</a></li><li><a href="../components/settings-and-tools.html">Settings and toolbars</a></li><li><a href="../components/slide-outs-and-dialogs.html">Slide-outs and dialogs</a></li></ul></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="s-sm-patterns"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-list-checks"/></svg>Patterns<svg class="i phone-menu__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></button><ul id="s-sm-patterns" hidden><li><a href="../patterns/index.html">All patterns</a></li><li><a href="../patterns/choosing.html">Choosing</a></li><li><a href="../patterns/wizard.html">Wizard</a></li><li><a href="../patterns/terminal.html">Terminal</a></li><li><a href="../patterns/lists-and-changes.html">Lists and changes</a></li><li><a href="../patterns/help.html">Help</a></li><li><a href="../patterns/dates.html">Dates</a></li></ul></div><div class="phone-menu__section"><a href="../guides/index.html" aria-current="page"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-book-open"/></svg>Guides</a></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="s-sm-boards"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-monitor"/></svg>Boards<svg class="i phone-menu__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></button><ul id="s-sm-boards" hidden><li><a href="../areas/index.html">All boards</a></li><li><a href="../areas/index-starboard.html">Starboard</a></li><li><a href="../areas/index-storyarr.html">Storyarr</a></li></ul></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="s-sm-resources"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-wrench"/></svg>Resources<svg class="i phone-menu__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></button><ul id="s-sm-resources" hidden><li><a href="../resources/index.html">Overview</a></li><li><a href="../resources/tools.html">Tools</a></li><li><a href="../resources/outside-tools.html">Outside tools</a></li><li><a href="../resources/make-a-change.html">Make a change</a></li><li><a href="../resources/get-feedback.html">Get feedback</a></li></ul></div><div class="phone-menu__section"><a href="../search.html"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>Search</a></div>
+      <div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="s-sm-foundations"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-sliders-horizontal"/></svg>Foundations<svg class="i phone-menu__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></button><ul id="s-sm-foundations" hidden><li><a href="../foundations/index.html">All foundations</a></li><li><a href="../foundations/colour.html">Colour</a></li><li><a href="../foundations/accent-colours.html">Accent colours</a></li><li><a href="../foundations/type-space-icons.html">Type, space and icons</a></li></ul></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="s-sm-components"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-layout-grid"/></svg>Components<svg class="i phone-menu__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></button><ul id="s-sm-components" hidden><li><a href="../components/index.html">All components</a></li><li><a href="../components/shell.html">Shell</a></li><li><a href="../components/menus-and-tabs.html">Menus and tabs</a></li><li><a href="../components/actions.html">Actions</a></li><li><a href="../components/inputs.html">Inputs</a></li><li><a href="../components/content.html">Content</a></li><li><a href="../components/containers.html">Panels, cards and tabs</a></li><li><a href="../components/media.html">Covers, media and shelves</a></li><li><a href="../components/settings-and-tools.html">Settings and toolbars</a></li><li><a href="../components/slide-outs-and-dialogs.html">Slide-outs and dialogs</a></li><li><a href="../components/app-patterns.html">App patterns</a></li></ul></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="s-sm-patterns"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-list-checks"/></svg>Patterns<svg class="i phone-menu__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></button><ul id="s-sm-patterns" hidden><li><a href="../patterns/index.html">All patterns</a></li><li><a href="../patterns/choosing.html">Choosing</a></li><li><a href="../patterns/wizard.html">Wizard</a></li><li><a href="../patterns/terminal.html">Terminal</a></li><li><a href="../patterns/lists-and-changes.html">Lists and changes</a></li><li><a href="../patterns/help.html">Help</a></li><li><a href="../patterns/dates.html">Dates</a></li></ul></div><div class="phone-menu__section"><a href="../guides/index.html" aria-current="page"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-book-open"/></svg>Guides</a></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="s-sm-boards"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-monitor"/></svg>Boards<svg class="i phone-menu__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></button><ul id="s-sm-boards" hidden><li><a href="../areas/index.html">All boards</a></li><li><a href="../areas/index-starboard.html">Starboard</a></li><li><a href="../areas/archive/storyarr/index-storyarr.html">Storyarr archive</a></li></ul></div><div class="phone-menu__section"><button type="button" aria-expanded="false" aria-controls="s-sm-resources"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-wrench"/></svg>Resources<svg class="i phone-menu__chevron" aria-hidden="true" focusable="false"><use href="#i-chevron-right"/></svg></button><ul id="s-sm-resources" hidden><li><a href="../resources/index.html">Overview</a></li><li><a href="../resources/tools.html">Tools</a></li><li><a href="../resources/outside-tools.html">Outside tools</a></li><li><a href="../resources/make-a-change.html">Make a change</a></li><li><a href="../resources/get-feedback.html">Get feedback</a></li></ul></div><div class="phone-menu__section"><a href="../search.html"><svg class="i i-lg" aria-hidden="true" focusable="false"><use href="#i-search"/></svg>Search</a></div>
     </div>
   </nav>
 </div>
 <div class="s-shell">
-<nav class="s-nav" aria-labelledby="s-nav-h"><h2 id="s-nav-h">Guides</h2><ol class="s-nav-pages"><li><a href="index.html">All guides</a></li><li class="s-group">Design</li><li><a href="design-system.html">Design system</a></li><li><a href="library.html">Component library</a></li><li><a href="components.html" aria-current="page">Components by area</a></li><li class="s-group">Patterns</li><li><a href="wizard.html">Wizard</a></li><li><a href="terminal.html">Terminal</a></li><li class="s-group">Words</li><li><a href="content-design.html">Content design</a></li><li><a href="help-writing.html">Help writing</a></li><li><a href="changelogs.html">Changelogs</a></li><li><a href="alt-text.html">Alt text</a></li><li><a href="screenshots.html">Screenshots</a></li><li class="s-group">Accessibility and security</li><li><a href="accessibility.html">Accessibility</a></li><li><a href="wcag.html">WCAG 2.2 AA</a></li><li><a href="security-checks.html">Security checks</a></li></ol><h2 id="s-own-h">On this page</h2><ol><li><a href="#storyarr-ui-inventory-1-november-2026">Storyarr UI inventory, 1 November 2026</a></li><li><a href="#1-tokens-and-themes">1. Tokens and themes</a></li><li><a href="#2-shell">2. Shell</a></li><li><a href="#3-pages">3. Pages</a></li><li><a href="#4-components-that-already-exist-rough-number-of-files-using-each">4. Components that already exist (rough number of files using each)</a></li><li><a href="#5-duplicates-to-merge">5. Duplicates to merge</a></li><li><a href="#6-status-words-in-use-today">6. Status words in use today</a></li><li><a href="#7-css">7. CSS</a></li></ol></nav>
+<nav class="s-nav" aria-labelledby="s-nav-h"><h2 id="s-nav-h">Guides</h2><ol class="s-nav-pages"><li><a href="index.html">All guides</a></li><li class="s-group">Design</li><li><a href="design-system.html">Design system</a></li><li><a href="library.html">Component library</a></li><li><a href="components.html" aria-current="page">Components by area</a></li><li class="s-group">Patterns</li><li><a href="wizard.html">Wizard</a></li><li><a href="terminal.html">Terminal</a></li><li class="s-group">Words</li><li><a href="content-design.html">Content design</a></li><li><a href="help-writing.html">Help writing</a></li><li><a href="changelogs.html">Changelogs</a></li><li><a href="alt-text.html">Alt text</a></li><li><a href="screenshots.html">Screenshots</a></li><li class="s-group">Accessibility and security</li><li><a href="accessibility.html">Accessibility</a></li><li><a href="wcag.html">WCAG 2.2 AA</a></li><li><a href="security-checks.html">Security checks</a></li><li><a href="ai-checks.html">AI-triggered checks</a></li></ol><h2 id="s-own-h">On this page</h2><ol><li><a href="#starboards-screens-and-the-parts-each-uses">Starboard&#x27;s screens and the parts each uses</a></li><li><a href="#where-the-other-records-are">Where the other records are</a></li></ol></nav>
 <main class="s-main" id="main" tabindex="-1">
 <nav class="breadcrumbs s-crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="index.html">Guides</a></li><li aria-current="page">Components by area</li></ol></nav><div class="s-doc"><div class="page-head"><div class="page-head__text"><h1>Components by area</h1><p class="page-head__summary">Design guide. <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/COMPONENTS.md">Edit this guide on GitHub</a>.</p></div></div><div class="prose">
 
-<p>Updated 20 November 2026. Every component in the shared library, by the area it belongs to, as the component pages
+<p>Updated 26 November 2026 (rewritten for Starboard as it is; the Storyarr inventory this file once held is in git history). Every component in the shared library, by the area it belongs to, as the component pages
 (<code>components/index.html</code>) group them. <code>LIBRARY.md</code> is the reference, with each component's classes, behaviour and rules. When
 you add a component, add it here and in <code>LIBRARY.md</code>.</p>
 <div class="s-scroll" tabindex="0" role="region" aria-label="Table 1"><table>
@@ -300,6 +312,10 @@ you add a component, add it here and in <code>LIBRARY.md</code>.</p>
 <td>Slide-out, dialog or page; which item to use (<code>DESIGN-SYSTEM.md</code> section 10); wizard and its pieces (<code>WIZARD.md</code>); signing in to a service; restart where it is needed; terminal (<code>TERMINAL.md</code>)</td>
 </tr>
 <tr>
+<td>App patterns</td>
+<td>Page topics, the update list, places and service logos, the dashboard grid and cards, show once, a wizard in a slide-out, folding sections (<code>LIBRARY.md</code>, App patterns)</td>
+</tr>
+<tr>
 <td>Help centre</td>
 <td>Top links, side tree, journey, flow chart, answer card, feature card, solver card and solver, version badge, plug-in card and band (<code>HELP-WRITING.md</code> section 11)</td>
 </tr>
@@ -311,520 +327,165 @@ that scrolls sideways. - <code>.count</code>, <code>.chip</code> and <code>.tag<
 slider, <code>.file-field</code> the file picker and <code>.side-tree</code> the folding side menu. - <code>.help</code> is the question button, and
 <code>.command</code> is a command to copy (not the command palette).</p>
 <hr />
-<p><strong>Historical record.</strong> Everything from here on is Storyarr's interface as it was on 1 November 2026, before the
-redesign, kept as a record. Storyarr was retired on 11 November 2026 and its work continues in Starboard; do not use
-these sections to build anything. The one part still current is section 6's table of Starboard's status words, which
-<code>CONTENT-DESIGN.md</code> points to.</p>
-<h2 id="storyarr-ui-inventory-1-november-2026">Storyarr UI inventory, 1 November 2026</h2>
-<p>Taken 1 November 2026 from Storyarr's <code>apps/web/src</code> (v0.4.6 on <code>main</code>). Paths are relative to
-<code>apps/web/src/</code>. This is the "before" picture for the redesign; <code>DESIGN-SYSTEM.md</code> is the "after".</p>
-<p><strong>For AI agents:</strong> re-check a path before relying on it; the code moves. Update this file when a duplicate is
-merged (tasks UX-02 to UX-11).</p>
-<h2 id="1-tokens-and-themes">1. Tokens and themes</h2>
+<h2 id="starboards-screens-and-the-parts-each-uses">Starboard's screens and the parts each uses</h2>
+<p>Starboard as it is on 26 November 2026, by main menu item and screen. "Library classes" are the parts of the shared library the screen is drawn with; the board is the design page in <code>areas/</code> (a screen without a board is listed in the Boards section of <code>README.md</code>). The words of every status chip are in <code>CONTENT-DESIGN.md</code> section 6.</p>
 <div class="s-scroll" tabindex="0" role="region" aria-label="Table 2"><table>
 <thead>
 <tr>
-<th>Area</th>
-<th>Today</th>
-<th>Problem</th>
+<th>Menu</th>
+<th>Screen</th>
+<th>Built from</th>
+<th>Board</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Colour</td>
-<td><code>theme-tokens.css</code> (44 KB): about 330 <code>--c-*</code> properties, defined for light, dark, auto and high contrast</td>
-<td>Names describe values (<code>--c-bg-indigo-27</code>), not roles; near-duplicates (<code>-2</code>, <code>-3</code> suffixes); no surface, success or danger tokens</td>
+<td>Home</td>
+<td>Dashboard</td>
+<td><code>.dash-grid</code>, <code>.dash-card</code>, <code>.card-band</code>, gauge, sparkline, <code>.guide-card</code>, <code>.spark-card</code>, <code>.dash-edit</code></td>
+<td>Dashboard</td>
 </tr>
 <tr>
-<td>Semantic aliases</td>
-<td><code>styles.css:301-304</code>: <code>--surface</code>, <code>--muted</code>, <code>--line</code>, <code>--accent</code> (heavily used), plus per-feature aliases <code>--request-*</code>, <code>--explore-*</code>, <code>--review-*</code>, <code>--mam-soft</code></td>
-<td>Partial and scattered</td>
+<td>Library</td>
+<td>My library (TV, Films, Music, Radio, Books, Audiobooks)</td>
+<td>A to Z jump, load more, media card and grid, series header, shelf, cover</td>
+<td>Library</td>
 </tr>
 <tr>
-<td>Undefined</td>
-<td><code>--text</code>, <code>--bg</code>, <code>--panel</code>, <code>--border</code> used in import-review, library-setup, controls, mounted-folders and entity-details CSS but never defined</td>
-<td>Silent fallbacks</td>
+<td>Library</td>
+<td>Networks, Collections, Series, Authors, Narrators, Stations</td>
+<td>Poster cards (Starboard's own, listed in <code>LIBRARY.md</code>), <code>.az-jump</code></td>
+<td>Library</td>
 </tr>
 <tr>
-<td>Spacing, type, radius</td>
-<td>None. Gaps of 4 to 18px; 32 different font sizes; <code>border-radius: 0</code> 291 times</td>
-<td>No scale</td>
+<td>Discover</td>
+<td>Search, Discover rows, Coming up, On demand history</td>
+<td>Shelf, filter chips, rows, <code>.discover-card</code></td>
+<td>Discover</td>
 </tr>
 <tr>
-<td>Controls</td>
-<td><code>--control-*</code> in <code>controls.css</code> and again in <code>settings.css</code>, with different heights (30, 38, 28px)</td>
-<td>Two definitions; under the 44px target</td>
+<td>Activity</td>
+<td>Queue, Recently finished, From a link</td>
+<td>Rows, progress, chips, toolbar, sortable</td>
+<td>Downloads</td>
 </tr>
 <tr>
-<td>Header</td>
-<td><code>--search-row-height</code>, <code>--submenu-height</code>, <code>--topbar-height</code> in <code>header.css</code></td>
-<td>Fine</td>
-</tr>
-<tr>
-<td>Theme switch</td>
-<td><code>displayPreferences.ts</code> <code>applyDisplay()</code>: <code>data-theme</code> (light, dark, auto) on <code>&lt;html&gt;</code>, root font-size %, classes <code>pref-hc</code>, <code>pref-readable</code>, <code>pref-calm</code>, <code>pref-underline</code>, <code>pref-spacing</code> (rules in <code>theme.css</code>); saved in localStorage</td>
-<td>Works; move to account (UX-29)</td>
-</tr>
-<tr>
-<td>Focus</td>
-<td><code>:focus-visible</code> 3px outline in <code>--accent</code> (<code>theme.css</code>)</td>
-<td>Good</td>
-</tr>
-</tbody>
-</table></div>
-<h2 id="2-shell">2. Shell</h2>
-<div class="s-scroll" tabindex="0" role="region" aria-label="Table 3"><table>
-<thead>
-<tr>
-<th>Piece</th>
-<th>File</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Layout setting (Classic default, Shelf)</td>
-<td><code>displayPreferences.ts</code>; picker <code>components/LayoutChoice.tsx</code>; <code>data-layout</code> on <code>.app-shell</code> (<code>App.tsx</code>)</td>
-</tr>
-<tr>
-<td>Classic sidebar: Discover, Following, My library, Library review, Requests, Settings</td>
-<td><code>App.tsx</code>, <code>styles.css</code></td>
-</tr>
-<tr>
-<td>Shelf icon rail: Library, Discover, Requests, Settings</td>
-<td><code>components/ShelfNavigation.tsx</code> (<code>ShelfRail</code>, <code>LibraryTabs</code>), <code>shelf-layout.css</code></td>
-</tr>
-<tr>
-<td>Fixed header: search, ConnectionHealth, page actions (Add list, Refresh lists on some pages), Display</td>
-<td><code>App.tsx</code>, <code>header.css</code></td>
-</tr>
-<tr>
-<td>Header sub-menu (Shelf only)</td>
-<td><code>components/HeaderSubmenu.tsx</code>; used by Discover, Requests, Settings, LibraryTabs</td>
-</tr>
-<tr>
-<td>Loading bar</td>
-<td><code>components/LoadingBar.tsx</code></td>
-</tr>
-<tr>
-<td>Page title</td>
-<td><code>components/PageTitle.tsx</code></td>
-</tr>
-<tr>
-<td>Display and accessibility panel</td>
-<td><code>components/DisplayPanel.tsx</code></td>
-</tr>
-<tr>
-<td>Loading skeleton</td>
-<td><code>components/ContentSkeleton.tsx</code></td>
-</tr>
-</tbody>
-</table></div>
-<h2 id="3-pages">3. Pages</h2>
-<div class="s-scroll" tabindex="0" role="region" aria-label="Table 4"><table>
-<thead>
-<tr>
-<th>Route</th>
-<th>Page</th>
-<th>In-page navigation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>/library</code> (<code>?view=authors</code>, <code>series</code>, <code>saved</code>)</td>
-<td><code>pages/MyLibrary.tsx</code></td>
-<td><code>.page-tabs</code>; search; <code>.library-filters</code> selects (Media, Library, Sort); cover wall; BookSummary panel</td>
-</tr>
-<tr>
-<td><code>/following</code></td>
-<td><code>pages/Following.tsx</code></td>
-<td><code>DetailTabs</code> (Authors, Series, Releases); <code>.follow-status-filters</code> chips; <code>.follow-toolbar</code> select; GroupShelf Detail/List switch</td>
-</tr>
-<tr>
-<td><code>/following/:listId</code></td>
-<td><code>pages/FollowShelf.tsx</code></td>
-<td><code>.wall-header</code>, status chips, cover wall, its own <code>.book-drawer</code></td>
-</tr>
-<tr>
-<td><code>/review</code></td>
-<td><code>pages/LibraryReview.tsx</code></td>
-<td><code>.page-tabs</code> with counts; <code>.settings-subtabs</code> reused as a filter; <code>.review-card</code>, <code>.review-chip</code></td>
-</tr>
-<tr>
-<td><code>/discover</code> (<code>?view=</code> home, series, browse, calendar, collections, awards, yours)</td>
-<td><code>pages/Discover.tsx</code>, <code>ReleaseCalendar</code>, <code>CustomizeDiscover</code></td>
-<td>Header sub-menu or <code>.page-tabs</code>; <strong>Customise</strong> dialog; <code>.explore-filters</code>; <code>.explore-segment</code>; calendar <code>.release-toolbar</code>, <code>.release-filters</code>, <code>.release-drawer</code></td>
-</tr>
-<tr>
-<td><code>/discover/books/:provider/:id</code></td>
-<td><code>pages/DiscoverBook.tsx</code></td>
-<td><code>DetailTabs</code></td>
-</tr>
-<tr>
-<td><code>/discover/lists</code>, <code>/lists</code></td>
-<td><code>pages/CommunityLists.tsx</code>, <code>pages/Lists.tsx</code></td>
-<td>Shelves, infinite scroll</td>
-</tr>
-<tr>
-<td><code>/series/hardcover/:id</code></td>
-<td><code>pages/Series.tsx</code></td>
-<td><code>DetailTabs</code> (Reading order, About, Requests, Lists); <code>.series-filter</code></td>
-</tr>
-<tr>
-<td><code>/authors/hardcover/:id</code></td>
-<td><code>pages/AuthorDetail.tsx</code></td>
-<td><code>DetailTabs</code> (Books, About the author)</td>
-</tr>
-<tr>
-<td><code>/books/:id</code></td>
-<td><code>pages/BookDetail.tsx</code></td>
-<td>Hand-made tab list: Overview, Library copies, Editions, Authors, Reviews, Downloads, Sources</td>
-</tr>
-<tr>
-<td><code>/search</code></td>
-<td><code>pages/ProviderSearch.tsx</code></td>
-<td>Search form, cover grid</td>
-</tr>
-<tr>
-<td><code>/requests</code></td>
-<td><code>pages/Requests.tsx</code>, <code>ActivityRequests.tsx</code></td>
-<td>Queue, Wanted, History with counts; <code>.activity-filters</code> link chips; sort select</td>
-</tr>
-<tr>
-<td><code>/settings#…</code></td>
-<td><code>pages/Settings.tsx</code>, <code>SettingsSections.tsx</code></td>
-<td>Six groups (General, Accounts, Sources, Library, Downloads, System); collapsible <code>SettingsGroup</code>s</td>
-</tr>
-<tr>
-<td><code>/organization/inspections</code></td>
-<td><code>pages/ImportReview.tsx</code></td>
-<td>Own toolbar</td>
-</tr>
-<tr>
-<td><code>/upgrade</code>, <code>/onboarding</code></td>
-<td><code>UpgradeWizard.tsx</code>, <code>GettingStarted.tsx</code></td>
-<td>Wizard steps</td>
-</tr>
-</tbody>
-</table></div>
-<p><code>pages/Downloads.tsx</code> appears unused (nothing imports it). Check, then remove.</p>
-<h2 id="4-components-that-already-exist-rough-number-of-files-using-each">4. Components that already exist (rough number of files using each)</h2>
-<ul>
-<li><strong>Covers and cards:</strong> BookCover (18), BookCard (8), EnrichedBookCard (2), GoodreadsDiscoveryBook (2),
-  BookPresentation (2), BookLink (8), LibraryFormatBadges (2), BookSourceIcon (4), RelatedBooks, RecentLibrary</li>
-<li><strong>Shelves and lists:</strong> DiscoveryShelf (4), DeferredShelf, DiscoveryCollections (4), ShelfViewAll (3),
-  ShelfPagination (5), BookPagination (2), InfiniteScroll (28), GroupShelf (2), LibraryGroups, FollowCatalog (7),
-  FollowRelease (5), FollowCollection, FollowedLists, SeriesContinuation, ListDownloads (4), Sortable (3)</li>
-<li><strong>Panels:</strong> BookSummary, BookReaderDetails (5), SourceReleaseDetails, DownloadRecoveryDetails (2)</li>
-<li><strong>Dialogs:</strong> BookDialog (about 20), DisplayPanel, CustomizeDiscover, AddMissingBooks (5), DeleteConfiguration (7),
-  DeleteLibraryCopy (2), CollectionReview, ReportDownloadProblem</li>
-<li><strong>Status:</strong> BookDetailsStatus, QuickAddStatus, ConnectionStatus (4), ConnectionTestStatus (4), ConnectionHealth,
-  RequestNextAction</li>
-<li><strong>Actions:</strong> QuickAdd (6), SourceReleaseDownload (2), BookDownloads, ImportExecution (2), DownloadImportReview,
-  DownloadMatchReview, CombineParts (2), AssetMatchForm (2)</li>
-<li><strong>Navigation:</strong> HeaderSubmenu (5), DetailTabs (4), ShelfNavigation, NavigationContinuity (10), PageTitle, LoadingBar</li>
-<li><strong>Forms and settings:</strong> SettingsGroup (5), SettingHelp (15), SelectMenu (global), LanguageSelect (7),
-  EditionFormatSelect (2), FollowFilterFields (3), GroupingEditor, CalendarSettings, AudibleStoreSetting,
-  LayoutChoice (3), MountedFolderBrowser (2), DownloadFileBrowser, UpgradeBackups (3)</li>
-<li><strong>States:</strong> Notice, Empty, Loading (in <code>components.tsx</code>), ContentSkeleton (4)</li>
-</ul>
-<h2 id="5-duplicates-to-merge">5. Duplicates to merge</h2>
-<div class="s-scroll" tabindex="0" role="region" aria-label="Table 5"><table>
-<thead>
-<tr>
-<th>Job</th>
-<th>Variants today</th>
-<th>Target (DESIGN-SYSTEM.md)</th>
-<th>Task</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Book details beside a list</td>
-<td>BookSummary (<code>.book-summary</code>), FollowShelf <code>.book-drawer</code> (<code>wall.css</code>), ReleaseCalendar <code>.release-drawer</code> (<code>discovery.css</code>), BookDialog modals</td>
-<td>SidePanel</td>
-<td>UX-09</td>
-</tr>
-<tr>
-<td>Book card</td>
-<td><code>.book-card</code>, <code>.discovery-book</code>, EnrichedBookCard, GoodreadsDiscoveryBook, <code>.cover-wall-book</code>, <code>.release-day-card</code>, <code>.library-group-card</code>, <code>.review-card</code>, assorted <code>.panel</code> cards</td>
-<td>CoverCard, Row, Panel</td>
-<td>UX-10</td>
-</tr>
-<tr>
-<td>Status badge</td>
-<td><code>.request-status</code> (defined twice in <code>requests.css</code>), <code>.review-chip</code>, <code>.cover-wall-chip</code>, <code>.follow-book-status</code>, <code>.series-format-status</code>, <code>.library-series-status</code>, <code>.download-review-status</code>, <code>.connection-state</code>, <code>*-folder-status</code></td>
-<td>StatusChip</td>
-<td>UX-04</td>
-</tr>
-<tr>
-<td>Tabs</td>
-<td><code>.page-tabs</code> (styled in 4 files), DetailTabs, BookDetail's copy, <code>.settings-subtabs</code> used as a filter</td>
-<td>SectionNav (links) and Tabs (in-page)</td>
-<td>UX-11</td>
-</tr>
-<tr>
-<td>Filter bar</td>
-<td><code>.library-filters</code>, <code>.explore-filters</code>, <code>.release-filters</code>, <code>.activity-filters</code>, <code>.follow-status-filters</code>, <code>.review-chips</code>, <code>.explore-segment</code></td>
-<td>Toolbar with FilterChips and Select</td>
-<td>UX-11</td>
-</tr>
-<tr>
-<td>Dialog</td>
-<td>BookDialog, DisplayPanel and ReleaseCalendar <code>&lt;dialog&gt;</code>s, feature <code>*-dialog</code> classes</td>
-<td>Dialog</td>
-<td>UX-10</td>
-</tr>
-<tr>
-<td>Control size</td>
-<td><code>--control-*</code> in <code>controls.css</code> and <code>settings.css</code></td>
-<td>One control scale</td>
-<td>UX-02</td>
-</tr>
-</tbody>
-</table></div>
-<p><strong>Inconsistencies to fix:</strong> in Shelf layout, Discover, Requests and Settings put their tabs in the header. Library
-pages keep page tabs under a header menu (two levels). Sort sits among filters in Library, next to tabs in Requests,
-and is missing on Discover. Page headers differ (eyebrow block, hidden h1, wall header).</p>
-<h2 id="6-status-words-in-use-today">6. Status words in use today</h2>
-<h3 id="starboard-one-word-and-one-tone-for-each-state-17-november-2026">Starboard: one word and one tone for each state (17 November 2026)</h3>
-<p>Starboard kept a map of status words on each page: <code>STATE_WORDS</code> in <code>downloads.js</code>, <code>BATCH_WORDS</code> and <code>TASK_WORDS</code> in
-<code>settings.js</code>, <code>STATUS_WORDS</code> in <code>system-backup.js</code>, <code>CUSTOM_STATE</code> in <code>plugins.js</code> and <code>STATE_BAND</code> in
-<code>dashboard.js</code>, with more in <code>app-details.js</code>, <code>apps.js</code> and <code>system-pool.js</code>. The same state had several words and
-tones. This table is the one list. Starboard keeps it as one map in <code>common.js</code>, and every chip, band, row and notice
-takes its word and tone from there.</p>
-<p>The rules of <code>CONTENT-DESIGN.md</code> section 6 apply. Use one or two words, never a sentence, and always put the word
-beside the colour and its icon.</p>
-<div class="s-scroll" tabindex="0" role="region" aria-label="Table 6"><table>
-<thead>
-<tr>
-<th>State</th>
-<th>Word</th>
-<th>Tone</th>
-<th>Replaces today</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>An app or service answers</td>
-<td>Running</td>
-<td>Success</td>
-<td>"Works" (<code>CUSTOM_STATE.ok</code>), "All running" on the dashboard for every app at once</td>
-</tr>
-<tr>
-<td>An app or service does not answer</td>
-<td>Not responding</td>
-<td>Danger</td>
-<td>"Not answering" (<code>CUSTOM_STATE.problem</code>, plug-ins, download clients), in Warning in <code>plugins.js</code></td>
-</tr>
-<tr>
-<td>A plug-in reports that all is well</td>
-<td>Healthy</td>
-<td>Success</td>
-<td>"OK" (<code>STATE_BAND.ok</code>)</td>
-</tr>
-<tr>
-<td>Something works, but needs a decision or is slow</td>
-<td>Needs attention</td>
-<td>Warning</td>
-<td>"Warning" (<code>STATE_BAND.warning</code>), "Slow" (<code>CUSTOM_STATE.warning</code>), <code>importBlocked</code></td>
-</tr>
-<tr>
-<td>A plug-in reports a problem</td>
-<td>Not working</td>
-<td>Danger</td>
-<td>"Problem" (<code>STATE_BAND.problem</code>)</td>
-</tr>
-<tr>
-<td>Not checked yet</td>
-<td>Not checked</td>
-<td>Muted</td>
-<td>"Not tested" (<code>CUSTOM_STATE.unknown</code>), "Not checked yet"</td>
-</tr>
-<tr>
-<td>A setting, plug-in or service is on</td>
-<td>Active</td>
-<td>Success</td>
-<td>"On"</td>
-</tr>
-<tr>
-<td>A setting, plug-in or service is off</td>
-<td>Inactive</td>
-<td>Muted</td>
-<td>"Off" (<code>CUSTOM_STATE.off</code> already says Inactive)</td>
-</tr>
-<tr>
-<td>In a queue, not started</td>
-<td>Waiting</td>
-<td>Neutral</td>
-<td>"Waiting" in Muted (<code>BATCH_WORDS</code>, <code>TASK_WORDS</code>), "Starting" (<code>STATUS_WORDS.waiting</code>), <code>queued</code>, <code>delay</code></td>
-</tr>
-<tr>
-<td>A job is running, with no more exact word</td>
-<td>In progress</td>
-<td>Info</td>
-<td>"Working" (<code>TASK_WORDS</code>), "Running" for a job in Info (<code>system-pool.js</code>)</td>
-</tr>
-<tr>
-<td>Downloading</td>
-<td>Downloading</td>
-<td>Info</td>
-<td></td>
-</tr>
-<tr>
-<td>Download finished, waiting to be copied in</td>
-<td>Waiting to import</td>
-<td>Neutral</td>
-<td></td>
-</tr>
-<tr>
-<td>Copying into the library</td>
-<td>Importing</td>
-<td>Info</td>
-<td></td>
-</tr>
-<tr>
-<td>Downloaded, not yet in the library</td>
-<td>Downloaded</td>
-<td>Success</td>
-<td></td>
-</tr>
-<tr>
-<td>In the library</td>
-<td>In library</td>
-<td>Success</td>
-<td></td>
-</tr>
-<tr>
-<td>An app or Starboard is being updated</td>
-<td>Updating</td>
-<td>Info</td>
-<td>"Updating" (<code>BATCH_WORDS.working</code>, <code>RX_LIST_STATE</code>)</td>
-</tr>
-<tr>
-<td>A backup is being made</td>
-<td>Backing up</td>
-<td>Info</td>
-<td>"Backing up now" (<code>STATUS_WORDS.running</code>)</td>
-</tr>
-<tr>
-<td>A job finished</td>
-<td>Done</td>
-<td>Success</td>
-<td>"Complete" (<code>STATUS_WORDS.done</code>), "Finished" (<code>system-pool.js</code>)</td>
-</tr>
-<tr>
-<td>A job or an update did not finish</td>
-<td>Failed</td>
-<td>Danger</td>
-<td>"Did not finish" (<code>TASK_WORDS</code>), "Not updated" (<code>BATCH_WORDS.failed</code>), "Update failed", "Last run failed"</td>
-</tr>
-<tr>
-<td>A job was not started, because an earlier one failed</td>
-<td>Not started</td>
-<td>Warning</td>
-<td>"Not updated" for <code>BATCH_WORDS.skipped</code>, "Stopped" for a skipped step in <code>system-pool.js</code></td>
-</tr>
-<tr>
-<td>An update was undone</td>
-<td>Went back</td>
-<td>Warning</td>
-<td></td>
-</tr>
-<tr>
-<td>An update was held back on purpose</td>
-<td>Held back</td>
-<td>Muted</td>
-<td></td>
-</tr>
-<tr>
-<td>Paused by the person</td>
-<td>Paused</td>
-<td>Muted</td>
-<td></td>
-</tr>
-<tr>
-<td>Stopped by the person</td>
-<td>Stopped</td>
-<td>Warning</td>
-<td>"Stopped" in Danger</td>
-</tr>
-<tr>
-<td>A newer version is out</td>
-<td>Update available</td>
-<td>Info</td>
-<td></td>
-</tr>
-<tr>
-<td>A newer version with a big change</td>
-<td>Check before updating</td>
-<td>Warning</td>
-<td>"Big change: check first"</td>
-</tr>
-<tr>
-<td>No newer version</td>
-<td>Up to date</td>
-<td>Success</td>
-<td></td>
-</tr>
-<tr>
-<td>Never updated</td>
-<td>Never updated</td>
-<td>Warning</td>
-<td></td>
-</tr>
-<tr>
-<td>An app uses a change only after it starts again</td>
-<td>Restart needed</td>
-<td>Warning</td>
-<td></td>
-</tr>
-</tbody>
-</table></div>
-<p>A word in this table means one state only. "Running" is an app that answers, never a job in progress. A job that runs
-is "In progress" or has its own word (Downloading, Updating, Backing up). A chip can add a detail after a middle dot
-("Downloading · 45%"), never a second word for the state.</p>
-<h3 id="storyarr">Storyarr</h3>
-<p>The same state has several names. Target vocabulary: <code>CONTENT-DESIGN.md</code> section 6.</p>
-<div class="s-scroll" tabindex="0" role="region" aria-label="Table 7"><table>
-<thead>
-<tr>
-<th>Target</th>
-<th>Found today</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>In library</td>
-<td>"In library", "✓ In library", "In your library", "Available"</td>
-</tr>
-<tr>
-<td>Not requested</td>
-<td>"Not in your library", "Not owned", "Not requested", "Saved in your catalog"</td>
-</tr>
-<tr>
+<td>Activity</td>
+<td>Wanted (one tab each for Missing and Quality wanted)</td>
+<td>Tabs, rows, selection bar, chips</td>
 <td>Wanted</td>
-<td>"Wanted", "Missing" (ListRequests, SeriesRequests). "Missing" also means missing files in My library</td>
 </tr>
 <tr>
-<td>Needs attention</td>
-<td>"Needs review", "Needs attention", "Download needs attention", "Source needs review", "Needs matching", "Needs verification"</td>
+<td>Activity</td>
+<td>Requests, Issues</td>
+<td>Rows, chips, slide-out</td>
+<td>Requests</td>
 </tr>
 <tr>
-<td>Searching, Waiting, Downloading, Importing</td>
-<td>"Queued", "Request queued", "Searching sources", "Waiting for source", "Preparing download", "Check inventory", "Paused", "Download not started"</td>
+<td>Activity</td>
+<td>History, Across apps</td>
+<td>Event list, rows, filter chips</td>
+<td>History</td>
 </tr>
 <tr>
-<td>Request outcomes (Activity History only)</td>
-<td>"Pending", "Declined", "Withdrawn"</td>
+<td>System</td>
+<td>Overview, Monitor, Busy now</td>
+<td>Stat, gauge, line chart, table, notice</td>
+<td>Overview, Monitor, Busy now</td>
+</tr>
+<tr>
+<td>System</td>
+<td>Apps, Other services, Install apps</td>
+<td>Cards, app icon, rows, wizard, option cards</td>
+<td>Apps, Other services</td>
+</tr>
+<tr>
+<td>System</td>
+<td>Updates</td>
+<td>Update list (<code>.updates-table</code>), selection bar, disclosure, <strong>Check now</strong></td>
+<td>Updates</td>
+</tr>
+<tr>
+<td>System</td>
+<td>Storage, Pool, Disk health</td>
+<td>Meter, table, rows, notice, chips</td>
+<td>Storage, Disk health</td>
+</tr>
+<tr>
+<td>System</td>
+<td>Network</td>
+<td>Facts, stat, switch</td>
+<td>Network</td>
+</tr>
+<tr>
+<td>System</td>
+<td>Clean up, Holding folder</td>
+<td>Rows, selection bar, dialog</td>
+<td>none</td>
+</tr>
+<tr>
+<td>System</td>
+<td>Logs</td>
+<td>Log viewer</td>
+<td>Logs</td>
+</tr>
+<tr>
+<td>Settings</td>
+<td>General (ten pages: Names and apps, Appearance, Pages and lists, Discover rows, Download hours, Logs and feedback, Alerts, Performance, Pictures, Backup and restore)</td>
+<td>Page topics (<code>.topic-tabs</code>), <code>.settings-sections</code>, settings rows, saved note, places for backups, show once</td>
+<td>General tabs, Backup places</td>
+</tr>
+<tr>
+<td>Settings</td>
+<td>Apps (Manage apps, Your install, Reelix, the media server tab)</td>
+<td>Sortable categories, option cards, wizard in a slide-out</td>
+<td>Manage apps, Media server</td>
+</tr>
+<tr>
+<td>Settings</td>
+<td>Downloads, Radio</td>
+<td>Settings rows, secret field, tag input, schedule</td>
+<td>Downloads settings</td>
+</tr>
+<tr>
+<td>Settings</td>
+<td>Security</td>
+<td>Secret field, show once, <code>.recovery-codes</code>, tables</td>
+<td>Security</td>
+</tr>
+<tr>
+<td>Settings</td>
+<td>Plug-ins (Manage, Catalogue, one tab for each plug-in)</td>
+<td><code>.plugin-card</code>, <code>.plugin-band</code>, folds, <code>.dash-stat</code>, requires tags</td>
+<td>Plug-ins</td>
+</tr>
+<tr>
+<td>Settings</td>
+<td>Updates, Releases, Restore</td>
+<td>Settings rows, release list, wizard</td>
+<td>About and updates</td>
+</tr>
+<tr>
+<td>Any</td>
+<td>Bring in</td>
+<td>Wizard, sortable, signin card, meter, <code>.wizard-job</code></td>
+<td>Bring in</td>
+</tr>
+<tr>
+<td>Any</td>
+<td>Sign in, Set up</td>
+<td><code>.page--narrow</code>, <code>.site-header--no-rail</code>, wizard</td>
+<td>Sign in, Set up</td>
 </tr>
 </tbody>
 </table></div>
-<p>Status maps today: <code>pages/requestStatus.ts</code> and <code>statusNames</code> in <code>pages/Following.tsx</code>; others are local to
-each page.</p>
-<h2 id="7-css">7. CSS</h2>
-<p>About 425 KB across 28 files, nearly all global (Tailwind plus two cascade layers, <code>app</code> and <code>controls</code>).
-Biggest: <code>styles.css</code> 87 KB, <code>settings.css</code> 74 KB, <code>theme-tokens.css</code> 44 KB, <code>discovery.css</code> 30 KB. No CSS
-modules; per-component files still emit global selectors.</p>
+<h2 id="where-the-other-records-are">Where the other records are</h2>
+<ul>
+<li>The status words: <code>CONTENT-DESIGN.md</code> section 6.</li>
+<li>The tokens: <code>foundations/tokens.html</code> on the site, made from <code>tokens.css</code>.</li>
+<li>The classes of each component, and its rules: <code>LIBRARY.md</code>.</li>
+<li>The <code>SharedComponents</code> functions an app can call: <code>LIBRARY.md</code>, JavaScript.</li>
+</ul>
 </div></div><nav class="s-pager" aria-label="Previous and next"><a class="s-prev" href="library.html" rel="prev"><small>Previous</small><span>Component library</span></a><a class="s-next" href="wizard.html" rel="next"><small>Next</small><span>Wizard</span></a></nav>
 </main>
 </div>

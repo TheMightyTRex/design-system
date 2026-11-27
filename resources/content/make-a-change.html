@@ -1,9 +1,9 @@
-<div class="page-head"><div class="page-head__text"><h1>Make a change</h1><p class="page-head__summary">How to change the design system so the change reaches Storyarr and Starboard, checked and in step.</p></div></div>
+<div class="page-head"><div class="page-head__text"><h1>Make a change</h1><p class="page-head__summary">How to change the design system so the change reaches every app, checked and in step.</p></div></div>
 
 <div class="prose">
-<p class="prose__lead">This repository is the one source of the library. Change it here, check it, commit it, and then copy it into both apps. This takes 10 steps.</p>
+<p class="prose__lead">This repository is the one source of the library. Change it here, check it, commit it, and then copy it into every app. This takes 10 steps.</p>
 
-<div class="notice" role="note">{{i:info}}<div class="notice__body"><span class="notice__title">Before you begin:</span><p>You need Python 3, git, and copies of this repository, Storyarr and Starboard. Run <code>tools/install-hooks.sh</code> once, so the privacy check runs before every commit.</p></div></div>
+<div class="notice" role="note">{{i:info}}<div class="notice__body"><span class="notice__title">Before you begin:</span><p>You need Python 3, git, and copies of this repository, Starboard, Stallboard and the plug-ins repository. Run <code>tools/install-hooks.sh</code> once, so the privacy check runs before every commit.</p></div></div>
 
 <h2 id="steps">Steps</h2>
 <ol>
@@ -13,10 +13,10 @@
 <li>Build the site, then the boards and resources pages. If you changed the resources pages, run <code>python3 resources/make.py</code> before <code>build.py</code>.
 <code class="code-block">python3 tools/site.py</code>
 <code class="code-block">python3 tools/build.py</code></li>
-<li>Check the components. Run <code>python3 tools/site.py</code>, open <code>components/index.html</code>, select <strong>Display</strong> and check the change in each theme: Light, Dark, High contrast and High contrast dark. Then check it at 175% text and at phone width.</li>
+<li>Check the components. Run <code>python3 tools/site.py</code>, open <code>components/index.html</code>, select <strong>Display</strong> and check the change in each theme: Light, Dark, High contrast and High contrast dark. Then check it at 175% text and at phone width, and run <code>node tools/check_demos.mjs</code>, which fails when a demo sticks to the window or overlaps the header or another part.</li>
 <li>Check contrast. The report must end with "0 failures".
 <code class="code-block">python3 tools/contrast.py &gt; contrast-report.txt</code></li>
-<li>Check the words against the checklist in the <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/CONTENT-DESIGN.md">content design guide</a>, and the accessibility floor in the <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/ACCESSIBILITY.md">accessibility guide</a>. Then run the banned words check and the token check; each must pass.
+<li>Check the words against the checklist in the <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/CONTENT-DESIGN.md">content design guide</a>, and the accessibility floor in the <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/ACCESSIBILITY.md">accessibility guide</a>. To have an AI assistant run the full check, say "Accessibility check" and give it the prompt in <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/AI-CHECKS.md">AI-triggered checks</a>. Then run the banned words check and the token check; each must pass.
 <code class="code-block">python3 tools/check_words.py</code>
 <code class="code-block">python3 tools/check_tokens.py</code></li>
 <li>Record the decision. When the change alters how something appears or works, add it to the decisions list in <code>docs/LIBRARY.md</code>.</li>
@@ -25,7 +25,7 @@
 <code class="code-block">git commit -am "Toasts: an action on warning toasts"</code></li>
 <li>Ask before you push. The owner of the repository approves every push. If you do not own it, open a pull request instead.
 <code class="code-block">git push</code></li>
-<li>Copy the library into both apps, then commit in each app, rebuild it and test it.
+<li>Copy the library into the apps, then commit in each app, rebuild it and test it.
 <code class="code-block">python3 tools/sync.py --check</code>
 <code class="code-block">python3 tools/sync.py</code></li>
 </ol>

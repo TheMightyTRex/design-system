@@ -1,7 +1,7 @@
 # Accessibility guide
 
-Version 1.2, 4 November 2026. For Storyarr and Starboard. The floor is **WCAG 2.2 level AA** on every page, in every
-theme (Light, Dark, High contrast) and every layout (Storyarr: Classic and Shelf). Content rules are in
+Version 1.2, 4 November 2026. For Starboard, its plug-ins and Stallboard. The floor is **WCAG 2.2 level AA** on every page, in every
+theme (Light, Dark, High contrast and High contrast dark) and every layout. Content rules are in
 `CONTENT-DESIGN.md` section 8. `WCAG.md` says how each WCAG point is met and what each app must still do.
 `ALT-TEXT.md` says how to write text descriptions for images.
 
@@ -10,7 +10,7 @@ to test each one.
 
 ## 1. Display and accessibility
 
-Every page of both apps, Sign in and Set up included, has the **Display** button as the last item in the
+Every page of every app, Sign in and Set up included, has the **Display** button as the last item in the
 header. It opens the Display and accessibility slide-out (gallery: Display button). The choices, in this
 order:
 
@@ -25,7 +25,7 @@ order:
 | An app's own choices | After these (Starboard: Design) | |
 | Done, Reset | Buttons in the foot | |
 
-Choices apply at once. They are saved to the person's account where the app has accounts (Storyarr task
+Choices apply at once. They are saved to the person's account where the app has accounts (the design task
 UX-29), otherwise in the browser. `components.js` applies them from `data-display` inputs.
 
 Every page uses Atkinson Hyperlegible Next, a typeface designed for readers with low vision, so there is no
@@ -36,7 +36,7 @@ separate low-vision font switch.
 **Structure**
 - **Check:** one h1 per page; headings in order; landmarks (`header`, `nav`, `main`) on every page.
 - **Check:** a "Skip to main content" link is the first focusable element.
-- **Check:** the browser tab title names the page ("Activity · Storyarr").
+- **Check:** the browser tab title names the page ("Updates · Starboard").
 
 **Keyboard and focus**
 - **Check:** everything works with a keyboard alone, in a logical order.
@@ -50,7 +50,7 @@ separate low-vision font switch.
 - **Check:** every drag has a way to do the same with buttons or the keyboard (WCAG 2.5.7).
 
 **Size and spacing**
-- **Check:** controls are at least 44 by 44 pixels (24 is the AA minimum; 44 is Storyarr's standard). Ticks and
+- **Check:** controls are at least 44 by 44 pixels (24 is the AA minimum; 44 is the standard of the apps). Ticks and
   choices are 24 by 24 at least, and a row's or card's name is at least 24 pixels tall (`components.css`).
 - **Check:** works at 400% zoom and 320px width with no horizontal scrolling of the page (wide tables may
   scroll inside their own region).
@@ -91,6 +91,8 @@ separate low-vision font switch.
 
 ## 3. Components and their accessibility contract
 
+Menu rows (the 2nd level tabs that condense to icons): read [Menu rows: condensing and accessibility](LIBRARY.md#menu-rows-condensing-and-accessibility) and the gallery page Components, Menus and tabs.
+
 | Component | Contract |
 |---|---|
 | Status chip | Text always present; icon `aria-hidden`; colour from the status tone tokens |
@@ -122,7 +124,7 @@ names. High contrast raises borders, focus rings and muted text, and removes sha
 - Theme default is Light (owner, 18 November 2026); Match device is a choice.
 - Starboard has an automated check (12 November 2026). `tools/a11y.sh` runs axe-core (WCAG 2.2 AA) on every page in
   Light, Dark and High contrast, with the structure, keyboard, slide-out focus, reflow, forced colours and reduced
-  motion checks of section 2. Storyarr has none yet (task A11Y-01).
+  motion checks of section 2.
 
 ## 6. How to test
 
@@ -131,6 +133,10 @@ names. High contrast raises borders, focus rings and muted text, and removes sha
 3. Themes: Light, Dark, High contrast; check chips, focus rings and controls that are not available.
 4. Screen reader: Orca on this computer, or NVDA on Windows; read the page headings list and one task.
 5. Automated: Starboard's `tools/a11y.sh` (axe-core and the checks in this section), before each release.
+
+**Asking an AI assistant for the full check.** The words "Accessibility check" start the full procedure in
+`AI-CHECKS.md` section 5: this table, every type of assistive technology, logical order, no needless repeats and a
+report with a table for each page. It has a prompt to copy and a downloadable report template.
 
 **The standard accessibility test** (TheMightyTRexUK, 12 November 2026: "needs adding to standard accessibility
 testing"). Whenever an accessibility test is asked for, it is all of these, never a scan alone:
