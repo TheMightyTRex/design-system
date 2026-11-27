@@ -7,6 +7,10 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 [Semantic Versioning](https://semver.org/).
 
 
+## 27 November 2026
+
+- **A printer icon.** `printer` joins the sprite (Lucide, ISC licence) for Print buttons, such as printing a page of sign-in details. It is listed in `tools/icons.txt` and shown in the icon row of Type, space and icons. No CSS or script changed, so `tools/sync.py` changes only Starboard's sprite.
+
 ## 26 November 2026
 
 - **An AI-triggered Accessibility check (DASH-606).** `docs/AI-CHECKS.md` is a new guide that says what an AI-triggered check is and sets out the Accessibility check in full, with a report template to download and a prompt to copy; it appears in the guides and in site search.
