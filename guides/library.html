@@ -542,6 +542,11 @@ and wider spacing.</p>
 <td><code>.actions</code></td>
 <td></td>
 </tr>
+<tr>
+<td>Library action row (owner, 26 November 2026)</td>
+<td><code>.series-head__actions</code> (an item page) or <code>#lib-actions</code> in the page head (a tab), with <code>.series-head__follow</code> for Following</td>
+<td>One row, the same on every type. Every control is the <code>--control-h</code> height and wraps on a phone, with the main action first. <strong>Order on an item page:</strong> the main action (Play, Find it, Find wanted episodes (n) or Listen), Follow or Following, Keep, Watched, Choose a download, Quality and folder, Open in Reelix, Change match, Delete (danger, last). <strong>On a tab:</strong> Find all wanted (n) first (primary), then Bring in media, Select several, Save this view as default. One primary button in the row. The words are the Library vocabulary in <code>CONTENT-DESIGN.md</code> section 6 and the Find all wanted pattern in section 7</td>
+</tr>
 </tbody>
 </table></div>
 <h3 id="inputs">Inputs</h3>
@@ -925,7 +930,7 @@ and wider spacing.</p>
 </tr>
 <tr>
 <td>Series header (UX-43)</td>
-<td><code>.series-head</code>, <code>.series-head__text</code>, <code>__name</code> (<code>.wordmark</code> with no logo), <code>__meta</code>, <code>__desc</code>, <code>__progress</code>, <code>__actions</code>, <code>.cover-fan</code></td>
+<td><code>.series-head</code>, <code>.series-head__text</code>, <code>__name</code> (<code>.wordmark</code> with no logo), <code>__meta</code>, <code>__desc</code>, <code>__progress</code>, <code>__actions</code>, <code>__follow</code> (the framed Following list in the action row), <code>.cover-fan</code></td>
 <td>Series and radio show pages; the name stays the h1; the fan is hidden on phones</td>
 </tr>
 <tr>

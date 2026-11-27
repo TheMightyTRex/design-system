@@ -100,6 +100,7 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 | Menu button and menu | `.menu-wrap`, `.menu`, `.menu__label`, `role="menu"` items | Related actions in one button (the Lists menu); sort as `menuitemradio`. Something to read and act on is a popover instead |
 | Copy button | `.copy-btn`, `data-copy` | Confirms in a status message |
 | Action row | `.actions` | |
+| Library action row (owner, 26 November 2026) | `.series-head__actions` (an item page) or `#lib-actions` in the page head (a tab), with `.series-head__follow` for Following | One row, the same on every type. Every control is the `--control-h` height and wraps on a phone, with the main action first. **Order on an item page:** the main action (Play, Find it, Find wanted episodes (n) or Listen), Follow or Following, Keep, Watched, Choose a download, Quality and folder, Open in Reelix, Change match, Delete (danger, last). **On a tab:** Find all wanted (n) first (primary), then Bring in media, Select several, Save this view as default. One primary button in the row. The words are the Library vocabulary in `CONTENT-DESIGN.md` section 6 and the Find all wanted pattern in section 7 |
 
 ### Inputs
 | Component | Classes | Notes |
@@ -181,7 +182,7 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 | Timeline | `.timeline`, `.timeline__item[data-tone]`, `.timeline__title`, `.timeline__meta` | A request's history, a backup run; newest first |
 | List and detail | `.list-detail`, `.list-detail__list`, `.row[aria-current]` | Following: authors on the left, the chosen one on the right; list alone on phones |
 | Item header | `.item-header`, `.item-header__art` (`--round` for people), `.item-header__text`, `.item-header__byline`, `.item-header__chips` | Book, author, series and narrator pages |
-| Series header (UX-43) | `.series-head`, `.series-head__text`, `__name` (`.wordmark` with no logo), `__meta`, `__desc`, `__progress`, `__actions`, `.cover-fan` | Series and radio show pages; the name stays the h1; the fan is hidden on phones |
+| Series header (UX-43) | `.series-head`, `.series-head__text`, `__name` (`.wordmark` with no logo), `__meta`, `__desc`, `__progress`, `__actions`, `__follow` (the framed Following list in the action row), `.cover-fan` | Series and radio show pages; the name stays the h1; the fan is hidden on phones |
 | Solid-colour logo, wordmark | `.logo-mask` (`--logo`, `--logo-ratio`, `data-colour="accent"`), `.wordmark` | Any transparent logo as one colour through a CSS mask; the name set large when there is none |
 | Logo slide-out (UX-43) | `.logo-saved`, `.logo-saved__row`, `.logo-saved__text`, `.logo-tabs`, `.logo-pane`, `.logo-step`, `.logo-candidates`, `.logo-candidate` (`__art`, `__text`), `.cover-pick`, `.logo-crop` (`__canvas`, `__controls`, `__readout`), `.range`, `.checker`, `.logo-drop`, `.logo-preview` (`__light`, `__dark`), `.inline-form` | From a cover, Find online, Upload your own; the saved copy and Remove |
 | Back link, breadcrumbs | `.back-link`, `.breadcrumbs` | "Back to My library"; folder paths |
