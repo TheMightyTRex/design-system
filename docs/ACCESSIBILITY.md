@@ -91,6 +91,8 @@ separate low-vision font switch.
 
 ## 3. Components and their accessibility contract
 
+Menu rows (the 2nd level tabs that condense to icons): read [Menu rows: condensing and accessibility](LIBRARY.md#menu-rows-condensing-and-accessibility) and the gallery page Components, Menus and tabs.
+
 | Component | Contract |
 |---|---|
 | Status chip | Text always present; icon `aria-hidden`; colour from the status tone tokens |
@@ -131,6 +133,10 @@ names. High contrast raises borders, focus rings and muted text, and removes sha
 3. Themes: Light, Dark, High contrast; check chips, focus rings and controls that are not available.
 4. Screen reader: Orca on this computer, or NVDA on Windows; read the page headings list and one task.
 5. Automated: Starboard's `tools/a11y.sh` (axe-core and the checks in this section), before each release.
+
+**Asking an AI assistant for the full check.** The words "Accessibility check" start the full procedure in
+`AI-CHECKS.md` section 5: this table, every type of assistive technology, logical order, no needless repeats and a
+report with a table for each page. It has a prompt to copy and a downloadable report template.
 
 **The standard accessibility test** (TheMightyTRexUK, 12 November 2026: "needs adding to standard accessibility
 testing"). Whenever an accessibility test is asked for, it is all of these, never a scan alone:
