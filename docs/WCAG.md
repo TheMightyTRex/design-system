@@ -12,7 +12,7 @@ Every word follows `CONTENT-DESIGN.md`.
 WCAG is the international standard for accessible websites and apps. GOV.UK services must meet level AA,
 and so does everything in this design system. This guide says, for each thing the standard asks, what the
 library already does and what each app must still do on its own pages. The checks to run are in
-`ACCESSIBILITY.md`; this guide says why each one is there.
+`ACCESSIBILITY.md`, which is the one accessibility guide; this guide says why each one is there.
 
 ### Who it is for
 
@@ -24,7 +24,7 @@ criterion number for anyone who wants the full text.
 
 1. Read section 1 once.
 2. When you build a page, go through sections 2 to 5 and check each line marked "The app" for your page.
-3. Then run the checks in `ACCESSIBILITY.md` section 2 and the tests in its section 6.
+3. Then run the checks in the topic sections of `ACCESSIBILITY.md` (sections 5 to 24) and the tests in its section 26.
 
 ## 1. What WCAG asks
 
@@ -77,9 +77,9 @@ In each table, "The library" is what `tokens.css`, `components.css` and `compone
 | Meaningful headings and labels | 2.4.6 | Every field has a visible label | Follow `CONTENT-DESIGN.md` |
 | Visible focus | 2.4.7 | A 3px focus ring at 3:1 contrast, in every theme | Never remove the focus ring |
 | Focus never hidden by sticky parts | 2.4.11 (new in 2.2) | The page keeps the sticky header and save bar clear when it scrolls (`scroll-padding`) | Use `.site-header` and `.save-bar`, not sticky parts of your own |
-| The name matches the visible label | 2.5.3 | Buttons are named by their words; hidden text only adds to the end | Start any `aria-label` with the visible words |
+| The name matches the visible label | 2.5.3 | Buttons are named by their words; hidden text only adds to the end | Start any `aria-label` with the visible words. An automated Label in Name check is in progress in Starboard; voice control steps are in `ACCESSIBILITY.md` section 22 |
 | Dragging has an alternative | 2.5.7 (new in 2.2) | The library has no drag-only control; the logo editor's crop is set with sliders | Give every drag a way to do the same with buttons or the keyboard |
-| Targets at least 24 by 24 pixels | 2.5.8 (new in 2.2) | Controls are 44px; 32px only for dense table rows | Never make a control smaller than the library's |
+| Targets at least 24 by 24 pixels | 2.5.8 (new in 2.2) | Controls are 44px; 32px only for dense table rows | Never make a control smaller than the library's. Sizes and checks: `ACCESSIBILITY.md` section 8; a per-control confirmation is in progress in Starboard |
 
 ## 4. Understandable
 
@@ -105,8 +105,8 @@ WCAG 2.2 removed 4.1.1 Parsing, so valid HTML is good practice rather than a cri
 
 ## 6. How to check
 
-- The checks before a change is finished: `ACCESSIBILITY.md` section 2.
-- How to test with a keyboard, zoom, themes and a screen reader: `ACCESSIBILITY.md` section 6.
+- The checks before a change is finished: the topic sections of `ACCESSIBILITY.md` (sections 5 to 24) and its gate (section 3).
+- How to test with a keyboard, zoom, themes, a screen reader and voice control: `ACCESSIBILITY.md` section 26, and section 22 for voice control.
 - Automatic checks, screen readers, magnifiers and voice control:
   [Outside tools for accessibility and testing](https://themightytrex.github.io/design-system/resources/outside-tools.html).
 - Testing with people: [Get feedback](https://themightytrex.github.io/design-system/resources/get-feedback.html).

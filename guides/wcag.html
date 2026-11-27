@@ -282,7 +282,7 @@ Every word follows <code>CONTENT-DESIGN.md</code>.</p>
 <p>WCAG is the international standard for accessible websites and apps. GOV.UK services must meet level AA,
 and so does everything in this design system. This guide says, for each thing the standard asks, what the
 library already does and what each app must still do on its own pages. The checks to run are in
-<code>ACCESSIBILITY.md</code>; this guide says why each one is there.</p>
+<code>ACCESSIBILITY.md</code>, which is the one accessibility guide; this guide says why each one is there.</p>
 <h3 id="who-it-is-for">Who it is for</h3>
 <p>Anyone who builds, reviews or tests a page of Starboard or Stallboard, or uses the design system for their
 own work. No knowledge of WCAG is needed: each point is explained in plain words, with its success
@@ -291,7 +291,7 @@ criterion number for anyone who wants the full text.</p>
 <ol>
 <li>Read section 1 once.</li>
 <li>When you build a page, go through sections 2 to 5 and check each line marked "The app" for your page.</li>
-<li>Then run the checks in <code>ACCESSIBILITY.md</code> section 2 and the tests in its section 6.</li>
+<li>Then run the checks in the topic sections of <code>ACCESSIBILITY.md</code> (sections 5 to 24) and the tests in its section 26.</li>
 </ol>
 <h2 id="1-what-wcag-asks">1. What WCAG asks</h2>
 <p>WCAG 2.2 has four principles. Content must be:</p>
@@ -490,7 +490,7 @@ understanding impairments, and helps everyone using a small screen, bright sunli
 <td>The name matches the visible label</td>
 <td>2.5.3</td>
 <td>Buttons are named by their words; hidden text only adds to the end</td>
-<td>Start any <code>aria-label</code> with the visible words</td>
+<td>Start any <code>aria-label</code> with the visible words. An automated Label in Name check is in progress in Starboard; voice control steps are in <code>ACCESSIBILITY.md</code> section 22</td>
 </tr>
 <tr>
 <td>Dragging has an alternative</td>
@@ -502,7 +502,7 @@ understanding impairments, and helps everyone using a small screen, bright sunli
 <td>Targets at least 24 by 24 pixels</td>
 <td>2.5.8 (new in 2.2)</td>
 <td>Controls are 44px; 32px only for dense table rows</td>
-<td>Never make a control smaller than the library's</td>
+<td>Never make a control smaller than the library's. Sizes and checks: <code>ACCESSIBILITY.md</code> section 8; a per-control confirmation is in progress in Starboard</td>
 </tr>
 </tbody>
 </table></div>
@@ -595,8 +595,8 @@ understanding impairments, and helps everyone using a small screen, bright sunli
 <p>WCAG 2.2 removed 4.1.1 Parsing, so valid HTML is good practice rather than a criterion.</p>
 <h2 id="6-how-to-check">6. How to check</h2>
 <ul>
-<li>The checks before a change is finished: <code>ACCESSIBILITY.md</code> section 2.</li>
-<li>How to test with a keyboard, zoom, themes and a screen reader: <code>ACCESSIBILITY.md</code> section 6.</li>
+<li>The checks before a change is finished: the topic sections of <code>ACCESSIBILITY.md</code> (sections 5 to 24) and its gate (section 3).</li>
+<li>How to test with a keyboard, zoom, themes, a screen reader and voice control: <code>ACCESSIBILITY.md</code> section 26, and section 22 for voice control.</li>
 <li>Automatic checks, screen readers, magnifiers and voice control:
   <a href="https://themightytrex.github.io/design-system/resources/outside-tools.html">Outside tools for accessibility and testing</a>.</li>
 <li>Testing with people: <a href="https://themightytrex.github.io/design-system/resources/get-feedback.html">Get feedback</a>.</li>
