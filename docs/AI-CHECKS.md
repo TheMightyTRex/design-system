@@ -114,11 +114,11 @@ An accessibility check is never only a scan. The assistant does every step in th
 - Say the scope: which pages, plug-in or part of the design system.
 - Make your own worktree and copy with sample data (section 3).
 - Note the date and the commit you test.
-- Read `ACCESSIBILITY.md`, `WCAG.md` and `ALT-TEXT.md` for the rules the pages must meet.
+- Read `ACCESSIBILITY.md` (the one accessibility guide), then `WCAG.md` and `ALT-TEXT.md` for the detail of the rules the pages must meet.
 
 ### 5.3 The steps
 
-**Step 1: the automatic base.** All five parts of the standard test in `ACCESSIBILITY.md` section 6:
+**Step 1: the automatic base.** The parts of the standard test in `ACCESSIBILITY.md` section 26.1 (the sixth, a person with a reader, is in step 2):
 
 | Part | Command in Starboard | What it checks |
 |---|---|---|
@@ -196,7 +196,7 @@ point and check the vendor's guide for the version in use.
 |---|---|---|---|
 | **Keyboard only** | Put the mouse away. Press Tab and Shift + Tab through the whole page. Use Enter and Space on controls, arrow keys inside menus, tabs and lists, and Escape to close. | Every control is reached once, in the visual order. Focus is always visible. No trap. A skip link is first. The sticky header never covers the focused item. | Yes. The keyboard walk (`TASKS=1 tools/a11y.sh`) and a browser run do this. |
 | **Switch access and scanning** (one or two switches, or Switch Access on Android) | The software steps through controls in the tab order and a switch selects. Check that there is one tab stop for each control, nothing needs hover, and no timed action. | Each control can be reached by stepping. No action needs a drag, a long press or a hover (WCAG 2.5.1, 2.5.7). | Partly. An AI checks the structure by script; a person confirms with a real switch. |
-| **Voice control** (Voice Control on Apple devices, Voice Access on Windows 11 and Android, Dragon) | Switch it on and say "show numbers" or "show names". Say each control's visible name, such as "Save changes". | Every control answers to the words shown on it. The accessible name contains the visible text (WCAG 2.5.3 Label in Name). | Partly. An AI compares each accessible name with its visible text by script. A person speaks the commands. |
+| **Voice control** (Voice Control on Apple devices, Voice Access on Windows 11, Dragon) | Switch it on. Windows Voice Access: say `click Save`, `show numbers`, `click 12`. Dragon: say `click Save`, then `show numbers` and the number. macOS and iOS Voice Control: say `click Save` (iOS: `tap Save`), `show numbers` or `show names`, then the number. Exact steps: `ACCESSIBILITY.md` section 22. | Every control answers to the words shown on it. The accessible name contains the visible text at the start (WCAG 2.5.3 Label in Name). A control that needs `show numbers` because its name does not match is a finding, and the report names it. | Partly. An AI can compare each accessible name with its visible text by script (an automated Label in Name check is in progress in Starboard). It cannot speak to the software. A person runs the steps, and until then the result is Expected. |
 
 #### Sight, colour and motion
 
@@ -212,7 +212,7 @@ point and check the vendor's guide for the version in use.
 
 | Need | Steps | What to expect | Can an AI verify it? |
 |---|---|---|---|
-| **Touch on a phone** | Use a real phone or a 375 px emulation with touch. | Targets are at least 44 px (WCAG 2.5.8 sets 24 px as the floor). No action needs a gesture with more than one finger or a drag with no button. The page works upright and sideways. | Yes for size and layout. A person confirms touch comfort. |
+| **Touch on a phone and target size** | Use a real phone or a 375 px emulation with touch. Measure each control. | Targets are at least 44 px, apart from dense table rows at 32 px (WCAG 2.5.8 sets 24 px as the floor, and nothing is smaller). No action needs a gesture with more than one finger or a drag with no button. The page works upright and sideways. | Yes for size and layout: the scan checks target size today, and a per-control confirmation is in progress in Starboard. A person confirms touch comfort. |
 | **Reading and cognitive needs** | Read the page text. Run `tools/verbose-check.py`. Read the error messages and the steps of every task. | Plain English (the Plain English Campaign rules in `CONTENT-DESIGN.md`). One idea for each step. Clear errors that say what went wrong and how to fix it. No time limits without a warning and a way to extend. | Partly. An AI checks wording and reading level. A person judges clarity. |
 
 ### 5.5 Where the steps come from
