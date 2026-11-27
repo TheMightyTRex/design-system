@@ -491,10 +491,10 @@ is **in progress**. It cannot hear a person speak, and it cannot judge whether a
 
 | Software | Start it | Steps |
 |---|---|---|
-| Windows Voice Access (Windows 11) | Settings, Accessibility, Speech, Voice access. Say `voice access wake up` if it sleeps. | 1. Say `click Save` for a button, or `click` and a link's words. 2. Say `show numbers`; a number appears on each control. 3. Say `click 12` for the control numbered 12. 4. Say `hide numbers`. 5. Say `scroll down` and `go back`. |
-| Dragon (Windows, with its Chrome or Edge extension) | Start Dragon, switch the browser extension on and the microphone on. | 1. Say `click Save`. 2. Say `show numbers`, then say the number. 3. Say `click` and a link's words. 4. Say `go to sleep` when finished. |
-| macOS Voice Control | System Settings, Accessibility, Voice Control. | 1. Say `click Save`. 2. Say `show numbers`, then say `click 12`. 3. Say `show names` to list each control's spoken name. 4. Say `hide numbers`. |
-| iOS and iPadOS Voice Control | Settings, Accessibility, Voice Control. | 1. Say `tap Save`. 2. Say `show numbers` or `show names`. 3. Say `tap 12`. 4. Say `scroll down`. |
+| Windows Voice Access (Windows 11) | Settings, Accessibility, Speech, Voice access. Say `voice access wake up` if it sleeps. | 1. Say `click Save` for a button, or `click` and a link's words.<br>2. Say `show numbers`; a number appears on each control.<br>3. Say `click 12` for the control numbered 12.<br>4. Say `hide numbers`.<br>5. Say `scroll down` and `go back`. |
+| Dragon (Windows, with its Chrome or Edge extension) | Start Dragon, switch the browser extension on and the microphone on. | 1. Say `click Save`.<br>2. Say `show numbers`, then say the number.<br>3. Say `click` and a link's words.<br>4. Say `go to sleep` when finished. |
+| macOS Voice Control | System Settings, Accessibility, Voice Control. | 1. Say `click Save`.<br>2. Say `show numbers`, then say `click 12`.<br>3. Say `show names` to list each control's spoken name.<br>4. Say `hide numbers`. |
+| iOS and iPadOS Voice Control | Settings, Accessibility, Voice Control. | 1. Say `tap Save`.<br>2. Say `show numbers` or `show names`.<br>3. Say `tap 12`.<br>4. Say `scroll down`. |
 
 **What to note**
 
