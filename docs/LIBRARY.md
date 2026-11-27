@@ -78,7 +78,7 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 |---|---|---|
 | Side menu (rail) | `.rail`, `.rail__brand` and `.rail__name` (logo with the name underneath), `.rail__logo` (logo only), `.rail__search`, `.rail__end`, `.rail__version`, `.with-rail` | Both apps; hidden on phones. `.rail__search` comes straight after the brand. The app's version, "v0.9.1", sits at the bottom in `.rail__end > .rail__version`, a link to the app's update page. When a newer release is out, an `.update-dot` sits directly before the number inside the link and pulses gently (still when Reduce motion is active), and the link's hidden text and title say "update available" with the version |
 | Header | `.site-header`, `.site-header--no-rail` (pages without a rail: name and logo start row 1), `.site-header__bar`, `.site-header__brand`, `.site-header__search`, `.site-header__search-btn` (phones), `.site-header__server` (the server name, start of the level 1 menu), `.site-header__actions`, `.site-header__tabs` | Row 1: 1st level, search, Help, Display. Row 2: 2nd level, only when the page has tabs. Nothing else. Help opens the help centre article for the page you are on, not the help centre's front page: the article for what the page does, or the help index's section when no one article covers the page. Its hidden text names the article's subject ("Help with checking your disks' health (opens in a new tab)"). Every page with the header has its own link, kept in one list in the app, and the app's build stops if a page has none or an article is missing |
-| Menu tabs (level 1 and level 2 menus) | `.menu-tabs`, `.menu-tabs__label`, `.is-compact` | Icons and names; icons only when they do not fit; current page bar |
+| Menu tabs (level 1 and level 2 menus) | `.menu-tabs`, `.menu-tabs__label`, `.is-compact` | Icons and names. A 2nd level row (`.site-header__tabs`) that does not fit, measured by `fitHeader`, shows icons only: every tab 44px wide, the current tab and the tab with focus keep their name, other tabs have a `data-tooltip`, the arrow keys, Home and End move between tabs, the current tab is scrolled into view, and a fade on the edge with more tabs says the row scrolls. The 1st level row only shows icons only (42px, tooltips by name). Current page bar |
 | Count and update dot | `.count`, `.update-dot` | Meaning in hidden text |
 | Phone menu | `.phone-menu-button`, `.phone-menu`, `.phone-menu__section > a` (an item with no 1st level), `.phone-menu__search`, `.phone-menu__section`, `.phone-menu__foot` | Drawer from the left; search, main menu, 1st level; the version and sign out at the foot |
 | Page and page head | `.page`, `.page--narrow` (Sign in, Set up), `.section-head`, `.section-head__control`, `.page-head`, `.page-head__text`, `.page-head__summary` | One visible h1; page actions on the right |
@@ -141,13 +141,14 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 | Facts | `.facts` (`dl`) | Author first, then Series; names are links |
 | Stat | `.stats`, `.stat[data-tone]`, `.stat__value`, `.stat__label` | Edge colour plus words |
 | Progress and meter | `.progress[data-tone]`, `.progress--busy`, `.progress--running`, `.meter`, `.meter__label`, `creepProgress()` | Value always in words. Waiting standard (DASH-493, TheMightyTRexUK, 20 November 2026): a bar that is working is 14px with rounded ends and moving stripes. `.progress--busy`: the end is not known, a striped band runs along. `.progress--running`: a count that is still going (such as 4 of 5); it starts with a visible piece and `creepProgress(bar, done, total, eachMs)` eases onto each count and creeps towards the next. Taken off when it ends; still with less motion asked for |
-| Waiting mark and busy button | `.wait`, `.wait__mark`, `.btn[aria-busy="true"]` | Waiting standard, option A, the ring: a short wait shows the ring with words, never a plain "Loading…". A busy button draws the ring before its doing word ("Testing"), keeps its size and has `aria-disabled`. After 0.3 seconds the place the answer goes shows its waiting state; the end replaces it with the result, and focus moves to an error. With less motion the ring fades instead of turning |
+| Waiting mark and busy button | `.wait`, `.wait__mark`, `.btn[aria-busy="true"]`; `SharedComponents.wait(words, { status, id })` returns the line | Waiting standard, option A, the ring: a short wait shows the ring with words, never a plain "Loading…". A busy button draws the ring before its doing word ("Testing"), keeps its size and has `aria-disabled`. After 0.3 seconds the place the answer goes shows its waiting state; the end replaces it with the result, and focus moves to an error. With less motion the ring fades instead of turning |
 | Rows | `.rows`, `.row`, `.row--no-lead`, `.row--opens`, `.row__title`, `.row__meta`, `.row__side` | `.row--opens`: the whole row opens a slide-out |
 | Group heading | `.group-heading` | Sentence case, no capitals |
 | Table | `.table-wrap[data-stack]`, `.table`, `th[aria-sort]`, `.table--middle` | Real tables only; stack into cards on phones. A row's heading (`th scope="row"`) has the same style as its cells, in bold. `.table--middle` puts every cell on the row's middle line, for a summary with a button on each row, such as a wizard's Check step with Change (7 November 2026) |
 | Tables that line up | `.table.table--fixed` with the same `<colgroup>` in each; `col.col-id`, `.col-date`, `.col-state`, `.col-number`, `.col-quarter`, `.col-third`, and no class on the column that takes the rest | Several tables one after another, such as tasks by category or a menu by section, keep their columns in line (4 November 2026) |
-| Notice and callout | `.notice[data-tone]` (`success`, `warning`, `danger`, `muted`; none is info), `.notice__title`, `.notice__body` | Icon and words; `role="status"` or `role="alert"`. As a callout in long text, the title is the lead word: Before you begin (info), Limitation (warning), Warning (danger, cannot be undone), Tip (success), Example (muted) |
+| Notice and callout | `.notice[data-tone]` (`success`, `warning`, `danger`, `muted`; none is info), `.notice__title`, `.notice__body` | Icon and words; `role="status"` or `role="alert"`. A page that draws one in script calls `SharedComponents.notice(tone, title, text, { actions, after, icon, alert, id, tabindex, heading })`: one icon for each tone (`circle-check`, `info`, `triangle-alert`, `circle-alert`), `role="status"` unless `alert: true` (an error that blocks), no `data-tone` for info, and never a copy of it in the app. As a callout in long text, the title is the lead word: Before you begin (info), Limitation (warning), Warning (danger, cannot be undone), Tip (success), Example (muted) |
 | Prose | `.prose`, `.prose__lead`, `.prose__kind` | Help topics, guides and release notes shown in an app (`HELP-WRITING.md`) |
+| Counts and clock times | `SharedComponents.plural(n, one, many)` ("3 disks"; `many` is `one` and an s unless given; an array `[one, many]` works too; thousands separator), `SharedComponents.clock(date)` ("14:05"), `SharedComponents.num(n)` | One way to write a count and a time of day, so an app has no copy of its own |
 | Time ago | `<time datetime>` with `.visually-hidden` exact time | "Updated 10 seconds ago" on screen, the exact time for screen readers |
 | Empty state | `.empty`, `.empty__icon` | What, why, one next step |
 | Loading | `.skeleton`, `.loading-bar[data-active]`, `aria-busy` | Skeletons in the shape of the content. The loading line (TheMightyTRexUK, 12 November 2026): on the header's lower edge, shown while something takes longer than a moment, until it has loaded. Chase: a long and a short bar follow each other across; since 20 November 2026 (option E) 6px with moving stripes. With Reduce motion it does not slide; it fades in and out across its width, so it still shows that something is happening |
@@ -241,6 +242,10 @@ still hold every component: the gallery, the boards and the help centre load the
 | `popover` | 2.2 KB | |
 | `alerts` | 2.0 KB | `popover` |
 | `command-palette` | 2.4 KB | `combobox` |
+| `extras` (styles only: split button, applied filters, timeline, shelf, the old help text) | 1.0 KB | |
+| `media-extras` (styles only: show art, item header) | 0.6 KB | |
+| `logo-picker` (styles only: choose, crop and save a logo) | 1.3 KB | |
+| `wizard-review` (styles only: what happens next, the decision tree, the summary) | 1.3 KB | |
 
 The core is everything else, 59 KB compressed where the whole is 77 KB. The page banner and the tooltip stay in
 the core, as any page can need them.
@@ -252,6 +257,8 @@ that folder the app gets the whole files, as before.
 On a page that uses a part, load its styles after `components.css`. Load its script after `components.js` and the
 parts it needs, and before the page's own scripts. `SharedComponents.setup()` then sets the part up with everything
 else. Its functions are on `SharedComponents` as before (`logView`, `showErrors`, `gauge` and so on).
+
+**Parts no page loads.** `extras`, `media-extras`, `logo-picker` and `wizard-review` are styles-only parts for components that no page of Starboard, its plug-ins, Stallboard or Snaglist uses (found by searching each class, 26 November 2026). The gallery and the help centre still load them. An app that wants one later loads `css/parts/<name>.css`. A part may be marked more than once: the pieces are put together in order.
 
 **Marking a part.** In `components.css`, inside `@layer shared`: `/* part: name */` before the part's rules and
 `/* /part */` after them, with the part's own Windows Contrast and less motion rules inside. In `components.js`:
@@ -463,3 +470,22 @@ Still in Starboard only, and why:
 
 - 11 November 2026: `--font-heading` (headings h1 to h4) and `--color-rail` (the side menu) are optional, for Starboard's styles. Unset, nothing changes.
 - 26 November 2026, defined: `--radius-sm`, `--radius-md`, `--font-mono`, `--color-success-text`, `--color-danger-text`, `.stack-3`, `.stack-5`, `.input--narrow`, `.select--compact`, `.field__error` (the same as `.field-error`) and `.btn--secondary` (drawn the same as `.btn`) are defined. The apps used them with no definition, so each took a fallback or nothing (audit of 26 November 2026).
+
+
+## Menu rows: condensing and accessibility
+
+Live examples in every case, with a width control (320, 375, 430, 768), are on the gallery page Components, Menus and tabs. The rules, in plain words:
+
+- **When it condenses.** A 2nd level row (`.site-header__tabs .menu-tabs`) is measured with its names showing by `SharedComponents.fitHeader` (one ResizeObserver). If it is too wide it shows icons only (`.is-compact`). Large text, wider spacing and translations are handled because nothing is decided from the screen width.
+- **What stays.** Every tab 44px wide. The current tab and the tab with focus keep their name. The other tabs have `data-tooltip` (hover and focus). The current tab is scrolled into view when the row changes size. If icons only still does not fit the row scrolls, with a fade (`.can-scroll-start`, `.can-scroll-end`) on the edge that has more.
+- **How many.** 6 or 7 tabs is the guide. 9 tabs always scroll on a phone. Join pages with in-page links before you add tabs. More than about 14: use a labelled `.select` at phone width.
+- **Do.** Short noun names in sentence case. A text name on every tab. The same order everywhere. Icons that stand for the thing.
+- **Do not.** Two tabs with the same icon or name in one row. Hide the name of the current tab. Use colour or an icon alone for the current tab. Use this row for panels inside a page (that is `.tabs`). Change the 1st level row or the side menu this way: they are not condensed like this.
+
+### Accessibility of menu rows
+
+- **Semantics.** A `nav` with an accessible name, links, and `aria-current="page"` on the current one. Not `role="tablist"`: each item is a link to a page (WAI-ARIA Authoring Practices, Tabs; WCAG 1.3.1, 4.1.2). The icon is `aria-hidden`; the name is always text in the page, clipped when only the icon shows (2.5.3).
+- **Keyboard.** Tab reaches every link (2.1.1, 2.4.3). Left, Right, Home and End move between links. Enter opens. The focus ring is 3px at 3:1 (2.4.7, 1.4.11), the focused tab shows its name, is scrolled clear of the fade, and is not hidden by a sticky header (2.4.11). Focus stays on the link when the row condenses, because only classes change. No trap.
+- **Touch, zoom, colour, motion.** 44px targets (2.5.8). No hover-only information. 175% text, wider spacing, 400% zoom and 320px: the row scrolls and keeps the current tab in view (1.4.4, 1.4.10, 1.4.12). Forced colours: `Highlight` bar and outline. The scroll into view is a jump, not an animation.
+- **Announcements.** Run: the browser accessibility tree (role, name, current page, landmark) in Chromium. Expected, not run: NVDA, JAWS, VoiceOver and TalkBack say the landmark name, then "General, link, current page".
+- **Tests.** axe in Light, Dark, High contrast and High contrast dark, at 100% and 175% text (clean on the gallery page, 26 November 2026); Tab and arrow walk on a row of 9; minimum tab size at 320, 375, 430 and 768px; first, middle and last current. Not covered: a full pass with each screen reader.
