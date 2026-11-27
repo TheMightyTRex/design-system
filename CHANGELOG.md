@@ -10,6 +10,7 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 ## 27 November 2026
 
 - **The hover outline of a page topic tab meets the rule under the tabs (Starboard issue #366).** The outline was an inset box-shadow, which stops at the padding box, so its lower edge sat 3px above the line under the tabs. It is now a 1px border on a pseudo-element over the whole tab, in the four themes; the tab keeps its size, the selected tab keeps its underline, and the focus ring is unchanged.
+- **A printer icon.** `printer` joins the sprite (Lucide, ISC licence) for Print buttons, such as printing a page of sign-in details. It is listed in `tools/icons.txt` and shown in the icon row of Type, space and icons. No CSS or script changed, so `tools/sync.py` changes only Starboard's sprite.
 
 ## 26 November 2026
 
