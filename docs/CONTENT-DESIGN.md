@@ -97,9 +97,13 @@ user.
 
 2.8 **Rule: "page", not "screen".**
 
-2.9 **Rule: "activate" and "deactivate".** "Activate **Upgrade automatically**", "Deactivate alerts". A
-setting's state is "active" or "inactive". Never "enable", "disable", "turn on", "turn off" or "toggle".
-State the result: "Active: Starboard backs up your settings and keeps the defaults."
+2.9 **Rule: "turn on" and "turn off".** "Turn on **Upgrade automatically**", "Turn off alerts", "Turn off all
+plug-ins", "Save and turn on". In a sentence, say a setting "is on" or "is off", or "turned on" when something did
+it ("while it is on", "until you turn it on"). A status chip says "Active" or "Inactive" (section 6). Never
+"activate", "deactivate", "activation", "enable", "disable" or "toggle" (owner decision, 28 November 2026: the
+first two read as technical and are easy to confuse with each other). Where the word meant a licence key, an
+account or an email, say what happens in plain English: "Use this key", "Confirm your email". State the result:
+"Active: Starboard backs up your settings and keeps the defaults."
 
 2.10 **Rule: no exclamation marks and no emoji.**
 
@@ -466,8 +470,8 @@ The full checklist is in `ACCESSIBILITY.md`. The content half:
 
 - [ ] No em dashes, contractions, exclamation marks or emoji
 - [ ] British spelling, sentence case, product names capitalised correctly
-- [ ] "Select", "Go to", "Enter", "page", "activate"; no "click", "see", "look", "enable", "disable",
-      "turn on", "toggle", "screen"
+- [ ] "Select", "Go to", "Enter", "page", "turn on", "turn off"; no "click", "see", "look", "enable",
+      "disable", "activate", "deactivate", "toggle", "screen"
 - [ ] No positional directions, no "above" or "below"
 - [ ] No difficulty words, no figures of speech, no double negatives
 - [ ] Words match section 5; statuses match section 6 exactly

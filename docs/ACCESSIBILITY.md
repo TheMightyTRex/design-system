@@ -148,7 +148,7 @@ WCAG 2.1.1, 2.1.2, 2.1.4, 2.4.7, 2.4.11, 2.5.7.
   and `.save-bar`; never add a sticky part of your own.
 - **Check:** drawers and dialogs move focus in, trap it, return it to the opener on close, and close with Escape. Side panels follow the same rule.
 - **Check:** no keyboard trap anywhere else.
-- **Check:** no single-key shortcuts, or a way to deactivate them (2.1.4).
+- **Check:** no single-key shortcuts, or a way to turn them off (2.1.4).
 - **Check:** every drag has a way to do the same with buttons or the keyboard (2.5.7). The library has no drag-only control.
 - **Check:** horizontal shelves can be operated by buttons, not only by scrolling (task UX-30).
 - Help, where the app has it, is in the footer of every page (3.2.6).
@@ -465,7 +465,7 @@ WCAG 1.4.11, 1.4.3.
 WCAG 3.1.1, 3.2.3, 3.3.1, 2.2.1. The rules are in [CONTENT-DESIGN.md](CONTENT-DESIGN.md).
 
 - Plain English, British English, sentence case, no em dashes, no contractions, active voice. Average sentence 15 to 20 words and none over 25.
-- Never `See` or `Look` in interface text or help: name the thing ("What is new"). Use select, not `click` or `tap`; activate and deactivate, not `enable`, `disable` or `toggle`; and no `above` or `below`.
+- Never `See` or `Look` in interface text or help: name the thing ("What is new"). Use select, not `click` or `tap`; turn on and turn off, not `activate`, `deactivate`, `enable`, `disable` or `toggle`; and no `above` or `below`.
 - One idea for each step. Errors say what went wrong and how to fix it, and what is safe. No time limit without a warning and a way to extend it.
 - Navigation and Help are in the same place every time.
 - Buttons start with a verb and name the object. Links name the destination.

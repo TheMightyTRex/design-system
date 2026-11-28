@@ -66,7 +66,7 @@ In each table, "The library" is what `tokens.css`, `components.css` and `compone
 | What is needed | Criterion | The library | The app |
 |---|---|---|---|
 | Everything works with a keyboard | 2.1.1, 2.1.2 | Menus, slide-outs, dialogs, the phone menu and filter chips all work by keyboard and never trap it | Use the library's components; test every page with Tab alone |
-| Shortcut keys can be changed or switched off | 2.1.4 | The library sets no single-key shortcuts | Add none, or let people deactivate them |
+| Shortcut keys can be changed or switched off | 2.1.4 | The library sets no single-key shortcuts | Add none, or let people turn them off |
 | Time limits can be extended | 2.2.1 | Toasts wait while the pointer or focus is on them; errors stay until closed | Anything a toast offers, such as Undo, can also be done on the page |
 | Moving content can be paused | 2.2.2 | Reduce motion stops animation; the loading bar stops when idle | Give anything that moves for over 5 seconds a pause control |
 | Nothing flashes | 2.3.1 | Nothing in the library flashes | Never show flashing content |
