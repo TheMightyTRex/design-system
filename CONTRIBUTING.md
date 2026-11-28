@@ -21,6 +21,8 @@ Every word, in the components, the gallery, the guides and commit messages, foll
 
 `python3 tools/check_words.py` finds the banned words in the text people read, and fails on each one.
 
+`python3 tools/check_on_this_page.py` fails a page that has an "On this page" list of jump links. A page with more than one topic uses page topics (tabs) instead; only a long single-topic document may keep the list, and `tools/on-this-page-allowed.txt` names it with the reason.
+
 ## Making a change
 
 Follow [Make a change](https://themightytrex.github.io/design-system/resources/make-a-change.html). Pull, change the

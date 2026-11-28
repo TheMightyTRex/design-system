@@ -1,0 +1,12 @@
+# Files that may keep an "On this page" list, each with its reason. A path pattern, a tab, the reason.
+# Only one long single-topic document belongs here (docs/LIBRARY.md, Page topics: tabs, not a jump list).
+guides/*.html	The library's guides are long documents, one subject each, read from the top and searched with the browser's find.
+docs/*.md	The guides' sources (the same documents).
+tools/site.py	Writes the library's own documentation pages (guides, components, patterns, foundations), the reference documents below.
+components/*.html	Reference pages of the library's own site: documents beside their contents list, compared and searched whole, not an app's screens.
+patterns/*.html	Reference pages of the library's own site (the same).
+foundations/*.html	Reference pages of the library's own site (the same).
+areas/*.html	The library's area boards: reference documents (the same).
+gallery.src.html	The gallery source that tools/site.py turns into the reference pages above.
+gallery.html	The gallery's old address for the reference pages above.
+tools/help_centre/*	Help articles: each is one long single-topic document, so a contents list is right (Library, Help centre).

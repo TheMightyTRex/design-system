@@ -283,6 +283,37 @@ A line outside a part that ends `// part` is left out of the core. `python3 tool
 lists the sizes. Run it after any change to a part. A component belongs in the core when any page may need it without
 warning. It belongs in a part when it is large and a page knows it will use it.
 
+## Page topics: tabs, not a jump list (owner decision, 28 November 2026)
+
+A page that holds more than one topic uses **page topics** (`.topic-tabs`, the tabs Settings uses). An "On this page" list of jump links is not used for separate topics. The owner's words, on Backup/Logs: "The on this page should be separate tabs as standard." It applies to every app that uses the library: Starboard, Stallboard, Snaglist and the plug-ins' own pages. The Reelix fork's interface is not restyled.
+
+**Tabs or a jump list**
+
+| The page is | Use |
+|---|---|
+| Several topics that people do one at a time or come back to separately (backups and logs, performance and pictures, lists and Discover rows) | Page topics: one tab for each topic |
+| One long document about one subject, read from the top and searched with the browser's find (a help article, release notes, a guide in this library) | A contents list is allowed. Call it "On this page" and keep it beside or before the article, never in front of a page of settings or controls |
+| One topic with several cards | Neither. Use a section group (`section.settings-section--group`) or folding sections |
+| Two or three parts of one thing in one panel | `.tabs`, not page topics |
+
+Only a help article, release notes and the library's own guides are single-topic documents. A page of settings, tools or lists is never one, however long it is. When a page is in doubt, make it tabs.
+
+**The rules**
+
+1. **Labels** are plain nouns or short noun phrases in sentence case ("Where backups go", "Logs"). No verbs, no counts, no icon alone, no "and more". The label is the section's own heading, word for word, so the tab and the heading never disagree.
+2. **Order** follows the order people do things: set up before run, run before review, review before remove. A rare or risky topic comes last. An action that needs a confirmation (such as deleting logs) is a button inside the topic it belongs to, never a tab.
+3. **Address.** Every tab has a stable address: the page's address, `#` and the section's id (`/settings-general-backup.html#bk-sb-h`). Choosing a tab sets it without adding a history step, so a copied link, a reload and a help link open the same tab. A link to anything inside a section opens that section's tab. When a page replaces an old in-page anchor, it keeps the old anchor working and opens the right tab.
+4. **Default.** The first tab opens when the address names none. The last tab used is not remembered, in storage or otherwise, unless the page says so and says why.
+5. **Keyboard.** The tablist is one Tab stop (the selected tab). Left and Right move between tabs and wrap, Home and End go to the first and last, and focus follows the arrow. Tab from the tablist goes into the panel, to its first control. The focus ring is visible on every tab.
+6. **Roles.** `nav.topic-tabs` holds `role="tablist"` with an accessible name; each tab is `role="tab"` with `aria-selected` and `aria-controls` the panel's id; each panel is `role="tabpanel"` with `aria-labelledby` the tab's id. A hidden panel is hidden from everyone (`.topic-off`, so also from the reading order), and its jobs and polling do not run until it is opened.
+7. **Reading order.** Page heading, its summary, the tablist, then the open panel. Nothing sits between the tabs and their panel.
+8. **Target size.** Each tab is at least 24px by 24px with space around it (the library's tabs are the full control height).
+9. **Phones.** The tabs wrap onto a second line and never scroll sideways or run past the page edge, at 320px wide and 175% text.
+10. **Find.** The browser's find-in-page only reaches the open tab. A page's own search lists each match with its tab's name and opens that tab. A page that must be searched as one whole is a document, not tabs.
+11. **Phone and desktop.** Page topics are for shared pages, so they work on a phone as well as on a desktop.
+
+**The check.** `tools/check_on_this_page.py` fails a page that has an "On this page" list or navigation, except in the files `tools/on-this-page-allowed.txt` names, each with its reason (help articles, release notes, this library's guides and reference pages, the plug-in store listing). Starboard has the same check in its tests. The demo is Page topics in the gallery, with the same behaviour a page's script gives.
+
 ## Slide-out, dialog or page
 
 | Use | When | Examples |
@@ -463,7 +494,7 @@ Owner decision, 26 November 2026: every Starboard pattern that other screens or 
 
 | Pattern | Classes | Part | Notes |
 |---|---|---|---|
-| Page topics | `.topic-tabs`, `.topic-tabs__tab`, `.topic-off`, `.settings-sections`, `.page--settings` | `page-topics` | A long page cut into topics, one at a time. Not `.tabs` (parts of one thing). The page's script builds the tablist; Starboard's is `topicTabs()` in `settings-core.js` |
+| Page topics | `.topic-tabs`, `.topic-tabs__tab`, `.topic-off`, `.settings-sections`, `.page--settings` | `page-topics` | A page with more than one topic, cut into tabs, one shown at a time: the standard in place of an "On this page" list (Page topics: tabs, not a jump list). Not `.tabs` (parts of one thing). The page's script builds the tablist; Starboard's is `topicTabs()` in `settings-core.js` |
 | Update list | `.updates-table`, `.updates-app` | `updates-table` | One table for each category, equal column widths. The button is **Check now** |
 | Places and service logos | `.places`, `.place*`, `.place-state`, `.tested`, `.place-adds`, `.place-add*` | `places` | Logos from `service-logos.svg`, one colour, always beside the name |
 | Dashboard | `.dash-grid`, `.dash-card*`, `.dash-edit*`, `.dash-links`, `.dash-stat`, `.guide-card*`, `.spark-card*` | `dashboard` | Preset sizes; a small card hides the chip's words from sight only |

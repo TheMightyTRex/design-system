@@ -294,7 +294,7 @@ gallery's Settings patterns section shows each one.
 
 | # | Pattern | Use it for | Code |
 |---|---|---|---|
-| 1 | **Section** | Each topic on a page: heading, one line about it, its state chip on the heading's line. Topic tabs first when a page has four sections or more | `.settings-section`, `.settings-section__head`, `.title-chip`, `.topic-tabs` |
+| 1 | **Section** | Each topic on a page: heading, one line about it, its state chip on the heading's line. Topic tabs first when a page has more than one topic (four sections or more by default; a page with fewer separate topics asks for them with `data-topic-min`). An "On this page" jump list is not used for separate topics (Library, Page topics: tabs, not a jump list) | `.settings-section`, `.settings-section__head`, `.title-chip`, `.topic-tabs` |
 | 2 | **Setting rows** | One setting each: label and hint on the left, control on the right. Switches, selects and numbers apply at once and show the saved note beside the control | `.settings-rows > .setting`, `.setting__text`, `.setting__control`, `.saved-note`; a number with a unit uses `.input-unit` |
 | 3 | **Choice cards** | Two to four choices that each need a sentence | `.option-cards > .option-card` (radios) |
 | 4 | **Location** | Every folder: the folder in words with free space, the path small under it, Browse (opens in the right place), Set automatically (the right folder for this setting), and Enter a path under More options | `.location` |
