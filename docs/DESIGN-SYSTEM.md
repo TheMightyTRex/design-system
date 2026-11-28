@@ -356,7 +356,7 @@ Rules:
 - **Feedback appears beside what it is about.** A saved setting: a saved note beside it. An error about a field or a row:
   on the field or row, and focus goes there. Only what happens elsewhere or later is a toast.
 - **Dialogs are short.** Up to two fields. Anything longer is a slide-out with its one Save in the foot.
-- **Words for state changes** are Activate and Deactivate, never Turn on, Turn off, Enable or Disable.
+- **Words for state changes** are Turn on and Turn off, never Activate, Deactivate, Enable or Disable.
 
 ## 11. Load more as you scroll
 

@@ -7,6 +7,10 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 [Semantic Versioning](https://semver.org/).
 
 
+## 28 November 2026
+
+- **Changed: "turn on" and "turn off" replace "activate" and "deactivate" (DASH-620).** Content rule 2.9 now says "Turn on **Upgrade automatically**", "Turn off all plug-ins", and a setting "is on" or "is off"; the Active and Inactive status chips stay. `tools/check_words.py` now fails on "activate", "deactivate" and their forms (activated, activating, activation) in the text people read, and no longer bans "turn on" and "turn off"; "enable", "disable" and "toggle" stay banned. The guides, gallery, Starboard boards and the Get feedback page use the new words. The wire name `data-activation="manual"` on tabs is unchanged.
+
 ## 27 November 2026
 
 - **The sync writes only the parts an app lists.** `tools/sync.py` reads an optional `parts-used.json` in an app's web folder, `{"use": [names]}`, and writes only those parts. Without the file it writes every part, as before. Starboard uses it, so the 23 part files it does not load are not copied back.
