@@ -459,7 +459,7 @@ with a flow chart, as any troubleshooting topic does.
   and TheMightyTRexUK on the right.
 - An area can have `link_card` (`title`, `text`, `to`, `button`, optional `icon`). This is one card at the top of its
   page that leads somewhere else, such as Starboard's Plug-ins area to the plug-ins' own help centre.
-- `goatcounter` (optional) activates visitor counting: the GoatCounter address, such as
+- `goatcounter` (optional) turns on visitor counting: the GoatCounter address, such as
   `https://<code>.goatcounter.com/count`. Every page loads its counter, and the footer says that visits are counted
   without cookies or personal data. Leave it out and nothing is counted.
 - `--strict` stops on an article with no group. It also stops on a page left as a placeholder ("still to be written",

@@ -207,7 +207,7 @@ Each scanner runs in Docker from a pinned image, so nothing is installed and eve
 
 ## 4. Checks on GitHub
 
-These are free for public repositories. Activate them in the repository's **Settings**, under
+These are free for public repositories. Turn them on in the repository's **Settings**, under
 **Code security**.
 
 - CodeQL code scanning: GitHub's own analysis runs on every push. It follows data from where it comes in,
@@ -238,7 +238,7 @@ scanning knows only the providers it has patterns for.
 
 - What it is: a fresh install on throwaway systems, from the same instructions people follow.
 - What it finds: security settings that only exist after a real install: file permissions, the user the app
-  runs as, ports it opens, and options that should stay inactive until someone activates them.
+  runs as, ports it opens, and options that should stay inactive until someone turns them on.
 - Run it: Starboard `tools/vm/vm.sh test <system>` on Ubuntu, Debian, Fedora and 64-bit ARM.
 - Pass: every install check passes on every system.
 - Limits: only the systems tested.
