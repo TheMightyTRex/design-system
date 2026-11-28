@@ -519,7 +519,7 @@ rule an ID (<code>SEC-01</code>, <code>SEC-02</code>) that the test prints besid
 <li>Limits: it reads the Dockerfile only, not what ends up in the image. Trivy does that.</li>
 </ul>
 <h2 id="4-checks-on-github">4. Checks on GitHub</h2>
-<p>These are free for public repositories. Activate them in the repository's <strong>Settings</strong>, under
+<p>These are free for public repositories. Turn them on in the repository's <strong>Settings</strong>, under
 <strong>Code security</strong>.</p>
 <ul>
 <li>CodeQL code scanning: GitHub's own analysis runs on every push. It follows data from where it comes in,
@@ -548,7 +548,7 @@ scanning knows only the providers it has patterns for.</p>
 <ul>
 <li>What it is: a fresh install on throwaway systems, from the same instructions people follow.</li>
 <li>What it finds: security settings that only exist after a real install: file permissions, the user the app
-  runs as, ports it opens, and options that should stay inactive until someone activates them.</li>
+  runs as, ports it opens, and options that should stay inactive until someone turns them on.</li>
 <li>Run it: Starboard <code>tools/vm/vm.sh test &lt;system&gt;</code> on Ubuntu, Debian, Fedora and 64-bit ARM.</li>
 <li>Pass: every install check passes on every system.</li>
 <li>Limits: only the systems tested.</li>

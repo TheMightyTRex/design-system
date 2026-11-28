@@ -7,9 +7,10 @@ docs/CONTENT-DESIGN.md	^2\.15 \*\*Rule|^straightforward, obviously|not "This is 
 docs/CONTENT-DESIGN.md	^2\.18 \*\*Rule: "enter" for typing	Rule 2.18 itself, naming what it covers
 docs/CONTENT-DESIGN.md	Never "click here"	Section 4, quoting a link text it bans
 docs/CONTENT-DESIGN.md	^\| disk \| drive, HDD, volume \|	Section 5, the words not to use for a disk
-docs/DESIGN-SYSTEM.md	never Turn on, Turn off, Enable or Disable	The rule itself, quoting the words it bans
+docs/DESIGN-SYSTEM.md	never Activate, Deactivate, Enable or Disable	The rule itself, quoting the words it bans
 docs/HELP-WRITING.md	"See" is the one that slips through most	Section 9, quoting a sentence the sweep catches
 areas/starboard-wanted.src.html	Below the quality wanted	Starboard's own tab label on the captured page, quoted as it is (an app wording task)
 areas/starboard-plugins.src.html	type your	Starboard's own text on the captured page, quoted as it is (an app wording task)
 docs/CONTENT-DESIGN.md	| Below quality |	The status word Below quality is the owner's own label (26 November 2026); it says a quality level, not a position on the page
 areas/starboard-wanted.src.html	Below quality	The status word Below quality is the owner's own label (26 November 2026), a quality level, not a position
+docs/AI-CHECKS.md	double-tap to activate" \(TalkBack	TalkBack announces these words itself; quoted as it says them

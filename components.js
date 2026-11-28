@@ -2395,6 +2395,352 @@
   }
   /* /part */
 
+
+  /* part: wizard-steps; exports: setupWizards; setup: setupWizards; needs: error-summary */
+  /* The shared wizard in script (28 November 2026, docs/WIZARD.md, Variants). Markup: `.wizard[data-wizard="id"]`, with
+     `data-mode="new"|"again"`, `data-finish="Words that name the action"`, holding
+     an optional `ol.steps` (one li for each step), `p.wizard__count`, one `section.wizard__step[data-step][data-title]` for
+     each question (`data-optional` when it may be skipped (it then says (optional) and has Skip this step); `data-required` to ask for an answer with an error summary;
+     `data-error` is the words of that error), a last `section.wizard__step.wizard__check` and `.wizard__foot` with buttons
+     `data-wizard-act="next|back|skip|recommended|finish"`. A choice is an input with `data-label`, and perhaps
+     `data-current` (how it is now) and `data-recommended`. The browser's Back button goes step to step (history states);
+     Change on Check your answers returns to that step and then to the answers. Fires `wizard-step` and `wizard-finish`
+     (`detail: { answers, skipped, changed }`). */
+  function wizardValue(step) {
+    const out = [];
+    step.querySelectorAll("input, select, textarea").forEach((c) => {
+      if ((c.type === "radio" || c.type === "checkbox") && !c.checked) return;
+      if (c.type === "checkbox" || c.type === "radio" || c.tagName === "SELECT" || c.value !== "") {
+        out.push({ value: c.value, label: c.dataset.label || (c.tagName === "SELECT" ? c.selectedOptions[0]?.textContent.trim() : c.value) });
+      }
+    });
+    return out;
+  }
+  function setupWizards(root = document) {
+    root.querySelectorAll(".wizard[data-wizard]:not([data-ready])").forEach((box) => {
+      box.dataset.ready = "";
+      const id = box.dataset.wizard;
+      const steps = [...box.querySelectorAll(".wizard__step")];
+      const check = box.querySelector(".wizard__check");
+      const questions = steps.filter((s) => s !== check);
+      const list = box.querySelector(":scope > .steps");
+      const count = box.querySelector(".wizard__count");
+      const say = window.SharedComponents.kit.ownStatus(box);
+      const again = box.dataset.mode === "again";
+      const skipped = new Set();
+      const last = steps.length - 1;
+      let at = 0;
+      let reached = 0;
+      let back = false; // Change was pressed: after this step, go to Check your answers
+      const act = (n) => box.querySelector(`[data-wizard-act="${n}"]`);
+      const title = (s) => s.dataset.title || s.querySelector(".wizard__q")?.textContent.replace(/\(optional\)/, "").trim() || s.dataset.step;
+      const skippable = (s) => s.hasAttribute("data-optional") && !s.hasAttribute("data-required");
+      const before = (s) => [...s.querySelectorAll("[data-current]")].map((c) => ({ value: c.value, label: c.dataset.label || c.value }));
+      const same = (a, b) => a.length === b.length && a.every((x) => b.some((y) => y.value === x.value));
+      const words = (v) => (v.length ? v.map((x) => x.label).join(", ") : "Nothing");
+      // (optional) on every question that can be skipped, never an asterisk
+      questions.forEach((s) => {
+        const q = s.querySelector(".wizard__q");
+        if (q && skippable(s) && !q.querySelector(".wizard__optional")) {
+          const o = document.createElement("span");
+          o.className = "wizard__optional";
+          o.textContent = " (optional)";
+          q.append(o);
+        }
+      });
+            const draw = () => {
+        const rows = questions.map((s) => {
+          const now = wizardValue(s);
+          const was = before(s);
+          const changed = again && was.length > 0 && !same(now, was);
+          const row = document.createElement("li");
+          if (changed) row.dataset.changed = "";
+          const text = document.createElement("div");
+          const b = document.createElement("b");
+          b.textContent = title(s);
+          const a = document.createElement("span");
+          a.textContent = changed ? `Now: ${words(now)}` : skipped.has(s.dataset.step) ? `${words(now)} (skipped)` : words(now);
+          text.append(b, a);
+          if (changed) { const w = document.createElement("span"); w.className = "wizard__was"; w.textContent = `Was: ${words(was)}`; text.append(w); }
+          const link = document.createElement("a");
+          link.href = `#${s.id || `${id}-${s.dataset.step}`}`;
+          link.append("Change");
+          const hid = document.createElement("span");
+          hid.className = "visually-hidden";
+          hid.textContent = ` ${title(s)}`;
+          link.append(hid);
+          link.addEventListener("click", (e) => { e.preventDefault(); back = true; show(questions.indexOf(s), true); });
+          row.append(text, link);
+          return { row, changed };
+        });
+        const n = rows.filter((r) => r.changed).length;
+        check.querySelectorAll(".wizard-summary, .wizard__change, .wizard__same").forEach((x) => x.remove());
+        const ul = document.createElement("ul");
+        ul.className = "wizard-summary wizard-summary--check";
+        const parts = [ul];
+        if (again) {
+          const p = document.createElement("p");
+          p.className = "wizard__change";
+          p.textContent = n ? `${n} of ${rows.length} choices change. The rest stay as they are now.` : "Nothing changes. Every choice stays as it is now.";
+          parts.unshift(p);
+          ul.append(...rows.filter((r) => r.changed).map((r) => r.row));
+          if (n < rows.length) {
+            const d = document.createElement("details");
+            d.className = "wizard__same";
+            const sm = document.createElement("summary");
+            sm.textContent = `Choices that stay the same (${rows.length - n})`;
+            const u2 = document.createElement("ul");
+            u2.className = "wizard-summary wizard-summary--check";
+            u2.append(...rows.filter((r) => !r.changed).map((r) => r.row));
+            d.append(sm, u2);
+            parts.push(d);
+          }
+        } else ul.append(...rows.map((r) => r.row));
+        check.querySelector(".wizard__q").after(...parts);
+      };
+      const show = (i, focus, fromHistory) => {
+        at = Math.max(0, Math.min(last, i));
+        reached = Math.max(reached, at);
+        steps.forEach((s, k) => { s.hidden = k !== at; });
+        box.querySelectorAll(".error-summary").forEach((x) => { x.hidden = true; });
+        if (check && at === last) draw();
+        [...(list?.children || [])].forEach((item, k) => {
+          const done = k < at;
+          item.toggleAttribute("data-done", done);
+          if (k === at) item.setAttribute("aria-current", "step"); else item.removeAttribute("aria-current");
+          const mark = item.querySelector(".visually-hidden");
+          if (mark) mark.textContent = k === at ? ", current step" : done ? ", done" : "";
+        });
+        const word = `Step ${at + 1} of ${steps.length}: ${at === last && check ? "Check your answers" : title(steps[at])}`;
+        if (count) count.textContent = word;
+        // The progress bar of docs/WIZARD.md section 5: words first, then the bar (role="progressbar"), always shown
+        const bar = box.querySelector("[role='progressbar']");
+        if (bar) {
+          bar.setAttribute("aria-valuemin", "1");
+          bar.setAttribute("aria-valuemax", String(steps.length));
+          bar.setAttribute("aria-valuenow", String(at + 1));
+          bar.setAttribute("aria-valuetext", word);
+          if (bar.firstElementChild) bar.firstElementChild.style.width = `${Math.round(((at + 1) / steps.length) * 100)}%`;
+          const left = box.querySelector(".meter .numeric");
+          if (left) left.textContent = at === last ? "Last step" : `${steps.length - at - 1} to go`;
+        }
+        const on = at === last && check;
+        const next = act("next");
+        if (next) { next.hidden = on; next.textContent = back ? "Check your answers" : at === last - 1 && check ? (box.dataset.review || "Check your answers") : "Continue"; }
+        const bk = act("back");
+        if (bk) bk.hidden = at === 0;
+        const sk = act("skip");
+        if (sk) sk.hidden = on || back || !skippable(steps[at]);
+        const rec = act("recommended");
+        if (rec) rec.hidden = on || !box.querySelector("[data-recommended]");
+        const fin = act("finish");
+        if (fin) { fin.hidden = !on; fin.textContent = box.dataset.finish || "Finish"; }
+        if (!fromHistory) {
+          try { history.pushState({ wizard: id, step: at }, ""); } catch { /* no history here */ }
+        }
+        box.dispatchEvent(new CustomEvent("wizard-step", { bubbles: true, detail: { step: steps[at].dataset.step, index: at } }));
+        // The wizard speaks only after a step changes, never when it opens
+        if (focus || fromHistory) say(word);
+        if (focus || fromHistory) { const q = steps[at].querySelector(".wizard__q"); if (q) { q.setAttribute("tabindex", "-1"); q.focus({ preventScroll: false }); } }
+      };
+      const problems = (s) => {
+        if (!s.hasAttribute("data-required")) return [];
+        const inputs = [...s.querySelectorAll("input, select, textarea")];
+        const ok = inputs.some((c) => ((c.type === "radio" || c.type === "checkbox") ? c.checked : c.value !== ""));
+        if (ok) return [];
+        if (!inputs[0].id) inputs[0].id = `${id}-${s.dataset.step}-first`;
+        return [{ field: inputs[0].id, message: s.dataset.error || `Choose an answer to ${title(s).toLowerCase()}` }];
+      };
+      act("next")?.addEventListener("click", () => {
+        const found = problems(steps[at]);
+        if (found.length) { window.SharedComponents.showErrors(steps[at], found); return; }
+        skipped.delete(steps[at].dataset.step);
+        if (back) { back = false; show(last, true); } else show(at + 1, true);
+      });
+      act("back")?.addEventListener("click", () => { back = false; if (history.state?.wizard === id && history.state.step === at && at > 0 && reached >= at) history.back(); else show(at - 1, true); });
+      act("skip")?.addEventListener("click", () => { skipped.add(steps[at].dataset.step); show(at + 1, true); });
+      act("recommended")?.addEventListener("click", () => {
+        box.querySelectorAll("[data-recommended]").forEach((c) => {
+          if (c.tagName === "SELECT") c.value = c.dataset.recommended || c.value;
+          else if (c.type === "radio" || c.type === "checkbox") c.checked = true;
+          else if (c.dataset.recommended) c.value = c.dataset.recommended;
+          c.dispatchEvent(new Event("change", { bubbles: true }));
+        });
+        back = false;
+        show(last, true);
+        say("The recommended choices are selected. Check your answers, then finish.");
+      });
+      act("finish")?.addEventListener("click", () => {
+        const answers = Object.fromEntries(questions.map((s) => [s.dataset.step, wizardValue(s)]));
+        const changed = again ? questions.filter((s) => { const w = before(s); return w.length && !same(wizardValue(s), w); }).map((s) => s.dataset.step) : [];
+        box.dispatchEvent(new CustomEvent("wizard-finish", { bubbles: true, detail: { answers, skipped: [...skipped], changed } }));
+      });
+      // The browser's Back button goes step to step, to the step as it was left
+      window.addEventListener("popstate", (e) => {
+        if (e.state?.wizard === id && box.isConnected) show(e.state.step, false, true);
+        else if (!e.state && at !== 0 && box.isConnected) show(0, false, true);
+      });
+      try { history.replaceState({ wizard: id, step: 0 }, ""); } catch { /* no history here */ }
+      show(0, false, true);
+    });
+  }
+  /* /part */
+
+  /* part: wizard-preview; exports: setPreview, setupPreviewPanes; setup: setupPreviewPanes */
+  /* Preview pane (28 November 2026): `.wizard-preview` holds `.wizard-preview__frame`, `.wizard-preview__strip`, `.wizard-preview__caption`
+     (a polite status) and `.wizard-preview__total`. setPreview(pane, { image: { src, alt }, lines: [text], corner, strip:
+     [{ label, seconds, kind }], caption, total }) draws it from a picture or from text and styles, never a video. An input
+     with `data-preview` (the same object as JSON) inside the same `[data-preview-scope]` as the pane fills it when it is
+     changed, and the checked choice fills it when a wizard shows a step. The caption is said only after a change. */
+  function setPreview(pane, d, said = true) {
+    const frame = pane.querySelector(".wizard-preview__frame");
+    const strip = pane.querySelector(".wizard-preview__strip");
+    const cap = pane.querySelector(".wizard-preview__caption");
+    const total = pane.querySelector(".wizard-preview__total");
+    if (frame) {
+      frame.replaceChildren();
+      const img = d.image && /^(data:image\/(png|jpeg|webp);base64,|\/|https:\/\/)/.test(d.image.src || "") ? d.image : null;
+      if (img) {
+        const i = document.createElement("img");
+        i.src = img.src;
+        i.alt = img.alt || "";
+        frame.append(i);
+      }
+      (d.lines || []).slice(0, 3).forEach((t) => { const s = document.createElement("span"); s.className = "wizard-preview__line"; s.textContent = t; frame.append(s); });
+      if (d.corner) { const c = document.createElement("span"); c.className = "wizard-preview__corner"; c.textContent = d.corner; frame.append(c); }
+    }
+    if (strip) {
+      strip.replaceChildren();
+      strip.hidden = !(d.strip || []).length;
+      (d.strip || []).slice(0, 12).forEach((p) => {
+        const li = document.createElement("li");
+        li.dataset.kind = p.kind || "";
+        li.style.flexGrow = String(Math.max(1, Math.min(60, Number(p.seconds) || 1)));
+        li.textContent = p.label;
+        strip.append(li);
+      });
+    }
+    if (total) total.textContent = d.total || "";
+    if (cap) {
+      cap.textContent = "";
+      if (said) setTimeout(() => (cap.textContent = d.caption || ""), 50); else cap.textContent = d.caption || "";
+    }
+  }
+  function setupPreviewPanes(root = document) {
+    root.querySelectorAll(".wizard-preview:not([data-ready])").forEach((pane) => {
+      pane.dataset.ready = "";
+      const scope = pane.closest("[data-preview-scope]") || pane.parentElement;
+      const use = (input, said) => {
+        try { setPreview(pane, JSON.parse(input.dataset.preview), said); } catch { /* a choice with no preview leaves the last one */ }
+      };
+      scope.addEventListener("change", (e) => { if (e.target.dataset?.preview) use(e.target, true); });
+      scope.addEventListener("wizard-step", () => {
+        const here = scope.querySelector(".wizard__step:not([hidden])");
+        const pick = here && [...here.querySelectorAll("[data-preview]")].find((c) => c.checked || c.tagName === "SELECT");
+        if (pick) use(pick, false);
+      });
+      const first = scope.querySelector("[data-preview]:checked");
+      if (first) use(first, false);
+    });
+  }
+  /* /part */
+
+  /* part: option-media; exports: setupOptionMedia; setup: setupOptionMedia */
+  /* A media card inside an option card (28 November 2026): `.option-card--media[data-kind="video"|"audio"]` is a div with
+     `.option-card__media` (a small picture, made once and kept), an input and its label, and a button
+     `[data-preview-src="address"][data-title]` that reads "Play preview" plus the title in words hidden from the eye.
+     Pressing it puts a player in the picture's place; pressing it again, or the end, puts the picture back. Nothing plays
+     until it is pressed, one plays at a time, and a file that will not play says so in words. */
+  function stopMedia(card) {
+    const media = card.querySelector(".option-card__media");
+    const player = media.querySelector("video, audio");
+    if (player) { player.pause(); player.removeAttribute("src"); player.load(); player.remove(); }
+    media.querySelectorAll("img").forEach((x) => { x.hidden = false; });
+    card.removeAttribute("data-playing");
+    const b = card.querySelector("[data-preview-src]");
+    if (b) b.firstChild.textContent = "Play preview";
+  }
+  function setupOptionMedia(root = document) {
+    root.querySelectorAll(".option-card--media:not([data-ready])").forEach((card) => {
+      card.dataset.ready = "";
+      const b = card.querySelector("[data-preview-src]");
+      if (!b) return;
+      const media = card.querySelector(".option-card__media");
+      b.addEventListener("click", () => {
+        if (card.hasAttribute("data-playing")) { stopMedia(card); return; }
+        document.querySelectorAll(".option-card--media[data-playing]").forEach(stopMedia);
+        card.querySelector(".option-card__error")?.remove();
+        const audio = card.dataset.kind === "audio";
+        const player = document.createElement(audio ? "audio" : "video");
+        player.controls = true;
+        player.preload = "none";
+        player.setAttribute("aria-label", `Preview of ${b.dataset.title || "this file"}`);
+        if (!audio) player.playsInline = true;
+        player.addEventListener("ended", () => stopMedia(card));
+        player.addEventListener("error", () => {
+          stopMedia(card);
+          const p = document.createElement("p");
+          p.className = "option-card__error";
+          p.setAttribute("role", "status");
+          p.textContent = "The preview did not play. The file may be missing or in a form this browser cannot play.";
+          card.append(p);
+        });
+        media.querySelectorAll("img").forEach((x) => { x.hidden = !audio; });
+        media.append(player);
+        player.src = b.dataset.previewSrc;
+        card.dataset.playing = "";
+        b.firstChild.textContent = "Stop preview";
+        player.play().catch(() => { /* the player's own controls stay for the person to press */ });
+      });
+    });
+  }
+  /* /part */
+
+  /* part: sentence; exports: setupSentences; setup: setupSentences */
+  /* Sentence (28 November 2026): `.sentence` holds `.sentence__text` with words and `select.sentence__select` (each named by
+     aria-label, such as "Short title clips") and `.sentence__readback` (a polite status) with a `[data-readback]` span.
+     After a change the readback says the whole sentence in plain words. It is never said when the page opens. */
+  function setupSentences(root = document) {
+    root.querySelectorAll(".sentence:not([data-ready])").forEach((box) => {
+      box.dataset.ready = "";
+      const text = box.querySelector(".sentence__text");
+      const out = box.querySelector("[data-readback]");
+      if (!text || !out) return;
+      const say = () => {
+        const parts = [...text.childNodes].map((n) => (n.nodeType === 3 ? n.textContent : n.matches?.("select") ? n.selectedOptions[0]?.textContent.trim() : n.querySelector?.("select")?.selectedOptions[0]?.textContent.trim() || "")).join("");
+        return parts.replace(/\s+/g, " ").replace(/\s([,.])/g, "$1").trim();
+      };
+      out.textContent = say();
+      text.addEventListener("change", () => { out.textContent = ""; setTimeout(() => (out.textContent = say()), 50); });
+    });
+  }
+  /* /part */
+
+  /* part: more-rows; exports: setupMoreRows; setup: setupMoreRows */
+  /* More rows (28 November 2026): `.more` holds a switch `input[role="switch"][data-more-switch]` and any number
+     of elements with `data-more`. They are hidden until the switch is on, the choice is kept for the session
+     (`data-key`), and the change is said in words. Without script every row shows. */
+  function setupMoreRows(root = document) {
+    root.querySelectorAll(".more:not([data-ready])").forEach((box) => {
+      box.dataset.ready = "";
+      const sw = box.querySelector("[data-more-switch]");
+      if (!sw) return;
+      const key = box.dataset.key ? `more:${box.dataset.key}` : "";
+      try { if (key && sessionStorage.getItem(key) === "on") sw.checked = true; } catch { /* kept only when the browser allows it */ }
+      const say = window.SharedComponents.kit.ownStatus(box);
+      const apply = (told) => {
+        const rows = [...box.querySelectorAll("[data-more]")];
+        rows.forEach((r) => { r.hidden = !sw.checked; });
+        sw.setAttribute("aria-controls", rows.map((r) => r.id).filter(Boolean).join(" "));
+        try { if (key) sessionStorage.setItem(key, sw.checked ? "on" : "off"); } catch { /* nothing to keep it in */ }
+        if (told) say(sw.checked ? `More settings shown: ${rows.length}` : "More settings hidden");
+      };
+      sw.addEventListener("change", () => apply(true));
+      apply(false);
+    });
+  }
+  /* /part */
+
   // Parts loaded as their own files (see the note above) add their set-up here; setup() runs them with the rest.
   const partSetups = { first: [], last: [] };
   function addSetup(run, first = false) {
@@ -2418,6 +2764,11 @@
     setupSideTrees(root);
     setupSolvers(root);
     setupTabs(root); // part
+    setupWizards(root); // part
+    setupPreviewPanes(root); // part
+    setupOptionMedia(root); // part
+    setupSentences(root); // part
+    setupMoreRows(root); // part
     setupComboboxes(root); // part
     setupCharts(root); // part
     setupErrorSummaries(root); // part
@@ -2460,6 +2811,7 @@
   Object.assign(window.SharedComponents, { plural, clock, num }); // counts and clock times in words
   Object.assign(window.SharedComponents, { progress, setProgress }); // the progress bar builder
   Object.assign(window.SharedComponents, { logView, setupTabs, combobox, sparkline, gauge, pagination, showErrors, clearErrors, setFieldError, // part
+    setupWizards, setPreview, setupPreviewPanes, setupOptionMedia, setupSentences, setupMoreRows, // part
     setupSecrets, scheduleWords, nextRun, setupSchedules, setupTagInputs, setupPopovers, setupAlerts, commandPalette }); // part
   // An app that wires its own behaviour (Starboard's page scripts) loads this file with data-manual, or
   // sets window.SharedComponentsManual = true first, and calls setup() or openLayer() itself.

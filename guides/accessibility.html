@@ -548,7 +548,7 @@ browser. <code>components.js</code> applies them from <code>data-display</code> 
   and <code>.save-bar</code>; never add a sticky part of your own.</li>
 <li><strong>Check:</strong> drawers and dialogs move focus in, trap it, return it to the opener on close, and close with Escape. Side panels follow the same rule.</li>
 <li><strong>Check:</strong> no keyboard trap anywhere else.</li>
-<li><strong>Check:</strong> no single-key shortcuts, or a way to deactivate them (2.1.4).</li>
+<li><strong>Check:</strong> no single-key shortcuts, or a way to turn them off (2.1.4).</li>
 <li><strong>Check:</strong> every drag has a way to do the same with buttons or the keyboard (2.5.7). The library has no drag-only control.</li>
 <li><strong>Check:</strong> horizontal shelves can be operated by buttons, not only by scrolling (task UX-30).</li>
 <li>Help, where the app has it, is in the footer of every page (3.2.6).</li>
@@ -833,7 +833,13 @@ Not covered: a full pass with each screen reader.</p>
 <li>The progress bar is <code>role="progressbar"</code> with <code>aria-valuenow</code>, <code>aria-valuemax</code> and <code>aria-valuetext</code> in words ("Step 7 of 18: Usenet"). A job's bar is drawn once and updated in place.</li>
 <li>An error goes under the bar, tied to it by <code>aria-describedby</code>, and focus moves to the error's heading. The choices are Try again, Show the details or Stop.</li>
 <li>The step's result goes into a polite live region. A wizard in a slide-out counts "Step 1 of 3" in one muted line.</li>
-<li>Back returns to the step before and loses nothing. Continue saves the answer.</li>
+<li>Back returns to the step before and loses nothing. Continue saves the answer. <strong>The browser's Back button goes step to step</strong> (history states) and returns to the step as it was left (3.2.3, 3.3.7).</li>
+<li><strong>Check your answers</strong> has one row for each answer and a Change link named for the question ("Change Style"), which returns to that step and then to the answers. The confirm button names its action (3.3.4, 2.4.6).</li>
+<li>A question that can be skipped says "(optional)" in its heading; there is never an asterisk (3.3.2). A step with errors shows the error summary "There is a problem", with a link to each field, and focus moves to it (3.3.1, 3.3.3).</li>
+<li><strong>A preview pane</strong> shows a picture or styles, never video, has a text caption in a polite status that is said after a change and never when the page opens, and moves nothing when less motion is asked for (2.2.2, 2.3.3, 4.1.3).</li>
+<li><strong>A media card</strong> plays a preview only when its button is pressed ("Play preview of Station title"), never by itself (1.4.2, 2.2.2), one at a time, with the player's own controls and a text message when it will not play.</li>
+<li><strong>A sentence with selects</strong> names each select by its gap, and says the whole sentence once, in a polite status, after a change. <strong>More rows</strong> are shown by a real switch that stays where it is, and the change is said in words.</li>
+<li><strong>A desktop only notice</strong> is plain words in a <code>role="note"</code>: "This page is for a computer screen. It is not made for phones."; use it only for a page that cannot be made to work on a phone.</li>
 <li>A state chip always has words ("Works after the switch"), never colour alone.</li>
 <li>In a terminal, plain mode is for screen readers: numbered choices, no clearing, no box characters, no QR code (the link is printed), and a progress line no more often than every few seconds.</li>
 </ul>
@@ -1058,7 +1064,7 @@ Escape returns focus to the opener, focus lands on the new step's heading), an a
 <p>WCAG 3.1.1, 3.2.3, 3.3.1, 2.2.1. The rules are in <a href="content-design.html">CONTENT-DESIGN.md</a>.</p>
 <ul>
 <li>Plain English, British English, sentence case, no em dashes, no contractions, active voice. Average sentence 15 to 20 words and none over 25.</li>
-<li>Never <code>See</code> or <code>Look</code> in interface text or help: name the thing ("What is new"). Use select, not <code>click</code> or <code>tap</code>; activate and deactivate, not <code>enable</code>, <code>disable</code> or <code>toggle</code>; and no <code>above</code> or <code>below</code>.</li>
+<li>Never <code>See</code> or <code>Look</code> in interface text or help: name the thing ("What is new"). Use select, not <code>click</code> or <code>tap</code>; turn on and turn off, not <code>activate</code>, <code>deactivate</code>, <code>enable</code>, <code>disable</code> or <code>toggle</code>; and no <code>above</code> or <code>below</code>.</li>
 <li>One idea for each step. Errors say what went wrong and how to fix it, and what is safe. No time limit without a warning and a way to extend it.</li>
 <li>Navigation and Help are in the same place every time.</li>
 <li>Buttons start with a verb and name the object. Links name the destination.</li>
