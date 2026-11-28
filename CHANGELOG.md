@@ -9,6 +9,7 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 
 ## 28 November 2026
 
+- **The Plain English check keeps its rule for moved and reworded lines (`tools/verbose-check.py`).** The check ignores a changed line that only moved or is a small edit of a line already on the base, and skips generated release notes and the API reference. Starboard had these rules in its own copy only, and a sync with this older copy removed them on 28 November. They now live here, the source. The ruff warnings of the old copy are fixed.
 - **A slide-out is a `div`, not an `aside` (found by the AI prompts mock-up work).** Every slide-out in the gallery, the area boards, the guides and `tools/sitepage.py` was `<aside role="dialog">`, which axe reports as aria-allowed-role in every theme. It is now `<div class="side-panel" role="dialog" aria-modal="true" aria-labelledby="...">` inside its layer; classes, focus and Escape are the same. `docs/ACCESSIBILITY.md` says so, and the site tools find a slide-out by its layer, not by its tag. Starboard's `sidePanel` in `common.js` is changed to match.
 
 - **A bot icon.** `bot` joins the sprite (Lucide, ISC licence) for the AI assistants category of the plug-in stores (Starboard's Catalogue and Stallboard). It is listed in `tools/icons.txt`. No CSS or script changed, so `tools/sync.py` changes only the sprites that carry a copy.
