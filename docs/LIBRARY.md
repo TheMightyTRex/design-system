@@ -190,6 +190,9 @@ Names (TheMightyTRexUK, 4 November 2026: "Side menu, Level 1 menu and Level 2 Me
 | Calendar month | `.calendar` (a `table`), `td[data-outside]`, `td[aria-current="date"]`, `.calendar__day` | List view on phones |
 | Selection bar | `.selection-bar`, `.selection-bar__text`, `.row--select`, `.cover--thumb` | Bulk actions (Wanted, series reading order) |
 | Wizard | `.wizard`, `.wizard__foot`, `.steps--collapse`, `.steps__short`, `.wizard-layout`, `.wizard-main`, `.wizard-progress`, `.steps--sub`, `.wizard-paths`, `.wizard-summary` | Every job done in steps (set-up, upgrade, restore, migration). Rules in `docs/WIZARD.md`; steps become "Step 3 of 7" on phones |
+| Wizard variants (28 November 2026) | `.wizard[data-wizard]`, `.wizard__step`, `.wizard__q`, `.wizard__check`, `.wizard-summary--check`, `.wizard__tag`, `.wizard__optional`, `.wizard__change`, `.wizard-preview*`, `.option-card--media`, `.desktop-notice` | Parts `wizard-steps` (needs `error-summary`), `wizard-preview`, `option-media`, `desktop-notice` (styles only) | The one wizard's variants: Check your answers, Run again, preview beside the step, media card in an option card, desktop only. `docs/WIZARD.md` section 15 |
+| Sentence | `.sentence`, `.sentence__text`, `.sentence__select`, `.sentence__readback` | Part `sentence` | A setting read as one sentence with selects in the gaps |
+| More rows | `.more`, `.more__switch`, `[data-more]` | Part `more-rows` | Show more settings, a switch that shows the rows marked as more |
 | Wizard review aids | `.wizard-aside`, `.wizard-next`, `.wizard-tree`, `.wizard-tree-toggle` | What happens next and the decision tree: for testing only, shown while the app's testing setting is active, never in the finished product |
 | Help links | `.help-links`, `.help-link` (a button), opening a slide-out (`.side-panel`) titled with the link's question | "What is…" and "Which one is right for me?" at the end of the part of a page they explain. Every piece of in-page help works this way: never a fold-out (`details`), never a dialog. Help that is an article in the help centre is shown in the slide-out too, with "Read it in the help centre" in its foot. **Two help icons, both square** (TheMightyTRexUK, 7 November 2026): `help` (a question mark in a square) for help that opens in the page, in a slide-out; `help-new-tab` (the square opening at the top right, with the new-tab arrow) for help that opens in a new tab: the header's Help and "Read it in the help centre". Never `circle-help` for help. A link that opens a new tab also says "(opens in a new tab)" for screen readers |
 | Address | `.address` with `.copy-btn` (`data-copied="Address copied"`) | A server address as a link that opens in a new tab, with a copy button |
@@ -247,6 +250,12 @@ still hold every component: the gallery, the boards and the help centre load the
 | `media-extras` (styles only: show art, item header) | 0.6 KB | |
 | `logo-picker` (styles only: choose, crop and save a logo) | 1.3 KB | |
 | `wizard-review` (styles only: what happens next, the decision tree, the summary) | 1.3 KB | |
+| `wizard-steps` (the shared wizard in script) | 4.7 KB | `error-summary` |
+| `wizard-preview` | 2.6 KB | |
+| `option-media` | 2.1 KB | |
+| `sentence` | 1.4 KB | |
+| `more-rows` | 1.4 KB | |
+| `desktop-notice` (styles only) | 0.4 KB | |
 
 The core is everything else, 59 KB compressed where the whole is 77 KB. The page banner and the tooltip stay in
 the core, as any page can need them.

@@ -269,7 +269,7 @@
   </nav>
 </div>
 <div class="s-shell">
-<nav class="s-nav" aria-labelledby="s-nav-h"><h2 id="s-nav-h">Guides</h2><ol class="s-nav-pages"><li><a href="index.html">All guides</a></li><li class="s-group">Design</li><li><a href="design-system.html">Design system</a></li><li><a href="library.html">Component library</a></li><li><a href="components.html">Components by area</a></li><li class="s-group">Patterns</li><li><a href="wizard.html" aria-current="page">Wizard</a></li><li><a href="terminal.html">Terminal</a></li><li class="s-group">Words</li><li><a href="content-design.html">Content design</a></li><li><a href="help-writing.html">Help writing</a></li><li><a href="changelogs.html">Changelogs</a></li><li><a href="alt-text.html">Alt text</a></li><li><a href="screenshots.html">Screenshots</a></li><li class="s-group">Accessibility and security</li><li><a href="accessibility.html">Accessibility</a></li><li><a href="wcag.html">WCAG 2.2 AA</a></li><li><a href="security-checks.html">Security checks</a></li><li><a href="ai-checks.html">AI-triggered checks</a></li></ol><h2 id="s-own-h">On this page</h2><ol><li><a href="#1-shape">1. Shape</a></li><li><a href="#2-the-first-question">2. The first question</a></li><li><a href="#3-steps">3. Steps</a></li><li><a href="#4-buttons">4. Buttons</a></li><li><a href="#5-progress-bar">5. Progress bar</a></li><li><a href="#6-review-aid-what-happens-next">6. Review aid: What happens next</a></li><li><a href="#7-review-aid-decision-tree">7. Review aid: decision tree</a></li><li><a href="#8-help-what-is">8. Help (&quot;What is…&quot;)</a></li><li><a href="#9-addresses-and-commands">9. Addresses and commands</a></li><li><a href="#10-the-end">10. The end</a></li><li><a href="#11-words">11. Words</a></li><li><a href="#12-feedback-in-a-wizard">12. Feedback in a wizard</a></li><li><a href="#13-checks-before-a-wizard-ships">13. Checks before a wizard ships</a></li><li><a href="#14-a-wizard-in-a-slide-out-26-november-2026">14. A wizard in a slide-out (26 November 2026)</a></li></ol></nav>
+<nav class="s-nav" aria-labelledby="s-nav-h"><h2 id="s-nav-h">Guides</h2><ol class="s-nav-pages"><li><a href="index.html">All guides</a></li><li class="s-group">Design</li><li><a href="design-system.html">Design system</a></li><li><a href="library.html">Component library</a></li><li><a href="components.html">Components by area</a></li><li class="s-group">Patterns</li><li><a href="wizard.html" aria-current="page">Wizard</a></li><li><a href="terminal.html">Terminal</a></li><li class="s-group">Words</li><li><a href="content-design.html">Content design</a></li><li><a href="help-writing.html">Help writing</a></li><li><a href="changelogs.html">Changelogs</a></li><li><a href="alt-text.html">Alt text</a></li><li><a href="screenshots.html">Screenshots</a></li><li class="s-group">Accessibility and security</li><li><a href="accessibility.html">Accessibility</a></li><li><a href="wcag.html">WCAG 2.2 AA</a></li><li><a href="security-checks.html">Security checks</a></li><li><a href="ai-checks.html">AI-triggered checks</a></li></ol><h2 id="s-own-h">On this page</h2><ol><li><a href="#1-shape">1. Shape</a></li><li><a href="#2-the-first-question">2. The first question</a></li><li><a href="#3-steps">3. Steps</a></li><li><a href="#4-buttons">4. Buttons</a></li><li><a href="#5-progress-bar">5. Progress bar</a></li><li><a href="#6-review-aid-what-happens-next">6. Review aid: What happens next</a></li><li><a href="#7-review-aid-decision-tree">7. Review aid: decision tree</a></li><li><a href="#8-help-what-is">8. Help (&quot;What is…&quot;)</a></li><li><a href="#9-addresses-and-commands">9. Addresses and commands</a></li><li><a href="#10-the-end-check-your-answers">10. The end: Check your answers</a></li><li><a href="#11-words-11-words">11. Words## 11. Words</a></li><li><a href="#12-feedback-in-a-wizard">12. Feedback in a wizard</a></li><li><a href="#13-checks-before-a-wizard-ships">13. Checks before a wizard ships</a></li><li><a href="#14-a-wizard-in-a-slide-out-26-november-2026">14. A wizard in a slide-out (26 November 2026)</a></li><li><a href="#15-variants-28-november-2026">15. Variants (28 November 2026)</a></li></ol></nav>
 <main class="s-main" id="main" tabindex="-1">
 <nav class="breadcrumbs s-crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="index.html">Guides</a></li><li aria-current="page">Wizard</li></ol></nav><div class="s-doc"><div class="page-head"><div class="page-head__text"><h1>Wizard: the rules</h1><p class="page-head__summary">Patterns guide. <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/WIZARD.md">Edit this guide on GitHub</a>.</p></div></div><div class="prose">
 
@@ -380,8 +380,13 @@ wizard (<code>TERMINAL.md</code>).</p>
    line ("The one most guides use."). Never "easiest", "simple" or other words about difficulty.
 6. <strong>Every choice offers both ways:</strong> "Install and set it up for me" and "I have it already", where the app
    can do both.
-7. <strong>An optional step has Skip this step</strong>, and the summary at the end lists what was skipped, each with
-   where to set it later.
+7. <strong>An optional step has Skip this step and says "(optional)" in its heading</strong> ("Which clips should play? (optional)"),
+   never an asterisk and never "required". A step with no Skip needs an answer. The summary at the end lists what was
+   skipped, each with where to set it later. (After GOV.UK's question pages, 28 November 2026.)
+9. <strong>Ask once, then carry it forward.</strong> Never ask for something the wizard, the app or an earlier step already knows:
+   fill it in, say where it came from, and let the person change it. A name, a folder or an address is entered once.
+10. <strong>The heading is the question, and each page asks one thing.</strong> A step that asks two things is split into two steps
+    (or into parts, point 3). Audit each wizard against this before it ships.
 8. <strong>Defaults are filled in.</strong> Keep the defaults and finish is offered where every remaining step has a
    safe default.</p>
 <h2 id="4-buttons">4. Buttons</h2>
@@ -392,6 +397,11 @@ wizard (<code>TERMINAL.md</code>).</p>
 <li>Back returns to the step before, including the part before in a step in parts. Nothing is lost by going
   back.</li>
 <li>Continue saves the answer. Nothing is lost silently.</li>
+<li><strong>The browser's Back button goes step to step</strong> (28 November 2026, after GOV.UK). Each step is a history entry, so Back
+  returns to the step before, with the answers as the person left them, and Forward returns to where they were. A wizard
+  in a slide-out does the same while it is open (the slide-out's own Close and Escape still close it). The Back button
+  never leaves the wizard from the second step on, and never discards an answer.</li>
+<li>A step that cannot be left (a job is running) has no Back button, and says why.</li>
 </ul>
 <h2 id="5-progress-bar">5. Progress bar</h2>
 <ul>
@@ -516,13 +526,24 @@ service's own page (OAuth), never ask for the person's password for that service
   It has What, Your answer and a Change button on each row that goes back to that step. Settings shown in full are a
   table too, never a list of terms (TheMightyTRexUK, 7 November 2026).</li>
 </ul>
-<h2 id="10-the-end">10. The end</h2>
+<h2 id="10-the-end-check-your-answers">10. The end: Check your answers</h2>
+<p>(28 November 2026, after GOV.UK's check answers page.) The end of every wizard that writes something is a page called
+<strong>Check your answers</strong>, before anything is written.</p>
 <ul>
-<li><code>.wizard-summary</code> has one line for each step. It shows what was set (with a tick) or skipped (with a warning edge
-  and where to set it later), and each line links to its settings page.</li>
-<li>Then the one next thing, as the primary button.</li>
+<li>One row for each answer (<code>.wizard-summary.wizard-summary--check</code>): the question in bold, the answer under it, and a
+  <strong>Change</strong> link named for the question ("Change Style"). A skipped step says "(skipped)" and where to set it later.</li>
+<li><strong>Change returns to that step, and then to Check your answers</strong>, not through every step in between. The step's
+  Continue button then says "Check your answers".</li>
+<li>A Check your answers page that is a table (<code>.table</code>, section 9, Check before writing) keeps its Change button on each row
+  and works the same way.</li>
+<li>The confirm button names what it does ("Write the files", "Switch to Plex", "Start the breaks"), never "Submit" or
+  "Finish". It is the one primary button.</li>
+<li>After it is pressed, the end screen says what was done (<code>.wizard-summary</code>, with ticks, as before) and gives the one
+  next thing.</li>
+<li>Nothing is written before the confirm button. A wizard with no choices to check (a job that only runs) says what it will do
+  instead.</li>
 </ul>
-<h2 id="11-words">11. Words</h2>
+<h2 id="11-words-11-words">11. Words## 11. Words</h2>
 <p>Every word follows <code>CONTENT-DESIGN.md</code>. The ones wizards get wrong most often:</p>
 <ul>
 <li>Questions and jobs as headings, in sentence case, with no question numbers written in ("STEP 1 OF 9").</li>
@@ -530,7 +551,9 @@ service's own page (OAuth), never ask for the person's password for that service
 <li>"Select", not "click"; "enter", not "type in".</li>
 <li>Example data is made up: addresses in 192.0.2.x, people called Alex and Sam.</li>
 <li>A link that leaves the app says "(opens in a new tab)".</li>
-<li>An error is beside its field and says what to do.</li>
+<li>An error is beside its field and says what to do. A step with errors also shows the error summary at its top,
+  "There is a problem", with a link to each field, and moves focus to it (<code>SharedComponents.showErrors</code>; GOV.UK's pattern).
+  The page title starts "Error: ". A terminal wizard puts the same words in plain lines under the question.</li>
 </ul>
 <h2 id="12-feedback-in-a-wizard">12. Feedback in a wizard</h2>
 <p>Every wizard carries <a href="https://github.com/TheMightyTRex/snaglist">Snaglist</a>, so people can say where it went
@@ -553,7 +576,8 @@ wrong while they are in it (5 November 2026):</p>
 <li>Every step has help for each term and, for testing, What happens next and a place in the tree.</li>
 <li>With the testing setting off, neither review aid shows and the step has the whole width.</li>
 <li>Four themes, 175% text, a phone at 390px wide: nothing wider than the screen.</li>
-<li>Keyboard only: every choice, link, dialog and Back works, and focus moves to each new step's heading.</li>
+<li>Keyboard only: every choice, link, dialog and Back works, and focus moves to each new step's heading. The browser's Back
+   button goes step to step. Change on Check your answers returns to that step and then to the answers.</li>
 <li>A screen reader hears the progress, the step's state and the chosen choice.</li>
 <li>Send feedback opens from every step, the report names the step, and the QR code scans with a phone.</li>
 <li>An app with a browser and a terminal set-up: walk every job in both, step by step side by side. Both ask the same
@@ -572,6 +596,74 @@ wrong while they are in it (5 November 2026):</p>
 <li><strong>Feedback.</strong> The Snaglist link of section 12 sits in the foot of the last step.</li>
 </ul>
 <p>The components page "Wizard in a slide-out" shows it, and <code>LIBRARY.md</code>, App patterns, lists the classes.</p>
+<h2 id="15-variants-28-november-2026">15. Variants (28 November 2026)</h2>
+<p>There is <strong>one wizard</strong>. A variant adds to it, never replaces it: the same steps, words, buttons, progress and behaviour,
+so first-run set-up, upgrades, restores, migrations, Bring in and a plug-in's set-up all feel the same. The components
+page, Wizard variants, shows each one working.</p>
+<div class="s-scroll" tabindex="0" role="region" aria-label="Table 2"><table>
+<thead>
+<tr>
+<th>Variant</th>
+<th>Use it when</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Standard</strong></td>
+<td>Every wizard</td>
+<td><code>.wizard</code> with steps, option cards, Continue, Back, Skip this step, the progress of section 5 and Check your answers (section 10)</td>
+</tr>
+<tr>
+<td><strong>Step in script</strong></td>
+<td>A wizard drawn from markup, such as a plug-in's set-up</td>
+<td><code>.wizard[data-wizard]</code>, one <code>.wizard__step</code> for each question and a last <code>.wizard__check</code>. The part <code>wizard-steps</code> adds the history, Change, (optional) and the error summary. An app that builds its own steps in script (Starboard's <code>wizardFrame</code>) keeps the same classes and rules</td>
+</tr>
+<tr>
+<td><strong>Run again</strong></td>
+<td>A set-up is run a second time, for example "Run again for this channel"</td>
+<td><code>data-mode="again"</code>. Each choice that is how it is now has <code>data-current</code> and a <strong>Current</strong> tag (a word, not only colour). Check your answers lists only what changes, each with "Was" and "Now", and folds the rest under "Choices that stay the same". It begins with how many choices change</td>
+</tr>
+<tr>
+<td><strong>Preview beside the step</strong></td>
+<td>The effect of a choice is something to show in a picture</td>
+<td><code>.wizard-preview</code> as a second column in <code>.wizard-layout</code>, after the step in the reading order. A picture or a drawing made of styles, never video; a text caption in a polite status, said after a change and never when the page opens; nothing moves with less motion asked for. On a phone it goes under the step</td>
+</tr>
+<tr>
+<td><strong>Media card in an option card</strong></td>
+<td>Choosing files by sight or sound (title clips, music)</td>
+<td><code>.option-card--media</code> inside <code>.option-cards</code>. A small picture made once and kept; the preview plays only when <strong>Play preview</strong> is pressed, one at a time, never by itself</td>
+</tr>
+<tr>
+<td><strong>A step that needs an answer</strong></td>
+<td>A question has no safe default</td>
+<td><code>data-required</code> on the step: no Skip, and an empty answer shows the error summary "There is a problem"</td>
+</tr>
+<tr>
+<td><strong>Desktop only</strong></td>
+<td>A page cannot work on a phone</td>
+<td>Put <code>.desktop-notice</code> first on the page: "This page is for a computer screen. It is not made for phones." It shows on windows narrower than 768 pixels. Use it only on a page that cannot be made to work; every other wizard works on a phone</td>
+</tr>
+<tr>
+<td><strong>In a slide-out</strong></td>
+<td>Three steps or fewer (section 14)</td>
+<td>Same rules; the history entries are made while it is open</td>
+</tr>
+<tr>
+<td><strong>In a terminal</strong></td>
+<td>The same job in a terminal</td>
+<td><code>TERMINAL.md</code>: the same questions, order, words and Check your answers, drawn as text</td>
+</tr>
+</tbody>
+</table></div>
+<p>Choose the lightest variant that does the job. A variant never changes a word that another variant already uses.</p>
+<h3 id="where-this-wizard-differs-from-govuk-owner-decisions-28-november-2026">Where this wizard differs from GOV.UK (owner decisions, 28 November 2026)</h3>
+<p>The wizard follows GOV.UK's question pages and check answers pattern, with three differences the owner chose:</p>
+<ul>
+<li><strong>No Back link at the top of a step.</strong> Back stays in the foot, after Continue, as in section 4. Owner decision, 28 November 2026.</li>
+<li><strong>No "Not sure" answer.</strong> A question that may be left is optional and has Skip this step, which keeps what is chosen now. Owner decision, 28 November 2026.</li>
+<li><strong>Progress is always shown</strong> (section 5), in every wizard, including a short one and the terminal ones, even where the path varies. GOV.UK shows a count only where research says it helps. Owner decision, 28 November 2026.</li>
+</ul>
 </div></div><nav class="s-pager" aria-label="Previous and next"><a class="s-prev" href="components.html" rel="prev"><small>Previous</small><span>Components by area</span></a><a class="s-next" href="terminal.html" rel="next"><small>Next</small><span>Terminal</span></a></nav>
 </main>
 </div>
