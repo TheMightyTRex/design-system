@@ -12,7 +12,7 @@ It writes (folders set in tools/paths.py):
                lib/terminal-frame.sh, the copy in run-first.sh, starboard/qr.py (from terminal/) and
                tools/verbose-check.py, the Plain English check (warns only)
   Stallboard   STALLBOARD_DS/tokens.css, components.css, components.js and fonts/ (the store's assets/ds folder)
-  Plug-ins     PLUGINS_DIR/tv-station/ds-tokens.css (the tokens, for the schedule grid pages) and
+  Plug-ins     PLUGINS_DIR/tv-station/ds-tokens.css (the tokens, for the schedule grid pages), tv-station/ds-components.css (the components, for the wizard page) and
                PLUGINS_DIR/outside-services/ds.css (tokens and components) with font.woff2, for the status page.
                A plug-in whose copy changes needs a patch version bump and a changelog line in the plug-ins repository.
 It does not commit. A file the library no longer has (RETIRED) is listed as "retired" while an app still has a
@@ -141,6 +141,8 @@ if PLUGINS.exists():
     tv_tokens = tokens.replace('url("fonts/atkinson-hyperlegible-next.woff2")', 'url("font.woff2")')
     if (PLUGINS / "tv-station").is_dir():
         write(PLUGINS / "tv-station/ds-tokens.css", PLUGIN_HEAD.format(what="tokens.css") + tv_tokens)
+        # The components too (28 November 2026), for the pages that use the library's wizard (Choose a style for my channel).
+        write(PLUGINS / "tv-station/ds-components.css", PLUGIN_HEAD.format(what="components.css") + components)
     if (PLUGINS / "outside-services").is_dir():
         write(PLUGINS / "outside-services/ds.css", PLUGIN_HEAD.format(what="tokens.css and components.css") + tokens + "\n" + components)
         font = HERE / "fonts/atkinson-hyperlegible-next.woff2"
