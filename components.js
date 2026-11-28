@@ -2513,6 +2513,17 @@
         });
         const word = `Step ${at + 1} of ${steps.length}: ${at === last && check ? "Check your answers" : title(steps[at])}`;
         if (count) count.textContent = word;
+        // The progress bar of docs/WIZARD.md section 5: words first, then the bar (role="progressbar"), always shown
+        const bar = box.querySelector("[role='progressbar']");
+        if (bar) {
+          bar.setAttribute("aria-valuemin", "1");
+          bar.setAttribute("aria-valuemax", String(steps.length));
+          bar.setAttribute("aria-valuenow", String(at + 1));
+          bar.setAttribute("aria-valuetext", word);
+          if (bar.firstElementChild) bar.firstElementChild.style.width = `${Math.round(((at + 1) / steps.length) * 100)}%`;
+          const left = box.querySelector(".meter .numeric");
+          if (left) left.textContent = at === last ? "Last step" : `${steps.length - at - 1} to go`;
+        }
         const on = at === last && check;
         const next = act("next");
         if (next) { next.hidden = on; next.textContent = back ? "Check your answers" : at === last - 1 && check ? (box.dataset.review || "Check your answers") : "Continue"; }
