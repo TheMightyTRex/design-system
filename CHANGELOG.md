@@ -7,6 +7,10 @@ commit on 2 November 2026 is under Unreleased. Once versions are tagged, they wi
 [Semantic Versioning](https://semver.org/).
 
 
+## 28 November 2026
+
+- **The sync also writes the components for Create your own TV channel.** `tools/sync.py` writes `tv-station/ds-components.css` (the library's `components.css`, with the usual header) beside `ds-tokens.css`, so the plug-in's own page Choose a style for my channel can use the shared wizard, option cards, notices and fields. Nothing in the library changed.
+
 ## 27 November 2026
 
 - **The sync writes only the parts an app lists.** `tools/sync.py` reads an optional `parts-used.json` in an app's web folder, `{"use": [names]}`, and writes only those parts. Without the file it writes every part, as before. Starboard uses it, so the 23 part files it does not load are not copied back.
