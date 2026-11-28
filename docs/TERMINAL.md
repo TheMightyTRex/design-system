@@ -63,6 +63,17 @@ terminal.
   every 2 minutes while it runs, and "Done" or "Did not finish" at the end. Each "Still working" line says how far the
   job has got, when it can tell. A screen reader user then knows it has not stopped. Never write more often than every
   2 minutes, because each line is read aloud.
+- **An optional question says "(optional)"** after its words, as the browser's does (`WIZARD.md` section 3), and offers
+  `s` to skip it. A question that needs an answer has no skip. Never an asterisk.
+- **Check your answers (28 November 2026, `WIZARD.md` section 10).** Before anything is written, the terminal shows the same
+  page as the browser: the heading "Check your answers", one numbered line for each answer (the question, then the
+  answer), and a menu line "Enter writes it  ·  1 to 9 changes that answer  ·  b goes back". Entering a number asks that
+  one question again, with its answer ready to keep, and then returns to Check your answers. The last line names
+  what Enter does ("Enter writes the files"). In a Run again, only what changes is listed, each with "Was" and "Now".
+- **Errors are plain lines under the question**, in the app's own words (`WIZARD.md` section 11), after the heading line
+  "There is a problem". The question is asked again with the answer kept.
+- **Progress stays.** The heading box shows the step count in every terminal wizard (`WIZARD.md`, section 15, owner
+  decision, 28 November 2026). Back stays on `b`, as before.
 - A long list on a short screen shows what fits, then "4 more: press m to show them".
 - Passwords and keys are entered hidden: say "(nothing appears as you enter it)". After Back, Enter keeps the one
   entered before, without showing it.
@@ -227,7 +238,8 @@ Starboard's `run-first.sh` (the "Run first script") is the first one.
 
 1. Walk every job to the end, boxed and plain, at 80 by 24, 80 by 30, 140 by 60 and 60 by 20. Change the window's size
    in the middle of a step. The heading, the bar and the menu stay in place.
-2. Back from every step, including after a hidden answer, keeps the answers and never shows a secret.
+2. Back from every step, including after a hidden answer, keeps the answers and never shows a secret. Change on Check
+   your answers returns to Check your answers, not through every step in between.
 3. Help and feedback open and close from every step, and the step comes back as it was.
 4. Plain mode: no clearing, no box characters, no QR code; a screen reader (espeakup or Orca) reads every
    question.

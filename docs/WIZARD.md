@@ -87,8 +87,13 @@ wizard (`TERMINAL.md`).
    line ("The one most guides use."). Never "easiest", "simple" or other words about difficulty.
 6. **Every choice offers both ways:** "Install and set it up for me" and "I have it already", where the app
    can do both.
-7. **An optional step has Skip this step**, and the summary at the end lists what was skipped, each with
-   where to set it later.
+7. **An optional step has Skip this step and says "(optional)" in its heading** ("Which clips should play? (optional)"),
+   never an asterisk and never "required". A step with no Skip needs an answer. The summary at the end lists what was
+   skipped, each with where to set it later. (After GOV.UK's question pages, 28 November 2026.)
+9. **Ask once, then carry it forward.** Never ask for something the wizard, the app or an earlier step already knows:
+   fill it in, say where it came from, and let the person change it. A name, a folder or an address is entered once.
+10. **The heading is the question, and each page asks one thing.** A step that asks two things is split into two steps
+    (or into parts, point 3). Audit each wizard against this before it ships.
 8. **Defaults are filled in.** Keep the defaults and finish is offered where every remaining step has a
    safe default.
 
@@ -100,6 +105,11 @@ wizard (`TERMINAL.md`).
 - Back returns to the step before, including the part before in a step in parts. Nothing is lost by going
   back.
 - Continue saves the answer. Nothing is lost silently.
+- **The browser's Back button goes step to step** (28 November 2026, after GOV.UK). Each step is a history entry, so Back
+  returns to the step before, with the answers as the person left them, and Forward returns to where they were. A wizard
+  in a slide-out does the same while it is open (the slide-out's own Close and Escape still close it). The Back button
+  never leaves the wizard from the second step on, and never discards an answer.
+- A step that cannot be left (a job is running) has no Back button, and says why.
 
 ## 5. Progress bar
 
@@ -232,13 +242,25 @@ service's own page (OAuth), never ask for the person's password for that service
   It has What, Your answer and a Change button on each row that goes back to that step. Settings shown in full are a
   table too, never a list of terms (TheMightyTRexUK, 7 November 2026).
 
-## 10. The end
+## 10. The end: Check your answers
 
-- `.wizard-summary` has one line for each step. It shows what was set (with a tick) or skipped (with a warning edge
-  and where to set it later), and each line links to its settings page.
-- Then the one next thing, as the primary button.
+(28 November 2026, after GOV.UK's check answers page.) The end of every wizard that writes something is a page called
+**Check your answers**, before anything is written.
 
-## 11. Words
+- One row for each answer (`.wizard-summary.wizard-summary--check`): the question in bold, the answer under it, and a
+  **Change** link named for the question ("Change Style"). A skipped step says "(skipped)" and where to set it later.
+- **Change returns to that step, and then to Check your answers**, not through every step in between. The step's
+  Continue button then says "Check your answers".
+- A Check your answers page that is a table (`.table`, section 9, Check before writing) keeps its Change button on each row
+  and works the same way.
+- The confirm button names what it does ("Write the files", "Switch to Plex", "Start the breaks"), never "Submit" or
+  "Finish". It is the one primary button.
+- After it is pressed, the end screen says what was done (`.wizard-summary`, with ticks, as before) and gives the one
+  next thing.
+- Nothing is written before the confirm button. A wizard with no choices to check (a job that only runs) says what it will do
+  instead.
+
+## 11. Words## 11. Words
 
 Every word follows `CONTENT-DESIGN.md`. The ones wizards get wrong most often:
 
@@ -247,7 +269,9 @@ Every word follows `CONTENT-DESIGN.md`. The ones wizards get wrong most often:
 - "Select", not "click"; "enter", not "type in".
 - Example data is made up: addresses in 192.0.2.x, people called Alex and Sam.
 - A link that leaves the app says "(opens in a new tab)".
-- An error is beside its field and says what to do.
+- An error is beside its field and says what to do. A step with errors also shows the error summary at its top,
+  "There is a problem", with a link to each field, and moves focus to it (`SharedComponents.showErrors`; GOV.UK's pattern).
+  The page title starts "Error: ". A terminal wizard puts the same words in plain lines under the question.
 
 ## 12. Feedback in a wizard
 
@@ -271,7 +295,8 @@ wrong while they are in it (5 November 2026):
 2. Every step has help for each term and, for testing, What happens next and a place in the tree.
 3. With the testing setting off, neither review aid shows and the step has the whole width.
 4. Four themes, 175% text, a phone at 390px wide: nothing wider than the screen.
-5. Keyboard only: every choice, link, dialog and Back works, and focus moves to each new step's heading.
+5. Keyboard only: every choice, link, dialog and Back works, and focus moves to each new step's heading. The browser's Back
+   button goes step to step. Change on Check your answers returns to that step and then to the answers.
 6. A screen reader hears the progress, the step's state and the chosen choice.
 7. Send feedback opens from every step, the report names the step, and the QR code scans with a phone.
 8. An app with a browser and a terminal set-up: walk every job in both, step by step side by side. Both ask the same
@@ -292,3 +317,32 @@ Most wizards are pages (section 1). A job of three steps or fewer, started from 
 
 The components page "Wizard in a slide-out" shows it, and `LIBRARY.md`, App patterns, lists the classes.
 
+
+
+## 15. Variants (28 November 2026)
+
+There is **one wizard**. A variant adds to it, never replaces it: the same steps, words, buttons, progress and behaviour,
+so first-run set-up, upgrades, restores, migrations, Bring in and a plug-in's set-up all feel the same. The components
+page, Wizard variants, shows each one working.
+
+| Variant | Use it when | How |
+|---|---|---|
+| **Standard** | Every wizard | `.wizard` with steps, option cards, Continue, Back, Skip this step, the progress of section 5 and Check your answers (section 10) |
+| **Step in script** | A wizard drawn from markup, such as a plug-in's set-up | `.wizard[data-wizard]`, one `.wizard__step` for each question and a last `.wizard__check`. The part `wizard-steps` adds the history, Change, (optional) and the error summary. An app that builds its own steps in script (Starboard's `wizardFrame`) keeps the same classes and rules |
+| **Run again** | A set-up is run a second time, for example "Run again for this channel" | `data-mode="again"`. Each choice that is how it is now has `data-current` and a **Current** tag (a word, not only colour). Check your answers lists only what changes, each with "Was" and "Now", and folds the rest under "Choices that stay the same". It begins with how many choices change |
+| **Preview beside the step** | The effect of a choice is something to show in a picture | `.wizard-preview` as a second column in `.wizard-layout`, after the step in the reading order. A picture or a drawing made of styles, never video; a text caption in a polite status, said after a change and never when the page opens; nothing moves with less motion asked for. On a phone it goes under the step |
+| **Media card in an option card** | Choosing files by sight or sound (title clips, music) | `.option-card--media` inside `.option-cards`. A small picture made once and kept; the preview plays only when **Play preview** is pressed, one at a time, never by itself |
+| **A step that needs an answer** | A question has no safe default | `data-required` on the step: no Skip, and an empty answer shows the error summary "There is a problem" |
+| **Desktop only** | A page cannot work on a phone | Put `.desktop-notice` first on the page: "This page is for a computer screen. It is not made for phones." It shows on windows narrower than 768 pixels. Use it only on a page that cannot be made to work; every other wizard works on a phone |
+| **In a slide-out** | Three steps or fewer (section 14) | Same rules; the history entries are made while it is open |
+| **In a terminal** | The same job in a terminal | `TERMINAL.md`: the same questions, order, words and Check your answers, drawn as text |
+
+Choose the lightest variant that does the job. A variant never changes a word that another variant already uses.
+
+### Where this wizard differs from GOV.UK (owner decisions, 28 November 2026)
+
+The wizard follows GOV.UK's question pages and check answers pattern, with three differences the owner chose:
+
+- **No Back link at the top of a step.** Back stays in the foot, after Continue, as in section 4. Owner decision, 28 November 2026.
+- **No "Not sure" answer.** A question that may be left is optional and has Skip this step, which keeps what is chosen now. Owner decision, 28 November 2026.
+- **Progress is always shown** (section 5), in every wizard, including a short one and the terminal ones, even where the path varies. GOV.UK shows a count only where research says it helps. Owner decision, 28 November 2026.

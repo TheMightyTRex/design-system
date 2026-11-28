@@ -320,7 +320,13 @@ WCAG 2.4.3, 3.3.7, 4.1.3. The wizard rules are in [WIZARD.md](WIZARD.md); the te
 - The progress bar is `role="progressbar"` with `aria-valuenow`, `aria-valuemax` and `aria-valuetext` in words ("Step 7 of 18: Usenet"). A job's bar is drawn once and updated in place.
 - An error goes under the bar, tied to it by `aria-describedby`, and focus moves to the error's heading. The choices are Try again, Show the details or Stop.
 - The step's result goes into a polite live region. A wizard in a slide-out counts "Step 1 of 3" in one muted line.
-- Back returns to the step before and loses nothing. Continue saves the answer.
+- Back returns to the step before and loses nothing. Continue saves the answer. **The browser's Back button goes step to step** (history states) and returns to the step as it was left (3.2.3, 3.3.7).
+- **Check your answers** has one row for each answer and a Change link named for the question ("Change Style"), which returns to that step and then to the answers. The confirm button names its action (3.3.4, 2.4.6).
+- A question that can be skipped says "(optional)" in its heading; there is never an asterisk (3.3.2). A step with errors shows the error summary "There is a problem", with a link to each field, and focus moves to it (3.3.1, 3.3.3).
+- **A preview pane** shows a picture or styles, never video, has a text caption in a polite status that is said after a change and never when the page opens, and moves nothing when less motion is asked for (2.2.2, 2.3.3, 4.1.3).
+- **A media card** plays a preview only when its button is pressed ("Play preview of Station title"), never by itself (1.4.2, 2.2.2), one at a time, with the player's own controls and a text message when it will not play.
+- **A sentence with selects** names each select by its gap, and says the whole sentence once, in a polite status, after a change. **More rows** are shown by a real switch that stays where it is, and the change is said in words.
+- **A desktop only notice** is plain words in a `role="note"`: "This page is for a computer screen. It is not made for phones."; use it only for a page that cannot be made to work on a phone.
 - A state chip always has words ("Works after the switch"), never colour alone.
 - In a terminal, plain mode is for screen readers: numbered choices, no clearing, no box characters, no QR code (the link is printed), and a progress line no more often than every few seconds.
 
