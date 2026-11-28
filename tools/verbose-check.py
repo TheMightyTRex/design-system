@@ -671,7 +671,7 @@ def cmd_files(args):
     for r in allr:
         for n, l, s in r.long_sent:
             print(f"  long ({n} words) {r.rel}:{l}: {s[:160]}")
-        for n, l, _t in r.long_para:
+        for n, l, t in r.long_para:
             print(f"  long paragraph ({n} sentences) {r.rel}:{l}: {t[:100]}")
         for l, h in r.heading_restate:
             print(f"  heading restates the title {r.rel}:{l}: {h}")
@@ -745,7 +745,7 @@ def cmd_ci(args):
                 continue
             for n, l, s in r.long_sent:
                 print(f"::warning file={r.rel},line={l or 1},title=Sentence over {MAX_SENTENCE} words::{n} words: {s[:120]}")
-            for n, l, t in r.long_para:
+            for n, l, _t in r.long_para:
                 print(f"::warning file={r.rel},line={l or 1},title=Paragraph over {MAX_PARAGRAPH_SENTENCES} sentences::{n} sentences")
             for l, h in r.heading_restate:
                 print(f"::warning file={r.rel},line={l or 1},title=Heading restates the title::{h}")
