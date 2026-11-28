@@ -590,7 +590,7 @@ TEMPLATE = """<!doctype html>
 </footer>
 {notice_panel}<div class="side-panel-layer" id="help-display" hidden>
   <div class="side-panel-backdrop"></div>
-  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="help-display-h">
+  <div class="side-panel" role="dialog" aria-modal="true" aria-labelledby="help-display-h">
     <div class="panel-header"><h2 class="panel-header__title" id="help-display-h">Display and accessibility</h2><button class="icon-btn" type="button" data-closes aria-label="Close display and accessibility">{icon_x}</button></div>
     <form class="side-panel__body form-stack" id="help-display-form">
       <fieldset><legend>Theme</legend><div class="segmented"><label><input type="radio" name="theme" value="system"><span>Match device</span></label><label><input type="radio" name="theme" value="light"><span>Light</span></label><label><input type="radio" name="theme" value="dark"><span>Dark</span></label></div></fieldset>
@@ -604,7 +604,7 @@ TEMPLATE = """<!doctype html>
       <p class="small muted">Choices apply at once and are kept in this browser.</p>
     </form>
     <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Close</button><button class="btn" type="button" id="help-display-reset">Reset to defaults</button></div>
-  </aside>
+  </div>
 </div>
 <div id="help-announcer" class="visually-hidden" aria-live="polite"></div>
 <script>window.SharedComponentsSprite = "{root}assets/icons/sprite.svg";</script>
@@ -647,12 +647,12 @@ class Site:
             notice_link=(f'<li><button class="site-footer__link-btn" type="button" data-opens="help-notice" aria-haspopup="dialog" '
                          f'aria-expanded="false">{html.escape(NOTICE_LABEL)}</button></li>') if NOTICE_LABEL else "",
             notice_panel=(f'<div class="side-panel-layer" id="help-notice" hidden><div class="side-panel-backdrop"></div>'
-                          f'<aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="help-notice-h">'
+                          f'<div class="side-panel" role="dialog" aria-modal="true" aria-labelledby="help-notice-h">'
                           f'<div class="panel-header"><h2 class="panel-header__title" id="help-notice-h">{html.escape(NOTICE_LABEL)}</h2>'
                           f'<button class="icon-btn" type="button" data-closes aria-label="Close">{icon("x", root)}</button></div>'
                           f'<div class="side-panel__body help-notice">{FOOTER_NOTE}</div>'
                           f'<div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Close</button></div>'
-                          f'</aside></div>') if NOTICE_LABEL else "",
+                          f'</div></div>') if NOTICE_LABEL else "",
             maker_mark=MAKER_MARK, icon_external=icon("external-link", root, 16),
             banner=(f'<aside class="help-banner" id="help-banner" aria-label="{html.escape(BANNER_LABEL)}">'
                     f'<div class="help-banner__body" data-count="{BANNER_COUNT}">{BANNER}</div>'

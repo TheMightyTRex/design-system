@@ -148,12 +148,12 @@ RELEASE_PANEL = None  # filled below (needs panel())
 def panel(pid, title, body, foot="", wide=False, head_extra=""):
     return (
         f'<div class="side-panel-layer" id="{pid}" hidden><div class="side-panel-backdrop"></div>'
-        f'<aside class="side-panel{" side-panel--wide" if wide else ""}" role="dialog" aria-modal="true" aria-labelledby="{pid}-h">'
+        f'<div class="side-panel{" side-panel--wide" if wide else ""}" role="dialog" aria-modal="true" aria-labelledby="{pid}-h">'
         f'<div class="panel-header"><h2 class="panel-header__title" id="{pid}-h">{title}</h2>'
         f'<span style="display:flex;gap:4px">{head_extra}<button class="icon-btn" type="button" data-closes aria-label="Close {strip_tags(title)}">{ic("x")}</button></span></div>'
         f'<div class="side-panel__body">{body}</div>'
         + (f'<div class="side-panel__foot">{foot}</div>' if foot else "")
-        + "</aside></div>"
+        + "</div></div>"
     )
 
 

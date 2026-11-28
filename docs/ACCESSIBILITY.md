@@ -544,7 +544,7 @@ The library gives each component its accessibility contract. Use the component f
 |---|---|
 | Status chip | Text always present; icon `aria-hidden`; colour from the status tone tokens |
 | Cover | `alt="Cover of <title>"` on its own; `alt=""` inside a link or button that already has the title as its name |
-| Drawer / side panel | `role="dialog"` or `aside` with a heading; focus moves to the heading; Escape closes |
+| Drawer / side panel | A `div` with `role="dialog"`, `aria-modal="true"` and `aria-labelledby` (never an `aside`: axe reports aria-allowed-role); focus moves to the heading; Escape closes |
 | Dialog | `role="dialog"` `aria-modal="true"`, labelled by its title; focus trapped |
 | Tabs / sub-menu | Navigation links with `aria-current="page"`, or real tabs with arrow-key support; never a mix |
 | Filter chips | Buttons that are pressed or not (`aria-pressed`); the count is part of the name ("Waiting, 1") |

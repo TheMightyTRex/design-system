@@ -222,7 +222,7 @@
 </div>
 <div class="side-panel-layer" id="app-details" hidden>
   <div class="side-panel-backdrop"></div>
-  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="app-details-h">
+  <div class="side-panel" role="dialog" aria-modal="true" aria-labelledby="app-details-h">
     <div class="panel-header"><h2 class="panel-header__title" id="app-details-h">Sonarr</h2><button class="icon-btn" type="button" data-closes aria-label="Close Sonarr details"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></div>
     <div class="side-panel__body">
       <div style="display:flex;gap:var(--space-3);align-items:center">
@@ -254,12 +254,12 @@
       </section>
     </div>
     <div class="side-panel__foot"><a class="btn btn--primary" href="#" target="_blank" rel="noopener"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-external-link"/></svg>Open Sonarr<span class="visually-hidden"> (opens in a new tab)</span></a><button class="btn" type="button" data-opens="app-edit"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-pencil"/></svg>Edit app</button><button class="btn btn--quiet" type="button"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-refresh-cw"/></svg>Check now</button></div>
-  </aside>
+  </div>
 </div>
 
 <div class="side-panel-layer" id="app-edit" hidden>
   <div class="side-panel-backdrop"></div>
-  <aside class="side-panel side-panel--wide" role="dialog" aria-modal="true" aria-labelledby="app-edit-h">
+  <div class="side-panel side-panel--wide" role="dialog" aria-modal="true" aria-labelledby="app-edit-h">
     <div class="panel-header"><h2 class="panel-header__title" id="app-edit-h">Edit Sonarr</h2><button class="icon-btn" type="button" data-closes aria-label="Close Edit Sonarr"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></div>
     <div class="side-panel__body">
       <ol class="steps" aria-label="Steps"><li aria-current="step">Connection</li><li>Adding options</li></ol>
@@ -290,12 +290,12 @@
       </section>
     </div>
     <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-opens="app-edit-2">Save and continue</button><button class="btn btn--quiet" type="button" data-closes>Cancel</button><button class="btn btn--danger" type="button" data-dialog="remove-app"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-trash-2"/></svg>Remove</button></div>
-  </aside>
+  </div>
 </div>
 
 <div class="side-panel-layer" id="app-edit-2" hidden>
   <div class="side-panel-backdrop"></div>
-  <aside class="side-panel side-panel--wide" role="dialog" aria-modal="true" aria-labelledby="app-edit-2-h">
+  <div class="side-panel side-panel--wide" role="dialog" aria-modal="true" aria-labelledby="app-edit-2-h">
     <div class="panel-header"><h2 class="panel-header__title" id="app-edit-2-h">Edit Sonarr</h2><button class="icon-btn" type="button" data-closes aria-label="Close Edit Sonarr"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></div>
     <div class="side-panel__body">
       <ol class="steps" aria-label="Steps"><li data-done>Connection</li><li aria-current="step">Adding options</li></ol>
@@ -310,7 +310,7 @@
       </section>
     </div>
     <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Save adding options</button><button class="btn btn--quiet" type="button" data-closes>Skip for now</button></div>
-  </aside>
+  </div>
 </div>
 
 <dialog class="dialog" id="remove-app" aria-labelledby="remove-app-h">

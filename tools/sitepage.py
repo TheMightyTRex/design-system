@@ -10,7 +10,27 @@ import html, pathlib, re
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 GALLERY = (ROOT / "gallery.src.html").read_text()
 LOGO = re.search(r'<svg class="g-logo".*?</svg>', GALLERY).group(0)
-DISPLAY = re.search(r'<div class="side-panel-layer" id="g-panel-display" hidden>.*?</aside>\s*</div>', GALLERY, re.S).group(0)
+
+
+def balanced_div(text, start):
+    """The <div> that opens at `start`, up to its own closing tag: a slide-out is a div with role="dialog" inside its layer div."""
+    depth, pos = 0, start
+    for m in re.finditer(r"<div\b|</div>", text[start:]):
+        depth += 1 if m.group().startswith("<div") else -1
+        if depth == 0:
+            return text[start:start + m.end()]
+    raise ValueError("an unclosed div")
+
+
+def layer(text, panel_id=None):
+    """Each slide-out layer of the gallery (or the one with this id): id -> html."""
+    found = {}
+    for m in re.finditer(r'<div class="side-panel-layer" id="(g-[\w-]+)" hidden>', text):
+        found[m.group(1)] = balanced_div(text, m.start())
+    return found if panel_id is None else found[panel_id]
+
+
+DISPLAY = layer(GALLERY, "g-panel-display")
 FOOTER = re.findall(r'^<footer class="site-footer">.*</footer>$', GALLERY, re.M)[-1]
 
 # Each app's own logo, as in the app.

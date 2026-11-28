@@ -104,8 +104,8 @@ def panels():
     """The slide-outs the demos open: id -> html."""
     tail = GALLERY[GALLERY.index("<!-- Slide-outs used by the demos -->"):GALLERY.index('<script src="components.js">')]
     out = {}
-    for m in re.finditer(r'\s*<div class="side-panel-layer" id="(g-[\w-]+)" hidden>.*?</aside>\s*</div>', tail, re.S):
-        out[m.group(1)] = m.group(0)
+    for panel_id, html_ in sitepage.layer(tail).items():
+        out[panel_id] = html_
     return out
 
 
