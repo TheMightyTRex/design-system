@@ -237,7 +237,7 @@
 </div>
 <div class="side-panel-layer" id="bk-run" hidden>
   <div class="side-panel-backdrop"></div>
-  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="br-h">
+  <div class="side-panel" role="dialog" aria-modal="true" aria-labelledby="br-h">
     <div class="panel-header"><h2 class="panel-header__title" id="br-h">Server backup, today at 03:00</h2><button class="icon-btn" type="button" data-closes aria-label="Close server backup details"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></div>
     <div class="side-panel__body">
       <div class="notice" data-tone="warning"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-triangle-alert"/></svg><div class="notice__body"><span class="notice__title">2 files could not be read</span><p>The backup finished without them. Both belong to Jellyfin, which was writing to them at the time.</p></div></div>
@@ -249,18 +249,18 @@
 /config/jellyfin/data/jellyfin.db-shm</code></div></details>
     </div>
     <div class="side-panel__foot"><button class="btn btn--primary" type="button"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-download"/></svg>Download</button><button class="btn" type="button" data-dialog="bk-restore"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-archive-restore"/></svg>Restore</button></div>
-  </aside>
+  </div>
 </div>
 <div class="side-panel-layer" id="bk-copy" hidden>
   <div class="side-panel-backdrop"></div>
-  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="bc-h">
+  <div class="side-panel" role="dialog" aria-modal="true" aria-labelledby="bc-h">
     <div class="panel-header"><h2 class="panel-header__title" id="bc-h">Saved copy, 30 October</h2><button class="icon-btn" type="button" data-closes aria-label="Close saved copy details"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></div>
     <div class="side-panel__body">
       <dl class="facts"><dt>Made</dt><dd>Friday 30 October at 21:14</dd><dt>Why</dt><dd>Before updating to v0.2.0</dd><dt>Apps</dt><dd>12</dd><dt>Categories</dt><dd>Media, Library managers, Downloads, Tools</dd></dl>
       <p class="small muted">Differences from now: Prowlarr was added on 1 November.</p>
     </div>
     <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-dialog="bk-restore"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-archive-restore"/></svg>Restore this copy</button><button class="btn" type="button"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-download"/></svg>Download</button></div>
-  </aside>
+  </div>
 </div>
 <dialog class="dialog" id="bk-restore" aria-labelledby="bk-restore-h">
   <div class="panel-header"><h2 class="panel-header__title" id="bk-restore-h">Restore Starboard's settings?</h2><button class="icon-btn" type="button" data-closes aria-label="Close"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-x"/></svg></button></div>

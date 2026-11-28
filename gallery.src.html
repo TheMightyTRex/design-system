@@ -1434,11 +1434,11 @@
   </div>
   <div class="side-panel-layer" id="g-wiz-help" hidden>
     <div class="side-panel-backdrop"></div>
-    <aside class="side-panel side-panel--wide" role="dialog" aria-modal="true" aria-labelledby="g-wiz-help-h">
+    <div class="side-panel side-panel--wide" role="dialog" aria-modal="true" aria-labelledby="g-wiz-help-h">
       <div class="panel-header"><h2 class="panel-header__title" id="g-wiz-help-h">What is Usenet?</h2><button class="icon-btn" type="button" data-closes aria-label="Close help">{{i:x}}</button></div>
       <div class="side-panel__body"><p>Usenet is a network of servers that keep copies of files people post. You pay a Usenet provider for access, and an indexer lists what is there.</p><h3>What you need</h3><ul><li>A Usenet provider, which you pay for each month.</li><li>An indexer, which lists the files.</li><li>A Usenet app, such as SABnzbd, which fetches them.</li></ul><h3>What this step does</h3><p>It installs the Usenet app and connects it to the app, so each download goes into the right folder.</p><p>Help is a slide-out: the step stays in view beside it. Only this text scrolls; the heading, Close and Back to set-up stay in view. A press outside closes it.</p></div>
       <div class="side-panel__foot"><button class="btn" type="button" data-closes>Back to set-up</button><a class="help-link" href="#" target="_blank" rel="noopener noreferrer">{{i:help-new-tab}}<span>Read it in the help centre</span><span class="visually-hidden"> (opens in a new tab)</span></a></div>
-    </aside>
+    </div>
   </div>
   <div class="g-notes">
     <div><h4>Shape</h4><ul><li>Progress bar, then the step bar for a step in parts, then the step. The step bar is as wide as the progress bar, with a line between parts; parts are numbered 1, 2, 3 and each is a step in the count (here steps 6 to 8 of 18). On phones only the numbers show, with ticks for done parts.</li><li>Review aids (What happens next, decision tree) only while testing: beside the step from 1100px, under it on narrower screens. Without them the step has the whole width.</li><li>The first question asks which job (new install, restore, migration); each has its own wizard (<code>.wizard-paths</code>).</li></ul></div>
@@ -1905,7 +1905,7 @@ Your choice [1]:</pre></div>
 <!-- Slide-outs used by the demos -->
   <div class="side-panel-layer" id="g-panel-switch" hidden>
     <div class="side-panel-backdrop"></div>
-    <aside class="side-panel side-panel--wide" role="dialog" aria-modal="true" aria-labelledby="g-psw-h">
+    <div class="side-panel side-panel--wide" role="dialog" aria-modal="true" aria-labelledby="g-psw-h">
       <div class="panel-header"><h2 class="panel-header__title" id="g-psw-h">Switch media server</h2><button class="icon-btn" type="button" data-closes aria-label="Close switch media server">{{i:x}}</button></div>
       <div class="side-panel__body panel-wizard">
         <p class="panel-wizard__count">Step 3 of 3</p>
@@ -1919,11 +1919,11 @@ Your choice [1]:</pre></div>
         <div role="status" aria-live="polite" class="small muted">Ready to switch to Plex.</div>
       </div>
       <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Switch to Plex</button><button class="btn" type="button">Back</button><button class="btn btn--quiet" type="button" data-closes>Cancel</button></div>
-    </aside>
+    </div>
   </div>
   <div class="side-panel-layer" id="g-panel-logo" hidden>
     <div class="side-panel-backdrop"></div>
-    <aside class="side-panel side-panel--wide" role="dialog" aria-modal="true" aria-labelledby="g-pl-h">
+    <div class="side-panel side-panel--wide" role="dialog" aria-modal="true" aria-labelledby="g-pl-h">
     <div class="panel-header"><h2 class="panel-header__title" id="g-pl-h">Series logo</h2><button class="icon-btn" type="button" data-closes aria-label="Close series logo">{{i:x}}</button></div>
     <div class="side-panel__body">
       <section class="logo-saved" aria-labelledby="g-pl-saved"><h3 id="g-pl-saved">{{i:hard-drive}}Saved logo</h3>
@@ -1945,11 +1945,11 @@ Your choice [1]:</pre></div>
       <div class="logo-preview"><div class="logo-preview__light"><span class="logo-mask" role="img" aria-label="Logo on the light theme" style="--logo:url(&quot;data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20640%20120%22%3E%20%3Cg%20fill%3D%22%23000%22%3E%20%3Cpath%20d%3D%22M38%2018h14l3%2010h-20z%22/%3E%3Cpath%20d%3D%22M36%2030h18l6%2074H30z%22/%3E%3Crect%20x%3D%2224%22%20y%3D%22104%22%20width%3D%2242%22%20height%3D%228%22/%3E%20%3Cpath%20d%3D%22M45%206l9%2010H36z%22/%3E%20%3Cpath%20d%3D%22M60%2022l40-10v4l-40%209zM30%2022l-28-9v4l28%208z%22%20opacity%3D%22.55%22/%3E%20%3Ctext%20x%3D%2284%22%20y%3D%2258%22%20font-family%3D%22Georgia%2C%20%27Times%20New%20Roman%27%2C%20serif%22%20font-size%3D%2230%22%20letter-spacing%3D%226%22%3ETHE%3C/text%3E%20%3Ctext%20x%3D%2280%22%20y%3D%22104%22%20font-family%3D%22Georgia%2C%20%27Times%20New%20Roman%27%2C%20serif%22%20font-size%3D%2254%22%20font-weight%3D%22700%22%20letter-spacing%3D%222%22%3EGLASS%20HARBOUR%3C/text%3E%20%3Crect%20x%3D%22186%22%20y%3D%2246%22%20width%3D%22430%22%20height%3D%223%22/%3E%20%3C/g%3E%20%3C/svg%3E&quot;);--logo-ratio:640 / 120"></span><small>Light</small></div><div class="logo-preview__dark"><span class="logo-mask" role="img" aria-label="Logo on the dark theme" style="--logo:url(&quot;data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20640%20120%22%3E%20%3Cg%20fill%3D%22%23000%22%3E%20%3Cpath%20d%3D%22M38%2018h14l3%2010h-20z%22/%3E%3Cpath%20d%3D%22M36%2030h18l6%2074H30z%22/%3E%3Crect%20x%3D%2224%22%20y%3D%22104%22%20width%3D%2242%22%20height%3D%228%22/%3E%20%3Cpath%20d%3D%22M45%206l9%2010H36z%22/%3E%20%3Cpath%20d%3D%22M60%2022l40-10v4l-40%209zM30%2022l-28-9v4l28%208z%22%20opacity%3D%22.55%22/%3E%20%3Ctext%20x%3D%2284%22%20y%3D%2258%22%20font-family%3D%22Georgia%2C%20%27Times%20New%20Roman%27%2C%20serif%22%20font-size%3D%2230%22%20letter-spacing%3D%226%22%3ETHE%3C/text%3E%20%3Ctext%20x%3D%2280%22%20y%3D%22104%22%20font-family%3D%22Georgia%2C%20%27Times%20New%20Roman%27%2C%20serif%22%20font-size%3D%2254%22%20font-weight%3D%22700%22%20letter-spacing%3D%222%22%3EGLASS%20HARBOUR%3C/text%3E%20%3Crect%20x%3D%22186%22%20y%3D%2246%22%20width%3D%22430%22%20height%3D%223%22/%3E%20%3C/g%3E%20%3C/svg%3E&quot;);--logo-ratio:640 / 120"></span><small>Dark</small></div></div>
     </div>
     <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Save logo</button><button class="btn btn--quiet" type="button" data-closes>Cancel</button></div>
-    </aside>
+    </div>
   </div>
 <div class="side-panel-layer" id="g-panel-book" hidden>
   <div class="side-panel-backdrop"></div>
-  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="g-pb-h">
+  <div class="side-panel" role="dialog" aria-modal="true" aria-labelledby="g-pb-h">
     <div class="panel-header"><h2 class="panel-header__title" id="g-pb-h">Summary</h2><button class="icon-btn" type="button" data-closes aria-label="Close summary">{{i:x}}</button></div>
     <div class="side-panel__body">
       <div class="side-panel__lead"><div class="cover" style="background:linear-gradient(160deg,#323a77,#af4e24);color:#fff">The Glass Harbour</div><div style="display:grid;gap:8px"><h3 style="font-size:var(--text-lg)">The Glass Harbour</h3><span class="chip" data-tone="success">{{i:circle-check}}In library</span><span class="small muted">Ebook and audiobook</span></div></div>
@@ -1957,12 +1957,12 @@ Your choice [1]:</pre></div>
       <p>A harbour town keeps its secrets in glass. When the lighthouse keeper vanishes, his niece finds the lamp still lit.</p>
     </div>
     <div class="side-panel__foot"><a class="btn btn--primary" href="#media">Open book page</a><button class="btn" type="button">{{i:download}}Search for audiobook</button></div>
-  </aside>
+  </div>
 </div>
 
 <div class="side-panel-layer" id="g-panel-edit" hidden>
   <div class="side-panel-backdrop"></div>
-  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="g-pe-h">
+  <div class="side-panel" role="dialog" aria-modal="true" aria-labelledby="g-pe-h">
     <div class="panel-header"><h2 class="panel-header__title" id="g-pe-h">qBittorrent</h2><button class="icon-btn" type="button" data-closes aria-label="Close qBittorrent">{{i:x}}</button></div>
     <div class="side-panel__body">
       <div class="notice" data-tone="success" role="status">{{i:circle-check}}<div class="notice__body"><span class="notice__title">Connected</span><p>Tested 2 minutes ago, version 5.0.3.</p></div></div>
@@ -1973,12 +1973,12 @@ Your choice [1]:</pre></div>
       <dl class="facts"><dt>Download folder</dt><dd><code>/data/torrents/starboard</code></dd></dl>
     </div>
     <div class="side-panel__foot"><button class="btn btn--primary" type="button">Save and test</button><button class="btn btn--quiet" type="button" data-closes>Cancel</button><button class="btn btn--danger" type="button">{{i:trash-2}}Remove</button></div>
-  </aside>
+  </div>
 </div>
 
 <div class="side-panel-layer" id="g-panel-display" hidden>
   <div class="side-panel-backdrop"></div>
-  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="g-pd-h">
+  <div class="side-panel" role="dialog" aria-modal="true" aria-labelledby="g-pd-h">
     <div class="panel-header"><h2 class="panel-header__title" id="g-pd-h">Display and accessibility</h2><button class="icon-btn" type="button" data-closes aria-label="Close display and accessibility">{{i:x}}</button></div>
     <form class="side-panel__body" data-display-save="ds-display">
       <fieldset><legend>Theme</legend><div class="segmented"><label><input type="radio" name="g-pd-theme" value="system" data-display="theme"><span>Match device</span></label><label><input type="radio" name="g-pd-theme" value="light" data-display="theme" checked><span>Light</span></label><label><input type="radio" name="g-pd-theme" value="dark" data-display="theme"><span>Dark</span></label></div></fieldset>
@@ -1992,12 +1992,12 @@ Your choice [1]:</pre></div>
       <p class="small muted">Choices apply at once and are kept in this browser.</p>
     </form>
     <div class="side-panel__foot"><button class="btn btn--primary" type="button" data-closes>Close</button><button class="btn" type="button" data-display-reset="ds-display">Reset to defaults</button></div>
-  </aside>
+  </div>
 </div>
 
 <div class="side-panel-layer" id="g-panel-app" hidden>
   <div class="side-panel-backdrop"></div>
-  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="g-pa-h">
+  <div class="side-panel" role="dialog" aria-modal="true" aria-labelledby="g-pa-h">
     <div class="panel-header"><h2 class="panel-header__title" id="g-pa-h">Disk 3</h2><button class="icon-btn" type="button" data-closes aria-label="Close Disk 3">{{i:x}}</button></div>
     <div class="side-panel__body">
       <div class="notice" data-tone="warning">{{i:triangle-alert}}<div class="notice__body"><span class="notice__title">Needs attention</span><p>12 sectors were reallocated this week. Back up its data and plan to replace it.</p></div></div>
@@ -2007,12 +2007,12 @@ Your choice [1]:</pre></div>
 Pending sectors: 0</code></div></details>
     </div>
     <div class="side-panel__foot"><button class="btn" type="button">{{i:refresh-cw}}Check now</button></div>
-  </aside>
+  </div>
 </div>
 
 <div class="side-panel-layer" id="g-panel-attention" hidden>
   <div class="side-panel-backdrop"></div>
-  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="g-pn-h">
+  <div class="side-panel" role="dialog" aria-modal="true" aria-labelledby="g-pn-h">
     <div class="panel-header"><h2 class="panel-header__title" id="g-pn-h">The Lost Valley S01E04 1080p</h2><button class="icon-btn" type="button" data-closes aria-label="Close The Lost Valley S01E04 1080p">{{i:x}}</button></div>
     <div class="side-panel__body">
       <div class="notice" data-tone="warning">{{i:triangle-alert}}<div class="notice__body"><span class="notice__title">The episode is inside RAR archives</span><p>Reelix found no video file to import. Unpack the archives, then Reelix imports what is inside.</p></div></div>
@@ -2032,7 +2032,7 @@ Pending sectors: 0</code></div></details>
         </ul>
       </section>
     </div>
-  </aside>
+  </div>
 </div>
 
 <script src="components.js"></script>

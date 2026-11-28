@@ -68,7 +68,7 @@
 <!--include:app-edit-->
 <div class="side-panel-layer" id="app-details-lidarr" hidden>
   <div class="side-panel-backdrop"></div>
-  <aside class="side-panel" role="dialog" aria-modal="true" aria-labelledby="adl-h">
+  <div class="side-panel" role="dialog" aria-modal="true" aria-labelledby="adl-h">
     <div class="panel-header"><h2 class="panel-header__title" id="adl-h">Lidarr</h2><button class="icon-btn" type="button" data-closes aria-label="Close Lidarr details">{{i:x}}</button></div>
     <div class="side-panel__body">
       <div style="display:flex;gap:var(--space-3);align-items:center"><span class="app-icon" aria-hidden="true">L</span><div style="display:grid;gap:var(--space-1)"><span class="chip" data-tone="danger" style="justify-self:start">Not responding</span><span class="small muted">No answer since 10:48 · checked 1 minute ago</span></div></div>
@@ -85,5 +85,5 @@ Connection refused after 3 tries (10:48, 10:53, 10:58)</code></div></details>
       <dl class="facts"><dt>Home address</dt><dd><code>http://homeserver.example:8686</code></dd><dt>Category</dt><dd>Library managers</dd><dt>Last version found</dt><dd class="numeric">2.8.2</dd></dl>
     </div>
     <div class="side-panel__foot"><button class="btn btn--primary" type="button">{{i:refresh-cw}}Check now</button><button class="btn" type="button" data-opens="app-edit">{{i:pencil}}Edit app</button></div>
-  </aside>
+  </div>
 </div>
