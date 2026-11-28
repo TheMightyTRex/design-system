@@ -296,6 +296,7 @@ WCAG 2.1.2, 2.4.3, 2.4.11.
 WCAG 1.3.1, 2.1.1, 2.4.3, 2.4.7, 2.4.11, 2.5.8, 4.1.2. The full rules are in [Menu rows: condensing and accessibility](LIBRARY.md#menu-rows-condensing-and-accessibility).
 
 - A 2nd level menu row is a `nav` with its own accessible name, links and `aria-current="page"` on the current one. It is **not** `role="tablist"`: each item is a link to a page.
+- Page topics (`.topic-tabs`) follow the same roles and keys, have a stable address (`#section-id`) that opens the right tab, wrap on a phone and never scroll, and keep a hidden panel out of the reading order. A page with more than one topic uses them; an "On this page" jump list is only for one long document (Library, Page topics: tabs, not a jump list).
 - Real tabs (`.tabs`) use `role="tablist"`, `tab` and `tabpanel`, one Tab stop for the list, arrow keys, Home and End. Never mix links and tabs.
 - Left, Right, Home and End move between links in a menu row. Enter opens. The focused tab shows its name and is scrolled clear of the fade.
 - When the names do not fit, the row shows icons only. Every tab stays 44px wide. The current tab and the tab with focus keep their name; the others have `data-tooltip`.

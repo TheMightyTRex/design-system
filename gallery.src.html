@@ -1273,7 +1273,7 @@
     </div>
   </div>
   <div class="g-notes">
-    <div><h4>Rules</h4><ul><li>Four or more sections make tabs; a page may ask for fewer. Each tab is named by its section's heading.</li><li>Left and Right move between tabs, Home and End go to the first and last. Only the selected tab is in the Tab order. A tab's address (<code>#topic</code>) opens it.</li><li>Tabs wrap onto a second line and never scroll, so every topic is in view.</li><li>From 768px wide and 640px tall the tabs stay under the header; <code>--topic-tabs-h</code> (set by the page's script) is their height, so the page keeps what has focus clear of them.</li></ul></div>
+    <div><h4>Rules</h4><ul><li>This is the standard for a page with more than one topic: an "On this page" jump list is not used for separate topics, only for one long document such as a help article or release notes. Four or more sections make tabs; a page may ask for fewer. Each tab is a plain noun in sentence case, the section's own heading, in the order people do things.</li><li>Each tab has an address (<code>#section-id</code>), set when it is chosen without a history step, so links, reload and help links open it. The first tab opens when there is none; the last tab used is not remembered.</li><li>A hidden panel is out of the reading order and runs nothing until opened. An action that needs a confirmation is a button inside its tab, never a tab.</li><li>Left and Right move between tabs, Home and End go to the first and last. Only the selected tab is in the Tab order. Tab goes from the selected tab into its panel.</li><li>Tabs are at least 24px high with space around them, and wrap onto a second line on a phone: never scroll, never past the page edge. The browser's find reaches only the open tab, so a page that must be searched whole is a document.</li><li>From 768px wide and 640px tall the tabs stay under the header; <code>--topic-tabs-h</code> (set by the page's script) is their height, so the page keeps what has focus clear of them.</li></ul></div>
     <div><h4>Classes</h4><ul><li><code>.topic-tabs</code>, <code>.topic-tabs__tab</code>, <code>.topic-off</code>, <code>.settings-sections</code> (one gap of 32px; 40px on a <code>.page--settings</code> page), <code>.page--settings</code> (full width, text no wider than 75 characters).</li><li>Styles-only part <code>page-topics</code>.</li></ul></div>
   </div>
 </section>
@@ -2251,14 +2251,18 @@ Pending sectors: 0</code></div></details>
       });
       if (focus) tab.focus();
     };
-    tabs.forEach((t) => t.addEventListener("click", () => show(t)));
+    // Each tab has an address (#section-id); choosing one sets it without a history step.
+    const pick = (tab, focus) => { show(tab, focus); try { history.replaceState(null, "", "#" + tab.getAttribute("aria-controls")); } catch (e) { /* no address */ } };
+    tabs.forEach((t) => t.addEventListener("click", () => pick(t)));
     list.addEventListener("keydown", (e) => {
       const at = tabs.indexOf(document.activeElement);
       const to = { ArrowRight: at + 1, ArrowLeft: at - 1, Home: 0, End: tabs.length - 1 }[e.key];
       if (at < 0 || to === undefined) return;
       e.preventDefault();
-      show(tabs[(to + tabs.length) % tabs.length], true);
+      pick(tabs[(to + tabs.length) % tabs.length], true);
     });
+    const named = tabs.find((x) => "#" + x.getAttribute("aria-controls") === location.hash);
+    if (named) show(named);
   })();
 
   // @chunk folds

@@ -269,7 +269,7 @@
   </nav>
 </div>
 <div class="s-shell">
-<nav class="s-nav" aria-labelledby="s-nav-h"><h2 id="s-nav-h">Guides</h2><ol class="s-nav-pages"><li><a href="index.html">All guides</a></li><li class="s-group">Design</li><li><a href="design-system.html">Design system</a></li><li><a href="library.html" aria-current="page">Component library</a></li><li><a href="components.html">Components by area</a></li><li class="s-group">Patterns</li><li><a href="wizard.html">Wizard</a></li><li><a href="terminal.html">Terminal</a></li><li class="s-group">Words</li><li><a href="content-design.html">Content design</a></li><li><a href="help-writing.html">Help writing</a></li><li><a href="changelogs.html">Changelogs</a></li><li><a href="alt-text.html">Alt text</a></li><li><a href="screenshots.html">Screenshots</a></li><li class="s-group">Accessibility and security</li><li><a href="accessibility.html">Accessibility</a></li><li><a href="wcag.html">WCAG 2.2 AA</a></li><li><a href="security-checks.html">Security checks</a></li><li><a href="ai-checks.html">AI-triggered checks</a></li></ol><h2 id="s-own-h">On this page</h2><ol><li><a href="#files">Files</a></li><li><a href="#principles">Principles</a></li><li><a href="#menu-names">Menu names</a></li><li><a href="#components">Components</a></li><li><a href="#javascript-sharedcomponents-26-november-2026">JavaScript: SharedComponents (26 November 2026)</a></li><li><a href="#parts-22-november-2026">Parts (22 November 2026)</a></li><li><a href="#slide-out-dialog-or-page">Slide-out, dialog or page</a></li><li><a href="#adopting-the-library">Adopting the library</a></li><li><a href="#help-centre-7-november-2026-the-standard-since-14-november-2026">Help centre (7 November 2026; the standard since 14 November 2026)</a></li><li><a href="#app-patterns-moved-into-the-library-on-26-november-2026">App patterns (moved into the library on 26 November 2026)</a></li><li><a href="#menu-rows-condensing-and-accessibility">Menu rows: condensing and accessibility</a></li></ol></nav>
+<nav class="s-nav" aria-labelledby="s-nav-h"><h2 id="s-nav-h">Guides</h2><ol class="s-nav-pages"><li><a href="index.html">All guides</a></li><li class="s-group">Design</li><li><a href="design-system.html">Design system</a></li><li><a href="library.html" aria-current="page">Component library</a></li><li><a href="components.html">Components by area</a></li><li class="s-group">Patterns</li><li><a href="wizard.html">Wizard</a></li><li><a href="terminal.html">Terminal</a></li><li class="s-group">Words</li><li><a href="content-design.html">Content design</a></li><li><a href="help-writing.html">Help writing</a></li><li><a href="changelogs.html">Changelogs</a></li><li><a href="alt-text.html">Alt text</a></li><li><a href="screenshots.html">Screenshots</a></li><li class="s-group">Accessibility and security</li><li><a href="accessibility.html">Accessibility</a></li><li><a href="wcag.html">WCAG 2.2 AA</a></li><li><a href="security-checks.html">Security checks</a></li><li><a href="ai-checks.html">AI-triggered checks</a></li></ol><h2 id="s-own-h">On this page</h2><ol><li><a href="#files">Files</a></li><li><a href="#principles">Principles</a></li><li><a href="#menu-names">Menu names</a></li><li><a href="#components">Components</a></li><li><a href="#javascript-sharedcomponents-26-november-2026">JavaScript: SharedComponents (26 November 2026)</a></li><li><a href="#parts-22-november-2026">Parts (22 November 2026)</a></li><li><a href="#page-topics-tabs-not-a-jump-list-owner-decision-28-november-2026">Page topics: tabs, not a jump list (owner decision, 28 November 2026)</a></li><li><a href="#slide-out-dialog-or-page">Slide-out, dialog or page</a></li><li><a href="#adopting-the-library">Adopting the library</a></li><li><a href="#help-centre-7-november-2026-the-standard-since-14-november-2026">Help centre (7 November 2026; the standard since 14 November 2026)</a></li><li><a href="#app-patterns-moved-into-the-library-on-26-november-2026">App patterns (moved into the library on 26 November 2026)</a></li><li><a href="#menu-rows-condensing-and-accessibility">Menu rows: condensing and accessibility</a></li></ol></nav>
 <main class="s-main" id="main" tabindex="-1">
 <nav class="breadcrumbs s-crumbs" aria-label="Breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="index.html">Guides</a></li><li aria-current="page">Component library</li></ol></nav><div class="s-doc"><div class="page-head"><div class="page-head__text"><h1>TRex Design System: the component library</h1><p class="page-head__summary">Design guide. <a href="https://github.com/TheMightyTRex/design-system/blob/main/docs/LIBRARY.md">Edit this guide on GitHub</a>.</p></div></div><div class="prose">
 
@@ -1254,8 +1254,53 @@ helpers in <code>SharedComponents.kit</code> and what it needs.</p>
 <p>A line outside a part that ends <code>// part</code> is left out of the core. <code>python3 tools/parts.py</code> checks all of this and
 lists the sizes. Run it after any change to a part. A component belongs in the core when any page may need it without
 warning. It belongs in a part when it is large and a page knows it will use it.</p>
-<h2 id="slide-out-dialog-or-page">Slide-out, dialog or page</h2>
+<h2 id="page-topics-tabs-not-a-jump-list-owner-decision-28-november-2026">Page topics: tabs, not a jump list (owner decision, 28 November 2026)</h2>
+<p>A page that holds more than one topic uses <strong>page topics</strong> (<code>.topic-tabs</code>, the tabs Settings uses). An "On this page" list of jump links is not used for separate topics. The owner's words, on Backup/Logs: "The on this page should be separate tabs as standard." It applies to every app that uses the library: Starboard, Stallboard, Snaglist and the plug-ins' own pages. The Reelix fork's interface is not restyled.</p>
+<p><strong>Tabs or a jump list</strong></p>
 <div class="s-scroll" tabindex="0" role="region" aria-label="Table 10"><table>
+<thead>
+<tr>
+<th>The page is</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Several topics that people do one at a time or come back to separately (backups and logs, performance and pictures, lists and Discover rows)</td>
+<td>Page topics: one tab for each topic</td>
+</tr>
+<tr>
+<td>One long document about one subject, read from the top and searched with the browser's find (a help article, release notes, a guide in this library)</td>
+<td>A contents list is allowed. Call it "On this page" and keep it beside or before the article, never in front of a page of settings or controls</td>
+</tr>
+<tr>
+<td>One topic with several cards</td>
+<td>Neither. Use a section group (<code>section.settings-section--group</code>) or folding sections</td>
+</tr>
+<tr>
+<td>Two or three parts of one thing in one panel</td>
+<td><code>.tabs</code>, not page topics</td>
+</tr>
+</tbody>
+</table></div>
+<p>Only a help article, release notes and the library's own guides are single-topic documents. A page of settings, tools or lists is never one, however long it is. When a page is in doubt, make it tabs.</p>
+<p><strong>The rules</strong></p>
+<ol>
+<li><strong>Labels</strong> are plain nouns or short noun phrases in sentence case ("Where backups go", "Logs"). No verbs, no counts, no icon alone, no "and more". The label is the section's own heading, word for word, so the tab and the heading never disagree.</li>
+<li><strong>Order</strong> follows the order people do things: set up before run, run before review, review before remove. A rare or risky topic comes last. An action that needs a confirmation (such as deleting logs) is a button inside the topic it belongs to, never a tab.</li>
+<li><strong>Address.</strong> Every tab has a stable address: the page's address, <code>#</code> and the section's id (<code>/settings-general-backup.html#bk-sb-h</code>). Choosing a tab sets it without adding a history step, so a copied link, a reload and a help link open the same tab. A link to anything inside a section opens that section's tab. When a page replaces an old in-page anchor, it keeps the old anchor working and opens the right tab.</li>
+<li><strong>Default.</strong> The first tab opens when the address names none. The last tab used is not remembered, in storage or otherwise, unless the page says so and says why.</li>
+<li><strong>Keyboard.</strong> The tablist is one Tab stop (the selected tab). Left and Right move between tabs and wrap, Home and End go to the first and last, and focus follows the arrow. Tab from the tablist goes into the panel, to its first control. The focus ring is visible on every tab.</li>
+<li><strong>Roles.</strong> <code>nav.topic-tabs</code> holds <code>role="tablist"</code> with an accessible name; each tab is <code>role="tab"</code> with <code>aria-selected</code> and <code>aria-controls</code> the panel's id; each panel is <code>role="tabpanel"</code> with <code>aria-labelledby</code> the tab's id. A hidden panel is hidden from everyone (<code>.topic-off</code>, so also from the reading order), and its jobs and polling do not run until it is opened.</li>
+<li><strong>Reading order.</strong> Page heading, its summary, the tablist, then the open panel. Nothing sits between the tabs and their panel.</li>
+<li><strong>Target size.</strong> Each tab is at least 24px by 24px with space around it (the library's tabs are the full control height).</li>
+<li><strong>Phones.</strong> The tabs wrap onto a second line and never scroll sideways or run past the page edge, at 320px wide and 175% text.</li>
+<li><strong>Find.</strong> The browser's find-in-page only reaches the open tab. A page's own search lists each match with its tab's name and opens that tab. A page that must be searched as one whole is a document, not tabs.</li>
+<li><strong>Phone and desktop.</strong> Page topics are for shared pages, so they work on a phone as well as on a desktop.</li>
+</ol>
+<p><strong>The check.</strong> <code>tools/check_on_this_page.py</code> fails a page that has an "On this page" list or navigation, except in the files <code>tools/on-this-page-allowed.txt</code> names, each with its reason (help articles, release notes, this library's guides and reference pages, the plug-in store listing). Starboard has the same check in its tests. The demo is Page topics in the gallery, with the same behaviour a page's script gives.</p>
+<h2 id="slide-out-dialog-or-page">Slide-out, dialog or page</h2>
+<div class="s-scroll" tabindex="0" role="region" aria-label="Table 11"><table>
 <thead>
 <tr>
 <th>Use</th>
@@ -1400,7 +1445,7 @@ help centre uses the standard the owner chose (Starboard DASH-436):
 <p><code>docs/HELP-WRITING.md</code> section 11 is the full standard, with the flow chart format and the shape of
 <code>help-centre.json</code>.</p>
 <p><strong>Components</strong> (in <code>components.css</code> and <code>components.js</code>, shown in the gallery under Help centre):</p>
-<div class="s-scroll" tabindex="0" role="region" aria-label="Table 11"><table>
+<div class="s-scroll" tabindex="0" role="region" aria-label="Table 12"><table>
 <thead>
 <tr>
 <th>Component</th>
@@ -1478,7 +1523,7 @@ through the header, search, side menu and disclosures.</p>
 Snaglist and the plug-in collection use it. Build one here with <code>tools/help_centre/build.sh</code> from the app's folder.</p>
 <h2 id="app-patterns-moved-into-the-library-on-26-november-2026">App patterns (moved into the library on 26 November 2026)</h2>
 <p>Owner decision, 26 November 2026: every Starboard pattern that other screens or plug-ins could reuse lives in the library. Each was built in Starboard first, so the values are Starboard's and an app that adopts one is drawn as before. The components pages show each one (App patterns). The larger ones are styles-only parts (<code>css/parts/&lt;name&gt;.css</code>; no script): an app loads one only on the pages that use it.</p>
-<div class="s-scroll" tabindex="0" role="region" aria-label="Table 12"><table>
+<div class="s-scroll" tabindex="0" role="region" aria-label="Table 13"><table>
 <thead>
 <tr>
 <th>Pattern</th>
@@ -1492,7 +1537,7 @@ Snaglist and the plug-in collection use it. Build one here with <code>tools/help
 <td>Page topics</td>
 <td><code>.topic-tabs</code>, <code>.topic-tabs__tab</code>, <code>.topic-off</code>, <code>.settings-sections</code>, <code>.page--settings</code></td>
 <td><code>page-topics</code></td>
-<td>A long page cut into topics, one at a time. Not <code>.tabs</code> (parts of one thing). The page's script builds the tablist; Starboard's is <code>topicTabs()</code> in <code>settings-core.js</code></td>
+<td>A page with more than one topic, cut into tabs, one shown at a time: the standard in place of an "On this page" list (Page topics: tabs, not a jump list). Not <code>.tabs</code> (parts of one thing). The page's script builds the tablist; Starboard's is <code>topicTabs()</code> in <code>settings-core.js</code></td>
 </tr>
 <tr>
 <td>Update list</td>
